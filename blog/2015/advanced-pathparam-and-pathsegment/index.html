@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>RestEasy İle Restful Web Servis Dersleri 6 - Advanced PathParam And PathSegment</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2015/advanced-pathparam-and-pathsegment/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>RestEasy İle Restful Web Servis Dersleri 6 - Advanced PathParam And PathSegment - İlkay Günel - Blog</title>
+<meta property="og:title" content="RestEasy İle Restful Web Servis Dersleri 6 - Advanced PathParam And PathSegment" />
+<meta name="description" content="" />
+<meta property="og:description" content="" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2015/advanced-pathparam-and-pathsegment/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2015/advanced-pathparam-and-pathsegment/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2015-11-26T15:46:52+02:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "RestEasy İle Restful Web Servis Dersleri 6 - Advanced PathParam And PathSegment",
+    "datePublished": "2015-11-26T15:46:52+02:00",
+    "description": "",
+    "url": "http://ilkaygunel.com/blog/2015/advanced-pathparam-and-pathsegment/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">RestEasy İle Restful Web Servis Dersleri 6 - Advanced PathParam And PathSegment</h1>
+      <p class="post-meta">Nov 26, 2015</p>
+    </header>
+
+    <div class="post-content">
+      <head>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-76541903-2', 'auto');
+ga('send', 'pageview');
+</script>
+</head>
+
+<p>Merhabalar arkadaşlar. Bu yazıda önceki yazılarda gördüğümüz PathParam bilgimizi biraz derinleştireceğiz.</p>
+
+<h3 id="advanced-pathparam-and-regular-expression">Advanced PathParam And Regular Expression</h3>
+<p>Önceki yazılarda @PathParam notasyonu ile gelen bir parametreyi almayı öğrenmiştik. RestEasy içerisinde ilgili pathi birden fazla parametre alacak şekilde düzenlememize imkan sağlayan yapı mevcuttur.
+Birkaç örnek kullanıma bakalım:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>1. @Path("/kalıp1{parametre}kalıp2")
+2. @Path("/{parametre1}-{parametre2}")
+3. @Path("/kalıp1{parametre1}-{parametre2}kalıp2")
+</code></pre>
+</div>
+
+<p>Yukarıdaki örnekleri incelediğimizde şu sonuca varıyor olacağız:
+1. Birinci örnekte kullanıcıdan değişmeyen bazı ifadelerin arasında parametre göndermesi bekleniyor. Örneğin kalıp1 ve kalıp2 id olsun biz parametrezi bu kalıplar arasında vereceğiz. Şöyle ki:
+<strong><em>id15id</em></strong> , <strong><em>id21id</em></strong> , <strong><em>id3id</em></strong>. Burada biz bir şablon belirlemiş oluyoruz ve şablon id kelimlerinin arasında bir parametre bekliyor.
+2. İkinci örnekte yukarıdan faklı olarak iki parametre alıyoruz ancak bu parametreler aralarında <strong><em>-</em></strong> ile gelmek zorundalar. Şöyle ki:
+<strong><em>ilkay-gunel</em></strong> , <strong><em>husnu-tapan</em></strong> , <strong><em>isa-aytimur</em></strong>
+3. Üçüncü örnekte ise bize ilk iki örnekten faklı olarak iki kalıp ve iki parametre amayı gösteriyor ve <strong><em>-</em></strong> işaretini zorunlu koşuyor yine. kalıp1 id olsun, kalıp2 isim olsun.
+<strong><em>id23-Mustafaisim</em></strong> , <strong><em>id15-Tanerisim</em></strong></p>
+
+<p>Burada başka bir durum da şu olabilir ki bu parametreler bazı özel ifadeler ile kalıplandırılabilinir:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@GET
+    @Path("/aaa{param:b.*}/{many:.*}/stuff")
+    @Produces("application/json")
+    public String getRecord(@PathParam("param") String bs, @PathParam("many") String many)
+    {
+    }
+</code></pre>
+</div>
+
+<p>Örneğimizde @Path’e dikkat ettiğimizde beklediği parametrenin <strong><em>aaa</em></strong> kalıbı ile başlamasını,baş harfi b olan bir parametrenin takip etmesini
+<strong><em>/</em></strong> ifadesi ile alt dizine inip {many:.<em>} ifadesi ile her türlü gelebilecek parametreyi kabul eden ama gelmesini şart koşan ve
+<strong>*/</strong></em> ifadesi ile alt dizine geçip stuff çağırımı yapan bir yapı görüyoruz.</p>
+
+<h3 id="pathsegment">PathSegment</h3>
+<p>Biz normalde birden fazla parametreyi metoda geçirmek istesek bu durumda birden @PathParam kullanmamız gerekecekti ve belki bu da kod kalabalığına sebep olacaktı.
+Ancak RestEasy içinde bulunan <strong><em>@PathSegment</em></strong> notasyonu ile gelen tek parametre ile birden çok değer elde edebiliriz. Hemen örneğimize bakalım:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@GET
+    @Path("/bookInfo/{bookInfo}")
+    @Produces("application/json")
+    public String getRecord(@PathParam("bookInfo") PathSegment bookInfo)
+    {
+        String returnedBookName="",returnedAuthorName="";
+        MultivaluedMap&lt;String,String&gt; parameters = bookInfo.getMatrixParameters();
+
+        Map&lt;String,String&gt; bookNameMap = new HashMap&lt;&gt;();
+        bookNameMap.put("bookName", "Kuyucaklı Yusuf");
+        bookNameMap.put("bookName", "1984");
+
+        Map&lt;String,String&gt; authorNameMap = new HashMap&lt;&gt;();
+        authorNameMap.put("authorName", "Sabahattin Ali");
+        authorNameMap.put("authorName", "George Orwell");
+
+        for (String string : bookNameMap.values()) {
+            System.out.println(parameters.getFirst("bookName"));
+            if(string.equals(parameters.getFirst("bookName"))){
+                returnedBookName = string;
+                break;
+            }
+        }
+        for (String string : authorNameMap.values()) {
+            System.out.println(parameters.getFirst("authorName"));
+            if (string.equals(parameters.getFirst("authorName"))) {
+                returnedAuthorName = string;
+                break;
+            }
+        }
+        return returnedBookName + ":"+returnedAuthorName;
+    }
+</code></pre>
+</div>
+
+<p>Örneğimizi incelediğimizde metodumuzun path’inin bookInfo olduğunu görüyoruz ve bu path altında bir de <strong><em>bookInfo</em></strong> parametresi bekleniyor. Metodun parametre alan kısmında dikkat ettiğimizde <strong><em>@PathSegment</em></strong> tipinde bir bookInfo
+parametresi görüyoruz. Bu parametreden biz kod içinde getMatrixParameters() metodu ile bir MultivaluedMap nesnesi elde ediyoruz. Bu nesne tek nesne içinde gönderilen parametreleri Map’e koyan bir nesne fakat bildiğimiz Map’ten farklı.
+Bu veri tipi ile ilgili bir yazı yazıcam inşaAllah.
+For döngüleri içinde gerFirst metodunun kullanılmasının sebebi bir key’in bir defa gönderildğinin varsayılmasıdır.</p>
+
+<h3 id="ekran-kts">Ekran Çıktısı</h3>
+<p>Tarayıcıda http://localhost:8084/RestEasyTutorials/restService/service/bookInfo/bookInfo;authorName=George Orwell;bookName=1984 adresine gidiyorum. URL’de şu noktaya dikkat etmeliyiz, ben authorName ve bookName parametreleri göndericem ama bundan önce herhangi bir stringle bunu söylemem lazım.
+Yani burada /bookInfo/bookInfo; ifadesindeki ikinci bookInfo; benim parametre göndereceğimi söylüyor. Noktalı virgülden sonra gönderdiğim parametrelerde sistem tarafından algılanıyor ve kullanılıyor.</p>
+
+<p>[<img src="/images/advancedPathParam.png" style="width: 1024px; height= 500px;" />]</p>
+
+<p>Resimde gördüğünüz gibi ben iki parametre yolladım ama tek bookInfo nesnesi ile bunları elde edip kullandım.</p>
+
+<p>Bu yazıda da bu kadar arkadaşlar. Gelecek yazıda görüşene kadar sağlıcakla kalın.</p>
+
+<div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//ilkgunelgithubio.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+<script id="dsq-count-scr" src="//ilkgunelgithubio.disqus.com/count.js" async=""></script>
+
+<!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function() {
+        this.page.url = 'http://ilkaygunel.com';
+        this.page.identifier = '/blog/2015/advanced-pathparam-and-pathsegment';
+      };
+      (function() {
+        var d = document,
+        s = d.createElement('script');
+        s.src = '//ilkgunelgithubio.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="http://github.com/ilkgunel" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="http://twitter.com/ilkgunel" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2016 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>

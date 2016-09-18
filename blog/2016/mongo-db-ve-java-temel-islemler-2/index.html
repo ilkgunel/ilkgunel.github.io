@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Mongo DB Ve Java Temel İşlemler 2 - Kayıt Çekme - Birinci Bölüm</title>
+    <meta name="description" content="Merhabalar.">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-2/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>Mongo DB Ve Java Temel İşlemler 2 - Kayıt Çekme - Birinci Bölüm - İlkay Günel - Blog</title>
+<meta property="og:title" content="Mongo DB Ve Java Temel İşlemler 2 - Kayıt Çekme - Birinci Bölüm" />
+<meta name="description" content="Mongo DB Ve Java Temel İşlemler 2 - Kayıt Çekme - Birinci Bölüm" />
+<meta property="og:description" content="Mongo DB Ve Java Temel İşlemler 2 - Kayıt Çekme - Birinci Bölüm" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-2/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-2/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-09-04T19:38:20+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Mongo DB Ve Java Temel İşlemler 2 - Kayıt Çekme - Birinci Bölüm",
+    "datePublished": "2016-09-04T19:38:20+03:00",
+    "description": "Mongo DB Ve Java Temel İşlemler 2 - Kayıt Çekme - Birinci Bölüm",
+    "url": "http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-2/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Mongo DB Ve Java Temel İşlemler 2 - Kayıt Çekme - Birinci Bölüm</h1>
+      <p class="post-meta">Sep 4, 2016</p>
+    </header>
+
+    <div class="post-content">
+      <p>Merhabalar.</p>
+
+<p><a href="http://ilkgunel.github.io/mongo-db-ve-java-temel-islemler-1">Önceki</a> yazıda MongoDB veri tabanımıza Java ile nasıl kayıt ekleyebileceğimizi görmüştük. Bu yazıda ve gelecek yazıda ,iki parça halinde, var olan kayıtların nasıl çekileceğini göreceğiz. Aslında
+tek yazı içinde kayıt çekme işlemini anlatmak istiyordum ama uzun yazı yazmayı ve size uzun, sıkıcı yazı okutmak istemediğimden kayıt çekme işlemini iki parçaya böldüm.</p>
+
+<p>Öncelikle önceki yazıda girdiğimiz kayıtlardan herhangi birisinin MongoDB’deki halini görelim ve akabinde Java kodumuz ile başlayalım.</p>
+
+<p><code class="highlighter-rouge">json
+{
+    "_id": "57c1991a3e9b4210c9d291c9",
+    "address": {
+      "street": "2 Avenue",
+      "zipcode": "10075",
+      "building": "1480",
+      "coord": [
+        -73.9557413,
+        40.7720266
+      ]
+    },
+    "borough": "Manhattan",
+    "cuisine": "Turkish",
+    "grades": [
+      {
+        "date": "27-08-2016",
+        "grade": "A",
+        "score": 11
+      },
+      {
+        "date": "27-08-2016",
+        "grade": "B",
+        "score": 17
+      }
+    ],
+    "name": "Vella",
+    "restaurant_id": "41704620"
+}
+</code></p>
+
+<p><strong>MongoDBSelectRecords.java</strong></p>
+
+<p>```java
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package io.github.ilkgunel.mongodb;</p>
+
+<p>import com.mongodb.Block;
+import com.mongodb.MongoClient;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import static com.mongodb.client.model.Filters.eq;
+import org.bson.Document;
+/**
+ *
+ * @author ilkaygunel
+ */
+public class MongoDBSelectRecords {
+    public static void main(String[] args) {
+        MongoClient mongoClient=null;</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    try {
+        mongoClient = new MongoClient("localhost", 27017);
+        MongoDatabase database = mongoClient.getDatabase("MongoDB");
+        
+        FindIterable&lt;Document&gt; iterable = database.getCollection("Records").find();
+        
+        iterable.forEach(new Block&lt;Document&gt;(){
+            @Override
+            public void apply(final Document document){
+                System.out.println(document);
+            }
+        });
+    } catch (Exception e) {
+        System.out.println("An Error Occured! Error is:"+e);
+    }
+    finally{
+        mongoClient.close();
+    }
+} } ```
+</code></pre>
+</div>
+
+<p>Yukarıdaki kod MongoDB içindeki bir Collection’daki tüm kayıtları getirmeye yarayan bir koddur. 
+Sınıfımız içerisinde öncelikle MongoDB veritabanımıza kayıt sağlıyoruz. Nasıl kayıt sağladığımıza önceki yazımızda değinmiştim.</p>
+
+<p><code class="highlighter-rouge">java
+FindIterable&lt;Document&gt; iterable = database.getCollection("Records").find();
+</code></p>
+
+<p>satırı ile Records atındaki collection’ı getir diyoruz ve <strong><em>find()</em></strong> metodu ile tüm kayıtları Document tipinde veri tutan FindIterable nesnesine koy diyoruz.Akabinde
+bu FindIterable sınıfına özgü olan forEach metodundan iterable nesnesi üzerinden faydalanarak tüm kayıtlarımızı konsola yazdırıyoruz. finally bloğunda ise açmış olduğumuz
+MongoClient nesnesini kapatıyoruz. Kodu çalştırdığımız zaman şöyle bir çıktı elde ediyoruz.</p>
+
+<p><a href="/images/mongoSelect1.png">
+<img src="/images/mongoSelect1.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Şimdi ben MongoClient üzerinden Records dökümanındaki her bir kaydın <strong><em>cuisine</em></strong> alanlarını değiştiriyorum. Turkish,American,German vb. atamalar yapıyorum.</p>
+
+<p>Eğer döküman içindeki spesifik alana özgü bir kayıt çekmek istersek, mesela cuisine alanı Turkish olanı getir demek istersek o zaman <strong><em>find()</em></strong> metodunun içine
+parametre vermemiz gerekir. Şöyle ki:</p>
+
+<p><code class="highlighter-rouge">java
+//FindIterable&lt;Document&gt; iterable = database.getCollection("Records").find();
+FindIterable&lt;Document&gt; iterable = database.getCollection("Records").find(new Document("cuisine","Turkish"));
+</code></p>
+
+<p>Kod içindeki new Document(“cuisine”,”Turkish”) ifadesi cuisine alanına Turkish alanına Turkis ataması yapıyor ve bu döküman find metoduna parametre olarak gidince
+sadece cuisine alanı Turkish olan kayıtların getirilmesini sağlıyor. Kodu çalıştırdığımızda şöyle bir çıktı alırız:</p>
+
+<p><a href="/images/mongoSelect2.png">
+<img src="/images/mongoSelect2.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>find metodu sadece yeni bir dökümanı parametre almak zorunda değildir. <strong><em>eq()</em></strong> metodunun parametre olarak verilmesi de aynı işlemi gerçekleştirir. Kullanımı şöyledir:</p>
+
+<p><code class="highlighter-rouge">java
+import static com.mongodb.client.model.Filters.eq;
+//FindIterable&lt;Document&gt; iterable = database.getCollection("Records").find();
+//FindIterable&lt;Document&gt; iterable = database.getCollection("Records").find(new Document("cuisine","Turkish"));
+FindIterable&lt;Document&gt; iterable = database.getCollection("Records").find(eq("cuisine", "Turkish"));
+</code></p>
+
+<p>Yukarıdaki cuisine alanı dökümanımızın doğrudan bir alanı idi. Yani tablodaki bir kolon gibi düşünebiliriz. Peki bir alanın altındaki alana göre kayıt çekmek istersek?
+O zaman da “.” ile ayırarak önce istediğimiz alt alanın üst alan adını ardından da istediğimiz alanın adını parametre olarak geçiriyoruz. Şimdi ben yine MongoClient üzerinden
+önceki yazıda eklemiş olduğumuz kayıtlardaki address alanının altındaki <strong><em>zipcode</em></strong> alanlarını kafama göre değiştiriyorum ve 10075,10076,10077 gibi değerler veriyorum. Mesela cuisine alanı Amerikan olan kayıt için zipcode 10077.
+Select işlemini yapacak kodum da şöyle:</p>
+
+<p><code class="highlighter-rouge">java
+//FindIterable&lt;Document&gt; iterable = database.getCollection("Records").find();
+//FindIterable&lt;Document&gt; iterable = database.getCollection("Records").find(new Document("cuisine","Turkish"));
+//FindIterable&lt;Document&gt; iterable = database.getCollection("Records").find(eq("cuisine", "Turkish"));
+FindIterable&lt;Document&gt; iterable = database.getCollection("Records").find(eq("address.zipcode", "10077"));
+</code></p>
+
+<p>Kodu çalıştırdığımda gelen çıktı şöyle:</p>
+
+<p><a href="/images/mongoSelect3.png">
+<img src="/images/mongoSelect3.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Yukarıdaki kodu az önce bahsettiğimiz gibi new Document(…) deyip de yapabilirdiniz.</p>
+
+<p>Önceki yazıda da bahsettiğim üzere biz bir alanın altına birden fazla aynı alanları içerecek şekilde kayıtlar koyabiliriz. Yazının başındaki JSON’dan da gördüğümüz gibi address alanı altına ilgili alanları barındıran
+tek  kayıt giriliyor. Fakat grades alanı altına aynı alanların var olduğu birden fazla kayıt girdik. Bu durumda grades alanı altında bir array mevcut oluyor. Fakat kayıt çekerken bu durum bizim için bir değişiklik doğurmuyor.
+Biz address alanı için address.zipcode dediğimiz gibi grades alanı için de grades.grade diyebiliriz. Kodumuz da şöyle olur:</p>
+
+<p><code class="highlighter-rouge">java
+FindIterable&lt;Document&gt; iterable = database.getCollection("Records").find(eq("grades.grade", "A"));
+</code></p>
+
+<p>Tabi biz burda ilgili kayıtların grade alanları ile hiç oynamadık ve tüm kayıtlar A’ya sahip grade barındırdığı için yukarıdaki kod yine tüm kayıtları getirecektir.</p>
+
+<p>Bu yazıda bu kadar arkadaşlar. Gelecek yazıda kayıt çekme işlemlerinin ikinci kısmını göreceğiz. O yazıda <strong><em>greater than, less than, logical or,and</em></strong> konularına değineceğiz. Görüşene kadar sağlıcakla kalın.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function() {
+        this.page.url = 'http://ilkaygunel.com';
+        this.page.identifier = '/blog/2016/mongo-db-ve-java-temel-islemler-2';
+      };
+      (function() {
+        var d = document,
+        s = d.createElement('script');
+        s.src = '//ilkgunelgithubio.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="http://github.com/ilkgunel" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="http://twitter.com/ilkgunel" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2016 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>

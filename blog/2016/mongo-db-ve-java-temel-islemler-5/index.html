@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Mongo DB Ve Java Temel İşlemler 5 - Kayıt Silme</title>
+    <meta name="description" content="Önceki yazımızda MongoDB’de nasıl kayıt güncelleyebileceğimizi görmüştük. Bu yazıda da  nasıl kayıt silineceği göreceğiz.">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-5/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>Mongo DB Ve Java Temel İşlemler 5 - Kayıt Silme - İlkay Günel - Blog</title>
+<meta property="og:title" content="Mongo DB Ve Java Temel İşlemler 5 - Kayıt Silme" />
+<meta name="description" content="Mongo DB Ve Java Temel İşlemler 5 - Kayıt Silme" />
+<meta property="og:description" content="Mongo DB Ve Java Temel İşlemler 5 - Kayıt Silme" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-5/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-5/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-09-10T19:38:20+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Mongo DB Ve Java Temel İşlemler 5 - Kayıt Silme",
+    "datePublished": "2016-09-10T19:38:20+03:00",
+    "description": "Mongo DB Ve Java Temel İşlemler 5 - Kayıt Silme",
+    "url": "http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-5/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Mongo DB Ve Java Temel İşlemler 5 - Kayıt Silme</h1>
+      <p class="post-meta">Sep 10, 2016</p>
+    </header>
+
+    <div class="post-content">
+      <p>Önceki yazımızda MongoDB’de nasıl kayıt güncelleyebileceğimizi görmüştük. Bu yazıda da  nasıl kayıt silineceği göreceğiz.</p>
+
+<p>MongoDB Java driver içerisinde kayıt silmek amacı ile <strong><em>deleteOne()</em></strong> ve <strong><em>deleteMany()</em></strong> metodu bize sunulmuş. İsimlerinden anlaşılacağı gibi deleteOne metodu
+sadece bir kayıt silmek deleteMany metodu da birden fazla kayıt silmek amacı ile kullanılır. Şimdi iki metodu da örnekleyelim.</p>
+
+<p>Önceki yazılarda da yaptığımız gibi öncelikle üzerinde çalışacağımız kaydı görelim:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57c19b523e9b4210f735327f"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 Avenue"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10077"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"building"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1480"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"coord"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mf">-73.9557413</span><span class="p">,</span><span class="w">
+        </span><span class="mf">40.7720266</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"borough"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Manhattan"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cuisine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"American"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"grades"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27-08-2016"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"grade"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27-08-2016"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"grade"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vella"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"restaurant_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"41704620"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>Veritabanında cuisine alanı American olan sadece bir kayıt var. Şimdi benim bu kaydı silmek için kullanacağım şu şekildedir:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package io.github.ilkgunel.mongodb;
+
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.result.DeleteResult;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import static java.util.Arrays.asList;
+import java.util.Locale;
+import org.bson.Document;
+
+/**
+ *
+ * @author ilkaygunel
+ */
+public class RemovingData {
+    public static void main(String[] args) {
+        MongoClient mongoClient = null;
+        try {
+            mongoClient = new MongoClient("localhost", 27017);
+            MongoDatabase database = mongoClient.getDatabase("MongoDB");
+            
+            database.getCollection("Records").deleteOne(new Document("cuisine","American"));
+
+        } catch (Exception e) {
+            System.out.println("An Error Occured! Error is:" + e);
+        } finally {
+            mongoClient.close();
+        }
+    }
+}
+</code></pre>
+</div>
+
+<p>Kod içerisinde deleteOne metoduna bir döküman geçirdik ve bu dökümanda cuisine keyine American valuesunu atadık. Kod çalıştığında veritabanında karşısına cuisine alanı
+American olup ilk gelen kaydı silecek.</p>
+
+<p>Kayıt silmeden önce veritabanımız kaydın şekli şöyle:</p>
+
+<p><a href="/images/mongoDelete1.png">
+<img src="/images/mongoDelete1.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Kaydı sildikten sonra ise şöyle:</p>
+
+<p><a href="/images/mongoDelete2.png">
+<img src="/images/mongoDelete2.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Gördüğümüz gibi kayıt sayımız 5’den 4’e indi ve 2. sıradaki kayda cuisine alanı Russian olan kayıt geçti.</p>
+
+<p>Şimdi de deleteMany metodunu örnekleyelim. Veritabanında cuisine alanı Italian olan 2 kayıt mevcut. deleteMany metodununa cuisine keyine Italian değerini verdiğim bir döküman atarsak 2 kayıt da silinir.
+Kodumuz şöyle:</p>
+
+<p><a href="/images/mongoDelete3.png">
+<img src="/images/mongoDelete3.png" style="width: 958px; height= 400px;" /></a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package io.github.ilkgunel.mongodb;
+
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.result.DeleteResult;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import static java.util.Arrays.asList;
+import java.util.Locale;
+import org.bson.Document;
+
+/**
+ *
+ * @author ilkaygunel
+ */
+public class RemovingData {
+    public static void main(String[] args) {
+        MongoClient mongoClient = null;
+        try {
+            mongoClient = new MongoClient("localhost", 27017);
+            MongoDatabase database = mongoClient.getDatabase("MongoDB");
+            
+            database.getCollection("Records").deleteMany(new Document("cuisine","Italian"));
+
+        } catch (Exception e) {
+            System.out.println("An Error Occured! Error is:" + e);
+        } finally {
+            mongoClient.close();
+        }
+    }
+}
+</code></pre>
+</div>
+
+<p>MongoClient’a dönüp baktığımızda kayıt sayısının 2’ye indiğini görüyoruz.</p>
+
+<p><a href="/images/mongoDelete4.png">
+<img src="/images/mongoDelete4.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>MongoDB’de eğer istenirse bir seferde tüm kayıtlar silinebilinir. Bunun yapılması için deleteMany metoduna boş bir döküman geçirilmesi yeterlidir. Örnek kodumuzu şu şekilde güncellersek amacımıza uygun hale gelir:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>//database.getCollection("Records").deleteMany(new Document("cuisine","Italian"));
+database.getCollection("Records").deleteMany(new Document());
+</code></pre>
+</div>
+
+<p>Kodun çalıştırılması akabinde durum şöyledir:</p>
+
+<p><a href="/images/mongoDelete5.png">
+<img src="/images/mongoDelete5.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Bu kodun işletilmesi akabinde tüm kayıtlar silinmiş olmasına rağmen Collection yerinde durmaktadır. Eğer tüm kayıtlarla beraber Collection’ı da silmek istersek <strong><em>drop()</em></strong> metodunu
+kullanabiliriz. Kodumuzu şu şekilde düzenlemeliyiz:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>//database.getCollection("Records").deleteMany(new Document("cuisine","Italian"));
+//database.getCollection("Records").deleteMany(new Document());
+database.getCollection("Records").drop();
+</code></pre>
+</div>
+
+<p>Collections’ın altındaki artık hiçbir Collection görünmüyor.</p>
+
+<p><a href="/images/mongoDelete5.png">
+ <img src="/images/mongoDelete5.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Bu yazıda da bu kadar arkadaşlar. MongodDB’de kayıt ve collection silme işlemlerini gördük. Gelecek yazıda görüşene kadar sağlıcakla kalın.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
+
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function() {
+        this.page.url = 'http://ilkaygunel.com';
+        this.page.identifier = '/blog/2016/mongo-db-ve-java-temel-islemler-5';
+      };
+      (function() {
+        var d = document,
+        s = d.createElement('script');
+        s.src = '//ilkgunelgithubio.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="http://github.com/ilkgunel" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="http://twitter.com/ilkgunel" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2016 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>

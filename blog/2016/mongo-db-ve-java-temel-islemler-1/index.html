@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>MongoDB Ve Java Temel İşlemler 1 - Kayıt Eklemek</title>
+    <meta name="description" content="Merhaba arkadaşlar.">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-1/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>MongoDB Ve Java Temel İşlemler 1 - Kayıt Eklemek - İlkay Günel - Blog</title>
+<meta property="og:title" content="MongoDB Ve Java Temel İşlemler 1 - Kayıt Eklemek" />
+<meta name="description" content="MongoDB Ve Java Temel İşlemler 1 - Kayıt Eklemek" />
+<meta property="og:description" content="MongoDB Ve Java Temel İşlemler 1 - Kayıt Eklemek" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-1/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-1/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-09-04T19:38:20+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "MongoDB Ve Java Temel İşlemler 1 - Kayıt Eklemek",
+    "datePublished": "2016-09-04T19:38:20+03:00",
+    "description": "MongoDB Ve Java Temel İşlemler 1 - Kayıt Eklemek",
+    "url": "http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-1/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">MongoDB Ve Java Temel İşlemler 1 - Kayıt Eklemek</h1>
+      <p class="post-meta">Sep 4, 2016</p>
+    </header>
+
+    <div class="post-content">
+      <p>Merhaba arkadaşlar.</p>
+
+<p>Benim de ilgili duyduğum NoSQL teknolojilerinden birisi olan MongoDB’nin diğer çok sevdiğim ortam olan Java ile nasıl kullanıldığına dair bilgilerimi tazelemek istedim ve
+bu yazı ile beraber 3 ya da 4 yazıda temel işlemlerden bahsedeceğim. Bu yazıda sizlere MongoDB veritabanına Java ile nasıl kayıt eklendiğini anlatmaya çalışacağım.
+MongoDB ve Java ile ilgili diğer yazılarımdan haberdar olmak için beni <a href="https://twitter.com/ilkgunel">Twitter hesabımdan</a> takip edebilirsiniz.
+Şimdi öncelikle kısaca MongoDB hakkında bilgi vereyim.</p>
+
+<h3 style="color: #4183C4;">MongoDB Nedir?</h3>
+
+<p>MongoDB’yi anlamak için öncelikle <em><strong>NoSql</strong></em>‘in ne olduğunu anlamalıyız. Açılımı <em><strong>Not Only Sql</strong></em> olan NoSql günümüzde çokça kullanılan ilişkisel veritabanı mantığı yerine döküman tabanlı veri tutma yolunu tercih eden veritabanı yönetim şeklidir. Veriler JSon ya da Xml formatında tutulur. NoSql’de Join ve Foreign Key yoktur. &nbsp;Bugün <em><strong>Big Data&nbsp;</strong></em>kavramını çok sıkça duyuyoruz ve bu kavramın beraberinde gelen verileri analiz etmek için günümüz ilişkisel veri tabanlarının yetersiz kalacağı, bu analizin ancak NoSql ile yapılabileceği söylenmekte. İnternette her an, her saniye veri üretilmekte ve devasa hale gelen bu verilerin işlenmesi için de NoSql kullanılmakta. Google ve Amazon gibi dev şirketler verileriniz NoSql tabanlı veritabanlarında tutmaktalar. Yalnız NoSql için verilerin çok mühim olduğu yerlerde (örneğin bankalarda) kullanılmaması yönününde düşünceler belirtiliyor. NoSql ilişkisel veritabanlarına göre daha performanslıdır ve bunu RAM üzerinde çalışmasına borçludur. Bu nedenle NoSql’in güncelleme ve yedekleme sistemlerine fazla güvenmemek gerekir.</p>
+
+<p>MongoDB ise son zamanlarda popülaritesi gittikçe artan NoSql’in bir çeşit veri tabanı uygulamasıdır. Açık kaynak kodlu olan MongoDB verileri JSon formatında tutar ve daha çok ilişkisel veritabanlarının yetersiz kaldığı yerlerde imdada yetişmektedir. İlişkisel veritabaları gibi <em><strong>Indexleme</strong></em> özelliğine sahiptir. MongoDB Java’nın yanında C ,C++, Python, PHP ve bunlara ek bir kaç dil tarafından desteklenmektedir.</p>
+
+<p>Bu kısa MongoDB bilgilendirmesinden sonra Java ile MongoDB’nin nasıl kullanılacağına geçelim.</p>
+
+<p>Öncelikle Windows için <a href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/">buradan</a>, OS X için de <a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/">buradan</a>işletim sisteminize uygun kurulum tamitlarını uygulayıp MongoDB’yi kurun arkadaşlar. Benim elimdeki OS X için</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>brew update
+brew install mongodb
+</code></pre>
+</div>
+
+<p>komutları MongoDB’yi kurmak için yetti. Windows altında kurulum da kolay. İndireceğiniz bir MSI dosyası ile kurulumu hemen yapabilirsiniz. Linux için de kurulum talimatlarını okumanızı tavsiye ederim. Kurulumu yaptıktan sonra terminalinizden cd komutu ile kök dizininize gelin ve</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo mkdir -p /data/db (OS X İçin)
+mkdir \data\db (Windows İçin)
+</code></pre>
+</div>
+
+<p>komutlarından uygun olanı verin.  Son olarak Windows’da Program Files\MongoDb\Server\SürümNo\bin altındaki mongod‘yi çalıştırın. OS X’de terminalden direk mongod komutunu verebilirsiniz. MongoDB’yi çalıştırdıktan sonra sıra Java bağlantısı yapmaya geliyor.</p>
+
+<p>Geliştirme ortamınızda bir Java projesi ya da bir Maven oluşturun. İsterseniz&nbsp;<a href="https://oss.sonatype.org/content/repositories/releases/org/mongodb/mongo-java-driver/2.13.2/">https://oss.sonatype.org/content/repositories/releases/org/mongodb/mongo-java-driver/2.13.2/</a>&nbsp;adresinden&nbsp;<span class="s1">mongo-java-driver-2.13.2.jar’ı indirin ve proje kütüphanenize ekleyin, isterseniz de aşağıdaki bağımlılığı pom.xml dosyasına ekleyerek projenize kütüphaneyi tanıtın.</span></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.mongodb&lt;/groupId&gt;
+    &lt;artifactId&gt;mongo-java-driver&lt;/artifactId&gt;
+    &lt;version&gt;3.3.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+</div>
+
+<p>Şimdi projemiz MongoDB’yi tanıdığı için kod yazabiliriz. Aşağıdaki MongoTest sınıfı basit bir MongoDB kullanımı içeriyor. Kodun satır satır açıklaması kodun altındadır.</p>
+
+<p><strong>MongoRecordInserting.java Kodu</strong></p>
+
+<p>```java
+    package io.github.ilkgunel.mongodb;</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/**
+ *
+ * @author ilkaygunel
+ */
+import org.bson.Document;
+
+import com.mongodb.Block;
+import com.mongodb.MongoClient;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoDatabase;
+
+import static java.util.Arrays.asList;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+/**
+ *
+ * @author ilkaygunel
+ */
+public class MongoRecordInserting {
+
+    public static void main(String[] args) {
+        MongoClient mongoClient;
+        DateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+        try {
+            mongoClient = new MongoClient("localhost", 27017);
+            MongoDatabase database = mongoClient.getDatabase("MongoDB");
+
+            database.getCollection("Records").insertOne(
+                    new Document("address",
+                            new Document()
+                            .append("street", "2 Avenue")
+                            .append("zipcode", "10075")
+                            .append("building", "1480")
+                            .append("coord", asList(-73.9557413, 40.7720266)))
+                    .append("borough", "Manhattan")
+                    .append("cuisine", "Italian")
+                    .append("grades", asList(
+                            new Document()
+                            .append("date", format.format(new Date()))
+                            .append("grade", "A")
+                            .append("score", 11),
+                            new Document()
+                            .append("date", format.format(new Date()))
+                            .append("grade", "B")
+                            .append("score", 17)))
+                    .append("name", "Vella")
+                    .append("restaurant_id", "41704620"));
+        } catch (Exception e) {
+            System.err.println("Bir Hata Meydana Geldi!");
+            System.out.println("Hata" + e);
+        }
+    }
+}
+</code></pre>
+</div>
+
+<p>```
+Kodumuzu adım adım inceleyerek devam edelim arkadaşlar.</p>
+<ol>
+<li>MongoDB veritabımıza MongoClient sınıfından bir nesne ile bağlantı kuruyoruz. MongoClient kullanmak istediğimizde Checked Exception işin içine girdiğinden kodlarımızı try-catch bloğu içinde yazıyoruz.</li>
+<li>Local makinede çalıştığımız için hostumuz localhost oluyor. MongoDB de kurulum ayarları itibari ile 27017 portu üzerinden hizmet veriyor ve biz de bu portu parametre olarak veriyoruz.</li>
+<li>mongoClient.getDatabase(“VeritabanıAdı”); diyerek MongoDB veritabanımızla bağlantı kuruyoruz ve dönen sonucu bir <em><strong>MongoDatabase</strong></em> sınıfı türünden değişkene&nbsp;atıyoruz. Burada veritabanını daha önce oluşturmamış olmanız önemli değil. Sizin için yoksa oluşturuyor.</li>
+<li>Oluşturmuş olduğumuz MongoDatabase nesnesinin getCollection("CollectionAdı") metodu ile koleksiyona bağlantı sağlıyoruz. Koleksiyonu tam olarak olmasa da ilişkisel veri tabanı yapısındaki tabloya karşılık geliyor diye düşünebiliriz. Veritabanı gibi koleksiyon da yoksa oluşturuluyor.</li>
+<li>Koleksiyona bağlantı sağladıktan sonra ona bir kayıt eklemek istiyoruz ve bunun için insertOne metodunu kullanıyoruz. &nbsp;İlişkisel veritabanındaki tablodaki sütunlar tek bir çeşit veri tutabilirler.
+MongoDB'de ise JSON'dan gelen bir özellik olarak içiçe (nested) alanlar kullanılabiliyor. Örneğin burada address bir kolon olarak düşünülürse onun içinde başka bilgiler de, alt bilgiler de barınıyor. Street, zipcode gibi.</li>
+<li>append metodu ise yeni kolonlar ekliyor olarak düşünülebilir. borough ve cuisine alanları örneğin yeni birer sütunlar.</li>
+<li>Bir alan eğer birden fazla alt değer tutacaksa bunu asList metodu sağlayabiliriz. Örneğin grades alanı altına iki döküman eklenecek. address alanında tek döküman eklemiştik, grades'de ise
+iki döküman yani iki farklı değer eklenecek. Bu bu dökümanların asList metodu içinde yazılması ile sağlanabilir.</li>
+<li>catch'in hemen üzerinde görülen iki append metodu ise tıpkı borough ve cuisine gibi iki yeni kolon (aslında property) ekliyor.</li>
+</ol>
+
+<p><strong>Ekran Çıktısı</strong></p>
+
+<p>Kodumuzu çalıştırıp MongoClient üzerinden dökümanımızı kontrol ettiğimizde sonuç şöyle:
+<img src="/images/mongoInsert1.png" style="width: 1024px;height= 392px;" /></p>
+
+<p>Yukarıdaki kodumuz tek bir kayıt eklemek için kullanılabilecek bir durumdur. Peki birden çok kaydı bir seferde eklemek istersek ne yapmalıyız?
+Bu durumda da <strong><em>insertMany</em></strong> metodunu kullanmamız gerekir.</p>
+
+<p>```java
+package io.github.ilkgunel.mongodb;</p>
+
+<p>/**
+ *
+ * @author ilkaygunel
+ */
+import org.bson.Document;</p>
+
+<p>import com.mongodb.Block;
+import com.mongodb.MongoClient;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoDatabase;</p>
+
+<p>import static java.util.Arrays.asList;</p>
+
+<p>import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;</p>
+
+<p>/**
+ *
+ * @author ilkaygunel
+ */
+public class MongoDBBasicUsage {</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public static void main(String[] args) {
+    MongoClient mongoClient;
+    DateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+    try {
+        mongoClient = new MongoClient("localhost", 27017);
+        MongoDatabase database = mongoClient.getDatabase("MongoDB");
+
+        List&lt;Document&gt; documents = new ArrayList&lt;&gt;();
+
+        for(int i=0;i&lt;=4;i++){
+            documents.add(new Document("address",
+                        new Document()
+                        .append("street", "2 Avenue")
+                        .append("zipcode", "10075")
+                        .append("building", "1480")
+                        .append("coord", asList(-73.9557413, 40.7720266)))
+                .append("borough", "Manhattan")
+                .append("cuisine", "Italian")
+                .append("grades", asList(
+                        new Document()
+                        .append("date", format.format(new Date()))
+                        .append("grade", "A")
+                        .append("score", 11),
+                        new Document()
+                        .append("date", format.format(new Date()))
+                        .append("grade", "B")
+                        .append("score", 17)))
+                .append("name", "Vella")
+                .append("restaurant_id", "41704620"));
+        }
+
+        database.getCollection("Records").insertMany(documents);
+    } catch (Exception e) {
+        System.err.println("Bir Hata Meydana Geldi!");
+        System.out.println("Hata" + e);
+    }
+} } ```
+</code></pre>
+</div>
+
+<p>Kodumuz içerisinde öncelikle <strong><em>Documents</em></strong> tipinde bir liste oluşuturuyoruz. Akabinde for döngüsü ile döküman oluşuturup dökümanı listeye ekliyoruz. Son aşamada ise oluşutup doldurduğumuz
+bu listeyi insertMany metoduna parametre olarak veriyoruz.</p>
+
+<p><strong>Ekran Çıktısı</strong></p>
+
+<p>insertMany metodu ile kayıt eklediğimizde de durum şöyledir:
+<img src="/images/mongoInsert2.png" style="width: 1024px;height= 392px;" /></p>
+
+<p>Resimde gördüğünüz gibi az önce eklediğimiz 1 kayıt ve insertMany ile eklenen 5 kayıt ile toplam 6 kayıt veri tabanında görünüyor.</p>
+
+<p>Bu yazımızda bu kadar sevgili arkadaşlar.  Gelecek yazıda kayıt çekme işlemlerini anlatmaya çalışacağım.. Sağlıcakla kalın.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
+
+<p>Yararlandığım Bazı Kaynaklar:</p>
+
+<p><a href="http://aslitonbul.blogspot.com.tr/2014/01/nosql-nedir.html">http://aslitonbul.blogspot.com.tr/2014/01/nosql-nedir.html</a></p>
+<p><a href="http://www.yunusmete.com/2014/02/09/mongodb-ve-nosql/">http://www.yunusmete.com/2014/02/09/mongodb-ve-nosql/</a></p>
+<p><a href="http://yazilimdersi.info/makaleler/detay/61/java-ile-mongodb-kullanimi">http://yazilimdersi.info/makaleler/detay/61/java-ile-mongodb-kullanimi</a></p>
+<p><a href="http://www.mertsarac.com/blog/post/nosql-nedir-nasil-kullaniliyor">http://www.mertsarac.com/blog/post/nosql-nedir-nasil-kullaniliyor</a>
+</p>
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function() {
+        this.page.url = 'http://ilkaygunel.com';
+        this.page.identifier = '/blog/2016/mongo-db-ve-java-temel-islemler-1';
+      };
+      (function() {
+        var d = document,
+        s = d.createElement('script');
+        s.src = '//ilkgunelgithubio.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="http://github.com/ilkgunel" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="http://twitter.com/ilkgunel" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2016 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>

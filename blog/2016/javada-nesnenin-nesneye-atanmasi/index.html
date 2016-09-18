@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Java'da Nesnenin Nesneye Atanması</title>
+    <meta name="description" content="layout: pagetitle: Java’da Nesnenin Nesneye Atanması—">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/javada-nesnenin-nesneye-atanmasi/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>Java’da Nesnenin Nesneye Atanması - İlkay Günel - Blog</title>
+<meta property="og:title" content="Java’da Nesnenin Nesneye Atanması" />
+<meta name="description" content="Java’da Nesnenin Nesneye Atanması" />
+<meta property="og:description" content="Java’da Nesnenin Nesneye Atanması" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/javada-nesnenin-nesneye-atanmasi/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/javada-nesnenin-nesneye-atanmasi/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-09-04T19:38:20+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Java’da Nesnenin Nesneye Atanması",
+    "datePublished": "2016-09-04T19:38:20+03:00",
+    "description": "Java’da Nesnenin Nesneye Atanması",
+    "url": "http://ilkaygunel.com/blog/2016/javada-nesnenin-nesneye-atanmasi/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Java'da Nesnenin Nesneye Atanması</h1>
+      <p class="post-meta">Sep 4, 2016</p>
+    </header>
+
+    <div class="post-content">
+      <hr />
+<p>layout: page
+title: Java’da Nesnenin Nesneye Atanması
+—</p>
+<head>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-76541903-2', 'auto');
+ga('send', 'pageview');
+</script>
+</head>
+
+<p>Merhabalar arkadaşlar. Java’ya yeni başlamış ya da biraz ilerlemiş ama bu ayrımın farkında olmayan arkadaşlar için birşeyler yazmak istedim.
+Java’da bizim kullandığımız bir atama operatörü var : <strong><em>=</em></strong>
+Bu operatör bizim bir değer tutan değişkeni başka bir değişkene, nesneye atamamızı sağlar. Fakat burada kod yazarken dikkatli olmak gerekir. Bu atama operatörü primitive(ilkel) ve referans tipli değişkenler üzerinde atama yapılırken farklı davranmaktadır.
+Ne demek istediğimiz örnekle açıklıyayım:</p>
+
+<h3 id="personclassjava">PersonClass.java`</h3>
+
+<p><code class="highlighter-rouge">java
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package collections;
+/**
+ *
+ * @author ilkaygunel
+ */
+public class PersonClass {
+    String name;
+    String surname;
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getSurname() {
+        return surname;
+    }
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+}
+</code></p>
+
+<p>PersonClass sınıfımız son derece basit. Sadece isim ve soyisim özellikleri ile get-set metotlarına sahip.</p>
+
+<h3 id="assignmetoperationjava">AssignmetOperation.java</h3>
+
+<p><code class="highlighter-rouge">java
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package collections;
+/**
+ *
+ * @author ilkaygunel
+ */
+public class AssignmentOperation {
+    public static void main(String[] args) {
+        int a=5;
+        int b=a;
+        b=10;
+        System.out.println("A'nın Değeri:"+a+",B'nin değeri:"+b);
+        PersonClass personClassObject1 = new PersonClass();
+        personClassObject1.setName("ilkay");
+        personClassObject1.setSurname("günel");
+        PersonClass personClassObject2 = new PersonClass();
+        personClassObject2=personClassObject1;
+        personClassObject2.setName("onur");
+        personClassObject2.setSurname("özcan");
+        System.out.println("personClassObject1:"+personClassObject1.getName()+" "+personClassObject1.getSurname());
+        System.out.println("personClassObject2:"+personClassObject2.getName()+" "+personClassObject2.getSurname());
+    }
+}
+</code></p>
+
+<p>AssignmetOperation sınıfını incelediğimizde iki primitive nesne var. a ve b. Önce a’ya 5 değeri atanıyor. Sonra a b’ye atanıyor. Akabinde b’ye 10 atanıyor ve konsola değerler yazdırılıyor.
+Burada hiçbir sıkıntı yok. a nesnesi değerini koruyacak, b en son atanan 10 değerine sahip olacak.
+Peki PersonClass nesnelerinde durum ne? Şimdi ona bakalım.
+Kod içinde iki adet PersonClass nesnesi üretiliyor: personClassObject1 ve personClassObject2. personClassObject1 nesnesinin name surname özelliklerine değerler atanıyor, personClassObject1 nesnesi personClassObject2 nesnesine atanıyor.
+personClassObject2 nesnesinin name surname özellikleri set metodları ile değiştiriliyor. Son olarak da bu iki nesnenin değerleri ekrana yazdırılıyor. Konsol çıktısı ne imiş bir bakalım:</p>
+
+<p>[<img src="/images/assignmetOperationImage.png" style="width: 958px; height= 400px;" />]</p>
+
+<p>Çıktıda gördüğümüz gibi pirimitive type olan int nesneler arası atama yapmada bir sıkıntı yok. Ama referans tipli nesneler olan personClassObject1 ve personClassObject2 birbirine atanması akabinde personClassObject2 üzerinde değişiklik yapılması personClassObject1 nesnesinin de özelliklerini etkiledi.
+Java dilinde eğer referans tipli değişkenler arası atama yapılırsa bu tip sorunla karşılaşmanız kaçınılmazdır. Çünkü atama yapılırken değer değil arka plandaki referans diğer nesneye atanıyor. Bu durumda iki nesne de aynı referansa sahip olduğu için birinde yapılan değişiklik diğerini de etkiliyor.</p>
+
+<p><strong><em>Peki bu durumu nasıl çözecez?</em></strong></p>
+
+<p>Çözüm aslında basit. Burada Java’nın en temel taşlarından biri olan Constructors (Yapılandırıcılar) devreye giriyor. Eğer oluşturulacak nesneye sadece değerlerin geçirilmesini sağlayan bir constructor daha yazılırsa sorun çözülecek.
+PersonClass sınıfımız için yapılandırıcıları şöyle güncelleyelim:</p>
+
+<p><code class="highlighter-rouge">java
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package collections;
+/**
+ *
+ * @author ilkaygunel
+ */
+public class PersonClass {
+    String name;
+    String surname;
+    public PersonClass(){
+    }
+    public PersonClass(PersonClass personClass)
+    {
+        this.setName(personClass.getName());
+        this.setSurname(personClass.getSurname());
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getSurname() {
+        return surname;
+    }
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+}
+</code></p>
+
+<p>AssignmetOperations sınıfımızdaki personClassObject2 nesnesinin oluşturulması`ı değiştirilim ve personClassObject1 nesnesinin personClassObject2 nesnesine atandığı satırı silelim.</p>
+
+<p><code class="highlighter-rouge">java
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package collections;
+/**
+ *
+ * @author ilkaygunel
+ */
+public class AssignmentOperation {
+    public static void main(String[] args) {
+        int a=5;
+        int b=a;
+        b=10;
+        System.out.println("A'nın Değeri:"+a+",B'nin değeri:"+b);
+        PersonClass personClassObject1 = new PersonClass();
+        personClassObject1.setName("ilkay");
+        personClassObject1.setSurname("günel");
+        PersonClass personClassObject2 = new PersonClass(personClassObject1);
+        personClassObject2.setName("onur");
+        personClassObject2.setSurname("özcan");
+        System.out.println("personClassObject1:"+personClassObject1.getName()+" "+personClassObject1.getSurname());
+        System.out.println("personClassObject2:"+personClassObject2.getName()+" "+personClassObject2.getSurname());
+    }
+}
+</code></p>
+
+<p>Konsol çıktısına bir de şimdi bakalım:
+[<img src="/images/assignmetOperationImage2.png" style="width: 958px; height= 400px;" />]</p>
+
+<p>Çıktıda gördüğümüz üzere personClassObject2 üzerinde yapılan değişiklik böylece personClassObject1 nesnesini etkilemedi.
+Bu tarz referans tipli atamalar yaparken dikkatli olun arkadaşlar. Doğrudan nesneyi nesneyi atamak yerine yapılandırıcı kullanarak nesnenin değerlerini geçirin yeni nesnenize. Aksi takdirde yazdığınız kod çok sorunlu hale gelecektir.</p>
+
+<p>Bu yazıda bu kadar arkadaşlar. Başka yazıda görüşene kadar sağlıcakla kalın.</p>
+
+<div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//ilkgunelgithubio.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+<script id="dsq-count-scr" src="//ilkgunelgithubio.disqus.com/count.js" async=""></script>
+
+<!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function() {
+        this.page.url = 'http://ilkaygunel.com';
+        this.page.identifier = '/blog/2016/javada-nesnenin-nesneye-atanmasi';
+      };
+      (function() {
+        var d = document,
+        s = d.createElement('script');
+        s.src = '//ilkgunelgithubio.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="http://github.com/ilkgunel" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="http://twitter.com/ilkgunel" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2016 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>

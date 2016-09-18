@@ -1,0 +1,1441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>İlkay Günel - Blog</title>
+    <description>İlkay Günel Blog</description>
+    <link>http://ilkaygunel.com/</link>
+    <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 18 Sep 2016 13:31:29 +0300</pubDate>
+    <lastBuildDate>Sun, 18 Sep 2016 13:31:29 +0300</lastBuildDate>
+    <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Apache JMeter İle Yük Testi Yapalım</title>
+        <description>&lt;p&gt;Oluşturulan yazılımların test edilmesindeki alanlardan birisi de ilgili yazılıma yük testi uygulamaktır. Yük testinden kastedilen ise bu yazılım canlı ortama geçtiğinde en fazla ne kadar istek kaldırabilir
+, amaçlanan request sayısını kaldırabiliyor mu yoksa server çöküyor mu gibi sorulara cevap bulmaktır.&lt;/p&gt;
+
+&lt;p&gt;Biz de bu yazıda temel seviyede bir yük testinin &lt;strong&gt;&lt;em&gt;Apache Jmeter&lt;/em&gt;&lt;/strong&gt; ile nasıl yapıldığına değineceğiz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Apache Jmeter Nedir?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Apache JMeter Apache tarafından ücretsiz bir şekilde sunulan, web sitelerini, servisleri, performans ölçümlerini vs. yapmaya yarayan ve bunları grafiğe dökebilen bir yazılımdır.
+JMeter başlangıçta Apache Tomcat sunucusunun performans ölçümü için geliştirilirken sonraları bu proje açık kaynak haline getirilip bizlere sunulmuştur.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Hazırlık Aşaması&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Öncelikle Apache JMeter’ın çalışması için sisteminizde Java SE 7 ve üzerinin kurulu olması gerekmektedir.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://jmeter.apache.org/download_jmeter.cgi&quot;&gt;http://jmeter.apache.org/download_jmeter.cgi&lt;/a&gt; adresinden tgz ya da zip uzantılı dosyalardan birini indirin ve indrdiğiniz sıkıştırılmış dosyayı bir klasöre açın.&lt;/p&gt;
+
+&lt;p&gt;Akabinde terminal ya da cmd’yi açıp az önce klasöre çıkarttığınız yere gidin. O klasör içindeki &lt;strong&gt;&lt;em&gt;bin&lt;/em&gt;&lt;/strong&gt; klasörüne girin.&lt;/p&gt;
+
+&lt;p&gt;Ben OS X üzerinde bu testi anlatıyor olacağım. Bu nedenle ben bin klasörü içindeki &lt;strong&gt;&lt;em&gt;jmeter.sh&lt;/em&gt;&lt;/strong&gt; dosyasını çalıştıracağım. Windows’da ise .bat uzantılı dosyanın çalıştırılması gerekiyor.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jmeter/jmeter1.png&quot;&gt;
+ &lt;img src=&quot;/images/jmeter/jmeter1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu komutun akabinde JMeter çalışacak karşımıza şöyle bir ekran gelecek:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jmeter/jmeter2.png&quot;&gt;
+  &lt;img src=&quot;/images/jmeter/jmeter2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Uygulama Örneği&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi biz de JMeter ile örnek bir yük testi uygulaması yapalım.&lt;/p&gt;
+
+&lt;p&gt;İlk olarak Test Plan’a sağ tıklayalım ve Add -&amp;gt; Threads (Users) -&amp;gt; Thread Group yolundan sistemi test edecek kullanıcı sayısı için ekleme yapalım.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jmeter/jmeter3.png&quot;&gt;
+  &lt;img src=&quot;/images/jmeter/jmeter3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Gelen ekrandaki input’ları şöyle dolduralım:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jmeter/jmeter4.png&quot;&gt;
+&lt;img src=&quot;/images/jmeter/jmeter4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Ekrandaki &lt;strong&gt;&lt;em&gt;Number Of Threads&lt;/em&gt;&lt;/strong&gt; alanı kaç kullanıcı ile bu ilgili yazılıma yük testi uygulamak istediğinizi belirtir. Biz şimdilik 10 kullanıcı ile test yapalım.&lt;/li&gt;
+  &lt;li&gt;Ram-Up Period alanı Number Of Threads alanında verilen kullanıcı sayısına kaç saniyede çıkılacağını belirtir. Biz 5 saniye dedik. Bu da 10/5 = 2’den her 5 saniyede bir sisteme 2 kullanıcının dahil edilmesi ve 5 saniye sonunda 10 kullanıcının sistem olmuş olmasını sağlar.&lt;/li&gt;
+  &lt;li&gt;Loop Count alanı ise bu testin kaç kez tekrarlanacağını belirtir. Eğer &lt;strong&gt;&lt;em&gt;forever&lt;/em&gt;&lt;/strong&gt; dersek biz durdurana kadar testi devam ettirir. Ben loop count’a 2 dedim ve bu test 2 defa yapılacak.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Şimdi yük testi uygulayacağımız yazılım için tanımlama yapacağız. Thread Group’a sağ tıklayalım Add -&amp;gt; Sampler -&amp;gt; HttpRequest yolundan bir HttpRequest ekleyelim.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jmeter/jmeter5.png&quot;&gt;
+&lt;img src=&quot;/images/jmeter/jmeter5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Ekranda &lt;strong&gt;&lt;em&gt;Server Name or IP&lt;/em&gt;&lt;/strong&gt; alanına test yapacağımız web sitesinin IP ya da domain name bilgisini yazıyoruz.&lt;/li&gt;
+  &lt;li&gt;Port kısmına hangi port üzerinden erişeceğimizi yazıyoruz. 80 portu üzerinden erişeceğiz.&lt;/li&gt;
+  &lt;li&gt;Method alanını da GET olarak bırakıyoruz.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jmeter/jmeter6.png&quot;&gt;
+&lt;img src=&quot;/images/jmeter/jmeter6.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi de test sonuçlarını izleyebilmek için eklemeler yapalım.&lt;/p&gt;
+
+&lt;p&gt;Yine Thread Group’a sap tıklayıp Add -&amp;gt; Listener kısmından &lt;strong&gt;&lt;em&gt;Response Time Graph&lt;/em&gt;&lt;/strong&gt;, &lt;strong&gt;&lt;em&gt;View Results in Table&lt;/em&gt;&lt;/strong&gt;, &lt;strong&gt;&lt;em&gt;View Results Tree&lt;/em&gt;&lt;/strong&gt; alanlarını ekleyelim.&lt;/p&gt;
+
+&lt;p&gt;Bu eklemelerin ardından üst ortadaki yeşil &lt;strong&gt;Start&lt;/strong&gt; butonu ile testimizi başlatalım.&lt;/p&gt;
+
+&lt;p&gt;View Results In Table sekmesine baktığımda tüm testlerin başarı ile sonuçlandığını görüyorum. Demek ki test yaptığımız web sitesi ilgili şartları, yükü kaldırabiliyor.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jmeter/jmeter7.png&quot;&gt;
+&lt;img src=&quot;/images/jmeter/jmeter7.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi testimizi biraz daha büyütelim arkadaşlar. HTTP Request’ten Server Name or IP kısmını kod5.org olarak değiştirelim. Thread Group’a dönelim, Number of Threads’i 500 yapalım ve Ram-Up Period’u 20 yapalım. Loop count aynı kalsın. Bu bizim 1000 kullanıcı ile test yapacağımız anlamına gelir. Akabinde testi tekrar çalıştıralım.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jmeter/jmeter8.png&quot;&gt;
+&lt;img src=&quot;/images/jmeter/jmeter8.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Uyguladığımız yük testi gördüğünüz gibi birçok başarısızlıkla sonuçlandı. Şimdi user sayısını biraz düşürelim ve 100 yapalım. Ram-up periodu da 10 yapalım.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jmeter/jmeter9.png&quot;&gt;
+&lt;img src=&quot;/images/jmeter/jmeter9.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Testin çoğunluğu yine başarısızlıkla sonuçlandı arkadaşlar. Yani kod5.org bu yükü de tam olarak kaldırabilecek seviyede değil demek ki.&lt;/p&gt;
+
+&lt;p&gt;Şimdi kullanıcı sayısını 50’ye çekelim ve testi yeniden çalıştıralım.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jmeter/jmeter10.png&quot;&gt;
+&lt;img src=&quot;/images/jmeter/jmeter10.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Son olarak loop count’u 1 yapıp testi tekrar çalıştıralım.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jmeter/jmeter11.png&quot;&gt;
+&lt;img src=&quot;/images/jmeter/jmeter11.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Gördüğünüz gibi hala sorunlar var.&lt;/p&gt;
+
+&lt;p&gt;Ben user sayısını 25 yaptığımda testler sorunsuz tamamlandı arkadaşlar. 25’in üzeri için kod5.org yük testi bakımından sorunlu olmaya başlıyor.&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda basitçe JMeter ile yük testini anlatmaya çalıştım arkadaşlar. Başka yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Sat, 17 Sep 2016 19:38:20 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/jmeter-load-testing/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/jmeter-load-testing/</guid>
+        
+        <category>apache jmeter</category>
+        
+        <category>apache jmeter nedir</category>
+        
+        <category>jmeter ile yük testi</category>
+        
+        <category>apache jmeter nasıl kullanılır</category>
+        
+        <category>jmeter ile yük testi nasıl yapılır</category>
+        
+        
+        <category>welcome</category>
+        
+      </item>
+    
+      <item>
+        <title>RestEasy İle Restful Web Servis Dersleri 9 – MatrixParam</title>
+        <description>&lt;p&gt;Merhaba arkadaşlar. Bu yazıda parametre alma yöntemlerinden bir diğer olan MatrixParam kullanımını öğreneceğiz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;MatrixParam.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;package com.mycompany.resteasytutorials;
+
+import java.util.ArrayList;
+import java.util.List;
+import javax.ws.rs.GET;
+import javax.ws.rs.MatrixParam;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path(&quot;/matrixParam&quot;)
+public class MatrixParamExample {
+    @GET
+    @Produces(MediaType.TEXT_HTML+&quot;;charset=UTF-8&quot;)
+    public String getBook(@MatrixParam(&quot;bookName&quot;) String bookName) {
+        String returnedBook=&quot;&quot;;
+        List&amp;lt;String&amp;gt; books = new ArrayList&amp;lt;&amp;gt;();
+        
+        books.add(&quot;1984&quot;);
+        books.add(&quot;Hayvan Çiftliği&quot;);
+        books.add(&quot;Cesur Yeni Dünya&quot;);
+        
+        for(String s : books) {
+            if (s.equals(bookName)) {
+                returnedBook = s;
+            }
+        }
+        return &quot;Kitap Adı : &quot;+returnedBook;
+    }           
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;MatrixParamExample sınıfımınız içinde @GET notasyonu ile işaretlediğimiz ve ekrana çıktı verecek olan getBook metodu parametresini @MatrixParam notasyonu ile alıyor. Burada yine dikkat edeceğimiz gibi path üzerinde herhangi bir parametre tanımlaması yok. Bu metot gelen parametreyi MatrixParam’ın özelliklerine göre algılayacak.&lt;/p&gt;
+
+&lt;p&gt;Kod hemen hemen önceki yazıdaki kod ile aynı olduğundan laf kalabalığı olmaması için ayrıntısına girmiyorum.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Ekran Çıktısı&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;ApplicationConfig sınıfım içerisinde kök yolumu restful olarak belirledim. Şimdi&lt;/p&gt;
+
+&lt;p&gt;http://localhost:8080/RestEasyTutorials-1.0-SNAPSHOT/restful/matrixParam;bookName=Hayvan Çiftliği&lt;/p&gt;
+
+&lt;p&gt;adresine gidiyorum. QueryParam’da hatırlayacağımız üzere parametre web servis path’inin bitişini ? işareti ile takip ederek gönderiliyordu. MatrixParam’da ise web servis path’inin bitişini ; ile takip ederek parametre yolluyoruz. Bizim path’imiz &lt;strong&gt;&lt;em&gt;…/restful/matrixParam&lt;/em&gt;&lt;/strong&gt; ile bitiyor ve &lt;strong&gt;&lt;em&gt;;bookName=Hayvan Çiftliği&lt;/em&gt;&lt;/strong&gt; ile parametremizi yolluyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/matrix1.png&quot;&gt;
+&lt;img src=&quot;/images/matrix1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Ekran çıktısında gördüğümüz üzere parametre alımı başarı ile sağlandı.&lt;/p&gt;
+
+&lt;p&gt;Peki bir değil de birden çok parametre göndermek istesek?&lt;/p&gt;
+
+&lt;p&gt;İşte o zaman da her parametreyi noktalı virgül ile birbirinden ayırmamız gerekirdi. Yani metodumuz diyelim ki 2 tane @MatrixParam ile işaretlenmiş parametre bekliyor, o zaman biz de &lt;strong&gt;&lt;em&gt;webservisYolu;parametre1=deger1;parametre2=deger2&lt;/em&gt;&lt;/strong&gt; diyerek işimizi görecektik.&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda da bu kadar arkadaşlar. Gelecek yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 15 Sep 2016 19:38:20 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/matrix-param/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/matrix-param/</guid>
+        
+        <category>resteasy ile restful web servis</category>
+        
+        <category>resteasy matrix param</category>
+        
+        <category>restful dersleri</category>
+        
+        <category>web service dersleri</category>
+        
+        <category>web servis dersleri</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>JSP, Servlet Ve MongoDB İle Örnek Proje</title>
+        <description>&lt;p&gt;Daha önce 5 yazı ile MongoDB ve Java ile temel işlemlerin gerçekleştirilmesi üzerinde durmuştuk. Bu yazıda da bu işlemleri pekiştirmek için yaptığım küçük bir
+projeden size bahsedeceğim.&lt;/p&gt;
+
+&lt;p&gt;Öncelikle projenin kaynak kodu &lt;a href=&quot;https://github.com/ilkgunel/JSPServletMongoDBSampleProject&quot;&gt;https://github.com/ilkgunel/JSPServletMongoDBSampleProject&lt;/a&gt; adresinde mevcuttur. Oradan indiribelir kodları değiştirebilir ve geliştirebilirsiniz.&lt;/p&gt;
+
+&lt;p&gt;Proje bir Java EE web projesidir. Maven tabanlı oluşturduğum projede önyüzde JSP ile arkada Servlet kullandım. Veritabanı olarak da MongoDB’yi kullandım. Projeyi NetBeans IDE üzerinde yazdım ve 
+sunucu olarak da Jetty kullandım. Ama siz istediğiniz IDE ve istediğiniz sunucu üzerinde projeyi çalıştırabilirsiniz.&lt;/p&gt;
+
+&lt;p&gt;Şimdi temel işlemlerin üzerinde çalıştığı projeye ekran görüntüleri üzerinden bakalım.&lt;/p&gt;
+
+&lt;p&gt;Projeyi çalıştırdğımızda ana sayfada iki link geliyor. Birisi kayıt eklemek, diğeri veri tabanındaki kayıtları listelemek için.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/sampleProject1.png&quot;&gt;
+&lt;img src=&quot;/images/sampleProject1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi kayıtları listeleme linkine tıklıyorum:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/sampleProject2.png&quot;&gt;
+&lt;img src=&quot;/images/sampleProject2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Veritabanındaki &lt;strong&gt;Members&lt;/strong&gt; koleksiyonunda saklanan 2 adet kayıt ekranda görünüyor. Şimdi &lt;strong&gt;&lt;em&gt;Kayıt Eklemek İçin Tıklayın&lt;/em&gt;&lt;/strong&gt; linkine tıklıyorum ve gelen ekrandaki textBox’ları dolduruyorum.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/sampleProject3.png&quot;&gt;
+&lt;img src=&quot;/images/sampleProject3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Kaydet butonuna tıkladığımda bana kayıt işleminin başarı ile neticelendiğini bildiren mesaj geliyor.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/sampleProject4.png&quot;&gt;
+&lt;img src=&quot;/images/sampleProject4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Kayıtları listeleme linkine tıkladığımda az önce girdiğim kaydın listede yer aldığını görüyorum.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/sampleProject5.png&quot;&gt;
+&lt;img src=&quot;/images/sampleProject5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi de kayıt güncelleme işlemine bakalım. Mavi renkteki kayıt güncelleme butonuna tıkladığımda beni ilgili kaydın bilgilerinin yer aldığı kayıt güncelleme sayfasına yönlendiriyor.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/sampleProject6.png&quot;&gt;
+&lt;img src=&quot;/images/sampleProject6.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Açılan sayfada cadde Mecidiyeköy ve ilçe Şişli. Ben şimdi bunları Petrol Yolu ve Pendik şeklinde değiştirip &lt;strong&gt;&lt;em&gt;Kaydı Güncelle&lt;/em&gt;&lt;/strong&gt; butonuna tıklıyorum.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/sampleProject7.png&quot;&gt;
+ &lt;img src=&quot;/images/sampleProject7.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bana &lt;strong&gt;&lt;em&gt;Update is Successful&lt;/em&gt;&lt;/strong&gt; şeklinde bir mesaj döndü. Bir de MongoDB’nin arayüz programı üzerinden kayıt gerçekten güncellenmiş mi diye baktığımızda kaydın güncellendiğini görebiliyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/sampleProject8.png&quot;&gt;
+ &lt;img src=&quot;/images/sampleProject8.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;http://localhost:8080/JSPServletMongoDBSampleProject/select adresine geri dönelim ve şimdi de kayıt silme işlemine bakalım. Herhangi bir kayıt için kırmızı renkli &lt;strong&gt;&lt;em&gt;Kaydı Sil&lt;/em&gt;&lt;/strong&gt; butonuna tıkladığımda öncelikle bana emin olup olmadığımı soran mesaj kutusu beliriyor.
+ OK butonuna tıkladığımda da kayıt silme işlemi gerçekleşiyor ve bana silme işleminin başarılı olduğuna dair mesaj dönüyor.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/sampleProject9.png&quot;&gt;
+&lt;img src=&quot;/images/sampleProject9.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/sampleProject10.png&quot;&gt;
+&lt;img src=&quot;/images/sampleProject10.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Arayüzden baktığımda da 3 olan kayıt sayısının 2’ye inmiş olduğunu görüyorum.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/sampleProject11.png&quot;&gt;
+&lt;img src=&quot;/images/sampleProject11.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Temel olarak size yaptığım bu ufak projeyi anlatmış oldum arkadaşlar. Başka bir yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 14 Sep 2016 19:38:20 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/jsp-servlet-mongodb-sample-project/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/jsp-servlet-mongodb-sample-project/</guid>
+        
+        <category>servlet</category>
+        
+        <category>jsp</category>
+        
+        <category>mongodb</category>
+        
+        <category>sample project</category>
+        
+        <category>mongodb java ee</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Jetty Maven Plugin İle Serverınızı Projenizde Taşıyın</title>
+        <description>&lt;p&gt;Günümüz Java EE dünyasında çok kapsamlı projeler için bile sadece Servlet Container’ı olan sunucu yazılımları yeterli olmaktadır. Öte yandan projenin bağımlılıklarının kolay yönetilmesi, IDE bağımsız olması gibi sebeplerden ötürü de projelerin çoğu Maven tabanlı yapılır.&lt;/p&gt;
+
+&lt;p&gt;İşte bu durumda Maven eklenti özelliği sayesinde bir servlet container olan Jetty sunucu yazılımını projenin içinde taşımaya imkan sağlıyor. Bunun için tek yapmamız gereken Maven’ın konfigürasyon dosyası olan pom.xml’e Jetty’nin pluginini eklemek.&lt;/p&gt;
+
+&lt;p&gt;Ben bu yazı için daha önce de hakkında bir yazı yazdığım &lt;a href=&quot;http://kod5.org/spring-mvc-ile-basit-bir-blog-projesi/&quot;&gt;SpringMVCBlogProject&lt;/a&gt; projesini kullanacağım. pom.xml dosyamıza şöyle bir kod ekleyip kaydediyoruz. Bu kod benim projeme özgü olarak sadece proje context pathîni içeriyor. Onun dışında tüm projeler için kullanılabilir durumda.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;build&amp;gt;
+	&amp;lt;plugins&amp;gt;
+		&amp;lt;plugin&amp;gt;
+			&amp;lt;groupId&amp;gt;org.eclipse.jetty&amp;lt;/groupId&amp;gt;
+			&amp;lt;artifactId&amp;gt;jetty-maven-plugin&amp;lt;/artifactId&amp;gt;
+			&amp;lt;version&amp;gt;9.2.11.v20150529&amp;lt;/version&amp;gt;
+			&amp;lt;configuration&amp;gt;
+				&amp;lt;scanIntervalSeconds&amp;gt;10&amp;lt;/scanIntervalSeconds&amp;gt;
+				&amp;lt;webApp&amp;gt;
+					&amp;lt;contextPath&amp;gt;/BlogProjectWithSpringMVC&amp;lt;/contextPath&amp;gt;
+				&amp;lt;/webApp&amp;gt;
+			&amp;lt;/configuration&amp;gt;
+		&amp;lt;/plugin&amp;gt;
+	&amp;lt;/plugins&amp;gt;
+&amp;lt;/build&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Akabinde eğer çalıştırmanız gereken database vs. varsa çalıştırıp sisteminizde Maven kurulu ise cmd/terminalden, kurulu değilse Eclipse IDE’den şu komutu vermemiz gerekiyor:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mvn jetty:run
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Bu kodu Eclipse’de projeye sağ tıklayıp Run As -&amp;gt; Maven build seçerek de girebilirsiniz (2 adet Maven Build göreceksiniz. Birincisi daha önceden çalıştırdığınız Maven Build komutlarını listeleyip seçim yapmanızı sağlar. İkincisi ise yeni bir komut girmenizi sağlar. Aşağıdaki ekran için ikincisini seçiyoruz):&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jetty1.png&quot;&gt;
+ &lt;img src=&quot;/images/jetty1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Run butonuna tıkladığınız zaman sizin için Jetty’nin bir defaya mahsus olmak üzere kütüphaneleri indirilir ve akabinde Jetty çalıştırılıp pom.xml’deki ilgili context-path ayarına göre deploy işlemi yapılır.&lt;/p&gt;
+
+&lt;p&gt;Bendeki konsol çıktısının bir kısmı şöyle, alttaki  &lt;strong&gt;Started Jetty Server&lt;/strong&gt; kısmını görmemiz gerekiyor.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jetty2.png&quot;&gt;
+ &lt;img src=&quot;/images/jetty2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;http://localhost:8080/BlogProjectWithSpringMVC/ adresine gittiğimde projemin sağlıklı bir şekilde çalıştığını görebiliyorum.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jetty3.png&quot;&gt;
+ &lt;img src=&quot;/images/jetty3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda da bu kadar arkadaşlar. Başka yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Tue, 13 Sep 2016 19:38:20 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/maven-jetty-plugin/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/maven-jetty-plugin/</guid>
+        
+        <category>jetty</category>
+        
+        <category>maven jetty</category>
+        
+        <category>jetty maven plugin</category>
+        
+        <category>jetty maven ile nasıl kullanılır</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Mongo DB Ve Java Temel İşlemler 5 - Kayıt Silme</title>
+        <description>&lt;p&gt;Önceki yazımızda MongoDB’de nasıl kayıt güncelleyebileceğimizi görmüştük. Bu yazıda da  nasıl kayıt silineceği göreceğiz.&lt;/p&gt;
+
+&lt;p&gt;MongoDB Java driver içerisinde kayıt silmek amacı ile &lt;strong&gt;&lt;em&gt;deleteOne()&lt;/em&gt;&lt;/strong&gt; ve &lt;strong&gt;&lt;em&gt;deleteMany()&lt;/em&gt;&lt;/strong&gt; metodu bize sunulmuş. İsimlerinden anlaşılacağı gibi deleteOne metodu
+sadece bir kayıt silmek deleteMany metodu da birden fazla kayıt silmek amacı ile kullanılır. Şimdi iki metodu da örnekleyelim.&lt;/p&gt;
+
+&lt;p&gt;Önceki yazılarda da yaptığımız gibi öncelikle üzerinde çalışacağımız kaydı görelim:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;_id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;57c19b523e9b4210f735327f&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;address&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;street&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2 Avenue&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;zipcode&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;10077&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;building&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1480&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;coord&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;-73.9557413&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;40.7720266&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;borough&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Manhattan&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;cuisine&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;American&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;grades&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;date&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;27-08-2016&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;grade&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;score&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;date&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;27-08-2016&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;grade&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;B&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;score&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Vella&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;restaurant_id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;41704620&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Veritabanında cuisine alanı American olan sadece bir kayıt var. Şimdi benim bu kaydı silmek için kullanacağım şu şekildedir:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package io.github.ilkgunel.mongodb;
+
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.result.DeleteResult;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import static java.util.Arrays.asList;
+import java.util.Locale;
+import org.bson.Document;
+
+/**
+ *
+ * @author ilkaygunel
+ */
+public class RemovingData {
+    public static void main(String[] args) {
+        MongoClient mongoClient = null;
+        try {
+            mongoClient = new MongoClient(&quot;localhost&quot;, 27017);
+            MongoDatabase database = mongoClient.getDatabase(&quot;MongoDB&quot;);
+            
+            database.getCollection(&quot;Records&quot;).deleteOne(new Document(&quot;cuisine&quot;,&quot;American&quot;));
+
+        } catch (Exception e) {
+            System.out.println(&quot;An Error Occured! Error is:&quot; + e);
+        } finally {
+            mongoClient.close();
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Kod içerisinde deleteOne metoduna bir döküman geçirdik ve bu dökümanda cuisine keyine American valuesunu atadık. Kod çalıştığında veritabanında karşısına cuisine alanı
+American olup ilk gelen kaydı silecek.&lt;/p&gt;
+
+&lt;p&gt;Kayıt silmeden önce veritabanımız kaydın şekli şöyle:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mongoDelete1.png&quot;&gt;
+&lt;img src=&quot;/images/mongoDelete1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Kaydı sildikten sonra ise şöyle:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mongoDelete2.png&quot;&gt;
+&lt;img src=&quot;/images/mongoDelete2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Gördüğümüz gibi kayıt sayımız 5’den 4’e indi ve 2. sıradaki kayda cuisine alanı Russian olan kayıt geçti.&lt;/p&gt;
+
+&lt;p&gt;Şimdi de deleteMany metodunu örnekleyelim. Veritabanında cuisine alanı Italian olan 2 kayıt mevcut. deleteMany metodununa cuisine keyine Italian değerini verdiğim bir döküman atarsak 2 kayıt da silinir.
+Kodumuz şöyle:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mongoDelete3.png&quot;&gt;
+&lt;img src=&quot;/images/mongoDelete3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package io.github.ilkgunel.mongodb;
+
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.result.DeleteResult;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import static java.util.Arrays.asList;
+import java.util.Locale;
+import org.bson.Document;
+
+/**
+ *
+ * @author ilkaygunel
+ */
+public class RemovingData {
+    public static void main(String[] args) {
+        MongoClient mongoClient = null;
+        try {
+            mongoClient = new MongoClient(&quot;localhost&quot;, 27017);
+            MongoDatabase database = mongoClient.getDatabase(&quot;MongoDB&quot;);
+            
+            database.getCollection(&quot;Records&quot;).deleteMany(new Document(&quot;cuisine&quot;,&quot;Italian&quot;));
+
+        } catch (Exception e) {
+            System.out.println(&quot;An Error Occured! Error is:&quot; + e);
+        } finally {
+            mongoClient.close();
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;MongoClient’a dönüp baktığımızda kayıt sayısının 2’ye indiğini görüyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mongoDelete4.png&quot;&gt;
+&lt;img src=&quot;/images/mongoDelete4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;MongoDB’de eğer istenirse bir seferde tüm kayıtlar silinebilinir. Bunun yapılması için deleteMany metoduna boş bir döküman geçirilmesi yeterlidir. Örnek kodumuzu şu şekilde güncellersek amacımıza uygun hale gelir:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//database.getCollection(&quot;Records&quot;).deleteMany(new Document(&quot;cuisine&quot;,&quot;Italian&quot;));
+database.getCollection(&quot;Records&quot;).deleteMany(new Document());
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Kodun çalıştırılması akabinde durum şöyledir:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mongoDelete5.png&quot;&gt;
+&lt;img src=&quot;/images/mongoDelete5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu kodun işletilmesi akabinde tüm kayıtlar silinmiş olmasına rağmen Collection yerinde durmaktadır. Eğer tüm kayıtlarla beraber Collection’ı da silmek istersek &lt;strong&gt;&lt;em&gt;drop()&lt;/em&gt;&lt;/strong&gt; metodunu
+kullanabiliriz. Kodumuzu şu şekilde düzenlemeliyiz:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//database.getCollection(&quot;Records&quot;).deleteMany(new Document(&quot;cuisine&quot;,&quot;Italian&quot;));
+//database.getCollection(&quot;Records&quot;).deleteMany(new Document());
+database.getCollection(&quot;Records&quot;).drop();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Collections’ın altındaki artık hiçbir Collection görünmüyor.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mongoDelete5.png&quot;&gt;
+ &lt;img src=&quot;/images/mongoDelete5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda da bu kadar arkadaşlar. MongodDB’de kayıt ve collection silme işlemlerini gördük. Gelecek yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 10 Sep 2016 19:38:20 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-5/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-5/</guid>
+        
+        <category>mongodb</category>
+        
+        <category>java</category>
+        
+        <category>kayıt güncelleme</category>
+        
+        
+        <category>welcome</category>
+        
+      </item>
+    
+      <item>
+        <title>Use Beatiful 3D Leopard Dock in OS X El Capitan</title>
+        <description>&lt;p&gt;Hello everyone. In this tutorial i am gonna show you how to you change El Capitan Dock with so beatiful 3D Leopard Dock. Let’s start.&lt;/p&gt;
+&lt;p&gt;First of all you need to download cDock app to do this purpose. You can download it from here:&lt;a href=&quot;http://w0lfschild.github.io/app_cDock.html&quot;&gt;http://w0lfschild.github.io/app_cDock.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;cDock an OS X application that you can change your dock to you want with it. When the app installation, cDock wants a permission about SIMBL. You need to give this permission to run the program. And do not forget to put cDock app to Applications folder.&lt;/p&gt;
+&lt;p&gt;After cDock installation , you need to download Leopard Dock files from Deviantart. You can download rar file&amp;nbsp;from here:&amp;nbsp;&lt;a href=&quot;http://gotier.deviantart.com/art/Leopard-Dock-3D-Original-1-0-83204400&quot;&gt;http://gotier.deviantart.com/art/Leopard-Dock-3D-Original-1-0-83204400&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Now, go to your Applications folder, find cDock and right click and click “Show Package Contents”.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/elcapitanDock1.png&quot;&gt;
+&lt;img src=&quot;/images/elcapitanDock1.png&quot; style=&quot;width: 1024px;height= 392px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Now you see the “Contents” folder. Open it and open Resources folder. In Resources folder open themes folder and create a new folder. You can set a name that you want. I am using  M5 string as folder name.&lt;/p&gt;
+&lt;p&gt;Now extract the rar file open the folder. In this folder you will see the dock and indicator png files.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/elcapitanDock2.png&quot;&gt;
+&lt;img src=&quot;/images/elcapitanDock2.png&quot; style=&quot;width: 1024px;height= 392px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Now change the name of indicator1.png file to indicator_large.png and move to M5 folder. After this, you should get 4 copy from file that’s name is indicator.png. Names of 4 copy files are&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;indicator_medium_simple.png&lt;/li&gt;
+&lt;li&gt;indicator_medium.png&lt;/li&gt;
+&lt;li&gt;indicator_small_simple.png&lt;/li&gt;
+&lt;li&gt;indicator_small.png&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Move this 4 files to M5 folder. After, change bg.png file name to background.png and move to M5 folder.&lt;/p&gt;
+
+&lt;p&gt;Lastly you need a .plist file.&amp;nbsp;Create a plist file that’s name is&amp;nbsp;&lt;strong&gt;M5.plist&lt;/strong&gt;&amp;nbsp;and copy these lines to the file.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;plist&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;version=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1.0&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;dict&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_borderBG&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_borderBGA&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_borderBGB&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_borderBGG&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_borderBGR&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_borderSize&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;integer&amp;gt;&lt;/span&gt;0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/integer&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_colorIndicator&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_cornerRadius&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;integer&amp;gt;&lt;/span&gt;0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/integer&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_customIndicator&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_darkMode&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;integer&amp;gt;&lt;/span&gt;0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/integer&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_darkenMouseOver&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;true/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_dockBG&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_dockBGA&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;100&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_dockBGB&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_dockBGG&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_dockBGR&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_fullWidth&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_hideLabels&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_iconReflection&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;true/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_iconShadow&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_iconShadowBGA&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_iconShadowBGB&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_iconShadowBGG&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_iconShadowBGR&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_iconShadowBGS&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;integer&amp;gt;&lt;/span&gt;10&lt;span class=&quot;nt&quot;&gt;&amp;lt;/integer&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_indicatorBGA&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_indicatorBGB&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_indicatorBGG&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_indicatorBGR&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_indicatorHeight&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;integer&amp;gt;&lt;/span&gt;0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/integer&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_indicatorWidth&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;integer&amp;gt;&lt;/span&gt;0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/integer&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_is3D&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;true/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_labelBG&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_labelBGA&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_labelBGB&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_labelBGG&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_labelBGR&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_pictureBG&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;true/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_pictureTile&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_separatorBG&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_separatorBGA&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_separatorBGB&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_separatorBGG&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_separatorBGR&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_showFrost&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_showGlass&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_showSeparator&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;true/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_sizeIndicator&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dict&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/plist&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In my M5 folder,they looks like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/elcapitanDock3.png&quot;&gt;
+&lt;img src=&quot;/images/elcapitanDock3.png&quot; style=&quot;width: 1024px;height= 392px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;In the folder, background1.png, indicator_medium1.png and indicator_large.png files my testing file. You can ignore these files.&lt;/p&gt;
+
+&lt;p&gt;Now almost finished. Open cDock App and choose the “M5” from Theme as dock option and check “Use image for application Indicators” . If dock doesn’t change, click the Restart Dock button. Again if dock doesn’t change, from Activity Monitor stop cDock and OS X Dock app. Try again. Sometimes cDock freezes.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/elcapitanDock4.png&quot;&gt;
+&lt;img src=&quot;/images/elcapitanDock4.png&quot; style=&quot;width: 1024px;height= 392px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Okey. Now everything is okey. Here is my beatiful 3D Leopard dock with the indicators.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/elcapitanDock5.png&quot;&gt;
+&lt;img src=&quot;/images/elcapitanDock5.png&quot; style=&quot;width: 1024px;height= 392px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I hope this post will help you to get a beatiful 3D dock in OS X.&lt;/p&gt;
+
+&lt;p&gt;Have a nice day.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 10 Sep 2016 19:38:20 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/use-beatiful-3d-leopard-dock-in-os-x-el-capitan/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/use-beatiful-3d-leopard-dock-in-os-x-el-capitan/</guid>
+        
+        <category>el capitan</category>
+        
+        <category>3D Dock</category>
+        
+        <category>Leopard Dock</category>
+        
+        <category>beatiful dock</category>
+        
+        <category>use 3D dock in el capitan</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>RestEasy İle Restful Web Servis Dersleri 8 – HeaderParam</title>
+        <description>&lt;p&gt;Merhabalar arkadaşlar. Bu yazıda RestEasy API içerisindeki bir başka parametre alma yöntemi olan HeaderParam’ı göreceğiz.&lt;/p&gt;
+
+&lt;p&gt;HeaderParam notasyonu sizin yazmış olduğunuz web servis metoduna HTTP Header’ından bir bilgi geçirmenizi sağlar. İlk yazıdan hatırlayacağımız üzere Restful Servis’ler HTTP protokolü üzerine yayılıyor ve işlerini HTTP metotları ile görüyor. İşte bu HTTP’nin özelliklerinden biri olan &lt;strong&gt;&lt;em&gt;Request Header&lt;/em&gt;&lt;/strong&gt; bilgisini parametre olarak geçirmek için de RestEasy içine &lt;strong&gt;&lt;em&gt;@HeaderParam&lt;/em&gt;&lt;/strong&gt; notasyonu koyulmuş durumda.&lt;/p&gt;
+
+&lt;p&gt;Şimdi bir örnek uygulama yapalım. Örnek uygulamayı &lt;a href=&quot;http://kod5.org/resteasy-ile-restful-web-servis-dersleri-7-query-param/&quot;&gt;önceki&lt;/a&gt; yazıdaki koda ekleme yaparak yapalım.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;HeaderParamExample.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;package com.mycompany.resteasytutorials;
+
+import java.util.ArrayList;
+import java.util.List;
+import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+
+@Path(&quot;/getBooks&quot;)
+public class HeaderParamExample {
+    @GET
+    @Produces(MediaType.TEXT_HTML+&quot;;charset=UTF-8&quot;)
+    public String getBook(@QueryParam(&quot;bookName&quot;) String bookName,@HeaderParam(&quot;Host&quot;) String host) {
+        String returnedBook=&quot;&quot;;
+        List&amp;lt;String&amp;gt; books = new ArrayList&amp;lt;&amp;gt;();
+        
+        books.add(&quot;1984&quot;);
+        books.add(&quot;Hayvan Çiftliği&quot;);
+        books.add(&quot;Cesur Yeni Dünya&quot;);
+        
+        for(String s : books) {
+            if (s.equals(bookName)) {
+                returnedBook = s;
+            }
+        }
+        return &quot;Kitap Adı : &quot;+returnedBook +&quot;&amp;lt;br/&amp;gt; Host Bilgisi : &quot; +host;
+    }           
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://kod5.org/resteasy-ile-restful-web-servis-dersleri-7-query-param/&quot;&gt;Önceki&lt;/a&gt; yazıdaki kodumuzdan farklı olarak buradaki metodumuz HeaderParam notasyonu kullanılarak fazladan bir parametre alıyor, ve return edilen String’e bu parametreyi ekliyor. Onun dışında kod tamamen aynı.&lt;/p&gt;
+
+&lt;p&gt;@HeaderParam notasyonuna parametre olarak verdiğimiz String bizim HTTP Header’ından hangi bilgiyi okumak istediğimizi söylediğimiz String’tir. Şimdi hangi tarayıcıyı kullanıyorsanız önceki yazıda yaptığımız gibi web servis’in sayfasını açın ve orada tarayıcının Network tabını bulun arkadaşlar. Ben Chrome üzerinde göstereceğim ve Chrome + Windows kullanan arkadaşlar F12’ye basarak ya da sağ tıklayıp incele diyerek Chrome’un konsolunu açabilirler. Açılan konsolda Network tabına tıklayıp sayfayı yenileyelim. Şöyle bir ekran sayfa içinde açılacak:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/header1.png&quot;&gt;
+&lt;img src=&quot;/images/header1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Buradaki getBooks ile başlayan yere tıklayın, kaşınıza HTTP isteği ve cevabına dair bazı bilgiler dönecek.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/header2.png&quot;&gt;
+&lt;img src=&quot;/images/header2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;İşte biz web servis metodumuza HeaderParam notasyonu ile Request Headers içindeki bilgileri parametre olarak geçirebiliriz. Bu yazıdaki örnek için &lt;strong&gt;&lt;em&gt;Host&lt;/em&gt;&lt;/strong&gt; bilgisini çekeceğiz. Bunun için metodun aldığı parametrelere &lt;strong&gt;&lt;em&gt;@HeaderParam(“Host”) String host&lt;/em&gt;&lt;/strong&gt; ifadesini eklememiz yeterli.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Ekran Çıktısı&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Web servisin sayfasını açtığımızda bizi şöyle bir ekran karşılıyor olacak.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/header3.png&quot;&gt;
+&lt;img src=&quot;/images/header3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Request Header’daki host bilgisini başarı ile aldık ve kitap adı ile birlikte ekrana yazdırdık arkadaşlar.&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda da bu kadar, gelecek yazıda görüşene kadar sağlıcakla kalın arkadaşlar.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Fri, 09 Sep 2016 19:38:20 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/header-param/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/header-param/</guid>
+        
+        <category>resteasy</category>
+        
+        <category>java</category>
+        
+        <category>header param</category>
+        
+        <category>restful web service</category>
+        
+        <category>resteasy ile restful web service</category>
+        
+        <category>java web service</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>RestEasy İle Restful Web Servis Dersleri 7 – Query Param</title>
+        <description>&lt;p&gt;Merhabalar arkadaşlar. Bu yazıda bir başka parametre elde etme yöntemi olan QueryParam’ı inceleyeceğiz.&lt;/p&gt;
+
+&lt;p&gt;Şimdiye kadarki yazılarda hep biz bir path tanımlaması yaparak parametre aldık. Fakat QueryParam ile web servisin yoluna herhangi bir ekleme, tanımlama yapmadan parametre almamız mümkün hale geliyor.&lt;/p&gt;
+
+&lt;p&gt;RestEasy API Servlet’in üstüne kurulu olduğu ve onun en üst katmanında yer aldığı için URI query parametrelerini URL form encoded parametrelerden ayırmaz. PathParam’da olduğu gibi QueryParam’da da verilerimiz int,String, bir Sınıf vs. tipinde olabilir.&lt;/p&gt;
+
+&lt;p&gt;Şimdi örnek kullanıma bakalım.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;ApplicationConfig.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;package com.mycompany.resteasytutorials;
+
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
+
+
+@ApplicationPath(&quot;queryParamExample&quot;)
+public class ApplicationConfig extends Application{
+    
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Web servisimiz için kök yolun &lt;strong&gt;&lt;em&gt;queryParamExample&lt;/em&gt;&lt;/strong&gt; olduğunu söyledik.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;QueryParamExample.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;package com.mycompany.resteasytutorials;
+
+import java.util.ArrayList;
+import java.util.List;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+
+@Path(&quot;/getBooks&quot;)
+public class QueryParamExample {
+    @GET
+    public String getBook(@QueryParam(&quot;bookName&quot;) String bookName) {
+        String returnedBook=&quot;&quot;;
+        List&amp;lt;String&amp;gt; books = new ArrayList&amp;lt;&amp;gt;();
+        
+        books.add(&quot;1984&quot;);
+        books.add(&quot;Hayvan Çiftliği&quot;);
+        books.add(&quot;Cesur Yeni Dünya&quot;);
+        
+        for(String s : books) {
+            if (s.equals(bookName)) {
+                returnedBook = s;
+                break;
+            }
+        }
+        return returnedBook;
+    }           
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;QueryParamExample sınıfımız içinde @GET notasyonu ile işaretlediğimiz ve sayfaya istekte bulunulduğunda çalışacak metodu görüyoruz. Bu metot QueryParam notasyonu ile tanımlanmış olan adres çubuğundan bookName ismi ile gönderilecek String tipindeki &lt;strong&gt;&lt;em&gt;bookName&lt;/em&gt;&lt;/strong&gt;* parametresini bekliyor. Metot içinde bir liste oluşturup eklemeler yapıyoruz ve QueryParam’dan gelen kitap ismini aratıp döndürüyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Ekran Çıktısı&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/query1.png&quot;&gt;
+ &lt;img src=&quot;/images/query1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;QueryParam ile tanımlanmış bir parametreyi gönderebilmek için web servis yolunun bittiği yerde ? işareti kullanıp peşine parametrenin adını ve değerini yazıyoruz. Bizim parametremizin adın bookName idi ve gönderdiğimiz değer de Hayvan Çiftliği. Bu nedenle &lt;strong&gt;&lt;em&gt;?bookName=Hayvan Çiftliği&lt;/em&gt;&lt;/strong&gt; diyerek parametremizi gönderiyoruz. Resimdeki %20 ifadesi URL kodlamasından geliyor, ona takılmayın. Hayvan Çiftliği şeklinde girdiğinizde parametre doğru bir şekilde iletiliyor.&lt;/p&gt;
+
+&lt;p&gt;Ekran çıktısında gördüğümüz gibi bir Türkçe karakter sorunu ile kaşı karşıyayız. Nasıl çözeceğiz bunu? Tek satırlık bir kod eklemesi bu sorunun kolayca üstesinden geleceğiz.&lt;/p&gt;
+
+&lt;p&gt;QueryParamExample sınıfımız içinde @GET notasyonunun hemen altına şu satırı ekleyelim.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@Produces(MediaType.TEXT_HTML+&quot;;charset=UTF-8&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Kod içinde şimdiye kadarki yazılardan farklı olarak @Produces notasyonunu kullanmamıştık. Fakat biz kullansak kullanmasak da arka planda bu notasyon çalışır ve varsayılan olarak TEXT_HTML tipinde veri üretir. Biz bu notasyonu kullanıp &lt;strong&gt;&lt;em&gt;MediaType.APPLICATION_JSON&lt;/em&gt;&lt;/strong&gt; ya da &lt;strong&gt;&lt;em&gt;“application/json”&lt;/em&gt;&lt;/strong&gt; ataması yaptığımızda sadece verilecek çıktının tipini değiştirmiş oluyoruz aslında.&lt;/p&gt;
+
+&lt;p&gt;Burada varsayılan çıktı olan TEXT_HTML’in karakter kodlmasını UTF-8’e dönüştürmek ve Türkçe karakterle sorun vermemesini sağlamak için MediaType.TEXT_HTML ifadesinin yanına &lt;strong&gt;&lt;em&gt;“;charset=UTF-8”&lt;/em&gt;&lt;/strong&gt; String’ini ekledik. Bunu web servis apisi bu web servisin karakter kodlamasını değiştiriyor ve UTF-8 yapıyor.&lt;/p&gt;
+
+&lt;p&gt;Şimdi ekran çıktısına bir kez daha bakalım.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/query2.png&quot;&gt;
+ &lt;img src=&quot;/images/query2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Türkçe karakter sorunu başarı ile çözüldü :)&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda da bu kadar arkadaşlar. QueryParam’ı ve Türkçe karakter sorununun çözümünü görmüş olduk. Gelecek yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 09 Sep 2016 19:38:20 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/query-param/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/query-param/</guid>
+        
+        <category>resteasy</category>
+        
+        <category>java</category>
+        
+        <category>query param</category>
+        
+        <category>restful web service</category>
+        
+        <category>resteasy ile restful web service</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Mongo DB Ve Java Temel İşlemler 4 - Kayıt Güncelleme</title>
+        <description>&lt;p&gt;Önceki 3 yazımızda MongoDB veritabanımıza Java ile nasıl kayıt girileceği ve kayıt çekileceği işlemlerini öğrenmiştik. Bu yazıda da mevcut verinin
+nasıl güncellenebileceğine değineceğiz.&lt;/p&gt;
+
+&lt;p&gt;Üzerinde update işlemi uygulayacağımız örnek Bson’larımızdan birisi şu arkadaşlar:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;_id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;57c19b523e9b4210f7353280&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;address&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;street&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2 Avenue&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;zipcode&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;10078&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;building&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1480&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;coord&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;-73.9557413&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;40.7720266&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;borough&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Manhattan&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;cuisine&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Russian&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;grades&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;date&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;27-08-2016&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;grade&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;score&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;date&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;27-08-2016&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;grade&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;B&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;score&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;17&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Vella&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;restaurant_id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;41704620&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Biz şimdi update kodumuzda &lt;strong&gt;&lt;em&gt;borough&lt;/em&gt;&lt;/strong&gt; alanını St.Petersburg olarak güncelleyeceğiz. Güncelleme kodumuz şöyle:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;package io.github.ilkgunel.mongodb;
+
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+
+public class MongoDBUpdateRecords {
+    public static void main(String[] args){
+        MongoClient mongoClient=null;
+        try {
+            mongoClient = new MongoClient(&quot;localhost&quot;, 27017);
+            MongoDatabase database = mongoClient.getDatabase(&quot;MongoDB&quot;);
+            
+            database.getCollection(&quot;Records&quot;).updateOne(new Document(&quot;cuisine&quot;,&quot;Russian&quot;), 
+                    new Document(&quot;$set&quot;,new Document(&quot;borough&quot;,&quot;St.Petersburg&quot;)));
+        
+        } catch (Exception e) {
+            System.out.println(&quot;An Error Occured! Error is:&quot;+e);
+        }
+        finally{
+            mongoClient.close();
+        }
+        
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Kod içerisinde database.getCollection(“Records”) diyerek Records collection’ını elde ediyoruz ve updateOne metodu ile bir kaydı güncelleyeceğimizi söylüyoruz.
+updateOne metoduna iki parametre veriyoruz. Birinci parametre bizim şartımızı bildiriyor. Bir döküman parametresi geçirerek cuisine alanı Russian olan kayıt üzerinde güncelleme yapılacak diyoruz.
+Burda trick bir nokta var. Birden fazla cuisine alanı Russian olan kayıt varsa ilk karşılaşılan kayıt üzerinde güncelleme yapılır, diğer kağıtlara dokunulmaz.
+updateOne matoduna verdiğimiz ikinci parametre yine bir döküman. Bu dökümanda key alanına &lt;strong&gt;&lt;em&gt;$set&lt;/em&gt;&lt;/strong&gt; operatörü ataması yapıyoruz. Bu operatör
+SQL’deki Update komutundaki Set gibi çalışarak value alanındaki döküman ile güncelleme yapıyor. updateOne metoduna verdiğimiz ikinci parametrenin value alanı da
+yine bir döküman ve bu dökümanda da key alanına güncellenecek alanı, value alanına güncellenecek değeri veriyoruz.&lt;/p&gt;
+
+&lt;p&gt;İşlemin neticesinde MongoClient üzerinden baktığımızda güncellemenin başarılı olduğunu görüyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mongoUpdate1.png&quot;&gt;
+&lt;img src=&quot;/images/mongoUpdate1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Yukarıdaki güncelleme işlemi kaydın doğrudan bir alanına yönelikti. Biz bir de bir alanın altındaki alanı güncelleyebiliriz. Örneğin yukarıdaki BSON üzerinde address alanı altındaki building
+alanını güncelleyelim ve bunun için şu kodu kullanalım. Bu arada MongoDB’nin dökümantasyonunda bu alanlara yani bir alanın içine açılmış alt alanların barındığı kısıma &lt;strong&gt;&lt;em&gt;Embedded Document&lt;/em&gt;&lt;/strong&gt; deniyor.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	database.getCollection(&quot;Records&quot;).updateOne(new Document(&quot;cuisine&quot;, &quot;Russian&quot;), 
+	new Document(&quot;$set&quot;, new Document(&quot;address.building&quot;, &quot;1481&quot;)));
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Kodda az önce yaptığımızdan bir fark yok. Sadece daha önce de gördüğümüz gibi iç içe alanlar için “.” operaötürnü kullanarak ulaşıyoruz. Kodu çalıştırıp MongoClient’a baktığımızda kaydın ilgili alanının başarılı bir şekilde güncellendiğini görebiliyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mongoUpdate2.png&quot;&gt;
+&lt;img src=&quot;/images/mongoUpdate2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu kısıma kadar tek kayıt güncellemeye yarayan updateOne metodunu gördük. Birden fazla kayıt güncellemek istediğimizde ise updateMany metodunu kullanmamız gerekiyor. Üzerinde update işlemi gerçekleştireceğimiz iki BSON’a şöyle bakalım:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;_id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;57c19b523e9b4210f7353281&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;address&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;street&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2 Avenue&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;zipcode&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;10079&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;building&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1480&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;coord&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;-73.9557413&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;40.7720266&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;borough&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Manhattan&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;cuisine&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Italian&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;grades&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;date&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;27-08-2016&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;grade&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;score&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;date&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;27-08-2016&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;grade&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;B&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;score&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;19&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Vella&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;restaurant_id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;41704620&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;_id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;57c19b523e9b4210f735327e&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;address&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;street&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2 Avenue&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;zipcode&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;10076&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;building&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1480&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;coord&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;-73.9557413&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;40.7720266&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;borough&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Manhattan&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;cuisine&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Italian&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;grades&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;date&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;27-08-2016&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;grade&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;score&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;date&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;27-08-2016&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;grade&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;B&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;score&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;13&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Vella&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;restaurant_id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;41704620&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Az önce de söylediğim gibi updateOne metodu kendisine verilen şarta göre ilk bulduğu kayıt üzerinde update yapar. Yukarıdaki kayıtların cuisine alanları aynı değerleri taşıyorlar.
+  Bu şartı updateMany metoduna verdiğimiz zaman aynı şartı taşıyan tüm kayıtlara update uygulanacak. Örnek kodumuz şöyle:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	database.getCollection(&quot;Records&quot;).updateMany(new Document(&quot;cuisine&quot;, &quot;Italian&quot;), 
+	new Document(&quot;$set&quot;, new Document(&quot;borough&quot;, &quot;Sicily&quot;)));
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Kodumuz cuisine alanı Italian olan tüm kayıtları bulacak ve akabinde borough alanlarını Sicily olarak güncelleyecek.&lt;/p&gt;
+
+&lt;p&gt;Kodu çalıştırdığımızda ilgili kayıtlar başarı ile güncelleniyor.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mongoUpdate3.png&quot;&gt;
+&lt;img src=&quot;/images/mongoUpdate3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bunların yanında bir de döküman değiştirme metodu kütüphane içerisinde yer alıyor. &lt;strong&gt;&lt;em&gt;replaceOne&lt;/em&gt;&lt;/strong&gt; adındaki metot ile mevcut kaydın tek seferde yeni bir kayıt ile değiştirilmesini sağlayabiliriz.
+Şimdi şu kayıt üzerinde replaceOne metodunu uygulayalım. Burada ayırt edici alan olarak yine cuisine alanını kullanabiliriz.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;57c1991a3e9b4210c9d291c9&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;address&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;street&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2 Avenue&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;zipcode&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;10075&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;building&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1480&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;coord&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;-73.9557413&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;40.7720266&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;borough&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Manhattan&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;cuisine&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Turkish&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;grades&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;date&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;27-08-2016&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;grade&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;score&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;date&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;27-08-2016&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;grade&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;B&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;score&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Vella&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;restaurant_id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;41704620&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Şimdi bu kayıt üzerinde replaceOne metodunu kullanarak kaydı değiştirme işlemini uygulayalım:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; package io.github.ilkgunel.mongodb;
+
+ import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import static java.util.Arrays.asList;
+import java.util.Date;
+import java.util.Locale;
+import org.bson.Document;
+
+public class MongoDBUpdateRecords {
+
+public static void main(String[] args) {
+    MongoClient mongoClient = null;
+    DateFormat format = new SimpleDateFormat(&quot;dd-MM-yyyy&quot;, Locale.ENGLISH);
+    try {
+        mongoClient = new MongoClient(&quot;localhost&quot;, 27017);
+        MongoDatabase database = mongoClient.getDatabase(&quot;MongoDB&quot;);
+        database.getCollection(&quot;Records&quot;).replaceOne(new Document(&quot;cuisine&quot;, &quot;Turkish&quot;),
+                new Document(&quot;address&quot;,
+                        new Document()
+                        .append(&quot;street&quot;, &quot;Samsun Sinop Yolu&quot;)
+                        .append(&quot;zipcode&quot;, &quot;5255&quot;)
+                        .append(&quot;building&quot;, &quot;5255&quot;)
+                        .append(&quot;coord&quot;, asList(-73.9557413, 40.7720266)))
+                .append(&quot;borough&quot;, &quot;Ünye&quot;)
+                .append(&quot;cuisine&quot;, &quot;Turkish&quot;)
+                .append(&quot;grades&quot;, asList(
+                        new Document()
+                        .append(&quot;date&quot;, format.format(new Date()))
+                        .append(&quot;grade&quot;, &quot;A&quot;)
+                        .append(&quot;score&quot;, 11),
+                        new Document()
+                        .append(&quot;date&quot;, format.format(new Date()))
+                        .append(&quot;grade&quot;, &quot;B&quot;)
+                        .append(&quot;score&quot;, 17)))
+                .append(&quot;name&quot;, &quot;Cabbar Usta&quot;)
+                .append(&quot;restaurant_id&quot;, &quot;41704620&quot;));
+
+    } catch (Exception e) {
+        System.out.println(&quot;An Error Occured! Error is:&quot; + e);
+    } finally {
+        mongoClient.close();
+    }
+  }
+ }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Kodun çalıştırılması neticesinde kayıt şu hale geliyor:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mongoUpdate3.png&quot;&gt;
+&lt;img src=&quot;/images/mongoUpdate3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;ReplaceOne metodunda bir püf nokta bulunuyor arkadaşlar. Bu metot güncellemeden ziyade değiştirme işlemi uyguladığından ilgili şarta uyan kayıt silinerek yerine gönderilen döküman girilir.
+Bu nedenle replaceOne metodu ile güncelleme yapmamaya çalışmamak önemlidir çünkü mevcut verileriniz silinebilir ve kaydı tamamen bozabilirsiniz. Şimdi bu durumu da örnekleyelim. Yukarıdaki kodu şu şekilde değiştirelim:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; public static void main(String[] args) {
+    MongoClient mongoClient = null;
+    DateFormat format = new SimpleDateFormat(&quot;dd-MM-yyyy&quot;, Locale.ENGLISH);
+    try {
+        mongoClient = new MongoClient(&quot;localhost&quot;, 27017);
+        MongoDatabase database = mongoClient.getDatabase(&quot;MongoDB&quot;);
+        
+        database.getCollection(&quot;Records&quot;).replaceOne(new Document(&quot;cuisine&quot;, &quot;Turkish&quot;),
+                new Document(&quot;address&quot;,
+                        new Document()
+                        .append(&quot;street&quot;, &quot;Samsun Sinop Yolu&quot;)
+                        .append(&quot;zipcode&quot;, &quot;5255&quot;)
+                        .append(&quot;building&quot;, &quot;5255&quot;)
+                        .append(&quot;coord&quot;, asList(-73.9557413, 40.7720266)))
+                .append(&quot;borough&quot;, &quot;Ünye&quot;)
+                .append(&quot;cuisine&quot;, &quot;Turkish&quot;)
+                .append(&quot;name&quot;, &quot;Cabbar Usta&quot;)
+                .append(&quot;restaurant_id&quot;, &quot;41704620&quot;));
+
+    } catch (Exception e) {
+        System.out.println(&quot;An Error Occured! Error is:&quot; + e);
+    } finally {
+        mongoClient.close();
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Önceki koddaki &lt;strong&gt;&lt;em&gt;grades&lt;/em&gt;&lt;/strong&gt; alanını ve altında tuttuğu alanları çıkardık. Şimdi kodumuzu çalıştıralım ve kaydın durumuna bakalım:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mongoUpdate3.png&quot;&gt;
+&lt;img src=&quot;/images/mongoUpdate3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Ekran çıktısında gördüğümüz gibi grades alanı mevcut kayıt içinden kabyboldu çünkü eski kayıt silinerek koddaki yeni kayıt girildi.&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda da bu kadar arkadaşlar. Gelecek yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 05 Sep 2016 19:38:20 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-4/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-4/</guid>
+        
+        <category>mongodb</category>
+        
+        <category>java</category>
+        
+        <category>kayıt güncelleme</category>
+        
+        
+        <category>welcome</category>
+        
+      </item>
+    
+      <item>
+        <title>Mongo DB Ve Java Temel İşlemler 3 - Kayıt Çekme - İkinci Bölüm</title>
+        <description>&lt;p&gt;Merhabalar. &lt;a href=&quot;http://ilkgunel.github.io/mongoDbAndJava/mongo-db-ve-java-temel-islemler-2/&quot;&gt;Önceki&lt;/a&gt; yazıda MongoDB veritabanımızdan kayıt çekme işlemlerinin
+bir kısmını görmüştük. Bu yazı ile de kayıt çekme işlemlerini tamamlayacağız.&lt;/p&gt;
+
+&lt;p&gt;Java kodumuza geçmeden önce yine MongoDB’deki kayıtlardan herhangi birisine göz atalım:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;json
+{
+    &quot;_id&quot;: &quot;57c19b523e9b4210f7353280&quot;,
+    &quot;address&quot;: {
+      &quot;street&quot;: &quot;2 Avenue&quot;,
+      &quot;zipcode&quot;: &quot;10078&quot;,
+      &quot;building&quot;: &quot;1480&quot;,
+      &quot;coord&quot;: [
+        -73.9557413,
+        40.7720266
+      ]
+    },
+    &quot;borough&quot;: &quot;Manhattan&quot;,
+    &quot;cuisine&quot;: &quot;Russian&quot;,
+    &quot;grades&quot;: [
+      {
+        &quot;date&quot;: &quot;27-08-2016&quot;,
+        &quot;grade&quot;: &quot;A&quot;,
+        &quot;score&quot;: 12
+      },
+      {
+        &quot;date&quot;: &quot;27-08-2016&quot;,
+        &quot;grade&quot;: &quot;B&quot;,
+        &quot;score&quot;: 13
+      }
+    ],
+    &quot;name&quot;: &quot;Vella&quot;,
+    &quot;restaurant_id&quot;: &quot;41704620&quot;
+  }
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;MongoDB’den kayıt çekme işlemleri sırasında büyüktür&amp;amp;küçüktür işlemleri de uygulanabilir. Yani belli bir değerin üstündekileri ya da altındakileri getir diyebiliriz. Örneğin yukarıdaki kaydı baz alarak
+score alanı değerinin 13’den büyük olan kayıtlarının getirilmesini istiyoruz. Bunun için kullanacağımız kodumuz şu şekilde olur:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import static com.mongodb.client.model.Filters.gt;
+FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;Records&quot;).find(gt(&quot;grades.score&quot;, 13));
+          
+iterable.forEach(new Block&amp;lt;Document&amp;gt;(){
+    @Override
+    public void apply(final Document document){
+        System.out.println(document);
+    }
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Kodu çalıştırdığımızda karşımıza gelen çıktı da şöyle,&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mongoSelect4.png&quot;&gt;
+&lt;img src=&quot;/images/mongoSelect4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Tabii burada şu sorulabilir. Bu greades altında iki kayıt tutuluyor, örneğin 13-14 şeklinde olsa idi ne olacaktı? O zaman 13-14 score’una sahip kayıt da getirilecekti çünkü bize 13’den 
+büyük score alanına sahip tüm kayıtlar getiriliyor. grades altındakilern sadece birinin istenenden büyük olması yeterli.&lt;/p&gt;
+
+&lt;p&gt;Yukarıdaki kod şu şekilde de kullanılabilirdi:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;java
+FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;Records&quot;).find(new Document(&quot;grades.score&quot;, new Document(&quot;$gt&quot;, 13)));
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Eğer belirli bir değerden küçük değerleri getir demek istiyorsak da &lt;strong&gt;&lt;em&gt;lt&lt;/em&gt;&lt;/strong&gt;‘yi kullanabiliriz. Şu kod parçası da iki score alanından birisi 15’den küçük değer içeren tüm
+kayıtları getirecektir.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;java
+import static com.mongodb.client.model.Filters.lt;
+FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;Records&quot;).find(lt(&quot;grades.score&quot;, 15));
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Yine aynı şekilde bu kod da yukarıdaki gibi new Document parametre verilerek kullanılabilir:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;java
+FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;Records&quot;).find(new Document(&quot;grades.score&quot;, new Document(&quot;$lt&quot;, 15)));
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Ekran çıktımız da şöyle olur, 15’den küçük score alanı olan tüm kayıtlar getirilir:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mongoSelect5.png&quot;&gt;
+&lt;img src=&quot;/images/mongoSelect5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;SQL ile klasik veri tabanı işlemeri yaparken kullanılan AND,OR işlemleri MongoDB’nin Java kütüphanesinde de mevcut. Şimdi örneğin cuisine alanı Turkish olan ve score alanı 11 olan kayıtları
+getir diyelim. Kodumuz şu şekilde olur:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;java
+FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;Records&quot;).find(and(eq(&quot;grades.score&quot;, 11),eq(&quot;cuisine&quot;, &quot;Turkish&quot;)));
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Resimde de gördüğümüz gibi cuisine alanı Turkish olan ve 11 score’una sahip kaydı bize getirdi.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mongoSelect6.png&quot;&gt;
+&lt;img src=&quot;/images/mongoSelect6.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Aynı kod şu şekilde de yazılabilirdi, bu durumda önceki örneklere benzer şekilde döküman parametresi yolluyoruz fakat AND işleminin gerçekleşmesi için
+şartlarımızı &lt;strong&gt;&lt;em&gt;append&lt;/em&gt;&lt;/strong&gt;‘liyoruz:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;java
+FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;Records&quot;).find(and(new Document(&quot;cuisine&quot;, &quot;Turkish&quot;).append(&quot;grades.score&quot;, 11));
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;OR operatörünü kullanmak istediğimizde ise döküman parametresi yollayacaksan durum yukarıdakinden farklı oluyor. OR işleminin yapılacağını bildirmek için parametre olarak verilen
+dökümanda &lt;strong&gt;&lt;em&gt;$or&lt;/em&gt;&lt;/strong&gt; olması gerekiyor. Örnek kodumuz şöyle olur:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;java
+FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;Records&quot;).find(new Document(&quot;$or&quot;, asList(new Document(&quot;cuisine&quot;, &quot;Turkish&quot;),
+                                                                                         new Document(&quot;grades.score&quot;, 14))));
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Parametre olarak geçirdiğimiz dökümanda birinci parametre yani key parametresi OR işleminin yapılacağını bildiren &lt;strong&gt;&lt;em&gt;$or&lt;/em&gt;&lt;/strong&gt; oluyor, ikinci parametre
+hangi şartlarda veri beklediğimizi bildiriyor. Biz cuisine key’ine karşılık Turkish değeri olan veya score alanı 14 olan kayıtları getir diyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mongoSelect7.png&quot;&gt;
+&lt;img src=&quot;/images/mongoSelect7.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Yukarıdaki kod şu şekilde de kullanılabilirdi:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;java
+import static com.mongodb.client.model.Filters.or;
+FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;Records&quot;).find(or(eq(&quot;cuisine&quot;, &quot;Turkish&quot;), eq(&quot;grades.score&quot;, 14)));
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Bazı durumlarda veritabanından aldığımız kayıtlarımızı artan ya da azalan sırada elde etmek isteriz. Bunun için de MongoDB Java kütüphanesinin içinde &lt;strong&gt;&lt;em&gt;sort()&lt;/em&gt;&lt;/strong&gt; metodu
+yer alıyor. sort metoduna az önceki gibi bir döküman parametre geçireceğiz ve dökümanın key alanı hangi alana göre sıralama yapmak istediğimiz, value alanı ise
+artan mı yoksa azalan sırada mı listelemek istediğimizi belirtecek. Örnek kodumuz şöyle :&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;java
+FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;Records&quot;).find().sort(new Document(&quot;address.zipcode&quot;, -1));
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Kodumuz içinde sort metoduna verdiğimiz döküman parametresinin key alanı hangi alana göre sıralama yapılıp kayıtlar getirilsin demek içindir. Value alanı ise
+artan mı azalan sırada mı listeleme yapmayı belirtmek içindir. Eğer &lt;strong&gt;1&lt;/strong&gt; gönderirseniz bu artan sırada demektir, &lt;strong&gt;-1&lt;/strong&gt; gönderirseniz azalan sırada demektir.
+Kodu çalıştırınca zipcode alanına göre şöyle bir azalan sırada çıktı elde ediyoruz:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mongoSelect8.png&quot;&gt;
+&lt;img src=&quot;/images/mongoSelect8.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Yukarıdaki kod şu şekilde de yazılabilirdi,Sorts sınıfı altındaki ascending-descending metotlarını kullanabiliriz. Örneğin azalan sırada listeleme için
+descending metodunu kullanıyoruz:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;java
+import static com.mongodb.client.model.Sorts.descending;
+FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;Records&quot;).find().sort(descending(&quot;address.zipcode&quot;));
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Biz yukarıdaki örneklerde tek bir key’e göre sıralama yapılmasını istedik. Eğer birden fazla key işin içine girecekse kodumuz şöyle olmalıdır:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;java
+FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;collectionName&quot;).find().sort(new Document(&quot;selectKey1&quot;, 1 or -1).append(&quot;selectKey2&quot;, 1 or -1));
+//Ya da şu şekilde de olabilir
+FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;collectionName&quot;).find().sort(ascending or descending(&quot;selectKey1&quot;, &quot;selectKeyTwo&quot;));
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda da bu kadar arkadaşlar. MongoDB’den kayıt çekme işlemlerini tamamladık. Gelecek yazıda kayıt güncelleme işlemlerine değineceğiz.
+Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 04 Sep 2016 19:38:20 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-3/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-3/</guid>
+        
+        <category>mongodb</category>
+        
+        <category>java</category>
+        
+        <category>kayıt çekme</category>
+        
+        <category>mongodb greater than</category>
+        
+        <category>mongodb less than</category>
+        
+        
+        <category>welcome</category>
+        
+      </item>
+    
+  </channel>
+</rss>
