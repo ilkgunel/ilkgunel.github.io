@@ -5,8 +5,8 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 25 Sep 2016 13:51:35 +0300</pubDate>
-    <lastBuildDate>Sun, 25 Sep 2016 13:51:35 +0300</lastBuildDate>
+    <pubDate>Sun, 25 Sep 2016 14:00:42 +0300</pubDate>
+    <lastBuildDate>Sun, 25 Sep 2016 14:00:42 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
     
       <item>
@@ -66,25 +66,30 @@ Bu nedenle biz 2.13.0 sürümlü Java drvier’ı kullanıyoruz.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;persistence.xml&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;persistence.xml&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;persistence.xml dosyamız içerisinde bağlantı kurulacak veritabanına ait bilgileri tanımlıyoruz. Burada veritabanına gönderilecek, alınacak vs. nesnelere ait sınıfların yani Entity sınıflarının &lt;class&gt;&lt;/class&gt; tagleri arasında belirtilmeleri gerekiyor. Aksi takdirde bilinmeyen tür gibisinden hatalar alabiliyoruz.
 Property’lerin ilk ikisi MongoDB’ye bağlantı kurulması için gerekli sınıflara ait tanımlamalar. 3. property port, 4.property host, 5. property de bağlantı kurulacak veritabanının ismini belirtiyor.&lt;/p&gt;
 
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;persistence version=&quot;2.0&quot; xmlns=&quot;http://java.sun.com/xml/ns/persistence&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemalocation=&quot;http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd&quot;&gt;
-  &lt;persistence-unit name=&quot;mongodbPersistenceUnit&quot; transaction-type=&quot;RESOURCE_LOCAL&quot;&gt;
-    &lt;class&gt;com.ilkaygunel.jpaandmongodb.entity.Person&lt;/class&gt;
-    &lt;properties&gt;
-      &lt;property name=&quot;eclipselink.target-database&quot; value=&quot;org.eclipse.persistence.nosql.adapters.mongo.MongoPlatform&quot; /&gt;
-      &lt;property name=&quot;eclipselink.nosql.connection-spec&quot; value=&quot;org.eclipse.persistence.nosql.adapters.mongo.MongoConnectionSpec&quot; /&gt;
-      &lt;property name=&quot;eclipselink.nosql.property.mongo.port&quot; value=&quot;27017&quot; /&gt;
-      &lt;property name=&quot;eclipselink.nosql.property.mongo.host&quot; value=&quot;localhost&quot; /&gt;
-      &lt;property name=&quot;eclipselink.nosql.property.mongo.db&quot; value=&quot;mongodatabase&quot; /&gt;
-      &lt;property name=&quot;eclipselink.logging.level&quot; value=&quot;FINEST&quot; /&gt;
-    &lt;/properties&gt;
-  &lt;/persistence-unit&gt;
-&lt;/persistence&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;persistence&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;version=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2.0&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://java.sun.com/xml/ns/persistence&quot;&lt;/span&gt; 
+             &lt;span class=&quot;na&quot;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt; 
+             &lt;span class=&quot;na&quot;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://java.sun.com/xml/ns/persistence&lt;/span&gt; 
+             &lt;span class=&quot;err&quot;&gt;http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;persistence-unit&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;mongodbPersistenceUnit&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;transaction-type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;RESOURCE_LOCAL&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;class&amp;gt;&lt;/span&gt;com.ilkaygunel.jpaandmongodb.entity.Person&lt;span class=&quot;nt&quot;&gt;&amp;lt;/class&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;properties&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;eclipselink.target-database&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.eclipse.persistence.nosql.adapters.mongo.MongoPlatform&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;eclipselink.nosql.connection-spec&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.eclipse.persistence.nosql.adapters.mongo.MongoConnectionSpec&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;eclipselink.nosql.property.mongo.port&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;27017&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;eclipselink.nosql.property.mongo.host&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;localhost&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;eclipselink.nosql.property.mongo.db&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;mongodatabase&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;eclipselink.logging.level&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;FINEST&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/properties&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/persistence-unit&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/persistence&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;index.xhtml’den Bir Parça&lt;/strong&gt;&lt;/p&gt;
 

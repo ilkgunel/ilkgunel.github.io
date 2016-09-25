@@ -141,25 +141,30 @@ Bu nedenle biz 2.13.0 sürümlü Java drvier’ı kullanıyoruz.</p>
 </code></pre>
 </div>
 
-<p><strong><em>persistence.xml</em></strong></p>
+<p><strong>persistence.xml</strong></p>
 
 <p>persistence.xml dosyamız içerisinde bağlantı kurulacak veritabanına ait bilgileri tanımlıyoruz. Burada veritabanına gönderilecek, alınacak vs. nesnelere ait sınıfların yani Entity sınıflarının <class></class> tagleri arasında belirtilmeleri gerekiyor. Aksi takdirde bilinmeyen tür gibisinden hatalar alabiliyoruz.
 Property’lerin ilk ikisi MongoDB’ye bağlantı kurulması için gerekli sınıflara ait tanımlamalar. 3. property port, 4.property host, 5. property de bağlantı kurulacak veritabanının ismini belirtiyor.</p>
 
-<?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemalocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-  <persistence-unit name="mongodbPersistenceUnit" transaction-type="RESOURCE_LOCAL">
-    <class>com.ilkaygunel.jpaandmongodb.entity.Person</class>
-    <properties>
-      <property name="eclipselink.target-database" value="org.eclipse.persistence.nosql.adapters.mongo.MongoPlatform" />
-      <property name="eclipselink.nosql.connection-spec" value="org.eclipse.persistence.nosql.adapters.mongo.MongoConnectionSpec" />
-      <property name="eclipselink.nosql.property.mongo.port" value="27017" />
-      <property name="eclipselink.nosql.property.mongo.host" value="localhost" />
-      <property name="eclipselink.nosql.property.mongo.db" value="mongodatabase" />
-      <property name="eclipselink.logging.level" value="FINEST" />
-    </properties>
-  </persistence-unit>
-</persistence>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;persistence</span> <span class="na">version=</span><span class="s">"2.0"</span> <span class="na">xmlns=</span><span class="s">"http://java.sun.com/xml/ns/persistence"</span> 
+             <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span> 
+             <span class="na">xsi:schemaLocation=</span><span class="s">"http://java.sun.com/xml/ns/persistence</span> 
+             <span class="err">http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;persistence-unit</span> <span class="na">name=</span><span class="s">"mongodbPersistenceUnit"</span> <span class="na">transaction-type=</span><span class="s">"RESOURCE_LOCAL"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;class&gt;</span>com.ilkaygunel.jpaandmongodb.entity.Person<span class="nt">&lt;/class&gt;</span>
+    <span class="nt">&lt;properties&gt;</span>
+      <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"eclipselink.target-database"</span> <span class="na">value=</span><span class="s">"org.eclipse.persistence.nosql.adapters.mongo.MongoPlatform"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"eclipselink.nosql.connection-spec"</span> <span class="na">value=</span><span class="s">"org.eclipse.persistence.nosql.adapters.mongo.MongoConnectionSpec"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"eclipselink.nosql.property.mongo.port"</span> <span class="na">value=</span><span class="s">"27017"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"eclipselink.nosql.property.mongo.host"</span> <span class="na">value=</span><span class="s">"localhost"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"eclipselink.nosql.property.mongo.db"</span> <span class="na">value=</span><span class="s">"mongodatabase"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"eclipselink.logging.level"</span> <span class="na">value=</span><span class="s">"FINEST"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/properties&gt;</span>
+  <span class="nt">&lt;/persistence-unit&gt;</span>
+<span class="nt">&lt;/persistence&gt;</span>
+</code></pre>
+</div>
 
 <p><strong>index.xhtml’den Bir Parça</strong></p>
 
