@@ -213,76 +213,76 @@ Property’lerin ilk ikisi MongoDB’ye bağlantı kurulması için gerekli sın
 
 <p><strong>ManagedBeanClass.java</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>package com.ilkaygunel.jpaandmongodb.bean;
-
-import com.ilkaygunel.jpaandmongodb.entity.Address;
-import com.ilkaygunel.jpaandmongodb.entity.Person;
-import java.text.ParseException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
-@ManagedBean
-@SessionScoped
-public class ManagedBeanClass {
-
-    private Person person;
-    private Address address;
-
-    private String operationMessage = "";
-
-    public ManagedBeanClass() {
-        person = new Person();
-        address = new Address();
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public String getOperationMessage() {
-        return operationMessage;
-    }
-
-    public void setOperationMessage(String operationMessage) {
-        this.operationMessage = operationMessage;
-    }
-
-    public void saveDataToDatabase() throws ParseException {
-        person.setAddress(address);
-
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("mongodbPersistenceUnit");
-        EntityManager em = emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            em.persist(person);
-            em.getTransaction().commit();
-            operationMessage = "Kayıt Başarı İle Eklendi!";
-            GetRecordsBean getRecordsBean = new GetRecordsBean();
-            getRecordsBean.refreshPersonList();
-        } catch (Exception e) {
-            operationMessage = "Kayıt eklenirken bir hata meydana geldi! Hata:"+e;
-        }
-        finally{
-            em.close();
-            emf.close();           
-        }
-    }
-}
+<div class="highlighter-rouge"><pre class="highlight"><code>    <span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">jpaandmongodb</span><span class="o">.</span><span class="na">bean</span><span class="o">;</span>
+    
+    <span class="kn">import</span> <span class="nn">com.ilkaygunel.jpaandmongodb.entity.Address</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">com.ilkaygunel.jpaandmongodb.entity.Person</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">java.text.ParseException</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">javax.faces.bean.ManagedBean</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">javax.faces.bean.SessionScoped</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">javax.persistence.EntityManager</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">javax.persistence.EntityManagerFactory</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">javax.persistence.Persistence</span><span class="o">;</span>
+    
+    <span class="nd">@ManagedBean</span>
+    <span class="nd">@SessionScoped</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ManagedBeanClass</span> <span class="o">{</span>
+    
+        <span class="kd">private</span> <span class="n">Person</span> <span class="n">person</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="n">Address</span> <span class="n">address</span><span class="o">;</span>
+    
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">operationMessage</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
+    
+        <span class="kd">public</span> <span class="n">ManagedBeanClass</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+            <span class="n">address</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Address</span><span class="o">();</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="n">Person</span> <span class="n">getPerson</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">person</span><span class="o">;</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="kt">void</span> <span class="n">setPerson</span><span class="o">(</span><span class="n">Person</span> <span class="n">person</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">person</span> <span class="o">=</span> <span class="n">person</span><span class="o">;</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="n">Address</span> <span class="n">getAddress</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">address</span><span class="o">;</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="kt">void</span> <span class="n">setAddress</span><span class="o">(</span><span class="n">Address</span> <span class="n">address</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">address</span> <span class="o">=</span> <span class="n">address</span><span class="o">;</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="n">String</span> <span class="n">getOperationMessage</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">operationMessage</span><span class="o">;</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="kt">void</span> <span class="n">setOperationMessage</span><span class="o">(</span><span class="n">String</span> <span class="n">operationMessage</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">operationMessage</span> <span class="o">=</span> <span class="n">operationMessage</span><span class="o">;</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="kt">void</span> <span class="n">saveDataToDatabase</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">ParseException</span> <span class="o">{</span>
+            <span class="n">person</span><span class="o">.</span><span class="na">setAddress</span><span class="o">(</span><span class="n">address</span><span class="o">);</span>
+    
+            <span class="n">EntityManagerFactory</span> <span class="n">emf</span> <span class="o">=</span> <span class="n">Persistence</span><span class="o">.</span><span class="na">createEntityManagerFactory</span><span class="o">(</span><span class="s">"mongodbPersistenceUnit"</span><span class="o">);</span>
+            <span class="n">EntityManager</span> <span class="n">em</span> <span class="o">=</span> <span class="n">emf</span><span class="o">.</span><span class="na">createEntityManager</span><span class="o">();</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">em</span><span class="o">.</span><span class="na">getTransaction</span><span class="o">().</span><span class="na">begin</span><span class="o">();</span>
+                <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">person</span><span class="o">);</span>
+                <span class="n">em</span><span class="o">.</span><span class="na">getTransaction</span><span class="o">().</span><span class="na">commit</span><span class="o">();</span>
+                <span class="n">operationMessage</span> <span class="o">=</span> <span class="s">"Kayıt Başarı İle Eklendi!"</span><span class="o">;</span>
+                <span class="n">GetRecordsBean</span> <span class="n">getRecordsBean</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GetRecordsBean</span><span class="o">();</span>
+                <span class="n">getRecordsBean</span><span class="o">.</span><span class="na">refreshPersonList</span><span class="o">();</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">operationMessage</span> <span class="o">=</span> <span class="s">"Kayıt eklenirken bir hata meydana geldi! Hata:"</span><span class="o">+</span><span class="n">e</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="k">finally</span><span class="o">{</span>
+                <span class="n">em</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                <span class="n">emf</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>           
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 </code></pre>
 </div>
 
