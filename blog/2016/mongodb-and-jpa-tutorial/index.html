@@ -170,42 +170,42 @@ Property’lerin ilk ikisi MongoDB’ye bağlantı kurulması için gerekli sın
 
 <p>Projemizin ana sayfasında şöyle bir kayıt formumuz var. Bu kayıt formu doldurulup butonuna tıkladığında MongoDB’ye ilgili bilgiler gönderiliyor.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;h:form&gt;
-        &lt;p:panelGrid columns="2"&gt;
-            &lt;p:outputLabel value="İsim:"/&gt;
-            &lt;p:inputText value="#{managedBeanClass.person.name}"/&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code>    <span class="nt">&lt;h:form&gt;</span>
+            <span class="nt">&lt;p:panelGrid</span> <span class="na">columns=</span><span class="s">"2"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;p:outputLabel</span> <span class="na">value=</span><span class="s">"İsim:"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;p:inputText</span> <span class="na">value=</span><span class="s">"#{managedBeanClass.person.name}"</span><span class="nt">/&gt;</span>
 
-            &lt;p:outputLabel value="Soyisim:"/&gt;
-            &lt;p:inputText value="#{managedBeanClass.person.surname}"/&gt;
+                <span class="nt">&lt;p:outputLabel</span> <span class="na">value=</span><span class="s">"Soyisim:"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;p:inputText</span> <span class="na">value=</span><span class="s">"#{managedBeanClass.person.surname}"</span><span class="nt">/&gt;</span>
 
-            &lt;p:outputLabel value="Telefon Numarası:"/&gt;
-            &lt;p:inputMask mask="0(999) 999-99-99" value="#{managedBeanClass.person.phoneNumber}"/&gt;
+                <span class="nt">&lt;p:outputLabel</span> <span class="na">value=</span><span class="s">"Telefon Numarası:"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;p:inputMask</span> <span class="na">mask=</span><span class="s">"0(999) 999-99-99"</span> <span class="na">value=</span><span class="s">"#{managedBeanClass.person.phoneNumber}"</span><span class="nt">/&gt;</span>
 
-            &lt;p:outputLabel value="Doğum Tarihi:"/&gt;
-            &lt;p:calendar value="#{managedBeanClass.person.birthDate}" locale="tr" yearRange="c-70:c+10" navigator="true" mask="true" pattern="dd-MM-yyyy"/&gt;
+                <span class="nt">&lt;p:outputLabel</span> <span class="na">value=</span><span class="s">"Doğum Tarihi:"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;p:calendar</span> <span class="na">value=</span><span class="s">"#{managedBeanClass.person.birthDate}"</span> <span class="na">locale=</span><span class="s">"tr"</span> <span class="na">yearRange=</span><span class="s">"c-70:c+10"</span> <span class="na">navigator=</span><span class="s">"true"</span> <span class="na">mask=</span><span class="s">"true"</span> <span class="na">pattern=</span><span class="s">"dd-MM-yyyy"</span><span class="nt">/&gt;</span>
 
-            &lt;p:outputLabel value="Adres Bilgileriniz"/&gt;
-            &lt;p:outputLabel/&gt;
+                <span class="nt">&lt;p:outputLabel</span> <span class="na">value=</span><span class="s">"Adres Bilgileriniz"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;p:outputLabel/&gt;</span>
 
-            &lt;p:outputLabel value="Cadde:"/&gt;
-            &lt;p:inputText value="#{managedBeanClass.address.street}"/&gt;
+                <span class="nt">&lt;p:outputLabel</span> <span class="na">value=</span><span class="s">"Cadde:"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;p:inputText</span> <span class="na">value=</span><span class="s">"#{managedBeanClass.address.street}"</span><span class="nt">/&gt;</span>
 
-            &lt;p:outputLabel value="Mahalle:"/&gt;
-            &lt;p:inputText value="#{managedBeanClass.address.neighborhood}"/&gt;
+                <span class="nt">&lt;p:outputLabel</span> <span class="na">value=</span><span class="s">"Mahalle:"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;p:inputText</span> <span class="na">value=</span><span class="s">"#{managedBeanClass.address.neighborhood}"</span><span class="nt">/&gt;</span>
 
-            &lt;p:outputLabel value="İlçe:"/&gt;
-            &lt;p:inputText value="#{managedBeanClass.address.district}"/&gt;
+                <span class="nt">&lt;p:outputLabel</span> <span class="na">value=</span><span class="s">"İlçe:"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;p:inputText</span> <span class="na">value=</span><span class="s">"#{managedBeanClass.address.district}"</span><span class="nt">/&gt;</span>
 
-            &lt;p:outputLabel value="İl:"/&gt;
-            &lt;p:inputText value="#{managedBeanClass.address.city}"/&gt;
+                <span class="nt">&lt;p:outputLabel</span> <span class="na">value=</span><span class="s">"İl:"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;p:inputText</span> <span class="na">value=</span><span class="s">"#{managedBeanClass.address.city}"</span><span class="nt">/&gt;</span>
 
-            &lt;p:outputLabel/&gt;
-            &lt;p:commandButton value="GÖNDER" ajax="false" action="#{managedBeanClass.saveDataToDatabase}"/&gt;
+                <span class="nt">&lt;p:outputLabel/&gt;</span>
+                <span class="nt">&lt;p:commandButton</span> <span class="na">value=</span><span class="s">"GÖNDER"</span> <span class="na">ajax=</span><span class="s">"false"</span> <span class="na">action=</span><span class="s">"#{managedBeanClass.saveDataToDatabase}"</span><span class="nt">/&gt;</span>
 
-            &lt;p:outputLabel value="#{managedBeanClass.operationMessage}"/&gt;
-            &lt;p:outputLabel/&gt;
-        &lt;/p:panelGrid&gt;
-    &lt;/h:form&gt;
+                <span class="nt">&lt;p:outputLabel</span> <span class="na">value=</span><span class="s">"#{managedBeanClass.operationMessage}"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;p:outputLabel/&gt;</span>
+            <span class="nt">&lt;/p:panelGrid&gt;</span>
+        <span class="nt">&lt;/h:form&gt;</span>
 </code></pre>
 </div>
 
@@ -294,100 +294,100 @@ Property’lerin ilk ikisi MongoDB’ye bağlantı kurulması için gerekli sın
 
 <p>Entity içerisinde Address alanına dikkat edersek bu alan Embedded notasyonu ile işaretlenmiş. Yani dökümanda bir alt alanımız olacak.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>package com.ilkaygunel.jpaandmongodb.entity;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import org.eclipse.persistence.nosql.annotations.DataFormatType;
-import org.eclipse.persistence.nosql.annotations.Field;
-import org.eclipse.persistence.nosql.annotations.NoSql;
-
-@Entity
-@NoSql(dataFormat=DataFormatType.MAPPED)
-public class Person implements Serializable {
-
-    public Person() { 
-    }
+<div class="highlighter-rouge"><pre class="highlight"><code>    <span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">jpaandmongodb</span><span class="o">.</span><span class="na">entity</span><span class="o">;</span>
     
-    @Id
-    @GeneratedValue
-    @Field(name="_id")
-    private String id;
+    <span class="kn">import</span> <span class="nn">java.io.Serializable</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">java.util.Date</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">javax.persistence.Basic</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">javax.persistence.Column</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">javax.persistence.ElementCollection</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">javax.persistence.Embedded</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">javax.persistence.Entity</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">javax.persistence.GeneratedValue</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">javax.persistence.Id</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">javax.persistence.Temporal</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.eclipse.persistence.nosql.annotations.DataFormatType</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.eclipse.persistence.nosql.annotations.Field</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.eclipse.persistence.nosql.annotations.NoSql</span><span class="o">;</span>
     
-    @Basic
-    private String name;
+    <span class="nd">@Entity</span>
+    <span class="nd">@NoSql</span><span class="o">(</span><span class="n">dataFormat</span><span class="o">=</span><span class="n">DataFormatType</span><span class="o">.</span><span class="na">MAPPED</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
     
-    @Basic
-    private String surname;
+        <span class="kd">public</span> <span class="n">Person</span><span class="o">()</span> <span class="o">{</span> 
+        <span class="o">}</span>
+        
+        <span class="nd">@Id</span>
+        <span class="nd">@GeneratedValue</span>
+        <span class="nd">@Field</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="s">"_id"</span><span class="o">)</span>
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">id</span><span class="o">;</span>
+        
+        <span class="nd">@Basic</span>
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+        
+        <span class="nd">@Basic</span>
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">surname</span><span class="o">;</span>
+        
+        <span class="nd">@Basic</span>
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">phoneNumber</span><span class="o">;</span>
+        
+        <span class="nd">@Basic</span>
+        <span class="nd">@Temporal</span><span class="o">(</span><span class="n">javax</span><span class="o">.</span><span class="na">persistence</span><span class="o">.</span><span class="na">TemporalType</span><span class="o">.</span><span class="na">DATE</span><span class="o">)</span>
+        <span class="kd">private</span> <span class="n">Date</span> <span class="n">birthDate</span><span class="o">;</span>
+       
+        <span class="nd">@Embedded</span>
+        <span class="kd">private</span> <span class="n">Address</span> <span class="n">address</span><span class="o">;</span>
     
-    @Basic
-    private String phoneNumber;
+        <span class="kd">public</span> <span class="n">String</span> <span class="n">getId</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+        <span class="o">}</span>
     
-    @Basic
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date birthDate;
-   
-    @Embedded
-    private Address address;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-}
+        <span class="kd">public</span> <span class="kt">void</span> <span class="n">setId</span><span class="o">(</span><span class="n">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="n">String</span> <span class="n">getName</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="kt">void</span> <span class="n">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="n">String</span> <span class="n">getSurname</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">surname</span><span class="o">;</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="kt">void</span> <span class="n">setSurname</span><span class="o">(</span><span class="n">String</span> <span class="n">surname</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">surname</span> <span class="o">=</span> <span class="n">surname</span><span class="o">;</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="n">String</span> <span class="n">getPhoneNumber</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">phoneNumber</span><span class="o">;</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="kt">void</span> <span class="n">setPhoneNumber</span><span class="o">(</span><span class="n">String</span> <span class="n">phoneNumber</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">phoneNumber</span> <span class="o">=</span> <span class="n">phoneNumber</span><span class="o">;</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="n">Date</span> <span class="n">getBirthDate</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">birthDate</span><span class="o">;</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="kt">void</span> <span class="n">setBirthDate</span><span class="o">(</span><span class="n">Date</span> <span class="n">birthDate</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">birthDate</span> <span class="o">=</span> <span class="n">birthDate</span><span class="o">;</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="n">Address</span> <span class="n">getAddress</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">address</span><span class="o">;</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="kt">void</span> <span class="n">setAddress</span><span class="o">(</span><span class="n">Address</span> <span class="n">address</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">address</span> <span class="o">=</span> <span class="n">address</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 </code></pre>
 </div>
 
@@ -396,63 +396,63 @@ public class Person implements Serializable {
 <p>Önceki MongoDB yazılarından hatırlayacağınız gibi MongoDB dökümanları içerisinde alt alanlar olabiliyordu. Yani bunlara embedded document deniliyordu. JPA içerisinde embedded dökümanaları tanımlamak için
 @Embeddable notasyonu getirilmiş. Person.java içerisinde address alanı alt alandı ve onun tanımlandığı Address sınıfı @Embeddable notasyonu ile işaretli.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>package com.ilkaygunel.jpaandmongodb.entity;
-
-import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Embeddable;
-import org.eclipse.persistence.nosql.annotations.DataFormatType;
-import org.eclipse.persistence.nosql.annotations.NoSql;
-
-@Embeddable
-@NoSql(dataFormat=DataFormatType.MAPPED)
-public class Address implements Serializable{
-    @Basic
-    private String street;
+<div class="highlighter-rouge"><pre class="highlight"><code>    <span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">jpaandmongodb</span><span class="o">.</span><span class="na">entity</span><span class="o">;</span>
     
-    @Basic
-    private String neighborhood;
+    <span class="kn">import</span> <span class="nn">java.io.Serializable</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">javax.persistence.Basic</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">javax.persistence.Embeddable</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.eclipse.persistence.nosql.annotations.DataFormatType</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">org.eclipse.persistence.nosql.annotations.NoSql</span><span class="o">;</span>
     
-    @Basic
-    private String district;
+    <span class="nd">@Embeddable</span>
+    <span class="nd">@NoSql</span><span class="o">(</span><span class="n">dataFormat</span><span class="o">=</span><span class="n">DataFormatType</span><span class="o">.</span><span class="na">MAPPED</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Address</span> <span class="kd">implements</span> <span class="n">Serializable</span><span class="o">{</span>
+        <span class="nd">@Basic</span>
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">street</span><span class="o">;</span>
+        
+        <span class="nd">@Basic</span>
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">neighborhood</span><span class="o">;</span>
+        
+        <span class="nd">@Basic</span>
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">district</span><span class="o">;</span>
+        
+        <span class="nd">@Basic</span>
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">city</span><span class="o">;</span>
     
-    @Basic
-    private String city;
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getNeighborhood() {
-        return neighborhood;
-    }
-
-    public void setNeighborhood(String neighborhood) {
-        this.neighborhood = neighborhood;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
+        <span class="kd">public</span> <span class="n">String</span> <span class="n">getStreet</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">street</span><span class="o">;</span>
+        <span class="o">}</span>
     
+        <span class="kd">public</span> <span class="kt">void</span> <span class="n">setStreet</span><span class="o">(</span><span class="n">String</span> <span class="n">street</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">street</span> <span class="o">=</span> <span class="n">street</span><span class="o">;</span>
+        <span class="o">}</span>
     
-}
+        <span class="kd">public</span> <span class="n">String</span> <span class="n">getNeighborhood</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">neighborhood</span><span class="o">;</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="kt">void</span> <span class="n">setNeighborhood</span><span class="o">(</span><span class="n">String</span> <span class="n">neighborhood</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">neighborhood</span> <span class="o">=</span> <span class="n">neighborhood</span><span class="o">;</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="n">String</span> <span class="n">getDistrict</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">district</span><span class="o">;</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="kt">void</span> <span class="n">setDistrict</span><span class="o">(</span><span class="n">String</span> <span class="n">district</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">district</span> <span class="o">=</span> <span class="n">district</span><span class="o">;</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="n">String</span> <span class="n">getCity</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">city</span><span class="o">;</span>
+        <span class="o">}</span>
+    
+        <span class="kd">public</span> <span class="kt">void</span> <span class="n">setCity</span><span class="o">(</span><span class="n">String</span> <span class="n">city</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">city</span> <span class="o">=</span> <span class="n">city</span><span class="o">;</span>
+        <span class="o">}</span>
+        
+        
+    <span class="o">}</span>
 </code></pre>
 </div>
 
