@@ -5,9 +5,420 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 18 Sep 2016 13:31:29 +0300</pubDate>
-    <lastBuildDate>Sun, 18 Sep 2016 13:31:29 +0300</lastBuildDate>
+    <pubDate>Sun, 25 Sep 2016 13:51:35 +0300</pubDate>
+    <lastBuildDate>Sun, 25 Sep 2016 13:51:35 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>JPA,JSF Ve PrimeFaces&#39;ın MongoDB İle Kullanımı</title>
+        <description>&lt;p&gt;Yukarıdaki MongoDB&amp;amp;Java bölümünden de bildiğiniz üzere daha MongoDB’nin Java driver’ı ile temel işlemler yapmıştık ve bir de Servlet&amp;amp;JSP kullanarak yapılmış örnek projemiz vardı.
+Fakat MongoDB Java çatısı altında sadece o şekilde kullanılmak zorunda değil. Sürekli yeni çıkan teknolojilere adapte olmaya çalışan ve onlara uygun yazılımlar çıkarmaya çalışan Java dünyası NoSQL dünyasına da kayıtsız kalmamış ve 
+Java ile NoSQL kullanımını daha kolay hale getirmeye çalışmışlar.&lt;/p&gt;
+
+&lt;p&gt;Java dünyası içindeki ORM specificaton’ı olan JPA’nın resmi implementadyonu olan EclipseLink geliştiricileri NoSQL teknolojileri için kütüphane geliştirip bize sunmuşlar. Ben de bu yazıda bu EclipseLink’in NoSQL teknolojisini kullanarak bir kayıt ekleme örneğini yapacağım.
+Kayıtları listeleme sayfasını da yazdım ancak ona yazı içerisinde değinmeyeceğim. &lt;a href=&quot;https://github.com/ilkgunel/JsfJpaAndongoDBSampleProject&quot;&gt;https://github.com/ilkgunel/JsfJpaAndongoDBSampleProject&lt;/a&gt; adresinden o kısmı inceleyebilirsiniz. Ayrıca kayıt silme ve güncelleme işlemlerini de yazacağım.
+Onları yazdığım zaman haberdar olmak için beni Twitter’dan takip edebilirsiniz: &lt;a href=&quot;https://twitter.com/ilkgunel&quot;&gt;https://twitter.com/ilkgunel&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Başlayalım …&lt;/p&gt;
+
+&lt;p&gt;İlk olarak hangi bağımlılıklara ihtiyacımız var onları görelim.&lt;/p&gt;
+
+&lt;p&gt;Aşağıdaki listede 5 adet bağımlılığımız var. JSF’in 2.2.13 numaralı sürümü, PrimeFaces’ın 6 numaralı sürümü projemize ekli. org.eclipse.persistence altındaki JPA ve NoSQL’in 2.6.4 sürümünü ekledik. Bu kütüphaneler kayıt ekleme, çekme vs. işlemlerini basitize edecek.
+Son olarak da MongoDB’nin Java driver’ını projemize ekledik. JPA ve NoSQL kütüphaneleri işlemlerini bu driver üzerinden yapacaklar. Burada önemli bir nokta mevcut. MongoDB’nin her ne kadar 3 ve üzerinde sürümleri olan Java driver’ı olsa da şu an için bu sürümler EclipseLink’in NoSQL teknolojisi ile uyumlu çalışamıyor.
+Bu nedenle biz 2.13.0 sürümlü Java drvier’ı kullanıyoruz.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;dependencies&amp;gt;
+    &amp;lt;!-- https://mvnrepository.com/artifact/org.glassfish/javax.faces --&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;org.glassfish&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;javax.faces&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;2.2.13&amp;lt;/version&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+    
+    &amp;lt;dependency&amp;gt;  
+        &amp;lt;groupId&amp;gt;org.primefaces&amp;lt;/groupId&amp;gt;  
+        &amp;lt;artifactId&amp;gt;primefaces&amp;lt;/artifactId&amp;gt;  
+        &amp;lt;version&amp;gt;6.0&amp;lt;/version&amp;gt;  
+    &amp;lt;/dependency&amp;gt; 
+    
+    &amp;lt;!-- https://mvnrepository.com/artifact/org.eclipse.persistence/org.eclipse.persistence.jpa --&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;org.eclipse.persistence&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;org.eclipse.persistence.jpa&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;2.6.4&amp;lt;/version&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+    
+    &amp;lt;!-- https://mvnrepository.com/artifact/org.eclipse.persistence/org.eclipse.persistence.nosql --&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;org.eclipse.persistence&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;org.eclipse.persistence.nosql&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;2.6.4&amp;lt;/version&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+
+    &amp;lt;!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver --&amp;gt;
+    &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;org.mongodb&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;mongo-java-driver&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;2.13.0&amp;lt;/version&amp;gt;
+    &amp;lt;/dependency&amp;gt;
+
+&amp;lt;/dependencies&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;persistence.xml&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;persistence.xml dosyamız içerisinde bağlantı kurulacak veritabanına ait bilgileri tanımlıyoruz. Burada veritabanına gönderilecek, alınacak vs. nesnelere ait sınıfların yani Entity sınıflarının &lt;class&gt;&lt;/class&gt; tagleri arasında belirtilmeleri gerekiyor. Aksi takdirde bilinmeyen tür gibisinden hatalar alabiliyoruz.
+Property’lerin ilk ikisi MongoDB’ye bağlantı kurulması için gerekli sınıflara ait tanımlamalar. 3. property port, 4.property host, 5. property de bağlantı kurulacak veritabanının ismini belirtiyor.&lt;/p&gt;
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;persistence version=&quot;2.0&quot; xmlns=&quot;http://java.sun.com/xml/ns/persistence&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemalocation=&quot;http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd&quot;&gt;
+  &lt;persistence-unit name=&quot;mongodbPersistenceUnit&quot; transaction-type=&quot;RESOURCE_LOCAL&quot;&gt;
+    &lt;class&gt;com.ilkaygunel.jpaandmongodb.entity.Person&lt;/class&gt;
+    &lt;properties&gt;
+      &lt;property name=&quot;eclipselink.target-database&quot; value=&quot;org.eclipse.persistence.nosql.adapters.mongo.MongoPlatform&quot; /&gt;
+      &lt;property name=&quot;eclipselink.nosql.connection-spec&quot; value=&quot;org.eclipse.persistence.nosql.adapters.mongo.MongoConnectionSpec&quot; /&gt;
+      &lt;property name=&quot;eclipselink.nosql.property.mongo.port&quot; value=&quot;27017&quot; /&gt;
+      &lt;property name=&quot;eclipselink.nosql.property.mongo.host&quot; value=&quot;localhost&quot; /&gt;
+      &lt;property name=&quot;eclipselink.nosql.property.mongo.db&quot; value=&quot;mongodatabase&quot; /&gt;
+      &lt;property name=&quot;eclipselink.logging.level&quot; value=&quot;FINEST&quot; /&gt;
+    &lt;/properties&gt;
+  &lt;/persistence-unit&gt;
+&lt;/persistence&gt;
+
+&lt;p&gt;&lt;strong&gt;index.xhtml’den Bir Parça&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Projemizin ana sayfasında şöyle bir kayıt formumuz var. Bu kayıt formu doldurulup butonuna tıkladığında MongoDB’ye ilgili bilgiler gönderiliyor.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;h:form&amp;gt;
+        &amp;lt;p:panelGrid columns=&quot;2&quot;&amp;gt;
+            &amp;lt;p:outputLabel value=&quot;İsim:&quot;/&amp;gt;
+            &amp;lt;p:inputText value=&quot;#{managedBeanClass.person.name}&quot;/&amp;gt;
+
+            &amp;lt;p:outputLabel value=&quot;Soyisim:&quot;/&amp;gt;
+            &amp;lt;p:inputText value=&quot;#{managedBeanClass.person.surname}&quot;/&amp;gt;
+
+            &amp;lt;p:outputLabel value=&quot;Telefon Numarası:&quot;/&amp;gt;
+            &amp;lt;p:inputMask mask=&quot;0(999) 999-99-99&quot; value=&quot;#{managedBeanClass.person.phoneNumber}&quot;/&amp;gt;
+
+            &amp;lt;p:outputLabel value=&quot;Doğum Tarihi:&quot;/&amp;gt;
+            &amp;lt;p:calendar value=&quot;#{managedBeanClass.person.birthDate}&quot; locale=&quot;tr&quot; yearRange=&quot;c-70:c+10&quot; navigator=&quot;true&quot; mask=&quot;true&quot; pattern=&quot;dd-MM-yyyy&quot;/&amp;gt;
+
+            &amp;lt;p:outputLabel value=&quot;Adres Bilgileriniz&quot;/&amp;gt;
+            &amp;lt;p:outputLabel/&amp;gt;
+
+            &amp;lt;p:outputLabel value=&quot;Cadde:&quot;/&amp;gt;
+            &amp;lt;p:inputText value=&quot;#{managedBeanClass.address.street}&quot;/&amp;gt;
+
+            &amp;lt;p:outputLabel value=&quot;Mahalle:&quot;/&amp;gt;
+            &amp;lt;p:inputText value=&quot;#{managedBeanClass.address.neighborhood}&quot;/&amp;gt;
+
+            &amp;lt;p:outputLabel value=&quot;İlçe:&quot;/&amp;gt;
+            &amp;lt;p:inputText value=&quot;#{managedBeanClass.address.district}&quot;/&amp;gt;
+
+            &amp;lt;p:outputLabel value=&quot;İl:&quot;/&amp;gt;
+            &amp;lt;p:inputText value=&quot;#{managedBeanClass.address.city}&quot;/&amp;gt;
+
+            &amp;lt;p:outputLabel/&amp;gt;
+            &amp;lt;p:commandButton value=&quot;GÖNDER&quot; ajax=&quot;false&quot; action=&quot;#{managedBeanClass.saveDataToDatabase}&quot;/&amp;gt;
+
+            &amp;lt;p:outputLabel value=&quot;#{managedBeanClass.operationMessage}&quot;/&amp;gt;
+            &amp;lt;p:outputLabel/&amp;gt;
+        &amp;lt;/p:panelGrid&amp;gt;
+    &amp;lt;/h:form&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;JSF sayfamız içinde kullanıcıdan birtakım bilgiler alınıyor ve managed bean içindeki &lt;strong&gt;&lt;em&gt;saveDataToDatabase metodu&lt;/em&gt;&lt;/strong&gt; ile MongoDB’ye gönderiliyor.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;ManagedBeanClass.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;package com.ilkaygunel.jpaandmongodb.bean;
+
+import com.ilkaygunel.jpaandmongodb.entity.Address;
+import com.ilkaygunel.jpaandmongodb.entity.Person;
+import java.text.ParseException;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+@ManagedBean
+@SessionScoped
+public class ManagedBeanClass {
+
+    private Person person;
+    private Address address;
+
+    private String operationMessage = &quot;&quot;;
+
+    public ManagedBeanClass() {
+        person = new Person();
+        address = new Address();
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public String getOperationMessage() {
+        return operationMessage;
+    }
+
+    public void setOperationMessage(String operationMessage) {
+        this.operationMessage = operationMessage;
+    }
+
+    public void saveDataToDatabase() throws ParseException {
+        person.setAddress(address);
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(&quot;mongodbPersistenceUnit&quot;);
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(person);
+            em.getTransaction().commit();
+            operationMessage = &quot;Kayıt Başarı İle Eklendi!&quot;;
+            GetRecordsBean getRecordsBean = new GetRecordsBean();
+            getRecordsBean.refreshPersonList();
+        } catch (Exception e) {
+            operationMessage = &quot;Kayıt eklenirken bir hata meydana geldi! Hata:&quot;+e;
+        }
+        finally{
+            em.close();
+            emf.close();           
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Managed bean içerisinde Person,Address ve operationMessage nesnelerimiz ve onlara ait get-set metotları yer alıyor. saveDataToDatabase metodu içerisinde tıpkı klasik veritabanlarında işlem yapar gibi &lt;strong&gt;&lt;em&gt;EntityManager&lt;/em&gt;&lt;/strong&gt; nesnesi elde edip bu nesnenin &lt;strong&gt;&lt;em&gt;persist&lt;/em&gt;&lt;/strong&gt; metodu ile veritabanına bilgi yolluyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Person.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Person entity sınıfımız’da sınıfımızın işaretlendiği bir notasyona dikkat edelim. Entity sınıfımız @NoSql(dataFormat=DataFormatType.MAPPED) notasyonu ile işaretli. Bu notasyon ile JPA’ya ilişkisel olmayan bir veri kaynağı kullandığını söylüyoruz ve Java fieldlar ile MongoDB objeleri arasında mapleme yapmasını söylüyoruz.&lt;/p&gt;
+
+&lt;p&gt;Entity içerisinde Address alanına dikkat edersek bu alan Embedded notasyonu ile işaretlenmiş. Yani dökümanda bir alt alanımız olacak.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;package com.ilkaygunel.jpaandmongodb.entity;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import org.eclipse.persistence.nosql.annotations.DataFormatType;
+import org.eclipse.persistence.nosql.annotations.Field;
+import org.eclipse.persistence.nosql.annotations.NoSql;
+
+@Entity
+@NoSql(dataFormat=DataFormatType.MAPPED)
+public class Person implements Serializable {
+
+    public Person() { 
+    }
+    
+    @Id
+    @GeneratedValue
+    @Field(name=&quot;_id&quot;)
+    private String id;
+    
+    @Basic
+    private String name;
+    
+    @Basic
+    private String surname;
+    
+    @Basic
+    private String phoneNumber;
+    
+    @Basic
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date birthDate;
+   
+    @Embedded
+    private Address address;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Address.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Önceki MongoDB yazılarından hatırlayacağınız gibi MongoDB dökümanları içerisinde alt alanlar olabiliyordu. Yani bunlara embedded document deniliyordu. JPA içerisinde embedded dökümanaları tanımlamak için
+@Embeddable notasyonu getirilmiş. Person.java içerisinde address alanı alt alandı ve onun tanımlandığı Address sınıfı @Embeddable notasyonu ile işaretli.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;package com.ilkaygunel.jpaandmongodb.entity;
+
+import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Embeddable;
+import org.eclipse.persistence.nosql.annotations.DataFormatType;
+import org.eclipse.persistence.nosql.annotations.NoSql;
+
+@Embeddable
+@NoSql(dataFormat=DataFormatType.MAPPED)
+public class Address implements Serializable{
+    @Basic
+    private String street;
+    
+    @Basic
+    private String neighborhood;
+    
+    @Basic
+    private String district;
+    
+    @Basic
+    private String city;
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getNeighborhood() {
+        return neighborhood;
+    }
+
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+    
+    
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Ekran Çıktısı&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Ana sayfada gelen formu şu şekilde dolduruyorum ve GÖNDER butonuna tıklıyorum.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mongojpa/mongojpa1.png&quot;&gt;
+&lt;img src=&quot;/images/mongojpa/mongojpa1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bana kaydın başarı ile yapıldığını söyleyen mesaj dönüyor.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mongojpa/mongojpa2.png&quot;&gt;
+&lt;img src=&quot;/images/mongojpa/mongojpa2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;MongoDB’nin arayüz programı üzerinden baktığımda da kaydın başarı ile yollandığını görüyorum.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mongojpa/mongojpa3.png&quot;&gt;
+&lt;img src=&quot;/images/mongojpa/mongojpa3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda da bu kadar arkadaşlar. Yazının başında da söylediğim gibi github’daki projeyi güncelleme ve silme işlemleri için de geliştireceğim. Haberdar olmak için Twitter’dan takip etmeyi unutmayın.&lt;/p&gt;
+
+&lt;p&gt;Başka bir yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Sat, 24 Sep 2016 19:38:20 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/mongodb-and-jpa-tutorial/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/mongodb-and-jpa-tutorial/</guid>
+        
+        <category>mongodb</category>
+        
+        <category>java</category>
+        
+        <category>mongodb jpa</category>
+        
+        <category>mongodb jsf</category>
+        
+        <category>mongodb primefaces</category>
+        
+        <category>mongodb jsf jpa primefaces</category>
+        
+        
+        <category>welcome</category>
+        
+      </item>
     
       <item>
         <title>Apache JMeter İle Yük Testi Yapalım</title>
@@ -1249,188 +1660,6 @@ Bu nedenle replaceOne metodu ile güncelleme yapmamaya çalışmamak önemlidir 
         <category>java</category>
         
         <category>kayıt güncelleme</category>
-        
-        
-        <category>welcome</category>
-        
-      </item>
-    
-      <item>
-        <title>Mongo DB Ve Java Temel İşlemler 3 - Kayıt Çekme - İkinci Bölüm</title>
-        <description>&lt;p&gt;Merhabalar. &lt;a href=&quot;http://ilkgunel.github.io/mongoDbAndJava/mongo-db-ve-java-temel-islemler-2/&quot;&gt;Önceki&lt;/a&gt; yazıda MongoDB veritabanımızdan kayıt çekme işlemlerinin
-bir kısmını görmüştük. Bu yazı ile de kayıt çekme işlemlerini tamamlayacağız.&lt;/p&gt;
-
-&lt;p&gt;Java kodumuza geçmeden önce yine MongoDB’deki kayıtlardan herhangi birisine göz atalım:&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;json
-{
-    &quot;_id&quot;: &quot;57c19b523e9b4210f7353280&quot;,
-    &quot;address&quot;: {
-      &quot;street&quot;: &quot;2 Avenue&quot;,
-      &quot;zipcode&quot;: &quot;10078&quot;,
-      &quot;building&quot;: &quot;1480&quot;,
-      &quot;coord&quot;: [
-        -73.9557413,
-        40.7720266
-      ]
-    },
-    &quot;borough&quot;: &quot;Manhattan&quot;,
-    &quot;cuisine&quot;: &quot;Russian&quot;,
-    &quot;grades&quot;: [
-      {
-        &quot;date&quot;: &quot;27-08-2016&quot;,
-        &quot;grade&quot;: &quot;A&quot;,
-        &quot;score&quot;: 12
-      },
-      {
-        &quot;date&quot;: &quot;27-08-2016&quot;,
-        &quot;grade&quot;: &quot;B&quot;,
-        &quot;score&quot;: 13
-      }
-    ],
-    &quot;name&quot;: &quot;Vella&quot;,
-    &quot;restaurant_id&quot;: &quot;41704620&quot;
-  }
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;MongoDB’den kayıt çekme işlemleri sırasında büyüktür&amp;amp;küçüktür işlemleri de uygulanabilir. Yani belli bir değerin üstündekileri ya da altındakileri getir diyebiliriz. Örneğin yukarıdaki kaydı baz alarak
-score alanı değerinin 13’den büyük olan kayıtlarının getirilmesini istiyoruz. Bunun için kullanacağımız kodumuz şu şekilde olur:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import static com.mongodb.client.model.Filters.gt;
-FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;Records&quot;).find(gt(&quot;grades.score&quot;, 13));
-          
-iterable.forEach(new Block&amp;lt;Document&amp;gt;(){
-    @Override
-    public void apply(final Document document){
-        System.out.println(document);
-    }
-});
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Kodu çalıştırdığımızda karşımıza gelen çıktı da şöyle,&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/mongoSelect4.png&quot;&gt;
-&lt;img src=&quot;/images/mongoSelect4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Tabii burada şu sorulabilir. Bu greades altında iki kayıt tutuluyor, örneğin 13-14 şeklinde olsa idi ne olacaktı? O zaman 13-14 score’una sahip kayıt da getirilecekti çünkü bize 13’den 
-büyük score alanına sahip tüm kayıtlar getiriliyor. grades altındakilern sadece birinin istenenden büyük olması yeterli.&lt;/p&gt;
-
-&lt;p&gt;Yukarıdaki kod şu şekilde de kullanılabilirdi:&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;java
-FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;Records&quot;).find(new Document(&quot;grades.score&quot;, new Document(&quot;$gt&quot;, 13)));
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Eğer belirli bir değerden küçük değerleri getir demek istiyorsak da &lt;strong&gt;&lt;em&gt;lt&lt;/em&gt;&lt;/strong&gt;‘yi kullanabiliriz. Şu kod parçası da iki score alanından birisi 15’den küçük değer içeren tüm
-kayıtları getirecektir.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;java
-import static com.mongodb.client.model.Filters.lt;
-FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;Records&quot;).find(lt(&quot;grades.score&quot;, 15));
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Yine aynı şekilde bu kod da yukarıdaki gibi new Document parametre verilerek kullanılabilir:&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;java
-FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;Records&quot;).find(new Document(&quot;grades.score&quot;, new Document(&quot;$lt&quot;, 15)));
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Ekran çıktımız da şöyle olur, 15’den küçük score alanı olan tüm kayıtlar getirilir:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/mongoSelect5.png&quot;&gt;
-&lt;img src=&quot;/images/mongoSelect5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;SQL ile klasik veri tabanı işlemeri yaparken kullanılan AND,OR işlemleri MongoDB’nin Java kütüphanesinde de mevcut. Şimdi örneğin cuisine alanı Turkish olan ve score alanı 11 olan kayıtları
-getir diyelim. Kodumuz şu şekilde olur:&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;java
-FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;Records&quot;).find(and(eq(&quot;grades.score&quot;, 11),eq(&quot;cuisine&quot;, &quot;Turkish&quot;)));
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Resimde de gördüğümüz gibi cuisine alanı Turkish olan ve 11 score’una sahip kaydı bize getirdi.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/mongoSelect6.png&quot;&gt;
-&lt;img src=&quot;/images/mongoSelect6.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Aynı kod şu şekilde de yazılabilirdi, bu durumda önceki örneklere benzer şekilde döküman parametresi yolluyoruz fakat AND işleminin gerçekleşmesi için
-şartlarımızı &lt;strong&gt;&lt;em&gt;append&lt;/em&gt;&lt;/strong&gt;‘liyoruz:&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;java
-FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;Records&quot;).find(and(new Document(&quot;cuisine&quot;, &quot;Turkish&quot;).append(&quot;grades.score&quot;, 11));
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;OR operatörünü kullanmak istediğimizde ise döküman parametresi yollayacaksan durum yukarıdakinden farklı oluyor. OR işleminin yapılacağını bildirmek için parametre olarak verilen
-dökümanda &lt;strong&gt;&lt;em&gt;$or&lt;/em&gt;&lt;/strong&gt; olması gerekiyor. Örnek kodumuz şöyle olur:&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;java
-FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;Records&quot;).find(new Document(&quot;$or&quot;, asList(new Document(&quot;cuisine&quot;, &quot;Turkish&quot;),
-                                                                                         new Document(&quot;grades.score&quot;, 14))));
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Parametre olarak geçirdiğimiz dökümanda birinci parametre yani key parametresi OR işleminin yapılacağını bildiren &lt;strong&gt;&lt;em&gt;$or&lt;/em&gt;&lt;/strong&gt; oluyor, ikinci parametre
-hangi şartlarda veri beklediğimizi bildiriyor. Biz cuisine key’ine karşılık Turkish değeri olan veya score alanı 14 olan kayıtları getir diyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/mongoSelect7.png&quot;&gt;
-&lt;img src=&quot;/images/mongoSelect7.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Yukarıdaki kod şu şekilde de kullanılabilirdi:&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;java
-import static com.mongodb.client.model.Filters.or;
-FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;Records&quot;).find(or(eq(&quot;cuisine&quot;, &quot;Turkish&quot;), eq(&quot;grades.score&quot;, 14)));
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Bazı durumlarda veritabanından aldığımız kayıtlarımızı artan ya da azalan sırada elde etmek isteriz. Bunun için de MongoDB Java kütüphanesinin içinde &lt;strong&gt;&lt;em&gt;sort()&lt;/em&gt;&lt;/strong&gt; metodu
-yer alıyor. sort metoduna az önceki gibi bir döküman parametre geçireceğiz ve dökümanın key alanı hangi alana göre sıralama yapmak istediğimiz, value alanı ise
-artan mı yoksa azalan sırada mı listelemek istediğimizi belirtecek. Örnek kodumuz şöyle :&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;java
-FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;Records&quot;).find().sort(new Document(&quot;address.zipcode&quot;, -1));
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Kodumuz içinde sort metoduna verdiğimiz döküman parametresinin key alanı hangi alana göre sıralama yapılıp kayıtlar getirilsin demek içindir. Value alanı ise
-artan mı azalan sırada mı listeleme yapmayı belirtmek içindir. Eğer &lt;strong&gt;1&lt;/strong&gt; gönderirseniz bu artan sırada demektir, &lt;strong&gt;-1&lt;/strong&gt; gönderirseniz azalan sırada demektir.
-Kodu çalıştırınca zipcode alanına göre şöyle bir azalan sırada çıktı elde ediyoruz:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/mongoSelect8.png&quot;&gt;
-&lt;img src=&quot;/images/mongoSelect8.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Yukarıdaki kod şu şekilde de yazılabilirdi,Sorts sınıfı altındaki ascending-descending metotlarını kullanabiliriz. Örneğin azalan sırada listeleme için
-descending metodunu kullanıyoruz:&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;java
-import static com.mongodb.client.model.Sorts.descending;
-FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;Records&quot;).find().sort(descending(&quot;address.zipcode&quot;));
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Biz yukarıdaki örneklerde tek bir key’e göre sıralama yapılmasını istedik. Eğer birden fazla key işin içine girecekse kodumuz şöyle olmalıdır:&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;java
-FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;collectionName&quot;).find().sort(new Document(&quot;selectKey1&quot;, 1 or -1).append(&quot;selectKey2&quot;, 1 or -1));
-//Ya da şu şekilde de olabilir
-FindIterable&amp;lt;Document&amp;gt; iterable = database.getCollection(&quot;collectionName&quot;).find().sort(ascending or descending(&quot;selectKey1&quot;, &quot;selectKeyTwo&quot;));
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Bu yazıda da bu kadar arkadaşlar. MongoDB’den kayıt çekme işlemlerini tamamladık. Gelecek yazıda kayıt güncelleme işlemlerine değineceğiz.
-Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-
-</description>
-        <pubDate>Sun, 04 Sep 2016 19:38:20 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-3/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-3/</guid>
-        
-        <category>mongodb</category>
-        
-        <category>java</category>
-        
-        <category>kayıt çekme</category>
-        
-        <category>mongodb greater than</category>
-        
-        <category>mongodb less than</category>
         
         
         <category>welcome</category>

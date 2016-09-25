@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>JPA,JSF Ve PrimeFaces'ın MongoDB İle Kullanımı</title>
+    <meta name="description" content="Yukarıdaki MongoDB&amp;Java bölümünden de bildiğiniz üzere daha MongoDB’nin Java driver’ı ile temel işlemler yapmıştık ve bir de Servlet&amp;JSP kullanarak y...">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/mongodb-and-jpa-tutorial/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>JPA,JSF Ve PrimeFaces’ın MongoDB İle Kullanımı - İlkay Günel - Blog</title>
+<meta property="og:title" content="JPA,JSF Ve PrimeFaces’ın MongoDB İle Kullanımı" />
+<meta name="description" content="JPA,JSF Ve PrimeFaces’ın MongoDB İle Kullanımı" />
+<meta property="og:description" content="JPA,JSF Ve PrimeFaces’ın MongoDB İle Kullanımı" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/mongodb-and-jpa-tutorial/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/mongodb-and-jpa-tutorial/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-09-24T19:38:20+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "JPA,JSF Ve PrimeFaces’ın MongoDB İle Kullanımı",
+    "datePublished": "2016-09-24T19:38:20+03:00",
+    "description": "JPA,JSF Ve PrimeFaces’ın MongoDB İle Kullanımı",
+    "url": "http://ilkaygunel.com/blog/2016/mongodb-and-jpa-tutorial/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">JPA,JSF Ve PrimeFaces'ın MongoDB İle Kullanımı</h1>
+      <p class="post-meta">Sep 24, 2016</p>
+    </header>
+
+    <div class="post-content">
+      <p>Yukarıdaki MongoDB&amp;Java bölümünden de bildiğiniz üzere daha MongoDB’nin Java driver’ı ile temel işlemler yapmıştık ve bir de Servlet&amp;JSP kullanarak yapılmış örnek projemiz vardı.
+Fakat MongoDB Java çatısı altında sadece o şekilde kullanılmak zorunda değil. Sürekli yeni çıkan teknolojilere adapte olmaya çalışan ve onlara uygun yazılımlar çıkarmaya çalışan Java dünyası NoSQL dünyasına da kayıtsız kalmamış ve 
+Java ile NoSQL kullanımını daha kolay hale getirmeye çalışmışlar.</p>
+
+<p>Java dünyası içindeki ORM specificaton’ı olan JPA’nın resmi implementadyonu olan EclipseLink geliştiricileri NoSQL teknolojileri için kütüphane geliştirip bize sunmuşlar. Ben de bu yazıda bu EclipseLink’in NoSQL teknolojisini kullanarak bir kayıt ekleme örneğini yapacağım.
+Kayıtları listeleme sayfasını da yazdım ancak ona yazı içerisinde değinmeyeceğim. <a href="https://github.com/ilkgunel/JsfJpaAndongoDBSampleProject">https://github.com/ilkgunel/JsfJpaAndongoDBSampleProject</a> adresinden o kısmı inceleyebilirsiniz. Ayrıca kayıt silme ve güncelleme işlemlerini de yazacağım.
+Onları yazdığım zaman haberdar olmak için beni Twitter’dan takip edebilirsiniz: <a href="https://twitter.com/ilkgunel">https://twitter.com/ilkgunel</a></p>
+
+<p>Başlayalım …</p>
+
+<p>İlk olarak hangi bağımlılıklara ihtiyacımız var onları görelim.</p>
+
+<p>Aşağıdaki listede 5 adet bağımlılığımız var. JSF’in 2.2.13 numaralı sürümü, PrimeFaces’ın 6 numaralı sürümü projemize ekli. org.eclipse.persistence altındaki JPA ve NoSQL’in 2.6.4 sürümünü ekledik. Bu kütüphaneler kayıt ekleme, çekme vs. işlemlerini basitize edecek.
+Son olarak da MongoDB’nin Java driver’ını projemize ekledik. JPA ve NoSQL kütüphaneleri işlemlerini bu driver üzerinden yapacaklar. Burada önemli bir nokta mevcut. MongoDB’nin her ne kadar 3 ve üzerinde sürümleri olan Java driver’ı olsa da şu an için bu sürümler EclipseLink’in NoSQL teknolojisi ile uyumlu çalışamıyor.
+Bu nedenle biz 2.13.0 sürümlü Java drvier’ı kullanıyoruz.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;dependencies&gt;
+    &lt;!-- https://mvnrepository.com/artifact/org.glassfish/javax.faces --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.glassfish&lt;/groupId&gt;
+        &lt;artifactId&gt;javax.faces&lt;/artifactId&gt;
+        &lt;version&gt;2.2.13&lt;/version&gt;
+    &lt;/dependency&gt;
+    
+    &lt;dependency&gt;  
+        &lt;groupId&gt;org.primefaces&lt;/groupId&gt;  
+        &lt;artifactId&gt;primefaces&lt;/artifactId&gt;  
+        &lt;version&gt;6.0&lt;/version&gt;  
+    &lt;/dependency&gt; 
+    
+    &lt;!-- https://mvnrepository.com/artifact/org.eclipse.persistence/org.eclipse.persistence.jpa --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.eclipse.persistence&lt;/groupId&gt;
+        &lt;artifactId&gt;org.eclipse.persistence.jpa&lt;/artifactId&gt;
+        &lt;version&gt;2.6.4&lt;/version&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- https://mvnrepository.com/artifact/org.eclipse.persistence/org.eclipse.persistence.nosql --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.eclipse.persistence&lt;/groupId&gt;
+        &lt;artifactId&gt;org.eclipse.persistence.nosql&lt;/artifactId&gt;
+        &lt;version&gt;2.6.4&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mongodb&lt;/groupId&gt;
+        &lt;artifactId&gt;mongo-java-driver&lt;/artifactId&gt;
+        &lt;version&gt;2.13.0&lt;/version&gt;
+    &lt;/dependency&gt;
+
+&lt;/dependencies&gt;
+</code></pre>
+</div>
+
+<p><strong><em>persistence.xml</em></strong></p>
+
+<p>persistence.xml dosyamız içerisinde bağlantı kurulacak veritabanına ait bilgileri tanımlıyoruz. Burada veritabanına gönderilecek, alınacak vs. nesnelere ait sınıfların yani Entity sınıflarının <class></class> tagleri arasında belirtilmeleri gerekiyor. Aksi takdirde bilinmeyen tür gibisinden hatalar alabiliyoruz.
+Property’lerin ilk ikisi MongoDB’ye bağlantı kurulması için gerekli sınıflara ait tanımlamalar. 3. property port, 4.property host, 5. property de bağlantı kurulacak veritabanının ismini belirtiyor.</p>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemalocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="mongodbPersistenceUnit" transaction-type="RESOURCE_LOCAL">
+    <class>com.ilkaygunel.jpaandmongodb.entity.Person</class>
+    <properties>
+      <property name="eclipselink.target-database" value="org.eclipse.persistence.nosql.adapters.mongo.MongoPlatform" />
+      <property name="eclipselink.nosql.connection-spec" value="org.eclipse.persistence.nosql.adapters.mongo.MongoConnectionSpec" />
+      <property name="eclipselink.nosql.property.mongo.port" value="27017" />
+      <property name="eclipselink.nosql.property.mongo.host" value="localhost" />
+      <property name="eclipselink.nosql.property.mongo.db" value="mongodatabase" />
+      <property name="eclipselink.logging.level" value="FINEST" />
+    </properties>
+  </persistence-unit>
+</persistence>
+
+<p><strong>index.xhtml’den Bir Parça</strong></p>
+
+<p>Projemizin ana sayfasında şöyle bir kayıt formumuz var. Bu kayıt formu doldurulup butonuna tıkladığında MongoDB’ye ilgili bilgiler gönderiliyor.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;h:form&gt;
+        &lt;p:panelGrid columns="2"&gt;
+            &lt;p:outputLabel value="İsim:"/&gt;
+            &lt;p:inputText value="#{managedBeanClass.person.name}"/&gt;
+
+            &lt;p:outputLabel value="Soyisim:"/&gt;
+            &lt;p:inputText value="#{managedBeanClass.person.surname}"/&gt;
+
+            &lt;p:outputLabel value="Telefon Numarası:"/&gt;
+            &lt;p:inputMask mask="0(999) 999-99-99" value="#{managedBeanClass.person.phoneNumber}"/&gt;
+
+            &lt;p:outputLabel value="Doğum Tarihi:"/&gt;
+            &lt;p:calendar value="#{managedBeanClass.person.birthDate}" locale="tr" yearRange="c-70:c+10" navigator="true" mask="true" pattern="dd-MM-yyyy"/&gt;
+
+            &lt;p:outputLabel value="Adres Bilgileriniz"/&gt;
+            &lt;p:outputLabel/&gt;
+
+            &lt;p:outputLabel value="Cadde:"/&gt;
+            &lt;p:inputText value="#{managedBeanClass.address.street}"/&gt;
+
+            &lt;p:outputLabel value="Mahalle:"/&gt;
+            &lt;p:inputText value="#{managedBeanClass.address.neighborhood}"/&gt;
+
+            &lt;p:outputLabel value="İlçe:"/&gt;
+            &lt;p:inputText value="#{managedBeanClass.address.district}"/&gt;
+
+            &lt;p:outputLabel value="İl:"/&gt;
+            &lt;p:inputText value="#{managedBeanClass.address.city}"/&gt;
+
+            &lt;p:outputLabel/&gt;
+            &lt;p:commandButton value="GÖNDER" ajax="false" action="#{managedBeanClass.saveDataToDatabase}"/&gt;
+
+            &lt;p:outputLabel value="#{managedBeanClass.operationMessage}"/&gt;
+            &lt;p:outputLabel/&gt;
+        &lt;/p:panelGrid&gt;
+    &lt;/h:form&gt;
+</code></pre>
+</div>
+
+<p>JSF sayfamız içinde kullanıcıdan birtakım bilgiler alınıyor ve managed bean içindeki <strong><em>saveDataToDatabase metodu</em></strong> ile MongoDB’ye gönderiliyor.</p>
+
+<p><strong>ManagedBeanClass.java</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>package com.ilkaygunel.jpaandmongodb.bean;
+
+import com.ilkaygunel.jpaandmongodb.entity.Address;
+import com.ilkaygunel.jpaandmongodb.entity.Person;
+import java.text.ParseException;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+@ManagedBean
+@SessionScoped
+public class ManagedBeanClass {
+
+    private Person person;
+    private Address address;
+
+    private String operationMessage = "";
+
+    public ManagedBeanClass() {
+        person = new Person();
+        address = new Address();
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public String getOperationMessage() {
+        return operationMessage;
+    }
+
+    public void setOperationMessage(String operationMessage) {
+        this.operationMessage = operationMessage;
+    }
+
+    public void saveDataToDatabase() throws ParseException {
+        person.setAddress(address);
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("mongodbPersistenceUnit");
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(person);
+            em.getTransaction().commit();
+            operationMessage = "Kayıt Başarı İle Eklendi!";
+            GetRecordsBean getRecordsBean = new GetRecordsBean();
+            getRecordsBean.refreshPersonList();
+        } catch (Exception e) {
+            operationMessage = "Kayıt eklenirken bir hata meydana geldi! Hata:"+e;
+        }
+        finally{
+            em.close();
+            emf.close();           
+        }
+    }
+}
+</code></pre>
+</div>
+
+<p>Managed bean içerisinde Person,Address ve operationMessage nesnelerimiz ve onlara ait get-set metotları yer alıyor. saveDataToDatabase metodu içerisinde tıpkı klasik veritabanlarında işlem yapar gibi <strong><em>EntityManager</em></strong> nesnesi elde edip bu nesnenin <strong><em>persist</em></strong> metodu ile veritabanına bilgi yolluyoruz.</p>
+
+<p><strong>Person.java</strong></p>
+
+<p>Person entity sınıfımız’da sınıfımızın işaretlendiği bir notasyona dikkat edelim. Entity sınıfımız @NoSql(dataFormat=DataFormatType.MAPPED) notasyonu ile işaretli. Bu notasyon ile JPA’ya ilişkisel olmayan bir veri kaynağı kullandığını söylüyoruz ve Java fieldlar ile MongoDB objeleri arasında mapleme yapmasını söylüyoruz.</p>
+
+<p>Entity içerisinde Address alanına dikkat edersek bu alan Embedded notasyonu ile işaretlenmiş. Yani dökümanda bir alt alanımız olacak.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>package com.ilkaygunel.jpaandmongodb.entity;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import org.eclipse.persistence.nosql.annotations.DataFormatType;
+import org.eclipse.persistence.nosql.annotations.Field;
+import org.eclipse.persistence.nosql.annotations.NoSql;
+
+@Entity
+@NoSql(dataFormat=DataFormatType.MAPPED)
+public class Person implements Serializable {
+
+    public Person() { 
+    }
+    
+    @Id
+    @GeneratedValue
+    @Field(name="_id")
+    private String id;
+    
+    @Basic
+    private String name;
+    
+    @Basic
+    private String surname;
+    
+    @Basic
+    private String phoneNumber;
+    
+    @Basic
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date birthDate;
+   
+    @Embedded
+    private Address address;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+}
+</code></pre>
+</div>
+
+<p><strong>Address.java</strong></p>
+
+<p>Önceki MongoDB yazılarından hatırlayacağınız gibi MongoDB dökümanları içerisinde alt alanlar olabiliyordu. Yani bunlara embedded document deniliyordu. JPA içerisinde embedded dökümanaları tanımlamak için
+@Embeddable notasyonu getirilmiş. Person.java içerisinde address alanı alt alandı ve onun tanımlandığı Address sınıfı @Embeddable notasyonu ile işaretli.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>package com.ilkaygunel.jpaandmongodb.entity;
+
+import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Embeddable;
+import org.eclipse.persistence.nosql.annotations.DataFormatType;
+import org.eclipse.persistence.nosql.annotations.NoSql;
+
+@Embeddable
+@NoSql(dataFormat=DataFormatType.MAPPED)
+public class Address implements Serializable{
+    @Basic
+    private String street;
+    
+    @Basic
+    private String neighborhood;
+    
+    @Basic
+    private String district;
+    
+    @Basic
+    private String city;
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getNeighborhood() {
+        return neighborhood;
+    }
+
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+    
+    
+}
+</code></pre>
+</div>
+
+<p><strong>Ekran Çıktısı</strong></p>
+
+<p>Ana sayfada gelen formu şu şekilde dolduruyorum ve GÖNDER butonuna tıklıyorum.</p>
+
+<p><a href="/images/mongojpa/mongojpa1.png">
+<img src="/images/mongojpa/mongojpa1.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Bana kaydın başarı ile yapıldığını söyleyen mesaj dönüyor.</p>
+
+<p><a href="/images/mongojpa/mongojpa2.png">
+<img src="/images/mongojpa/mongojpa2.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>MongoDB’nin arayüz programı üzerinden baktığımda da kaydın başarı ile yollandığını görüyorum.</p>
+
+<p><a href="/images/mongojpa/mongojpa3.png">
+<img src="/images/mongojpa/mongojpa3.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Bu yazıda da bu kadar arkadaşlar. Yazının başında da söylediğim gibi github’daki projeyi güncelleme ve silme işlemleri için de geliştireceğim. Haberdar olmak için Twitter’dan takip etmeyi unutmayın.</p>
+
+<p>Başka bir yazıda görüşene kadar sağlıcakla kalın.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function() {
+        this.page.url = 'http://ilkaygunel.com';
+        this.page.identifier = '/blog/2016/mongodb-and-jpa-tutorial';
+      };
+      (function() {
+        var d = document,
+        s = d.createElement('script');
+        s.src = '//ilkgunelgithubio.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="http://github.com/ilkgunel" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="http://twitter.com/ilkgunel" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2016 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>
