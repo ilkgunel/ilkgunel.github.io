@@ -145,12 +145,12 @@
 
 <p>Bu kodun çalışabilmesi için projenizin Servlet Api kütüphanesine sahip olması gerekiyor. Eğer kütüphane yoksa şu bağımlılık ile edinebilirsiniz:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;!-- http://mvnrepository.com/artifact/javax.servlet/javax.servlet-api --&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
-    &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
-    &lt;version&gt;3.1.0&lt;/version&gt;
-&lt;/dependency&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>javax.servlet<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>javax.servlet-api<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>3.1.0<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 </code></pre>
 </div>
 
@@ -181,7 +181,8 @@
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CookieParamExample</span> <span class="o">{</span>
     <span class="nd">@GET</span>
     <span class="nd">@Produces</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">TEXT_HTML</span><span class="o">+</span><span class="s">";charset=UTF-8"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">getCookie</span><span class="o">(</span><span class="nd">@CookieParam</span><span class="o">(</span><span class="s">"first_name"</span><span class="o">)</span> <span class="n">Cookie</span> <span class="n">firstName</span><span class="o">,</span><span class="nd">@CookieParam</span><span class="o">(</span><span class="s">"last_name"</span><span class="o">)</span> <span class="n">Cookie</span> <span class="n">lastName</span><span class="o">){</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getCookie</span><span class="o">(</span><span class="nd">@CookieParam</span><span class="o">(</span><span class="s">"first_name"</span><span class="o">)</span> <span class="n">Cookie</span> <span class="n">firstName</span><span class="o">,</span>
+							<span class="nd">@CookieParam</span><span class="o">(</span><span class="s">"last_name"</span><span class="o">)</span> <span class="n">Cookie</span> <span class="n">lastName</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="s">"Ad Soyad:"</span><span class="o">+</span><span class="n">firstName</span><span class="o">.</span><span class="na">getValue</span><span class="o">()+</span><span class="s">" "</span><span class="o">+</span><span class="n">lastName</span><span class="o">.</span><span class="na">getValue</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
