@@ -5,9 +5,332 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 03 Oct 2016 21:28:38 +0300</pubDate>
-    <lastBuildDate>Mon, 03 Oct 2016 21:28:38 +0300</lastBuildDate>
+    <pubDate>Tue, 04 Oct 2016 21:31:36 +0300</pubDate>
+    <lastBuildDate>Tue, 04 Oct 2016 21:31:36 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>JSF ve PrimeFaces İle Seçime Bağlı Otomatik Değişim</title>
+        <description>&lt;p&gt;Sık sık JSF yazan arkadaşlardan JSF’de bir değer seçildiğinde bunun seçilecek diğer değeri nasıl etkileyebileceğine dair sorular alıyordum. Örneğin bir selectOneMenu’den seçilecek değerin ikinci selectOneMenu’yu nasıl etkileyebileceği soruluyordu. Bu yazıda ben de bu durumu örneğe dökerek sorulara bir çözüm üretmeye çalışacağım.&lt;/p&gt;
+
+&lt;p&gt;Başlayalım…&lt;/p&gt;
+
+&lt;p&gt;Örneğimizde 2 adet dosyamız olacak. Birisi Managed Bean sınıfımız, diğeri de xhtml sayfamız. Öncelikle Java kodunu inceleyelim.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;BeanClass.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;primefacesautofilling&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.annotation.PostConstruct&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.faces.bean.ManagedBean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.faces.bean.SessionScoped&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@ManagedBean&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@SessionScoped&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BeanClass&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cities&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boroughs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;istanbulBorough&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ankaraBorough&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;samsunBorough&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;selectedCity&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;selectedBorough&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@PostConstruct&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;cities&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;boroughs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;istanbulBorough&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ankaraBorough&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;samsunBorough&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
+        
+        &lt;span class=&quot;n&quot;&gt;cities&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;istanbul&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;cities&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ankara&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;cities&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;samsun&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;istanbulBorough&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;şişli&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;istanbulBorough&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;eyüp&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;istanbulBorough&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;beyoğlu&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        
+        &lt;span class=&quot;n&quot;&gt;ankaraBorough&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;keçiören&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ankaraBorough&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;mamak&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ankaraBorough&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sincan&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        
+        &lt;span class=&quot;n&quot;&gt;samsunBorough&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bafra&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;samsunBorough&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;atakum&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;samsunBorough&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;vezirköprü&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getCities&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cities&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fillBoroughList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;selectedCity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;istanbul&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)){&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;boroughs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;istanbulBorough&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;selectedCity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ankara&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)){&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;boroughs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ankaraBorough&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;boroughs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;samsunBorough&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getSelectedCity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;selectedCity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setSelectedCity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;selectedCity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;selectedCity&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;selectedCity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getBoroughs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boroughs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setBoroughs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boroughs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;boroughs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boroughs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getSelectedBorough&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;selectedBorough&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setSelectedBorough&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;selectedBorough&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;selectedBorough&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;selectedBorough&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;BeanClass sınıfımız içinde 7 adet nesne tanımlı. Bu nesnelerden cities listesi xhtml içinde iller selectOneMenu’sünü dolduracak. boroughs listesi iller selectOneMenu’sünden seçilen ile göre dolacak bir liste. İstanbul seçilirse İstanbul’un listeleri görünecek örneğin. istanbulBorough, ankaraBorough ve samsunBorough listeleri de seçilen ile göre doldurulması yapılacak listeye atanacak değerleri tutan listeler. Yani Ankara seçilirse Ankara’ya ait ilçeler gösterilmesi için hazırda tutuluyor ve seçim yapıldığında direk atanıyor. selectedCity nesnesi seçilen ili tutacak ve ikinci selectOneMenu’ü bu nesneye göre dolacak. selectedBorough ise seçilen ilçeyi tutacak.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;@PostConstruct&lt;/strong&gt; notasyonu ile işaretli metot sınıfın constructor’ının yani yapılandırıcısının hemen peşinden devreye girecek listeleri dolduracak.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;fillBoroughList()&lt;/strong&gt; burada yazının asıl amacını yerine getiren metot olacak. Xhtml içinden il selectOneMenu’sünden seçim yapıldığında bu metot çalışacak ve ilçe selectOneMenu’sünü seçilen ile göre dolduracak. Örneğin seçilen ilin İStanbul olması durumunda ilçe selectOneMenu’sünü dolduracak boroughs lsitesi istanbul’un ilçelerini tutan istanbulBoroughs ile doldurulacak.&lt;/p&gt;
+
+&lt;p&gt;Sınıfın geri kalanı ise xhtml içinde kullanılacak nesnelerin get-set metotlarından oluşmakta. Bildiğimiz gibi xhtml sayfaları managed bean içinde tanımlı nesnelere ulaşabilmek için get metoduna, o nesnelere yazabilmek için de set metoduna ihtiyaç duyar.&lt;/p&gt;
+
+&lt;p&gt;Şimdi xhtml sayfamızı inceleyelim.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;index.xhtml&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&#39;1.0&#39; encoding=&#39;UTF-8&#39; ?&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/1999/xhtml&quot;&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;xmlns:h=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://xmlns.jcp.org/jsf/html&quot;&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;xmlns:p=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://primefaces.org/ui&quot;&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;xmlns:f=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://xmlns.jcp.org/jsf/core&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;h:head&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Facelet Title&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:head&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;h:body&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;h:form&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;p:panelGrid&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;columns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;h:outputText&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;İl Seçiniz&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;p:selectOneMenu&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;citySelectOneMenu&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#{beanClass.selectedCity}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+					&lt;span class=&quot;nt&quot;&gt;&amp;lt;f:selectItem&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;itemLabel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;İl Seçin&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemValue=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#{null}&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;f:selectItems&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#{beanClass.cities}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;p:ajax&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;update=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;boroughSelectOneMenu&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;listener=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#{beanClass.fillBoroughList()}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;/p:selectOneMenu&amp;gt;&lt;/span&gt;
+                
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;h:outputText&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;İlçe Seçiniz&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;p:selectOneMenu&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;boroughSelectOneMenu&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#{beanClass.selectedBorough}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;f:selectItems&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#{beanClass.boroughs}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;/p:selectOneMenu&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/p:panelGrid&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:form&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Xhtml sayfamız gördüğünüz gibi çok sade. Burada Birinci selectOneMenu’nün value özelliğine &lt;strong&gt;&lt;em&gt;beanClass.selectedCity&lt;/em&gt;&lt;/strong&gt; atanması sureti ile seçilen ilin selectedCity nesnesine yazılmasını söylüyoruz. p:selectOneMenu bileşeninin içerisinde üç adet bileşen var.&lt;/p&gt;
+
+&lt;p&gt;Birincisi kullanıcıya il seçmesini bildiren bir eleman. Bu elemanı selectOneMenu’ye ilk eleman seçiminde ajax tetiklemesini sağlamak için koyduk arkadaşlar.&lt;/p&gt;
+
+&lt;p&gt;p:selectOneMenu içindeki ikinci bileşen ekranda hangi değerleri gösterecek bunu belirleyen f:selectItems. Bu bileşenin value özelliğine managed bean içinki şehirleri tutan cities listesini atıyoruz ve birinci selectOneMenu’nün illeri göstermesini söylüyoruz.&lt;/p&gt;
+
+&lt;p&gt;Son bileşen  ise bir ajax tetiklemesi. Bu ajax tetiklemesi p:ajax etiketi ile kullanılacak ve ilgili selectOneMenu’den bir seçim yapıldığında yapılacak ve update özelliğine atanmış olan &lt;strong&gt;&lt;em&gt;boroughSelectOneMenu&lt;/em&gt;&lt;/strong&gt; id’li bileşeni güncelleyecek. Bu güncellemeyi de listener özelliğine atanmış metodun yardımı ile yapacak. Listener özelliğine atanmış metot güncellenecek selectOneMenu’nün doldurulacağı nesneyi güncellemeli. Bizde de ikinci selectOneMenu’yü dolduracak liste borough listesi ve fillBoroughList() metodu seçilen ile göre borough listesini güncelleyerek bu görevi yerine getiriyor.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Ekran Çıktıları&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Projeyi çalıştırdığımızda karşımıza şöyle bir ekran geliyor.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/pfauto1.png&quot;&gt;
+&lt;img src=&quot;/images/pfauto1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Ben İstanbul’u seçtiğimde ilçe selectOneMenu’sü gördüğünüz gibi İstanbul’un ilçeleri ile doluyor.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/pfauto2.png&quot;&gt;
+&lt;img src=&quot;/images/pfauto2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Ankara’yı seçtiğimde de Ankara’nın ilçeleri ile doluyor.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/pfauto3.png&quot;&gt;
+&lt;img src=&quot;/images/pfauto3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda da bu kadar arkadaşlar. Bana sık sık gelen sorulardan birine böylece bir çözüm üretmiş olayım inşaAllah :)&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Başka yazıda görüşene kadar sağlıcakla kalın.
+ Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Mon, 03 Oct 2016 20:38:20 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/jsf-primefaces-autochanging/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/jsf-primefaces-autochanging/</guid>
+        
+        <category>jsf primefaces</category>
+        
+        <category>java server faces primefaces</category>
+        
+        <category>jsf primefaces auto changing</category>
+        
+        <category>primefaces otomatik değişim</category>
+        
+        <category>jsf otomatik değişim</category>
+        
+        <category>jsf and primefaces example</category>
+        
+        <category>primefaces auto changing example</category>
+        
+        <category>primefaces select event</category>
+        
+        <category>jsf primefaces select event</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>RestEasy İle Restful Web Servis Dersleri 11 – Form Param</title>
+        <description>&lt;p&gt;Merhabalar arkadaşlar. Bu yazıda JAX-RS içinde yer alan ve önceki gördüklerimizden bir tık ilerde olan bir parametre alma yöntemi olan FormParam’ı öğreneceğiz.&lt;/p&gt;
+
+&lt;p&gt;Daha önce Java web ile proje geliştirmiş arkadaşların aşina olduğu üzere biz kullanıcıdan veri alırdık ve onu bir yere yönlendirirdik. Örneğin JSP ve Servlet kullanılan bir arayüzde JSP ile verileri alır Servlet’e yönlendiririz. Ya da JSF içinde xhtml içinden verileri alır Managed Bean’e yollarız.&lt;/p&gt;
+
+&lt;p&gt;RestEasy de Servlet’in en üst katmanının üzerine kurulu bir çatı olduğundan yazdığımız bir formun action’ına web servis metodumuzu atayabiliriz. Tabii bu atama path bilgisi olmaktadır. Web servis metodumuz da @FormParam notasyonu ile form’dan gelen parametreleri &lt;strong&gt;&lt;em&gt;tek tek&lt;/em&gt;&lt;/strong&gt; alabilir.&lt;/p&gt;
+
+&lt;p&gt;Şimdi bir örnek uygulama ile ne demek istediğimi anlatmaya çalışayım.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;index.html&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Form Sayfası&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;http-equiv=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Content-Type&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/html;charset=UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Ad ve Soyad Bilgilerinizi Girin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;form&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;method=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;POST&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;restful/formParamExample/postFormParams&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;table&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;tr&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;td&amp;gt;&lt;/span&gt;Adınız:&lt;span class=&quot;nt&quot;&gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;td&amp;gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;firstname&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;/tr&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;tr&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;td&amp;gt;&lt;/span&gt;Soyadınız:&lt;span class=&quot;nt&quot;&gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;td&amp;gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;lastname&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;/tr&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/table&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;submit&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;GÖNDER&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/form&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Html sayfamız içinde kullanıcıdan isim soyisim aldığımız bir form yer alıyor. Dikkatinizi iki yere çekeceğim. Birincisi form’un method özelliği. Bu özelliğe POST ataması yaparak formun verilerini HTTP-POST metodu ile iletileceğini söylüyoruz. İkinci nokta ise form’un action özelliği. Bu özellik de butona tıklanıldığında gidilecek yeri temsil ediyor. Biz action özelliğine @POST notasyonu ile işaretlenmiş olan web servis metodumuzun path bilgisini veriyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;FormParamExample.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;mycompany&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;resteasytutorials&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.FormParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.GET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.POST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.Produces&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.core.HttpHeaders&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.core.MediaType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.core.Response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/formParamExample&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FormParamExample&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/postFormParams&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Produces&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MediaType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;TEXT_HTML&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;;charset=UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@POST&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Response&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;formParamMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@FormParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;firstname&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;firstName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@FormParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;lastname&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lastname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;entity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;---Gelen İsim   :&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;firstName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;---&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;---Gelen Soyisim:&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lastname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;---&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;        
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;FormParamExample sınıfımız @Path notasyonu ile işaretlenmiş ve formParamExample String’i bu sınıfın path’i olarak tanımlanmış. Sınıf içerisinde ise &lt;strong&gt;&lt;em&gt;postFormParams&lt;/em&gt;&lt;/strong&gt; string’inin path olarak tanımlandığı bir metodumuz yer alıyor. Bu metot @POST notasyonu ile işaretli gördüğümüz üzere. Yani POST isteklerini kabul eden bir metot. Html içinde form da POST isteği yapılarak gönderiliyor.&lt;/p&gt;
+
+&lt;p&gt;Metodun dönüş tipine baktığımızda Response’u görüyoruz.  Önceki örneklerde String, void vs. dönüş tipleri ile çıktılar elde etmiştik. Genel olarak Response döndürmek web servis kullanımında daha iyi bir durumdur çünkü daha önce de bahsettiğimiz üzere Rest API HTPP üzerinde çalışıyor ve istek-cevap üzerinde daha yetkin olabilmek için dönüş tipimizin Response olmasında fayda var. Döndüreceğimiz değeri de Response sınıfı aracılığı ile yolluyoruz.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;status() metodu cevabın durumunu kodu ile beraber Response’a ekliyor. 200 OK, 404 Not Found örnek verilebilir.&lt;/li&gt;
+  &lt;li&gt;entity() göndereceğimiz bilgiyi Response’a gömdüğümüz kısım. Biz gelen isim soyisim bilgilerini Response’a koyduk.&lt;/li&gt;
+  &lt;li&gt;build() döndürülecek response bu metot ile inşa edilip döndürülüyor.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Ekran Çıktısı&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/formparam1.png&quot;&gt;
+&lt;img src=&quot;/images/formparam1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Projeyi çalıştırdığımızda karşımıza gelen index sayfası bu şekilde.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/formparam2.png&quot;&gt;
+&lt;img src=&quot;/images/formparam2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;İsim ve soyisim alanlarını doldurup GÖNDER butonuna tıklıyorum.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/formparam3.png&quot;&gt;
+&lt;img src=&quot;/images/formparam3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;POST metodu parametreleri başarı ile bize döndürdü.&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda da bu kadar arkadaşlar. Gelecek yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Mon, 03 Oct 2016 19:38:20 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/form-param/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/form-param/</guid>
+        
+        <category>resteasy ile restful web servis</category>
+        
+        <category>resteasy form param</category>
+        
+        <category>restful dersleri</category>
+        
+        <category>web service dersleri</category>
+        
+        <category>web servis dersleri</category>
+        
+        <category>restful web service</category>
+        
+        <category>web service nedir?</category>
+        
+        <category>restful param param</category>
+        
+        <category>jax-rs param param</category>
+        
+        
+      </item>
     
       <item>
         <title>RestEasy İle Restful Web Servis Dersleri 10 – CookieParam</title>
@@ -1154,371 +1477,6 @@ sunucu olarak da Jetty kullandım. Ama siz istediğiniz IDE ve istediğiniz sunu
         <category>jetty maven plugin</category>
         
         <category>jetty maven ile nasıl kullanılır</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Mongo DB Ve Java Temel İşlemler 5 - Kayıt Silme</title>
-        <description>&lt;p&gt;Önceki yazımızda MongoDB’de nasıl kayıt güncelleyebileceğimizi görmüştük. Bu yazıda da  nasıl kayıt silineceği göreceğiz.&lt;/p&gt;
-
-&lt;p&gt;MongoDB Java driver içerisinde kayıt silmek amacı ile &lt;strong&gt;&lt;em&gt;deleteOne()&lt;/em&gt;&lt;/strong&gt; ve &lt;strong&gt;&lt;em&gt;deleteMany()&lt;/em&gt;&lt;/strong&gt; metodu bize sunulmuş. İsimlerinden anlaşılacağı gibi deleteOne metodu
-sadece bir kayıt silmek deleteMany metodu da birden fazla kayıt silmek amacı ile kullanılır. Şimdi iki metodu da örnekleyelim.&lt;/p&gt;
-
-&lt;p&gt;Önceki yazılarda da yaptığımız gibi öncelikle üzerinde çalışacağımız kaydı görelim:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;_id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;57c19b523e9b4210f735327f&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;address&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;street&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2 Avenue&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;zipcode&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;10077&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;building&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1480&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;coord&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;-73.9557413&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;40.7720266&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;borough&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Manhattan&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;cuisine&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;American&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;grades&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;date&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;27-08-2016&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;grade&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;score&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;date&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;27-08-2016&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;grade&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;B&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;score&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Vella&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;restaurant_id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;41704620&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Veritabanında cuisine alanı American olan sadece bir kayıt var. Şimdi benim bu kaydı silmek için kullanacağım şu şekildedir:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package io.github.ilkgunel.mongodb;
-
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.result.DeleteResult;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import static java.util.Arrays.asList;
-import java.util.Locale;
-import org.bson.Document;
-
-/**
- *
- * @author ilkaygunel
- */
-public class RemovingData {
-    public static void main(String[] args) {
-        MongoClient mongoClient = null;
-        try {
-            mongoClient = new MongoClient(&quot;localhost&quot;, 27017);
-            MongoDatabase database = mongoClient.getDatabase(&quot;MongoDB&quot;);
-            
-            database.getCollection(&quot;Records&quot;).deleteOne(new Document(&quot;cuisine&quot;,&quot;American&quot;));
-
-        } catch (Exception e) {
-            System.out.println(&quot;An Error Occured! Error is:&quot; + e);
-        } finally {
-            mongoClient.close();
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Kod içerisinde deleteOne metoduna bir döküman geçirdik ve bu dökümanda cuisine keyine American valuesunu atadık. Kod çalıştığında veritabanında karşısına cuisine alanı
-American olup ilk gelen kaydı silecek.&lt;/p&gt;
-
-&lt;p&gt;Kayıt silmeden önce veritabanımız kaydın şekli şöyle:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/mongoDelete1.png&quot;&gt;
-&lt;img src=&quot;/images/mongoDelete1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Kaydı sildikten sonra ise şöyle:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/mongoDelete2.png&quot;&gt;
-&lt;img src=&quot;/images/mongoDelete2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Gördüğümüz gibi kayıt sayımız 5’den 4’e indi ve 2. sıradaki kayda cuisine alanı Russian olan kayıt geçti.&lt;/p&gt;
-
-&lt;p&gt;Şimdi de deleteMany metodunu örnekleyelim. Veritabanında cuisine alanı Italian olan 2 kayıt mevcut. deleteMany metodununa cuisine keyine Italian değerini verdiğim bir döküman atarsak 2 kayıt da silinir.
-Kodumuz şöyle:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/mongoDelete3.png&quot;&gt;
-&lt;img src=&quot;/images/mongoDelete3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package io.github.ilkgunel.mongodb;
-
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.result.DeleteResult;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import static java.util.Arrays.asList;
-import java.util.Locale;
-import org.bson.Document;
-
-/**
- *
- * @author ilkaygunel
- */
-public class RemovingData {
-    public static void main(String[] args) {
-        MongoClient mongoClient = null;
-        try {
-            mongoClient = new MongoClient(&quot;localhost&quot;, 27017);
-            MongoDatabase database = mongoClient.getDatabase(&quot;MongoDB&quot;);
-            
-            database.getCollection(&quot;Records&quot;).deleteMany(new Document(&quot;cuisine&quot;,&quot;Italian&quot;));
-
-        } catch (Exception e) {
-            System.out.println(&quot;An Error Occured! Error is:&quot; + e);
-        } finally {
-            mongoClient.close();
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;MongoClient’a dönüp baktığımızda kayıt sayısının 2’ye indiğini görüyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/mongoDelete4.png&quot;&gt;
-&lt;img src=&quot;/images/mongoDelete4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;MongoDB’de eğer istenirse bir seferde tüm kayıtlar silinebilinir. Bunun yapılması için deleteMany metoduna boş bir döküman geçirilmesi yeterlidir. Örnek kodumuzu şu şekilde güncellersek amacımıza uygun hale gelir:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//database.getCollection(&quot;Records&quot;).deleteMany(new Document(&quot;cuisine&quot;,&quot;Italian&quot;));
-database.getCollection(&quot;Records&quot;).deleteMany(new Document());
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Kodun çalıştırılması akabinde durum şöyledir:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/mongoDelete5.png&quot;&gt;
-&lt;img src=&quot;/images/mongoDelete5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Bu kodun işletilmesi akabinde tüm kayıtlar silinmiş olmasına rağmen Collection yerinde durmaktadır. Eğer tüm kayıtlarla beraber Collection’ı da silmek istersek &lt;strong&gt;&lt;em&gt;drop()&lt;/em&gt;&lt;/strong&gt; metodunu
-kullanabiliriz. Kodumuzu şu şekilde düzenlemeliyiz:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//database.getCollection(&quot;Records&quot;).deleteMany(new Document(&quot;cuisine&quot;,&quot;Italian&quot;));
-//database.getCollection(&quot;Records&quot;).deleteMany(new Document());
-database.getCollection(&quot;Records&quot;).drop();
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Collections’ın altındaki artık hiçbir Collection görünmüyor.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/mongoDelete5.png&quot;&gt;
- &lt;img src=&quot;/images/mongoDelete5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Bu yazıda da bu kadar arkadaşlar. MongodDB’de kayıt ve collection silme işlemlerini gördük. Gelecek yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-
-</description>
-        <pubDate>Sat, 10 Sep 2016 19:38:20 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-5/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-5/</guid>
-        
-        <category>mongodb</category>
-        
-        <category>java</category>
-        
-        <category>kayıt güncelleme</category>
-        
-        
-        <category>welcome</category>
-        
-      </item>
-    
-      <item>
-        <title>Use Beatiful 3D Leopard Dock in OS X El Capitan</title>
-        <description>&lt;p&gt;Hello everyone. In this tutorial i am gonna show you how to you change El Capitan Dock with so beatiful 3D Leopard Dock. Let’s start.&lt;/p&gt;
-&lt;p&gt;First of all you need to download cDock app to do this purpose. You can download it from here:&lt;a href=&quot;http://w0lfschild.github.io/app_cDock.html&quot;&gt;http://w0lfschild.github.io/app_cDock.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;cDock an OS X application that you can change your dock to you want with it. When the app installation, cDock wants a permission about SIMBL. You need to give this permission to run the program. And do not forget to put cDock app to Applications folder.&lt;/p&gt;
-&lt;p&gt;After cDock installation , you need to download Leopard Dock files from Deviantart. You can download rar file&amp;nbsp;from here:&amp;nbsp;&lt;a href=&quot;http://gotier.deviantart.com/art/Leopard-Dock-3D-Original-1-0-83204400&quot;&gt;http://gotier.deviantart.com/art/Leopard-Dock-3D-Original-1-0-83204400&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Now, go to your Applications folder, find cDock and right click and click “Show Package Contents”.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/elcapitanDock1.png&quot;&gt;
-&lt;img src=&quot;/images/elcapitanDock1.png&quot; style=&quot;width: 1024px;height= 392px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Now you see the “Contents” folder. Open it and open Resources folder. In Resources folder open themes folder and create a new folder. You can set a name that you want. I am using  M5 string as folder name.&lt;/p&gt;
-&lt;p&gt;Now extract the rar file open the folder. In this folder you will see the dock and indicator png files.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/elcapitanDock2.png&quot;&gt;
-&lt;img src=&quot;/images/elcapitanDock2.png&quot; style=&quot;width: 1024px;height= 392px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Now change the name of indicator1.png file to indicator_large.png and move to M5 folder. After this, you should get 4 copy from file that’s name is indicator.png. Names of 4 copy files are&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;indicator_medium_simple.png&lt;/li&gt;
-&lt;li&gt;indicator_medium.png&lt;/li&gt;
-&lt;li&gt;indicator_small_simple.png&lt;/li&gt;
-&lt;li&gt;indicator_small.png&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Move this 4 files to M5 folder. After, change bg.png file name to background.png and move to M5 folder.&lt;/p&gt;
-
-&lt;p&gt;Lastly you need a .plist file.&amp;nbsp;Create a plist file that’s name is&amp;nbsp;&lt;strong&gt;M5.plist&lt;/strong&gt;&amp;nbsp;and copy these lines to the file.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;plist&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;version=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1.0&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;dict&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_borderBG&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_borderBGA&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_borderBGB&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_borderBGG&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_borderBGR&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_borderSize&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;integer&amp;gt;&lt;/span&gt;0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/integer&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_colorIndicator&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_cornerRadius&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;integer&amp;gt;&lt;/span&gt;0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/integer&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_customIndicator&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_darkMode&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;integer&amp;gt;&lt;/span&gt;0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/integer&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_darkenMouseOver&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;true/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_dockBG&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_dockBGA&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;100&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_dockBGB&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_dockBGG&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_dockBGR&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_fullWidth&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_hideLabels&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_iconReflection&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;true/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_iconShadow&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_iconShadowBGA&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_iconShadowBGB&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_iconShadowBGG&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_iconShadowBGR&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_iconShadowBGS&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;integer&amp;gt;&lt;/span&gt;10&lt;span class=&quot;nt&quot;&gt;&amp;lt;/integer&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_indicatorBGA&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_indicatorBGB&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_indicatorBGG&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_indicatorBGR&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_indicatorHeight&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;integer&amp;gt;&lt;/span&gt;0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/integer&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_indicatorWidth&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;integer&amp;gt;&lt;/span&gt;0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/integer&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_is3D&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;true/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_labelBG&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_labelBGA&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_labelBGB&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_labelBGG&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_labelBGR&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_pictureBG&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;true/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_pictureTile&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_separatorBG&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_separatorBGA&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_separatorBGB&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_separatorBGG&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_separatorBGR&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;real&amp;gt;&lt;/span&gt;0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/real&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_showFrost&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_showGlass&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_showSeparator&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;true/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&amp;gt;&lt;/span&gt;cd_sizeIndicator&lt;span class=&quot;nt&quot;&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dict&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/plist&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;In my M5 folder,they looks like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/elcapitanDock3.png&quot;&gt;
-&lt;img src=&quot;/images/elcapitanDock3.png&quot; style=&quot;width: 1024px;height= 392px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;In the folder, background1.png, indicator_medium1.png and indicator_large.png files my testing file. You can ignore these files.&lt;/p&gt;
-
-&lt;p&gt;Now almost finished. Open cDock App and choose the “M5” from Theme as dock option and check “Use image for application Indicators” . If dock doesn’t change, click the Restart Dock button. Again if dock doesn’t change, from Activity Monitor stop cDock and OS X Dock app. Try again. Sometimes cDock freezes.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/elcapitanDock4.png&quot;&gt;
-&lt;img src=&quot;/images/elcapitanDock4.png&quot; style=&quot;width: 1024px;height= 392px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Okey. Now everything is okey. Here is my beatiful 3D Leopard dock with the indicators.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/elcapitanDock5.png&quot;&gt;
-&lt;img src=&quot;/images/elcapitanDock5.png&quot; style=&quot;width: 1024px;height= 392px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I hope this post will help you to get a beatiful 3D dock in OS X.&lt;/p&gt;
-
-&lt;p&gt;Have a nice day.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 10 Sep 2016 19:38:20 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2016/use-beatiful-3d-leopard-dock-in-os-x-el-capitan/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/use-beatiful-3d-leopard-dock-in-os-x-el-capitan/</guid>
-        
-        <category>el capitan</category>
-        
-        <category>3D Dock</category>
-        
-        <category>Leopard Dock</category>
-        
-        <category>beatiful dock</category>
-        
-        <category>use 3D dock in el capitan</category>
         
         
       </item>

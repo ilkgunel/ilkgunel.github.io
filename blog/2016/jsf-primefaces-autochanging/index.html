@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>JSF ve PrimeFaces İle Seçime Bağlı Otomatik Değişim</title>
+    <meta name="description" content="Sık sık JSF yazan arkadaşlardan JSF’de bir değer seçildiğinde bunun seçilecek diğer değeri nasıl etkileyebileceğine dair sorular alıyordum. Örneğin bir selec...">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsf-primefaces-autochanging/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>JSF ve PrimeFaces İle Seçime Bağlı Otomatik Değişim - İlkay Günel - Blog</title>
+<meta property="og:title" content="JSF ve PrimeFaces İle Seçime Bağlı Otomatik Değişim" />
+<meta name="description" content="JSF ve PrimeFaces İle Seçime Bağlı Otomatik Değişim" />
+<meta property="og:description" content="JSF ve PrimeFaces İle Seçime Bağlı Otomatik Değişim" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsf-primefaces-autochanging/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/jsf-primefaces-autochanging/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-10-03T20:38:20+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "JSF ve PrimeFaces İle Seçime Bağlı Otomatik Değişim",
+    "datePublished": "2016-10-03T20:38:20+03:00",
+    "description": "JSF ve PrimeFaces İle Seçime Bağlı Otomatik Değişim",
+    "url": "http://ilkaygunel.com/blog/2016/jsf-primefaces-autochanging/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">JSF ve PrimeFaces İle Seçime Bağlı Otomatik Değişim</h1>
+      <p class="post-meta">Oct 3, 2016</p>
+    </header>
+
+    <div class="post-content">
+      <p>Sık sık JSF yazan arkadaşlardan JSF’de bir değer seçildiğinde bunun seçilecek diğer değeri nasıl etkileyebileceğine dair sorular alıyordum. Örneğin bir selectOneMenu’den seçilecek değerin ikinci selectOneMenu’yu nasıl etkileyebileceği soruluyordu. Bu yazıda ben de bu durumu örneğe dökerek sorulara bir çözüm üretmeye çalışacağım.</p>
+
+<p>Başlayalım…</p>
+
+<p>Örneğimizde 2 adet dosyamız olacak. Birisi Managed Bean sınıfımız, diğeri de xhtml sayfamız. Öncelikle Java kodunu inceleyelim.</p>
+
+<p><strong>BeanClass.java</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">primefacesautofilling</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.annotation.PostConstruct</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.faces.bean.ManagedBean</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.faces.bean.SessionScoped</span><span class="o">;</span>
+
+<span class="nd">@ManagedBean</span>
+<span class="nd">@SessionScoped</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BeanClass</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">cities</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">boroughs</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">istanbulBorough</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">ankaraBorough</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">samsunBorough</span><span class="o">;</span>
+    
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">selectedCity</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">selectedBorough</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
+
+    <span class="nd">@PostConstruct</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">init</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">cities</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+        <span class="n">boroughs</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+        <span class="n">istanbulBorough</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+        <span class="n">ankaraBorough</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+        <span class="n">samsunBorough</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+        
+        <span class="n">cities</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"istanbul"</span><span class="o">);</span>
+        <span class="n">cities</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"ankara"</span><span class="o">);</span>
+        <span class="n">cities</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"samsun"</span><span class="o">);</span>
+
+        <span class="n">istanbulBorough</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"şişli"</span><span class="o">);</span>
+        <span class="n">istanbulBorough</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"eyüp"</span><span class="o">);</span>
+        <span class="n">istanbulBorough</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"beyoğlu"</span><span class="o">);</span>
+        
+        <span class="n">ankaraBorough</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"keçiören"</span><span class="o">);</span>
+        <span class="n">ankaraBorough</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"mamak"</span><span class="o">);</span>
+        <span class="n">ankaraBorough</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"sincan"</span><span class="o">);</span>
+        
+        <span class="n">samsunBorough</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"bafra"</span><span class="o">);</span>
+        <span class="n">samsunBorough</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"atakum"</span><span class="o">);</span>
+        <span class="n">samsunBorough</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"vezirköprü"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">getCities</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">cities</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">fillBoroughList</span><span class="o">(){</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">selectedCity</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"istanbul"</span><span class="o">)){</span>
+            <span class="n">boroughs</span> <span class="o">=</span> <span class="n">istanbulBorough</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">selectedCity</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"ankara"</span><span class="o">)){</span>
+            <span class="n">boroughs</span> <span class="o">=</span> <span class="n">ankaraBorough</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span><span class="o">{</span>
+            <span class="n">boroughs</span> <span class="o">=</span> <span class="n">samsunBorough</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getSelectedCity</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">selectedCity</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setSelectedCity</span><span class="o">(</span><span class="n">String</span> <span class="n">selectedCity</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">selectedCity</span> <span class="o">=</span> <span class="n">selectedCity</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">getBoroughs</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">boroughs</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setBoroughs</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">boroughs</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">boroughs</span> <span class="o">=</span> <span class="n">boroughs</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getSelectedBorough</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">selectedBorough</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setSelectedBorough</span><span class="o">(</span><span class="n">String</span> <span class="n">selectedBorough</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">selectedBorough</span> <span class="o">=</span> <span class="n">selectedBorough</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>BeanClass sınıfımız içinde 7 adet nesne tanımlı. Bu nesnelerden cities listesi xhtml içinde iller selectOneMenu’sünü dolduracak. boroughs listesi iller selectOneMenu’sünden seçilen ile göre dolacak bir liste. İstanbul seçilirse İstanbul’un listeleri görünecek örneğin. istanbulBorough, ankaraBorough ve samsunBorough listeleri de seçilen ile göre doldurulması yapılacak listeye atanacak değerleri tutan listeler. Yani Ankara seçilirse Ankara’ya ait ilçeler gösterilmesi için hazırda tutuluyor ve seçim yapıldığında direk atanıyor. selectedCity nesnesi seçilen ili tutacak ve ikinci selectOneMenu’ü bu nesneye göre dolacak. selectedBorough ise seçilen ilçeyi tutacak.</p>
+
+<p><strong>@PostConstruct</strong> notasyonu ile işaretli metot sınıfın constructor’ının yani yapılandırıcısının hemen peşinden devreye girecek listeleri dolduracak.</p>
+
+<p><strong>fillBoroughList()</strong> burada yazının asıl amacını yerine getiren metot olacak. Xhtml içinden il selectOneMenu’sünden seçim yapıldığında bu metot çalışacak ve ilçe selectOneMenu’sünü seçilen ile göre dolduracak. Örneğin seçilen ilin İStanbul olması durumunda ilçe selectOneMenu’sünü dolduracak boroughs lsitesi istanbul’un ilçelerini tutan istanbulBoroughs ile doldurulacak.</p>
+
+<p>Sınıfın geri kalanı ise xhtml içinde kullanılacak nesnelerin get-set metotlarından oluşmakta. Bildiğimiz gibi xhtml sayfaları managed bean içinde tanımlı nesnelere ulaşabilmek için get metoduna, o nesnelere yazabilmek için de set metoduna ihtiyaç duyar.</p>
+
+<p>Şimdi xhtml sayfamızı inceleyelim.</p>
+
+<p><strong>index.xhtml</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
+<span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
+      <span class="na">xmlns:h=</span><span class="s">"http://xmlns.jcp.org/jsf/html"</span>
+      <span class="na">xmlns:p=</span><span class="s">"http://primefaces.org/ui"</span>
+      <span class="na">xmlns:f=</span><span class="s">"http://xmlns.jcp.org/jsf/core"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h:head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Facelet Title<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/h:head&gt;</span>
+    <span class="nt">&lt;h:body&gt;</span>
+        <span class="nt">&lt;h:form&gt;</span>
+            <span class="nt">&lt;p:panelGrid</span> <span class="na">columns=</span><span class="s">"2"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">"İl Seçiniz"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;p:selectOneMenu</span> <span class="na">id=</span><span class="s">"citySelectOneMenu"</span> <span class="na">value=</span><span class="s">"#{beanClass.selectedCity}"</span><span class="nt">&gt;</span>
+					<span class="nt">&lt;f:selectItem</span>  <span class="na">itemLabel=</span><span class="s">"İl Seçin"</span> <span class="na">itemValue=</span><span class="s">"#{null}"</span> <span class="nt">/&gt;</span>
+                    <span class="nt">&lt;f:selectItems</span> <span class="na">value=</span><span class="s">"#{beanClass.cities}"</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;p:ajax</span> <span class="na">update=</span><span class="s">"boroughSelectOneMenu"</span> <span class="na">listener=</span><span class="s">"#{beanClass.fillBoroughList()}"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;/p:selectOneMenu&gt;</span>
+                
+                <span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">"İlçe Seçiniz"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;p:selectOneMenu</span> <span class="na">id=</span><span class="s">"boroughSelectOneMenu"</span> <span class="na">value=</span><span class="s">"#{beanClass.selectedBorough}"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;f:selectItems</span> <span class="na">value=</span><span class="s">"#{beanClass.boroughs}"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;/p:selectOneMenu&gt;</span>
+            <span class="nt">&lt;/p:panelGrid&gt;</span>
+        <span class="nt">&lt;/h:form&gt;</span>
+    <span class="nt">&lt;/h:body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<p>Xhtml sayfamız gördüğünüz gibi çok sade. Burada Birinci selectOneMenu’nün value özelliğine <strong><em>beanClass.selectedCity</em></strong> atanması sureti ile seçilen ilin selectedCity nesnesine yazılmasını söylüyoruz. p:selectOneMenu bileşeninin içerisinde üç adet bileşen var.</p>
+
+<p>Birincisi kullanıcıya il seçmesini bildiren bir eleman. Bu elemanı selectOneMenu’ye ilk eleman seçiminde ajax tetiklemesini sağlamak için koyduk arkadaşlar.</p>
+
+<p>p:selectOneMenu içindeki ikinci bileşen ekranda hangi değerleri gösterecek bunu belirleyen f:selectItems. Bu bileşenin value özelliğine managed bean içinki şehirleri tutan cities listesini atıyoruz ve birinci selectOneMenu’nün illeri göstermesini söylüyoruz.</p>
+
+<p>Son bileşen  ise bir ajax tetiklemesi. Bu ajax tetiklemesi p:ajax etiketi ile kullanılacak ve ilgili selectOneMenu’den bir seçim yapıldığında yapılacak ve update özelliğine atanmış olan <strong><em>boroughSelectOneMenu</em></strong> id’li bileşeni güncelleyecek. Bu güncellemeyi de listener özelliğine atanmış metodun yardımı ile yapacak. Listener özelliğine atanmış metot güncellenecek selectOneMenu’nün doldurulacağı nesneyi güncellemeli. Bizde de ikinci selectOneMenu’yü dolduracak liste borough listesi ve fillBoroughList() metodu seçilen ile göre borough listesini güncelleyerek bu görevi yerine getiriyor.</p>
+
+<p><strong>Ekran Çıktıları</strong></p>
+
+<p>Projeyi çalıştırdığımızda karşımıza şöyle bir ekran geliyor.</p>
+
+<p><a href="/images/pfauto1.png">
+<img src="/images/pfauto1.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Ben İstanbul’u seçtiğimde ilçe selectOneMenu’sü gördüğünüz gibi İstanbul’un ilçeleri ile doluyor.</p>
+
+<p><a href="/images/pfauto2.png">
+<img src="/images/pfauto2.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Ankara’yı seçtiğimde de Ankara’nın ilçeleri ile doluyor.</p>
+
+<p><a href="/images/pfauto3.png">
+<img src="/images/pfauto3.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Bu yazıda da bu kadar arkadaşlar. Bana sık sık gelen sorulardan birine böylece bir çözüm üretmiş olayım inşaAllah :)</p>
+
+<p style="text-align: center">Başka yazıda görüşene kadar sağlıcakla kalın.
+ Selam ve Sevgilerimle</p>
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="http://github.com/ilkgunel" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="http://twitter.com/ilkgunel" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+  <li><a href="https://www.instagram.com/ilkgunel/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2016 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>
