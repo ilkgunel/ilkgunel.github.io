@@ -96,25 +96,25 @@
 
 <p><strong>DefaultValueExample.java</strong></p>
 
-<p>~~
-package com.mycompany.resteasytutorials;</p>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">mycompany</span><span class="o">.</span><span class="na">resteasytutorials</span><span class="o">;</span>
 
-<p>import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;</p>
+<span class="kn">import</span> <span class="nn">javax.ws.rs.DefaultValue</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.ws.rs.GET</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.ws.rs.Path</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.ws.rs.Produces</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.ws.rs.QueryParam</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.ws.rs.core.MediaType</span><span class="o">;</span>
 
-<p class="language-java">@Path(“/defaultValueExample”)
-public class DefaultValueExample {
-    @Produces(MediaType.TEXT_HTML)
-    @GET
-    public String returnParameter(@QueryParam(“parameter”) @DefaultValue(“kod5.org”) String parameter){
-        return parameter;
-    }
-}
-~~~~</p>
+<span class="nd">@Path</span><span class="o">(</span><span class="s">"/defaultValueExample"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DefaultValueExample</span> <span class="o">{</span>
+    <span class="nd">@Produces</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">TEXT_HTML</span><span class="o">)</span>
+    <span class="nd">@GET</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">returnParameter</span><span class="o">(</span><span class="nd">@QueryParam</span><span class="o">(</span><span class="s">"parameter"</span><span class="o">)</span> <span class="nd">@DefaultValue</span><span class="o">(</span><span class="s">"kod5.org"</span><span class="o">)</span> <span class="n">String</span> <span class="n">parameter</span><span class="o">){</span>
+        <span class="k">return</span> <span class="n">parameter</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
 
 <p>GET notasyonu ile işaretlediğimiz ve bu sayfaya istekte bulunulduğunda çalışacak olan <strong><em>returnParameter</em></strong> metodumuz adres çubuğundan <strong><em>parameter</em></strong> ismi ile gönderilecek bir String parameter parametresi bekliyor. Eğer adres çubuğuna herhangi bir QueryParam girilmeden GET isteğinde bulunursa da devreye hemen varsayılan değer olan kod5.org girecek ve web servisin sağlıksız çalışmasının önüne geçecek.</p>
 

@@ -108,7 +108,8 @@
 	<span class="nd">@Path</span><span class="o">(</span><span class="s">"/{pathParam}"</span><span class="o">)</span>
 	<span class="nd">@Produces</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">TEXT_HTML</span><span class="o">)</span>
 	<span class="nd">@GET</span>	
-	<span class="kd">public</span> <span class="n">String</span> <span class="n">returnParameters</span><span class="o">(</span><span class="nd">@PathParam</span><span class="o">(</span><span class="s">"pathParam"</span><span class="o">)</span> <span class="n">String</span> <span class="n">pathParam</span><span class="o">,</span><span class="nd">@QueryParam</span><span class="o">(</span><span class="s">"queryParam"</span><span class="o">)</span> <span class="n">String</span> <span class="n">queryParam</span><span class="o">){</span>				
+	<span class="kd">public</span> <span class="n">String</span> <span class="n">returnParameters</span><span class="o">(</span><span class="nd">@PathParam</span><span class="o">(</span><span class="s">"pathParam"</span><span class="o">)</span> <span class="n">String</span> <span class="n">pathParam</span><span class="o">,</span>
+								   <span class="nd">@QueryParam</span><span class="o">(</span><span class="s">"queryParam"</span><span class="o">)</span> <span class="n">String</span> <span class="n">queryParam</span><span class="o">){</span>				
 		<span class="k">return</span> <span class="n">pathParam</span> <span class="o">+</span><span class="s">" "</span><span class="o">+</span><span class="n">queryParam</span><span class="o">;</span>
 	<span class="o">}</span>
 <span class="o">}</span>
@@ -135,7 +136,8 @@
 	<span class="nd">@Produces</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">TEXT_HTML</span><span class="o">)</span>
 	<span class="nd">@GET</span>
 	<span class="nd">@Encoded</span>
-	<span class="kd">public</span> <span class="n">String</span> <span class="n">returnParameters</span><span class="o">(</span><span class="nd">@PathParam</span><span class="o">(</span><span class="s">"pathParam"</span><span class="o">)</span> <span class="n">String</span> <span class="n">pathParam</span><span class="o">,</span><span class="nd">@QueryParam</span><span class="o">(</span><span class="s">"queryParam"</span><span class="o">)</span> <span class="n">String</span> <span class="n">queryParam</span><span class="o">){</span>				
+	<span class="kd">public</span> <span class="n">String</span> <span class="n">returnParameters</span><span class="o">(</span><span class="nd">@PathParam</span><span class="o">(</span><span class="s">"pathParam"</span><span class="o">)</span> <span class="n">String</span> <span class="n">pathParam</span><span class="o">,</span>
+									<span class="nd">@QueryParam</span><span class="o">(</span><span class="s">"queryParam"</span><span class="o">)</span> <span class="n">String</span> <span class="n">queryParam</span><span class="o">){</span>				
 		<span class="k">return</span> <span class="n">pathParam</span> <span class="o">+</span><span class="s">" "</span><span class="o">+</span><span class="n">queryParam</span><span class="o">;</span>
 	<span class="o">}</span>
 <span class="o">}</span>
@@ -156,7 +158,8 @@
 	<span class="nd">@Path</span><span class="o">(</span><span class="s">"/{pathParam}"</span><span class="o">)</span>
 	<span class="nd">@Produces</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">TEXT_HTML</span><span class="o">)</span>
 	<span class="nd">@GET</span>	
-	<span class="kd">public</span> <span class="n">String</span> <span class="n">returnParameters</span><span class="o">(</span><span class="nd">@PathParam</span><span class="o">(</span><span class="s">"pathParam"</span><span class="o">)</span> <span class="n">String</span> <span class="n">pathParam</span><span class="o">,</span><span class="nd">@QueryParam</span><span class="o">(</span><span class="s">"queryParam"</span><span class="o">)</span> <span class="n">String</span> <span class="n">queryParam</span><span class="o">){</span>				
+	<span class="kd">public</span> <span class="n">String</span> <span class="n">returnParameters</span><span class="o">(</span><span class="nd">@PathParam</span><span class="o">(</span><span class="s">"pathParam"</span><span class="o">)</span> <span class="n">String</span> <span class="n">pathParam</span><span class="o">,</span>
+									<span class="nd">@QueryParam</span><span class="o">(</span><span class="s">"queryParam"</span><span class="o">)</span> <span class="n">String</span> <span class="n">queryParam</span><span class="o">){</span>				
 		<span class="k">return</span> <span class="n">pathParam</span> <span class="o">+</span><span class="s">" "</span><span class="o">+</span><span class="n">queryParam</span><span class="o">;</span>
 	<span class="o">}</span>
 <span class="o">}</span>
@@ -186,7 +189,8 @@
 	<span class="nd">@Produces</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">TEXT_HTML</span><span class="o">+</span><span class="s">";charset=UTF-8"</span><span class="o">)</span>
 	<span class="nd">@GET</span>	
         <span class="nd">@Encoded</span>
-	<span class="kd">public</span> <span class="n">String</span> <span class="n">returnParameters</span><span class="o">(</span><span class="nd">@PathParam</span><span class="o">(</span><span class="s">"pathParam"</span><span class="o">)</span> <span class="n">String</span> <span class="n">pathParam</span><span class="o">,</span><span class="nd">@QueryParam</span><span class="o">(</span><span class="s">"queryParam"</span><span class="o">)</span> <span class="n">String</span> <span class="n">queryParam</span><span class="o">){</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="n">returnParameters</span><span class="o">(</span><span class="nd">@PathParam</span><span class="o">(</span><span class="s">"pathParam"</span><span class="o">)</span> <span class="n">String</span> <span class="n">pathParam</span><span class="o">,</span>
+									<span class="nd">@QueryParam</span><span class="o">(</span><span class="s">"queryParam"</span><span class="o">)</span> <span class="n">String</span> <span class="n">queryParam</span><span class="o">){</span>
 		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">pathParam</span> <span class="o">+</span><span class="s">" "</span><span class="o">+</span><span class="n">queryParam</span><span class="o">);</span>
 		<span class="n">String</span> <span class="n">decodedPathParam</span><span class="o">=</span><span class="s">""</span><span class="o">;</span>
 		<span class="n">String</span> <span class="n">decodedQueryParam</span><span class="o">=</span><span class="s">""</span><span class="o">;</span>
