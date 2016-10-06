@@ -5,30 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>RestEasy İle Restful Web Servis Yazı Dizisi</title>
-    <meta name="description" content="Daha önce http://kod5.org/category/web-servis/resteasy/ adresinde yer alan yazılar buraya taşınmaktadır. Taşınma işlemi tamamlandığında oradaki yazılar silin...">
+    <title>Eclipse IDE Üzerinde RestEasy İçin Hazırlık</title>
+    <meta name="description" content="  Eclipse IDE üzerinde File -&gt; New -&gt; Maven Project yolunu takip ederek yeni bir Maven projesi oluşturalım.">
 
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/resteasy/">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/resteasy-on-eclipse-ide/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
       <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>RestEasy İle Restful Web Servis Yazı Dizisi - İlkay Günel - Blog</title>
-<meta property="og:title" content="RestEasy İle Restful Web Servis Yazı Dizisi" />
-<meta name="description" content="RestEasy İle Restful Web Servis Yazı Dizisi" />
-<meta property="og:description" content="RestEasy İle Restful Web Servis Yazı Dizisi" />
-<link rel="canonical" href="http://ilkaygunel.com/blog/2016/resteasy/" />
-<meta property="og:url" content="http://ilkaygunel.com/blog/2016/resteasy/" />
+<title>Eclipse IDE Üzerinde RestEasy İçin Hazırlık - İlkay Günel - Blog</title>
+<meta property="og:title" content="Eclipse IDE Üzerinde RestEasy İçin Hazırlık" />
+<meta name="description" content="Eclipse IDE Üzerinde RestEasy İçin Hazırlık" />
+<meta property="og:description" content="Eclipse IDE Üzerinde RestEasy İçin Hazırlık" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/resteasy-on-eclipse-ide/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/resteasy-on-eclipse-ide/" />
 <meta property="og:site_name" content="İlkay Günel - Blog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2016-09-04T19:38:20+03:00" />
+<meta property="article:published_time" content="2016-10-05T19:38:20+03:00" />
 <script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "RestEasy İle Restful Web Servis Yazı Dizisi",
-    "datePublished": "2016-09-04T19:38:20+03:00",
-    "description": "RestEasy İle Restful Web Servis Yazı Dizisi",
-    "url": "http://ilkaygunel.com/blog/2016/resteasy/"
+    "headline": "Eclipse IDE Üzerinde RestEasy İçin Hazırlık",
+    "datePublished": "2016-10-05T19:38:20+03:00",
+    "description": "Eclipse IDE Üzerinde RestEasy İçin Hazırlık",
+    "url": "http://ilkaygunel.com/blog/2016/resteasy-on-eclipse-ide/"
   }
 </script>
 <!-- End Jekyll SEO tag -->
@@ -83,33 +83,78 @@
 
   <div class="card">
     <header class="post-header">
-      <h1 class="post-title">RestEasy İle Restful Web Servis Yazı Dizisi</h1>
-      <p class="post-meta">Sep 4, 2016</p>
+      <h1 class="post-title">Eclipse IDE Üzerinde RestEasy İçin Hazırlık</h1>
+      <p class="post-meta">Oct 5, 2016</p>
     </header>
 
     <div class="post-content">
-      <p>Daha önce <a href="http://kod5.org/category/web-servis/resteasy/">http://kod5.org/category/web-servis/resteasy/</a> adresinde yer alan yazılar buraya taşınmaktadır. Taşınma işlemi tamamlandığında oradaki yazılar silinecektir.</p>
-
-<ol>
-  <li><a href="http://ilkgunel.github.io/blog/2016/rest-giris/">RestEasy İle Restful Web Servis Dersleri 1 - Giriş, Web Servis Nedir?</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/resteasy-restEasy-kullanımı-ic-in-hazırlık//">RestEasy İle Restful Web Servis Dersleri 2 - RestEasy Kullanımı İçin Hazırlık</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/resteasy-servlet-initializer/">RestEasy İle Restful Web Servis Dersleri 3 - Resteasy Servlet Initializer</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/pathvegetnotasyonlar%C4%B1/">RestEasy İle Restful Web Servis Dersleri 4 – @Path Ve @GET Notasyonları</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/postputdeletenotasyonlar%C4%B1/">RestEasy İle Restful Web Servis Dersleri 5 – @Post,@Put,@Delete Notasyonları</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/advanced-pathparam-and-pathsegment">RestEasy İle Restful Web Servis Dersleri 6 – Advanced PathParam And PathSegment</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/query-param">RestEasy İle Restful Web Servis Dersleri 7 – Query Param</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/header-param">RestEasy İle Restful Web Servis Dersleri 8 – Header Param</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/matrix-param">RestEasy İle Restful Web Servis Dersleri 9 – Matrix Param</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/cookie-param">RestEasy İle Restful Web Servis Dersleri 10 – Cookie Param</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/form-param">RestEasy İle Restful Web Servis Dersleri 11 – Form Param</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/rest-form-notation">RestEasy İle Restful Web Servis Dersleri 12 – Form Notation</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/rest-default-value">RestEasy İle Restful Web Servis Dersleri 13 – Default Value</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/rest-encoded-encoding-and-decoding">RestEasy İle Restful Web Servis Dersleri 14 – RestEasy İle Restful Web Servis Dersleri 14 – @Encoded, Encoding And Decoding</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/resteasy-on-eclipse-ide">Eclipse IDE Üzerinde RestEasy İçin Hazırlık</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/rest-context">RestEasy İle Restful Web Servis Dersleri 15 – Context</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/rest-resource-locators-and-subresources">RestEasy İle Restful Web Servis Dersleri 16 – Resource Locators And Subresources</a></li>
+      <ol>
+  <li>Eclipse IDE üzerinde File -&gt; New -&gt; Maven Project yolunu takip ederek yeni bir Maven projesi oluşturalım.</li>
 </ol>
 
+<p><a href="/images/eclipseRest1.png">
+<img src="/images/eclipseRest1.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Create a simple project (skip archetype selection) kısmına tik koyalım. Next diyelim.</p>
+
+<p><a href="/images/eclipseRest2.png">
+<img src="/images/eclipseRest2.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Şimdi gelen ekranda projenin Group ID ve Artifact ID atamasını yapalım ve <strong><em>“Packaging”</em></strong> kısmını war olarak seçelim. Finish butonuna tıklayıp projeyi oluşturalım.</p>
+
+<p><a href="/images/eclipseRest3.png">
+<img src="/images/eclipseRest3.png" style="width: 958px; height= 400px;" /></a></p>
+
+<ol>
+  <li>Projenin oluşturulması akabinde pom.xml dosyası projede bir web.xml dosyası olmadığı için hata var diyecektir. Bunun çözümü için projeye sağ tıklayıp Java EE Tools kısmında <strong><em>Generate Deployment Descriptor</em></strong> denmelidir.</li>
+</ol>
+
+<p><a href="/images/eclipseRest4.png">
+<img src="/images/eclipseRest4.png" style="width: 958px; height= 400px;" /></a></p>
+
+<ol>
+  <li>Bu işlemin akabinde pom.xml dosyasını açın ve şu bağımlılık kodlarını ekleyin:</li>
+</ol>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemalocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelversion>4.0.0</modelversion>
+  <groupid>io.github.ilkgunel</groupid>
+  <artifactid>RestEasyOnEclipse</artifactid>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  <name>RestEasyOnEclipse</name>
+  
+  <dependencies>
+    <dependency>
+        <groupid>org.jboss.resteasy</groupid>
+        <artifactid>resteasy-jaxrs</artifactid>
+        <version>3.0.16.Final</version>
+    </dependency>
+    <dependency>
+        <groupid>org.jboss.resteasy</groupid>
+        <artifactid>resteasy-servlet-initializer</artifactid>
+        <version>3.0.16.Final</version>
+    </dependency>
+    <dependency>
+        <groupid>org.jboss.resteasy</groupid>
+        <artifactid>resteasy-jackson-provider</artifactid>
+        <version>3.0.16.Final</version>
+    </dependency>
+</dependencies>
+  
+</project>
+
+<ol>
+  <li>Son olarak da @ApplicationPath notasyonu ile işaretlenmiş ve Application sınıfını kalıtmış bir Java sınıfı yazalım ve hazırlıklarımız tamam olsun :)</li>
+</ol>
+
+<p><a href="/images/eclipseRest5.png">
+<img src="/images/eclipseRest5.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Eclipse üzerinde RestEasy yazabilmek için yapılması gereken ön hazırlık bu kadar arkadaşlar. Başka yazıda görüşene kadar sağlıcakla kalın.</p>
+
+<p style="text-align: center">Selam Ve Sevgilerimle</p>
 
     </div>
 

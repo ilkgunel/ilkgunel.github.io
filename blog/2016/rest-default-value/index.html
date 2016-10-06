@@ -5,30 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>RestEasy İle Restful Web Servis Yazı Dizisi</title>
-    <meta name="description" content="Daha önce http://kod5.org/category/web-servis/resteasy/ adresinde yer alan yazılar buraya taşınmaktadır. Taşınma işlemi tamamlandığında oradaki yazılar silin...">
+    <title>RestEasy İle Restful Web Servis Dersleri 13 – Default Value</title>
+    <meta name="description" content="Merhabalar arkadaşlar. Bu yazıda RestEasy içindeki bir başka notasyon olan @DefaultValue notasyonunu göreceğiz.">
 
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/resteasy/">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/rest-default-value/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
       <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>RestEasy İle Restful Web Servis Yazı Dizisi - İlkay Günel - Blog</title>
-<meta property="og:title" content="RestEasy İle Restful Web Servis Yazı Dizisi" />
-<meta name="description" content="RestEasy İle Restful Web Servis Yazı Dizisi" />
-<meta property="og:description" content="RestEasy İle Restful Web Servis Yazı Dizisi" />
-<link rel="canonical" href="http://ilkaygunel.com/blog/2016/resteasy/" />
-<meta property="og:url" content="http://ilkaygunel.com/blog/2016/resteasy/" />
+<title>RestEasy İle Restful Web Servis Dersleri 13 – Default Value - İlkay Günel - Blog</title>
+<meta property="og:title" content="RestEasy İle Restful Web Servis Dersleri 13 – Default Value" />
+<meta name="description" content="RestEasy İle Restful Web Servis Dersleri 13 – Default Value" />
+<meta property="og:description" content="RestEasy İle Restful Web Servis Dersleri 13 – Default Value" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/rest-default-value/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/rest-default-value/" />
 <meta property="og:site_name" content="İlkay Günel - Blog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2016-09-04T19:38:20+03:00" />
+<meta property="article:published_time" content="2016-10-05T19:38:20+03:00" />
 <script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "RestEasy İle Restful Web Servis Yazı Dizisi",
-    "datePublished": "2016-09-04T19:38:20+03:00",
-    "description": "RestEasy İle Restful Web Servis Yazı Dizisi",
-    "url": "http://ilkaygunel.com/blog/2016/resteasy/"
+    "headline": "RestEasy İle Restful Web Servis Dersleri 13 – Default Value",
+    "datePublished": "2016-10-05T19:38:20+03:00",
+    "description": "RestEasy İle Restful Web Servis Dersleri 13 – Default Value",
+    "url": "http://ilkaygunel.com/blog/2016/rest-default-value/"
   }
 </script>
 <!-- End Jekyll SEO tag -->
@@ -83,33 +83,58 @@
 
   <div class="card">
     <header class="post-header">
-      <h1 class="post-title">RestEasy İle Restful Web Servis Yazı Dizisi</h1>
-      <p class="post-meta">Sep 4, 2016</p>
+      <h1 class="post-title">RestEasy İle Restful Web Servis Dersleri 13 – Default Value</h1>
+      <p class="post-meta">Oct 5, 2016</p>
     </header>
 
     <div class="post-content">
-      <p>Daha önce <a href="http://kod5.org/category/web-servis/resteasy/">http://kod5.org/category/web-servis/resteasy/</a> adresinde yer alan yazılar buraya taşınmaktadır. Taşınma işlemi tamamlandığında oradaki yazılar silinecektir.</p>
+      <p>Merhabalar arkadaşlar. Bu yazıda RestEasy içindeki bir başka notasyon olan <strong><em>@DefaultValue</em></strong> notasyonunu göreceğiz.</p>
 
-<ol>
-  <li><a href="http://ilkgunel.github.io/blog/2016/rest-giris/">RestEasy İle Restful Web Servis Dersleri 1 - Giriş, Web Servis Nedir?</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/resteasy-restEasy-kullanımı-ic-in-hazırlık//">RestEasy İle Restful Web Servis Dersleri 2 - RestEasy Kullanımı İçin Hazırlık</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/resteasy-servlet-initializer/">RestEasy İle Restful Web Servis Dersleri 3 - Resteasy Servlet Initializer</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/pathvegetnotasyonlar%C4%B1/">RestEasy İle Restful Web Servis Dersleri 4 – @Path Ve @GET Notasyonları</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/postputdeletenotasyonlar%C4%B1/">RestEasy İle Restful Web Servis Dersleri 5 – @Post,@Put,@Delete Notasyonları</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/advanced-pathparam-and-pathsegment">RestEasy İle Restful Web Servis Dersleri 6 – Advanced PathParam And PathSegment</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/query-param">RestEasy İle Restful Web Servis Dersleri 7 – Query Param</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/header-param">RestEasy İle Restful Web Servis Dersleri 8 – Header Param</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/matrix-param">RestEasy İle Restful Web Servis Dersleri 9 – Matrix Param</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/cookie-param">RestEasy İle Restful Web Servis Dersleri 10 – Cookie Param</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/form-param">RestEasy İle Restful Web Servis Dersleri 11 – Form Param</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/rest-form-notation">RestEasy İle Restful Web Servis Dersleri 12 – Form Notation</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/rest-default-value">RestEasy İle Restful Web Servis Dersleri 13 – Default Value</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/rest-encoded-encoding-and-decoding">RestEasy İle Restful Web Servis Dersleri 14 – RestEasy İle Restful Web Servis Dersleri 14 – @Encoded, Encoding And Decoding</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/resteasy-on-eclipse-ide">Eclipse IDE Üzerinde RestEasy İçin Hazırlık</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/rest-context">RestEasy İle Restful Web Servis Dersleri 15 – Context</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/rest-resource-locators-and-subresources">RestEasy İle Restful Web Servis Dersleri 16 – Resource Locators And Subresources</a></li>
-</ol>
+<p>Önceki yazılarda yazmış olduğumuz web servis metotlarımız hep parametre bekler halde idi ve biz de parametrelerini elle vererek metotları tetiklemiştik. Bizden parametre bekleyen metodu biz parametre vermeden tetikleme denemesi yaparsak ya yazdığımız web servis 404 status codu ile geri döner ya da yarım yamalak işler yapılır. Bu durumda ilgili web serviste bir default değer tanımlaması yapmak gerekebilir.</p>
 
+<p>Hemen basit bir örnek uygulama yapalım.</p>
+
+<p><strong>DefaultValueExample.java</strong></p>
+
+<p>~~
+package com.mycompany.resteasytutorials;</p>
+
+<p>import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;</p>
+
+<p class="language-java">@Path(“/defaultValueExample”)
+public class DefaultValueExample {
+    @Produces(MediaType.TEXT_HTML)
+    @GET
+    public String returnParameter(@QueryParam(“parameter”) @DefaultValue(“kod5.org”) String parameter){
+        return parameter;
+    }
+}
+~~~~</p>
+
+<p>GET notasyonu ile işaretlediğimiz ve bu sayfaya istekte bulunulduğunda çalışacak olan <strong><em>returnParameter</em></strong> metodumuz adres çubuğundan <strong><em>parameter</em></strong> ismi ile gönderilecek bir String parameter parametresi bekliyor. Eğer adres çubuğuna herhangi bir QueryParam girilmeden GET isteğinde bulunursa da devreye hemen varsayılan değer olan kod5.org girecek ve web servisin sağlıksız çalışmasının önüne geçecek.</p>
+
+<p><strong>Ekran Çıktısı</strong></p>
+
+<p>Normalde returnParameter metodu benden bir Query Param bekliyor fakat ben göndermediğimde de devreye varsayılan parametre giriyor.</p>
+
+<p><a href="/images/restDefaultValue1.png">
+<img src="/images/restDefaultValue1.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Kendi Query Param’ımı yolladığımda varsayılan parametre hemen benim parametrem ile değiştiriliyor.</p>
+
+<p><a href="/images/restDefaultValue2.png">
+<img src="/images/restDefaultValue2.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Bu yazıda da bu kadar arkadaşlar. Gelecek yazıda görüşene kadar sağlıcakla kalın.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
 
     </div>
 

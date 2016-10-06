@@ -5,30 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>RestEasy İle Restful Web Servis Yazı Dizisi</title>
-    <meta name="description" content="Daha önce http://kod5.org/category/web-servis/resteasy/ adresinde yer alan yazılar buraya taşınmaktadır. Taşınma işlemi tamamlandığında oradaki yazılar silin...">
+    <title>RestEasy İle Restful Web Servis Dersleri 15 – Context</title>
+    <meta name="description" content="Merhabalar. Bu yazıda RestEasy içerisinde bize enjeksiyon (injection) imkanı sunan Context konusuna değineceğiz.">
 
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/resteasy/">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/rest-context/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
       <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>RestEasy İle Restful Web Servis Yazı Dizisi - İlkay Günel - Blog</title>
-<meta property="og:title" content="RestEasy İle Restful Web Servis Yazı Dizisi" />
-<meta name="description" content="RestEasy İle Restful Web Servis Yazı Dizisi" />
-<meta property="og:description" content="RestEasy İle Restful Web Servis Yazı Dizisi" />
-<link rel="canonical" href="http://ilkaygunel.com/blog/2016/resteasy/" />
-<meta property="og:url" content="http://ilkaygunel.com/blog/2016/resteasy/" />
+<title>RestEasy İle Restful Web Servis Dersleri 15 – Context - İlkay Günel - Blog</title>
+<meta property="og:title" content="RestEasy İle Restful Web Servis Dersleri 15 – Context" />
+<meta name="description" content="RestEasy İle Restful Web Servis Dersleri 15 – Context" />
+<meta property="og:description" content="RestEasy İle Restful Web Servis Dersleri 15 – Context" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/rest-context/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/rest-context/" />
 <meta property="og:site_name" content="İlkay Günel - Blog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2016-09-04T19:38:20+03:00" />
+<meta property="article:published_time" content="2016-10-05T19:38:20+03:00" />
 <script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "RestEasy İle Restful Web Servis Yazı Dizisi",
-    "datePublished": "2016-09-04T19:38:20+03:00",
-    "description": "RestEasy İle Restful Web Servis Yazı Dizisi",
-    "url": "http://ilkaygunel.com/blog/2016/resteasy/"
+    "headline": "RestEasy İle Restful Web Servis Dersleri 15 – Context",
+    "datePublished": "2016-10-05T19:38:20+03:00",
+    "description": "RestEasy İle Restful Web Servis Dersleri 15 – Context",
+    "url": "http://ilkaygunel.com/blog/2016/rest-context/"
   }
 </script>
 <!-- End Jekyll SEO tag -->
@@ -83,32 +83,69 @@
 
   <div class="card">
     <header class="post-header">
-      <h1 class="post-title">RestEasy İle Restful Web Servis Yazı Dizisi</h1>
-      <p class="post-meta">Sep 4, 2016</p>
+      <h1 class="post-title">RestEasy İle Restful Web Servis Dersleri 15 – Context</h1>
+      <p class="post-meta">Oct 5, 2016</p>
     </header>
 
     <div class="post-content">
-      <p>Daha önce <a href="http://kod5.org/category/web-servis/resteasy/">http://kod5.org/category/web-servis/resteasy/</a> adresinde yer alan yazılar buraya taşınmaktadır. Taşınma işlemi tamamlandığında oradaki yazılar silinecektir.</p>
+      <p>Merhabalar. Bu yazıda RestEasy içerisinde bize enjeksiyon (injection) imkanı sunan <strong><em>Context</em></strong> konusuna değineceğiz.</p>
 
-<ol>
-  <li><a href="http://ilkgunel.github.io/blog/2016/rest-giris/">RestEasy İle Restful Web Servis Dersleri 1 - Giriş, Web Servis Nedir?</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/resteasy-restEasy-kullanımı-ic-in-hazırlık//">RestEasy İle Restful Web Servis Dersleri 2 - RestEasy Kullanımı İçin Hazırlık</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/resteasy-servlet-initializer/">RestEasy İle Restful Web Servis Dersleri 3 - Resteasy Servlet Initializer</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/pathvegetnotasyonlar%C4%B1/">RestEasy İle Restful Web Servis Dersleri 4 – @Path Ve @GET Notasyonları</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/postputdeletenotasyonlar%C4%B1/">RestEasy İle Restful Web Servis Dersleri 5 – @Post,@Put,@Delete Notasyonları</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/advanced-pathparam-and-pathsegment">RestEasy İle Restful Web Servis Dersleri 6 – Advanced PathParam And PathSegment</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/query-param">RestEasy İle Restful Web Servis Dersleri 7 – Query Param</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/header-param">RestEasy İle Restful Web Servis Dersleri 8 – Header Param</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/matrix-param">RestEasy İle Restful Web Servis Dersleri 9 – Matrix Param</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/cookie-param">RestEasy İle Restful Web Servis Dersleri 10 – Cookie Param</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/form-param">RestEasy İle Restful Web Servis Dersleri 11 – Form Param</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/rest-form-notation">RestEasy İle Restful Web Servis Dersleri 12 – Form Notation</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/rest-default-value">RestEasy İle Restful Web Servis Dersleri 13 – Default Value</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/rest-encoded-encoding-and-decoding">RestEasy İle Restful Web Servis Dersleri 14 – RestEasy İle Restful Web Servis Dersleri 14 – @Encoded, Encoding And Decoding</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/resteasy-on-eclipse-ide">Eclipse IDE Üzerinde RestEasy İçin Hazırlık</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/rest-context">RestEasy İle Restful Web Servis Dersleri 15 – Context</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/rest-resource-locators-and-subresources">RestEasy İle Restful Web Servis Dersleri 16 – Resource Locators And Subresources</a></li>
-</ol>
+<p>Yaptığımız projeler içerisinde bildiğiniz gibi sınıflar arası bağımlılıklar olur ve frameworkler bu bağımlılığı en minimize seviyede kullanmak için ekstra imkanlar sunarlar. İşte RestEasy kütüphanesi de içerisinde @Context notasyonu ile bazı sınıfların enjeksiyonu konusunda imkan sağlar. Enjeksiyon imkanı sağlanan bu sınıflar şöyledir:</p>
+
+<ul>
+<li>javax.ws.rs.core.HttpHeaders</li>
+<li>javax.ws.rs.core.UrlInfo</li>
+<li>javaw.ws.rs.core.Request</li>
+<li>javax.servlet.http.HttpServletRequest</li>
+<li>javax.servlet.http.HttpServletResponse</li>
+<li>javax.servlet.ServletConfig</li>
+<li>javax.servlet.ServletContext</li>
+<li>javax.ws.rs.core.SecurityContext</li>
+</ul>
+
+<p>Şimdi bu sınıflar içerisinden örneğin HttpHeaders sınıfını inject edelim ve bir bilgi alıp döndürelim.</p>
+
+<p><strong>ContextExample.java</strong>*</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">restPackage</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.ws.rs.GET</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.ws.rs.Path</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.ws.rs.core.Context</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.ws.rs.core.HttpHeaders</span><span class="o">;</span>
+
+<span class="nd">@Path</span><span class="o">(</span><span class="s">"/contextExample"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ContextExample</span> <span class="o">{</span>
+	<span class="nd">@Context</span>
+	<span class="kd">private</span> <span class="n">HttpHeaders</span> <span class="n">httpHeaders</span><span class="o">;</span>
+	
+	<span class="nd">@GET</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="n">getHostInfo</span><span class="o">(){</span>
+		<span class="k">return</span> <span class="n">httpHeaders</span><span class="o">.</span><span class="na">getHeaderString</span><span class="o">(</span><span class="s">"Host"</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Java kodumuz içerisinde @Context notasyonu ile HttpHeaders sınıfından bir örneği (instance) ContextExample sınıfına enjekte etmiş oluyoruz. GET metodu içerisinde de header’dan host bilgisini alıyoruz. Bu konu biraz da Servlet ve Network tarafı ile de ilgili.</p>
+
+<p><strong>Ekran Çıktısı</strong></p>
+
+<p>İlgili web servis metoduna istekte bulunduğumuzda bizi bu ekran karşılıyor.</p>
+
+<p><a href="/images/restContext1.png">
+<img src="/images/restContext1.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Sayfada herhangi bir yere sağ tıklayıp Inspect Element (İncele) deyip Network tabına tıklayın ve sayfayı yenileyin. Gelen kısımdaki contextExample’a tıklayın. Orada Request Headers içinde gördüğümüz Host bilgisi bizim <strong><em>getHeaderString</em></strong> metodu ile aldığımız bilgidir. Buradaki diğer bilgileri ilgili ismi parametre olarak vererek aynı metotla çekebiliriz.</p>
+
+<p><a href="/images/restContext2.png">
+<img src="/images/restContext2.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Diğer sınıfları ihtiyacımız doğrultusunda inject edip kullanabiliriz arkadaşlar.</p>
+
+<p>Bu yazıda anlatacaklarım da bu kadar arkadaşlar. Gelecek yazıda görüşene kadar sağlıcakla kalın.</p>
+
+<p style="text-align: center">Selam Ve Sevgilerimle</p>
 
 
     </div>
