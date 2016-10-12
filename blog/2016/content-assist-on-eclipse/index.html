@@ -5,30 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Lorem ipsum dolor sit amet</title>
-    <meta name="description" content="Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor s...">
+    <title>Eclipse IDE'de Kod Tamamlamanın Açılması</title>
+    <meta name="description" content="Eclipse IDE kod yazarken bize tanımlı nesnelerin, metotların ve kullanılan kütüphaneler içindeki ve bizim yazdığımız sınıfların kullanımında kod tamamlama va...">
 
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="http://ilkaygunel.com/blog/2015/lorem/">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/content-assist-on-eclipse/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
       <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Lorem ipsum dolor sit amet - İlkay Günel - Blog</title>
-<meta property="og:title" content="Lorem ipsum dolor sit amet" />
-<meta name="description" content="Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui." />
-<meta property="og:description" content="Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui." />
-<link rel="canonical" href="http://ilkaygunel.com/blog/2015/lorem/" />
-<meta property="og:url" content="http://ilkaygunel.com/blog/2015/lorem/" />
+<title>Eclipse IDE’de Kod Tamamlamanın Açılması - İlkay Günel - Blog</title>
+<meta property="og:title" content="Eclipse IDE’de Kod Tamamlamanın Açılması" />
+<meta name="description" content="Eclipse IDE’de Kod Tamamlamanın Açılması" />
+<meta property="og:description" content="Eclipse IDE’de Kod Tamamlamanın Açılması" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/content-assist-on-eclipse/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/content-assist-on-eclipse/" />
 <meta property="og:site_name" content="İlkay Günel - Blog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2015-11-12T21:19:43+02:00" />
+<meta property="article:published_time" content="2016-10-11T18:38:20+03:00" />
 <script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "Lorem ipsum dolor sit amet",
-    "datePublished": "2015-11-12T21:19:43+02:00",
-    "description": "Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.",
-    "url": "http://ilkaygunel.com/blog/2015/lorem/"
+    "headline": "Eclipse IDE’de Kod Tamamlamanın Açılması",
+    "datePublished": "2016-10-11T18:38:20+03:00",
+    "description": "Eclipse IDE’de Kod Tamamlamanın Açılması",
+    "url": "http://ilkaygunel.com/blog/2016/content-assist-on-eclipse/"
   }
 </script>
 <!-- End Jekyll SEO tag -->
@@ -85,40 +85,31 @@
 
   <div class="card">
     <header class="post-header">
-      <h1 class="post-title">Lorem ipsum dolor sit amet</h1>
-      <p class="post-meta">Nov 12, 2015</p>
+      <h1 class="post-title">Eclipse IDE'de Kod Tamamlamanın Açılması</h1>
+      <p class="post-meta">Oct 11, 2016</p>
     </header>
 
     <div class="post-content">
-      <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
+      <p>Eclipse IDE kod yazarken bize tanımlı nesnelerin, metotların ve kullanılan kütüphaneler içindeki ve bizim yazdığımız sınıfların kullanımında kod tamamlama vasıtası ile bize yardımcı olmaktadır.
+Şimdi bu kod tamamlama nasıl açılır buna bakalım.</p>
 
-<h2>Header Level 2</h2>
+<p>Mac için Eclipse -&gt; Preferences, Windows&amp;Linux için Windows -&gt; Preferences kısmından Preferences ekranını açalım. Gelen ekrandaki arama kutusuna <strong><em>Content assist</em></strong> yazalım.</p>
 
-<ol>
-  <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-  <li>Aliquam tincidunt mauris eu risus.</li>
-</ol>
+<p>Gelen seçeneklerden <strong><em>Java -&gt; Editor</em></strong> altındaki Content Assist’i seçelim. Alt kısımdaki <strong><em>Enable auto activation</em></strong> seçeneğine tik koyalım.</p>
 
-<blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p></blockquote>
+<p>Son olarak da <strong><em>Auto activation triggers for Java</em></strong> kısmındaki input alanına şunu yazalım ve Apply ve OK butonuna tıklayalım: .abcdefghijklmnopqrstuvwxyz</p>
 
-<h3>Header Level 3</h3>
+<p><a href="/images/eclipse/contentAssist1.png">
+<img src="/images/eclipse/contentAssist1.png" style="width: 958px; height= 400px;" /></a></p>
 
-<ul>
-  <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-  <li>Aliquam tincidunt mauris eu risus.</li>
-</ul>
+<p>Artık kod yazmamız sırasında Eclipse yazdığımız kelimelere en yakın seçenekleri otomatik tamamlama yolu ile bize sunuyor.</p>
 
-<h4>Header Level 4</h4>
+<p><a href="/images/eclipse/contentAssist1.png">
+<img src="/images/eclipse/contentAssist1.png" style="width: 958px; height= 400px;" /></a></p>
 
-<h5>Header Level 5</h5>
+<p>Başka yazıda da bu kadar arkadaşlar. Gelecek yazıda görüşene kadar sağlıcakla kalın. Görüşmek üzere</p>
 
-<h6>Header Level 6</h6>
-
-<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="nf">#header</span> <span class="nt">h1</span> <span class="nt">a</span> <span class="p">{</span>
-  <span class="k">display</span><span class="o">:</span> <span class="k">block</span><span class="p">;</span>
-  <span class="k">width</span><span class="o">:</span> <span class="m">300px</span><span class="p">;</span>
-  <span class="k">height</span><span class="o">:</span> <span class="m">80px</span><span class="p">;</span>
-<span class="p">}</span></code></pre></figure>
+<p style="text-align: center">Selam ve Sevgilerimle</p>
 
     </div>
 
