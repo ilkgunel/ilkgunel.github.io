@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Hibernate 1 – Giriş @Entity – @Id</title>
-    <meta name="description" content="Merhaba arkadaşlar. Bu yazı ile birlikte artık Hibernate kodlamaya ufaktan giriş yapıyoruz.">
+    <meta name="description" content="Bu yazı Ferhat Aykan tarafından yazılmıştır ve onun izni ile bu blogta yayınlanmıştır. Kendisine teşekkürlerimi sunarım.">
 
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/hibernate-1-giris/">
@@ -90,7 +90,9 @@
     </header>
 
     <div class="post-content">
-      <p>Merhaba arkadaşlar. Bu yazı ile birlikte artık Hibernate kodlamaya ufaktan giriş yapıyoruz.</p>
+      <p style="color: red">Bu yazı <strong>Ferhat Aykan</strong> tarafından yazılmıştır ve onun izni ile bu blogta yayınlanmıştır. Kendisine teşekkürlerimi sunarım.</p>
+
+<p>Merhaba arkadaşlar. Bu yazı ile birlikte artık Hibernate kodlamaya ufaktan giriş yapıyoruz.</p>
 
 <p><strong>Hibernate Nedir?</strong></p>
 
@@ -291,32 +293,20 @@
 
 <p>Bir diğer özelliğimiz  <strong><em>&lt;mapping class=”Student”/&gt;</em></strong>   ise @Entity notasyonunu kullanarak oluşturduğumuz java classlarını burada bildiriyoruz. Her oluşturduğumuz Entity burada bildirmek zorundayız.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
-<span class="cp">&lt;!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-                                     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"&gt;</span>
-<span class="nt">&lt;hibernate-configuration&gt;</span>
- 	<span class="nt">&lt;session-factory</span> <span class="na">name=</span><span class="s">""</span><span class="nt">&gt;</span>
-</code></pre>
-</div>
-
-  	<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-
-  	<property name="hibernate.connection.url">jdbc:postgresql://127.0.0.1:5432/Hibernate</property>
-
-  	<property name="hibernate.connection.username">postgres</property>
-  	<property name="hibernate.connection.password">123456</property>
-
-  	<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-
-  	<property name="hibernate.hbm2ddl.auto">create</property>
-  	<property name="hibernate.show_sql">true</property>
-
-  	<mapping class="Student"></mapping>
-
- 	&lt;/session-factory&gt;
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;/hibernate-configuration&gt;
-</code></pre>
-</div>
+<?xml version="1.0" encoding="UTF-8"?>
+<p>&lt;!DOCTYPE hibernate-configuration PUBLIC “-//Hibernate/Hibernate Configuration DTD 3.0//EN” “http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd”&gt;</p>
+<hibernate-configuration>
+   <session-factory name="">
+      <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+      <property name="hibernate.connection.url">jdbc:postgresql://127.0.0.1:5432/Hibernate</property>
+      <property name="hibernate.connection.username">postgres</property>
+      <property name="hibernate.connection.password">123456</property>
+      <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+      <property name="hibernate.hbm2ddl.auto">create</property>
+      <property name="hibernate.show_sql">true</property>
+      <mapping class="Student" />
+   </session-factory>
+</hibernate-configuration>
 
 <p>Daha sonra uygulamamızı test etmek için gerekli olan Main sınıfını oluşturuyoruz.</p>
 
