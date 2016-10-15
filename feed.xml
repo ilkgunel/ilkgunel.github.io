@@ -5,9 +5,188 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 14 Oct 2016 22:37:18 +0300</pubDate>
-    <lastBuildDate>Fri, 14 Oct 2016 22:37:18 +0300</lastBuildDate>
+    <pubDate>Sat, 15 Oct 2016 19:16:47 +0300</pubDate>
+    <lastBuildDate>Sat, 15 Oct 2016 19:16:47 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>JSF Dersleri – JSF Nedir? Giriş,IDE Kurulumu Ve İlk Uygulama</title>
+        <description>&lt;p&gt;&lt;strong&gt;JSF NEDİR?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;JSF (Java Server Faces) Java programlama dilinin  standart web çatısıdır. JSF çatısı 2.0 versiyonundan önce
+JSP sayfaları içinde yazılabilirken 2.0 sürümü ile birlikte &lt;strong&gt;&lt;em&gt;Facelet&lt;/em&gt;&lt;/strong&gt; mimarisine geçmiştir ve &lt;strong&gt;&lt;em&gt;.xhtml&lt;/em&gt;&lt;/strong&gt; uzantılı sayfalar üzerinde yazılmaya başlanmıştır.
+JSF &lt;strong&gt;MVC (Model – View – Controller)&lt;/strong&gt; mimarisine yapısına dayanan bir frameworktür. Ayrıca JSF &lt;strong&gt;&lt;em&gt;Component Based&lt;/em&gt;&lt;/strong&gt; yani bileşen tabanlı bir frameworktür. Bu da şu demektir ki JSF’de kullanıma hazır
+bileşenler yer almaktadır. Örneğin HTML’deki table etiketine karşılık çok daha hızlı ve pratik bir şekilde PanelGrid ya da DataTable bileşenleri ile işinizi halledebilirsiniz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;JSF GELİŞTİRMEK İÇİN NELERE İHTİYAÇ VAR?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Hepsinden önce JSF geliştirebilmek için Java SE programlama dilini bilmeniz gerekmektedir. Bu dili biliyorsanız bir IDE (Integrated Development Environmet – Tümleşik Geliştirme Ortamı) ile JSF’yi kolayca geliştirebilirsiniz. JSF geliştirmek için şu anda çok popüler 3 IDE var. Bunlar:  Eclipse, Netbeans ve IntelliJ Idea’dır. Ben bunlardan Eclipse ve Netbeans kullanıyorum. Yazılarımı yazarken de Netbeans kullanacağım.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;JDK KURULUMU&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Öncelikle eğer bilgisayarımızda &lt;strong&gt;JDK&lt;/strong&gt; kurulu değilse onu kuruyoruz. Bunun için Oracle’ın web sitesindeki JDK indirme adresine gidiyoruz.  JDK için &lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html&quot;&gt;buraya&lt;/a&gt; tıklayarak, indirme sayfasına ulaşabilirsiniz.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfGiris1.png&quot;&gt;
+&lt;img src=&quot;/images/jsf/jsfGiris1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Windows kullandığınızı düşünerek, uygun olan 32bitlik veya 64bitlik kurulum dosyasını bilgisayarımıza indiriyoruz ve çalıştırıp kuruyoruz.&lt;/p&gt;
+
+&lt;p&gt;Eğer Debian tabanlı bir GNU/Linux dağıtımı  kullanıyorsanız  terminalden / konsol ekranından şu komutları vererek JDK’yı kurabilirsiniz:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;apt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;repository&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;ppa:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;webupd8team&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;apt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;apt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oracle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;java8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;installer&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;MAC OS X ortamı için de kurulum Windows ile aynıdır. Bilgisayarınıza uygun JDK’yı indirip çift tıklayarak kurabilirsiniz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NETBEANS KURULUMU&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;JSF geliştirmek için birde geliştirme ortamına ihtiyacımız var. Geliştirme ortamlarından biri olan Netbeans’ın kurulumuna bakalım. Kurulumu Windows için oldukça basit.&lt;/p&gt;
+
+&lt;p&gt;Bu adresten Netbeans’ın &lt;a href=&quot;https://netbeans.org/downloads/&quot;&gt;indirme sayfasına&lt;/a&gt; gidiyoruz:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfGiris2.png&quot;&gt;
+&lt;img src=&quot;/images/jsf/jsfGiris2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şu an güncel olarak Netbeans 8.0.2 sürümü kullanılıyor. Bizim derslerimiz için yukarıdaki 5 farklı sürümden Java EE ve All sürümleri işimize yarayanlardır. Eğer C/C++/PHP vs. de geliştirmek isterseniz All sürümünü indirebilirsiniz. Ama sadece Java EE çalışacaksanız Java EE sürümü yeterlidir. İndirdikten sonra Windows ve Mac OS ortamlarında kurulum dosyasına çift tıklayıp kurulumu gerçekleştirebilirsiniz. Kurulum ekranı karşınıza geldiğinde &lt;a href=&quot;http://tomcat.apache.org/&quot;&gt;Apache Tomcat&lt;/a&gt; de kurmak isterseniz &lt;strong&gt;&lt;em&gt;“Customize”&lt;/em&gt;&lt;/strong&gt; butonuna tıklıyor, Apache Tomcat seçeneğine de işaretliyoruz. &lt;strong&gt;&lt;em&gt;Okey&lt;/em&gt;&lt;/strong&gt; diyoruz ve programımızı kuruyoruz.&lt;/p&gt;
+
+&lt;p&gt;Linux ortamında indirilen .sh script dosyasını terminal aracılığı çalıştırıp Netbeans’i kurabilirsiniz. Bunun için yapmanız gereken şöyledir:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;chmod&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;indirilenDosyaninAdi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sh&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sh&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;./&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;indirilenDosyaninAdi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sh&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;İLK PROJE: MERHABA DÜNYA&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Gelenektir ilk örnek her zaman için “Hello World” yani “Merhaba Dünya” olur. Biz de bir “Hello World” örneği yaparak ilk yazımızı sonlandıralım.&lt;/p&gt;
+
+&lt;p&gt;NetBeans programını açıyor ve sol üstten turuncu renkteki &lt;strong&gt;New Project&lt;/strong&gt; ikonuna tıklıyoruz ya da File -&amp;gt; New Project diyoruz. Karşımıza proje tipini soran ekran gelecek. Sol kısımdan &lt;strong&gt;&lt;em&gt;Java Web&lt;/em&gt;&lt;/strong&gt;, sağ kısımdan ise &lt;strong&gt;&lt;em&gt;Web Application&lt;/em&gt;&lt;/strong&gt; seçiyoruz ve Next butonuna tıklıyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfGiris3.png&quot;&gt;
+&lt;img src=&quot;/images/jsf/jsfGiris3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Karşımıza projemizin adını soran bir ekran gelecek. Projenize istediğiniz herhangi bir ismi verin burada. Ben JSFDersleri1 adını veriyorum. Yine &lt;strong&gt;&lt;em&gt;Next&lt;/em&gt;&lt;/strong&gt; diyelim ve sonraki adıma geçelim;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfGiris4.png&quot;&gt;
+&lt;img src=&quot;/images/jsf/jsfGiris4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi de karşımıza projemizi çalıştıracak olan sunucuyu seçeceğimiz ekran gelecek. Benim tavsiyem başlangıç’tan bir yere kadar Apache Tomcat ile gitmeniz şeklinde olacak. Listede bir de Glassfish Server bulunmakta. Glassfish Server bir uygulama sunucusu iken Tomcat bir uygulama katmanıdır. Bu nedenle Tomcat biraz daha hızlı çalışır ve hafiftir. İlerde JSF projeinize daha çok kurumsal yapılar koymak istediğinizde Tomcat zaten size yetersiz gelecek ve Glassfish ya da başka bir uygulama sınucusu kullanacaksınız. Şimdilik bir süre Tomcat kullanalım 🙂&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfGiris5.png&quot;&gt;
+&lt;img src=&quot;/images/jsf/jsfGiris5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu ekranda bize projemizde hangi framework üzerinde çalışmayı istediğimizi soruyor. Biz &lt;strong&gt;&lt;em&gt;Java Server Faces&lt;/em&gt;&lt;/strong&gt; seçeneğini işaretliyoruz ve Finish butonu ile işlemleri sonlandırıyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfGiris6.png&quot;&gt;
+&lt;img src=&quot;/images/jsf/jsfGiris6.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Ve işte, projemizin ana sayfası geldi. Birkaç kod yazarak ekranımızı renklendirelim. Açılan &lt;strong&gt;&lt;em&gt;index.xhtml&lt;/em&gt;&lt;/strong&gt; sayfası içerisindeki kodlara bakalım. Burada 1 ve 2. satırdaki kodlar Xml tanımlamaları ile alakalı. 3 ve 4. satırlar kullanılacak kütüphaneler ile akalı. Şimdilik orası ile işimiz yok.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;h:head&gt; ve &lt;/h:head&gt;&lt;/em&gt;&lt;/strong&gt; arasında ise sayfamızın başlığını belirlediğimiz &lt;title&gt;…&lt;/title&gt; etiketi bulunuyor. Bir sayfa başlığı yazıyoruz. Ayrıca head etiketleri arasına CSS kodlarımızı da yazabiliriz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;h:body&gt; ve &lt;/h:body&gt;&lt;/em&gt;&lt;/strong&gt; etiketleri arasına ise asıl işi yapacak kodlarımızı yazacağız. Aşağıdaki kod bir Merhaba Dünya örneğidir. JSF kodlarımızı bir h:form etiketinin arasına yazarız ve h:outputText ile de ekrana çıktı alırız. Bu kısımlara sonraki yazılarda yine değineceğimiz için bu kısım üzerinde şimdilik fazla durmaya gerek yok.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&#39;1.0&#39; encoding=&#39;UTF-8&#39; ?&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/1999/xhtml&quot;&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;xmlns:h=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://xmlns.jcp.org/jsf/html&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;h:head&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;JSF Hello World Örneği&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:head&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;h:body&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;h:form&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;h:outputText&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Merhaba Dünya :)&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:form&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;F6 tuşuna basarak ya da üst menüden Run butonuna tıklayarak projemizi çalıştırıyoruz. Tarayıcımızda ilgili kodlar çalışacak ve ekranda yazımız görüntülenecek.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfGiris7.png&quot;&gt;
+&lt;img src=&quot;/images/jsf/jsfGiris7.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Sonuç&lt;/p&gt;
+
+&lt;p&gt;Sonuç olarak İlk makalemizde;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;JSF’nin ne olduğunu öğrendik,&lt;/li&gt;
+  &lt;li&gt;Geliştirme ortamımızı kurduk,&lt;/li&gt;
+  &lt;li&gt;İlk uygulamamızı yazdık.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;JSF için yazdığım tüm dersler aşağıda listelenmiştir. İlgili yazının üstüne tıklayarak yazıya ulaşabilirsiniz. Bir sonraki makalemizde &lt;strong&gt;&lt;em&gt;JSF’de Form Bileşenleri&lt;/em&gt;&lt;/strong&gt; konusunda görüşmek üzere.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=GGo1k_2cCSU&quot; title=&quot;JSF Video Dersleri 1 - JSF&#39;e Giriş Ve Kurulum&quot;&gt;&lt;img src=&quot;http://img.youtube.com/vi/GGo1k_2cCSU/0.jpg&quot; alt=&quot;JSF Video Dersleri 1 - JSF&#39;E Giriş Ve Kurulum&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 14 Oct 2016 20:38:20 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/jsfye-giris/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/jsfye-giris/</guid>
+        
+        <category>Hello World</category>
+        
+        <category>how to use arabic calendar in primefaces</category>
+        
+        <category>java server faces dersleri</category>
+        
+        <category>jdk</category>
+        
+        <category>jdk nasıl kurulur</category>
+        
+        <category>jsf çalıştırma</category>
+        
+        <category>jsf dersleri</category>
+        
+        <category>jsf giriş</category>
+        
+        <category>jsf hello world</category>
+        
+        <category>jsf introduction</category>
+        
+        <category>jsf makaleleri</category>
+        
+        <category>jsf nedir?</category>
+        
+        <category>jsf öğren</category>
+        
+        <category>jsf projesi açmak</category>
+        
+        <category>jsf türkçe</category>
+        
+        <category>jsf türkçe kaynak</category>
+        
+        <category>jsf tutorial netbeans netbeans</category>
+        
+        <category>jsf netbeans</category>
+        
+        <category>jsf uygulaması</category>
+        
+        <category>netbeans kurulumu</category>
+        
+        <category>netbeans nasıl kurulur</category>
+        
+        <category>netbeans&#39;da nasıl proje açılır</category>
+        
+        <category>primefaces dersleri</category>
+        
+        <category>primefaces tutorial</category>
+        
+        
+      </item>
     
       <item>
         <title>Hibernate 1 – Giriş @Entity – @Id</title>
@@ -1221,103 +1400,6 @@ Gördüğünüz üzere bu sınıfta bir @GET metodu yok. O da Subresource olarak
         <category>restful default value</category>
         
         <category>jax-rs dersleri</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>RestEasy İle Restful Web Servis Dersleri 15 – Context</title>
-        <description>&lt;p&gt;Merhabalar. Bu yazıda RestEasy içerisinde bize enjeksiyon (injection) imkanı sunan &lt;strong&gt;&lt;em&gt;Context&lt;/em&gt;&lt;/strong&gt; konusuna değineceğiz.&lt;/p&gt;
-
-&lt;p&gt;Yaptığımız projeler içerisinde bildiğiniz gibi sınıflar arası bağımlılıklar olur ve frameworkler bu bağımlılığı en minimize seviyede kullanmak için ekstra imkanlar sunarlar. İşte RestEasy kütüphanesi de içerisinde @Context notasyonu ile bazı sınıfların enjeksiyonu konusunda imkan sağlar. Enjeksiyon imkanı sağlanan bu sınıflar şöyledir:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;javax.ws.rs.core.HttpHeaders&lt;/li&gt;
-&lt;li&gt;javax.ws.rs.core.UrlInfo&lt;/li&gt;
-&lt;li&gt;javaw.ws.rs.core.Request&lt;/li&gt;
-&lt;li&gt;javax.servlet.http.HttpServletRequest&lt;/li&gt;
-&lt;li&gt;javax.servlet.http.HttpServletResponse&lt;/li&gt;
-&lt;li&gt;javax.servlet.ServletConfig&lt;/li&gt;
-&lt;li&gt;javax.servlet.ServletContext&lt;/li&gt;
-&lt;li&gt;javax.ws.rs.core.SecurityContext&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Şimdi bu sınıflar içerisinden örneğin HttpHeaders sınıfını inject edelim ve bir bilgi alıp döndürelim.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;ContextExample.java&lt;/strong&gt;*&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;restPackage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.GET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.core.Context&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.core.HttpHeaders&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;nd&quot;&gt;@Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/contextExample&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ContextExample&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Context&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HttpHeaders&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;httpHeaders&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	
-	&lt;span class=&quot;nd&quot;&gt;@GET&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getHostInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;httpHeaders&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getHeaderString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Host&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Java kodumuz içerisinde @Context notasyonu ile HttpHeaders sınıfından bir örneği (instance) ContextExample sınıfına enjekte etmiş oluyoruz. GET metodu içerisinde de header’dan host bilgisini alıyoruz. Bu konu biraz da Servlet ve Network tarafı ile de ilgili.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Ekran Çıktısı&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;İlgili web servis metoduna istekte bulunduğumuzda bizi bu ekran karşılıyor.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/restContext1.png&quot;&gt;
-&lt;img src=&quot;/images/restContext1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Sayfada herhangi bir yere sağ tıklayıp Inspect Element (İncele) deyip Network tabına tıklayın ve sayfayı yenileyin. Gelen kısımdaki contextExample’a tıklayın. Orada Request Headers içinde gördüğümüz Host bilgisi bizim &lt;strong&gt;&lt;em&gt;getHeaderString&lt;/em&gt;&lt;/strong&gt; metodu ile aldığımız bilgidir. Buradaki diğer bilgileri ilgili ismi parametre olarak vererek aynı metotla çekebiliriz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/restContext2.png&quot;&gt;
-&lt;img src=&quot;/images/restContext2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Diğer sınıfları ihtiyacımız doğrultusunda inject edip kullanabiliriz arkadaşlar.&lt;/p&gt;
-
-&lt;p&gt;Bu yazıda anlatacaklarım da bu kadar arkadaşlar. Gelecek yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam Ve Sevgilerimle&lt;/p&gt;
-
-</description>
-        <pubDate>Wed, 05 Oct 2016 19:38:20 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2016/rest-context/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/rest-context/</guid>
-        
-        <category>resteasy ile restful web servis</category>
-        
-        <category>java ile restful web service</category>
-        
-        <category>resteasy context</category>
-        
-        <category>jax-rs context</category>
-        
-        <category>restful dersleri</category>
-        
-        <category>web service dersleri</category>
-        
-        <category>web servis dersleri</category>
-        
-        <category>restful web service</category>
-        
-        <category>web service nedir?</category>
-        
-        <category>restful context</category>
-        
-        <category>jax-rs dersleri</category>
-        
-        <category>eclipse resteasy</category>
-        
-        <category>eclipse restful web service</category>
-        
-        <category>eclipse jax-rs</category>
         
         
       </item>
