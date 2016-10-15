@@ -5,9 +5,227 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 15 Oct 2016 19:16:47 +0300</pubDate>
-    <lastBuildDate>Sat, 15 Oct 2016 19:16:47 +0300</lastBuildDate>
+    <pubDate>Sat, 15 Oct 2016 19:51:20 +0300</pubDate>
+    <lastBuildDate>Sat, 15 Oct 2016 19:51:20 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>JSF’De Form Oluşturmak Ve Sayfa Uzantısını .xhtml Yerine .jsf Yapmak</title>
+        <description>&lt;p&gt;Bu makalemizde JSF’de form oluşturma konusunu anlatacağız. Fakat form oluşturma konusuna girmeden önce size sayfa uzantıları hakkında bir bilgi vermek istiyorum.
+JSF’de sayfa uzantısı varsayılan olarak xhtml’dir ve çoğunlukla bu uzantı kullanılır. Fakat biz istersek bu sayfa uzantısını jsf de yapabiliriz.Şimdi önceki makalemizde anlattığımız
+ gibi bir proje açalım, adını JSF_Dersleri_2 verelim. Framewok seçme ekranına gelelim, &lt;strong&gt;&lt;em&gt;Java Server Faces&lt;/em&gt;&lt;/strong&gt; seçelim ve alttan Configuration alanına tıklayalım. Burada &lt;strong&gt;&lt;em&gt;/faces/&lt;/em&gt;&lt;/strong&gt;* yazısını 
+ göreceksiniz. Bunu *.jsf yapalım. Finish diyelim.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfDersleri2-1.png&quot;&gt;
+&lt;img src=&quot;/images/jsf/jsfDersleri2-1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi form oluşturma konusuna başlayalım. Bir form doldururken gördüğümüz üzere bizlere yazılar ve doldurmak üzere verilen boşuklar oluyor. Bunların yanında birde butonlar.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Form Etiketi&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;JSF’de form oluştururken mutlaka kullanmak zorunda olduğumuz etikettir. Body etiketleri arasına &lt;h:form&gt; ve &lt;/h:form&gt; etiketlerini yazıyoruz ve form bileşenleri etiketlerimizi form etiketimizin arasına yazıyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;InputText&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;JSF’de form oluştururken bilgilerimizi gireceğimiz alanlar için &lt;strong&gt;&lt;em&gt;inputText&lt;/em&gt;&lt;/strong&gt; bileşenini kullanıyoruz. Bu etiketimizi yazarken &lt;strong&gt;&lt;em&gt;id&lt;/em&gt;&lt;/strong&gt; ve &lt;strong&gt;&lt;em&gt;value&lt;/em&gt;&lt;/strong&gt; bilgilerini kullanmak yeterli oluyor. 
+Id ileri seviye JSF kodlamak için şarttır ama başlarda kullanmamıza gerek yoktur. Onun için başlardaki yazılarda sadece value kullanacağız. Örnek bir inputText kodu şu şekildedir:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:inputText&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;””&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/h:inputText&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Value kısmına bir sonraki ünitede işleyeceğimiz &lt;strong&gt;&lt;em&gt;Managed Bean&lt;/em&gt;&lt;/strong&gt; sınıflarından değerler atıyacağız. Şimdilik değeri boş olacak.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;InputSecret&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Oluşturduğumuz formlarda formu dolduran kişiden parola girmesini istediğimiz zaman bu bileşeni kullanıyoruz. Örnek kodumuz şu şekilde:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:inputSecret&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;””&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/h:inputSecret&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;InputTextArea&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu bileşeni kullanıcıdan adres vb. uzun bilgiler girmesini istediğimiz zaman kullanıyoruz. İnputText’in 3,4 kat genişliğinde bir text alanı sunar bize.&lt;/p&gt;
+
+&lt;p&gt;Örnek kodumuz şu şekilde olur:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:inputTextArea&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;””&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/h:inputTextArea&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;OutputText&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;JSF’de oluşturduğumuz formlarda kullanıcıya hangi bilgileri girmesi gerektiğini
+söylerken bu bileşeni kullanıyoruz. Örneğin adını girmesini istiyoruz,şu şekilde söyleriz:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:outputText&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;”Adınızı&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;giriniz&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;”&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/h:outputText&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;SelectOneMenu&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Açılır liste oluşturmak istediğimiz zaman bu bileşeni kullanıyoruz. Bu bileşende tıkladığımızda açılan listenin elementlerini tek tek de girebiliriz, bir dizi vasıtası ile de girebiliriz. Şimdi bir örnek koda bakalım ve kodumuzda elementler tek tek girilmiş olsun.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:selectOneMenu&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;f:selectItem&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemValue=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;”1”&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemLabel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;”Eyüp”/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;f:selectItem&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemValue=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;”2”&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemLabel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;”Üsküdar”/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:selectOneMenu&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Bu kodu çalıştırdığımızda açılır listeye tıklayınca Eyüp ve Üsküdar ilçelerini göreceğiz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;GraphicImage&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Sayfamıza resim eklemek istediğimiz zaman bu bileşeni kullanıyoruz. Projemiz içinde &lt;strong&gt;&lt;em&gt;images&lt;/em&gt;&lt;/strong&gt; klasörü olsun ve bu klasörün içinde &lt;strong&gt;&lt;em&gt;img.jpg&lt;/em&gt;&lt;/strong&gt; adında bir resim olsun. Biz bunu sayfaya eklemek istediğimizde şu kodu kullanabiliriz:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:graphic&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;İ&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;mage&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;”images/img.jpg/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Veya şu şekilde de olabilir:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:graphicImage&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;library=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;”images”&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;”img.jpg”/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;CommandButton&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Oluşturduğumuz ve doldurduğumuz formu göndermemiz gerekiyor. Bunun için bir butona ihtiyacımız var. Bunun için commandButton kullanıyoruz. Butonların gideceği sayfayı bilmesi action denilen elementleri vardır. Burada gideceği sayfayı söyleriz. 
+Bu da daha sonra anlatacağımız ”Navigation Rules” konusu ile ilgilidir. Orada daha detaylı bakabileceğiz. Gideceği sayfayası boş olan bir commandButton kodu şu şekildedir:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:commandButton&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;””&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;”GÖNDER”&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/h:commandButton&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Burada  action=””  demek hataya sebep olur. Onun için kodunuzda böyle bir şey kullanmayın.&lt;/p&gt;
+
+&lt;p&gt;Sizin göndermek istediğiniz sayfanın adı &lt;strong&gt;&lt;em&gt;gonderildi.xhtml&lt;/em&gt;&lt;/strong&gt; olsun. O zaman siz &lt;strong&gt;&lt;em&gt;action=”gonderildi.xhtml”&lt;/em&gt;&lt;/strong&gt; yazmalısınız.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;CommandLink&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Sayfa içi bağlantı veriken kullandığımız etikettir. ”Buraya” şeklinde tıklanabilir yazılar görürsünüz hep sitelerde. Bunu oluşturabilmek için commandLink kullanılır. Bir commandLink örnek kodu şu şekildedir:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:commandLink&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;””&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;”tıklayın”&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:commandLink&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Yine söyleyelim. Action kısmının değeri boş olamaz. Burada da action üst maddedeki gibi kullanılır.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;OutputLink&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu bileşeni isterseniz proje dışı bir sayfaya isterseniz de proje içi bir sayfaya&lt;/p&gt;
+
+&lt;p&gt;yönledimek için kullanabilirsiniz. Örneğin Google’a yönelik bir link koymak istiyorsunuz, kodumuz şöyle olur:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:outputLink&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;”www.google.com”&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;GOOGLE&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:outputLink&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Burada araya &lt;strong&gt;GOOGLE&lt;/strong&gt; yazdık böyelce sayfada &lt;strong&gt;GOOGLE&lt;/strong&gt; yazısı gözükecek. Diğer bileşenlerden farkı budur. Sayfada gözükecek yazı &amp;gt; ve &amp;lt;/ arasına yazılır.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;PanelGrid&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu bileşenimizde sayfamızda oluşturduğumuz formun bir tablo içinde yer almasını sağlıyor. Siz isterseniz bunun yerine html‘deki tablo bileşenini de kullanabilirsiniz. Örnek kodumuz şu şekilde:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:panelGrid&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;columns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;”2”&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;border=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;”1”&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:outputText&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;”Ad”/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:outputText&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;”Soyad”&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:outputText&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;”İlkay”/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:outputText&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;”Günel”/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:panelGrid&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Bu makalemizde JSF’de bir form nasıl oluşturulur onu anlatmaya çalıştık. Temel bir form oluşturabilmeniz gerekli bilgiler size makale içinde anlatıldı. Anlattığımız form bileşenleri:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;-inputText&lt;/li&gt;
+&lt;li&gt;-inputSecret&lt;/li&gt;
+&lt;li&gt;-inputTextArea&lt;/li&gt;
+&lt;li&gt;-outputText&lt;/li&gt;
+&lt;li&gt;-selectOneMenu&lt;/li&gt;
+&lt;li&gt;-graphicImage&lt;/li&gt;
+&lt;li&gt;-commandButton&lt;/li&gt;
+&lt;li&gt;-commandLink&lt;/li&gt;
+&lt;li&gt;-outputLink&lt;/li&gt;
+&lt;li&gt;PanelGrid.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Bir sonraki makalemizde zevkli konularımızdan biri olan &lt;strong&gt;Managed Beans&lt;/strong&gt; konusunu anlatmaya çalışacağız. Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=mYHNq0mFUGo&quot; title=&quot;JSF Video Dersleri 2-Form Bileşenleri Ve Managed Beans&quot;&gt;&lt;img src=&quot;http://img.youtube.com/vi/mYHNq0mFUGo/0.jpg&quot; alt=&quot;JSF Video Dersleri 2-Form Bileşenleri Ve Managed Beans&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 14 Oct 2016 20:39:20 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/jsfde-form-olusturmak-ve-sayfa-uzantisini-xhtml-yerine-jsf-yapmak/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/jsfde-form-olusturmak-ve-sayfa-uzantisini-xhtml-yerine-jsf-yapmak/</guid>
+        
+        <category>Hello World</category>
+        
+        <category>how to use arabic calendar in primefaces</category>
+        
+        <category>java server faces dersleri</category>
+        
+        <category>jdk</category>
+        
+        <category>jdk nasıl kurulur</category>
+        
+        <category>jsf çalıştırma</category>
+        
+        <category>jsf dersleri</category>
+        
+        <category>jsf giriş</category>
+        
+        <category>jsf hello world</category>
+        
+        <category>jsf introduction</category>
+        
+        <category>jsf makaleleri</category>
+        
+        <category>jsf nedir?</category>
+        
+        <category>jsf öğren</category>
+        
+        <category>jsf projesi açmak</category>
+        
+        <category>jsf türkçe</category>
+        
+        <category>jsf türkçe kaynak</category>
+        
+        <category>jsf tutorial netbeans netbeans</category>
+        
+        <category>jsf netbeans</category>
+        
+        <category>jsf uygulaması</category>
+        
+        <category>netbeans kurulumu</category>
+        
+        <category>netbeans nasıl kurulur</category>
+        
+        <category>netbeans&#39;da nasıl proje açılır</category>
+        
+        <category>primefaces dersleri</category>
+        
+        <category>primefaces tutorial</category>
+        
+        
+      </item>
     
       <item>
         <title>JSF Dersleri – JSF Nedir? Giriş,IDE Kurulumu Ve İlk Uygulama</title>
@@ -1319,85 +1537,6 @@ Gördüğünüz üzere bu sınıfta bir @GET metodu yok. O da Subresource olarak
         <category>web service nedir?</category>
         
         <category>restful @Encoded, Encoding And Decoding</category>
-        
-        <category>jax-rs dersleri</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>RestEasy İle Restful Web Servis Dersleri 13 – Default Value</title>
-        <description>&lt;p&gt;Merhabalar arkadaşlar. Bu yazıda RestEasy içindeki bir başka notasyon olan &lt;strong&gt;&lt;em&gt;@DefaultValue&lt;/em&gt;&lt;/strong&gt; notasyonunu göreceğiz.&lt;/p&gt;
-
-&lt;p&gt;Önceki yazılarda yazmış olduğumuz web servis metotlarımız hep parametre bekler halde idi ve biz de parametrelerini elle vererek metotları tetiklemiştik. Bizden parametre bekleyen metodu biz parametre vermeden tetikleme denemesi yaparsak ya yazdığımız web servis 404 status codu ile geri döner ya da yarım yamalak işler yapılır. Bu durumda ilgili web serviste bir default değer tanımlaması yapmak gerekebilir.&lt;/p&gt;
-
-&lt;p&gt;Hemen basit bir örnek uygulama yapalım.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;DefaultValueExample.java&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;mycompany&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;resteasytutorials&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.DefaultValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.GET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.Produces&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.QueryParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.core.MediaType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;nd&quot;&gt;@Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/defaultValueExample&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DefaultValueExample&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@Produces&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MediaType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;TEXT_HTML&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@GET&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;returnParameter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@QueryParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;parameter&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@DefaultValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;kod5.org&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parameter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parameter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;GET notasyonu ile işaretlediğimiz ve bu sayfaya istekte bulunulduğunda çalışacak olan &lt;strong&gt;&lt;em&gt;returnParameter&lt;/em&gt;&lt;/strong&gt; metodumuz adres çubuğundan &lt;strong&gt;&lt;em&gt;parameter&lt;/em&gt;&lt;/strong&gt; ismi ile gönderilecek bir String parameter parametresi bekliyor. Eğer adres çubuğuna herhangi bir QueryParam girilmeden GET isteğinde bulunursa da devreye hemen varsayılan değer olan kod5.org girecek ve web servisin sağlıksız çalışmasının önüne geçecek.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Ekran Çıktısı&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Normalde returnParameter metodu benden bir Query Param bekliyor fakat ben göndermediğimde de devreye varsayılan parametre giriyor.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/restDefaultValue1.png&quot;&gt;
-&lt;img src=&quot;/images/restDefaultValue1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Kendi Query Param’ımı yolladığımda varsayılan parametre hemen benim parametrem ile değiştiriliyor.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/restDefaultValue2.png&quot;&gt;
-&lt;img src=&quot;/images/restDefaultValue2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Bu yazıda da bu kadar arkadaşlar. Gelecek yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-</description>
-        <pubDate>Wed, 05 Oct 2016 19:38:20 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2016/rest-default-value/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/rest-default-value/</guid>
-        
-        <category>resteasy ile restful web servis</category>
-        
-        <category>java ile restful web service</category>
-        
-        <category>resteasy default value</category>
-        
-        <category>jax-rs default value</category>
-        
-        <category>restful dersleri</category>
-        
-        <category>web service dersleri</category>
-        
-        <category>web servis dersleri</category>
-        
-        <category>restful web service</category>
-        
-        <category>web service nedir?</category>
-        
-        <category>restful default value</category>
         
         <category>jax-rs dersleri</category>
         
