@@ -5,30 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>RestEasy İle Restful Web Servis Dersleri 13 – Default Value</title>
-    <meta name="description" content="Merhabalar arkadaşlar. Bu yazıda RestEasy içindeki bir başka notasyon olan @DefaultValue notasyonunu göreceğiz.">
+    <title>JSF Yazı Dizisi</title>
+    <meta name="description" content="Daha önce başka bir adreste yayınlanmış olan Java Server Faces yazılarım’ın bu bloğa aktarımına başladım. 1 Ocak 2017 tarihine kadar tüm JSF yazılarımı taşım...">
 
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/rest-default-value/">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsf-tutorials-list/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
       <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>RestEasy İle Restful Web Servis Dersleri 13 – Default Value - İlkay Günel - Blog</title>
-<meta property="og:title" content="RestEasy İle Restful Web Servis Dersleri 13 – Default Value" />
-<meta name="description" content="RestEasy İle Restful Web Servis Dersleri 13 – Default Value" />
-<meta property="og:description" content="RestEasy İle Restful Web Servis Dersleri 13 – Default Value" />
-<link rel="canonical" href="http://ilkaygunel.com/blog/2016/rest-default-value/" />
-<meta property="og:url" content="http://ilkaygunel.com/blog/2016/rest-default-value/" />
+<title>JSF Yazı Dizisi - İlkay Günel - Blog</title>
+<meta property="og:title" content="JSF Yazı Dizisi" />
+<meta name="description" content="JSF Yazı Dizisi" />
+<meta property="og:description" content="JSF Yazı Dizisi" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsf-tutorials-list/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/jsf-tutorials-list/" />
 <meta property="og:site_name" content="İlkay Günel - Blog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2016-10-05T19:38:20+03:00" />
+<meta property="article:published_time" content="2016-01-01T19:39:20+02:00" />
 <script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "RestEasy İle Restful Web Servis Dersleri 13 – Default Value",
-    "datePublished": "2016-10-05T19:38:20+03:00",
-    "description": "RestEasy İle Restful Web Servis Dersleri 13 – Default Value",
-    "url": "http://ilkaygunel.com/blog/2016/rest-default-value/"
+    "headline": "JSF Yazı Dizisi",
+    "datePublished": "2016-01-01T19:39:20+02:00",
+    "description": "JSF Yazı Dizisi",
+    "url": "http://ilkaygunel.com/blog/2016/jsf-tutorials-list/"
   }
 </script>
 <!-- End Jekyll SEO tag -->
@@ -87,58 +87,18 @@
 
   <div class="card">
     <header class="post-header">
-      <h1 class="post-title">RestEasy İle Restful Web Servis Dersleri 13 – Default Value</h1>
-      <p class="post-meta">Oct 5, 2016</p>
+      <h1 class="post-title">JSF Yazı Dizisi</h1>
+      <p class="post-meta">Jan 1, 2016</p>
     </header>
 
     <div class="post-content">
-      <p>Merhabalar arkadaşlar. Bu yazıda RestEasy içindeki bir başka notasyon olan <strong><em>@DefaultValue</em></strong> notasyonunu göreceğiz.</p>
+      <p>Daha önce başka bir adreste yayınlanmış olan Java Server Faces yazılarım’ın bu bloğa aktarımına başladım. 1 Ocak 2017 tarihine kadar tüm JSF yazılarımı taşımayı planlıyorum.</p>
 
-<p>Önceki yazılarda yazmış olduğumuz web servis metotlarımız hep parametre bekler halde idi ve biz de parametrelerini elle vererek metotları tetiklemiştik. Bizden parametre bekleyen metodu biz parametre vermeden tetikleme denemesi yaparsak ya yazdığımız web servis 404 status codu ile geri döner ya da yarım yamalak işler yapılır. Bu durumda ilgili web serviste bir default değer tanımlaması yapmak gerekebilir.</p>
-
-<p>Hemen basit bir örnek uygulama yapalım.</p>
-
-<p><strong>DefaultValueExample.java</strong></p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">mycompany</span><span class="o">.</span><span class="na">resteasytutorials</span><span class="o">;</span>
-
-<span class="kn">import</span> <span class="nn">javax.ws.rs.DefaultValue</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.ws.rs.GET</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.ws.rs.Path</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.ws.rs.Produces</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.ws.rs.QueryParam</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.ws.rs.core.MediaType</span><span class="o">;</span>
-
-<span class="nd">@Path</span><span class="o">(</span><span class="s">"/defaultValueExample"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DefaultValueExample</span> <span class="o">{</span>
-    <span class="nd">@Produces</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">TEXT_HTML</span><span class="o">)</span>
-    <span class="nd">@GET</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">returnParameter</span><span class="o">(</span><span class="nd">@QueryParam</span><span class="o">(</span><span class="s">"parameter"</span><span class="o">)</span> <span class="nd">@DefaultValue</span><span class="o">(</span><span class="s">"kod5.org"</span><span class="o">)</span> <span class="n">String</span> <span class="n">parameter</span><span class="o">){</span>
-        <span class="k">return</span> <span class="n">parameter</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre>
-</div>
-
-<p>GET notasyonu ile işaretlediğimiz ve bu sayfaya istekte bulunulduğunda çalışacak olan <strong><em>returnParameter</em></strong> metodumuz adres çubuğundan <strong><em>parameter</em></strong> ismi ile gönderilecek bir String parameter parametresi bekliyor. Eğer adres çubuğuna herhangi bir QueryParam girilmeden GET isteğinde bulunursa da devreye hemen varsayılan değer olan kod5.org girecek ve web servisin sağlıksız çalışmasının önüne geçecek.</p>
-
-<p><strong>Ekran Çıktısı</strong></p>
-
-<p>Normalde returnParameter metodu benden bir Query Param bekliyor fakat ben göndermediğimde de devreye varsayılan parametre giriyor.</p>
-
-<p><a href="/images/restDefaultValue1.png">
-<img src="/images/restDefaultValue1.png" style="width: 958px; height= 400px;" />
-</a></p>
-
-<p>Kendi Query Param’ımı yolladığımda varsayılan parametre hemen benim parametrem ile değiştiriliyor.</p>
-
-<p><a href="/images/restDefaultValue2.png">
-<img src="/images/restDefaultValue2.png" style="width: 958px; height= 400px;" />
-</a></p>
-
-<p>Bu yazıda da bu kadar arkadaşlar. Gelecek yazıda görüşene kadar sağlıcakla kalın.</p>
-
-<p style="text-align: center">Selam ve Sevgilerimle</p>
+<ol>
+  <li><a href="http://ilkaygunel.com/blog/2016/jsfye-giris/">JSF Framework’e Giriş Ve İlk Uygulama</a></li>
+  <li><a href="http://ilkaygunel.com/blog/2016/jsfde-form-olusturmak-ve-sayfa-uzantisini-xhtml-yerine-jsf-yapmak/">JSF’De Form Oluşturmak Ve Sayfa Uzantısını .xhtml Yerine .jsf Yapmak</a></li>
+  <li><a href="http://ilkaygunel.com/blog/2016/jsf-developing-on-eclipe-ide">Eclipse IDE Üzerinde Pluginsiz JSF Geliştirmek</a></li>
+</ol>
 
     </div>
 
