@@ -5,9 +5,187 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 15 Oct 2016 21:01:21 +0300</pubDate>
-    <lastBuildDate>Sat, 15 Oct 2016 21:01:21 +0300</lastBuildDate>
+    <pubDate>Sun, 16 Oct 2016 12:24:49 +0300</pubDate>
+    <lastBuildDate>Sun, 16 Oct 2016 12:24:49 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Managed Beans</title>
+        <description>&lt;p class=&quot;Standard&quot;&gt;&lt;span style=&quot;color: black&quot;&gt;Bu makalemizde &lt;strong&gt;&lt;i&gt;“Managed Beans” &lt;/i&gt;&lt;/strong&gt;konusunu ele alacağız.&amp;nbsp;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p class=&quot;Standard&quot;&gt;&lt;b&gt;&lt;/b&gt;&amp;nbsp;&lt;strong&gt;&lt;em&gt;Managed bean&lt;/em&gt; &lt;/strong&gt;en temel tabiri ile &lt;strong&gt;&lt;em&gt;Java SE&lt;/em&gt;&lt;/strong&gt; dilinde öğrendiğimiz ve kullandığımız &lt;strong&gt;&lt;i&gt;“sınıf” &lt;/i&gt;&lt;/strong&gt;yapılarıdır. &lt;em&gt;&lt;strong&gt;Managed bean&lt;/strong&gt;&lt;/em&gt; yapılarını normal sınıf yapılarından ayıran özellik &lt;em&gt;&lt;strong&gt;xhtml&lt;/strong&gt;&lt;/em&gt; sayfalarına bağlanabilme özelliklerinin olmasıdır. Bunun dışında &lt;em&gt;&lt;strong&gt;Java SE&lt;/strong&gt;&lt;/em&gt;‘de öğrendiğiniz tüm kodlamaları bu sınıf yapılarına da uygulayabiliriz.&lt;span id=&quot;more-1758&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span style=&quot;color: black&quot;&gt;&lt;em&gt;&lt;strong&gt;Managed bean&lt;/strong&gt;&lt;/em&gt; yapıları &lt;em&gt;&lt;strong&gt;xhtml&lt;/strong&gt;&lt;/em&gt; sayfalarından alınan bilgilerin arka planda işlenip değerlendirilip bir sonuç üretilip tekrar &lt;em&gt;&lt;strong&gt;xhtml&lt;/strong&gt;&lt;/em&gt; sayfalarına gönderilmeleri için kullanılır. Örneğin bir form oluşturdunuz. Doldurttunuz ama bilgileri veri tabanına göndermeniz lazım. Burada işlemi &lt;em&gt;&lt;strong&gt;managed bean&lt;/strong&gt; &lt;/em&gt;sınıfları halletmektedir.&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span style=&quot;color: black&quot;&gt;&lt;em&gt;&lt;strong&gt;Managed bean&lt;/strong&gt;&lt;/em&gt; sınıflarını &lt;em&gt;&lt;strong&gt;xhtml&lt;/strong&gt;&lt;/em&gt; sayfalarına bağlamak için &lt;em&gt;&lt;strong&gt;“&lt;/strong&gt;&lt;strong&gt;Expression Language”&lt;/strong&gt; &lt;/em&gt;denilen özel bir yapı kullanılır ve burada kullanacağımız işaret &lt;em&gt;&lt;strong&gt;“&lt;/strong&gt;&lt;strong&gt;#”&lt;/strong&gt; &lt;/em&gt;işaretidir.&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span style=&quot;color: black&quot;&gt;Şimdi NetBeans’ımızda &lt;strong&gt;&lt;i&gt;JSFDersleri3 &lt;/i&gt;&lt;/strong&gt; adında bir proje oluşturalım. Projemizi oluşturduktan sonra projemize sağ tıklıyoruz. &lt;i&gt;&lt;strong&gt;New&lt;/strong&gt; &lt;/i&gt;yazan yere geliyoruz. Sağında yeni bir pencere açılacak. En altta bulunan &lt;strong&gt;&lt;i&gt;Other &lt;/i&gt;&lt;/strong&gt;bölümüne tıklıyoruz. Açılan pencerede sol kısımdan &lt;strong&gt;&lt;i&gt;“Java Server Faces” &lt;/i&gt;&lt;/strong&gt;sağ kısımdan &lt;strong&gt;&lt;i&gt;“JSF Managed Bean” &lt;/i&gt;&lt;/strong&gt;seçiyoruz. &lt;i&gt;&lt;strong&gt;Next&lt;/strong&gt; &lt;/i&gt;diyoruz.&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfDersleri3-1.png&quot;&gt;
+&lt;img src=&quot;/images/jsf/jsfDersleri3-1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Karşımıza isim vermemizi isteyen bir ekran geliyor.Sınıf ismi olarak &lt;strong&gt;&lt;em&gt;ManagedBeanClass&lt;/em&gt;&lt;/strong&gt; veriyoruz. Yine burda yapması size kalmış olmakla beraber &lt;strong&gt;&lt;em&gt;package&lt;/em&gt;&lt;/strong&gt; tanımlaması da yapabiliriz. 
+Managed Bean sınıfının hangi package içinde olduğunu tanımlıyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfDersleri3-2.png&quot;&gt;
+&lt;img src=&quot;/images/jsf/jsfDersleri3-2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Finish&lt;/em&gt;&lt;/strong&gt;  diyoruz ve projemize &lt;strong&gt;&lt;em&gt;managed bean&lt;/em&gt;&lt;/strong&gt; eklemiş oluyoruz. Karşımıza bir Java class yapısı gelmiş oluyor.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfDersleri3-3.png&quot;&gt;
+&lt;img src=&quot;/images/jsf/jsfDersleri3-3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;xhtml ve bean yapımızı oluşturduk. Şimdi küçük bir örnek yapalım ve bu makalemizi burada bitirelim. Örneğimizde kullanıcıdan isim ve soyisim almasını isteyecek isim ve soyismini girdirecek ve aynı sayfada isim ve soyismini yazdıracağız. Bir önceki makalemizde yer alan  &lt;a href=&quot;sfde-form-olusturmak-ve-sayfa-uzantisini-xhtml-yerine-jsf-yapmak&quot;&gt;Form Bileşenleri&lt;/a&gt; konusunu bilmeniz gerekmekte.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;index.xhtml&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&#39;1.0&#39; encoding=&#39;UTF-8&#39; ?&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/1999/xhtml&quot;&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;xmlns:h=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://xmlns.jcp.org/jsf/html&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;h:head&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;JSF Hello World Örneği&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:head&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;h:body&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;h:form&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;h:panelGrid&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;columns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;h:outputText&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Adınızı Giriniz:&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;h:inputText&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#{managedBeanClass.name}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+                
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;h:outputText&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Soyadınızı Giriniz:&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;h:inputText&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#{managedBeanClass.surname}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+                
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;h:commandButton&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;GÖNDER&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+                
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:panelGrid&amp;gt;&lt;/span&gt;
+            
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;h:outputText&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Adınız Ve SoyAdınız:#{managedBeanClass.name} #{managedBeanClass.surname}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:form&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;ManagedBeanClass.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;jsfDersleri&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.faces.bean.ManagedBean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.faces.bean.RequestScoped&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@ManagedBean&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequestScoped&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ManagedBeanClass&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;surname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getSurname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;surname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setSurname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;surname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;surname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;surname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Kodların Açıklaması&lt;/p&gt;
+
+&lt;p&gt;Kodlar için bazı temel noktalar var. Bunları iyi kavramamız gerekiyor.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;index.xhtml&lt;/em&gt;&lt;/strong&gt; sayfası içerisinde inputText’lerin value kısımlarını #{managedBeanClass.name} ve #{managedBeanClass.surname} şeklinde verdik. 
+Burada &lt;strong&gt;&lt;em&gt;#&lt;/em&gt;&lt;/strong&gt; işareti &lt;strong&gt;&lt;em&gt;managed bean&lt;/em&gt;&lt;/strong&gt; yapısına bağlanmamızı sağladı. managedBeanClass ifadesi ise managed bean yapımızın adı.İstersek bu ad yerine başka bir ad da tanımlayabiliriz. 
+Bunun için sınıf yapısı içerisinde bulunan &lt;strong&gt;&lt;em&gt;@ManagedBean&lt;/em&gt;&lt;/strong&gt; ifadesini &lt;strong&gt;&lt;em&gt;@ManagedBean(name=”vermek_istediğiniz_isim”)&lt;/em&gt;&lt;/strong&gt; değiştirmeniz yeterlidir. Managed bean yapısının isminden sonra o 
+sınıftaki değişkenlere ulaşmak için “.” koyuyoruz. “.” işreti koyunca NetBeans bize o sınıfın değişkenleri gösteriyor zaten.&lt;/p&gt;
+
+&lt;p&gt;Sınıf yapımızda ise 2 değişken oluşturduk ve bunlara ait &lt;strong&gt;&lt;em&gt;get ve set&lt;/em&gt;&lt;/strong&gt; metodlarını oluşturduk. Az değişken olduğunda sorun değil ama daha çok değişken olduğunda get ve set metodlarını el ile yazmak çok vakit kaybettirir. 
+Bunun için NetBeans bir kolaylık sağlıyor. Sınıf içerisinde sağ tıklıyoruz, “Insert Code” diyoruz, yeni açılan pencerede &lt;strong&gt;&lt;em&gt;Getter and Setter&lt;/em&gt;&lt;/strong&gt;  yazısına tıklıyoruz. Şimdiki yeni çıkan pencerede değişkenlerimize tik koyup “Generate” diyoruz. Get ve set metodlarımız hazır halde 🙂 .&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Managed Bean&lt;/em&gt;&lt;/strong&gt; oluşturunca üstte bulunan 4 satırlık kod NetBeans tarafından hazır olarak bize veriliyor.&lt;/p&gt;
+
+&lt;p&gt;Bir de ekran çıktımıza bakalım. Adınızı ve Soyadınızı yazıp &lt;strong&gt;&lt;em&gt;GÖNDER&lt;/em&gt;&lt;/strong&gt; butonuna tıkladığınızda adınızı ve soyadınızı yazacaktır.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfDersleri3-4.png&quot;&gt;
+&lt;img src=&quot;/images/jsf/jsfDersleri3-4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu makalemizde &lt;strong&gt;&lt;em&gt;Managed Beans&lt;/em&gt;&lt;/strong&gt; konusunu ele aldık. Bir sonraki makalemizde &lt;strong&gt;&lt;em&gt;Navigation Rules-Yönlendirme Kuralları&lt;/em&gt;&lt;/strong&gt; konusunu ele alacağız.&lt;/p&gt;
+
+&lt;p&gt;Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=mYHNq0mFUGo&quot; title=&quot;JSF Video Dersleri 2-Form Bileşenleri Ve Managed Beans&quot;&gt;&lt;img src=&quot;http://img.youtube.com/vi/mYHNq0mFUGo/0.jpg&quot; alt=&quot;JSF Video Dersleri 2-Form Bileşenleri Ve Managed Beans&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 15 Oct 2016 20:39:20 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/managed-beans-yonetimli-fasulyeler-yonetimli-kahve-cekirdekleri/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/managed-beans-yonetimli-fasulyeler-yonetimli-kahve-cekirdekleri/</guid>
+        
+        <category>jsf manahed beans</category>
+        
+        <category>managed beans</category>
+        
+        <category>java server faces dersleri</category>
+        
+        <category>jsf yönetimli çekirdekler</category>
+        
+        <category>jdk</category>
+        
+        <category>jdk nasıl kurulur</category>
+        
+        <category>jsf çalıştırma</category>
+        
+        <category>jsf dersleri</category>
+        
+        <category>jsf giriş</category>
+        
+        <category>jsf hello world</category>
+        
+        <category>jsf introduction</category>
+        
+        <category>jsf makaleleri</category>
+        
+        <category>jsf nedir?</category>
+        
+        <category>jsf öğren</category>
+        
+        <category>jsf projesi açmak</category>
+        
+        <category>jsf türkçe</category>
+        
+        <category>jsf türkçe kaynak</category>
+        
+        <category>jsf tutorial netbeans netbeans</category>
+        
+        <category>jsf netbeans</category>
+        
+        <category>jsf uygulaması</category>
+        
+        <category>netbeans kurulumu</category>
+        
+        <category>netbeans nasıl kurulur</category>
+        
+        <category>netbeans&#39;da nasıl proje açılır</category>
+        
+        <category>primefaces dersleri</category>
+        
+        <category>primefaces tutorial</category>
+        
+        
+      </item>
     
       <item>
         <title>JSF’De Form Oluşturmak Ve Sayfa Uzantısını .xhtml Yerine .jsf Yapmak</title>
@@ -1371,174 +1549,6 @@ Gördüğünüz üzere bu sınıfta bir @GET metodu yok. O da Subresource olarak
         <category>restful form notation</category>
         
         <category>jax-rs form notation</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>RestEasy İle Restful Web Servis Dersleri 14 – @Encoded, Encoding And Decoding</title>
-        <description>&lt;p&gt;Merhabalar arkadaşlar. Bu yazıda JAX-RS içerisinde yer alan @Encoded notasyonunun kullanımını öğreneceğiz.&lt;/p&gt;
-
-&lt;p&gt;Önceki yazılarda birçok parametre alma çeşidi görmüştürk. URL’den gönderdiğimiz veriler web servis metodumuzdaki parametrelere enjekte ediliyordu. JAX-RS içerisinde olası veri kaybını önlemek ve daha sağlıklı iş yapmak için @Encoded notasyonu konularak olası riskler aşılmak istenmiş. @Encoded notasyonu nereye koyduğunuza bağlı olarak ilgili parametreyi encode ediyor ve web servis metoduna öyle veriyor. Varsayılan olarak bu encode edilmiş değer tekrar decode &lt;strong&gt;&lt;em&gt;edilmiyor&lt;/em&gt;&lt;/strong&gt;. Bizim decode işlemine tekrar tabi tutmamız gerekiyor. Şimdi önce @Encoded olmadan ne oluyor sonra da koyunca ne oluyor onu ve örnek uygulama ile nasıl kullanıldığını görelim.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;EncodeAndEncoding.java&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.GET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.PathParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.Produces&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.QueryParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.core.MediaType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;nd&quot;&gt;@Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/encodedAndEncoding&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;EncodedAndEncoding&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/{pathParam}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Produces&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MediaType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;TEXT_HTML&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@GET&lt;/span&gt;	
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;returnParameters&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;pathParam&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pathParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
-								   &lt;span class=&quot;nd&quot;&gt;@QueryParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;queryParam&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;queryParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;				
-		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pathParam&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;queryParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Web servis sınıfımız daha önce gördüklerimizi içeren bir örnek. Bir adet PathParam ve bir adet QueryParam parametresi alıyor. Bu kodu çalıştırıp “Türkçe karakterler” muhteva eden &lt;strong&gt;&lt;em&gt;/Hayvan Çiftliği?queryParam=Sırça Köşk&lt;/em&gt;&lt;/strong&gt; şeklinde parametre gönderdiğimizde durum şöyle oluyor. Web servis metodunun Produce bilgisine charset=UTF-8 tanımlaması yapmadığımız için web servis metoduna parametreler sağlıklı da gitse tarayıcıda bozuk görünüyor.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/encoded1.png&quot;&gt;
-&lt;img src=&quot;/images/encoded1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Şimdi kod içindeki &lt;strong&gt;&lt;em&gt;@PathParam&lt;/em&gt;&lt;/strong&gt; ile alınan parametreyi @Encoded notasyonu ile de işaretleyelim ve ne oluyor bakalım.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/encoded2.png&quot;&gt;
-&lt;img src=&quot;/images/encoded2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;@PathParam ile aldığımız Hayvan Çiftliği parametresi gördüğünüz gibi bir encoding işlemine maruz kaldı. Metotdaki ilgili parametreye encode edilmiş halde iken enjekte edildi ve biz de onu görüyoruz. Sırça köşk ise yine bozuk bir şekilde bize döndü. Peki böyle birden fazla parametre alan metotlarda her bir parametreyi @Encoded ile işaretleyecek miyiz? Hayır. @Encoded notasyonu metotlara da uygulanabilir. Şimdi @PathParam’ın yanındaki @Encoded’ı metotun üstüne alalım.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/encodedAndEncoding&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;EncodedAndEncoding&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/{pathParam}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Produces&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MediaType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;TEXT_HTML&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@GET&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Encoded&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;returnParameters&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;pathParam&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pathParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
-									&lt;span class=&quot;nd&quot;&gt;@QueryParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;queryParam&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;queryParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;				
-		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pathParam&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;queryParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/encoded3.png&quot;&gt;
-&lt;img src=&quot;/images/encoded3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;@Encoded’ı metodun üstüne aldığımızda metodun aldığı iki parametreye de encoding işlemi uygulanmış oldu. Bu sayede tek seferde tüm parametreleri encode edebiliriz. Tabi burda şu soru aklınıza gelebilir: “Bir sınıf içindeki tüm metotları tek tek @Encoding ile işaretlemek zorunda mıyız? Kısa yolu yok mu?”&lt;/p&gt;
-
-&lt;p&gt;@Encoding notasyonu sınıflara da uygulamabiliyor. Bu durumda sınıftaki tüm metotlar ve dolayısı ile aldıkları tüm parametreler encoding işlemine tabi tutulmuş olurlar. Kodu şöyle değiştirirsek amacımıza ulaşmış oluruz:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/encodedAndEncoding&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@Encoded&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;EncodedAndEncoding&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/{pathParam}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Produces&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MediaType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;TEXT_HTML&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@GET&lt;/span&gt;	
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;returnParameters&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;pathParam&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pathParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
-									&lt;span class=&quot;nd&quot;&gt;@QueryParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;queryParam&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;queryParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;				
-		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pathParam&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;queryParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Peki encode edilmiş veriden geri decode da etmemiz gerekiyor şu anda. Onu nasıl yapacağız? Hemen örneğe bakalım:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.io.UnsupportedEncodingException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.net.URLDecoder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.Encoded&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.GET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.PathParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.Produces&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.QueryParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.core.MediaType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.ws.rs.core.Response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;nd&quot;&gt;@Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/encodedAndEncoding&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;EncodedAndEncoding&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/{pathParam}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Produces&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MediaType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;TEXT_HTML&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;;charset=UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@GET&lt;/span&gt;	
-        &lt;span class=&quot;nd&quot;&gt;@Encoded&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;returnParameters&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;pathParam&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pathParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
-									&lt;span class=&quot;nd&quot;&gt;@QueryParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;queryParam&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;queryParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pathParam&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;queryParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decodedPathParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decodedQueryParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-			&lt;span class=&quot;n&quot;&gt;decodedPathParam&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;URLDecoder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pathParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-			&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Decoded Path Param:&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decodedPathParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-			&lt;span class=&quot;n&quot;&gt;decodedQueryParam&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;URLDecoder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;queryParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-			&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Decoded Query Param&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decodedQueryParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-			
-		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UnsupportedEncodingException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exception&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
-			&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;An error occured while trying the decoding!&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exception&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pathParam&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;queryParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Java’da encode edilmiş bir veriden decode işlemini java.net paketinde bulunan &lt;strong&gt;&lt;em&gt;URLDecoder&lt;/em&gt;&lt;/strong&gt; sınıfındaki &lt;strong&gt;&lt;em&gt;decode&lt;/em&gt;&lt;/strong&gt; metodu ile yapabiliriz. URLDecoder iki adet decode metoduna sahiptir. Sadece decode edilecek String’i alan metot artık deprecated olmuştur. Kullanımı geçerli olan metot ise hem String hem de decode edilecek charset’i alan metotdur. Ayrıca bu işlem bir Checked Exception’dır. Yani throws ya da try-catch ile hata meydana gelebileceğini söylememiz gerekir.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Konsol Çıktısı&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/encoded4.png&quot;&gt;
-&lt;img src=&quot;/images/encoded4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Encode edilmiş parametrelerden decode işlemi ile asılları geri elde ettik.&lt;/p&gt;
-
-&lt;p&gt;Bu yazıda da bu kadar arkadaşlar. Gelecek yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-
-</description>
-        <pubDate>Wed, 05 Oct 2016 19:38:20 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2016/rest-encoded-encoding-and-decoding/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/rest-encoded-encoding-and-decoding/</guid>
-        
-        <category>resteasy ile restful web servis</category>
-        
-        <category>java ile restful web service</category>
-        
-        <category>resteasy @Encoded, Encoding And Decoding</category>
-        
-        <category>jax-rs @Encoded, Encoding And Decoding</category>
-        
-        <category>restful dersleri</category>
-        
-        <category>web service dersleri</category>
-        
-        <category>web servis dersleri</category>
-        
-        <category>restful web service</category>
-        
-        <category>web service nedir?</category>
-        
-        <category>restful @Encoded, Encoding And Decoding</category>
-        
-        <category>jax-rs dersleri</category>
         
         
       </item>

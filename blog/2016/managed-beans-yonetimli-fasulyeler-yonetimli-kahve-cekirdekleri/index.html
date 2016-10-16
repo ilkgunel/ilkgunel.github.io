@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Managed Beans</title>
+    <meta name="description" content="Bu makalemizde “Managed Beans” konusunu ele alacağız.&nbsp;">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/managed-beans-yonetimli-fasulyeler-yonetimli-kahve-cekirdekleri/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>Managed Beans - İlkay Günel - Blog</title>
+<meta property="og:title" content="Managed Beans" />
+<meta name="description" content="Managed Beans" />
+<meta property="og:description" content="Managed Beans" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/managed-beans-yonetimli-fasulyeler-yonetimli-kahve-cekirdekleri/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/managed-beans-yonetimli-fasulyeler-yonetimli-kahve-cekirdekleri/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-10-15T20:39:20+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Managed Beans",
+    "datePublished": "2016-10-15T20:39:20+03:00",
+    "description": "Managed Beans",
+    "url": "http://ilkaygunel.com/blog/2016/managed-beans-yonetimli-fasulyeler-yonetimli-kahve-cekirdekleri/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/blog/2016/jsf-tutorials-list" title="JSF">JSF</a></li>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog/2016/eclipse-notes" title="Eclipse">Eclipse</a></li>
+        
+          <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Managed Beans</h1>
+      <p class="post-meta">Oct 15, 2016</p>
+    </header>
+
+    <div class="post-content">
+      <p class="Standard"><span style="color: black">Bu makalemizde <strong><i>“Managed Beans” </i></strong>konusunu ele alacağız.&nbsp;</span></p>
+
+<p class="Standard"><b></b>&nbsp;<strong><em>Managed bean</em> </strong>en temel tabiri ile <strong><em>Java SE</em></strong> dilinde öğrendiğimiz ve kullandığımız <strong><i>“sınıf” </i></strong>yapılarıdır. <em><strong>Managed bean</strong></em> yapılarını normal sınıf yapılarından ayıran özellik <em><strong>xhtml</strong></em> sayfalarına bağlanabilme özelliklerinin olmasıdır. Bunun dışında <em><strong>Java SE</strong></em>‘de öğrendiğiniz tüm kodlamaları bu sınıf yapılarına da uygulayabiliriz.<span id="more-1758"></span></p>
+
+<p><span style="color: black"><em><strong>Managed bean</strong></em> yapıları <em><strong>xhtml</strong></em> sayfalarından alınan bilgilerin arka planda işlenip değerlendirilip bir sonuç üretilip tekrar <em><strong>xhtml</strong></em> sayfalarına gönderilmeleri için kullanılır. Örneğin bir form oluşturdunuz. Doldurttunuz ama bilgileri veri tabanına göndermeniz lazım. Burada işlemi <em><strong>managed bean</strong> </em>sınıfları halletmektedir.</span></p>
+
+<p><span style="color: black"><em><strong>Managed bean</strong></em> sınıflarını <em><strong>xhtml</strong></em> sayfalarına bağlamak için <em><strong>“</strong><strong>Expression Language”</strong> </em>denilen özel bir yapı kullanılır ve burada kullanacağımız işaret <em><strong>“</strong><strong>#”</strong> </em>işaretidir.</span></p>
+
+<p><span style="color: black">Şimdi NetBeans’ımızda <strong><i>JSFDersleri3 </i></strong> adında bir proje oluşturalım. Projemizi oluşturduktan sonra projemize sağ tıklıyoruz. <i><strong>New</strong> </i>yazan yere geliyoruz. Sağında yeni bir pencere açılacak. En altta bulunan <strong><i>Other </i></strong>bölümüne tıklıyoruz. Açılan pencerede sol kısımdan <strong><i>“Java Server Faces” </i></strong>sağ kısımdan <strong><i>“JSF Managed Bean” </i></strong>seçiyoruz. <i><strong>Next</strong> </i>diyoruz.</span></p>
+
+<p><a href="/images/jsf/jsfDersleri3-1.png">
+<img src="/images/jsf/jsfDersleri3-1.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Karşımıza isim vermemizi isteyen bir ekran geliyor.Sınıf ismi olarak <strong><em>ManagedBeanClass</em></strong> veriyoruz. Yine burda yapması size kalmış olmakla beraber <strong><em>package</em></strong> tanımlaması da yapabiliriz. 
+Managed Bean sınıfının hangi package içinde olduğunu tanımlıyoruz.</p>
+
+<p><a href="/images/jsf/jsfDersleri3-2.png">
+<img src="/images/jsf/jsfDersleri3-2.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p><strong><em>Finish</em></strong>  diyoruz ve projemize <strong><em>managed bean</em></strong> eklemiş oluyoruz. Karşımıza bir Java class yapısı gelmiş oluyor.</p>
+
+<p><a href="/images/jsf/jsfDersleri3-3.png">
+<img src="/images/jsf/jsfDersleri3-3.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>xhtml ve bean yapımızı oluşturduk. Şimdi küçük bir örnek yapalım ve bu makalemizi burada bitirelim. Örneğimizde kullanıcıdan isim ve soyisim almasını isteyecek isim ve soyismini girdirecek ve aynı sayfada isim ve soyismini yazdıracağız. Bir önceki makalemizde yer alan  <a href="sfde-form-olusturmak-ve-sayfa-uzantisini-xhtml-yerine-jsf-yapmak">Form Bileşenleri</a> konusunu bilmeniz gerekmekte.</p>
+
+<p><strong>index.xhtml</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
+<span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
+      <span class="na">xmlns:h=</span><span class="s">"http://xmlns.jcp.org/jsf/html"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h:head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>JSF Hello World Örneği<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/h:head&gt;</span>
+    <span class="nt">&lt;h:body&gt;</span>
+        <span class="nt">&lt;h:form&gt;</span>
+            <span class="nt">&lt;h:panelGrid</span> <span class="na">columns=</span><span class="s">"2"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">"Adınızı Giriniz:"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;h:inputText</span> <span class="na">value=</span><span class="s">"#{managedBeanClass.name}"</span><span class="nt">/&gt;</span>
+                
+                <span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">"Soyadınızı Giriniz:"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;h:inputText</span> <span class="na">value=</span><span class="s">"#{managedBeanClass.surname}"</span><span class="nt">/&gt;</span>
+                
+                <span class="nt">&lt;h:commandButton</span> <span class="na">value=</span><span class="s">"GÖNDER"</span><span class="nt">/&gt;</span>
+                
+            <span class="nt">&lt;/h:panelGrid&gt;</span>
+            
+            <span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">"Adınız Ve SoyAdınız:#{managedBeanClass.name} #{managedBeanClass.surname}"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/h:form&gt;</span>
+    <span class="nt">&lt;/h:body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<p><strong>ManagedBeanClass.java</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jsfDersleri</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.faces.bean.ManagedBean</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.faces.bean.RequestScoped</span><span class="o">;</span>
+
+<span class="nd">@ManagedBean</span>
+<span class="nd">@RequestScoped</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ManagedBeanClass</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">surname</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getSurname</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">surname</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setSurname</span><span class="o">(</span><span class="n">String</span> <span class="n">surname</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">surname</span> <span class="o">=</span> <span class="n">surname</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Kodların Açıklaması</p>
+
+<p>Kodlar için bazı temel noktalar var. Bunları iyi kavramamız gerekiyor.</p>
+
+<p><strong><em>index.xhtml</em></strong> sayfası içerisinde inputText’lerin value kısımlarını #{managedBeanClass.name} ve #{managedBeanClass.surname} şeklinde verdik. 
+Burada <strong><em>#</em></strong> işareti <strong><em>managed bean</em></strong> yapısına bağlanmamızı sağladı. managedBeanClass ifadesi ise managed bean yapımızın adı.İstersek bu ad yerine başka bir ad da tanımlayabiliriz. 
+Bunun için sınıf yapısı içerisinde bulunan <strong><em>@ManagedBean</em></strong> ifadesini <strong><em>@ManagedBean(name=”vermek_istediğiniz_isim”)</em></strong> değiştirmeniz yeterlidir. Managed bean yapısının isminden sonra o 
+sınıftaki değişkenlere ulaşmak için “.” koyuyoruz. “.” işreti koyunca NetBeans bize o sınıfın değişkenleri gösteriyor zaten.</p>
+
+<p>Sınıf yapımızda ise 2 değişken oluşturduk ve bunlara ait <strong><em>get ve set</em></strong> metodlarını oluşturduk. Az değişken olduğunda sorun değil ama daha çok değişken olduğunda get ve set metodlarını el ile yazmak çok vakit kaybettirir. 
+Bunun için NetBeans bir kolaylık sağlıyor. Sınıf içerisinde sağ tıklıyoruz, “Insert Code” diyoruz, yeni açılan pencerede <strong><em>Getter and Setter</em></strong>  yazısına tıklıyoruz. Şimdiki yeni çıkan pencerede değişkenlerimize tik koyup “Generate” diyoruz. Get ve set metodlarımız hazır halde 🙂 .</p>
+
+<p><strong><em>Managed Bean</em></strong> oluşturunca üstte bulunan 4 satırlık kod NetBeans tarafından hazır olarak bize veriliyor.</p>
+
+<p>Bir de ekran çıktımıza bakalım. Adınızı ve Soyadınızı yazıp <strong><em>GÖNDER</em></strong> butonuna tıkladığınızda adınızı ve soyadınızı yazacaktır.</p>
+
+<p><a href="/images/jsf/jsfDersleri3-4.png">
+<img src="/images/jsf/jsfDersleri3-4.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Bu makalemizde <strong><em>Managed Beans</em></strong> konusunu ele aldık. Bir sonraki makalemizde <strong><em>Navigation Rules-Yönlendirme Kuralları</em></strong> konusunu ele alacağız.</p>
+
+<p>Görüşene kadar sağlıcakla kalın.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
+
+<p><a href="https://www.youtube.com/watch?v=mYHNq0mFUGo" title="JSF Video Dersleri 2-Form Bileşenleri Ve Managed Beans"><img src="http://img.youtube.com/vi/mYHNq0mFUGo/0.jpg" alt="JSF Video Dersleri 2-Form Bileşenleri Ve Managed Beans" /></a></p>
+
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="http://github.com/ilkgunel" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="http://twitter.com/ilkgunel" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+  <li><a href="https://www.instagram.com/ilkgunel/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2016 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>
