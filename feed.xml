@@ -5,9 +5,213 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 18 Oct 2016 20:51:18 +0300</pubDate>
-    <lastBuildDate>Tue, 18 Oct 2016 20:51:18 +0300</lastBuildDate>
+    <pubDate>Tue, 18 Oct 2016 21:24:41 +0300</pubDate>
+    <lastBuildDate>Tue, 18 Oct 2016 21:24:41 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>InputHidden ve Çoklu CheckBox</title>
+        <description>&lt;p&gt;Merhabalar. Bu makalemizde JSF içerisinde yer alan etiketlere (tags) giriş yapacağız. Daha önce JSF ile form oluşturma makalesinde bir takım etiketlere değinmiştik. O etiketlere&lt;br /&gt;
+burada değinmeyeceğiz. Makaleyi okumak isteyenler &lt;a href=&quot;http://ilkaygunel.com/blog/2016/jsfde-form-olusturmak-ve-sayfa-uzantisini-xhtml-yerine-jsf-yapmak/&quot;&gt;buradan&lt;/a&gt; ulaşabilirler.&lt;/p&gt;
+
+&lt;p&gt;Bu makalede inputHidden ve checkbox yapılarını inceleyeceğiz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;InputHidden&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;InputHidden ile biz bir &lt;strong&gt;&lt;em&gt;pop-up&lt;/em&gt;&lt;/strong&gt; işlemi yapabiliriz. Kullanıcıya yaptığı işlem sonunda işlem sonucuna göre açılacak bir ekranla bilgi verebiliriz.&lt;/p&gt;
+
+&lt;p&gt;Örnek bir &lt;strong&gt;&lt;em&gt;inputHidden&lt;/em&gt;&lt;/strong&gt; yapısı için &lt;strong&gt;&lt;em&gt;index.xhtml&lt;/em&gt;&lt;/strong&gt; kodu şu şekilde olabilir:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;
+&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/1999/xhtml&quot;&lt;/span&gt;
+	  &lt;span class=&quot;na&quot;&gt;xmlns:f=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://java.sun.com/jsf/core&quot;&lt;/span&gt;     
+	  &lt;span class=&quot;na&quot;&gt;xmlns:h=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://java.sun.com/jsf/html&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:head&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;uyari&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+			&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+				&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;form:bilgi&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+			&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:head&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:body&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:form&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;form&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:inputHidden&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;TIKLADINIZ&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bilgi&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:commandButton&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Pop-up için tıklayın&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;onclick=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;uyari()&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:form&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Bu kodda sadece &lt;strong&gt;&lt;em&gt;xhtml&lt;/em&gt;&lt;/strong&gt; sayfası kullanılarak bir &lt;strong&gt;&lt;em&gt;pop-up&lt;/em&gt;&lt;/strong&gt; yapısı çıkarılmıştır. Siz &lt;strong&gt;&lt;em&gt;managed bean’lerdeki&lt;/em&gt;&lt;/strong&gt; bilgiyi çekerek ya da işlemin sonucuna göre bir değer atıyarak &lt;strong&gt;&lt;em&gt;pop-up&lt;/em&gt;&lt;/strong&gt; içeriğine istediğiniz şekli verebilirsiniz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Kodumuzun Açıklaması:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu kodda bir &lt;strong&gt;&lt;em&gt;script&lt;/em&gt;&lt;/strong&gt; yapısı ile &lt;strong&gt;&lt;em&gt;pop-up&lt;/em&gt;&lt;/strong&gt; kullanmamızı sağladık. &lt;strong&gt;&lt;em&gt;CommanButton&lt;/em&gt;&lt;/strong&gt; nesnesine dikkat ederseniz bir &lt;strong&gt;&lt;em&gt;action&lt;/em&gt;&lt;/strong&gt; yapısına sahip değil. Burada &lt;strong&gt;&lt;em&gt;action&lt;/em&gt;&lt;/strong&gt; işlevini bizim için &lt;strong&gt;&lt;em&gt;onclick&lt;/em&gt;&lt;/strong&gt; yapısı görmektedir ve ekrana yeni bir pencerede bilgi vermektedir.&lt;/p&gt;
+
+&lt;p&gt;Ekrana ne bilgi yazılacağı&amp;nbsp; &lt;strong&gt;&lt;em&gt;id &lt;/em&gt;&lt;/strong&gt;ifadesi ile belirlenmektedir. Script&amp;nbsp; içerisinde yer alan &lt;strong&gt;&lt;em&gt;uyari&lt;/em&gt;&lt;/strong&gt; fonksiyonunda bulunan &lt;strong&gt;&lt;em&gt;alert&lt;/em&gt;&lt;/strong&gt;&amp;nbsp; ekrana &lt;em&gt;&lt;strong&gt;pop-up&lt;/strong&gt;&lt;/em&gt; yapısının çıkmasını sağladı. &lt;strong&gt;&lt;em&gt;document.getElementById &lt;/em&gt;&lt;/strong&gt;ifadesi ise butona tıklandığında hangi &lt;strong&gt;&lt;em&gt;formdan&lt;/em&gt;&lt;/strong&gt; ve hangi &lt;strong&gt;&lt;em&gt;verinin&lt;/em&gt;&lt;/strong&gt; alınmasını belirleyen yapıdır. Bizim &lt;strong&gt;&lt;em&gt;formumuzun&lt;/em&gt;&lt;/strong&gt; &lt;strong&gt;&lt;em&gt;id’si&lt;/em&gt;&lt;/strong&gt; &lt;strong&gt;&lt;em&gt;form&lt;/em&gt;&lt;/strong&gt; ve ekrana verdirmek istediğimiz &lt;strong&gt;&lt;em&gt;mesajın&lt;/em&gt;&lt;/strong&gt; &lt;strong&gt;&lt;em&gt;id’si&lt;/em&gt;&lt;/strong&gt; &lt;strong&gt;&lt;em&gt;bilgi&lt;/em&gt;&lt;/strong&gt;. Böylece &lt;strong&gt;&lt;em&gt;form.bilgi&lt;/em&gt;&lt;/strong&gt; ile &lt;strong&gt;&lt;em&gt;form&lt;/em&gt;&lt;/strong&gt; &lt;strong&gt;&lt;em&gt;id’li&lt;/em&gt;&lt;/strong&gt; &lt;strong&gt;&lt;em&gt;formdan&lt;/em&gt;&lt;/strong&gt; &lt;strong&gt;&lt;em&gt;bilgi id’li nesneyi&lt;/em&gt;&lt;/strong&gt; çek demiş olduk. İfadenin sonundaki &lt;strong&gt;&lt;em&gt;value&lt;/em&gt;&lt;/strong&gt; ifadesi ise o id’ye sahip nesnenin &lt;strong&gt;&lt;em&gt;değerini&lt;/em&gt;&lt;/strong&gt; bize vermektedir.&lt;/p&gt;
+
+&lt;p&gt;Butona basıldığında ekran çıktımız şöyle olacaktır.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfDersleri6-1.png&quot;&gt;
+&lt;img src=&quot;/images/jsf/jsfDersleri6-1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;ÇOKLU CHECKBOX&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Çoklu checkbox ifadesi ile anlatmak istediğim sayfada istediğiniz kadar checkbox yapısını kullanmanızı sağlamak ve bunu yaparken nesneleri tek tek değil bir dizi ya da liste kullanarak girmektir. Şimdi bir örnek yapalım. Örneğimizde tik koyabildiğimiz checkbox  nesnelerini bir kez elle, bir kez dizi ile, bir kez de liste yapısı ile oluşturalım.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;index.xhtml Kodu:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;
+&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/1999/xhtml&quot;&lt;/span&gt;
+	  &lt;span class=&quot;na&quot;&gt;xmlns:f=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://java.sun.com/jsf/core&quot;&lt;/span&gt;     
+	  &lt;span class=&quot;na&quot;&gt;xmlns:h=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://java.sun.com/jsf/html&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:head&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:head&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:body&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:form&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;form&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;h3&amp;gt;&lt;/span&gt;Elle veri girerek:&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h3&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:selectManyCheckbox&amp;gt;&lt;/span&gt;
+				&lt;span class=&quot;nt&quot;&gt;&amp;lt;f:selectItem&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemLabel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;AVCILAR&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemValue=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+				&lt;span class=&quot;nt&quot;&gt;&amp;lt;f:selectItem&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemLabel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ÜSKÜDAR&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemValue=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+				&lt;span class=&quot;nt&quot;&gt;&amp;lt;f:selectItem&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemLabel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;FATİH&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemValue=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;3&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:selectManyCheckbox&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;h3&amp;gt;&lt;/span&gt;Dizi vasıtası ile girerek:&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h3&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:selectManyCheckbox&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#{ilceler.ilceler}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+				&lt;span class=&quot;nt&quot;&gt;&amp;lt;f:selectItems&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#{ilceler.listeyiDoldur}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:selectManyCheckbox&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;h3&amp;gt;&lt;/span&gt;Liste vasıtası ile girerek&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h3&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:selectManyCheckbox&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#{ilceler.ilceler1}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+				&lt;span class=&quot;nt&quot;&gt;&amp;lt;f:selectItems&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#{ilceler.listeyidoldur1}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:selectManyCheckbox&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:form&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Ilceler.java Kodu:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.faces.bean.ManagedBean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.faces.bean.RequestScoped&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@ManagedBean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ilceler&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequestScoped&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Ilceler&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ilceler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ilceler1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getIlceler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;   
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ilceler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getListeyiDoldur&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ilceler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ilceler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;SULTANBEYLİ&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ilceler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;EDİRNEKAPI&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ilceler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ATAŞEHİR&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ilceler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getilcelerstring&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ilceler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getIlceler1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ilceler1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setIlceler1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ilceler1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilceler1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ilceler1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;listeyidoldur1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;listeyidoldur1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;listeyidoldur1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;PENDİK&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;listeyidoldur1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;KARTAL&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;listeyidoldur1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;SAMANDIRA&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getListeyidoldur1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;listeyidoldur1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getListeyiStringeDonustur&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ilceler1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Kodların Açıklaması:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;index.xhtml sayfasında checkboxlar’ın value kısmına managed bean içinde yer alan dizileri atıyoruz ki seçilen değerler kayıt altına alınsın.&lt;/p&gt;
+
+&lt;p&gt;SelectItems kısmındaki value kısımlarına ise eğer dizi kullanıyorsak dizinin değerlerini atadğımız metodu, eğer liste kullanıyorsak  oluşturduğumuz liste nesnesini atamalıyız.&lt;/p&gt;
+
+&lt;p&gt;Managed Bean yapısı içerisinde ise  iki dizi ve bir liste tanımladık. Verileri diziden almak istediğimizde dizimizin get ve set metodları dışında dizimize değer atadığımız bir fonksiyon ve dizimizi String tipine çeviren bir metod kullandık.&lt;/p&gt;
+
+&lt;p&gt;Verileri eğer listeden almak istersek tanımladığımız listeye elemanlarımızı put metodu ile ekledikten sonra listeyi de String tipine çeviriyoruz. Listeyi static tanımlamamızın ve bir static yapı ile değer ataması yapmamızın nedeni class çağrıldığı anda değerlerin hazır edilip kullanılır hale getirilmesidir.&lt;/p&gt;
+
+&lt;p&gt;Bir de ekran çıktımıza bakalım.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfDersleri6-2.png&quot;&gt;
+&lt;img src=&quot;/images/jsf/jsfDersleri6-2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Basitçe &lt;strong&gt;&lt;em&gt;inputHidden&lt;/em&gt;&lt;/strong&gt; ve &lt;strong&gt;&lt;em&gt;selectManyCheckBox&lt;/em&gt;&lt;/strong&gt; yapıları bu şekilde kullanılıp kullanıcıdan çoklu seçim alabilirsiniz ve pop-up yapısını kullanabilirsiniz.&lt;/p&gt;
+
+&lt;p&gt;Bir sonraki yazımızıda &lt;strong&gt;&lt;em&gt;selectOneRadio&lt;/em&gt;&lt;/strong&gt; kullanımına değineceğiz. Sağlıcakla esen kalın.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 17 Oct 2016 20:40:21 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/jsf-inputhidden-ve-coklu-checkbox/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/jsf-inputhidden-ve-coklu-checkbox/</guid>
+        
+        <category>jsf manahed beans</category>
+        
+        <category>managed beans</category>
+        
+        <category>java server faces dersleri</category>
+        
+        <category>jsf yönetimli çekirdekler</category>
+        
+        <category>jsf çalıştırma</category>
+        
+        <category>jsf dersleri</category>
+        
+        <category>jsf giriş</category>
+        
+        <category>jsf hello world</category>
+        
+        <category>jsf introduction</category>
+        
+        <category>jsf makaleleri</category>
+        
+        <category>jsf nedir?</category>
+        
+        <category>jsf öğren</category>
+        
+        <category>jsf projesi açmak</category>
+        
+        <category>jsf türkçe</category>
+        
+        <category>jsf türkçe kaynak</category>
+        
+        <category>application base bundle config demetleri eklenir faces jsf kaynak kullanılır mesaj message name nasıl nereye özellikler param properties resource xml</category>
+        
+        
+      </item>
     
       <item>
         <title>JSF Derslerim- Resources Bundle in JSF</title>
@@ -1494,108 +1698,6 @@ onu anlatmaya çalışacağım.&lt;/p&gt;
         
         <category>how to remove unused import automatically in eclipse ide</category>
         
-        
-      </item>
-    
-      <item>
-        <title>Formula 1 2016 Japonya GP&#39;nin Ardından</title>
-        <description>&lt;p&gt;2 Ekim’de yapılan Malezya GP’nin ardından sıra Japonya GP’ye geldi ve Suzuka pistinde antreman seansları ile birlikte ilk turlar atılmaya başlandı. Malezya’da yarışı lider götürürken motorunun patlaması neticesinde yarışı dışı kalarak punasız ayrılan Lewis Hamilton ile yarışı 3. bitiren Nico Rosberg arasındaki puan farkı 23’e yükselmişti. 
-Saat farkından ötürü 04:00-05:50 arasına denk gelen ve izleyemediğim 1. antreman turlarını Nico Rosberg bu antreman tularını 1. tamamladı. Onu takım arkadaşı Lewis Hamilton takip etti ve 2. oldu. Mercedes pilotlarını Ferrari pilotları takip etti ve 3. Sebastian Vettel, Kimi Raikkonen 4. sırayı aldılar. Takip eden sıralar ise Formula 1’in son yıllarda önde gelen bir diğer takımı Red Bull pilotları Daniel Ricardo ve Max Verstappen oldular. Birinci antreman turlarının sonuçlarına ait tüm liste ise şöyle:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/f12016/japanese/p1-2.png&quot;&gt;
-&lt;img src=&quot;/images/f12016/japanese/p1-2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/f12016/japanese/p1-1.png&quot;&gt;
-&lt;img src=&quot;/images/f12016/japanese/p1-1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Birinci antreman turlarına göre nispeten daha uygun saatlere denk gelen 2. antreman turlarını şampiyona lideri Nico Rosberg tekrar zirvede tamamladı ve bir kez daha Lewis Hamilton takım arkadaşını takip etti. Birinci antreman turlarına göre çok daha az bir fark ile, 0.072 saniye ile, Rosberg birinci oldu. 3 numara bu kez değişti ve grid’in en tecrübelilerinden olan Raikkonen bu kez 3. oldu. Ferrarilerin arasına bu kez Red Bull Racing pilotu Max Verstappen girdi ve 4. oldu. Sebastian Vettel de 5. oldu. 2. antreman sonuçlarına ait tüm liste şöyle:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/f12016/japanese/p2-1.png&quot;&gt;
-&lt;img src=&quot;/images/f12016/japanese/p2-1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/f12016/japanese/p2-2.png&quot;&gt;
-&lt;img src=&quot;/images/f12016/japanese/p2-2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Rosberg’in birinciği ile tamamlanan ilk iki antreman seansından sonra sıralama turlarından önceki son antreman turlarına çıkıldı ve Nico Rosberg bir kez daha zirveyi kimseye kaptırmayarak birincilik koltuğuna oturdu. 2 numaraya bu kez bir Mercedes değil Red Bull pilotu oturdu ve Ricardo 2. oldu. Ferrari pilotu Vettel Ricardoyu takip etti ve 3. oldu. Verstappen 4.’lük, Raikkonen de 5.’lik koltuğunu aldılar. 3. antreman turlarının sonuç listesi şöyle:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/f12016/japanese/p3-1.png&quot;&gt;
-&lt;img src=&quot;/images/f12016/japanese/p3-1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/f12016/japanese/p3-2.png&quot;&gt;
-&lt;img src=&quot;/images/f12016/japanese/p2-2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Rosberg’in liderliği ile tamamlanan 3 antreman seansının ardından sıralama turlarına geçildi ve Rosberg antreman turlarının verdiği piskolojik üstünlükle sıralamalara başladı. Sıralama seanslarının birincisinde Ferrari pilotları Vettel ve Raikkonen ilk iki sırayı alarak ikinci seansa geçtiler. Mercedes’in bu seansda birinci olamamsının sebebi orta sert lastiklerle tur atmaları ve lastik saklama stratejileri idi. Sıralamarın 1. seansında süpriz olarak nitelendirilebhilecek olay ise Honda’nın evinde olan ve Honda motoru kullanan McLaren’in pilotu Jenson Button’ın 17. olarak elenmesi oldu.&lt;/p&gt;
-
-&lt;p&gt;Sıralamarın ikinci seansında ise Rosberg sazı geri eline aldı ve seansı lider tamamladı. Hamilton ile arasındaki fark ise 0.4 saniye idi ve Hamilton 2. sırada idi. Mercedes’i Ferrari ve Red Bull takımları takip ettiler. 2. seansın biraz beklenmedik olarak nitelendirilebilecek olayı ise Williams pilotları Bottas ve Massa’nın elenmesi ve Haas pilotları Grosjean ve Gutierrez’in son seansa kalması oldu. Honda’nın güncellenmiş motoru ile Japonya’ya gelen Alonso ise umduğunu bulamadı ve 15. sırada kalarak 2. seans da elendi.&lt;/p&gt;
-
-&lt;p&gt;Son seans ise 3 takım arasında adeta bir kapışmaya sahne oldu. Mercedes’den Hamilton mı Rosberg mi pole pozisyonunu kazanacak derken Rosberg kıl payı ama gerçekten kıl payı bir fark ile pole pozisyonunu kaptı ve 2. sıradaki Hamilton’ın önünde kaldı. Ferrari pilotları Raikkonen 3. ve Vettel 4. oldular. Fakat Vettel Malezya’da yarış başında Rosberg’e çarpması yüzünden 3 sıra grid cezası almıştı ve bu yarışa 7. sıradan başlayacak. Reb Bull’lar da 5 ve 6. sırayı aldılar. Sıralamala sonucuna ait tüm liste şöyle:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/f12016/japanese/q1.png&quot;&gt;
-&lt;img src=&quot;/images/f12016/japanese/q1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/f12016/japanese/q2.png&quot;&gt;
-&lt;img src=&quot;/images/f12016/japanese/q2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;9 Ekim 2016 Pazar sabahı saat 8’de yarış geldi çattı. Sıralamları 3. sırada bitiren Raikkonen’in vites kutusunu değiştirdiği için 5 sıra grid cezası alması neticesinde 8. sıradan başladığı yarışta 
-herkes kalkışta Hamilton ile Rosberg arasında bir kapışma bekledi ancak Hamilton kalkışta yavaş kaldı ve bu yavaşlığının neticesinde 8. sıraya kadar geriledi.
-Daha sonralarında hızla yükselen Hamilton rakiplerini adım adım geride bırakarak 3. sıraya kadar yükseldi. Yarış sonlarında 2. sıradaki Red Bull pilotu Max Verstappen’in arkasına gelen Hamilton onu geçmek
-için son turda uğraş gösterdi fakat başarılı olamadı. Yaptığı bir atak neticesinde savunmaları sıklıkla eleştirilen ve tehlikeli savunma yaptığı söylenen Max Verstappen’in yine aynı savunmayı yapması ile pist dışına taştı ve
-2 numaralı sırayı elde edemeden yarışı tamamladı.&lt;/p&gt;
-
-&lt;p&gt;Yarışın galibi Nico Rosberg ise şampiyona liderliğinde en yakın rakibi ve takım arkadaşı Lewis Hamilton ile puan farkını 33’e çıkararak şampiyon olma yönünde büyük bir avantaj yakalamış oldu.&lt;/p&gt;
-
-&lt;p&gt;Yarışta önemli sayılabilecek diğer olay ise Ferrari pit duvarının bana göre verdii yanlış kararlar neticesinde en azından podyumu ellerinden kaçırması oldu. Özellikle son bölümde Sebastian Vettelin yumuşak lastiklere geçirilmesi pit-stop’dan çıktığında Hamilton’ın hemen arkakasında olan Vettel’in
-yarış bittinde Hamilton ile arasında 20 saniye fark olması ile sonuçlandı.&lt;/p&gt;
-
-&lt;p&gt;Suzuka’da gerçekleştirilen bu yarış Honda’nın evinde yapılmıştı ama Honda motoru kullanan McLaren pilotları yarışta pek bir varlık gösteremeyip arka sıralarda kaldılar. Bu da Honda için kötü bir gün geçirmesine sebep oldu. Mercedes motoru ile yarıştığı yıllarda fırtına gibi esen McLaren adeta o günlerini mumla arıyor.&lt;/p&gt;
-
-&lt;p&gt;Haas takımının pilotları her ne kadar sıralamarda Q3’e kalmış olsalar dahi yarışta bu performansı gösteremediler ve yarıştan puansız ayrıldılar.&lt;/p&gt;
-
-&lt;p&gt;Yarışın tamamına ait sonuç listesi ise şöyle:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/f12016/japanese/r1.png&quot;&gt;
-&lt;img src=&quot;/images/f12016/japanese/r1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Bu yrış önceki yarış olan Malezya GP kadar olaylı olmadı :)&lt;/p&gt;
-
-&lt;p&gt;Yarışın ardından Mercedes AMG takımının Verstappen’i yaptığı savunmadan ötürü şikayet ettiği haberleri çıktı. Hamilton ise &lt;strong&gt;&lt;em&gt;benim şikayetim yok, takıma da şikayet etmeyelim dedim&lt;/em&gt;&lt;/strong&gt; şeklinde bir açıklama yaptı.
-Bunun ardından çok geçmeden FIA Mercedes’in şikayetini geri çektiğini açıkladı. Açıkçası Mercedes ve Hamilton’ın bu tehlikeli savunmayı şikayet etmelerini neden geri çektikleri de herkesin aklında bir soru işareti olarak kaldı bu yarış sonrasında.&lt;/p&gt;
-
-&lt;p&gt;Bu yarışın ardından Formula 1’e 2 haftalık bir ara veriliyor ve F! dünyanın bir ucundan öteki ucuna, ABD’ye gidiyor. 23 Ekim 2016’da ABD’de, Austin’de USA GP gerçekleştirilecek ve bu kez de yarışı gece geç
-sayılabilecek saatlerde izleyeceğiz.&lt;/p&gt;
-
-&lt;p&gt;Görüşene kadar hoşçakalın.&lt;/p&gt;
-
-&lt;p&gt;Yazıdaki fotoğraflar şu linklerden alınmıştır:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://tr.motorsport.com/f1/news/japonya-gp-1-seansin-lideri-rosberg-835591/?s=1&quot;&gt;http://tr.motorsport.com/f1/news/japonya-gp-1-seansin-lideri-rosberg-835591/?s=1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://tr.motorsport.com/f1/news/japonya-gp-rosberg-2-seansta-da-lider-835645/?s=1&quot;&gt;http://tr.motorsport.com/f1/news/japonya-gp-rosberg-2-seansta-da-lider-835645/?s=1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://tr.motorsport.com/f1/news/japonya-gp-rosberg-3-antrenman-seansinda-da-lider-835956/?s=1&quot;&gt;http://tr.motorsport.com/f1/news/japonya-gp-rosberg-3-antrenman-seansinda-da-lider-835956/?s=1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://tr.motorsport.com/f1/news/japonya-gp-suzuka-da-durdurulamayan-rosberg-pole-pozisyonunda-836021/?s=1&quot;&gt;http://tr.motorsport.com/f1/news/japonya-gp-suzuka-da-durdurulamayan-rosberg-pole-pozisyonunda-836021/?s=1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://tr.motorsport.com/f1/news/japonya-gp-rosberg-rahat-bir-sekilde-kazandi-836426/&quot;&gt;http://tr.motorsport.com/f1/news/japonya-gp-rosberg-rahat-bir-sekilde-kazandi-836426/&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Fri, 07 Oct 2016 17:26:00 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2016/f1japanese2016gp/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/f1japanese2016gp/</guid>
-        
-        <category>japanese gp</category>
-        
-        <category>japonya gp</category>
-        
-        <category>formula 1 2016 japonya gp</category>
-        
-        <category>formula 1 2016 japanese gp</category>
-        
-        <category>f1 2016 japanese gp</category>
-        
-        <category>f1 2016 japonya gp</category>
-        
-        <category>after 2016 f1 japanese gp</category>
-        
-        
-        <category>welcome</category>
         
       </item>
     
