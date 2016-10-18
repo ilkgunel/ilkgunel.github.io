@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>JSF Dersleri-JSF’De Metot İle Sayfa Yönlendirme</title>
+    <meta name="description" content="Merhaba. Bu makalemizde “JSF’de Yönlendirme Kuralları” konusunu irdeleyeceğiz.">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsfde-yonlendirme-kurali-navigation-rule-in-jsf/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>JSF Dersleri-JSF’De Metot İle Sayfa Yönlendirme - İlkay Günel - Blog</title>
+<meta property="og:title" content="JSF Dersleri-JSF’De Metot İle Sayfa Yönlendirme" />
+<meta name="description" content="JSF Dersleri-JSF’De Metot İle Sayfa Yönlendirme" />
+<meta property="og:description" content="JSF Dersleri-JSF’De Metot İle Sayfa Yönlendirme" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsfde-yonlendirme-kurali-navigation-rule-in-jsf/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/jsfde-yonlendirme-kurali-navigation-rule-in-jsf/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-10-17T20:39:20+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "JSF Dersleri-JSF’De Metot İle Sayfa Yönlendirme",
+    "datePublished": "2016-10-17T20:39:20+03:00",
+    "description": "JSF Dersleri-JSF’De Metot İle Sayfa Yönlendirme",
+    "url": "http://ilkaygunel.com/blog/2016/jsfde-yonlendirme-kurali-navigation-rule-in-jsf/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/blog/2016/jsf-tutorials-list" title="JSF">JSF</a></li>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog/2016/eclipse-notes" title="Eclipse">Eclipse</a></li>
+        
+          <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">JSF Dersleri-JSF’De Metot İle Sayfa Yönlendirme</h1>
+      <p class="post-meta">Oct 17, 2016</p>
+    </header>
+
+    <div class="post-content">
+      <p>Merhaba. Bu makalemizde “JSF’de Yönlendirme Kuralları” konusunu irdeleyeceğiz.</p>
+
+<p><strong>Ne için kullanılır?</strong></p>
+
+<p>Normalde bir butona action verdiğimizde bizi istediğimiz sayfaya götürüyordu. Ancak dikkat ettiyseniz tarayıcı kısmında yönlendirdiğiniz sayfa değil eski sayfa sayfa adresi kalıyordu. 
+Bu sorunu çözmek için biz basit bir ifadeyi kullanabiliriz. Bunun yanında sayfa yönlendirmeleri koşula bağlı olabilir. Bir alışveriş sitesi yaptınız diyelim ki. Kullanıcıya puan imkanı 
+sundunuz. Kullanıcı alışveriş yaptı ve “Puanlarımı Kullanmak İstiyorum” ismindeki butona tıkladı. Sizin burada kullanıcının yeterli puanı olup olmadığını kontrol ettirmeniz ve sonrasında 
+gerekli işlemleri yapmanız gerekir. Yeterli puanı varsa kullanabileceği sayfaya yoksa kullanamayacağına dair uygun sayfaya yönlendirirsiniz. İşte bu durumlarda imdadımıza  metot ile sayfa 
+yönlendirme yetişiyor.</p>
+
+<p><strong><em>Tarayıcıda eski sayfanın adresinin kalması sorunun çözümü:</em></strong></p>
+
+<p>Şimdi tarayıcıda eski sayfanın adresinin kalması sorununu çözelim. Çözümü çok basittir. Butona action veriyorsunuz ve yenisayfa.xhtml adında bir sayfaya göndermek istiyorsunuz. Bunu yaparken action=”yenisayfa.xhtml?faces-redirect=true” derseniz sorununuz çözülmüş olur.</p>
+
+<p><strong>Örnek uygulama</strong></p>
+
+<p>Şimdi bir örnek uygulama yapalım konuyu anlayabilmemiz için ve kodları açıklayalım. Kullanıcıdan bir sayı alacağız ve girdiği sayıya göre onu yeni bir sayfaya yönlendireceğiz. Eğer girdiği sayı 50’den büyük olursa 50’den büyük sayı girdiniz, küçük olursa 50’den küçük sayı girdiniz şeklinde yazılar olan sayfalara göndereceğiz.</p>
+
+<p>Projemize sağ tıklıyoruz. New üstüne geliyoruz. En alttan Other bölümüne tıklıyoruz. Yeni gelen pencerede sağdan “Java Server Faces” soldan “JSF Page” seçiyoruz. Next diyoruz. Şimdi sayfanın adını soran ekran geliyor. kucuk adında  sayfa ekleyeceğiz. Daha sonra aynı yolla bir de buyuk adında bir sayfa ekliyoruz.</p>
+
+<p>Projemize bir de <strong><em>managedbean</em></strong> adında bir <strong><em>Managed Bean</em></strong> ekliyoruz.</p>
+
+<p><strong>index.xhtml Kodu</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
+<span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
+ 	 <span class="na">xmlns:h=</span><span class="s">"http://xmlns.jcp.org/jsf/html"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;h:head&gt;</span>
+    	<span class="nt">&lt;title&gt;</span>Metot İle Sayfa Yönlendirme<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;/h:head&gt;</span>
+	<span class="nt">&lt;h:body&gt;</span>
+    	<span class="nt">&lt;h:form&gt;</span>
+        	<span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">"Bir sayı giriniz:"</span><span class="nt">/&gt;</span>
+        	<span class="nt">&lt;h:inputText</span> <span class="na">value=</span><span class="s">"#{managedbean.sayi}"</span><span class="nt">/&gt;</span>
+        	<span class="nt">&lt;h:commandButton</span> <span class="na">value=</span><span class="s">"GÖNDER"</span> <span class="na">action=</span><span class="s">"#{managedbean.karsilastir()}"</span><span class="nt">/&gt;</span>
+    	<span class="nt">&lt;/h:form&gt;</span>
+	<span class="nt">&lt;/h:body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<p><strong>Kodun açıklaması:</strong></p>
+
+<p>Kodumuzda önceki makalelerde anlatılmayan bir nokta var o da action. Butonların action kısmına managed bean içinde tanımlanmış metodlar da verilebilir. Hatta ileri düzey kod yazarken daha çok bunu kullanabiliriz yaptığımız projeye göre. Action kısmına verdiğimiz metod bir string döndürüyor ve bu stringe göre action hangi sayfaya gideceğine karar veriyor.</p>
+
+<p><strong>kucuk.xhtml Kodu:</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
+<span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
+  	<span class="na">xmlns:h=</span><span class="s">"http://xmlns.jcp.org/jsf/html"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;h:head&gt;</span>
+    	<span class="nt">&lt;title&gt;</span>50'den Küçük<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;/h:head&gt;</span>
+	<span class="nt">&lt;h:body&gt;</span>
+    	Girilen sayı 50'den küçük
+	<span class="nt">&lt;/h:body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<p><strong>buyuk.xhtml Kodu:</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
+<span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
+  	<span class="na">xmlns:h=</span><span class="s">"http://xmlns.jcp.org/jsf/html"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;h:head&gt;</span>
+    	<span class="nt">&lt;title&gt;</span>Facelet Title<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;/h:head&gt;</span>
+	<span class="nt">&lt;h:body&gt;</span>
+    	Girilen sayı 50'den büyük
+	<span class="nt">&lt;/h:body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<p><strong>Kodların Açıklaması:</strong></p>
+
+<p>Bu kodlar önceki makalelerde anlatılan kısımları içeriyor.Ekstra anlatıcak bir şey barındırmıyor.</p>
+
+<p><strong>ManagedBean.java kodu:</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">javax.faces.bean.ManagedBean</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.faces.bean.RequestScoped</span><span class="o">;</span>
+<span class="nd">@ManagedBean</span>
+<span class="nd">@RequestScoped</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">managedbean</span> <span class="o">{</span>
+<span class="kt">int</span> <span class="n">sayi</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="n">getSayi</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">sayi</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setSayi</span><span class="o">(</span><span class="kt">int</span> <span class="n">sayi</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">sayi</span> <span class="o">=</span> <span class="n">sayi</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">karsilastir</span><span class="o">()</span>
+    <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">sayi</span><span class="o">&gt;</span><span class="mi">50</span><span class="o">)</span>
+        <span class="o">{</span>
+            <span class="k">return</span> <span class="s">"buyuk?faces-redirect=true"</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span>
+        <span class="o">{</span>
+            <span class="k">return</span>  <span class="s">"kucuk?faces-redirect=true"</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p><strong>Kodun açıklaması:</strong></p>
+
+<p><span style="font-size: 14.0pt;color: black">Burada <em><strong>index.xhtml</strong> </em>sayfasından alınan sayı <strong><i>int sayi</i></strong> değişkenine atanıyor. Bu kodda çalışan kısım <em><strong>set (değişkene yaz)</strong></em> metodudur. <em><strong>Get (değişkeni al)</strong></em> metodu sayının değerini almak isteseydik işimize yarayacaktı. Burada kullanmasak da olurdu. <em><strong>Karsilastir</strong></em> metodu da girilen sayının 50 ‘den büyük mü küçük mü olduğuna karar veriyor ve ona göre uygun bir string döndürüyor.</span></p>
+
+<p><a href="/images/jsf/jsfDersleri4-1.png">
+<img src="/images/jsf/jsfDersleri4-1.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p><a href="/images/jsf/jsfDersleri4-2.png">
+<img src="/images/jsf/jsfDersleri4-2.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p><a href="/images/jsf/jsfDersleri4-3.png">
+<img src="/images/jsf/jsfDersleri4-3.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p><a href="/images/jsf/jsfDersleri4-4.png">
+<img src="/images/jsf/jsfDersleri4-4.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Bu yazıda da bu kadar arkadaşlar. Basitçe metotla sayfa yönlendirmenin nasıl yapıldığını görmüş olduk. Bu dersin video halini de aşağıya ekledim. Gelecek yazıda görüşmek üzere sağlıcakla kalın.</p>
+
+<p>https://www.youtube.com/watch?v=ugtc8aXNXmw</p>
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="http://github.com/ilkgunel" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="http://twitter.com/ilkgunel" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+  <li><a href="https://www.instagram.com/ilkgunel/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2016 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>
