@@ -5,9 +5,130 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 19 Oct 2016 20:57:07 +0300</pubDate>
-    <lastBuildDate>Wed, 19 Oct 2016 20:57:07 +0300</lastBuildDate>
+    <pubDate>Sat, 22 Oct 2016 13:21:35 +0300</pubDate>
+    <lastBuildDate>Sat, 22 Oct 2016 13:21:35 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Microsoft SQL Server JDBC Driver&#39;ının Local Maven Reposuna Eklenmesi</title>
+        <description>&lt;p&gt;Merhabalar.&lt;/p&gt;
+
+&lt;p&gt;Geliştirilen bir Java projesinde Microsoft SQL Server kullanma durumumuz hasıl olabiliyor. Microsoft bize bir adet JDBC driver sunuyor fakat geliştirilen Java projeleri çoğunlukla Maven tabanlı
+oluyor ve Microsoft SQL JDBC Driver’ın bir Maven bağımlılığı yok. Yani Maven reposu içerisinde bulunmuyor kendileri. Oluşturulan projenin de bir sunucu üzerinde koşması gerekiyor ve bu durumda 
+jarı indirip classpath’e elle atmak vb. durumlar uygun olmuyor. Sorunlara açık oluyor. Bu durumda bizim bu JDBC driver’ı kendi Maven local repomuza eklememiz ve
+pom.xml dosyasına kaydetmemiz lazım. Şimdi bunu nasıl yapacağımıza bakalım.&lt;/p&gt;
+
+&lt;p&gt;Öncelikle sistemimizde Maven’ın kurulu olması gerekiyor. Komut satırınızdan &lt;strong&gt;&lt;em&gt;mvn -version&lt;/em&gt;&lt;/strong&gt; komutunu vererek Maven’ın hangi sürümünün kurulu olduğuna bakabilirsiniz. Eğer kurulu değilse 
+komutun bulunamadığına mesaj dönecektir zaten.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mavenMssql1.png&quot;&gt;
+&lt;img src=&quot;/images/mavenMssql1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Mac OS işletim sisteminde &lt;strong&gt;&lt;em&gt;brew install maven&lt;/em&gt;&lt;/strong&gt; komutunu işletmeniz Maven kurulumu için yeterlidir. Hatırladığım kadarı ile Linux dağıtımlarında da tek komutla kurulum yapılabiliyor. Sadece
+Windows’da Path ayarlamaları yapmak gerekiyor.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.microsoft.com/en-us/download/details.aspx?id=11774&quot;&gt;https://www.microsoft.com/en-us/download/details.aspx?id=11774&lt;/a&gt; adresinden Microsoft SQL JDBC Driver’ın istediğiniz bir 
+sürümünü indirin. Ben aşağıdaki resimdeki işaretli sürümü indiriyorum.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mavenMssql2.png&quot;&gt;
+&lt;img src=&quot;/images/mavenMssql2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;İndirdiğimiz tar.gz uzantılı sıkıştırılmış dosyayı herhangi bir yere açalım ve o orada beklesin.&lt;/p&gt;
+
+&lt;p&gt;Şimdi herhangi bir IDE’de bir Maven projesi açalım ve pom.xml’imizi şöyle düzenleyelim.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; 
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+	xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 
+	http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&amp;gt;
+	&amp;lt;modelVersion&amp;gt;4.0.0&amp;lt;/modelVersion&amp;gt;
+	&amp;lt;groupId&amp;gt;com.ilkaygunel&amp;lt;/groupId&amp;gt;
+	&amp;lt;artifactId&amp;gt;MsSsqlJdbcInLocalRepo&amp;lt;/artifactId&amp;gt;
+	&amp;lt;version&amp;gt;0.0.1-SNAPSHOT&amp;lt;/version&amp;gt;
+	&amp;lt;name&amp;gt;MsSsqlJdbcInLocalRepo&amp;lt;/name&amp;gt;
+	&amp;lt;dependencies&amp;gt;
+		&amp;lt;dependency&amp;gt;
+			&amp;lt;groupId&amp;gt;com.microsoft.sqlserver&amp;lt;/groupId&amp;gt;
+			&amp;lt;artifactId&amp;gt;sqljdbc4&amp;lt;/artifactId&amp;gt;
+			&amp;lt;version&amp;gt;4.0&amp;lt;/version&amp;gt;
+		&amp;lt;/dependency&amp;gt;
+	&amp;lt;/dependencies&amp;gt;
+&amp;lt;/project&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;IDE bu düzenlemenin ardından hata verecektir çünkü ne local repoda ne uzak sunucuda böyle bir bağımlılık bulunmaktadır.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mavenMssql3.png&quot;&gt;
+&lt;img src=&quot;/images/mavenMssql3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi terminali açalım, az önce indridğimiz tar.gz uzantılı dosyayı açtığımız yere gidelim. Bu klasörün içinde &lt;strong&gt;&lt;em&gt;enu&lt;/em&gt;&lt;/strong&gt; isminde bir klasör var. cd komutu ile içine girelim 
+ve şu komutu işletelim:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;mvn&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;install:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;install&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dfile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqljdbc42&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;jar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DgroupId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;microsoft&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sqlserver&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DartifactId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqljdbc4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dversion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;4.0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dpackaging&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;jar&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;enu ismindeki klasör içinde 4 adet jar var. Biz bunlardan &lt;strong&gt;&lt;em&gt;sqljdbc42.jar&lt;/em&gt;&lt;/strong&gt; ismindeki jar’ı kullanıyoruz.&lt;/p&gt;
+
+&lt;p&gt;Terminalden işlettiğimiz komutu biraz açacak olursak bu komut sizin local maven reponuz içerisinde sanki uzak sunucudan indirilmiş gibi bir bağımlılık oluşturur.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;mvn install:install-file kod parçası local repo içerisinde bağımlılık oluşturacak.&lt;/li&gt;
+  &lt;li&gt;-Dfile=sqljdbc42.jar kod parçası hangi jar’ın bağımlılık olarak kullanılacağını bildiriyor. Bu kısım en önemli noktalardan birisi çünkü projemizin kullanacağı dosyayı burada tanımlıyoruz.&lt;/li&gt;
+  &lt;li&gt;-DgroupId=com.microsoft.sqlserver kod parçası ilgili bağımlılığın gruop id bilgisini vermemize yarıyor. Maven repolarından çağırım yaparken de bildiğiniz gibi groupId ve artifactId bilgileri ile
+çağırım yapıyoruz.&lt;/li&gt;
+  &lt;li&gt;-DartifactId=sqljdbc4 kod parçası ilgili bağımlılığın artifactId bilgisini tanımlıyor.&lt;/li&gt;
+  &lt;li&gt;-Dversion=4.0 -Dpackaging=jar kod parçası da oluşturulan local bağımlılığın versiyon ve paketleme bilgisini veriyor.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Komutu işletirken pom.xml’e eklediğimiz bağımlılık kodu ile komuttaki bilgilerin uyuşmasına dikkat etmemiz gerekiyor.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mavenMssql4.png&quot;&gt;
+&lt;img src=&quot;/images/mavenMssql4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;BUILD SUCCESS aldıktan sonra IDE’mize geri dönelim. Ben Eclipse IDE’de açtım projeyi. Projeye sağ tıklayalım ve Maven -&amp;gt; Update Project diyelim. NetBeans kullanan arkadaşlar da Clean&amp;amp;Build yapabilirler.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mavenMssql5.png&quot;&gt;
+&lt;img src=&quot;/images/mavenMssql5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;pom.xml’deki hata gördüğünüz gibi gitti ve artık Microsoft SQL JDBC Driver’ı Maven’a tanıtmış olduk.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/mavenMssql6.png&quot;&gt;
+&lt;img src=&quot;/images/mavenMssql6.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Başka bir yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Fri, 21 Oct 2016 20:41:20 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/microsoft-sql-jdbc-driver-in-local-maven/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/microsoft-sql-jdbc-driver-in-local-maven/</guid>
+        
+        <category>microsoft sql jdbc driver</category>
+        
+        <category>microsoft jdbc driver</category>
+        
+        <category>how to add microsoft sql jdbc driver to local maven repository</category>
+        
+        <category>add microsoft sql jdbc driver to maven repository</category>
+        
+        <category>microsoft jdbc driver mavem</category>
+        
+        <category>microsft jdbc driver nasıl kullanılır</category>
+        
+        <category>microsoft sql jdbc driver nasıl kullanılır</category>
+        
+        <category>microsoft jdbc driver nasıl kullanılır</category>
+        
+        
+      </item>
     
       <item>
         <title>Java&#39;da İki Listedeki Ortak ve Ortak Olmayan Elemanları Bulmak</title>
@@ -1756,311 +1877,6 @@ bileşenler yer almaktadır. Örneğin HTML’deki table etiketine karşılık �
         <category>primefaces dersleri</category>
         
         <category>primefaces tutorial</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Hibernate 1 – Giriş @Entity – @Id</title>
-        <description>&lt;p style=&quot;color: red&quot;&gt;Bu yazı &lt;strong&gt;Ferhat Aykan&lt;/strong&gt; tarafından yazılmıştır ve onun izni ile bu blogta yayınlanmıştır. Kendisine teşekkürlerimi sunarım.&lt;/p&gt;
-
-&lt;p&gt;Merhaba arkadaşlar. Bu yazı ile birlikte artık Hibernate kodlamaya ufaktan giriş yapıyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Hibernate Nedir?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Java class’larımızı(POJO) veritabanında ki tablolar ile eşleştirmeye yarayan ve kendine ait HQL sorgu ile daha kolay sorgu yapmamızı sağlayan bir framework’tur.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;POJO Nedir?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Pojo -&amp;gt; Plain Of Java Object yani Java Class’larımızın en saf halidir. Aşağıdaki örnekte POJO’yu daha iyi anlayacağız.&lt;/p&gt;
-
-&lt;p&gt;Bu yazımızda Hibernate’in en temel konusu olan &lt;strong&gt;&lt;em&gt;Entity Tanımlaması&lt;/em&gt;&lt;/strong&gt;‘nı ve hangi şartların gerekli olduğunu öğreneceğiz.&lt;/p&gt;
-
-&lt;p&gt;En temel hali ile veri tabanımızdaki tablolarımıza karşılık gelen Java sınıflarımız bizim Entity sınıflarımız oluyor. Tablolarımızdaki sütunlar da bu Entity sınıfları içindeki değişkenler ile ifade ediliyor. Bir sınıfın Entity sınıfı olması için olmazsa olmaz 2 kural vardır arkadaşlar. Bunlar:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;@Entity notasyonunun kullanılmış olması&lt;/li&gt;
-  &lt;li&gt;@Id notasyonu kullanarak belirlenmiş bir ayırt edici alanın olmadır.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;İlk önce Eclipse’mize Hibernate entegrasyonu yapıcağız ve veritabanı olarak da PostgreSQL kullanacağız ve bu yazımda anlaşılması kolay olsun diye her adımı resimleyerek gösterdim.&lt;/p&gt;
-
-&lt;p&gt;İlk önce PostgreSQL ‘ de  &lt;strong&gt;&lt;em&gt;Hibernate&lt;/em&gt;&lt;/strong&gt;  adlı bir veritabanı oluşturuyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/hibernate/hibernateGiris1.png&quot;&gt;
-&lt;img src=&quot;/images/hibernate/hibernateGiris1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;İkinci adım olarak Eclipse IDE miz yapacağımız işi kolaylaştırmak için bize bazı araçlar sunmaktadır. Eclipse üzerinden tablomuza erişmek için &lt;strong&gt;&lt;em&gt;Data Source Explorer&lt;/em&gt;&lt;/strong&gt; perspektifini kullanacağız.&lt;/p&gt;
-
-&lt;p&gt;Eclipse üzerinden &lt;strong&gt;&lt;em&gt;Window -&amp;gt; Show View -&amp;gt; Other -&amp;gt; Data Source Explorer&lt;/em&gt;&lt;/strong&gt;  ekliyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/hibernate/hibernateGiris2.png&quot;&gt;
-&lt;img src=&quot;/images/hibernate/hibernateGiris2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/hibernate/hibernateGiris3.png&quot;&gt;
-&lt;img src=&quot;/images/hibernate/hibernateGiris3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Daha sonra eklediğimiz &lt;strong&gt;&lt;em&gt;Data Source Explorer&lt;/em&gt;&lt;/strong&gt;‘a sağ tıklayarak new diyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/hibernate/hibernateGiris4.png&quot;&gt;
-&lt;img src=&quot;/images/hibernate/hibernateGiris4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;PostgreSQL&lt;/em&gt;&lt;/strong&gt; seçiyoruz ve bağlantımıza bir isim veriyoruz ve next diyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/hibernate/hibernateGiris5.png&quot;&gt;
-&lt;img src=&quot;/images/hibernate/hibernateGiris5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Eğer daha önceden bağlantı kurmadıysanız yeni bir bağlantı oluşturmak için tıklıyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/hibernate/hibernateGiris6.png&quot;&gt;
-&lt;img src=&quot;/images/hibernate/hibernateGiris6.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Daha sonra varsayılan olarak verilen .jar siliyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/hibernate/hibernateGiris7.png&quot;&gt;
-&lt;img src=&quot;/images/hibernate/hibernateGiris7.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://jdbc.postgresql.org/download.html&quot;&gt;https://jdbc.postgresql.org/download.html&lt;/a&gt;  Adresinden gerekli olan Jar’ı indirebilirsiniz.&lt;/p&gt;
-
-&lt;p&gt;İndirdiğimiz jar Add Jar diyerek bilgisayarımızdan yüklüyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/hibernate/hibernateGiris8.png&quot;&gt;
-&lt;img src=&quot;/images/hibernate/hibernateGiris8.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Daha sonra properties kısmına gelerek veritabanı bilgilerini giriyoruz ve ok tıklıyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/hibernate/hibernateGiris9.png&quot;&gt;
-&lt;img src=&quot;/images/hibernate/hibernateGiris9.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Daha sonra test connection’a tıklayarak bağlantımızı kontrol ediyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/hibernate/hibernateGiris10.png&quot;&gt;
-&lt;img src=&quot;/images/hibernate/hibernateGiris10.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Hibernate projemizi &lt;strong&gt;&lt;em&gt;Maven&lt;/em&gt;&lt;/strong&gt; tabanlı yapacağız.  Hibernate projemizde kullanabilmek için gerekli olan Jar’ları(Kütüphaneleri) otamatik bir şekilde maven sayesinde projemize dahil edeceğiz. İlk önce bir maven projesi açalım.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/hibernate/hibernateGiris11.png&quot;&gt;
-&lt;img src=&quot;/images/hibernate/hibernateGiris11.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/hibernate/hibernateGiris12.png&quot;&gt;
-&lt;img src=&quot;/images/hibernate/hibernateGiris12.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/hibernate/hibernateGiris13.png&quot;&gt;
-&lt;img src=&quot;/images/hibernate/hibernateGiris13.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Projemize bir ad veriyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/hibernate/hibernateGiris14.png&quot;&gt;
-&lt;img src=&quot;/images/hibernate/hibernateGiris14.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Daha sonra gerikli Jar’ları indirmek için &lt;strong&gt;&lt;em&gt;pom.xml&lt;/em&gt;&lt;/strong&gt; gerekli dependecies leri tanımlıyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/hibernate/hibernateGiris15.png&quot;&gt;
-&lt;img src=&quot;/images/hibernate/hibernateGiris15.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Ve resimde de görüldüğü gibi gerekli Jar dosyalarını Maven sayesinde otomatik bir şekilde indirmiş olduk.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/hibernate/hibernateGiris16.png&quot;&gt;
-&lt;img src=&quot;/images/hibernate/hibernateGiris16.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;pom.xml dependecies’lerimiz.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;       &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;
-  		&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.hibernate&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;hibernate-core&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;5.1.0.Final&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;commons-logging&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;commons-logging&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.2&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;postgresql&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;postgresql&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;9.1-901.jdbc4&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Ve sıra geldi bir tane Entity tanımlamaya. En başta belirttiğimiz gibi Entity tanımlayabilmek için 2 tane kuralımız vardı;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;@Entity notasyonunun kullanılmış olması&lt;/li&gt;
-  &lt;li&gt;@Id notasyonu kullanarak belirlenmiş bir ayırt edici alanın olmadır.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Burada Student adında bir Java class’ı oluşturuyoruz.&lt;/p&gt;
-
-&lt;p&gt;Bu class’a &lt;strong&gt;&lt;em&gt;POJO&lt;/em&gt;&lt;/strong&gt; diyoruz. Sadece Student ve ona ait özellikler mevcut. POJO’larımız da herhangi bir hesaplama doğrulama methodları tanımlamak önerilmez. POJO larımızın saf ve temiz olması kodumuzun bakımınıda kolaylaştırır.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/hibernate/hibernateGiris17.png&quot;&gt;
-&lt;img src=&quot;/images/hibernate/hibernateGiris17.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Bir Entity tanımlayabilmek için Java class’ımızın başında @Entity notasyonunu kullanıyoruz.&lt;/p&gt;
-
-&lt;p&gt;Ve her Entity içinde bir tane @Id tanımlıyoruz.&lt;/p&gt;
-
-&lt;p&gt;Her bir entity bir veritabanındaki tabloya karşılık gelmektedir.&lt;/p&gt;
-
-&lt;p&gt;Bu resimden şunu anlayabiliriz. Veritabanın Student adında bir tablo oluşacak ve tablonun stunlarıda burada tanımladığımız instance veriable’lar olucak.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.persistence.Entity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.persistence.Id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;nd&quot;&gt;@Entity&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Student&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-	&lt;span class=&quot;nd&quot;&gt;@Id&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;studentId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;surname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Student&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;studentId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;surname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;studentId&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;studentId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;surname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;surname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getStudentId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;studentId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setStudentId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;studentId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;studentId&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;studentId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getSurname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;surname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setSurname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;surname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;surname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;surname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Şimdide Hibernate için gerekli olan configration dosyamızı ayarlayacağız.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/hibernate/hibernateGiris18.png&quot;&gt;
-&lt;img src=&quot;/images/hibernate/hibernateGiris18.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Veritabanımızın PostgreSQL olduğunu belitmek için onun url sini yazdık : &lt;strong&gt;&lt;em&gt;org.postgresql.Driver&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Daha sonra veritabanımıza ait url, username, password ve PostgreSQL’ e ait dialect sınıfını yazıyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;&amp;lt;property name=”hibernate.hbm2ddl.auto”&amp;gt;create&amp;lt;/property&amp;gt;&lt;/em&gt;&lt;/strong&gt; anlamı ise her uygulamamızı çalıştırdığımızda veritabanınından tablomuzu silip baştan oluşturmaktır.&lt;/p&gt;
-
-&lt;p&gt;update gibi diğer fonksiyonlarını diğer derslerimizde bahsedeceğim.&lt;/p&gt;
-
-&lt;p&gt;Diğer bir property’miz ise : &lt;strong&gt;&lt;em&gt;&amp;lt;property name=”hibernate.show_sql”&amp;gt;true&amp;lt;/property&amp;gt;&lt;/em&gt;&lt;/strong&gt;  uygulamamızı her çalıştırdığımızda consolda veri tabanımıza tabloyu oluşturma ve ekleme işlemleri için oluşan sql sorguları gösterip göstermeyeceğini ayarlıyoruz. True ve false olarak iki fonksiyondan oluşmaktadır.&lt;/p&gt;
-
-&lt;p&gt;Bir diğer özelliğimiz  &lt;strong&gt;&lt;em&gt;&amp;lt;mapping class=”Student”/&amp;gt;&lt;/em&gt;&lt;/strong&gt;   ise @Entity notasyonunu kullanarak oluşturduğumuz java classlarını burada bildiriyoruz. Her oluşturduğumuz Entity burada bildirmek zorundayız.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE hibernate-configuration PUBLIC &quot;-//Hibernate/Hibernate Configuration DTD 3.0//EN&quot; &quot;http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd&quot;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;hibernate-configuration&amp;gt;&lt;/span&gt;
-   		&lt;span class=&quot;nt&quot;&gt;&amp;lt;session-factory&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  		&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hibernate.connection.driver_class&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;org.postgresql.Driver&lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-  		&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hibernate.connection.url&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;jdbc:postgresql://127.0.0.1:5432/Hibernate&lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-  		&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hibernate.connection.username&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;postgres&lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-  		&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hibernate.connection.password&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;123456&lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-  		&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hibernate.dialect&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;org.hibernate.dialect.PostgreSQLDialect&lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-  		&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hibernate.hbm2ddl.auto&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;create&lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-  		&lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hibernate.show_sql&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;true&lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-  		&lt;span class=&quot;nt&quot;&gt;&amp;lt;mapping&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Student&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-   		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/session-factory&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/hibernate-configuration&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Daha sonra uygulamamızı test etmek için gerekli olan Main sınıfını oluşturuyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/hibernate/hibernateGiris19.png&quot;&gt;
-&lt;img src=&quot;/images/hibernate/hibernateGiris19.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;İlk önce &lt;strong&gt;&lt;em&gt;SessionFactory&lt;/em&gt;&lt;/strong&gt; arabirimini oluşturuyoruz. SessionFactory arabirimini oluştururken &lt;strong&gt;&lt;em&gt;Configuration&lt;/em&gt;&lt;/strong&gt; nesnesinden yararlanıyoruz ve &lt;strong&gt;&lt;em&gt;Hibenate&lt;/em&gt;&lt;/strong&gt; configuration(hibernate.cfg.xml) dosyasını burada SessionFactory nesnesine veriyoruz. SessionFactory nesnesi  &lt;strong&gt;&lt;em&gt;Session&lt;/em&gt;&lt;/strong&gt; oluşturmamızı sağlar. Session ile de veritabanımız dan ekleme silme güncelleme gibi işlemler yapmaktayız.&lt;/p&gt;
-
-&lt;p&gt;Session nesnesini SessionFactory arabirimindeki &lt;strong&gt;&lt;em&gt;openSession()&lt;/em&gt;&lt;/strong&gt; methodu ile Session nesnesini oluşturuyoruz.&lt;/p&gt;
-
-&lt;p&gt;Session ile veritabanımıza haritalanacak olan nesneleri &lt;strong&gt;&lt;em&gt;save&lt;/em&gt;&lt;/strong&gt; ediyoruz ve işlemlerimizin kalıcı olması içinde &lt;strong&gt;&lt;em&gt;commit&lt;/em&gt;&lt;/strong&gt; ediyoruz.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.hibernate.Session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.hibernate.SessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.hibernate.cfg.Configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Main&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		
-		&lt;span class=&quot;n&quot;&gt;Student&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;student1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Student&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Ferhat&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Aykan&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;Student&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;student2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Student&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Enes&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Çınar&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		
-		
-		&lt;span class=&quot;n&quot;&gt;SessionFactory&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sessionFactory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;configure&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hibernate.cfg.xml&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;buildSessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		
-		&lt;span class=&quot;n&quot;&gt;Session&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;session&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;openSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		
-		&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;student1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;student2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Student&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Ahmet&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Aykan&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Student&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Ugur&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Baş&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-		
-		&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;beginTransaction&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;commit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Uygulamamızı çalıştırdığımızda consolda Sql sorgularının oluştuğunu görmekteyiz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/hibernate/hibernateGiris20.png&quot;&gt;
-&lt;img src=&quot;/images/hibernate/hibernateGiris20.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;&amp;lt;property name=”hibernate.show_sql”&amp;gt;true&amp;lt;/property&amp;gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Eger property’mizi false yapsaydık console’da sql sorgularımızı göremeyecektik.&lt;/p&gt;
-
-&lt;p&gt;Ve daha sonra Data Source Explorer’i refresh ettiğimizde tablomuzun oluştuğunu görmekteyiz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/hibernate/hibernateGiris21.png&quot;&gt;
-&lt;img src=&quot;/images/hibernate/hibernateGiris21.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Aynı şekilde veritabanımıza baktığımızda kayıtlarımızın oraya da eklendiğini görmekteyiz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/hibernate/hibernateGiris22.png&quot;&gt;
-&lt;img src=&quot;/images/hibernate/hibernateGiris22.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Bu yazı ile kurulumları bitirmiş olup burada sonlandırıyorum.  Bir sonraki yazıda hızlı bir şekilde kod örnekleriyle ilerleyeceğiz, görüşmek üzere 🙂&lt;/p&gt;
-</description>
-        <pubDate>Thu, 13 Oct 2016 18:38:20 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2016/hibernate-1-giris/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/hibernate-1-giris/</guid>
-        
-        <category>hibernate dersleri</category>
-        
-        <category>hibernate giriş</category>
-        
-        <category>hibernate kurulum</category>
-        
-        <category>Hibernate maven</category>
-        
-        <category>hibernate nedir</category>
-        
-        <category>hibernate örnek</category>
-        
-        <category>hibernate örnek uygulama</category>
-        
-        <category>maven</category>
         
         
       </item>
