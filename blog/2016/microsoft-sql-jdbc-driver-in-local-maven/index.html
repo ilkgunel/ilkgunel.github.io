@@ -120,21 +120,25 @@ sürümünü indirin. Ben aşağıdaki resimdeki işaretli sürümü indiriyorum
 
 <p>Şimdi herhangi bir IDE’de bir Maven projesi açalım ve pom.xml’imizi şöyle düzenleyelim.</p>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemalocation="http://maven.apache.org/POM/4.0.0 
-	http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelversion>4.0.0</modelversion>
-	<groupid>com.ilkaygunel</groupid>
-	<artifactid>MsSsqlJdbcInLocalRepo</artifactid>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>MsSsqlJdbcInLocalRepo</name>
-	<dependencies>
-		<dependency>
-			<groupid>com.microsoft.sqlserver</groupid>
-			<artifactid>sqljdbc4</artifactid>
-			<version>4.0</version>
-		</dependency>
-	</dependencies>
-</project>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/POM/4.0.0"</span> 
+<span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+	<span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/POM/4.0.0</span> 
+	<span class="err">http://maven.apache.org/xsd/maven-4.0.0.xsd"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+	<span class="nt">&lt;groupId&gt;</span>com.ilkaygunel<span class="nt">&lt;/groupId&gt;</span>
+	<span class="nt">&lt;artifactId&gt;</span>MsSsqlJdbcInLocalRepo<span class="nt">&lt;/artifactId&gt;</span>
+	<span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+	<span class="nt">&lt;name&gt;</span>MsSsqlJdbcInLocalRepo<span class="nt">&lt;/name&gt;</span>
+	<span class="nt">&lt;dependencies&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>com.microsoft.sqlserver<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>sqljdbc4<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;version&gt;</span>4.0<span class="nt">&lt;/version&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+	<span class="nt">&lt;/dependencies&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+</code></pre>
+</div>
 
 <p>IDE bu düzenlemenin ardından hata verecektir çünkü ne local repoda ne uzak sunucuda böyle bir bağımlılık bulunmaktadır.</p>
 

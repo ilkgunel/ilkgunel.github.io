@@ -5,8 +5,8 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 22 Oct 2016 13:26:25 +0300</pubDate>
-    <lastBuildDate>Sat, 22 Oct 2016 13:26:25 +0300</lastBuildDate>
+    <pubDate>Sat, 22 Oct 2016 13:28:58 +0300</pubDate>
+    <lastBuildDate>Sat, 22 Oct 2016 13:28:58 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
     
       <item>
@@ -39,21 +39,25 @@ sürümünü indirin. Ben aşağıdaki resimdeki işaretli sürümü indiriyorum
 
 &lt;p&gt;Şimdi herhangi bir IDE’de bir Maven projesi açalım ve pom.xml’imizi şöyle düzenleyelim.&lt;/p&gt;
 
-&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemalocation=&quot;http://maven.apache.org/POM/4.0.0 
-	http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
-	&lt;modelversion&gt;4.0.0&lt;/modelversion&gt;
-	&lt;groupid&gt;com.ilkaygunel&lt;/groupid&gt;
-	&lt;artifactid&gt;MsSsqlJdbcInLocalRepo&lt;/artifactid&gt;
-	&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-	&lt;name&gt;MsSsqlJdbcInLocalRepo&lt;/name&gt;
-	&lt;dependencies&gt;
-		&lt;dependency&gt;
-			&lt;groupid&gt;com.microsoft.sqlserver&lt;/groupid&gt;
-			&lt;artifactid&gt;sqljdbc4&lt;/artifactid&gt;
-			&lt;version&gt;4.0&lt;/version&gt;
-		&lt;/dependency&gt;
-	&lt;/dependencies&gt;
-&lt;/project&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;project&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://maven.apache.org/POM/4.0.0&quot;&lt;/span&gt; 
+&lt;span class=&quot;na&quot;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt;
+	&lt;span class=&quot;na&quot;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://maven.apache.org/POM/4.0.0&lt;/span&gt; 
+	&lt;span class=&quot;err&quot;&gt;http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;modelVersion&amp;gt;&lt;/span&gt;4.0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/modelVersion&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.ilkaygunel&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;MsSsqlJdbcInLocalRepo&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;0.0.1-SNAPSHOT&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;MsSsqlJdbcInLocalRepo&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.microsoft.sqlserver&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;sqljdbc4&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;4.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;IDE bu düzenlemenin ardından hata verecektir çünkü ne local repoda ne uzak sunucuda böyle bir bağımlılık bulunmaktadır.&lt;/p&gt;
 
