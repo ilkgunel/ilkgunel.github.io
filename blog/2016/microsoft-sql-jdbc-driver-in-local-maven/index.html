@@ -120,25 +120,21 @@ sürümünü indirin. Ben aşağıdaki resimdeki işaretli sürümü indiriyorum
 
 <p>Şimdi herhangi bir IDE’de bir Maven projesi açalım ve pom.xml’imizi şöyle düzenleyelim.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;project xmlns="http://maven.apache.org/POM/4.0.0" 
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-	http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
-	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-	&lt;groupId&gt;com.ilkaygunel&lt;/groupId&gt;
-	&lt;artifactId&gt;MsSsqlJdbcInLocalRepo&lt;/artifactId&gt;
-	&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-	&lt;name&gt;MsSsqlJdbcInLocalRepo&lt;/name&gt;
-	&lt;dependencies&gt;
-		&lt;dependency&gt;
-			&lt;groupId&gt;com.microsoft.sqlserver&lt;/groupId&gt;
-			&lt;artifactId&gt;sqljdbc4&lt;/artifactId&gt;
-			&lt;version&gt;4.0&lt;/version&gt;
-		&lt;/dependency&gt;
-	&lt;/dependencies&gt;
-&lt;/project&gt;
-</code></pre>
-</div>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemalocation="http://maven.apache.org/POM/4.0.0 
+	http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelversion>4.0.0</modelversion>
+	<groupid>com.ilkaygunel</groupid>
+	<artifactid>MsSsqlJdbcInLocalRepo</artifactid>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>MsSsqlJdbcInLocalRepo</name>
+	<dependencies>
+		<dependency>
+			<groupid>com.microsoft.sqlserver</groupid>
+			<artifactid>sqljdbc4</artifactid>
+			<version>4.0</version>
+		</dependency>
+	</dependencies>
+</project>
 
 <p>IDE bu düzenlemenin ardından hata verecektir çünkü ne local repoda ne uzak sunucuda böyle bir bağımlılık bulunmaktadır.</p>
 
@@ -149,7 +145,8 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 <p>Şimdi terminali açalım, az önce indridğimiz tar.gz uzantılı dosyayı açtığımız yere gidelim. Bu klasörün içinde <strong><em>enu</em></strong> isminde bir klasör var. cd komutu ile içine girelim 
 ve şu komutu işletelim:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">mvn</span> <span class="nl">install:</span><span class="n">install</span><span class="o">-</span><span class="n">file</span> <span class="o">-</span><span class="n">Dfile</span><span class="o">=</span><span class="n">sqljdbc42</span><span class="o">.</span><span class="na">jar</span> <span class="o">-</span><span class="n">DgroupId</span><span class="o">=</span><span class="n">com</span><span class="o">.</span><span class="na">microsoft</span><span class="o">.</span><span class="na">sqlserver</span> <span class="o">-</span><span class="n">DartifactId</span><span class="o">=</span><span class="n">sqljdbc4</span> <span class="o">-</span><span class="n">Dversion</span><span class="o">=</span><span class="mf">4.0</span> <span class="o">-</span><span class="n">Dpackaging</span><span class="o">=</span><span class="n">jar</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">mvn</span> <span class="nl">install:</span><span class="n">install</span><span class="o">-</span><span class="n">file</span> <span class="o">-</span><span class="n">Dfile</span><span class="o">=</span><span class="n">sqljdbc42</span><span class="o">.</span><span class="na">jar</span> <span class="o">-</span><span class="n">DgroupId</span><span class="o">=</span><span class="n">com</span><span class="o">.</span><span class="na">microsoft</span><span class="o">.</span><span class="na">sqlserver</span>
+<span class="o">-</span><span class="n">DartifactId</span><span class="o">=</span><span class="n">sqljdbc4</span> <span class="o">-</span><span class="n">Dversion</span><span class="o">=</span><span class="mf">4.0</span> <span class="o">-</span><span class="n">Dpackaging</span><span class="o">=</span><span class="n">jar</span>
 </code></pre>
 </div>
 
