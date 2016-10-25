@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>JPA-01-Entity Sınıfı Tanımlama</title>
+    <meta name="description" content="Merhaba arkadaşlar. Bu yazı ile birlikte artık JPA/Eclipselink derslerine başlıyoruz ve JPA’ya giriş yapıyoruz.">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/eclipselink-giris/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>JPA-01-Entity Sınıfı Tanımlama - İlkay Günel - Blog</title>
+<meta property="og:title" content="JPA-01-Entity Sınıfı Tanımlama" />
+<meta name="description" content="JPA-01-Entity Sınıfı Tanımlama" />
+<meta property="og:description" content="JPA-01-Entity Sınıfı Tanımlama" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/eclipselink-giris/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/eclipselink-giris/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-10-24T20:41:21+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "JPA-01-Entity Sınıfı Tanımlama",
+    "datePublished": "2016-10-24T20:41:21+03:00",
+    "description": "JPA-01-Entity Sınıfı Tanımlama",
+    "url": "http://ilkaygunel.com/blog/2016/eclipselink-giris/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/blog/2016/jsf-tutorials-list" title="JSF">JSF</a></li>
+        
+          <li><a href="/blog/2016/eclipselink" title="Eclipselink">Eclipselink</a></li>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog/2016/eclipse-notes" title="Eclipse">Eclipse</a></li>
+        
+          <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">JPA-01-Entity Sınıfı Tanımlama</h1>
+      <p class="post-meta">Oct 24, 2016</p>
+    </header>
+
+    <div class="post-content">
+      <p>Merhaba arkadaşlar. Bu yazı ile birlikte artık JPA/Eclipselink derslerine başlıyoruz ve JPA’ya giriş yapıyoruz.</p>
+
+<p>İlk olarak ORM ve JPA konularının ne olduğu ile başlayalım.</p>
+
+<p><strong>ORM Ve JPA Nedir?</strong></p>
+
+<p>Açılımı Object Relational Mapping-İlişkisel Nesne Eşleştirme olan ORM bizim ilişkisel veri tabanımız ile projemiz arasında 
+köprü görevi gören  araçtır. Bu araç ile biz veri tabanımızdaki tabloları sınıflar ile sütunları da nesneler ile 
+ilişkilendirerek ve nesneler üstünde çalışarak işlemlerimizi yaparız. Programcıya tamamen nesne modeli üzerinde çalışma
+imkanı sağlar. Ayrıca ORM projenizi veri tabanı türünden bağımsız kılan bir teknolojidir. Yani siz isterseniz MySql 
+isterseniz MS SQL Server kullanın bu ORM için bir önem arz etmez. Diğer yandan ORM ile veri tabanı ve uygulamada kullanılan
+dil arasındaki tür uyuşmazlığı sorunu da ortadan kaldırılır. Diğer bir özellik de şudur. Normal projelerde bizler standart
+SQL ifadeleri ile veri tabanına kayıt yollar,çeker,siler,değiştiririz. ORM teknolojisi ile bu SQL ifadeleri kullanmak yerine
+daha basitleştirilmiş,daha hızlı ve daha güvenli işlemler yaparız. Bu olay JPA standartı çıkmadan  önce çıkmış olan ORM 
+çatılarında da vardı. JPA bunları örnek alarak geliştirildi.</p>
+
+<p>JPA ise yukarıdaki özelliklerin tümünü taşıyan standartlaştırılmış ORM apisidir. Açılımı Java Persistence API‘dir. JPA ile 
+bizler veritabanındaki tablolarımızı programımızdaki Java sınıfları ile, tablolardaki sütunlar da bu sınıflar içindeki 
+değişkenler ile eşleştireceğiz.  Daha sonra da tüm işlemlerimizi bu sınıf vasıtası ile yapacağız. Yani bizler JPA ile 
+nesneler üzerinde çalışacağız.</p>
+
+<p>JPA hem Java SE hem de Java EE için kullanılabilir bir teknolojidir. Ben JPA’yı buradaki yazılarda herkes tarafından 
+anlaşılabilmesi için Java SE üzerinden anlatacağım.</p>
+
+<p><strong>Entity Konusu</strong></p>
+
+<p>Yazımızın bu kısmından sonra JPA’nın en temel konusu olan Entity Tanımlaması‘nı ve hangi şartların gerekli olduğunu öğreneceğiz.</p>
+
+<p>En temel hali ile veri tabanımızdaki tablolarımıza karşılık gelen Java sınıflarımız bizim Entity sınıflarımız oluyor. Tablolarımızdaki 
+sütunlar da bu Entity sınıfları içindeki değişkenler ile ifade ediliyor. Bir sınıfın Entity sınıfı olması için olmazsa olmaz 
+3 kural vardır arkadaşlar. Bunlar:</p>
+
+<ul>
+  <li>@Entity notasyonunun kullanılmış olması</li>
+  <li>Argüman almayan bir public yapılandırıcı(constructor) metodun var olması</li>
+  <li>@Id notasyonu kullanarak belirlenmiş bir ayırt edici alanın olmadır.</li>
+</ul>
+
+<p>Ne demek istediğime şimdi bir de örnek kod ile bakalım arkadaşlar.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">jpa</span><span class="o">.</span><span class="na">pkg01</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.Serializable</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Entity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.GeneratedValue</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.GenerationType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Id</span><span class="o">;</span>
+
+<span class="nd">@Entity</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">EntitySinifi</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
+    <span class="nd">@Id</span>
+    <span class="nd">@GeneratedValue</span><span class="o">(</span><span class="n">strategy</span> <span class="o">=</span> <span class="n">GenerationType</span><span class="o">.</span><span class="na">AUTO</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="n">Long</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">isim</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="n">EntitySinifi</span><span class="o">()</span>
+    <span class="o">{</span>
+        
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="n">EntitySinifi</span><span class="o">(</span><span class="n">Long</span> <span class="n">id</span><span class="o">)</span>
+    <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">id</span><span class="o">=</span><span class="n">id</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getIsim</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">isim</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setIsim</span><span class="o">(</span><span class="n">String</span> <span class="n">isim</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">isim</span> <span class="o">=</span> <span class="n">isim</span><span class="o">;</span>
+    <span class="o">}</span>  
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Kodda gördüğünüz gibi Entity sınıfımız @Entity notasyonuna sahip,argümansız bir yapılandırıcısı var ve ayırt edici alan olarak @Id notasyonuna sahip. id değişkenimiz bu sınıf içinde Long olarak yazılı fakat istersek onu int ya da String olarak da tanımlayabiliriz. Ayrıca dikkat ederseniz id değişkeni için get/set metotları da yer almamakta sınıf içinde. @Id ile tanımlanmış alanın değiştirilmez olduğu düşünüldüğü için değişkene ait get/set metotları sınıfımızda yer almıyor.</p>
+
+<p>Şimdi Entity sınıfımıza ekleyebileceğimiz bazı diğer özelliklerden olan @Table ve @Column notasyonlarına bakalım.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">jpa</span><span class="o">.</span><span class="na">pkg01</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.Serializable</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Entity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.GeneratedValue</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.GenerationType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Id</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Table</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Column</span><span class="o">;</span>
+
+<span class="nd">@Entity</span>
+<span class="nd">@Table</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="s">"BASVURULAR"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">EntitySinifi</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
+    <span class="nd">@Id</span>
+    <span class="nd">@GeneratedValue</span><span class="o">(</span><span class="n">strategy</span> <span class="o">=</span> <span class="n">GenerationType</span><span class="o">.</span><span class="na">AUTO</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="n">Long</span> <span class="n">id</span><span class="o">;</span>
+    <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="s">"AdSoyad"</span><span class="o">,</span><span class="n">length</span><span class="o">=</span><span class="mi">50</span><span class="o">,</span><span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">isim</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="n">EntitySinifi</span><span class="o">()</span>
+    <span class="o">{</span>
+        
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="n">EntitySinifi</span><span class="o">(</span><span class="n">Long</span> <span class="n">id</span><span class="o">)</span>
+    <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">id</span><span class="o">=</span><span class="n">id</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getIsim</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">isim</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setIsim</span><span class="o">(</span><span class="n">String</span> <span class="n">isim</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">isim</span> <span class="o">=</span> <span class="n">isim</span><span class="o">;</span>
+    <span class="o">}</span>  
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Kod içerisinde bir önceki koddan farklı olarak @Table ve @Column notasyonlarını kullandık. @Table notasyonu ile sınıfımız ve 
+veri tabanımızdaki tablomuzun adının aynı olması durumunu ortadan kaldırabiliriz. 
+<strong><em>@Table(name=”BASVURULAR”)</em></strong> ifadesi ile <strong><em>EntitySinifi</em></strong> sınıfının veri tabanında BASVURULAR tablosu ile ilişkilendirildiğini 
+söylüyoruz. @Column notasyonu ile de sütunun ve değişkenin aynı isimde olması durumunu ortadan kaldırıyoruz 
+ve sütuna boş değer gidip gidemeyeceği ile en fazla kaç karakter girilebileceğini belirleyebiliyoruz.</p>
+
+<p>Son olarak <strong><em>Fiziksel Notasyon</em></strong> ve <strong><em>Mantıksal Notasyon</em></strong> kavramlarını ve farkını öğrenelim. Yukarıdaki kodda göreceğiniz üzere 
+@Entity,@Table,@Id ve @Column notasyonlarını kullandık. @GeneratedValue notasyonu @Id notasyonu ile ilişkili olduğu için onu 
+saymadık.</p>
+
+<p>Fiziksel notasyonlar veri tabanı yapılandırmasını sınıfa haritalayan notasyonlardır. Yani Fiziksel notasyonlar ile tablo adı,
+sütun adı tanımalama ve daha başka ayarlar yapmak mümkündür. Mantıksal notasyonlar ise veri tabanı ve sınıf arasındaki 
+modellemeyi sağlayan notasyonlardır. Yani sınıfın bir Entity sınıfı olarak davranmasını sağlayan notasyonlardır. Buradan 
+hareketle @Entity ve @Id notasyonlarının Mantıksal Notasyon, @Table ve @Column notasyonlarının da Fizikesel Notasyon olduğunu 
+söyleyebiliriz.</p>
+
+<p>Gelecek yazıda görüşene kadar sağlıcakla kalın arkadaşlar.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="http://github.com/ilkgunel" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="http://twitter.com/ilkgunel" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+  <li><a href="https://www.instagram.com/ilkgunel/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2016 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>
