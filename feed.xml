@@ -5,9 +5,209 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 05 Nov 2016 13:50:51 +0300</pubDate>
-    <lastBuildDate>Sat, 05 Nov 2016 13:50:51 +0300</lastBuildDate>
+    <pubDate>Sun, 06 Nov 2016 00:24:53 +0300</pubDate>
+    <lastBuildDate>Sun, 06 Nov 2016 00:24:53 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Spring Framework Dersleri 2 - Inversion Of Control&amp;Dependency Injection</title>
+        <description>&lt;p&gt;Merhabalar. (Spring’e Giriş)[http://ilkaygunel.com/blog/2016/spring-giris/] yazımızın ardından bu yazımızda 
+&lt;strong&gt;&lt;em&gt;Inversion Of Control&lt;/em&gt;&lt;/strong&gt; ve &lt;strong&gt;&lt;em&gt;Dependency Injection&lt;/em&gt;&lt;/strong&gt; konularını işleyeceğiz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Inversion of Control Nedir?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Türkçe’ye kontol çevrimi olarak çevirilebilecek olan Inversion Of Control kontrol mekanizmasını developer’dan alarak kullanılan
+frameworkün mekanizmasına veren yapıdır.&lt;/p&gt;
+
+&lt;p&gt;Bizler kod yazarken nesneleri new’leyerek oluştururuz ve IoC mantığı da bunun developer’dan alınıp framework’e verilmesi yönündedir.&lt;/p&gt;
+
+&lt;p&gt;IoC konusu 2 alt alana ayrılır. Bunlar &lt;strong&gt;&lt;em&gt;Dependency Lookup&lt;/em&gt;&lt;/strong&gt; ve &lt;strong&gt;&lt;em&gt;Dependency Injection&lt;/em&gt;&lt;/strong&gt;‘dır.&lt;/p&gt;
+
+&lt;p&gt;Dependency Lookup da kendi içinde iki türe sahiptir.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Dependency Pull: İlgili bağımlılığın gerekli olduğu zamanda çekilmesi işlemidir. Önceki yazıdaki örneğimizi hatırlayacak olursak
+XML’den ilgili bean’i çekme işlemi kod tetiklendiği anda yani ihtiyaç olduğunda gerçekleştirilecektir. Ayrıca Dependency Pull işleminde
+ilgili bean’ler, bağımlılıklar JNDI Registry’den okunurlar.&lt;/li&gt;
+  &lt;li&gt;Contextualized Dependency Pull: Çalışma mantığı olarak Dependency Pull’a benzerdir fakat bağımlılıklar Dependency Pull gibi
+bir registiry’den değil de container’den alınır.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Dependency Injection dediğimiz zaman da aklımıza iki yöntem geliyor:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Constructor Based Dependency Injection: Bir sınıfın yapılandırıcısı vasıtası ile ilgili bağımlılığın karşılanması işlemidir.
+Aşağıdaki sınıfta da bağımlılık ihtiyacını yapılandırıcı vasıtası ile karşılayan sınıfı görmekteyiz.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;springtutorials&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ConstructorInjection&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+ &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dependency&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dependency&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+ &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ConstructorInjection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dependency&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dependency&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dependency&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dependency&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Setter Based Dependency Injection: İlgili bağımlılığın bir set metodu vasıtası ile karşılanması işlemidir.
+Şu kod örneğimizdir:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;apress&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;prospring4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ch3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SetterInjection&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+ &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dependency&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dependency&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+ &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setDependency&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dependency&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dependency&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dependency&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dependency&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Injection vs. Lookup&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Eğer kodlamakta olduğunuz proje EJB’nin 2.1 ve öncesi sürümü içeriyorsa (ki bu saatten sonra hiç zannetmiyorum) IoC mekanizması
+Dependency Lookup olmaktadır. Spring Framework’te IoC mekanizması Dependency Injection ile çalışmaktadır.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Inversion of Control in Spring&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;IoC mekanizması Spring’in büyük parçalarından biridir. Spring’in çekirdeği Dependency Lookup’ı desteklemekle birlikte aslolan
+Dependency Injection üzerine inşa edilmiştir.&lt;/p&gt;
+
+&lt;p&gt;Spring Framework bağımlılık enjeksiyonunu otomatik, kendi başına yapacak şekilde konfigüre edilmemeiştir. Bir şekilde programcı
+tarafından bu bağımlılık enjeksiyonunun tetiklenmesi gerekmektedir. Önceki yazımızı tekrar göz önüne getirdiğimizde 
+ClassPathXmlApplicationContext sınıfı vasıtası ile bağımlılık enjeksiyonunu sağlamıştık.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Dependency Injection in Spring&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Spring framework içinde DI (bağımlılık enjeksiyonu) için iki mekanizma mevcut. Bunlar BeanFactory ve ApplicationContext’tir.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Beans &amp;amp; BeanFactories&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Spring içerisinde container tarafından yönetilen tüm elemanlara &lt;strong&gt;&lt;em&gt;bean&lt;/em&gt;&lt;/strong&gt; ismi verilir. Örneğin bir sınıf içinde Spring vasıtası
+ile sağladığımız bir bağımlılık bizim için bean olmuş olur.&lt;/p&gt;
+
+&lt;p&gt;BeanFactory Interface ise Spring’in DI container’ının çekirdeğidir. BeanFactory componenet’lerin yönetiminden ve içerdiği 
+bağımlılıklarla birlikte yaşam döngüsünden sorumludur.&lt;/p&gt;
+
+&lt;p&gt;Önceki yazıdaki HelloWorldDI sınıfımızı şu şekilde güncellersek BeanFactory kullanmış oluruz:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;springtutorials&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;helloworld&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.beans.factory.support.DefaultListableBeanFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.beans.factory.xml.XmlBeanDefinitionReader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.core.io.ClassPathResource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloWorldBeanFactory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;DefaultListableBeanFactory&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;factory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DefaultListableBeanFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;XmlBeanDefinitionReader&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rdr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;XmlBeanDefinitionReader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;factory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;rdr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;loadBeanDefinitions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ClassPathResource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;beans.xml&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;MessageRendererImplementation&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;renderer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MessageRendererImplementation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;factory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getBean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;renderer&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;renderer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;ApplicationConetxt&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;ApplicationContext arabirimi BeanFactory arabiriminin genişletilmiş halidir. ApplicationContext arabirimi sadece DI işlemleri için
+değil, transaction, AOP, internalization, event handling gibi mekanizmalar da sunar.&lt;/p&gt;
+
+&lt;p&gt;Spring’in kendisi de uygulama geliştirirken ApplicationConetxt’den faydalanılmasını tavsiye ediyor.&lt;/p&gt;
+
+&lt;p&gt;BeanFactory ile çalıştığımızda getBean metodu çağırılmadan  önce bean objesi oluşturulmaz yani metodun çağırılmasını bekler.
+Fakat ApplicationContext bu beklemeyi yapmaz ve DI Container çalıştığı andan itibaren obje oluşturulur.&lt;/p&gt;
+
+&lt;p&gt;Önceki yazıda kullandığımız ClassPathXmlApplicationContext sınıfı da ApplicationContext’dan türetilmiş bir sınıftır.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Configuring ApplicationContext&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Spring içerisinde bean tanımlamaları benim gördüğüm kadarı ile ya XML ya annotation ya da ikisi beraber kullanılarak yapılabiliyor.
+Burada neyi ne zaman kullanacağınız uygulamanızın mimarisine, proje geliştirme kurallarınıza göre vs. değişebilir.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Basic Configuration Overview&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;En temel konfigürasyonda XML dosyası içinde namespace alanı dediğimiz 2. satırdan itibaren başlayıp bir takım tanımlamaların
+yapıldığı kısımda uygulamamız için gerekli namespace’lerin eklenmesini Spring şart koşar. En temel hali ile içi boş bir konfigürasyon
+şu şekilde olur:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;beans&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans&quot;&lt;/span&gt;
+	&lt;span class=&quot;na&quot;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt;
+	&lt;span class=&quot;na&quot;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans&lt;/span&gt;
+ &lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/beans&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;İleriki derslerimizde notasyonlar da kullanacağız ve konfigürasyona bu anotasyon desteğini eklememiz gerekir. Onu da 
+&lt;strong&gt;&lt;em&gt;&lt;context:component-scan base-package=&quot;com.apress.prospring4.ch3.annotation&quot;&gt;&lt;/context:component-scan&gt;&lt;/em&gt;&lt;/strong&gt; ifadesini XML’imize ekleyerek sağlayabiliriz.
+Şu şekilde:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;beans&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans&quot;&lt;/span&gt;
+	&lt;span class=&quot;na&quot;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:context=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/context&quot;&lt;/span&gt;
+	&lt;span class=&quot;na&quot;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans&lt;/span&gt;
+ &lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/beans/spring-beans.xsd&lt;/span&gt;
+ &lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/context&lt;/span&gt;
+ &lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/context/spring-context.xsd&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;context:component-scan&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;base-package=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;package-name&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/beans&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Bu yazımızda bu kadar arkadaşlar. IoC, DI, BeanFactory ve ApplicationContext konularını işlemiş olduk. Gelecek yazıda görüşene
+kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+
+&lt;p&gt;NOT: Yazıda Spring Pro 4 ve http://www.injavawetrust.com/spring-03-inversion-of-control-ioc-dependency-injection/ kaynakları
+kullanılmıştır.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 04 Nov 2016 20:30:21 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/spring-ioc-and-di/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/spring-ioc-and-di/</guid>
+        
+        <category>spring framework</category>
+        
+        <category>spring framework dersleri</category>
+        
+        <category>spring framework giriş</category>
+        
+        <category>spring framework tutorial</category>
+        
+        <category>spring framework türkçe kaynak</category>
+        
+        <category>spring framework hello world örneği</category>
+        
+        <category>spring framework hello world example</category>
+        
+        <category>spring framework hello world tutorial</category>
+        
+        <category>spring framework öğren</category>
+        
+        <category>spring framework türkçe</category>
+        
+        <category>spring framework nedir</category>
+        
+        <category>spring framework nasıl kullanılır</category>
+        
+        <category>spring inversion of control nedir?</category>
+        
+        <category>spring dependency injection nedir?</category>
+        
+        <category>spring ioc</category>
+        
+        <category>spring di</category>
+        
+        
+      </item>
     
       <item>
         <title>Spring Framework Dersleri 1 - Spring&#39;e Giriş ve Hello World</title>
@@ -15,6 +215,21 @@
 
 &lt;p&gt;Bu yazı ile ne zamandır niyetli olduğum, hem unuttuklarımı öğrenmek hem de paylaşım yapma amaçlı olduğum &lt;strong&gt;Spring Framework&lt;/strong&gt; yazılarına
 bu yazı ile başlıyorum. Allah bana en azından yazı dizisini bitiremesem bile bolca içerik üretebilmeyi nasip etsin.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Yazı Dizisi Boyunca Hangi Kaynakları Kullanacağız?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Spring Framework yazı dizisi boyunca&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Özcan Acar hocamızın Spring kitabı&lt;/li&gt;
+  &lt;li&gt;apress.com’dan satın alabileceğiniz Pro Spring 4 kitabı&lt;/li&gt;
+  &lt;li&gt;internetteki çeşitli kaynaklar&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;bizim referans kaynaklarımız olacak.&lt;/p&gt;
+
+&lt;p&gt;Daha önceki yazı dizilerimde yakışıksız bir şekilde hırsızlık vb. ithamlarla karşılaştığım için söylemem gerekir ki anlatımlarım
+kitaplardan kopyala yapıştır şeklinde olmamaktadır. Kendi anladığım ne ise onu anlatmaktayım.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Spring Framework Nedir?&lt;/strong&gt;&lt;/p&gt;
 
@@ -1803,202 +2018,6 @@ messages.TwoAuthorParam = &quot;Yazar İsimleri:&quot; {0},{1}
         <category>jsf türkçe kaynak</category>
         
         <category>application base bundle config demetleri eklenir faces jsf kaynak kullanılır mesaj message name nasıl nereye özellikler param properties resource xml</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>JSF Dersleri-JSF’De Metot İle Sayfa Yönlendirme</title>
-        <description>&lt;p&gt;Merhaba. Bu makalemizde “JSF’de Yönlendirme Kuralları” konusunu irdeleyeceğiz.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Ne için kullanılır?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Normalde bir butona action verdiğimizde bizi istediğimiz sayfaya götürüyordu. Ancak dikkat ettiyseniz tarayıcı kısmında yönlendirdiğiniz sayfa değil eski sayfa sayfa adresi kalıyordu. 
-Bu sorunu çözmek için biz basit bir ifadeyi kullanabiliriz. Bunun yanında sayfa yönlendirmeleri koşula bağlı olabilir. Bir alışveriş sitesi yaptınız diyelim ki. Kullanıcıya puan imkanı 
-sundunuz. Kullanıcı alışveriş yaptı ve “Puanlarımı Kullanmak İstiyorum” ismindeki butona tıkladı. Sizin burada kullanıcının yeterli puanı olup olmadığını kontrol ettirmeniz ve sonrasında 
-gerekli işlemleri yapmanız gerekir. Yeterli puanı varsa kullanabileceği sayfaya yoksa kullanamayacağına dair uygun sayfaya yönlendirirsiniz. İşte bu durumlarda imdadımıza  metot ile sayfa 
-yönlendirme yetişiyor.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Tarayıcıda eski sayfanın adresinin kalması sorunun çözümü:&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Şimdi tarayıcıda eski sayfanın adresinin kalması sorununu çözelim. Çözümü çok basittir. Butona action veriyorsunuz ve yenisayfa.xhtml adında bir sayfaya göndermek istiyorsunuz. Bunu yaparken action=”yenisayfa.xhtml?faces-redirect=true” derseniz sorununuz çözülmüş olur.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Örnek uygulama&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Şimdi bir örnek uygulama yapalım konuyu anlayabilmemiz için ve kodları açıklayalım. Kullanıcıdan bir sayı alacağız ve girdiği sayıya göre onu yeni bir sayfaya yönlendireceğiz. Eğer girdiği sayı 50’den büyük olursa 50’den büyük sayı girdiniz, küçük olursa 50’den küçük sayı girdiniz şeklinde yazılar olan sayfalara göndereceğiz.&lt;/p&gt;
-
-&lt;p&gt;Projemize sağ tıklıyoruz. New üstüne geliyoruz. En alttan Other bölümüne tıklıyoruz. Yeni gelen pencerede sağdan “Java Server Faces” soldan “JSF Page” seçiyoruz. Next diyoruz. Şimdi sayfanın adını soran ekran geliyor. kucuk adında  sayfa ekleyeceğiz. Daha sonra aynı yolla bir de buyuk adında bir sayfa ekliyoruz.&lt;/p&gt;
-
-&lt;p&gt;Projemize bir de &lt;strong&gt;&lt;em&gt;managedbean&lt;/em&gt;&lt;/strong&gt; adında bir &lt;strong&gt;&lt;em&gt;Managed Bean&lt;/em&gt;&lt;/strong&gt; ekliyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;index.xhtml Kodu&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&#39;1.0&#39; encoding=&#39;UTF-8&#39; ?&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/1999/xhtml&quot;&lt;/span&gt;
- 	 &lt;span class=&quot;na&quot;&gt;xmlns:h=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://xmlns.jcp.org/jsf/html&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:head&amp;gt;&lt;/span&gt;
-    	&lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Metot İle Sayfa Yönlendirme&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:head&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:body&amp;gt;&lt;/span&gt;
-    	&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:form&amp;gt;&lt;/span&gt;
-        	&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:outputText&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Bir sayı giriniz:&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        	&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:inputText&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#{managedbean.sayi}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        	&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:commandButton&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;GÖNDER&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#{managedbean.karsilastir()}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:form&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Kodun açıklaması:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Kodumuzda önceki makalelerde anlatılmayan bir nokta var o da action. Butonların action kısmına managed bean içinde tanımlanmış metodlar da verilebilir. Hatta ileri düzey kod yazarken daha çok bunu kullanabiliriz yaptığımız projeye göre. Action kısmına verdiğimiz metod bir string döndürüyor ve bu stringe göre action hangi sayfaya gideceğine karar veriyor.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;kucuk.xhtml Kodu:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&#39;1.0&#39; encoding=&#39;UTF-8&#39; ?&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/1999/xhtml&quot;&lt;/span&gt;
-  	&lt;span class=&quot;na&quot;&gt;xmlns:h=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://xmlns.jcp.org/jsf/html&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:head&amp;gt;&lt;/span&gt;
-    	&lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;50&#39;den Küçük&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:head&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:body&amp;gt;&lt;/span&gt;
-    	Girilen sayı 50&#39;den küçük
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;buyuk.xhtml Kodu:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&#39;1.0&#39; encoding=&#39;UTF-8&#39; ?&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/1999/xhtml&quot;&lt;/span&gt;
-  	&lt;span class=&quot;na&quot;&gt;xmlns:h=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://xmlns.jcp.org/jsf/html&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:head&amp;gt;&lt;/span&gt;
-    	&lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Facelet Title&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:head&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:body&amp;gt;&lt;/span&gt;
-    	Girilen sayı 50&#39;den büyük
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Kodların Açıklaması:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Bu kodlar önceki makalelerde anlatılan kısımları içeriyor.Ekstra anlatıcak bir şey barındırmıyor.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;ManagedBean.java kodu:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.faces.bean.ManagedBean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.faces.bean.RequestScoped&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@ManagedBean&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@RequestScoped&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;managedbean&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sayi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getSayi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sayi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setSayi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sayi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sayi&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sayi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;karsilastir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sayi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;buyuk?faces-redirect=true&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;&quot;kucuk?faces-redirect=true&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Kodun açıklaması:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;span style=&quot;font-size: 14.0pt;color: black&quot;&gt;Burada &lt;em&gt;&lt;strong&gt;index.xhtml&lt;/strong&gt; &lt;/em&gt;sayfasından alınan sayı &lt;strong&gt;&lt;i&gt;int sayi&lt;/i&gt;&lt;/strong&gt; değişkenine atanıyor. Bu kodda çalışan kısım &lt;em&gt;&lt;strong&gt;set (değişkene yaz)&lt;/strong&gt;&lt;/em&gt; metodudur. &lt;em&gt;&lt;strong&gt;Get (değişkeni al)&lt;/strong&gt;&lt;/em&gt; metodu sayının değerini almak isteseydik işimize yarayacaktı. Burada kullanmasak da olurdu. &lt;em&gt;&lt;strong&gt;Karsilastir&lt;/strong&gt;&lt;/em&gt; metodu da girilen sayının 50 ‘den büyük mü küçük mü olduğuna karar veriyor ve ona göre uygun bir string döndürüyor.&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfDersleri4-1.png&quot;&gt;
-&lt;img src=&quot;/images/jsf/jsfDersleri4-1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfDersleri4-2.png&quot;&gt;
-&lt;img src=&quot;/images/jsf/jsfDersleri4-2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfDersleri4-3.png&quot;&gt;
-&lt;img src=&quot;/images/jsf/jsfDersleri4-3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfDersleri4-4.png&quot;&gt;
-&lt;img src=&quot;/images/jsf/jsfDersleri4-4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Bu yazıda da bu kadar arkadaşlar. Basitçe metotla sayfa yönlendirmenin nasıl yapıldığını görmüş olduk. Bu dersin video halini de aşağıya ekledim. Gelecek yazıda görüşmek üzere sağlıcakla kalın.&lt;/p&gt;
-
-&lt;p&gt;https://www.youtube.com/watch?v=ugtc8aXNXmw&lt;/p&gt;
-</description>
-        <pubDate>Mon, 17 Oct 2016 20:39:20 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2016/jsfde-yonlendirme-kurali-navigation-rule-in-jsf/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/jsfde-yonlendirme-kurali-navigation-rule-in-jsf/</guid>
-        
-        <category>jsf manahed beans</category>
-        
-        <category>managed beans</category>
-        
-        <category>java server faces dersleri</category>
-        
-        <category>jsf yönetimli çekirdekler</category>
-        
-        <category>jdk</category>
-        
-        <category>jdk nasıl kurulur</category>
-        
-        <category>jsf çalıştırma</category>
-        
-        <category>jsf dersleri</category>
-        
-        <category>jsf giriş</category>
-        
-        <category>jsf hello world</category>
-        
-        <category>jsf introduction</category>
-        
-        <category>jsf makaleleri</category>
-        
-        <category>jsf nedir?</category>
-        
-        <category>jsf öğren</category>
-        
-        <category>jsf projesi açmak</category>
-        
-        <category>jsf türkçe</category>
-        
-        <category>jsf türkçe kaynak</category>
-        
-        <category>jsf tutorial netbeans netbeans</category>
-        
-        <category>jsf netbeans</category>
-        
-        <category>jsf uygulaması</category>
-        
-        <category>jsf dersleri</category>
-        
-        <category>jsf motet ila sayfa yönlendirme</category>
-        
-        <category>jsf öğren</category>
-        
-        <category>jsf sayfa adı değişmiyor</category>
-        
-        <category>jsf sayfa adı değişmiyor sorununun çözümü</category>
         
         
       </item>
