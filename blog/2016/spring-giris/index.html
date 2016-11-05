@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Spring Framework Dersleri 1 - Spring'e Giriş ve Hello World</title>
+    <meta name="description" content="Merhabalar.">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/spring-giris/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>Spring Framework Dersleri 1 - Spring’e Giriş ve Hello World - İlkay Günel - Blog</title>
+<meta property="og:title" content="Spring Framework Dersleri 1 - Spring’e Giriş ve Hello World" />
+<meta name="description" content="Spring Framework Dersleri 1 - Spring’e Giriş ve Hello World" />
+<meta property="og:description" content="Spring Framework Dersleri 1 - Spring’e Giriş ve Hello World" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/spring-giris/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/spring-giris/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-11-04T20:30:21+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Spring Framework Dersleri 1 - Spring’e Giriş ve Hello World",
+    "datePublished": "2016-11-04T20:30:21+03:00",
+    "description": "Spring Framework Dersleri 1 - Spring’e Giriş ve Hello World",
+    "url": "http://ilkaygunel.com/blog/2016/spring-giris/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/blog/2016/jsf-tutorials-list" title="JSF">JSF</a></li>
+        
+          <li><a href="/blog/2016/eclipselink" title="Eclipselink">Eclipselink</a></li>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog/2016/eclipse-notes" title="Eclipse">Eclipse</a></li>
+        
+          <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Spring Framework Dersleri 1 - Spring'e Giriş ve Hello World</h1>
+      <p class="post-meta">Nov 4, 2016</p>
+    </header>
+
+    <div class="post-content">
+      <p>Merhabalar.</p>
+
+<p>Bu yazı ile ne zamandır niyetli olduğum, hem unuttuklarımı öğrenmek hem de paylaşım yapma amaçlı olduğum <strong>Spring Framework</strong> yazılarına
+bu yazı ile başlıyorum. Allah bana en azından yazı dizisini bitiremesem bile bolca içerik üretebilmeyi nasip etsin.</p>
+
+<p><strong>Spring Framework Nedir?</strong></p>
+
+<p>En basit tabiri ile Spring Framework Java uygulamalarını daha hızlı ve pratik şekilde geliştirilmesi, geliştiricilerin işlerini
+kolaylaştırılması amacı ile ortaya çıkarılmış bir framework’tür.</p>
+
+<p>Çokça meşhur olan, ülkemiz yazılım piyasasında da oldukça popüler olan Spring Framework’ün geçmişi ve ortaya çıkışı Java EE’nin
+ilk zamanlarındaki kullanım zorluğuna dayanıyor. Spring’in çıktığı sıralarda Java EE spectlerini uygulamak, kullanmak çok zordu.
+Spring’in geliştiricileri adeta krizi fırsata çevirdiler ve Java EE’ye göre çok daha kolay kullanılabilen, uygulanabilen bir
+framework ortaya çıkardılar. Tabii ki yazılım geliştiricileri kolayı varken zoru seçmediler ve Spring framework tabir yerinde ise
+aldı yürüdü.</p>
+
+<p>İlk çıktığı zamanlarda belli başlı sorunlara, bağımlık enjeksiyonu gibi, çözüm getiren bir framework olan Spring bugün artık çok 
+büyük bir aile. Çatısı altında çok sayıda kütüphane yer almakta. En bilinenleri Spring MVC, Spring Security, Spring Data gibi 
+kütüphanelerdir. Bu kütüphanelerin tamamı Spring geliştiricileri tarafından modüler olarak tasarlanmıştır. Yani birbirlerinden 
+bağımsızdırlardır ve projenizde ihtiyacınız olanı kullanabilirsiniz.</p>
+
+<p>Yeri geldikçe yeni açıklamalar ve tanımlamalar yapacağız.</p>
+
+<p><strong>İlk Uygulama –&gt; Hello World</strong></p>
+
+<p>Adet olduğu üzere yeni bir dil, framework vs. öğrenilirken Hello World ile başlarız. Şimdi biz de bir Hello World uygulaması 
+yapacağız.</p>
+
+<p>Şimdi siz kendi IDE’niz içerisinde bir Maven Java projesi açın. Ben dersleri Eclipse IDE üzerinde yürüteceğim ve zaman zaman da
+Spring Tool Suite ile de çalışacağız.</p>
+
+<p>Standart bir Java projesinde Hello World’ü basitçe şöyle yapıyorduk:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld</span> <span class="o">{</span>
+ <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+ <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello World!"</span><span class="o">);</span>
+ <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Peki işi biraz zorlaştırırsak? İşin içine Interface’ler falan girerse? Büyük projelerde bir çok Interface ve onları uygulayan
+sınıflar kol gezer. Biz de basitçe hemen örnekleyelim…</p>
+
+<p>İçerisinde sadece mesaj döndürmekle yükümlü bir metot tanımlanmış olan MessageProvider interface’miz şöyle olsun:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">MessageProvider</span> <span class="o">{</span>
+ <span class="n">String</span> <span class="n">getMessage</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Mesajın ekrana yazdırılması için yazdırma, MessageProvider interface’ini implement eden sınıf nesnesini set ve get eden metotların
+barındığı interface’miz de şöyle olsun.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">MessageRenderer</span> <span class="o">{</span>
+ <span class="kt">void</span> <span class="n">render</span><span class="o">();</span>
+ <span class="kt">void</span> <span class="n">setMessageProvider</span><span class="o">(</span><span class="n">MessageProvider</span> <span class="n">provider</span><span class="o">);</span>
+ <span class="n">MessageProvider</span> <span class="n">getMessageProvider</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Bu interface’lerin ardından şimdi implementasyonlarına bakalım.</p>
+
+<p>Bize bir mesaj döndürecek olan metodu barındıran MessageProvider interface’ni uygulayan <strong><em>MessageProviderImplementation</em></strong> 
+sınıfımız mesaj olarak <strong><em>Hello Spring World :)”</em></strong> String’ini bize döndürecek.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">springtutorials</span><span class="o">.</span><span class="na">helloworld</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MessageProviderImplementation</span> <span class="kd">implements</span> <span class="n">MessageProvider</span><span class="o">{</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="n">getMessage</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="s">"Hello Spring World :)"</span><span class="o">;</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Mesajın ekrana yazdırılması için gerekli metotların tanımlarını içinde barındıran MessageRenderer interface’ini uygulayan
+<strong><em>MessageRendererImplementation</em></strong> sınıfımız ekrana yazdırma işlemini yapan <strong>render()</strong> metodunu ve MessageProvider’ı uygulayan 
+sınıftan bir nesnenin get-set metotlarının uygulanmış halini barındırıyor.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">springtutorials</span><span class="o">.</span><span class="na">helloworld</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MessageRendererImplementation</span> <span class="kd">implements</span> <span class="n">MessageRenderer</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="n">MessageProvider</span> <span class="n">messageProvider</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="n">render</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">messageProvider</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span>
+					<span class="s">"MessageProvider Interface'ini Uygulamış Bir Sınıfın Nesnesini Göndermelisiniz:"</span> 
+					<span class="o">+</span> <span class="n">MessageRendererImplementation</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+		<span class="o">}</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">messageProvider</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="n">setMessageProvider</span><span class="o">(</span><span class="n">MessageProvider</span> <span class="n">provider</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">messageProvider</span> <span class="o">=</span> <span class="n">provider</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">MessageProvider</span> <span class="n">getMessageProvider</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">messageProvider</span><span class="o">;</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Interface’lerimizi yazdık, sınıflara uygulattık. Şimdi sadece kullanması kaldı. <strong><em>HelloWorld</em></strong> sınıfımız içerisinde bunları 
+kullanalım.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">springtutorials</span><span class="o">.</span><span class="na">helloworld</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">MessageProvider</span> <span class="n">ms</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MessageProviderImplementation</span><span class="o">();</span>
+		<span class="n">MessageRenderer</span> <span class="n">mr</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MessageRendererImplementation</span><span class="o">();</span>
+		<span class="n">mr</span><span class="o">.</span><span class="na">setMessageProvider</span><span class="o">(</span><span class="n">ms</span><span class="o">);</span>
+		<span class="n">mr</span><span class="o">.</span><span class="na">render</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Bu uygulamayı çalıştırdığımızda konsolda Hello Spring World :) çıktısını alacağız. Peki şimdi bu uygulamayı yaptık da ne oldu?</p>
+
+<p>Gelmek istediğim nokta şu ki biz Hello World sınıfını 2 adet sınıfa bağımlı hale getirdik. Yazılım dünyasında sınıflar arasında
+ne kadar az bağımlılık olursa yazım o kadar kullanışlı ve bakıma uygun olur. Bu nedenle <strong><em>Loose coupling (Zayıf Bağımlılık)</em></strong>
+denen olay yazılım geliştirilirken hedeflenen olgulardan birisidir. Spring Framework de bu ihtiyacı pratik ve kolay bir 
+şekilde karşılayabildiğinden popülerleşmesi hızlı olmuştur.</p>
+
+<p>Şimdi bu uyglamayı Spring Framework kullanarak nasıl daha az bağımlı hale getirebiliriz ona bakalım.</p>
+
+<p>Öncelikle projemizdeki pom.xml dosyamıza şu bağımlılığı ekleyelim:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+	<span class="nt">&lt;groupId&gt;</span>org.springframework<span class="nt">&lt;/groupId&gt;</span>
+	<span class="nt">&lt;artifactId&gt;</span>spring-context<span class="nt">&lt;/artifactId&gt;</span>
+	<span class="nt">&lt;version&gt;</span>4.3.3.RELEASE<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre>
+</div>
+
+<p>Akabinde <strong><em>src/main/resources/</em></strong> dizini altında <strong>beans.xml</strong> adında bir dosya oluşturalım ve içeriğini şöyle düzenleyelim:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;beans</span> <span class="na">xmlns=</span><span class="s">"http://www.springframework.org/schema/beans"</span>
+	   <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span> 
+	   <span class="na">xmlns:p=</span><span class="s">"http://www.springframework.org/schema/p"</span>
+	   <span class="na">xsi:schemaLocation=</span><span class="s">"http://www.springframework.org/schema/beans</span>
+       <span class="err">http://www.springframework.org/schema/beans/spring-beans.xsd"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"provider"</span> <span class="na">class=</span><span class="s">"com.ilkaygunel.springtutorials.helloworld.MessageProviderImplementation"</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"renderer"</span> <span class="na">class=</span><span class="s">"com.ilkaygunel.springtutorials.helloworld.MessageRendererImplementation"</span>
+		<span class="na">p:messageProvider-ref=</span><span class="s">"provider"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/beans&gt;</span>
+</code></pre>
+</div>
+
+<p>Spring’de bağımlılık ihtiyacı iki yolla sağlanabilir ve XML ile bu ihtiyacı sağlamak bu yollardan birisidir. Diğer yola ilerleyen
+derslerde değineceğiz.</p>
+
+<p>Şimdi bu XML dosyasını inceleyelim. İlk 2-6 satırları arasında Spring’in XML tag’lerine ait tanımlamalar yer alıyor. 7. satırda
+bizim MessageProvider interface’mizi uygulayan MessageProviderImplementation sınıfı <strong><em>privovider</em></strong> id bilgisi ile Spring’e
+kayıt ettiriliyor. 8. satırda ise bizim MessageRenderer interface’mizi uygulayan MessageRendererImplementation sınıfımız
+<strong><em>renderer</em></strong> id bilgisi ile kayıt ettiriliyor yalnız MessageRendererImplementation’ın kayıt edilmesi sırasında fazladan bir şey
+daha var: <strong><em>p:messageProvider-ref=”provider”</em></strong></p>
+
+<p>p:messageProvider-ref=”provider” ifadesi ile biz Spring’e diyoruz ki, MessageRendererImplementation sınıfı içerisinde 
+<strong><em>messageProvider</em></strong> adında bir alan var ve sen bu alanı bu XML içindeki <strong><em>provider</em></strong> id bilgili sınıftan bir nesne oluşturup otomatik
+olarak doldur. Böylece biz main metodumuz içinde MessageProviderImplementation nesnesi oluşturmaktan kurtulmuş oluyoruz ve 
+sınıfımızın bağımlılığı bir nebze azalmış oluyor.</p>
+
+<p>Şimdi HelloWorld sınıfımızın güncellenmiş haline bakalım:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">springtutorials</span><span class="o">.</span><span class="na">helloworld</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.context.support.ClassPathXmlApplicationContext</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorldWithDI</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">(</span><span class="n">ClassPathXmlApplicationContext</span> <span class="n">classPathXmlApplicationContext</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassPathXmlApplicationContext</span><span class="o">(</span>
+				<span class="s">"beans.xml"</span><span class="o">))</span> <span class="o">{</span>
+			<span class="n">MessageRenderer</span> <span class="n">mr</span> <span class="o">=</span> <span class="n">classPathXmlApplicationContext</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">"renderer"</span><span class="o">,</span>
+					<span class="n">MessageRendererImplementation</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+			<span class="n">mr</span><span class="o">.</span><span class="na">render</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Bir Hata Meydana Geldi! Hata:"</span> <span class="o">+</span> <span class="n">e</span><span class="o">);</span>
+		<span class="o">}</span>
+
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>HelloWorldWithDI sınıfımız içerisinde try’ın hemen başında <strong><em>ClassPathXmlApplicationContext</em></strong> sınıfından bir nesne 
+oluşturuyoruz ve ClassPathXmlApplicationContext sınıfının yapılandırıcısına beans.xml’i parametre olarak gönderiyoruz.</p>
+
+<p>try bloğunun içinde ise MessageRenderer interface’i tipinde bir nesne tanımlıyoruz ve bu nesnenin içinin doldurulması işlemini
+az önce tanımladığımız ClassPathXmlApplicationContext tipindeki nesne ile yapıyoruz.</p>
+
+<p>ClassPathXmlApplicationContext tipindeki <strong><em>classPathXmlApplicationContext</em></strong> nesnesi beans.xml içindeki bean’leri okuyabilir
+ve kullanabilir. Burada da biz <strong><em>getBean()</em></strong> metodunu kullanarak XML içinde tanımlanmış bean’lere ulaşabiliriz. Bizim burada
+beans.xml’den sadece MessageRendererImplementation sınıfını çekmemiz yeterli olacaktır çünkü az önce de belirttiğim gibi
+MessageRendererImplementation sınıfı içindeki alan otomatik olarak dolacaktır. MessageProviderImplementation sınıfına ait çekim
+yapıp uğraşmaya gerek yoktur. getBean() metodunu kullanırken parametrelerden birincisi XML içinde tanımlı bean id’si, ikincisi ise
+hangi sınıf türünde bean çekileceğidir. renderer id’li olan ve MessageRendererImplementation sınıfı tipinde bean’i çekeceğiz.
+Akabinde de son oalrak MessageRendererImplementation sınıfından render() metodunu çağırarak yazdırma işlemini yapacağız.</p>
+
+<p><strong>Ekran Çıktısı</strong></p>
+
+<p>HelloWorldWithDI sınıfına sağ tıklayıp Rus As -&gt; Java Application dediğimizde şu ekran çıktısını alabiliriz.</p>
+
+<p><a href="/images/spring/springGiris1.png">
+<img src="/images/spring/springGiris1.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Gördüğünüz gibi aynı işlem Spring Framework ile yapıldı ve bağımlılık azaltımı konusunda yol alındı.</p>
+
+<p>Bu ilk yazımızda Spring’e bir giriş yaptık ve Hello World örneğimizi uyguladık. Gelecek yazıda <strong><em>Inversion Of Control</em></strong>
+ve <strong><em>Dependency Injection</em></strong> konularını işleyeceğiz.</p>
+
+<p>Sağlıcakla Kalın</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="http://github.com/ilkgunel" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="http://twitter.com/ilkgunel" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+  <li><a href="https://www.instagram.com/ilkgunel/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2016 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>
