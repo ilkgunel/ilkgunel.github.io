@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Geçerlilik Denetleyicisi ile Form Örneği</title>
+    <meta name="description" content="Merhaba arkadaşlar. Bu yazımızda önceki yazımızda belirttiğimiz gibi bir form örneği yapacağız. Daha önce anlatmadığımız bir konu olan geçerlilik denetleyici...">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsf-gecerlilik-denetleyicisi-ile-form-ornegi/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>Geçerlilik Denetleyicisi ile Form Örneği - İlkay Günel - Blog</title>
+<meta property="og:title" content="Geçerlilik Denetleyicisi ile Form Örneği" />
+<meta name="description" content="Geçerlilik Denetleyicisi ile Form Örneği" />
+<meta property="og:description" content="Geçerlilik Denetleyicisi ile Form Örneği" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsf-gecerlilik-denetleyicisi-ile-form-ornegi/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/jsf-gecerlilik-denetleyicisi-ile-form-ornegi/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-11-05T20:40:21+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Geçerlilik Denetleyicisi ile Form Örneği",
+    "datePublished": "2016-11-05T20:40:21+03:00",
+    "description": "Geçerlilik Denetleyicisi ile Form Örneği",
+    "url": "http://ilkaygunel.com/blog/2016/jsf-gecerlilik-denetleyicisi-ile-form-ornegi/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/blog/2016/jsf-tutorials-list" title="JSF">JSF</a></li>
+        
+          <li><a href="/blog/2016/spring-tutorials" title="Spring 4">Spring 4</a></li>
+        
+          <li><a href="/blog/2016/eclipselink" title="Eclipselink">Eclipselink</a></li>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog/2016/eclipse-notes" title="Eclipse">Eclipse</a></li>
+        
+          <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Geçerlilik Denetleyicisi ile Form Örneği</h1>
+      <p class="post-meta">Nov 5, 2016</p>
+    </header>
+
+    <div class="post-content">
+      <p>Merhaba arkadaşlar. Bu yazımızda önceki yazımızda belirttiğimiz gibi bir form örneği yapacağız. Daha önce anlatmadığımız bir 
+konu olan <strong><em>geçerlilik denetleyicileri</em></strong> konusundan 2 adet denetleyiciyi bu yazıda anlatmış olacağım. Şimdi ben size projenin 
+kodlarını veriyorum. Kodların ardından açıklama kısmında denetleyicilerin anlatımı yer almaktadır. Kodlarda denetleyici 
+dışında daha önce bahsetmediğimiz bir nokta yoktur.</p>
+
+<p><strong>index.xhtml Kodu</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
+<span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
+	  <span class="na">xmlns:h=</span><span class="s">"http://xmlns.jcp.org/jsf/html"</span>
+	  <span class="na">xmlns:f=</span><span class="s">"http://xmlns.jcp.org/jsf/core"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;h:head&gt;</span>
+		<span class="nt">&lt;title&gt;</span>Facelet Title<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;/h:head&gt;</span>
+	<span class="nt">&lt;h:body&gt;</span>
+		<span class="nt">&lt;h:form</span> <span class="na">id=</span><span class="s">"kayit_formu"</span><span class="nt">&gt;</span>
+			<span class="nt">&lt;h:panelGrid</span> <span class="na">columns=</span><span class="s">"4"</span><span class="nt">&gt;</span>
+				<span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">"Adınız:"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;h:inputText</span> <span class="na">value=</span><span class="s">"#{d.isim}"</span> <span class="na">required=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">"Soyadınız:"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;h:inputText</span> <span class="na">value=</span><span class="s">"#{d.soyisim}"</span> <span class="na">required=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">"E-posta adresiniz:"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;h:inputText</span> <span class="na">value=</span><span class="s">"#{d.esposta}"</span> <span class="na">required=</span><span class="s">"true"</span> <span class="na">validatorMessage=</span><span class="s">"Geçersiz E-posta adresi!"</span><span class="nt">&gt;</span>
+					<span class="nt">&lt;f:validateRegex</span> <span class="na">pattern=</span><span class="s">"^[_A-Za-z0-9-+\]+(.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;/h:inputText&gt;</span>
+				<span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">"Sisteme giriş parolanız:"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;h:inputSecret</span> <span class="na">value=</span><span class="s">"#{d.parola}"</span> <span class="na">required=</span><span class="s">"true"</span><span class="nt">/&gt;</span> 
+			<span class="nt">&lt;/h:panelGrid&gt;</span>
+			<span class="nt">&lt;h:panelGrid</span> <span class="na">columns=</span><span class="s">"4"</span><span class="nt">&gt;</span>
+				<span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">"Oturduğunuz ili seçiniz:"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;h:selectOneMenu</span> <span class="na">value=</span><span class="s">"#{d.il}"</span><span class="nt">&gt;</span>
+					<span class="nt">&lt;f:selectItems</span> <span class="na">value=</span><span class="s">"#{d.illeridondur()}"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;/h:selectOneMenu&gt;</span> 
+				<span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">"Cinsiyetiniz:"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;h:selectOneRadio</span> <span class="na">value=</span><span class="s">"#{d.cinsiyet}"</span><span class="nt">&gt;</span>
+					<span class="nt">&lt;f:selectItems</span> <span class="na">value=</span><span class="s">"#{d.cinsiyetleridondur()}"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;/h:selectOneRadio&gt;</span>
+				<span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">"LinkEdin hesabınız var mı?"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;h:selectOneRadio</span> <span class="na">value=</span><span class="s">"#{d.linkedinkullaniyormusunuz}"</span><span class="nt">&gt;</span>
+						<span class="nt">&lt;f:selectItems</span> <span class="na">value=</span><span class="s">"#{d.hesapvarmidondur()}"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;/h:selectOneRadio&gt;</span>
+				<span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">"Tam adresinizi giriniz:"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;h:inputTextarea</span> <span class="na">value=</span><span class="s">"#{d.adres}"</span> <span class="na">required=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+			<span class="nt">&lt;/h:panelGrid&gt;</span>
+			<span class="nt">&lt;h:panelGrid</span> <span class="na">columns=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+				<span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">"Hobileriniz nelerdir?"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;h:selectManyCheckbox</span> <span class="na">value=</span><span class="s">"#{d.hobiler}"</span><span class="nt">&gt;</span>
+					<span class="nt">&lt;f:selectItems</span> <span class="na">value=</span><span class="s">"#{d.hobilistesinidondur()}"</span><span class="nt">/&gt;</span> 
+				<span class="nt">&lt;/h:selectManyCheckbox&gt;</span>
+				<span class="nt">&lt;/h:panelGrid&gt;</span>
+				<span class="nt">&lt;h:panelGrid</span> <span class="na">columns=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+				<span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">"İngilizce bilginiz nedir?"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;h:selectOneRadio</span> <span class="na">value=</span><span class="s">"#{d.yabanci_dil_seviyesi}"</span><span class="nt">&gt;</span>
+					<span class="nt">&lt;f:selectItems</span> <span class="na">value=</span><span class="s">"#{d.ydseviyeleridondur()}"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;/h:selectOneRadio&gt;</span>
+			<span class="nt">&lt;/h:panelGrid&gt;</span>
+			<span class="nt">&lt;h:commandButton</span> <span class="na">value=</span><span class="s">"GÖNDER"</span> <span class="na">action=</span><span class="s">"gelen_veriler.xhtml"</span><span class="nt">/&gt;</span>
+		<span class="nt">&lt;/h:form&gt;</span>
+	<span class="nt">&lt;/h:body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<p><strong>gelen_veriler.xhtml Kodu</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
+<span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
+	  <span class="na">xmlns:h=</span><span class="s">"http://xmlns.jcp.org/jsf/html"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;h:head&gt;</span>
+		<span class="nt">&lt;title&gt;</span>Facelet Title<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;/h:head&gt;</span>
+	<span class="nt">&lt;h:body&gt;</span>
+		<span class="nt">&lt;ol&gt;</span>
+			<span class="nt">&lt;li&gt;</span>
+			   #{d.isim} 
+			<span class="nt">&lt;/li&gt;</span>
+			<span class="nt">&lt;li&gt;</span>
+			   #{d.soyisim} 
+			<span class="nt">&lt;/li&gt;</span>
+			<span class="nt">&lt;li&gt;</span>
+			   #{d.il} 
+			<span class="nt">&lt;/li&gt;</span>
+			<span class="nt">&lt;li&gt;</span>
+			   #{d.esposta}
+			<span class="nt">&lt;/li&gt;</span>
+			<span class="nt">&lt;li&gt;</span>
+			   #{d.linkedinkullaniyormusunuz} 
+			<span class="nt">&lt;/li&gt;</span>
+			<span class="nt">&lt;li&gt;</span>
+			   #{d.cinsiyet} 
+			<span class="nt">&lt;/li&gt;</span>
+			<span class="nt">&lt;li&gt;</span>
+			   #{d.adres} 
+			<span class="nt">&lt;/li&gt;</span>
+			<span class="nt">&lt;li&gt;</span>
+			   #{d.parola} 
+			<span class="nt">&lt;/li&gt;</span>
+			<span class="nt">&lt;li&gt;</span>
+			   #{d.hobileriStringecevir()} 
+			<span class="nt">&lt;/li&gt;</span>
+			<span class="nt">&lt;li&gt;</span>
+			   #{d.yabanci_dil_seviyesi} 
+			<span class="nt">&lt;/li&gt;</span>
+		<span class="nt">&lt;/ol&gt;</span>
+	<span class="nt">&lt;/h:body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<p><strong>Degiskenler.java Kodu</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.LinkedHashMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.faces.bean.ManagedBean</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.faces.bean.RequestScoped</span><span class="o">;</span>
+<span class="nd">@ManagedBean</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="s">"d"</span><span class="o">)</span>
+<span class="nd">@RequestScoped</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Degiskenler</span> <span class="o">{</span>
+<span class="kd">private</span> <span class="n">String</span> <span class="n">isim</span><span class="o">;</span>
+<span class="kd">private</span> <span class="n">String</span> <span class="n">soyisim</span><span class="o">;</span>
+<span class="kd">private</span> <span class="n">String</span> <span class="n">il</span><span class="o">;</span>
+<span class="kd">private</span> <span class="n">String</span> <span class="n">esposta</span><span class="o">;</span>
+<span class="kd">private</span> <span class="n">String</span> <span class="n">linkedinkullaniyormusunuz</span><span class="o">;</span>
+<span class="kd">private</span> <span class="n">String</span> <span class="n">cinsiyet</span><span class="o">;</span>
+<span class="kd">private</span> <span class="n">String</span> <span class="n">adres</span><span class="o">;</span>
+<span class="kd">private</span> <span class="n">String</span> <span class="n">parola</span><span class="o">;</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">cinsiyetler</span><span class="o">=</span><span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;();</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">iller</span><span class="o">=</span><span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;();</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">hesapvarmi</span><span class="o">=</span><span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;();</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">hobilistesi</span><span class="o">=</span><span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;();</span>
+<span class="kd">private</span> <span class="n">String</span><span class="o">[]</span> <span class="n">hobiler</span><span class="o">=</span><span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="mi">7</span><span class="o">];</span>
+<span class="kd">private</span> <span class="n">String</span> <span class="n">yabanci_dil_seviyesi</span><span class="o">;</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">ydseviyeler</span><span class="o">=</span><span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;();</span>
+<span class="kd">static</span><span class="o">{</span>
+    <span class="n">ydseviyeler</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"İyi"</span><span class="o">,</span> <span class="s">"İyi"</span><span class="o">);</span>
+    <span class="n">ydseviyeler</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Orta"</span><span class="o">,</span> <span class="s">"Orta"</span><span class="o">);</span>
+    <span class="n">ydseviyeler</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Yok"</span><span class="o">,</span> <span class="s">"Yok"</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">ydseviyeleridondur</span><span class="o">()</span>
+<span class="o">{</span>
+    <span class="k">return</span> <span class="n">ydseviyeler</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="kd">static</span><span class="o">{</span>
+    <span class="n">hobilistesi</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Kitap Okumak"</span><span class="o">,</span> <span class="s">"Kitap Okumak"</span><span class="o">);</span>
+    <span class="n">hobilistesi</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Futbol Maçı İzleme"</span><span class="o">,</span> <span class="s">"Futbol Maçı İzleme"</span><span class="o">);</span>
+    <span class="n">hobilistesi</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Koleksiyonlar"</span><span class="o">,</span> <span class="s">"Koleksiyonlar"</span><span class="o">);</span>
+    <span class="n">hobilistesi</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Tiyatro ve Sinema"</span><span class="o">,</span> <span class="s">"Tiyatro ve Sinema"</span><span class="o">);</span>
+    <span class="n">hobilistesi</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Formula 1"</span><span class="o">,</span> <span class="s">"Formula 1"</span><span class="o">);</span>
+    <span class="n">hobilistesi</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Gastronomi"</span><span class="o">,</span> <span class="s">"Gastronomi"</span><span class="o">);</span>
+    <span class="n">hobilistesi</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Avcılık"</span><span class="o">,</span> <span class="s">"Avcılık"</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">hobilistesinidondur</span><span class="o">()</span>
+<span class="o">{</span>
+    <span class="k">return</span> <span class="n">hobilistesi</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">hobileriStringecevir</span><span class="p">(</span><span class="o">)</span>
+<span class="o">{</span>
+    <span class="k">return</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">hobiler</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">static</span><span class="o">{</span>
+    <span class="n">iller</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"İSTANBUL"</span><span class="o">,</span> <span class="s">"İSTANBUL"</span><span class="o">);</span>
+    <span class="n">iller</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"ANKARA"</span><span class="o">,</span> <span class="s">"ANKARA"</span><span class="o">);</span>
+    <span class="n">iller</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"SAMSUN"</span><span class="o">,</span><span class="s">"SAMSUN"</span><span class="o">);</span>
+    <span class="n">iller</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"ADANA"</span><span class="o">,</span> <span class="s">"ADANA"</span><span class="o">);</span>
+    <span class="n">iller</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"ESKİŞEHŞİR"</span><span class="o">,</span> <span class="s">"ESKİŞEHİR"</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">illeridondur</span><span class="o">()</span>
+<span class="o">{</span>
+    <span class="k">return</span> <span class="n">iller</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="kd">static</span><span class="o">{</span>
+    <span class="n">cinsiyetler</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Erkek"</span><span class="o">,</span> <span class="s">"Erkek"</span><span class="o">);</span>
+    <span class="n">cinsiyetler</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Bayan"</span><span class="o">,</span> <span class="s">"Bayan"</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">cinsiyetleridondur</span><span class="o">()</span>
+<span class="o">{</span>
+    <span class="k">return</span> <span class="n">cinsiyetler</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="kd">static</span><span class="o">{</span>
+    <span class="n">hesapvarmi</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Evet"</span><span class="o">,</span> <span class="s">"Evet"</span><span class="o">);</span>
+    <span class="n">hesapvarmi</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Hayır"</span><span class="o">,</span> <span class="s">"Hayır"</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">hesapvarmidondur</span><span class="o">()</span>
+<span class="o">{</span>
+    <span class="k">return</span> <span class="n">hesapvarmi</span><span class="o">;</span>
+<span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getParola</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">parola</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setParola</span><span class="o">(</span><span class="n">String</span> <span class="n">parola</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">parola</span> <span class="o">=</span> <span class="n">parola</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">getCinsiyetler</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">cinsiyetler</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">setCinsiyetler</span><span class="o">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">cinsiyetler</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Degiskenler</span><span class="o">.</span><span class="na">cinsiyetler</span> <span class="o">=</span> <span class="n">cinsiyetler</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">getHesapvarmi</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">hesapvarmi</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">setHesapvarmi</span><span class="o">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">hesapvarmi</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Degiskenler</span><span class="o">.</span><span class="na">hesapvarmi</span> <span class="o">=</span> <span class="n">hesapvarmi</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getAdres</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">adres</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setAdres</span><span class="o">(</span><span class="n">String</span> <span class="n">adres</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">adres</span> <span class="o">=</span> <span class="n">adres</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getCinsiyet</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">cinsiyet</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setCinsiyet</span><span class="o">(</span><span class="n">String</span> <span class="n">cinsiyet</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">cinsiyet</span> <span class="o">=</span> <span class="n">cinsiyet</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">getIller</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">iller</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setIller</span><span class="o">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">iller</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">iller</span> <span class="o">=</span> <span class="n">iller</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getIsim</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">isim</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setIsim</span><span class="o">(</span><span class="n">String</span> <span class="n">isim</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">isim</span> <span class="o">=</span> <span class="n">isim</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getSoyisim</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">soyisim</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setSoyisim</span><span class="o">(</span><span class="n">String</span> <span class="n">soyisim</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">soyisim</span> <span class="o">=</span> <span class="n">soyisim</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getIl</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">il</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setIl</span><span class="o">(</span><span class="n">String</span> <span class="n">il</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">il</span> <span class="o">=</span> <span class="n">il</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getEsposta</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">esposta</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setEsposta</span><span class="o">(</span><span class="n">String</span> <span class="n">esposta</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">esposta</span> <span class="o">=</span> <span class="n">esposta</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getLinkedinkullaniyormusunuz</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">linkedinkullaniyormusunuz</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setLinkedinkullaniyormusunuz</span><span class="o">(</span><span class="n">String</span> <span class="n">linkedinkullaniyormusunuz</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">linkedinkullaniyormusunuz</span> <span class="o">=</span> <span class="n">linkedinkullaniyormusunuz</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="n">getHobiler</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">hobiler</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setHobiler</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">hobiler</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">hobiler</span> <span class="o">=</span> <span class="n">hobiler</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">getHobilistesi</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">hobilistesi</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">setHobilistesi</span><span class="o">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">hobilistesi</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Degiskenler</span><span class="o">.</span><span class="na">hobilistesi</span> <span class="o">=</span> <span class="n">hobilistesi</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getYabanci_dil_seviyesi</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">yabanci_dil_seviyesi</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setYabanci_dil_seviyesi</span><span class="o">(</span><span class="n">String</span> <span class="n">yabanci_dil_seviyesi</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">yabanci_dil_seviyesi</span> <span class="o">=</span> <span class="n">yabanci_dil_seviyesi</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">getYdseviyeler</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">ydseviyeler</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">setYdseviyeler</span><span class="o">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">ydseviyeler</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Degiskenler</span><span class="o">.</span><span class="na">ydseviyeler</span> <span class="o">=</span> <span class="n">ydseviyeler</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p><strong>Denetleyicilerin Açıklaması:</strong></p>
+
+<p>Kodları çalıştırdığınızda ekranında form bileşenleri göreceksiniz. Buradaki form bileşenleri temel olarak çok kullanılanlardır.</p>
+
+<p>Index sayfamız içindeki kodlarımızda <strong><em>inputText</em></strong> ve <strong><em>inputSecret</em></strong> kısmına dikkat ediniz. Orada <strong><em>required=true</em></strong>
+ifadesini göreceksiniz. 
+Bu kullanıcının formu doldururken o kısmı <strong><em>boş geçmesini</em></strong> engelleyen yapıdır. 
+Az sonra ekran çıktımızda da bunu göreceğiz.</p>
+
+<p>Index sayfamız içinde kullanıcıdan epostayı aldığımız yere dikkat ediniz. Orada bir validatorMessage ve <f:validateregex> 
+etiketini göreceksiniz.  <f:validateregex> belirlediğimiz bir formata göre kullanıcıdan e-mail alınması sağlayan bileşendir.
+validatorMessage ise kullanıcı istenen şekilde e-mail girmezse kullanıcıya verdirilecek mesajdır. Şimdi .  <f:validateregex> 
+içinde pattern kısmına atadığımız şartı inceleyelim.</f:validateregex></f:validateregex></f:validateregex></p>
+
+<p>pattern=”^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)<em>@[A-Za-z0-9-]+(.[A-Za-z0-9]+)</em>(.[A-Za-z]{2,})$”</p>
+
+<ul>
+  <li>
+    <p>Bu kodda ^ işareti denetleyicinin başlangıcıdır.</p>
+  </li>
+  <li>
+    <p>[_A-Za-z0-9-+] ifadesi sizin girilecek e-mailin büyük küçük harf, rakam, tire, , + işareti koyulmasına izin vermeniz anlamına gelmektedir.</p>
+  </li>
+  <li>
+    <p>(.[_A-Za-z0-9-]+)* ifadesinin sonundaki * ifadesi bu ifadenin optional olduğunu bize bildiriyor. işaretinden sonraki kısım bir önceki kısma eklenebilir anlamındadır. Yani işareti koyup bir takım ifadeler verdiğinizde bu girilen ifadeye eklenebilir anlamındadır. Burada işaretinden sonra . , büyük küçük harf, rakam, -, + koyabileceğimiz ama koymasak da olur anlamındanır.</p>
+  </li>
+  <li>
+    <p>@[A-Za-z0-9-] ifadesi ise e-mailde bulunan @ işaretini zorunlu kılar ve ondan sonra bir kelime girilmesi gerektiğini söyler.</p>
+  </li>
+  <li>
+    <p>(.[A-Za-z0-9]+)* ifadesi @ işaretinden sonraki kelimeden sonra . ile bir kelime ekleyebilirsiniz demektir. * işaretinden göreceğiniz gibi optional’dır.</p>
+  </li>
+  <li>
+    <p>(.[A-Za-z]{2,}) ifadesi de @ işaretinden sonraki kelime gurubunun ardından . ile en az 2 harflik bir ifadenin girilmesini zorunlu kılar.</p>
+  </li>
+  <li>
+    <p>$ işareti de denetleyicinin bittiğini bildirir.</p>
+  </li>
+</ul>
+
+<p>Şimdi ekran çıktılarına bakalım. Resimlerin altında bazı açıklamalar bulunmaktadır.</p>
+
+<p>5 adet textBox’tan 4’ünü boş bıraktık. Gönder butonuna bastık. 4 adet girilmesi zorunludur yazısı geldi.</p>
+
+<p><a href="/images/jsf/jsfDersleri8-1.png">
+<img src="/images/jsf/jsfDersleri8-1.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Normal de de geçersiz olan bir e-mail girip göndere bastık. Geçersiz olduğunu bildirdi.</p>
+
+<p><a href="/images/jsf/jsfDersleri8-2.png">
+<img src="/images/jsf/jsfDersleri8-2.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Tüm değerli düzgün olarak girdik.</p>
+
+<p><a href="/images/jsf/jsfDersleri8-3.png">
+<img src="/images/jsf/jsfDersleri8-3.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Girilen verileri gösteren sayfa.</p>
+
+<p><a href="/images/jsf/jsfDersleri8-4.png">
+<img src="/images/jsf/jsfDersleri8-4.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Bu yazımızda da bu kadar arkadaşlar. Form örneğimizi ve geçerlilik denetleyicisini incelemiş olduk. Gelecek yazımızda 
+<strong><em>Facelet Tags konusuna</em></strong> değineceğiz.</p>
+
+<p>Esen kalın.</p>
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="http://github.com/ilkgunel" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="http://twitter.com/ilkgunel" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+  <li><a href="https://www.instagram.com/ilkgunel/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2016 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>
