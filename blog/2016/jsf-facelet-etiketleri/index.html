@@ -111,66 +111,72 @@ göstererek bu yapının kullanımını görelim. Uygulamanın kodlarına direk
 
 <p><strong>index.xhtml Kodu</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
-<span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
-<span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
-	  <span class="na">xmlns:h=</span><span class="s">"http://xmlns.jcp.org/jsf/html"</span>
-	  <span class="na">xmlns:ui=</span><span class="s">"http://java.sun.com/jsf/facelets"</span><span class="nt">&gt;</span>
-	<span class="nt">&lt;h:head&gt;</span>
-	<span class="nt">&lt;/h:head&gt;</span>
-	<span class="nt">&lt;h:body&gt;</span>
-		<span class="nt">&lt;ui:composition</span> <span class="na">template=</span><span class="s">"template/TemplateSayfamiz.xhtml"</span><span class="nt">&gt;</span>
-			<span class="nt">&lt;ui:define</span> <span class="na">name=</span><span class="s">"title"</span><span class="nt">&gt;</span>Ana Sayfa<span class="nt">&lt;/ui:define&gt;</span>
-		
-			<span class="nt">&lt;ui:define</span> <span class="na">name=</span><span class="s">"content"</span><span class="nt">&gt;</span>
-			<span class="nt">&lt;h3&gt;&lt;h:outputText</span> <span class="na">value=</span><span class="s">"Ana Sayfaya Hoşgeldiniz!"</span> <span class="nt">/&gt;&lt;/h3&gt;</span>
-			<span class="nt">&lt;h3&gt;&lt;h:outputText</span> <span class="na">value=</span><span class="s">"Hakkımda sayfasından hakkımda bilgi edinebilir ya da"</span> <span class="nt">/&gt;&lt;/h3&gt;</span>
-			<span class="nt">&lt;h3&gt;&lt;h:outputText</span> <span class="na">value=</span><span class="s">"Video Dersleri sayfasından JSF video derslerine ulaşabilirsiniz."</span> <span class="nt">/&gt;&lt;/h3&gt;</span>
-		<span class="nt">&lt;/ui:define&gt;</span>
-		<span class="nt">&lt;/ui:composition&gt;</span>
-	<span class="nt">&lt;/h:body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
+<div class="highlighter-rouge"><pre class="highlight"><code>	~~~
+	<span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
+	<span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
+	<span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
+		  <span class="na">xmlns:h=</span><span class="s">"http://xmlns.jcp.org/jsf/html"</span>
+		  <span class="na">xmlns:ui=</span><span class="s">"http://java.sun.com/jsf/facelets"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;h:head&gt;</span>
+		<span class="nt">&lt;/h:head&gt;</span>
+		<span class="nt">&lt;h:body&gt;</span>
+			<span class="nt">&lt;ui:composition</span> <span class="na">template=</span><span class="s">"template/TemplateSayfamiz.xhtml"</span><span class="nt">&gt;</span>
+				<span class="nt">&lt;ui:define</span> <span class="na">name=</span><span class="s">"title"</span><span class="nt">&gt;</span>Ana Sayfa<span class="nt">&lt;/ui:define&gt;</span>
+	
+				<span class="nt">&lt;ui:define</span> <span class="na">name=</span><span class="s">"content"</span><span class="nt">&gt;</span>
+				<span class="nt">&lt;h3&gt;&lt;h:outputText</span> <span class="na">value=</span><span class="s">"Ana Sayfaya Hoşgeldiniz!"</span> <span class="nt">/&gt;&lt;/h3&gt;</span>
+				<span class="nt">&lt;h3&gt;&lt;h:outputText</span> <span class="na">value=</span><span class="s">"Hakkımda sayfasından hakkımda bilgi edinebilir ya da"</span> <span class="nt">/&gt;&lt;/h3&gt;</span>
+				<span class="nt">&lt;h3&gt;&lt;h:outputText</span> <span class="na">value=</span><span class="s">"Video Dersleri sayfasından JSF video derslerine ulaşabilirsiniz."</span> <span class="nt">/&gt;&lt;/h3&gt;</span>
+			<span class="nt">&lt;/ui:define&gt;</span>
+			<span class="nt">&lt;/ui:composition&gt;</span>
+		<span class="nt">&lt;/h:body&gt;</span>
+	<span class="nt">&lt;/html&gt;</span>
+	~~~
+	{: .language-html}
 </code></pre>
 </div>
 
 <p><strong>TemplateSayfamiz.xhtml Kodu</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
-<span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
-<span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
-	  <span class="na">xmlns:h=</span><span class="s">"http://xmlns.jcp.org/jsf/html"</span>
-	  <span class="na">xmlns:ui=</span><span class="s">"http://java.sun.com/jsf/facelets"</span><span class="nt">&gt;</span>
-	<span class="nt">&lt;h:head&gt;</span>
-		<span class="nt">&lt;title&gt;&lt;ui:insert</span> <span class="na">name=</span><span class="s">"title"</span><span class="nt">&gt;</span>SayfaBasligi<span class="nt">&lt;/ui:insert&gt;&lt;/title&gt;</span>
-	<span class="nt">&lt;h:outputStylesheet</span> <span class="na">name=</span><span class="s">"common-style.css"</span> <span class="na">library=</span><span class="s">"css"</span> <span class="nt">/&gt;</span>
-	<span class="nt">&lt;/h:head&gt;</span>
+<div class="highlighter-rouge"><pre class="highlight"><code>	~~~
+	<span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
+	<span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
+	<span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
+		  <span class="na">xmlns:h=</span><span class="s">"http://xmlns.jcp.org/jsf/html"</span>
+		  <span class="na">xmlns:ui=</span><span class="s">"http://java.sun.com/jsf/facelets"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;h:head&gt;</span>
+			<span class="nt">&lt;title&gt;&lt;ui:insert</span> <span class="na">name=</span><span class="s">"title"</span><span class="nt">&gt;</span>SayfaBasligi<span class="nt">&lt;/ui:insert&gt;&lt;/title&gt;</span>
+		<span class="nt">&lt;h:outputStylesheet</span> <span class="na">name=</span><span class="s">"common-style.css"</span> <span class="na">library=</span><span class="s">"css"</span> <span class="nt">/&gt;</span>
+		<span class="nt">&lt;/h:head&gt;</span>
 
-	<span class="nt">&lt;h:body&gt;</span>
+		<span class="nt">&lt;h:body&gt;</span>
 
-	<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"page"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"page"</span><span class="nt">&gt;</span>
 
-		<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"header"</span><span class="nt">&gt;</span>
-		<span class="nt">&lt;ui:insert</span> <span class="na">name=</span><span class="s">"header"</span> <span class="nt">&gt;</span>
-		  <span class="nt">&lt;ui:include</span> <span class="na">src=</span><span class="s">"/template/headerPage.xhtml"</span> <span class="nt">/&gt;</span>
-		<span class="nt">&lt;/ui:insert&gt;</span>
-		<span class="nt">&lt;/div&gt;</span>
-
-		<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"content"</span><span class="nt">&gt;</span>
-		<span class="nt">&lt;ui:insert</span> <span class="na">name=</span><span class="s">"content"</span> <span class="nt">&gt;</span>
-		  <span class="nt">&lt;ui:include</span> <span class="na">src=</span><span class="s">"/template/contentPage.xhtml"</span> <span class="nt">/&gt;</span>
-		<span class="nt">&lt;/ui:insert&gt;</span>
-		<span class="nt">&lt;/div&gt;</span>
-
-		<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"footer"</span><span class="nt">&gt;</span>
-			<span class="nt">&lt;ui:insert</span> <span class="na">name=</span><span class="s">"footer"</span> <span class="nt">&gt;</span>
-			  <span class="nt">&lt;ui:include</span> <span class="na">src=</span><span class="s">"/template/footerPage.xhtml"</span> <span class="nt">/&gt;</span>
+			<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"header"</span><span class="nt">&gt;</span>
+			<span class="nt">&lt;ui:insert</span> <span class="na">name=</span><span class="s">"header"</span> <span class="nt">&gt;</span>
+			  <span class="nt">&lt;ui:include</span> <span class="na">src=</span><span class="s">"/template/headerPage.xhtml"</span> <span class="nt">/&gt;</span>
 			<span class="nt">&lt;/ui:insert&gt;</span>
 			<span class="nt">&lt;/div&gt;</span>
 
-		<span class="nt">&lt;/div&gt;</span>
+			<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"content"</span><span class="nt">&gt;</span>
+			<span class="nt">&lt;ui:insert</span> <span class="na">name=</span><span class="s">"content"</span> <span class="nt">&gt;</span>
+			  <span class="nt">&lt;ui:include</span> <span class="na">src=</span><span class="s">"/template/contentPage.xhtml"</span> <span class="nt">/&gt;</span>
+			<span class="nt">&lt;/ui:insert&gt;</span>
+			<span class="nt">&lt;/div&gt;</span>
 
-	<span class="nt">&lt;/h:body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
+			<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"footer"</span><span class="nt">&gt;</span>
+				<span class="nt">&lt;ui:insert</span> <span class="na">name=</span><span class="s">"footer"</span> <span class="nt">&gt;</span>
+				  <span class="nt">&lt;ui:include</span> <span class="na">src=</span><span class="s">"/template/footerPage.xhtml"</span> <span class="nt">/&gt;</span>
+				<span class="nt">&lt;/ui:insert&gt;</span>
+				<span class="nt">&lt;/div&gt;</span>
+
+			<span class="nt">&lt;/div&gt;</span>
+
+		<span class="nt">&lt;/h:body&gt;</span>
+	<span class="nt">&lt;/html&gt;</span>
+	~~~
+	{: .language-html}
 </code></pre>
 </div>
 
@@ -185,25 +191,28 @@ atama yapılarak tanımlanır. <ui:include> etiketi ile de bu parçaları hangi 
 
 <p><strong>headerPage.xhtml Kodu</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
-<span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
-<span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>   
-	  <span class="na">xmlns:ui=</span><span class="s">"http://java.sun.com/jsf/facelets"</span>
-	  <span class="na">xmlns:h=</span><span class="s">"http://xmlns.jcp.org/jsf/html"</span>    
-	  <span class="na">xmlns:f=</span><span class="s">"http://xmlns.jcp.org/jsf/core"</span><span class="nt">&gt;</span>
-	<span class="nt">&lt;body&gt;</span>
-		<span class="nt">&lt;ui:composition&gt;</span>
-				<span class="nt">&lt;h:form&gt;</span>
-					<span class="nt">&lt;h:commandLink</span> <span class="na">value=</span><span class="s">"AnaSayfa"</span> <span class="na">action=</span><span class="s">"index.xhtml?faces-redirect=true"</span><span class="nt">/&gt;</span>
-					<span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">"  "</span><span class="nt">/&gt;</span>
-					<span class="nt">&lt;h:commandLink</span> <span class="na">value=</span><span class="s">"Hakkımda"</span> <span class="na">action=</span><span class="s">"hakkimda.xhtml?faces-redirect=true"</span><span class="nt">/&gt;</span>
-					<span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">"  "</span><span class="nt">/&gt;</span>
-					<span class="nt">&lt;h:commandLink</span> <span class="na">value=</span><span class="s">"JSF Video Dersleri"</span> <span class="na">action=</span><span class="s">"videoDersler.xhtml?faces-redirect=true"</span><span class="nt">/&gt;</span>
-				<span class="nt">&lt;/h:form&gt;</span>
+<div class="highlighter-rouge"><pre class="highlight"><code>	~~~
+	<span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
+	<span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
+	<span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>   
+		  <span class="na">xmlns:ui=</span><span class="s">"http://java.sun.com/jsf/facelets"</span>
+		  <span class="na">xmlns:h=</span><span class="s">"http://xmlns.jcp.org/jsf/html"</span>    
+		  <span class="na">xmlns:f=</span><span class="s">"http://xmlns.jcp.org/jsf/core"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;body&gt;</span>
+			<span class="nt">&lt;ui:composition&gt;</span>
+					<span class="nt">&lt;h:form&gt;</span>
+						<span class="nt">&lt;h:commandLink</span> <span class="na">value=</span><span class="s">"AnaSayfa"</span> <span class="na">action=</span><span class="s">"index.xhtml?faces-redirect=true"</span><span class="nt">/&gt;</span>
+						<span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">"  "</span><span class="nt">/&gt;</span>
+						<span class="nt">&lt;h:commandLink</span> <span class="na">value=</span><span class="s">"Hakkımda"</span> <span class="na">action=</span><span class="s">"hakkimda.xhtml?faces-redirect=true"</span><span class="nt">/&gt;</span>
+						<span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">"  "</span><span class="nt">/&gt;</span>
+						<span class="nt">&lt;h:commandLink</span> <span class="na">value=</span><span class="s">"JSF Video Dersleri"</span> <span class="na">action=</span><span class="s">"videoDersler.xhtml?faces-redirect=true"</span><span class="nt">/&gt;</span>
+					<span class="nt">&lt;/h:form&gt;</span>
 
-		<span class="nt">&lt;/ui:composition&gt;</span>
-	<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
+			<span class="nt">&lt;/ui:composition&gt;</span>
+		<span class="nt">&lt;/body&gt;</span>
+	<span class="nt">&lt;/html&gt;</span>
+	~~~
+	{: .language-html}
 </code></pre>
 </div>
 
