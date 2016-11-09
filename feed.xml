@@ -5,8 +5,8 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 09 Nov 2016 22:18:24 +0300</pubDate>
-    <lastBuildDate>Wed, 09 Nov 2016 22:18:24 +0300</lastBuildDate>
+    <pubDate>Wed, 09 Nov 2016 22:24:10 +0300</pubDate>
+    <lastBuildDate>Wed, 09 Nov 2016 22:24:10 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
     
       <item>
@@ -200,45 +200,42 @@ göstererek bu yapının kullanımını görelim. Uygulamanın kodlarına direk
 
 &lt;p&gt;&lt;strong&gt;TemplateSayfamiz.xhtml Kodu&lt;/strong&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	~~~
-	&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&#39;1.0&#39; encoding=&#39;UTF-8&#39; ?&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/1999/xhtml&quot;&lt;/span&gt;
-		  &lt;span class=&quot;na&quot;&gt;xmlns:h=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://xmlns.jcp.org/jsf/html&quot;&lt;/span&gt;
-		  &lt;span class=&quot;na&quot;&gt;xmlns:ui=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://java.sun.com/jsf/facelets&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:head&amp;gt;&lt;/span&gt;
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&amp;lt;ui:insert&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;SayfaBasligi&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ui:insert&amp;gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:outputStylesheet&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;common-style.css&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;library=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;css&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:head&amp;gt;&lt;/span&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&#39;1.0&#39; encoding=&#39;UTF-8&#39; ?&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/1999/xhtml&quot;&lt;/span&gt;
+	  &lt;span class=&quot;na&quot;&gt;xmlns:h=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://xmlns.jcp.org/jsf/html&quot;&lt;/span&gt;
+	  &lt;span class=&quot;na&quot;&gt;xmlns:ui=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://java.sun.com/jsf/facelets&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:head&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&amp;lt;ui:insert&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;SayfaBasligi&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ui:insert&amp;gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:outputStylesheet&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;common-style.css&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;library=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;css&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:head&amp;gt;&lt;/span&gt;
 
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:body&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:body&amp;gt;&lt;/span&gt;
 
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;page&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;page&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
 
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;header&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;ui:insert&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;header&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-			  &lt;span class=&quot;nt&quot;&gt;&amp;lt;ui:include&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/template/headerPage.xhtml&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;header&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;ui:insert&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;header&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+		  &lt;span class=&quot;nt&quot;&gt;&amp;lt;ui:include&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/template/headerPage.xhtml&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ui:insert&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;content&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;ui:insert&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;content&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+		  &lt;span class=&quot;nt&quot;&gt;&amp;lt;ui:include&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/template/contentPage.xhtml&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ui:insert&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;footer&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;nt&quot;&gt;&amp;lt;ui:insert&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;footer&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+			  &lt;span class=&quot;nt&quot;&gt;&amp;lt;ui:include&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/template/footerPage.xhtml&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
 			&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ui:insert&amp;gt;&lt;/span&gt;
 			&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
 
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;content&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;ui:insert&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;content&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-			  &lt;span class=&quot;nt&quot;&gt;&amp;lt;ui:include&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/template/contentPage.xhtml&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ui:insert&amp;gt;&lt;/span&gt;
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
 
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;footer&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-				&lt;span class=&quot;nt&quot;&gt;&amp;lt;ui:insert&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;footer&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-				  &lt;span class=&quot;nt&quot;&gt;&amp;lt;ui:include&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/template/footerPage.xhtml&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-				&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ui:insert&amp;gt;&lt;/span&gt;
-				&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:body&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
-	~~~
-	{: .language-html}
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -253,57 +250,50 @@ atama yapılarak tanımlanır. &lt;ui:include&gt; etiketi ile de bu parçaları 
 
 &lt;p&gt;&lt;strong&gt;headerPage.xhtml Kodu&lt;/strong&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	~~~
-	&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&#39;1.0&#39; encoding=&#39;UTF-8&#39; ?&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/1999/xhtml&quot;&lt;/span&gt;   
-		  &lt;span class=&quot;na&quot;&gt;xmlns:ui=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://java.sun.com/jsf/facelets&quot;&lt;/span&gt;
-		  &lt;span class=&quot;na&quot;&gt;xmlns:h=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://xmlns.jcp.org/jsf/html&quot;&lt;/span&gt;    
-		  &lt;span class=&quot;na&quot;&gt;xmlns:f=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://xmlns.jcp.org/jsf/core&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;ui:composition&amp;gt;&lt;/span&gt;
-					&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:form&amp;gt;&lt;/span&gt;
-						&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:commandLink&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;AnaSayfa&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;index.xhtml?faces-redirect=true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-						&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:outputText&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;  &quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-						&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:commandLink&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hakkımda&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hakkimda.xhtml?faces-redirect=true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-						&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:outputText&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;  &quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-						&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:commandLink&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;JSF Video Dersleri&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;videoDersler.xhtml?faces-redirect=true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-					&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:form&amp;gt;&lt;/span&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&#39;1.0&#39; encoding=&#39;UTF-8&#39; ?&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/1999/xhtml&quot;&lt;/span&gt;   
+	  &lt;span class=&quot;na&quot;&gt;xmlns:ui=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://java.sun.com/jsf/facelets&quot;&lt;/span&gt;
+	  &lt;span class=&quot;na&quot;&gt;xmlns:h=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://xmlns.jcp.org/jsf/html&quot;&lt;/span&gt;    
+	  &lt;span class=&quot;na&quot;&gt;xmlns:f=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://xmlns.jcp.org/jsf/core&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;ui:composition&amp;gt;&lt;/span&gt;
+				&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:form&amp;gt;&lt;/span&gt;
+					&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:commandLink&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;AnaSayfa&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;index.xhtml?faces-redirect=true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+					&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:outputText&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;  &quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+					&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:commandLink&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hakkımda&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hakkimda.xhtml?faces-redirect=true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+					&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:outputText&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;  &quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+					&lt;span class=&quot;nt&quot;&gt;&amp;lt;h:commandLink&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;JSF Video Dersleri&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;videoDersler.xhtml?faces-redirect=true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+				&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h:form&amp;gt;&lt;/span&gt;
 
-			&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ui:composition&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
-	~~~
-	{: .language-html}
+		&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ui:composition&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;HeaderPage sayfamız şablonumuzun üst kısmını oluşturuyor. Biz de şablon olarak kullanacağımız için bu sayfaya özgü içeriğimizi&lt;/p&gt;
-&lt;ui:composition&gt; etiketlerinin arasında tanımlıyoruz. Örneğin burada headerPage basit bir menü tutacak. Biz de &lt;ui:composition&gt; 
-etiketinin arasına yazarak bu yapıyı şablonun bir parçası haline getirdik.
+&lt;p&gt;HeaderPage sayfamız şablonumuzun üst kısmını oluşturuyor. Biz de şablon olarak kullanacağımız için bu sayfaya özgü içeriğimizi 
+***&lt;ui:composition&gt;*** etiketlerinin arasında tanımlıyoruz. Örneğin burada headerPage basit bir menü tutacak. Biz de ***&lt;ui:composition&gt;*** 
+etiketinin arasına yazarak bu yapıyı şablonun bir parçası haline getirdik.&lt;/ui:composition&gt;&lt;/ui:composition&gt;&lt;/p&gt;
 
+&lt;p&gt;&lt;strong&gt;Ekran Çıktısı&lt;/strong&gt;&lt;/p&gt;
 
-**Ekran Çıktısı**
-
-&lt;a href=&quot;/images/jsf/jsfDersleri9-1.png&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfDersleri9-1.png&quot;&gt;
 &lt;img src=&quot;/images/jsf/jsfDersleri9-1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;
+&lt;/a&gt;&lt;/p&gt;
 
-&lt;a href=&quot;/images/jsf/jsfDersleri9-2.png&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfDersleri9-2.png&quot;&gt;
 &lt;img src=&quot;/images/jsf/jsfDersleri9-2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;
+&lt;/a&gt;&lt;/p&gt;
 
-XHTML içerisinde xhtml kullanımını sağlayan facelet etiketlerinin kullanımı bu şekilde arkadaşlar. Siz de xhtml sayfasını 
-dilediğiniz gibi oluşturup diğer sayfalar içerisinden çekebilirsiniz.
+&lt;p&gt;XHTML içerisinde xhtml kullanımını sağlayan facelet etiketlerinin kullanımı bu şekilde arkadaşlar. Siz de xhtml sayfasını 
+dilediğiniz gibi oluşturup diğer sayfalar içerisinden çekebilirsiniz.&lt;/p&gt;
 
-Gelecek yazımızda ***Composite Components*** konusuna değineceğiz. 
+&lt;p&gt;Gelecek yazımızda &lt;strong&gt;&lt;em&gt;Composite Components&lt;/em&gt;&lt;/strong&gt; konusuna değineceğiz.&lt;/p&gt;
 
-Esen kalın.
+&lt;p&gt;Esen kalın.&lt;/p&gt;
 
-
-Selam ve Sevgilerimle
-{: style=&quot;text-align: center&quot;}
-&lt;/ui:composition&gt;&lt;/ui:composition&gt;
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
 </description>
         <pubDate>Tue, 08 Nov 2016 20:40:21 +0300</pubDate>
         <link>http://ilkaygunel.com/blog/2016/jsf-facelet-etiketleri/</link>
