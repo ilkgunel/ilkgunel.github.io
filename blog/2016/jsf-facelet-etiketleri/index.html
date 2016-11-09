@@ -111,66 +111,74 @@ göstererek bu yapının kullanımını görelim. Uygulamanın kodlarına direk
 
 <p><strong>index.xhtml Kodu</strong></p>
 
-<p>``` html
-<?xml version='1.0' encoding='UTF-8' ?>
-&lt;!DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Transitional//EN” 
-“http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd”&gt;</p>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
-	<h:head>
-	</h:head>
-	<h:body>
-		<ui:composition template="template/TemplateSayfamiz.xhtml">
-			<ui:define name="title">Ana Sayfa</ui:define>
+<div class="highlighter-rouge"><pre class="highlight"><code>``` html
+<span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
+<span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
+	  <span class="na">xmlns:h=</span><span class="s">"http://xmlns.jcp.org/jsf/html"</span>
+	  <span class="na">xmlns:ui=</span><span class="s">"http://java.sun.com/jsf/facelets"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;h:head&gt;</span>
+	<span class="nt">&lt;/h:head&gt;</span>
+	<span class="nt">&lt;h:body&gt;</span>
+		<span class="nt">&lt;ui:composition</span> <span class="na">template=</span><span class="s">"template/TemplateSayfamiz.xhtml"</span><span class="nt">&gt;</span>
+			<span class="nt">&lt;ui:define</span> <span class="na">name=</span><span class="s">"title"</span><span class="nt">&gt;</span>Ana Sayfa<span class="nt">&lt;/ui:define&gt;</span>
 
-			<ui:define name="content">
-			<h3><h:outputtext value="Ana Sayfaya Hoşgeldiniz!" /></h3>
-			<h3><h:outputtext value="Hakkımda sayfasından hakkımda bilgi edinebilir ya da" /></h3>
-			<h3><h:outputtext value="Video Dersleri sayfasından JSF video derslerine ulaşabilirsiniz." /></h3>
-		</ui:define>
-		</ui:composition>
-	</h:body>
-</html>
-<p>```</p>
+			<span class="nt">&lt;ui:define</span> <span class="na">name=</span><span class="s">"content"</span><span class="nt">&gt;</span>
+			<span class="nt">&lt;h3&gt;&lt;h:outputText</span> <span class="na">value=</span><span class="s">"Ana Sayfaya Hoşgeldiniz!"</span> <span class="nt">/&gt;&lt;/h3&gt;</span>
+			<span class="nt">&lt;h3&gt;&lt;h:outputText</span> <span class="na">value=</span><span class="s">"Hakkımda sayfasından hakkımda bilgi edinebilir ya da"</span> <span class="nt">/&gt;&lt;/h3&gt;</span>
+			<span class="nt">&lt;h3&gt;&lt;h:outputText</span> <span class="na">value=</span><span class="s">"Video Dersleri sayfasından JSF video derslerine ulaşabilirsiniz."</span> <span class="nt">/&gt;&lt;/h3&gt;</span>
+		<span class="nt">&lt;/ui:define&gt;</span>
+		<span class="nt">&lt;/ui:composition&gt;</span>
+	<span class="nt">&lt;/h:body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+```
+</code></pre>
+</div>
 
 <p><strong>TemplateSayfamiz.xhtml Kodu</strong></p>
 
-<p>``` html
-<?xml version='1.0' encoding='UTF-8' ?>
-&lt;!DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Transitional//EN” 
-“http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd”&gt;</p>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
-	<h:head>
-		<title><ui:insert name="title">SayfaBasligi</ui:insert></title>
-	<h:outputstylesheet name="common-style.css" library="css" />
-	</h:head>
+<div class="highlighter-rouge"><pre class="highlight"><code>``` html
+<span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
+<span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
+	  <span class="na">xmlns:h=</span><span class="s">"http://xmlns.jcp.org/jsf/html"</span>
+	  <span class="na">xmlns:ui=</span><span class="s">"http://java.sun.com/jsf/facelets"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;h:head&gt;</span>
+		<span class="nt">&lt;title&gt;&lt;ui:insert</span> <span class="na">name=</span><span class="s">"title"</span><span class="nt">&gt;</span>SayfaBasligi<span class="nt">&lt;/ui:insert&gt;&lt;/title&gt;</span>
+	<span class="nt">&lt;h:outputStylesheet</span> <span class="na">name=</span><span class="s">"common-style.css"</span> <span class="na">library=</span><span class="s">"css"</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;/h:head&gt;</span>
 
-	<h:body>
+	<span class="nt">&lt;h:body&gt;</span>
 
-	<div id="page">
+	<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"page"</span><span class="nt">&gt;</span>
 
-		<div id="header">
-		<ui:insert name="header">
-		  <ui:include src="/template/headerPage.xhtml" />
-		</ui:insert>
-		</div>
+		<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"header"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;ui:insert</span> <span class="na">name=</span><span class="s">"header"</span> <span class="nt">&gt;</span>
+		  <span class="nt">&lt;ui:include</span> <span class="na">src=</span><span class="s">"/template/headerPage.xhtml"</span> <span class="nt">/&gt;</span>
+		<span class="nt">&lt;/ui:insert&gt;</span>
+		<span class="nt">&lt;/div&gt;</span>
 
-		<div id="content">
-		<ui:insert name="content">
-		  <ui:include src="/template/contentPage.xhtml" />
-		</ui:insert>
-		</div>
+		<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"content"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;ui:insert</span> <span class="na">name=</span><span class="s">"content"</span> <span class="nt">&gt;</span>
+		  <span class="nt">&lt;ui:include</span> <span class="na">src=</span><span class="s">"/template/contentPage.xhtml"</span> <span class="nt">/&gt;</span>
+		<span class="nt">&lt;/ui:insert&gt;</span>
+		<span class="nt">&lt;/div&gt;</span>
 
-		<div id="footer">
-			<ui:insert name="footer">
-			  <ui:include src="/template/footerPage.xhtml" />
-			</ui:insert>
-			</div>
+		<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"footer"</span><span class="nt">&gt;</span>
+			<span class="nt">&lt;ui:insert</span> <span class="na">name=</span><span class="s">"footer"</span> <span class="nt">&gt;</span>
+			  <span class="nt">&lt;ui:include</span> <span class="na">src=</span><span class="s">"/template/footerPage.xhtml"</span> <span class="nt">/&gt;</span>
+			<span class="nt">&lt;/ui:insert&gt;</span>
+			<span class="nt">&lt;/div&gt;</span>
 
-		</div>
+		<span class="nt">&lt;/div&gt;</span>
 
-	</h:body>
-</html>
-<p>```</p>
+	<span class="nt">&lt;/h:body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+```
+</code></pre>
+</div>
 
 <p><strong>Kodun Açıklaması</strong></p>
 
@@ -183,24 +191,29 @@ atama yapılarak tanımlanır. <ui:include> etiketi ile de bu parçaları hangi 
 
 <p><strong>headerPage.xhtml Kodu</strong></p>
 
-<p>``` html
-<?xml version='1.0' encoding='UTF-8' ?>
-&lt;!DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Transitional//EN” 
-“http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd”&gt;</p>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
-	<body>
-		<ui:composition>
-			<h:form>
-				<h:commandlink value="AnaSayfa" action="index.xhtml?faces-redirect=true" />
-				<h:outputtext value="  " />
-				<h:commandlink value="Hakkımda" action="hakkimda.xhtml?faces-redirect=true" />
-				<h:outputtext value="  " />
-				<h:commandlink value="JSF Video Dersleri" action="videoDersler.xhtml?faces-redirect=true" />
-			</h:form>
-		</ui:composition>
-	</body>
-</html>
-<p>```</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>``` html
+<span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
+<span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>   
+	  <span class="na">xmlns:ui=</span><span class="s">"http://java.sun.com/jsf/facelets"</span>
+	  <span class="na">xmlns:h=</span><span class="s">"http://xmlns.jcp.org/jsf/html"</span>    
+	  <span class="na">xmlns:f=</span><span class="s">"http://xmlns.jcp.org/jsf/core"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;body&gt;</span>
+		<span class="nt">&lt;ui:composition&gt;</span>
+			<span class="nt">&lt;h:form&gt;</span>
+				<span class="nt">&lt;h:commandLink</span> <span class="na">value=</span><span class="s">"AnaSayfa"</span> <span class="na">action=</span><span class="s">"index.xhtml?faces-redirect=true"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">"  "</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;h:commandLink</span> <span class="na">value=</span><span class="s">"Hakkımda"</span> <span class="na">action=</span><span class="s">"hakkimda.xhtml?faces-redirect=true"</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">"  "</span><span class="nt">/&gt;</span>
+				<span class="nt">&lt;h:commandLink</span> <span class="na">value=</span><span class="s">"JSF Video Dersleri"</span> <span class="na">action=</span><span class="s">"videoDersler.xhtml?faces-redirect=true"</span><span class="nt">/&gt;</span>
+			<span class="nt">&lt;/h:form&gt;</span>
+		<span class="nt">&lt;/ui:composition&gt;</span>
+	<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+```  
+</code></pre>
+</div>
 
 <p>HeaderPage sayfamız şablonumuzun üst kısmını oluşturuyor. Biz de şablon olarak kullanacağımız için bu sayfaya özgü içeriğimizi 
 <strong>ui:composition</strong>
