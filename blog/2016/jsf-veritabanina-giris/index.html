@@ -5,30 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>JSF Yazı Dizisi</title>
-    <meta name="description" content="Daha önce başka bir adreste yayınlanmış olan Java Server Faces yazılarım’ın bu bloğa aktarımına başladım. 1 Ocak 2017 tarihine kadar tüm JSF yazılarımı taşım...">
+    <title>Veritabanına Giriş</title>
+    <meta name="description" content="Merhaba arkadaşlar. Bu yazımızda JSF içinde veritabanı kullanımına bir giriş yapacağız ve JSF projesi ile veritabanının ilişkilendirilmesini öğreneceğiz.">
 
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsf-tutorials-list/">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsf-veritabanina-giris/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
       <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>JSF Yazı Dizisi - İlkay Günel - Blog</title>
-<meta property="og:title" content="JSF Yazı Dizisi" />
-<meta name="description" content="JSF Yazı Dizisi" />
-<meta property="og:description" content="JSF Yazı Dizisi" />
-<link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsf-tutorials-list/" />
-<meta property="og:url" content="http://ilkaygunel.com/blog/2016/jsf-tutorials-list/" />
+<title>Veritabanına Giriş - İlkay Günel - Blog</title>
+<meta property="og:title" content="Veritabanına Giriş" />
+<meta name="description" content="Veritabanına Giriş" />
+<meta property="og:description" content="Veritabanına Giriş" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsf-veritabanina-giris/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/jsf-veritabanina-giris/" />
 <meta property="og:site_name" content="İlkay Günel - Blog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2016-01-01T19:39:20+02:00" />
+<meta property="article:published_time" content="2016-11-12T20:40:21+03:00" />
 <script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "JSF Yazı Dizisi",
-    "datePublished": "2016-01-01T19:39:20+02:00",
-    "description": "JSF Yazı Dizisi",
-    "url": "http://ilkaygunel.com/blog/2016/jsf-tutorials-list/"
+    "headline": "Veritabanına Giriş",
+    "datePublished": "2016-11-12T20:40:21+03:00",
+    "description": "Veritabanına Giriş",
+    "url": "http://ilkaygunel.com/blog/2016/jsf-veritabanina-giris/"
   }
 </script>
 <!-- End Jekyll SEO tag -->
@@ -91,29 +91,63 @@
 
   <div class="card">
     <header class="post-header">
-      <h1 class="post-title">JSF Yazı Dizisi</h1>
-      <p class="post-meta">Jan 1, 2016</p>
+      <h1 class="post-title">Veritabanına Giriş</h1>
+      <p class="post-meta">Nov 12, 2016</p>
     </header>
 
     <div class="post-content">
-      <p>Daha önce başka bir adreste yayınlanmış olan Java Server Faces yazılarım’ın bu bloğa aktarımına başladım. 1 Ocak 2017 tarihine kadar tüm JSF yazılarımı taşımayı planlıyorum.</p>
+      <p>Merhaba arkadaşlar. Bu yazımızda JSF içinde veritabanı kullanımına bir giriş yapacağız ve JSF projesi ile veritabanının ilişkilendirilmesini öğreneceğiz.</p>
 
-<ol>
-  <li><a href="http://ilkaygunel.com/blog/2016/jsfye-giris/">JSF Framework’e Giriş Ve İlk Uygulama</a></li>
-  <li><a href="http://ilkaygunel.com/blog/2016/jsfde-form-olusturmak-ve-sayfa-uzantisini-xhtml-yerine-jsf-yapmak/">JSF’De Form Oluşturmak Ve Sayfa Uzantısını .xhtml Yerine .jsf Yapmak</a></li>
-  <li><a href="http://ilkaygunel.com/blog/2016/managed-beans-yonetimli-fasulyeler-yonetimli-kahve-cekirdekleri/">Managed Beans</a></li>
-  <li><a href="http://ilkaygunel.com/blog/2016/jsfde-yonlendirme-kurali-navigation-rule-in-jsf/">JSF Dersleri-JSF’De Metot İle Sayfa Yönlendirme</a></li>
-  <li><a href="http://ilkaygunel.com/blog/2016/jsf-developing-on-eclipe-ide">Eclipse IDE Üzerinde Pluginsiz JSF Geliştirmek</a></li>
-  <li><a href="http://ilkaygunel.com/blog/2016/jsfde-kaynak-demetleriresources-bundle-in-jsf/">Resources Bundle in JSF)</a></li>
-  <li><a href="http://ilkaygunel.com/blog/2016/jsf-inputhidden-ve-coklu-checkbox/">InputHidden ve Çoklu CheckBox</a></li>
-  <li><a href="http://ilkaygunel.com/blog/2016/jsf-selectoneradio-kullanimi/">SelectOneRadio Kullanımı</a></li>
-  <li><a href="http://ilkaygunel.com/blog/2016/jsf-gecerlilik-denetleyicisi-ile-form-ornegi">Geçerlilik Denetleyicisi ile Form Örneği</a></li>
-  <li><a href="http://ilkaygunel.com/blog/2016/jsf-facelet-etiketleri/">Facelet Etiketleri</a></li>
-  <li><a href="http://ilkaygunel.com/blog/2016/jsf-bilesik-bilesenler/">Composite Components</a></li>
-  <li><a href="http://ilkaygunel.com/blog/2016/jsf-ve-ajaxjsf-and-ajax/">JSF ve Ajax(JSF and Ajax)</a></li>
-  <li><a href="http://ilkaygunel.com/blog/2016/jsf-ajax-ve-jsf-ile-anket-ornegi/">JSF Dersleri-Ajax ve JSF ile Anket Örneği</a></li>
-  <li><a href="http://ilkaygunel.com/blog/2016/jsf-veritabanina-giris/">JSF Dersleri-Veritabanına Giriş</a></li>
-</ol>
+<p><strong>Neler Gerekli?</strong></p>
+
+<p>JSF ile veritabanı işlemleri yapmak için iki şeye ihtiyacımız var. Birincisi bir sunucuya, ikincisi ise proje içinde bu sunucunun kullandığı veritabanının sürücüsüne. Bu yazıyı yazarken ben sunucu olarak Xampp 
+Server‘ı kullanacağım. Xampp Server MySQL veritabanını da beraberinde getiren bir sunucudur. İçinde PhpMyAdmin kurulu olarak gelmektedir. PhpMyAdmin veritabanlarını yönetmemizi sağlayan bir araçtır. PhpMyAdmin 
+hakkında bilgi almak isterseniz vikipedi sayfasına <a href="http://tr.wikipedia.org/wiki/PhpMyAdmin">buraya</a> tıklayarak ulaşabilirsiniz. MySQL ise açık kaynak koldu bir veritabanı yönetim sistemidir. MySQL’in vikipedi 
+sayfası için de <a href="http://tr.wikipedia.org/wiki/MySQL">buraya</a> tıklayabilirsiniz. Xampp Server’ı indirmek için <a href="https://www.apachefriends.org/tr/download.html">buraya</a> tıklayın ve işletim sisteminize uygun sürümü indirin.</p>
+
+<p><a href="/images/jsf/jsfDersleri13-1.png">
+<img src="/images/jsf/jsfDersleri13-1.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Burada bir noktaya değinelim. Xampp Server’ın Windows ve MAC OS X altında kurulum ve kullanımı çok basittir ancak Linux ortamında biraz zorlayabilir. 
+Linux ortamında Xampp Server’ı kurmak için, indirme işleminde sonra cd ile Xampp Server’ı indirdiğiniz yere gelin ve şu komutları girin.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">sudo</span> <span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="n">xampp</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">x64</span><span class="o">-</span><span class="mf">1.8</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">installer</span><span class="o">.</span><span class="na">run</span>
+<span class="n">sudo</span> <span class="o">./</span><span class="n">xampp</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">x64</span><span class="o">-</span><span class="mf">1.8</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">installer</span><span class="o">.</span><span class="na">run</span></code></pre></figure>
+
+<p>Bu komutların ardından karşınıza kurulum ekranı gelecek. Next butonlarına tıklayarak kurulumu bitiriyoruz. İlk kurulum sonunda Finish butonuna basmadan önce Launch XAMPP seçeneği işaretli ise Xampp Server kendisi açılır ama diğer zamanlarda Xampp Server’ı başlatmak için terminalden şu komutu vermeniz gerekir.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">sudo</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">lampp</span><span class="o">/</span><span class="n">lampp</span> <span class="n">start</span></code></pre></figure>
+
+<p>Xampp Server’ı kapatmak için de şu komutu girmelisiniz.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">sudo</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">lampp</span><span class="o">/</span><span class="n">lampp</span> <span class="n">stop</span></code></pre></figure>
+
+<p>Xampp Server’ı kurduktan sonra şimdi olayın NetBeans tarafına geçelim. Geliştirme ortamımızda “Veritabanına Giriş”  adında bir proje oluşturalım. MySQL veritabanını kullanabilmek için projemize MySQL’i tanıyacak bir sürücü eklememiz gerekiyor. Şimdi o sürücüyü ekleyelim.</p>
+
+<p>Projemize sağ tıklayıp “Add Library”  diyoruz.</p>
+
+<p><a href="/images/jsf/jsfDersleri13-2.png">
+<img src="/images/jsf/jsfDersleri13-2.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Açılan ekran “MySQL JDBC Driver” kütüphanesini seçelim ve “Add Library” diyelim.</p>
+
+<p><a href="/images/jsf/jsfDersleri13-3.png">
+<img src="/images/jsf/jsfDersleri13-3.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Libraries kısmına sürücü kütüphanemiz eklenmiş oluyor.</p>
+
+<p><a href="/images/jsf/jsfDersleri13-4.png">
+<img src="/images/jsf/jsfDersleri13-4.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Bu yazımızda Xampp Server kurulumunu ve projemizi MySQL ile ilişkilendirmeyi öğrendik. Gelecek yazımızda veritabanına kayıt ekleme işlemini öğreneceğiz.</p>
+
+<p>Esen kalın.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
 
     </div>
 
