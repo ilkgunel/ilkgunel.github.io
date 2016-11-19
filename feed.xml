@@ -5,9 +5,90 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 13 Nov 2016 23:12:42 +0300</pubDate>
-    <lastBuildDate>Sun, 13 Nov 2016 23:12:42 +0300</lastBuildDate>
+    <pubDate>Sat, 19 Nov 2016 22:19:58 +0300</pubDate>
+    <lastBuildDate>Sat, 19 Nov 2016 22:19:58 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Ember.js 1 - Giriş ve Kurulum</title>
+        <description>&lt;p&gt;Merhabalar.&lt;/p&gt;
+
+&lt;p&gt;Bu yazı ile birlikte Ember.js’e giriş yapacağız ve kurulumundan bahsedeceğiz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Ember.js Nedir?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Front-end dünyasında bildiğiniz gibi Javascript çok önemli bir teknolojidir. Aynı zamanda bana göre saf hali ile karışık ve uzun olan Javascript’in işlerin hem daha kolay ve az kodla hem de belli standarta göre halledilebilmesi için kütüphaneleri çıkmaktadır. Şu anda muhtemelen her gün kulağımıza gelen Angular.js bu teknolojiler içinde en meşhuru. Ember.js de Angular.js gibi &lt;strong&gt;&lt;em&gt;Client Side MVC&lt;/em&gt;&lt;/strong&gt; denen olayı gerçekleyen bir JS framewoküdür. Ayrıca çokça konuşulan bir başka konu ise &lt;strong&gt;Single Page Application&lt;/strong&gt; konusudur. Ember ve Angular gibi JS kütüphaneleri geliştiricilere sayfayı yenilemeye ihtiyaç duymaksızın ihtiyaçların karşılanabildiği bir sayfa yazma imkanı sunarlar.&lt;/p&gt;
+
+&lt;p&gt;Her yiğidin yoğurt yemesi ayrıdır derler ya ben de Angular.js teknolojisini sevmiyorum. Bu nedenle front-end dünyasından bir JS frameworkünü bilgilerime katmak istedim ve Ember.js’de karar kıldım. Sonraları farklı JS frameworkleri deöğrenme niyetim var.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Ember.js İle Geliştirme Yapmak İçin Yapılması Gerekenler&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Ember.js ile proje geliştirebilmek için ilk olarak makinanızda Node.js teknolojisinin kurulu olması gerekmektedir çünkü komut satırı üzerinden ember.js kurulumu yapacağımız sırada node.js’e ait &lt;strong&gt;&lt;em&gt;npm&lt;/em&gt;&lt;/strong&gt; komutunu kullanacağız.&lt;/p&gt;
+
+&lt;p&gt;Windows ve Mac OS için &lt;a href=&quot;https://nodejs.org/en/&quot;&gt;https://nodejs.org/en/&lt;/a&gt; adresinden indirme yapıp direk kurabilirsiniz. Windows ve Mac OS’da kurulum Next,Next’den ibaret olduğu için node.js kurulumuna girmiyorum arkadaşlar.&lt;/p&gt;
+
+&lt;p&gt;Node.js kurulumunun akabinde sisteminizde kurulu değilse &lt;strong&gt;&lt;em&gt;Git&lt;/em&gt;&lt;/strong&gt; kurulumunu ve Path ayarlarını yapmanız gerekiyor. Bunun için de &lt;a href=&quot;https://git-scm.com/download/win&quot;&gt;https://git-scm.com/download/win&lt;/a&gt; adresinden Windows için Git’i indirip kurun. Sizin için Path’e Git’i ekleyecek. Akabinde bir komut satırı açalım ve ember.js kurulumu için şu komutu koşturalım:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;npm&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ember&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cli&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;2.9&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Bu komutla birlikte npm kütüphanesinden ember.js’in 2.9 sürümünü kurmasını söyledik. Bu yazının yazıldığı sırada da en güncel sürüm 2.9’dur.&lt;/p&gt;
+
+&lt;p&gt;Komutu işlettiğimizde Windows komut satırı şu şekilde indirme ve kurma işlemlerine başlayacaktır.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/emberjs/emberjs1-1.png&quot;&gt;
+&lt;img src=&quot;/images/emberjs/emberjs1-1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Kurulumun tamamlanmasından ardından cd komutu ile masaüstüne ( ya da istediğiniz herhangi bir yere) gelin ve şu komutu işletin.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;ember&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FirstEmberProject&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Bu komut ile biz ember.js kodlayabilmek için gerekli tüm bağımlılıkların ve ayar dosyalarının yer aldığı bir projeyi hazır olarak elde etmiş olacağız. Bu komutun işlemini tamamlaması biraz zaman alabilir çünkü bağımlılıkların kurulması için zaman gerekebiliyor. Biz bu komutu işlettiğimizde arka planda npm install komutunu da koşturacak.&lt;/p&gt;
+
+&lt;p&gt;Bu komtun başarı ile koşturulmasının ardından yine cd komutu FirstEmberProject içine girelim ve şu komutu koşturalım:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;ember&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Bu komutu koşturduktan sonra Windows sizden şu şekilde izin isteyebilir. Erişime izin ver butonuna tıklayıp işlemi tamamlayalım.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/emberjs/emberjs1-2.png&quot;&gt;
+&lt;img src=&quot;/images/emberjs/emberjs1-2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Adres çubuğu üzerinden http://localhost:4200/ adresine gittiğimizde Ember bizi karşılıyor olacak :)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/emberjs/emberjs1-3.png&quot;&gt;
+&lt;img src=&quot;/images/emberjs/emberjs1-3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu sayfa package.json içerisinde &lt;strong&gt;&lt;em&gt;ember-welcome-page&lt;/em&gt;&lt;/strong&gt; sayesinde üretilir ve aslında projemiz ile doğrudan ilgisi yoktur. Sadece ember.js kodlamak için gerekli hazırlıkların tamam olduğunu bildirir bize.&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda bu kadar arkadaşlar. Gelecek yazıda Routes and Templates konusuna değineceğiz. Görüşene kadar hoşçakalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Fri, 18 Nov 2016 20:40:21 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/emberjs-dersleri-1-giris/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/emberjs-dersleri-1-giris/</guid>
+        
+        <category>ember.js nedir?</category>
+        
+        <category>ember.js dersleri</category>
+        
+        <category>ember.js tutorial</category>
+        
+        <category>ember.js</category>
+        
+        <category>ember.js Türkçe</category>
+        
+        <category>ember.js Türkçe kaynak</category>
+        
+        <category>ember.js öğren</category>
+        
+        <category>ember.js türkçe dersleri</category>
+        
+        
+      </item>
     
       <item>
         <title>Veritabanına Giriş</title>
@@ -2138,181 +2219,6 @@ ve &lt;strong&gt;&lt;em&gt;Dependency Injection&lt;/em&gt;&lt;/strong&gt; konula
         <category>spring framework nedir</category>
         
         <category>spring framework nasıl kullanılır</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>JPA-01-Entity Sınıfı Tanımlama</title>
-        <description>&lt;p&gt;Merhaba arkadaşlar. Bu yazı ile birlikte artık JPA/Eclipselink derslerine başlıyoruz ve JPA’ya giriş yapıyoruz.&lt;/p&gt;
-
-&lt;p&gt;İlk olarak ORM ve JPA konularının ne olduğu ile başlayalım.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;ORM Ve JPA Nedir?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Açılımı Object Relational Mapping-İlişkisel Nesne Eşleştirme olan ORM bizim ilişkisel veri tabanımız ile projemiz arasında 
-köprü görevi gören  araçtır. Bu araç ile biz veri tabanımızdaki tabloları sınıflar ile sütunları da nesneler ile 
-ilişkilendirerek ve nesneler üstünde çalışarak işlemlerimizi yaparız. Programcıya tamamen nesne modeli üzerinde çalışma
-imkanı sağlar. Ayrıca ORM projenizi veri tabanı türünden bağımsız kılan bir teknolojidir. Yani siz isterseniz MySql 
-isterseniz MS SQL Server kullanın bu ORM için bir önem arz etmez. Diğer yandan ORM ile veri tabanı ve uygulamada kullanılan
-dil arasındaki tür uyuşmazlığı sorunu da ortadan kaldırılır. Diğer bir özellik de şudur. Normal projelerde bizler standart
-SQL ifadeleri ile veri tabanına kayıt yollar,çeker,siler,değiştiririz. ORM teknolojisi ile bu SQL ifadeleri kullanmak yerine
-daha basitleştirilmiş,daha hızlı ve daha güvenli işlemler yaparız. Bu olay JPA standartı çıkmadan  önce çıkmış olan ORM 
-çatılarında da vardı. JPA bunları örnek alarak geliştirildi.&lt;/p&gt;
-
-&lt;p&gt;JPA ise yukarıdaki özelliklerin tümünü taşıyan standartlaştırılmış ORM apisidir. Açılımı Java Persistence API‘dir. JPA ile 
-bizler veritabanındaki tablolarımızı programımızdaki Java sınıfları ile, tablolardaki sütunlar da bu sınıflar içindeki 
-değişkenler ile eşleştireceğiz.  Daha sonra da tüm işlemlerimizi bu sınıf vasıtası ile yapacağız. Yani bizler JPA ile 
-nesneler üzerinde çalışacağız.&lt;/p&gt;
-
-&lt;p&gt;JPA hem Java SE hem de Java EE için kullanılabilir bir teknolojidir. Ben JPA’yı buradaki yazılarda herkes tarafından 
-anlaşılabilmesi için Java SE üzerinden anlatacağım.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Entity Konusu&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Yazımızın bu kısmından sonra JPA’nın en temel konusu olan Entity Tanımlaması‘nı ve hangi şartların gerekli olduğunu öğreneceğiz.&lt;/p&gt;
-
-&lt;p&gt;En temel hali ile veri tabanımızdaki tablolarımıza karşılık gelen Java sınıflarımız bizim Entity sınıflarımız oluyor. Tablolarımızdaki 
-sütunlar da bu Entity sınıfları içindeki değişkenler ile ifade ediliyor. Bir sınıfın Entity sınıfı olması için olmazsa olmaz 
-3 kural vardır arkadaşlar. Bunlar:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;@Entity notasyonunun kullanılmış olması&lt;/li&gt;
-  &lt;li&gt;Argüman almayan bir public yapılandırıcı(constructor) metodun var olması&lt;/li&gt;
-  &lt;li&gt;@Id notasyonu kullanarak belirlenmiş bir ayırt edici alanın olmadır.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Ne demek istediğime şimdi bir de örnek kod ile bakalım arkadaşlar.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jpa&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pkg01&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.io.Serializable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.persistence.Entity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.persistence.GeneratedValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.persistence.GenerationType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.persistence.Id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;nd&quot;&gt;@Entity&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;EntitySinifi&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Serializable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;serialVersionUID&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1L&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@Id&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@GeneratedValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strategy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GenerationType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;AUTO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EntitySinifi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EntitySinifi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getIsim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setIsim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isim&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Kodda gördüğünüz gibi Entity sınıfımız @Entity notasyonuna sahip,argümansız bir yapılandırıcısı var ve ayırt edici alan olarak @Id notasyonuna sahip. id değişkenimiz bu sınıf içinde Long olarak yazılı fakat istersek onu int ya da String olarak da tanımlayabiliriz. Ayrıca dikkat ederseniz id değişkeni için get/set metotları da yer almamakta sınıf içinde. @Id ile tanımlanmış alanın değiştirilmez olduğu düşünüldüğü için değişkene ait get/set metotları sınıfımızda yer almıyor.&lt;/p&gt;
-
-&lt;p&gt;Şimdi Entity sınıfımıza ekleyebileceğimiz bazı diğer özelliklerden olan @Table ve @Column notasyonlarına bakalım.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jpa&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pkg01&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.io.Serializable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.persistence.Entity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.persistence.GeneratedValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.persistence.GenerationType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.persistence.Id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.persistence.Table&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.persistence.Column&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;nd&quot;&gt;@Entity&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@Table&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;BASVURULAR&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;EntitySinifi&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Serializable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;serialVersionUID&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1L&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@Id&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@GeneratedValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strategy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GenerationType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;AUTO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@Column&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;AdSoyad&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nullable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EntitySinifi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EntitySinifi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getIsim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setIsim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isim&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Kod içerisinde bir önceki koddan farklı olarak @Table ve @Column notasyonlarını kullandık. @Table notasyonu ile sınıfımız ve 
-veri tabanımızdaki tablomuzun adının aynı olması durumunu ortadan kaldırabiliriz. 
-&lt;strong&gt;&lt;em&gt;@Table(name=”BASVURULAR”)&lt;/em&gt;&lt;/strong&gt; ifadesi ile &lt;strong&gt;&lt;em&gt;EntitySinifi&lt;/em&gt;&lt;/strong&gt; sınıfının veri tabanında BASVURULAR tablosu ile ilişkilendirildiğini 
-söylüyoruz. @Column notasyonu ile de sütunun ve değişkenin aynı isimde olması durumunu ortadan kaldırıyoruz 
-ve sütuna boş değer gidip gidemeyeceği ile en fazla kaç karakter girilebileceğini belirleyebiliyoruz.&lt;/p&gt;
-
-&lt;p&gt;Son olarak &lt;strong&gt;&lt;em&gt;Fiziksel Notasyon&lt;/em&gt;&lt;/strong&gt; ve &lt;strong&gt;&lt;em&gt;Mantıksal Notasyon&lt;/em&gt;&lt;/strong&gt; kavramlarını ve farkını öğrenelim. Yukarıdaki kodda göreceğiniz üzere 
-@Entity,@Table,@Id ve @Column notasyonlarını kullandık. @GeneratedValue notasyonu @Id notasyonu ile ilişkili olduğu için onu 
-saymadık.&lt;/p&gt;
-
-&lt;p&gt;Fiziksel notasyonlar veri tabanı yapılandırmasını sınıfa haritalayan notasyonlardır. Yani Fiziksel notasyonlar ile tablo adı,
-sütun adı tanımalama ve daha başka ayarlar yapmak mümkündür. Mantıksal notasyonlar ise veri tabanı ve sınıf arasındaki 
-modellemeyi sağlayan notasyonlardır. Yani sınıfın bir Entity sınıfı olarak davranmasını sağlayan notasyonlardır. Buradan 
-hareketle @Entity ve @Id notasyonlarının Mantıksal Notasyon, @Table ve @Column notasyonlarının da Fizikesel Notasyon olduğunu 
-söyleyebiliriz.&lt;/p&gt;
-
-&lt;p&gt;Gelecek yazıda görüşene kadar sağlıcakla kalın arkadaşlar.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-</description>
-        <pubDate>Mon, 24 Oct 2016 20:41:21 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2016/eclipselink-giris/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/eclipselink-giris/</guid>
-        
-        <category>entity sınıfı olma şartları</category>
-        
-        <category>jpa @column notasyonu</category>
-        
-        <category>jpa @entity</category>
-        
-        <category>jpa @entity notasyonu</category>
-        
-        <category>jpa @ıd notasyonu</category>
-        
-        <category>jpa dersleri</category>
-        
-        <category>jpa entity tanımlaması</category>
-        
-        <category>jpa fiziksel notasyon</category>
-        
-        <category>jpa mantıksal notasyon</category>
-        
-        <category>jpa öğren</category>
-        
-        <category>jpa türkçe</category>
-        
-        <category>jpa türkçe kaynak</category>
         
         
       </item>
