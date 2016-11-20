@@ -182,20 +182,21 @@
 
 <p>İki sayfa arasında yönlendirme için biz <strong><em>link-to</em></strong> ifadesini kullanacağız. about.hbs dosyasını şu şekilde düzenleyelim:</p>
 
-<div class="jumbo">
-  <div class="right tomster"></div>
-  <h2>İlkay Günel Hakkında</h2>
-  <p>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;jumbo&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;right tomster&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;h2&gt;</span>İlkay Günel Hakkında<span class="nt">&lt;/h2&gt;</span>
+  <span class="nt">&lt;p&gt;</span>
     Ben İlkay Günel. 
 	Haziran 2016 İÜ Bilgisayar Mühendisliği Mezunuyum.
-  </p>
-  {{#link-to 'contact' class="button"}}
+  <span class="nt">&lt;/p&gt;</span>
+
+  {{#link-to &#39;contact&#39; class=&quot;button&quot;}}
   İletişim Sayfası
   {{/link-to}}
-</div>
-<p>{% endhighlight %}</p>
 
-<p>about.hbs içinde <strong><em>{% raw %}{{ }}</em></strong> işaretlerinin arası #link-to diyerek bir link alt yapısı oluşturuyoruz. #link-to’dan sonra ‘contact’ diyerek bu linkin contact adresine gideceğini söylüyoruz. {{#link-to}} ile {{/link-to}} ifadelerinin arasına ise link için ekranda görüncek yazıyı yazıyoruz. Server’ı durdurup yeniden başlattığımızda ise sayfa şu şekilde oluyor:</p>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
+
+<p>about.hbs içinde <strong><em>{{ }}</em></strong> işaretlerinin arası #link-to diyerek bir link alt yapısı oluşturuyoruz. #link-to’dan sonra ‘contact’ diyerek bu linkin contact adresine gideceğini söylüyoruz. {{#link-to}} ile {{/link-to}} ifadelerinin arasına ise link için ekranda görüncek yazıyı yazıyoruz. Server’ı durdurup yeniden başlattığımızda ise sayfa şu şekilde oluyor:</p>
 
 <p><a href="/images/emberjs/emberjs2-4.png">
 <img src="/images/emberjs/emberjs2-4.png" style="width: 958px; height= 400px;" />
