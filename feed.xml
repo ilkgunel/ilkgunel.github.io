@@ -5,9 +5,144 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 19 Nov 2016 22:19:58 +0300</pubDate>
-    <lastBuildDate>Sat, 19 Nov 2016 22:19:58 +0300</lastBuildDate>
+    <pubDate>Sun, 20 Nov 2016 15:23:55 +0300</pubDate>
+    <lastBuildDate>Sun, 20 Nov 2016 15:23:55 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Ember.js 2 - Routes and Templates</title>
+        <description>&lt;p&gt;Merhabalar. Önceki yazıda Ember.js’e bir giriş yapmıştık. Bu yazıda da &lt;strong&gt;&lt;em&gt;Routes and Templates&lt;/em&gt;&lt;/strong&gt; konusuna değineceğiz.&lt;/p&gt;
+
+&lt;p&gt;Ember adreslenebilir sayfaların kullnılabilmesini sağlamak için Route adındaki yapısını kullanılır. Route, bir URL’den gelen isteği handle eder ve ilgili template’e gönderir. Template dediğimiz olay da aslında kullanıcının sayfayı açtığında göreceği şeylerin şablon halidir. Sayfa düzenlemelerini o template üzerinden yapabiliriz.&lt;/p&gt;
+
+&lt;p&gt;Şimdi biz de beraber bir tane &lt;strong&gt;&lt;em&gt;about&lt;/em&gt;&lt;/strong&gt; sayfası hazırlayalım ve Route&amp;amp;Template nasıl kullanılıyormuş görelim.&lt;/p&gt;
+
+&lt;p&gt;İlk olarak yine komut satırımızı açıyoruz, cd komutu ile projenin içine giriyoruz ve&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;ember&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;generate&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;route&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;about&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//Daha kısa hali --&amp;gt; ember g route about&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;komutunu işletiyoruz. Bu komut bizim için app/routes altında about.js adında bir route dosyası ve app/templates altında about.hbs adında bir template dosyası oluşturacak. Komutu işletince komut satırında durum şöyle olmalı:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/emberjs/emberjs2-1.png&quot;&gt;
+&lt;img src=&quot;/images/emberjs/emberjs2-1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Biz bu komutu işlettiğimizde localhost:4200/about adresine gelen istek otomatik olarak about.hbs template’ine yönlendirilecek çünkü app dizinideki router.js dosyasına komut koşturulduğu sırada bu bilgi eklendi.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Ember&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;ember&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;./config/environment&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kr&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Router&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Ember&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Router&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;extend&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;location&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;locationType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;rootURL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;rootURL&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;Router&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;about&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+
+&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Router&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Yukarıdaki kodda öncelikle bir adet Router nesnesi oluşturuluyor. Akabinde bu Router nesnesini map metoduna bir function parametre olarak veriliyor. Bu function’ın yaptığı da about URL path’ini route’a eklemek oluyor.&lt;/p&gt;
+
+&lt;p&gt;about.hbs dosyasını açtığınızda muhtemelen içinde sadece  yazısından başka bir şey görmeyeceksiniz. Şimdi bu about.hbs dosyasını biraz düzenleyelim ve şu şekile getirelim:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;jumbo&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;right tomster&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;İlkay Günel Hakkında&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
+    Ben İlkay Günel. 
+	Haziran 2016 İÜ Bilgisayar Mühendisliği Mezunuyum.
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p style=&quot;color: red&quot;&gt;NOT: Bu düzenleme işlemini muhakkak bir IDE ya da sağlam bir editör aracılığı ile yapın. Windows’un Wordpad,Text Editörü gibi araçlarla yapmayın!&lt;/p&gt;
+
+&lt;p&gt;Şimdi komut satırından önceki yazıda yaptığımız gibi ember server diyerek sunucuyu çalıştıralım ve tarayıcıda localhost:4200/about adresine gidelim. Karşımıza düzenlediğimiz about.hbs’in içeriği çıkacak.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/emberjs/emberjs2-2.png&quot;&gt;
+&lt;img src=&quot;/images/emberjs/emberjs2-2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Komut satırınca ctrl+c yaparak sunucuyu durduralım ve şimdi bir de iletişim sayfası oluşturalım. Komutumuz yine aynı şekilde olacak:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;ember&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;generate&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;route&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contact&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//Daha kısa hali --&amp;gt; ember g route contact&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Bu komutu işlettikten sonra router.js’i kontrol ederseniz contact da oraya eklenmiş olacak. contact.hbs dosyasını da şu şekilde düzenleyelim:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;jumbo&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;right tomster&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Benimle İletişime Geç&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;İletişim Bilgileri&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
+    İlkay Günel
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;address&amp;gt;&lt;/span&gt;
+      İstanbul Üniversitesi&lt;span class=&quot;nt&quot;&gt;&amp;lt;br&amp;gt;&lt;/span&gt;
+      Avcılar Kampüsü
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/address&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;tel:501.222.3344&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;+90 (501) 222-3344&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&amp;lt;br&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;mailto:ilkgunel93@gmail.com&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;ilkgunel93@gmail.com&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Sunucumuzu ember server komutu ile tekrar çalıştırdığımızda ve localhost:4200/contact adresine gittiğimizde şu ekran görüntüsü bizi karşılar:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/emberjs/emberjs2-3.png&quot;&gt;
+&lt;img src=&quot;/images/emberjs/emberjs2-3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi bir de bu iki sayfa arasında yönlendirme nasıl yapılabilir ona bakalım.&lt;/p&gt;
+
+&lt;p&gt;İki sayfa arasında yönlendirme için biz &lt;strong&gt;&lt;em&gt;link-to&lt;/em&gt;&lt;/strong&gt; ifadesini kullanacağız. about.hbs dosyasını şu şekilde düzenleyelim:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;jumbo&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;right tomster&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;İlkay Günel Hakkında&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
+    Ben İlkay Günel. 
+	Haziran 2016 İÜ Bilgisayar Mühendisliği Mezunuyum.
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+    
+    İletişim Sayfası
+  
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;about.hbs içinde &lt;strong&gt;**&lt;/strong&gt; işaretlerinin arası #link-to diyerek bir link alt yapısı oluşturuyoruz. #link-to’dan sonra ‘contact’ diyerek bu linkin contact adresine gideceğini söylüyoruz.  ile  ifadelerinin arasına ise link için ekranda görüncek yazıyı yazıyoruz. Server’ı durdurup yeniden başlattığımızda ise sayfa şu şekilde oluyor:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/emberjs/emberjs2-4.png&quot;&gt;
+&lt;img src=&quot;/images/emberjs/emberjs2-4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;İletişim Sayfası linkine tıkladığımda da beni contact sayfasına yönlendiriyor olacak.&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda da bu kadar arkadaşlar. Gelecek yazıda Index Route ve Banner Ekleme konusuna değineceğiniz. Görüşene kadar hoşçakalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Fri, 18 Nov 2016 20:40:21 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/emberjs-dersleri-2-routes-and-templates/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/emberjs-dersleri-2-routes-and-templates/</guid>
+        
+        <category>ember.js nedir?</category>
+        
+        <category>ember.js dersleri</category>
+        
+        <category>ember.js tutorial</category>
+        
+        <category>ember.js</category>
+        
+        <category>ember.js Türkçe</category>
+        
+        <category>ember.js Türkçe kaynak</category>
+        
+        <category>ember.js öğren</category>
+        
+        <category>ember.js türkçe dersleri</category>
+        
+        
+      </item>
     
       <item>
         <title>Ember.js 1 - Giriş ve Kurulum</title>
@@ -1942,283 +2077,6 @@ kullanılmıştır.&lt;/p&gt;
         <category>spring ioc</category>
         
         <category>spring di</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Spring Framework Dersleri 1 - Spring&#39;e Giriş ve Hello World</title>
-        <description>&lt;p&gt;Merhabalar.&lt;/p&gt;
-
-&lt;p&gt;Bu yazı ile ne zamandır niyetli olduğum, hem unuttuklarımı öğrenmek hem de paylaşım yapma amaçlı olduğum &lt;strong&gt;Spring Framework&lt;/strong&gt; yazılarına
-bu yazı ile başlıyorum. Allah bana en azından yazı dizisini bitiremesem bile bolca içerik üretebilmeyi nasip etsin.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Yazı Dizisi Boyunca Hangi Kaynakları Kullanacağız?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Spring Framework yazı dizisi boyunca&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Özcan Acar hocamızın Spring kitabı&lt;/li&gt;
-  &lt;li&gt;apress.com’dan satın alabileceğiniz Pro Spring 4 kitabı&lt;/li&gt;
-  &lt;li&gt;internetteki çeşitli kaynaklar&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;bizim referans kaynaklarımız olacak.&lt;/p&gt;
-
-&lt;p&gt;Daha önceki yazı dizilerimde yakışıksız bir şekilde hırsızlık vb. ithamlarla karşılaştığım için söylemem gerekir ki anlatımlarım
-kitaplardan kopyala yapıştır şeklinde olmamaktadır. Kendi anladığım ne ise onu anlatmaktayım.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Spring Framework Nedir?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;En basit tabiri ile Spring Framework Java uygulamalarını daha hızlı ve pratik şekilde geliştirilmesi, geliştiricilerin işlerini
-kolaylaştırılması amacı ile ortaya çıkarılmış bir framework’tür.&lt;/p&gt;
-
-&lt;p&gt;Çokça meşhur olan, ülkemiz yazılım piyasasında da oldukça popüler olan Spring Framework’ün geçmişi ve ortaya çıkışı Java EE’nin
-ilk zamanlarındaki kullanım zorluğuna dayanıyor. Spring’in çıktığı sıralarda Java EE spectlerini uygulamak, kullanmak çok zordu.
-Spring’in geliştiricileri adeta krizi fırsata çevirdiler ve Java EE’ye göre çok daha kolay kullanılabilen, uygulanabilen bir
-framework ortaya çıkardılar. Tabii ki yazılım geliştiricileri kolayı varken zoru seçmediler ve Spring framework tabir yerinde ise
-aldı yürüdü.&lt;/p&gt;
-
-&lt;p&gt;İlk çıktığı zamanlarda belli başlı sorunlara, bağımlık enjeksiyonu gibi, çözüm getiren bir framework olan Spring bugün artık çok 
-büyük bir aile. Çatısı altında çok sayıda kütüphane yer almakta. En bilinenleri Spring MVC, Spring Security, Spring Data gibi 
-kütüphanelerdir. Bu kütüphanelerin tamamı Spring geliştiricileri tarafından modüler olarak tasarlanmıştır. Yani birbirlerinden 
-bağımsızdırlardır ve projenizde ihtiyacınız olanı kullanabilirsiniz.&lt;/p&gt;
-
-&lt;p&gt;Yeri geldikçe yeni açıklamalar ve tanımlamalar yapacağız.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;İlk Uygulama –&amp;gt; Hello World&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Adet olduğu üzere yeni bir dil, framework vs. öğrenilirken Hello World ile başlarız. Şimdi biz de bir Hello World uygulaması 
-yapacağız.&lt;/p&gt;
-
-&lt;p&gt;Şimdi siz kendi IDE’niz içerisinde bir Maven Java projesi açın. Ben dersleri Eclipse IDE üzerinde yürüteceğim ve zaman zaman da
-Spring Tool Suite ile de çalışacağız.&lt;/p&gt;
-
-&lt;p&gt;Standart bir Java projesinde Hello World’ü basitçe şöyle yapıyorduk:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloWorld&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
- &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello World!&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Peki işi biraz zorlaştırırsak? İşin içine Interface’ler falan girerse? Büyük projelerde bir çok Interface ve onları uygulayan
-sınıflar kol gezer. Biz de basitçe hemen örnekleyelim…&lt;/p&gt;
-
-&lt;p&gt;İçerisinde sadece mesaj döndürmekle yükümlü bir metot tanımlanmış olan MessageProvider interface’miz şöyle olsun:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MessageProvider&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Mesajın ekrana yazdırılması için yazdırma, MessageProvider interface’ini implement eden sınıf nesnesini set ve get eden metotların
-barındığı interface’miz de şöyle olsun.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MessageRenderer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
- &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
- &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setMessageProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MessageProvider&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;provider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;MessageProvider&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getMessageProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Bu interface’lerin ardından şimdi implementasyonlarına bakalım.&lt;/p&gt;
-
-&lt;p&gt;Bize bir mesaj döndürecek olan metodu barındıran MessageProvider interface’ni uygulayan &lt;strong&gt;&lt;em&gt;MessageProviderImplementation&lt;/em&gt;&lt;/strong&gt; 
-sınıfımız mesaj olarak &lt;strong&gt;&lt;em&gt;Hello Spring World :)”&lt;/em&gt;&lt;/strong&gt; String’ini bize döndürecek.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;springtutorials&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;helloworld&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MessageProviderImplementation&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MessageProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello Spring World :)&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Mesajın ekrana yazdırılması için gerekli metotların tanımlarını içinde barındıran MessageRenderer interface’ini uygulayan
-&lt;strong&gt;&lt;em&gt;MessageRendererImplementation&lt;/em&gt;&lt;/strong&gt; sınıfımız ekrana yazdırma işlemini yapan &lt;strong&gt;render()&lt;/strong&gt; metodunu ve MessageProvider’ı uygulayan 
-sınıftan bir nesnenin get-set metotlarının uygulanmış halini barındırıyor.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;springtutorials&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;helloworld&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MessageRendererImplementation&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MessageRenderer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MessageProvider&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;messageProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;messageProvider&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-			&lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RuntimeException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
-					&lt;span class=&quot;s&quot;&gt;&quot;MessageProvider Interface&#39;ini Uygulamış Bir Sınıfın Nesnesini Göndermelisiniz:&quot;&lt;/span&gt; 
-					&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MessageRendererImplementation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;messageProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setMessageProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MessageProvider&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;provider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;messageProvider&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;provider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MessageProvider&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getMessageProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;messageProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Interface’lerimizi yazdık, sınıflara uygulattık. Şimdi sadece kullanması kaldı. &lt;strong&gt;&lt;em&gt;HelloWorld&lt;/em&gt;&lt;/strong&gt; sınıfımız içerisinde bunları 
-kullanalım.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;springtutorials&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;helloworld&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloWorld&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;MessageProvider&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ms&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MessageProviderImplementation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;MessageRenderer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MessageRendererImplementation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;mr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setMessageProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;mr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Bu uygulamayı çalıştırdığımızda konsolda Hello Spring World :) çıktısını alacağız. Peki şimdi bu uygulamayı yaptık da ne oldu?&lt;/p&gt;
-
-&lt;p&gt;Gelmek istediğim nokta şu ki biz Hello World sınıfını 2 adet sınıfa bağımlı hale getirdik. Yazılım dünyasında sınıflar arasında
-ne kadar az bağımlılık olursa yazım o kadar kullanışlı ve bakıma uygun olur. Bu nedenle &lt;strong&gt;&lt;em&gt;Loose coupling (Zayıf Bağımlılık)&lt;/em&gt;&lt;/strong&gt;
-denen olay yazılım geliştirilirken hedeflenen olgulardan birisidir. Spring Framework de bu ihtiyacı pratik ve kolay bir 
-şekilde karşılayabildiğinden popülerleşmesi hızlı olmuştur.&lt;/p&gt;
-
-&lt;p&gt;Şimdi bu uyglamayı Spring Framework kullanarak nasıl daha az bağımlı hale getirebiliriz ona bakalım.&lt;/p&gt;
-
-&lt;p&gt;Öncelikle projemizdeki pom.xml dosyamıza şu bağımlılığı ekleyelim:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-context&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;4.3.3.RELEASE&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Akabinde &lt;strong&gt;&lt;em&gt;src/main/resources/&lt;/em&gt;&lt;/strong&gt; dizini altında &lt;strong&gt;beans.xml&lt;/strong&gt; adında bir dosya oluşturalım ve içeriğini şöyle düzenleyelim:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;beans&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans&quot;&lt;/span&gt;
-	   &lt;span class=&quot;na&quot;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt; 
-	   &lt;span class=&quot;na&quot;&gt;xmlns:p=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/p&quot;&lt;/span&gt;
-	   &lt;span class=&quot;na&quot;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans&lt;/span&gt;
-       &lt;span class=&quot;err&quot;&gt;http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;provider&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.ilkaygunel.springtutorials.helloworld.MessageProviderImplementation&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;renderer&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.ilkaygunel.springtutorials.helloworld.MessageRendererImplementation&quot;&lt;/span&gt;
-		&lt;span class=&quot;na&quot;&gt;p:messageProvider-ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;provider&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/beans&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Spring’de bağımlılık ihtiyacı iki yolla sağlanabilir ve XML ile bu ihtiyacı sağlamak bu yollardan birisidir. Diğer yola ilerleyen
-derslerde değineceğiz.&lt;/p&gt;
-
-&lt;p&gt;Şimdi bu XML dosyasını inceleyelim. İlk 2-6 satırları arasında Spring’in XML tag’lerine ait tanımlamalar yer alıyor. 7. satırda
-bizim MessageProvider interface’mizi uygulayan MessageProviderImplementation sınıfı &lt;strong&gt;&lt;em&gt;privovider&lt;/em&gt;&lt;/strong&gt; id bilgisi ile Spring’e
-kayıt ettiriliyor. 8. satırda ise bizim MessageRenderer interface’mizi uygulayan MessageRendererImplementation sınıfımız
-&lt;strong&gt;&lt;em&gt;renderer&lt;/em&gt;&lt;/strong&gt; id bilgisi ile kayıt ettiriliyor yalnız MessageRendererImplementation’ın kayıt edilmesi sırasında fazladan bir şey
-daha var: &lt;strong&gt;&lt;em&gt;p:messageProvider-ref=”provider”&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;p:messageProvider-ref=”provider” ifadesi ile biz Spring’e diyoruz ki, MessageRendererImplementation sınıfı içerisinde 
-&lt;strong&gt;&lt;em&gt;messageProvider&lt;/em&gt;&lt;/strong&gt; adında bir alan var ve sen bu alanı bu XML içindeki &lt;strong&gt;&lt;em&gt;provider&lt;/em&gt;&lt;/strong&gt; id bilgili sınıftan bir nesne oluşturup otomatik
-olarak doldur. Böylece biz main metodumuz içinde MessageProviderImplementation nesnesi oluşturmaktan kurtulmuş oluyoruz ve 
-sınıfımızın bağımlılığı bir nebze azalmış oluyor.&lt;/p&gt;
-
-&lt;p&gt;Şimdi HelloWorld sınıfımızın güncellenmiş haline bakalım:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;springtutorials&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;helloworld&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.context.support.ClassPathXmlApplicationContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloWorldWithDI&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ClassPathXmlApplicationContext&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;classPathXmlApplicationContext&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ClassPathXmlApplicationContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
-				&lt;span class=&quot;s&quot;&gt;&quot;beans.xml&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-			&lt;span class=&quot;n&quot;&gt;MessageRenderer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;classPathXmlApplicationContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getBean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;renderer&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
-					&lt;span class=&quot;n&quot;&gt;MessageRendererImplementation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-			&lt;span class=&quot;n&quot;&gt;mr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-			&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Bir Hata Meydana Geldi! Hata:&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;HelloWorldWithDI sınıfımız içerisinde try’ın hemen başında &lt;strong&gt;&lt;em&gt;ClassPathXmlApplicationContext&lt;/em&gt;&lt;/strong&gt; sınıfından bir nesne 
-oluşturuyoruz ve ClassPathXmlApplicationContext sınıfının yapılandırıcısına beans.xml’i parametre olarak gönderiyoruz.&lt;/p&gt;
-
-&lt;p&gt;try bloğunun içinde ise MessageRenderer interface’i tipinde bir nesne tanımlıyoruz ve bu nesnenin içinin doldurulması işlemini
-az önce tanımladığımız ClassPathXmlApplicationContext tipindeki nesne ile yapıyoruz.&lt;/p&gt;
-
-&lt;p&gt;ClassPathXmlApplicationContext tipindeki &lt;strong&gt;&lt;em&gt;classPathXmlApplicationContext&lt;/em&gt;&lt;/strong&gt; nesnesi beans.xml içindeki bean’leri okuyabilir
-ve kullanabilir. Burada da biz &lt;strong&gt;&lt;em&gt;getBean()&lt;/em&gt;&lt;/strong&gt; metodunu kullanarak XML içinde tanımlanmış bean’lere ulaşabiliriz. Bizim burada
-beans.xml’den sadece MessageRendererImplementation sınıfını çekmemiz yeterli olacaktır çünkü az önce de belirttiğim gibi
-MessageRendererImplementation sınıfı içindeki alan otomatik olarak dolacaktır. MessageProviderImplementation sınıfına ait çekim
-yapıp uğraşmaya gerek yoktur. getBean() metodunu kullanırken parametrelerden birincisi XML içinde tanımlı bean id’si, ikincisi ise
-hangi sınıf türünde bean çekileceğidir. renderer id’li olan ve MessageRendererImplementation sınıfı tipinde bean’i çekeceğiz.
-Akabinde de son oalrak MessageRendererImplementation sınıfından render() metodunu çağırarak yazdırma işlemini yapacağız.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Ekran Çıktısı&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;HelloWorldWithDI sınıfına sağ tıklayıp Rus As -&amp;gt; Java Application dediğimizde şu ekran çıktısını alabiliriz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/spring/springGiris1.png&quot;&gt;
-&lt;img src=&quot;/images/spring/springGiris1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Gördüğünüz gibi aynı işlem Spring Framework ile yapıldı ve bağımlılık azaltımı konusunda yol alındı.&lt;/p&gt;
-
-&lt;p&gt;Bu ilk yazımızda Spring’e bir giriş yaptık ve Hello World örneğimizi uyguladık. Gelecek yazıda &lt;strong&gt;&lt;em&gt;Inversion Of Control&lt;/em&gt;&lt;/strong&gt;
-ve &lt;strong&gt;&lt;em&gt;Dependency Injection&lt;/em&gt;&lt;/strong&gt; konularını işleyeceğiz.&lt;/p&gt;
-
-&lt;p&gt;Sağlıcakla Kalın&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-</description>
-        <pubDate>Fri, 04 Nov 2016 20:30:21 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2016/spring-giris/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/spring-giris/</guid>
-        
-        <category>spring framework</category>
-        
-        <category>spring framework dersleri</category>
-        
-        <category>spring framework giriş</category>
-        
-        <category>spring framework tutorial</category>
-        
-        <category>spring framework türkçe kaynak</category>
-        
-        <category>spring framework hello world örneği</category>
-        
-        <category>spring framework hello world example</category>
-        
-        <category>spring framework hello world tutorial</category>
-        
-        <category>spring framework öğren</category>
-        
-        <category>spring framework türkçe</category>
-        
-        <category>spring framework nedir</category>
-        
-        <category>spring framework nasıl kullanılır</category>
         
         
       </item>
