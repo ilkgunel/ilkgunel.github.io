@@ -5,8 +5,8 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 20 Nov 2016 16:08:59 +0300</pubDate>
-    <lastBuildDate>Sun, 20 Nov 2016 16:08:59 +0300</lastBuildDate>
+    <pubDate>Sun, 20 Nov 2016 16:15:45 +0300</pubDate>
+    <lastBuildDate>Sun, 20 Nov 2016 16:15:45 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
     
       <item>
@@ -97,19 +97,20 @@
 
 &lt;p&gt;İki sayfa arasında yönlendirme için biz &lt;strong&gt;&lt;em&gt;link-to&lt;/em&gt;&lt;/strong&gt; ifadesini kullanacağız. about.hbs dosyasını şu şekilde düzenleyelim:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;jumbo&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;right tomster&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;İlkay&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Günel&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Hakkında&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Ben&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;İlkay&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Günel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; 
-	&lt;span class=&quot;n&quot;&gt;Haziran&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2016&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;İÜ&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Bilgisayar&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Mühendisliği&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Mezunuyum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;İletişim&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sayfası&lt;/span&gt;
-  &lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;div class=&quot;jumbo&quot;&gt;
+  &lt;div class=&quot;right tomster&quot;&gt;&lt;/div&gt;
+  &lt;h2&gt;İlkay Günel Hakkında&lt;/h2&gt;
+  &lt;p&gt;
+    Ben İlkay Günel. 
+	Haziran 2016 İÜ Bilgisayar Mühendisliği Mezunuyum.
+  &lt;/p&gt;
+  {{#link-to &#39;contact&#39; class=&quot;button&quot;}}
+  İletişim Sayfası
+  {{/link-to}}
+&lt;/div&gt;
+&lt;p&gt;{% endhighlight %}&lt;/p&gt;
 
-&lt;p&gt;about.hbs içinde &lt;strong&gt;**&lt;/strong&gt; işaretlerinin arası #link-to diyerek bir link alt yapısı oluşturuyoruz. #link-to’dan sonra ‘contact’ diyerek bu linkin contact adresine gideceğini söylüyoruz.  ile  ifadelerinin arasına ise link için ekranda görüncek yazıyı yazıyoruz. Server’ı durdurup yeniden başlattığımızda ise sayfa şu şekilde oluyor:&lt;/p&gt;
+&lt;p&gt;about.hbs içinde &lt;strong&gt;&lt;em&gt;{% raw %}{{ }}&lt;/em&gt;&lt;/strong&gt; işaretlerinin arası #link-to diyerek bir link alt yapısı oluşturuyoruz. #link-to’dan sonra ‘contact’ diyerek bu linkin contact adresine gideceğini söylüyoruz. {{#link-to}} ile {{/link-to}} ifadelerinin arasına ise link için ekranda görüncek yazıyı yazıyoruz. Server’ı durdurup yeniden başlattığımızda ise sayfa şu şekilde oluyor:&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;/images/emberjs/emberjs2-4.png&quot;&gt;
 &lt;img src=&quot;/images/emberjs/emberjs2-4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
