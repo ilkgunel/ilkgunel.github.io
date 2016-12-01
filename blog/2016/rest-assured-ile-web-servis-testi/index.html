@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Rest Assured İle Web Servis Testi - 1</title>
+    <meta name="description" content="Geliştirilmiş olan bir yazılımın test edilmesi en az onun geliştirilmesi kadar mühim bir konudur. Java dünyasında da farklı ortamları test etmek için farklı ...">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/rest-assured-ile-web-servis-testi/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>Rest Assured İle Web Servis Testi - 1 - İlkay Günel - Blog</title>
+<meta property="og:title" content="Rest Assured İle Web Servis Testi - 1" />
+<meta name="description" content="Rest Assured İle Web Servis Testi" />
+<meta property="og:description" content="Rest Assured İle Web Servis Testi" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/rest-assured-ile-web-servis-testi/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/rest-assured-ile-web-servis-testi/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-11-25T20:40:21+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Rest Assured İle Web Servis Testi - 1",
+    "datePublished": "2016-11-25T20:40:21+03:00",
+    "description": "Rest Assured İle Web Servis Testi",
+    "url": "http://ilkaygunel.com/blog/2016/rest-assured-ile-web-servis-testi/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/blog/2016/jsf-tutorials-list" title="JSF">JSF</a></li>
+        
+          <li><a href="/blog/2016/spring-tutorials" title="Spring 4">Spring 4</a></li>
+        
+          <li><a href="/blog/2016/eclipselink" title="Eclipselink">Eclipselink</a></li>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog/2016/eclipse-notes" title="Eclipse">Eclipse</a></li>
+        
+          <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
+        
+          <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Rest Assured İle Web Servis Testi - 1</h1>
+      <p class="post-meta">Nov 25, 2016</p>
+    </header>
+
+    <div class="post-content">
+      <p>Geliştirilmiş olan bir yazılımın test edilmesi en az onun geliştirilmesi kadar mühim bir konudur. Java dünyasında da farklı ortamları test etmek için farklı araçlar yer almaktadır. Örneğin ekran testleri Selenium ile, mobil uygulama testleri Appium ile, yük testleri Apache JMeter ile ve web servis testleri de Rest Assured kütüphanesi ile yapılabiliyor. Tabi bunların yanında test deyince akla ilk gelen kütüphane olan JUnit’i de unutmamak lazım.</p>
+
+<p>Ben de bu yazıda Rest Assured kütüphanesi ile basitçe bir web servis testi yapmayı anlatmaya çalışacağım. Rest Assured dediğim gibi yazılmış olan web servisleri test edebilmek amacı ile Java ile testler yazabildiğimiz bir kütüphane.</p>
+
+<p>Web servis testi yapılacağı zaman çok büyük oranda testleri yazan kişiler web servisin yazıldığı ortam, kütüphane, dil vb. şeylerden habersiz olurlar çünkü bunları bilmesine hiç gerek yoktur. Sadece kendisine hangi URL’e hangi şekilde, tipte veri gönderileceğini anlatan bir döküman verilmesi yeterlidir. Bu yazıda elimizde döküman varmış gibi varsayımlarda bulunarak ilerleyeceğiz.</p>
+
+<p>Bize verilen dökümanda web servis üzerinden bir üye kaydı yapılması için yetkilendirilmiş bir istekte bulunulması, bilgilerin JSON formatında gönderilmesi isteniyor ve gönderilebilecek bir örnek şöyle gösteriliyor:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span>
+<span class="nt">&quot;name&quot;</span> <span class="p">:</span> <span class="s2">&quot;ilkay&quot;</span><span class="p">,</span>
+<span class="nt">&quot;surname&quot;</span> <span class="p">:</span> <span class="s2">&quot;günel&quot;</span><span class="p">,</span>
+<span class="nt">&quot;emailAddress&quot;</span> <span class="p">:</span> <span class="s2">&quot;ilkay.gunel@kod5.org&quot;</span><span class="p">,</span>
+<span class="nt">&quot;birthDate&quot;</span> <span class="p">:</span> <span class="s2">&quot;1980-01-01&quot;</span><span class="p">,</span>
+<span class="nt">&quot;address&quot;</span> <span class="p">:</span> <span class="s2">&quot;İstanbul&quot;</span><span class="p">,</span>
+<span class="nt">&quot;password&quot;</span> <span class="p">:</span> <span class="s2">&quot;12345&quot;</span><span class="p">,</span>
+<span class="nt">&quot;telephoneNumber&quot;</span> <span class="p">:</span> <span class="s2">&quot;0212-212-33-44&quot;</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Ben bu JSON’ı src/test/resources altında requests adındaki bir klasör içindeki memberRegisterRequest.json adındaki dosyaya koydum. Test kodu içinde bu dosyayı kullanacağız.  Java kodu içinde yapacağımız testte kullanmak üzere bu JSON’ı baz alarak JSON’daki alanları içinde barındıran bir Class oluşturmamız gerekiyor. O sınıfımızın ismi MemberRegisterRequest sınıfıdır ve sınıf şöyledir:</p>
+
+<p><strong>MemberRegisterRequest.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">sampleTest</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberRegisterRequest</span> <span class="o">{</span>
+	<span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="n">String</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="n">String</span> <span class="n">emailAddress</span><span class="o">;</span>
+	<span class="n">String</span> <span class="n">birthDate</span><span class="o">;</span>
+	<span class="n">String</span> <span class="n">address</span><span class="o">;</span>
+	<span class="n">String</span> <span class="n">password</span><span class="o">;</span>
+	<span class="n">String</span> <span class="n">telephoneNumber</span><span class="o">;</span>
+	
+	
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getSurname</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSurname</span><span class="o">(</span><span class="n">String</span> <span class="n">surname</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">surname</span> <span class="o">=</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getEmailAddress</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">emailAddress</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEmailAddress</span><span class="o">(</span><span class="n">String</span> <span class="n">emailAddress</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">emailAddress</span> <span class="o">=</span> <span class="n">emailAddress</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getBirthDate</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">birthDate</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setBirthDate</span><span class="o">(</span><span class="n">String</span> <span class="n">birthDate</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">birthDate</span> <span class="o">=</span> <span class="n">birthDate</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getAddress</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">address</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAddress</span><span class="o">(</span><span class="n">String</span> <span class="n">address</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">address</span> <span class="o">=</span> <span class="n">address</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getPassword</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">password</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPassword</span><span class="o">(</span><span class="n">String</span> <span class="n">password</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">password</span> <span class="o">=</span> <span class="n">password</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getTelephoneNumber</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">telephoneNumber</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setTelephoneNumber</span><span class="o">(</span><span class="n">String</span> <span class="n">telephoneNumber</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">telephoneNumber</span> <span class="o">=</span> <span class="n">telephoneNumber</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Bu sınıf sadece ilgili JSON’daki alanlara karşılık gelen değişkenleri ve get-set metotlarını taşımakla yükümlüdür.</p>
+
+<p>Rest Assured kütüphanesi içinde yetkilendirme yapmak için de gerekli metotlar yer alıyor.</p>
+
+<p>Biz <a href="localhost:8080/BlogProjectWithSpringMVC/webservice/memberRegister">localhost:8080/BlogProjectWithSpringMVC/webservice/memberRegister</a> adresine bir POST işlemi uygulayacağız fakat bu URL’e erişim sadece web servis sahibinin veritabanında ilgili iznin tanımlandığı kullanıcıların erişimine açık. Bu nedenle önce bir authentication işlemi uygulamamız akabinde POST işlemi yapmamız lazım. POST işlemi uygularken de yukarıdaki JSON’ı baz alarak bir JSON göndermeliyiz.</p>
+
+<p>Şimdi test işlemini gerçekleştiren Java kodumuza bakalım:</p>
+
+<p><strong>WebServisTest.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">sampleTest</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">com</span><span class="o">.</span><span class="na">jayway</span><span class="o">.</span><span class="na">restassured</span><span class="o">.</span><span class="na">RestAssured</span><span class="o">.</span><span class="na">given</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.FileNotFoundException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.FileReader</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.google.gson.Gson</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.jayway.restassured.RestAssured</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.jayway.restassured.response.Response</span><span class="o">;</span>
+
+
+<span class="kn">import</span> <span class="nn">org.apache.log4j.Logger</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">WebServiceTest</span> <span class="o">{</span>
+	
+	<span class="kd">protected</span> <span class="n">Logger</span> <span class="n">log</span> <span class="o">=</span> <span class="n">Logger</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">getClass</span><span class="o">());</span>
+	
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">memberRegisterTest</span><span class="o">(){</span>
+		<span class="n">RestAssured</span><span class="o">.</span><span class="na">baseURI</span><span class="o">=</span><span class="s">&quot;http://localhost:8080/BlogProjectWithSpringMVC&quot;</span><span class="o">;</span>
+		
+		<span class="n">MemberRegisterRequest</span> <span class="n">memberRegisterRequest</span> <span class="o">=</span> <span class="n">memberRegisterRequestFromJson</span><span class="o">();</span>
+		<span class="n">String</span> <span class="n">json</span> <span class="o">=</span> <span class="n">memberRegisterRequestToJson</span><span class="o">(</span><span class="n">memberRegisterRequest</span><span class="o">);</span>
+		
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Body:&quot;</span><span class="o">+</span><span class="n">json</span><span class="o">);</span>
+		
+		<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">given</span><span class="o">()</span>
+		<span class="c1">//.auth().form(&quot;ilkay.gunel@kod5.org&quot;, &quot;12345&quot;,new FormAuthConfig(&quot;/BlogProjectWithSpringMVC/j_spring_security_check&quot;, &quot;j_username&quot;, &quot;j_password&quot;))</span>
+        <span class="o">.</span><span class="na">contentType</span><span class="o">(</span><span class="s">&quot;application/json&quot;</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="n">json</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">when</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">&quot;/webservice/memberRegister&quot;</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">then</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">statusCode</span><span class="o">(</span><span class="mi">200</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">extract</span><span class="o">().</span><span class="na">response</span><span class="o">();</span>
+		
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">getBody</span><span class="o">().</span><span class="na">prettyPrint</span><span class="o">());</span>
+	<span class="o">}</span>
+	
+	<span class="kd">private</span> <span class="kd">static</span> <span class="n">MemberRegisterRequest</span> <span class="nf">memberRegisterRequestFromJson</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">Gson</span> <span class="n">gson</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Gson</span><span class="o">();</span>
+			<span class="n">FileReader</span> <span class="n">reader</span><span class="o">;</span>
+			<span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">FileReader</span><span class="o">(</span><span class="s">&quot;src/test/resources/requests/memberRegisterRequest.json&quot;</span><span class="o">);</span>
+			<span class="k">return</span> <span class="n">gson</span><span class="o">.</span><span class="na">fromJson</span><span class="o">(</span><span class="n">reader</span><span class="o">,</span> <span class="n">MemberRegisterRequest</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">FileNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">memberRegisterRequestToJson</span><span class="o">(</span><span class="n">MemberRegisterRequest</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">Gson</span> <span class="n">gson</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Gson</span><span class="o">();</span>
+		
+		<span class="n">request</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">&quot;Mustafa&quot;</span><span class="o">);</span>
+		<span class="n">request</span><span class="o">.</span><span class="na">setSurname</span><span class="o">(</span><span class="s">&quot;İçmen&quot;</span><span class="o">);</span>
+		<span class="n">request</span><span class="o">.</span><span class="na">setEmailAddress</span><span class="o">(</span><span class="s">&quot;mustafa@icmen.com&quot;</span><span class="o">);</span>
+		<span class="n">request</span><span class="o">.</span><span class="na">setBirthDate</span><span class="o">(</span><span class="s">&quot;1980-01-01&quot;</span><span class="o">);</span>
+		<span class="n">request</span><span class="o">.</span><span class="na">setAddress</span><span class="o">(</span><span class="s">&quot;İÜ Avcılar Kampüs&quot;</span><span class="o">);</span>
+		<span class="n">request</span><span class="o">.</span><span class="na">setPassword</span><span class="o">(</span><span class="s">&quot;12345&quot;</span><span class="o">);</span>
+		<span class="n">request</span><span class="o">.</span><span class="na">setTelephoneNumber</span><span class="o">(</span><span class="s">&quot;0-212-473-70-70&quot;</span><span class="o">);</span>
+		
+		<span class="k">return</span> <span class="n">gson</span><span class="o">.</span><span class="na">toJson</span><span class="o">(</span><span class="n">request</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Kod içerisinde 3 metot var. Birisi @Test ile işaretlenmiş test işlemini gerçekleştirecek metot, diğer ikisi ise az önce bahsettiğim memberRegisterRequst.json dosyasından okuma yapıp JSON formatında String veren ve aldığı parametreyi JSON formatında String’e çeviren metotlardır.</p>
+
+<ul>
+  <li>memberRegisterTest içindeki RestAssured.baseURI=“http://localhost:8080/BlogProjectWithSpringMVC”;  satırı web servis testinin yapılacağı ana domaini bildirir. Mesela analitics.google.com’daki google.com gibi.</li>
+  <li>MemberRegisterRequest memberRegisterRequest = memberRegisterRequestFromJson(); satırı ile JSON formatındaki dosyadan okuma yapıp MemberRegisterRequest sınıfı tipinde bir nesne elde ediyoruz.</li>
+  <li>String json = memberRegisterRequestToJson(memberRegisterRequest); satırı ile JSON formatında bir String elde ediyoruz.</li>
+  <li></li>
+</ul>
+<figure class="highlight"><pre><code class="language-java" data-lang="java">	<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">given</span><span class="o">()</span>
+	<span class="c1">//.auth().form(&quot;ilkay.gunel@kod5.org&quot;, &quot;12345&quot;,new FormAuthConfig(&quot;/BlogProjectWithSpringMVC/j_spring_security_check&quot;, &quot;j_username&quot;, &quot;j_password&quot;))</span>
+	<span class="o">.</span><span class="na">contentType</span><span class="o">(</span><span class="s">&quot;application/json&quot;</span><span class="o">)</span>
+	<span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="n">json</span><span class="o">)</span>
+	<span class="o">.</span><span class="na">when</span><span class="o">()</span>
+	<span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">&quot;/webservice/memberRegister&quot;</span><span class="o">)</span>
+	<span class="o">.</span><span class="na">then</span><span class="o">()</span>
+	<span class="o">.</span><span class="na">statusCode</span><span class="o">(</span><span class="mi">200</span><span class="o">)</span>
+	<span class="o">.</span><span class="na">extract</span><span class="o">().</span><span class="na">response</span><span class="o">();</span>
+	</code></pre></figure>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Bu kod parçası ile ilgili path’e post isteğinde bulunuyoruz. Öncelikle given() ile başlıyoruz, akabinde yetkilendirme lazımsa auth().form() dememiz lazım. (Bu satır şimdilik kapalı çünkü önce yetkisiz erişim denemesi yapacağız, akabinde bu satırı açıp deneyeceğiz. )
+Bana verilen dökümana göre erişimi kısıtlanmış bir yere erişilmeye çalışıldığında şöyle bir login formu geliyor:
+&lt;a href="/images/restAssured1.png"&gt;
+&lt;img src="/images/restAssured1.png" style="width: 958px; height= 400px;"/&gt;
+&lt;/a&gt;
+Biz de auth().form(“ilkay.gunel@kod5.org“, “12345”,new FormAuthConfig(“/BlogProjectWithSpringMVC/j_spring_security_check”, “j_username”, “j_password”)) diyerek formdaki j_username ve j_password alanlarına verileri koyup /BlogProjectWithSpringMVC/j_spring_security_check adresine POST ediyoruz. Burada Rest Assured ilgili yetkilendirme mekanizmasını otomatik çözümleyip yapıyor.
+Akabinde POST edeceğimiz ne türde veri bekliyorsa bunu Content-Type’a söylüyoruz. Daha sonra body() metoduna POST edilecek JSON formatındaki String’i geçiriyoruz. ***.when().post(“/webservice/memberRegister”)*** ifadesi ile http://localhost:8080/BlogProjectWithSpringMVC/webservice/memberRegister adresine json’ı post et diyoruz. Son aşamada ise then() metodu POST işlemi akabindeki beklentilerimizi söylüyoruz. statusCode(200) ile HTTP 200 OK beklediğimi söylüyorum ve dönen Response’u bana extract etmesini söylüyorum.
+</code></pre>
+</div>
+
+<ul>
+  <li>System.out.println(response.getBody().prettyPrint()); satırı ile dönen Response’da ne olduğunu görüyorum.</li>
+</ul>
+
+<p>memberRegisterRequestFromJson() metodu JSON formatındaki bir dosyadan okuma yapıp verilen ilgili sınıf tipinde bir nesneyi bize döndürüyor. Burada MemberRegisterRequest tipinde bir nesne döndürecek. memberRegisterRequestToJson() metodu ise gelen parametreyi JSON formatındaki String’e çevirip döndürüyor. Metot içerisinde String’e çevrilip döndürülmeden önce ilgili parametreye ait alanlara bilgiler set ediliyor. JSON’dan ve JSON’a dönüşüm işlemleri Google’ın JSON işleme kütüphanesi olan Gson ile hallediliyor burada.</p>
+
+<p><strong>21 Ağustos 2016 GÜNCELLEME:</strong> Web servis testi yapılırken POST edilen JSON içindeki bazı değerlerin her daim sabit olması istenebilir ve bu sabit değerler kalıp JSON içinde tutulabilir. Bizim elimizdeki memberRegisterRequestFromJson metodu kalıp olarak verilmiş JSON’dan bir memberRegisterRequest nesnesi döndürürken bu sabit değerleri de kalıp JSON’dan okuyarak gelir. Biz memberRegisterRequestToJson metodu içinde değiştirmemiz gereken alanları değiştiriyoruz. Daha ileri durumlarda bizden POST edilen JSON içinde değişmeyecek alanlar gönderilmesi de istenebilir. Bu durumda kalıp JSON’dan okuma yapıp kalıp JSON’daki verileri tutan nesne elde edip o nesne üzerinde güncellemeler yaptıktan sonra JSON’a çevirip POST edebiliriz. Örneğin web servis ile gönderilen her kullanıcı için başlangıçta enabled diye bir kolona false olarak veri gönderilmek isteniyor olabilir. Bu durumda kalıp JSON içinde bu alan false olarak dururken bizim onu değiştirmememiz gerekir.</p>
+
+<p>Şimdi WebServiceTest sınıfına sağ tıklayıp Rus As -&gt; JUnit Test diyelim ve konsol çıktısına bakalım.</p>
+
+<p><a href="/images/restAssured2.png">
+<img src="/images/restAssured2.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Konsolda sadece konsola yazdırdığımız Body var. Peki Hemen yanındaki kırmız çarpılı JUnit tabında ne var?</p>
+
+<p><a href="/images/restAssured3.png">
+<img src="/images/restAssured3.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>JUnit tabı ise siz 200 HTTP kodu bekliyordunuz ama 302 döndü diyor. Yani yetkisiz erişim denemesinde bulunulduğu için bağlantı açmaya izin vermedi. Şimdi WebServiceTest içindeki auth().form(…) satırındaki yorumu kaldıralım ve WebServiceTest sınıfını yeniden çalıştıralım.</p>
+
+<p><a href="/images/restAssured4.png">
+<img src="/images/restAssured4.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Yetkilendirme işlemi başarı ile sonuçlanınca POST işlemini de yapabildi.</p>
+
+<p>Bu yazıda anlatacaklarım bu kadar arkadaşlar. Bu konu ile ilgili 1 yazı daha yazıp orada da JSON Schema Validation ve Response’dan dönen alanların alınmasını  anlatmaya çalışacağım.</p>
+
+<p style="text-align: center">Görüşene kadar sağlıcakla kalın.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="http://github.com/ilkgunel" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="http://twitter.com/ilkgunel" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+  <li><a href="https://www.instagram.com/first.month/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2016 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>
