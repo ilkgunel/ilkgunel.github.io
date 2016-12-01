@@ -5,8 +5,8 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 01 Dec 2016 20:18:58 +0300</pubDate>
-    <lastBuildDate>Thu, 01 Dec 2016 20:18:58 +0300</lastBuildDate>
+    <pubDate>Thu, 01 Dec 2016 20:21:15 +0300</pubDate>
+    <lastBuildDate>Thu, 01 Dec 2016 20:21:15 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
     
       <item>
@@ -189,9 +189,11 @@
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Bu kod parçası ile ilgili path’e post isteğinde bulunuyoruz. Öncelikle given() ile başlıyoruz, akabinde yetkilendirme lazımsa auth().form() dememiz lazım. (Bu satır şimdilik kapalı çünkü önce yetkisiz erişim denemesi yapacağız, akabinde bu satırı açıp deneyeceğiz. )
 Bana verilen dökümana göre erişimi kısıtlanmış bir yere erişilmeye çalışıldığında şöyle bir login formu geliyor:
+
 &amp;lt;a href=&quot;/images/restAssured1.png&quot;&amp;gt;
 &amp;lt;img src=&quot;/images/restAssured1.png&quot; style=&quot;width: 958px; height= 400px;&quot;/&amp;gt;
 &amp;lt;/a&amp;gt;
+
 Biz de auth().form(“ilkay.gunel@kod5.org“, “12345”,new FormAuthConfig(“/BlogProjectWithSpringMVC/j_spring_security_check”, “j_username”, “j_password”)) diyerek formdaki j_username ve j_password alanlarına verileri koyup /BlogProjectWithSpringMVC/j_spring_security_check adresine POST ediyoruz. Burada Rest Assured ilgili yetkilendirme mekanizmasını otomatik çözümleyip yapıyor.
 Akabinde POST edeceğimiz ne türde veri bekliyorsa bunu Content-Type’a söylüyoruz. Daha sonra body() metoduna POST edilecek JSON formatındaki String’i geçiriyoruz. ***.when().post(“/webservice/memberRegister”)*** ifadesi ile http://localhost:8080/BlogProjectWithSpringMVC/webservice/memberRegister adresine json’ı post et diyoruz. Son aşamada ise then() metodu POST işlemi akabindeki beklentilerimizi söylüyoruz. statusCode(200) ile HTTP 200 OK beklediğimi söylüyorum ve dönen Response’u bana extract etmesini söylüyorum.
 &lt;/code&gt;&lt;/pre&gt;

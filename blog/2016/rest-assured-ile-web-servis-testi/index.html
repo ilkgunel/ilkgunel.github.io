@@ -278,9 +278,11 @@
 
 <div class="highlighter-rouge"><pre class="highlight"><code>Bu kod parçası ile ilgili path’e post isteğinde bulunuyoruz. Öncelikle given() ile başlıyoruz, akabinde yetkilendirme lazımsa auth().form() dememiz lazım. (Bu satır şimdilik kapalı çünkü önce yetkisiz erişim denemesi yapacağız, akabinde bu satırı açıp deneyeceğiz. )
 Bana verilen dökümana göre erişimi kısıtlanmış bir yere erişilmeye çalışıldığında şöyle bir login formu geliyor:
+
 &lt;a href="/images/restAssured1.png"&gt;
 &lt;img src="/images/restAssured1.png" style="width: 958px; height= 400px;"/&gt;
 &lt;/a&gt;
+
 Biz de auth().form(“ilkay.gunel@kod5.org“, “12345”,new FormAuthConfig(“/BlogProjectWithSpringMVC/j_spring_security_check”, “j_username”, “j_password”)) diyerek formdaki j_username ve j_password alanlarına verileri koyup /BlogProjectWithSpringMVC/j_spring_security_check adresine POST ediyoruz. Burada Rest Assured ilgili yetkilendirme mekanizmasını otomatik çözümleyip yapıyor.
 Akabinde POST edeceğimiz ne türde veri bekliyorsa bunu Content-Type’a söylüyoruz. Daha sonra body() metoduna POST edilecek JSON formatındaki String’i geçiriyoruz. ***.when().post(“/webservice/memberRegister”)*** ifadesi ile http://localhost:8080/BlogProjectWithSpringMVC/webservice/memberRegister adresine json’ı post et diyoruz. Son aşamada ise then() metodu POST işlemi akabindeki beklentilerimizi söylüyoruz. statusCode(200) ile HTTP 200 OK beklediğimi söylüyorum ve dönen Response’u bana extract etmesini söylüyorum.
 </code></pre>
