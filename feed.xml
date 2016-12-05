@@ -5,9 +5,112 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 01 Dec 2016 22:26:04 +0300</pubDate>
-    <lastBuildDate>Thu, 01 Dec 2016 22:26:04 +0300</lastBuildDate>
+    <pubDate>Mon, 05 Dec 2016 20:23:27 +0300</pubDate>
+    <lastBuildDate>Mon, 05 Dec 2016 20:23:27 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Sonar İle Kod Kalitesini Arttırın</title>
+        <description>&lt;p&gt;Merhabalar arkadaşlar.&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda Java projesi geliştirirken Eclipse IDE üzerinde kod kalitesini arttırmaya yardımcı olan &lt;strong&gt;&lt;em&gt;Sonar&lt;/em&gt;&lt;/strong&gt; eklentisinin Eclipse IDE üzerinde kurulum ve basitçe kullanımı konusunu anlatmaya
+çalışacağım. Basitçe bir kaç örnekle de Sonar’ın analizini örneklendirmeye çalışacağım.&lt;/p&gt;
+
+&lt;p&gt;İlk olarak Eclipse’de &lt;strong&gt;&lt;em&gt;Help -&amp;gt; Eclipse Marketplace&lt;/em&gt;&lt;/strong&gt; Eclipse’in mağazasını açalım ve arama kutusuna &lt;strong&gt;&lt;em&gt;Sonar&lt;/em&gt;&lt;/strong&gt; yazalım. &lt;strong&gt;&lt;em&gt;Go&lt;/em&gt;&lt;/strong&gt; butonuna tıklayarak aratalım.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/sonar/sonar1.png&quot;&gt;
+&lt;img src=&quot;/images/sonar/sonar1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Arama işleminin ardından &lt;strong&gt;&lt;em&gt;SonarLint 2.4.0&lt;/em&gt;&lt;/strong&gt; eklentisini Install butonuna tıklayarak IDE’mize kuralım. Sürüm sizin bu yazıyı okuduğunuz zamanda değişebilir.&lt;/p&gt;
+
+&lt;p&gt;Bu ekranda ikisini de işaretleyelim.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/sonar/sonar2.png&quot;&gt;
+&lt;img src=&quot;/images/sonar/sonar2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu ekranda da şartları kabul edip &lt;strong&gt;&lt;em&gt;Finish&lt;/em&gt;&lt;/strong&gt; butonuna tıklayalım.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/sonar/sonar3.png&quot;&gt;
+&lt;img src=&quot;/images/sonar/sonar3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Eclipse bir süre sürecek şekilde eklentiyi kuracak. Kurulum işlemi bittiğinde Eclipse sizden IDE’yi Restart etmenizi isteyecek. IDE’yi yeniden başlatın.&lt;/p&gt;
+
+&lt;p&gt;Şimdi bir proje açın ve main metodunu barındıran bir Java sınıfı oluşturun. Sonar hemen analiz yapmaya ve sizi kod kalitesini arttırmaya yöneltmeye başlayacak. Şu resimden de 
+görebileceğiniz gibi Sonar Sonar analiz yaparken sorunlu gördüğü bölgelerin altını mavi bir çizgi ile çizip size düzeltmeniz gerektiğini söyleyecek.&lt;/p&gt;
+
+&lt;p&gt;Eclipse’in hızlı ulaşım kutucuğu olan arama kutusuna SonarLint yazıp &lt;strong&gt;&lt;em&gt;SonarLint Issues&lt;/em&gt;&lt;/strong&gt; tabını açın. SonarLint bu tabda düzeltilmesi gereken yerleri söylüyor olacak.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/sonar/sonar4.png&quot;&gt;
+&lt;img src=&quot;/images/sonar/sonar4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Yukarıdaki mesela iki adet düzeltilmesi gereken şey olduğunu söylüyor. Birinci madde main metodu boş ve en azından yorum satırları ile niye metodun boş olduğunu bildir diyor.&lt;/p&gt;
+
+&lt;p&gt;İkinci madde ise her Java sınıfında default olarak üretilen public constructor yerine private bir constructor bir yaz.&lt;/p&gt;
+
+&lt;p&gt;Ben bunları yaptığımda Sonar’ın iki uyarısı da gitti.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/sonar/sonar5.png&quot;&gt;
+&lt;img src=&quot;/images/sonar/sonar5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Java’da JDK tarafından şart koşulmayan ama de-facto bir şekilde kodlama standartı olmuş şeyler vardır. Örneğin sınıf isimleri büyük harfle başlar, metot ve değişken isimleri küçük harfle
+başlar gibi. Şimdi bunları yaptığımızda Sonar bir tepki veriyor mu bakalım.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;sonarTutorialClass&lt;/em&gt;&lt;/strong&gt; isminde küçük harfle başlayan bir sınıf, ismi büyük harfle başlayan bir method, ismi büyük harfle başlayan bir değişken ve bir de System.out kullanıyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/sonar/sonar6.png&quot;&gt;
+&lt;img src=&quot;/images/sonar/sonar6.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;SonarLint Issues kısmında 4 adet düzeltilmesi gereken yer olduğunu görüyoruz.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Birinci madde System.out ya da System.err gibi şeylerin loglama yapmamız gerektiğini söylüyor.&lt;/li&gt;
+  &lt;li&gt;İkinci madde local değişkenlerin adlarının küçük harfle başlaması gerektiğini ve bu yönde düzeltme yapmamızı söylüyor.&lt;/li&gt;
+  &lt;li&gt;Üçüncü madde metot adlarının küçük harfle başlaması gerektiğini ve bu yönde düzeltme yapmamızı söylüyor.&lt;/li&gt;
+  &lt;li&gt;Dördüncü madde sınıf isimlerinin büyük harfle başlaması gerektiğini ve küçük harfle başlaması gerektiğini ve bu yönde düzeltme yapmamızı söylüyor.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Şimdi bu dediklerini düzenleyelim ve Sonar’ın analizine bırakalım. Gördüğünüz gibi hatalar gitti.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/sonar/sonar7.png&quot;&gt;
+&lt;img src=&quot;/images/sonar/sonar7.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu şekilde kodunuzun içerisinde derleme zamanı için hatalı olmayan ama düzeltilmeye ihtiyaç duyulan kodları Sonar eklentisi ile görüp iyileştirebiliriz.&lt;/p&gt;
+
+&lt;p&gt;Başka bir yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Sun, 04 Dec 2016 20:40:21 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/sonar-plugin/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/sonar-plugin/</guid>
+        
+        <category>sonar nedir?</category>
+        
+        <category>sonar nasıl kullanılır?</category>
+        
+        <category>java sonar nedir?</category>
+        
+        <category>java sonar nasıl kullanılır?</category>
+        
+        <category>java sonar nasıl kurulur?</category>
+        
+        <category>sonar ile kod analizi</category>
+        
+        <category>eclipse sonar plugin</category>
+        
+        <category>sonar plugin ile kod kalitenizi arttırın.</category>
+        
+        <category>eclipse sonar plugin</category>
+        
+        
+      </item>
     
       <item>
         <title>TestNG Nedir? TestNG İle Örnek Uygulama</title>
@@ -1338,132 +1441,6 @@ bir yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
         <category>ember.js öğren</category>
         
         <category>ember.js türkçe dersleri</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Veritabanına Giriş</title>
-        <description>&lt;p&gt;Merhaba arkadaşlar. Bu yazımızda JSF içinde veritabanı kullanımına bir giriş yapacağız ve JSF projesi ile veritabanının ilişkilendirilmesini öğreneceğiz.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Neler Gerekli?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;JSF ile veritabanı işlemleri yapmak için iki şeye ihtiyacımız var. Birincisi bir sunucuya, ikincisi ise proje içinde bu sunucunun kullandığı veritabanının sürücüsüne. Bu yazıyı yazarken ben sunucu olarak Xampp 
-Server‘ı kullanacağım. Xampp Server MySQL veritabanını da beraberinde getiren bir sunucudur. İçinde PhpMyAdmin kurulu olarak gelmektedir. PhpMyAdmin veritabanlarını yönetmemizi sağlayan bir araçtır. PhpMyAdmin 
-hakkında bilgi almak isterseniz vikipedi sayfasına &lt;a href=&quot;http://tr.wikipedia.org/wiki/PhpMyAdmin&quot;&gt;buraya&lt;/a&gt; tıklayarak ulaşabilirsiniz. MySQL ise açık kaynak koldu bir veritabanı yönetim sistemidir. MySQL’in vikipedi 
-sayfası için de &lt;a href=&quot;http://tr.wikipedia.org/wiki/MySQL&quot;&gt;buraya&lt;/a&gt; tıklayabilirsiniz. Xampp Server’ı indirmek için &lt;a href=&quot;https://www.apachefriends.org/tr/download.html&quot;&gt;buraya&lt;/a&gt; tıklayın ve işletim sisteminize uygun sürümü indirin.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfDersleri13-1.png&quot;&gt;
-&lt;img src=&quot;/images/jsf/jsfDersleri13-1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Burada bir noktaya değinelim. Xampp Server’ın Windows ve MAC OS X altında kurulum ve kullanımı çok basittir ancak Linux ortamında biraz zorlayabilir. 
-Linux ortamında Xampp Server’ı kurmak için, indirme işleminde sonra cd ile Xampp Server’ı indirdiğiniz yere gelin ve şu komutları girin.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;chmod&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xampp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x64&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;installer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;./&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xampp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x64&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;installer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Bu komutların ardından karşınıza kurulum ekranı gelecek. Next butonlarına tıklayarak kurulumu bitiriyoruz. İlk kurulum sonunda Finish butonuna basmadan önce Launch XAMPP seçeneği işaretli ise Xampp Server kendisi açılır ama diğer zamanlarda Xampp Server’ı başlatmak için terminalden şu komutu vermeniz gerekir.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;opt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lampp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lampp&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Xampp Server’ı kapatmak için de şu komutu girmelisiniz.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;opt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lampp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lampp&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stop&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Xampp Server’ı kurduktan sonra şimdi olayın NetBeans tarafına geçelim. Geliştirme ortamımızda “Veritabanına Giriş”  adında bir proje oluşturalım. MySQL veritabanını kullanabilmek için projemize MySQL’i tanıyacak bir sürücü eklememiz gerekiyor. Şimdi o sürücüyü ekleyelim.&lt;/p&gt;
-
-&lt;p&gt;Projemize sağ tıklayıp “Add Library”  diyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfDersleri13-2.png&quot;&gt;
-&lt;img src=&quot;/images/jsf/jsfDersleri13-2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Açılan ekran “MySQL JDBC Driver” kütüphanesini seçelim ve “Add Library” diyelim.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfDersleri13-3.png&quot;&gt;
-&lt;img src=&quot;/images/jsf/jsfDersleri13-3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Libraries kısmına sürücü kütüphanemiz eklenmiş oluyor.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/jsf/jsfDersleri13-4.png&quot;&gt;
-&lt;img src=&quot;/images/jsf/jsfDersleri13-4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Bu yazımızda Xampp Server kurulumunu ve projemizi MySQL ile ilişkilendirmeyi öğrendik. Gelecek yazımızda veritabanına kayıt ekleme işlemini öğreneceğiz.&lt;/p&gt;
-
-&lt;p&gt;Esen kalın.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-</description>
-        <pubDate>Sat, 12 Nov 2016 20:40:21 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2016/jsf-veritabanina-giris/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/jsf-veritabanina-giris/</guid>
-        
-        <category>jsf dersleri</category>
-        
-        <category>jsf öğren</category>
-        
-        <category>jsf tutorial</category>
-        
-        <category>jsf türkçe</category>
-        
-        <category>jsf türkçe kaynak</category>
-        
-        <category>jsf türkçe tutorial</category>
-        
-        <category>java server faces</category>
-        
-        <category>java server faces dersleri</category>
-        
-        <category>java server faces öğren</category>
-        
-        <category>java server faces öğreniyorum</category>
-        
-        <category>jsf</category>
-        
-        <category>jsf nedir?</category>
-        
-        <category>java server faces içinde mysql kullanımı</category>
-        
-        <category>java server faces ile mysql kullanımı</category>
-        
-        <category>java server faces mysql</category>
-        
-        <category>java server faces öğren</category>
-        
-        <category>java server faces öğreniyorum</category>
-        
-        <category>java server faces veritabanı</category>
-        
-        <category>java server faces veritabanı kullanımı</category>
-        
-        <category>jsf içinde mysql</category>
-        
-        <category>JSF içinde mysql kullanımı</category>
-        
-        <category>JSF ile mysql kullanımı</category>
-        
-        <category>jsf mysql</category>
-        
-        <category>Jsf Mysql ilişkilendirilmesi</category>
-        
-        <category>JSF veritabanı</category>
-        
-        <category>JSF veritabanı kullanımı l</category>
-        
-        <category>inuxta xampp kurulumu</category>
-        
-        <category>mysql</category>
-        
-        <category>mysql jdbc driver</category>
-        
-        <category>using of mysql in JSF</category>
-        
-        <category>xampp server kullanımı</category>
-        
-        <category>xampp sunucusu</category>
         
         
       </item>

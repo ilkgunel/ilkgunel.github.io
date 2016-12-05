@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Sonar İle Kod Kalitesini Arttırın</title>
+    <meta name="description" content="Merhabalar arkadaşlar.">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/sonar-plugin/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>Sonar İle Kod Kalitesini Arttırın - İlkay Günel - Blog</title>
+<meta property="og:title" content="Sonar İle Kod Kalitesini Arttırın" />
+<meta name="description" content="Sonar İle Kod Kalitesini Arttırın, Sonar Nedir? Eclipse Üzerinde Sonar Kullanımı" />
+<meta property="og:description" content="Sonar İle Kod Kalitesini Arttırın, Sonar Nedir? Eclipse Üzerinde Sonar Kullanımı" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/sonar-plugin/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/sonar-plugin/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-12-04T20:40:21+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Sonar İle Kod Kalitesini Arttırın",
+    "datePublished": "2016-12-04T20:40:21+03:00",
+    "description": "Sonar İle Kod Kalitesini Arttırın, Sonar Nedir? Eclipse Üzerinde Sonar Kullanımı",
+    "url": "http://ilkaygunel.com/blog/2016/sonar-plugin/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/blog/2016/jsf-tutorials-list" title="JSF">JSF</a></li>
+        
+          <li><a href="/blog/2016/spring-tutorials" title="Spring 4">Spring 4</a></li>
+        
+          <li><a href="/blog/2016/eclipselink" title="Eclipselink">Eclipselink</a></li>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/blog/2016/test" title="Test">Test</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog/2016/eclipse-notes" title="Eclipse">Eclipse</a></li>
+        
+          <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
+        
+          <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Sonar İle Kod Kalitesini Arttırın</h1>
+      <p class="post-meta">Dec 4, 2016</p>
+    </header>
+
+    <div class="post-content">
+      <p>Merhabalar arkadaşlar.</p>
+
+<p>Bu yazıda Java projesi geliştirirken Eclipse IDE üzerinde kod kalitesini arttırmaya yardımcı olan <strong><em>Sonar</em></strong> eklentisinin Eclipse IDE üzerinde kurulum ve basitçe kullanımı konusunu anlatmaya
+çalışacağım. Basitçe bir kaç örnekle de Sonar’ın analizini örneklendirmeye çalışacağım.</p>
+
+<p>İlk olarak Eclipse’de <strong><em>Help -&gt; Eclipse Marketplace</em></strong> Eclipse’in mağazasını açalım ve arama kutusuna <strong><em>Sonar</em></strong> yazalım. <strong><em>Go</em></strong> butonuna tıklayarak aratalım.</p>
+
+<p><a href="/images/sonar/sonar1.png">
+<img src="/images/sonar/sonar1.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Arama işleminin ardından <strong><em>SonarLint 2.4.0</em></strong> eklentisini Install butonuna tıklayarak IDE’mize kuralım. Sürüm sizin bu yazıyı okuduğunuz zamanda değişebilir.</p>
+
+<p>Bu ekranda ikisini de işaretleyelim.</p>
+
+<p><a href="/images/sonar/sonar2.png">
+<img src="/images/sonar/sonar2.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Bu ekranda da şartları kabul edip <strong><em>Finish</em></strong> butonuna tıklayalım.</p>
+
+<p><a href="/images/sonar/sonar3.png">
+<img src="/images/sonar/sonar3.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Eclipse bir süre sürecek şekilde eklentiyi kuracak. Kurulum işlemi bittiğinde Eclipse sizden IDE’yi Restart etmenizi isteyecek. IDE’yi yeniden başlatın.</p>
+
+<p>Şimdi bir proje açın ve main metodunu barındıran bir Java sınıfı oluşturun. Sonar hemen analiz yapmaya ve sizi kod kalitesini arttırmaya yöneltmeye başlayacak. Şu resimden de 
+görebileceğiniz gibi Sonar Sonar analiz yaparken sorunlu gördüğü bölgelerin altını mavi bir çizgi ile çizip size düzeltmeniz gerektiğini söyleyecek.</p>
+
+<p>Eclipse’in hızlı ulaşım kutucuğu olan arama kutusuna SonarLint yazıp <strong><em>SonarLint Issues</em></strong> tabını açın. SonarLint bu tabda düzeltilmesi gereken yerleri söylüyor olacak.</p>
+
+<p><a href="/images/sonar/sonar4.png">
+<img src="/images/sonar/sonar4.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Yukarıdaki mesela iki adet düzeltilmesi gereken şey olduğunu söylüyor. Birinci madde main metodu boş ve en azından yorum satırları ile niye metodun boş olduğunu bildir diyor.</p>
+
+<p>İkinci madde ise her Java sınıfında default olarak üretilen public constructor yerine private bir constructor bir yaz.</p>
+
+<p>Ben bunları yaptığımda Sonar’ın iki uyarısı da gitti.</p>
+
+<p><a href="/images/sonar/sonar5.png">
+<img src="/images/sonar/sonar5.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Java’da JDK tarafından şart koşulmayan ama de-facto bir şekilde kodlama standartı olmuş şeyler vardır. Örneğin sınıf isimleri büyük harfle başlar, metot ve değişken isimleri küçük harfle
+başlar gibi. Şimdi bunları yaptığımızda Sonar bir tepki veriyor mu bakalım.</p>
+
+<p><strong><em>sonarTutorialClass</em></strong> isminde küçük harfle başlayan bir sınıf, ismi büyük harfle başlayan bir method, ismi büyük harfle başlayan bir değişken ve bir de System.out kullanıyoruz.</p>
+
+<p><a href="/images/sonar/sonar6.png">
+<img src="/images/sonar/sonar6.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>SonarLint Issues kısmında 4 adet düzeltilmesi gereken yer olduğunu görüyoruz.</p>
+
+<ul>
+  <li>Birinci madde System.out ya da System.err gibi şeylerin loglama yapmamız gerektiğini söylüyor.</li>
+  <li>İkinci madde local değişkenlerin adlarının küçük harfle başlaması gerektiğini ve bu yönde düzeltme yapmamızı söylüyor.</li>
+  <li>Üçüncü madde metot adlarının küçük harfle başlaması gerektiğini ve bu yönde düzeltme yapmamızı söylüyor.</li>
+  <li>Dördüncü madde sınıf isimlerinin büyük harfle başlaması gerektiğini ve küçük harfle başlaması gerektiğini ve bu yönde düzeltme yapmamızı söylüyor.</li>
+</ul>
+
+<p>Şimdi bu dediklerini düzenleyelim ve Sonar’ın analizine bırakalım. Gördüğünüz gibi hatalar gitti.</p>
+
+<p><a href="/images/sonar/sonar7.png">
+<img src="/images/sonar/sonar7.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Bu şekilde kodunuzun içerisinde derleme zamanı için hatalı olmayan ama düzeltilmeye ihtiyaç duyulan kodları Sonar eklentisi ile görüp iyileştirebiliriz.</p>
+
+<p>Başka bir yazıda görüşene kadar sağlıcakla kalın.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="http://github.com/ilkgunel" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="http://twitter.com/ilkgunel" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+  <li><a href="https://www.instagram.com/first.month/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2016 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>
