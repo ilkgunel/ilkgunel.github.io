@@ -163,6 +163,9 @@ export PATH=$SCALA_HOME/bin:$PATH</code></pre></figure>
 <span class="o">}</span></code></pre></figure>
 
 <p>Bu kodları komut satırında yazdıktan sonra Scala bize <strong><em>defined object HelloWorld</em></strong> şeklinde bir mesaj dönecek. Buradaki <strong><em>object</em></strong> keywordü Java SE’deki sınıf gibi düşünülebilir.
+Scala’da Java SE’deki gibi <strong><em>class</em></strong> keywordü de mevcuttur. Object ile Class arasındaki fark ise Class Java SE’de bildiğimiz gibi OOP mantığında çalışırken Object ise sanki dana önce
+oluşturulmuş bir sınıfdan nesne üretiyorumuş gibi ve Singleton mantığı üzerinde çalışır. Yani Object ile oluşturduklarımızın bellek üzerinde sadece bir örneği yaşar. Class ile oluşturulanların
+ise tıpkı Java’daki gibi new’lenerek birden fazla örneğinin yaşaması sağlanabilir. 
 <strong><em>def</em></strong> keywordü ise definition’dan geliyor ve adı üzerinde bir tanımla yapmak için kullanılıyor. def’in akabinde tanımlama yapacağımız metodun ismi yazılıyor, biz de main metodu 
 tanımladık. Java SE’de main metodu String[] args şeklinde bir parametre alıyordu. Scala’da da benzer şekilde args: Array[String] şeklinde. println komutu da yazdırma işlemi için 
 kullanılıyor. C dilinde <strong><em>printf</em></strong>, C++’da <strong><em>cout</em></strong>, Java’da <strong><em>println</em></strong> yazdırma işlemleri için kullanılabilen metotlardan bazıları. Scala’da da println’i kullanabiliriz.</p>

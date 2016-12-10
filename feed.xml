@@ -5,8 +5,8 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 10 Dec 2016 16:26:53 +0300</pubDate>
-    <lastBuildDate>Sat, 10 Dec 2016 16:26:53 +0300</lastBuildDate>
+    <pubDate>Sat, 10 Dec 2016 16:35:16 +0300</pubDate>
+    <lastBuildDate>Sat, 10 Dec 2016 16:35:16 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
     
       <item>
@@ -74,6 +74,9 @@ export PATH=$SCALA_HOME/bin:$PATH&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Bu kodları komut satırında yazdıktan sonra Scala bize &lt;strong&gt;&lt;em&gt;defined object HelloWorld&lt;/em&gt;&lt;/strong&gt; şeklinde bir mesaj dönecek. Buradaki &lt;strong&gt;&lt;em&gt;object&lt;/em&gt;&lt;/strong&gt; keywordü Java SE’deki sınıf gibi düşünülebilir.
+Scala’da Java SE’deki gibi &lt;strong&gt;&lt;em&gt;class&lt;/em&gt;&lt;/strong&gt; keywordü de mevcuttur. Object ile Class arasındaki fark ise Class Java SE’de bildiğimiz gibi OOP mantığında çalışırken Object ise sanki dana önce
+oluşturulmuş bir sınıfdan nesne üretiyorumuş gibi ve Singleton mantığı üzerinde çalışır. Yani Object ile oluşturduklarımızın bellek üzerinde sadece bir örneği yaşar. Class ile oluşturulanların
+ise tıpkı Java’daki gibi new’lenerek birden fazla örneğinin yaşaması sağlanabilir. 
 &lt;strong&gt;&lt;em&gt;def&lt;/em&gt;&lt;/strong&gt; keywordü ise definition’dan geliyor ve adı üzerinde bir tanımla yapmak için kullanılıyor. def’in akabinde tanımlama yapacağımız metodun ismi yazılıyor, biz de main metodu 
 tanımladık. Java SE’de main metodu String[] args şeklinde bir parametre alıyordu. Scala’da da benzer şekilde args: Array[String] şeklinde. println komutu da yazdırma işlemi için 
 kullanılıyor. C dilinde &lt;strong&gt;&lt;em&gt;printf&lt;/em&gt;&lt;/strong&gt;, C++’da &lt;strong&gt;&lt;em&gt;cout&lt;/em&gt;&lt;/strong&gt;, Java’da &lt;strong&gt;&lt;em&gt;println&lt;/em&gt;&lt;/strong&gt; yazdırma işlemleri için kullanılabilen metotlardan bazıları. Scala’da da println’i kullanabiliriz.&lt;/p&gt;
