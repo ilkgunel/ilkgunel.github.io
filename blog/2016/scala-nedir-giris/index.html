@@ -123,28 +123,32 @@ binary dosyalarını indirip PATH’e atıp derleme yolu ile Hello World olacak.
 <p>Birinci yolu uygulamak için tabii ki önce Scala’yı indirmemiz gerekecek. 😊</p>
 
 <ol>
-  <li><a href="http://scala-lang.org/download/">http://scala-lang.org/download/</a> adresinden 1 numaralı kısımdan Scala’nın sisteminize uygun sürümünü indirin.</li>
+  <li>
+    <p><a href="http://scala-lang.org/download/">http://scala-lang.org/download/</a> adresinden 1 numaralı kısımdan Scala’nın sisteminize uygun sürümünü indirin.</p>
+
+    <p><a href="/images/scala/scalaGiris1.png">
+ <img src="/images/scala/scalaGiris1.png" style="width: 958px; height= 400px;" />
+ </a></p>
+  </li>
+  <li>
+    <p>İndirmiş olduğunuz sıkıştırılmış dosyayı herhangi bir yere açın. Şimdi bilgisayarımızın PATH’ine Scala’yı eklememiz gerekiyor. MacOS çalıştıran bilgisayarlar için $HOME dizini 
+altındaki <strong><em>.bash_profile</em></strong> dosyasını güncellemeniz gerekiyor. Şu iki satırı .bash_profile dosyanıza eklemeniz yeterli:</p>
+  </li>
 </ol>
 
-<p><a href="/images/scala/scalaGiris1.png">
-<img src="/images/scala/scalaGiris1.png" style="width: 958px; height= 400px;" />
-</a></p>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">	export SCALA_HOME=/Users/ilkaygunel/Downloads/scala-2.12.1
+	export PATH=$SCALA_HOME/bin:$PATH
+	</code></pre></figure>
 
 <ol>
-  <li>İndirmiş olduğunuz sıkıştırılmış dosyayı herhangi bir yere açın. Şimdi bilgisayarımızın PATH’ine Scala’yı eklememiz gerekiyor. MacOS çalıştıran bilgisayarlar için $HOME dizini 
-altındaki <strong><em>.bash_profile</em></strong> dosyasını güncellemeniz gerekiyor. Şu iki satırı .bash_profile dosyanıza eklemeniz yeterli:</li>
+  <li>
+    <p>PATH ayarının düzgün yapılıp yapılmadığını anlamak için komut satırına gelip <strong><em>scalac -version</em></strong> komutunu çalıştırın. Şöyle bir çıktı almanız gerekiyor:</p>
+
+    <p><a href="/images/scala/scalaGiris2.png">
+ <img src="/images/scala/scalaGiris2.png" style="width: 958px; height= 400px;" />
+ </a></p>
+  </li>
 </ol>
-
-<figure class="highlight"><pre><code class="language-text" data-lang="text">export SCALA_HOME=/Users/ilkaygunel/Downloads/scala-2.12.1
-export PATH=$SCALA_HOME/bin:$PATH</code></pre></figure>
-
-<ol>
-  <li>PATH ayarının düzgün yapılıp yapılmadığını anlamak için komut satırına gelip <strong><em>scalac -version</em></strong> komutunu çalıştırın. Şöyle bir çıktı almanız gerekiyor:</li>
-</ol>
-
-<p><a href="/images/scala/scalaGiris2.png">
-<img src="/images/scala/scalaGiris2.png" style="width: 958px; height= 400px;" />
-</a></p>
 
 <p>Eğer komut satırından doğru çıktıyı alabildi iseniz Scala kodu yazmaya hazırız demektir. Şimdi komut satırı üzerinde bir <strong><em>Hello World</em></strong> uyglaması yazalım.</p>
 

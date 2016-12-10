@@ -5,8 +5,8 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 10 Dec 2016 16:35:16 +0300</pubDate>
-    <lastBuildDate>Sat, 10 Dec 2016 16:35:16 +0300</lastBuildDate>
+    <pubDate>Sat, 10 Dec 2016 16:39:18 +0300</pubDate>
+    <lastBuildDate>Sat, 10 Dec 2016 16:39:18 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
     
       <item>
@@ -34,28 +34,32 @@ binary dosyalarını indirip PATH’e atıp derleme yolu ile Hello World olacak.
 &lt;p&gt;Birinci yolu uygulamak için tabii ki önce Scala’yı indirmemiz gerekecek. 😊&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://scala-lang.org/download/&quot;&gt;http://scala-lang.org/download/&lt;/a&gt; adresinden 1 numaralı kısımdan Scala’nın sisteminize uygun sürümünü indirin.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://scala-lang.org/download/&quot;&gt;http://scala-lang.org/download/&lt;/a&gt; adresinden 1 numaralı kısımdan Scala’nın sisteminize uygun sürümünü indirin.&lt;/p&gt;
+
+    &lt;p&gt;&lt;a href=&quot;/images/scala/scalaGiris1.png&quot;&gt;
+ &lt;img src=&quot;/images/scala/scalaGiris1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+ &lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;İndirmiş olduğunuz sıkıştırılmış dosyayı herhangi bir yere açın. Şimdi bilgisayarımızın PATH’ine Scala’yı eklememiz gerekiyor. MacOS çalıştıran bilgisayarlar için $HOME dizini 
+altındaki &lt;strong&gt;&lt;em&gt;.bash_profile&lt;/em&gt;&lt;/strong&gt; dosyasını güncellemeniz gerekiyor. Şu iki satırı .bash_profile dosyanıza eklemeniz yeterli:&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;&lt;a href=&quot;/images/scala/scalaGiris1.png&quot;&gt;
-&lt;img src=&quot;/images/scala/scalaGiris1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;	export SCALA_HOME=/Users/ilkaygunel/Downloads/scala-2.12.1
+	export PATH=$SCALA_HOME/bin:$PATH
+	&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;İndirmiş olduğunuz sıkıştırılmış dosyayı herhangi bir yere açın. Şimdi bilgisayarımızın PATH’ine Scala’yı eklememiz gerekiyor. MacOS çalıştıran bilgisayarlar için $HOME dizini 
-altındaki &lt;strong&gt;&lt;em&gt;.bash_profile&lt;/em&gt;&lt;/strong&gt; dosyasını güncellemeniz gerekiyor. Şu iki satırı .bash_profile dosyanıza eklemeniz yeterli:&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;PATH ayarının düzgün yapılıp yapılmadığını anlamak için komut satırına gelip &lt;strong&gt;&lt;em&gt;scalac -version&lt;/em&gt;&lt;/strong&gt; komutunu çalıştırın. Şöyle bir çıktı almanız gerekiyor:&lt;/p&gt;
+
+    &lt;p&gt;&lt;a href=&quot;/images/scala/scalaGiris2.png&quot;&gt;
+ &lt;img src=&quot;/images/scala/scalaGiris2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+ &lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;export SCALA_HOME=/Users/ilkaygunel/Downloads/scala-2.12.1
-export PATH=$SCALA_HOME/bin:$PATH&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;PATH ayarının düzgün yapılıp yapılmadığını anlamak için komut satırına gelip &lt;strong&gt;&lt;em&gt;scalac -version&lt;/em&gt;&lt;/strong&gt; komutunu çalıştırın. Şöyle bir çıktı almanız gerekiyor:&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/scala/scalaGiris2.png&quot;&gt;
-&lt;img src=&quot;/images/scala/scalaGiris2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Eğer komut satırından doğru çıktıyı alabildi iseniz Scala kodu yazmaya hazırız demektir. Şimdi komut satırı üzerinde bir &lt;strong&gt;&lt;em&gt;Hello World&lt;/em&gt;&lt;/strong&gt; uyglaması yazalım.&lt;/p&gt;
 
