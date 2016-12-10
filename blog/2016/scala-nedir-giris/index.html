@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Scala Giriş - Scala Nedir? Scala İle Hello World</title>
+    <meta name="description" content="Merhabalar arkadaşlar.">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/scala-nedir-giris/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>Scala Giriş - Scala Nedir? Scala İle Hello World - İlkay Günel - Blog</title>
+<meta property="og:title" content="Scala Giriş - Scala Nedir? Scala İle Hello World" />
+<meta name="description" content="Scala Giriş - Scala Nedir? Scala İle Hello World" />
+<meta property="og:description" content="Scala Giriş - Scala Nedir? Scala İle Hello World" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/scala-nedir-giris/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/scala-nedir-giris/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-12-04T20:40:21+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Scala Giriş - Scala Nedir? Scala İle Hello World",
+    "datePublished": "2016-12-04T20:40:21+03:00",
+    "description": "Scala Giriş - Scala Nedir? Scala İle Hello World",
+    "url": "http://ilkaygunel.com/blog/2016/scala-nedir-giris/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/blog/2016/jsf-tutorials-list" title="JSF">JSF</a></li>
+        
+          <li><a href="/blog/2016/spring-tutorials" title="Spring 4">Spring 4</a></li>
+        
+          <li><a href="/blog/2016/eclipselink" title="Eclipselink">Eclipselink</a></li>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/blog/2016/test" title="Test">Test</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog/2016/eclipse-notes" title="Eclipse">Eclipse</a></li>
+        
+          <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
+        
+          <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Scala Giriş - Scala Nedir? Scala İle Hello World</h1>
+      <p class="post-meta">Dec 4, 2016</p>
+    </header>
+
+    <div class="post-content">
+      <p>Merhabalar arkadaşlar.</p>
+
+<p>Bir süredir Java’nın yanına başka bir programalama dili koymak için niyetli idim ve bu niyeti Scala dilininden yana kullandım. Scala programalama dilini öğrenmeye karar verdim ve
+öğrenirken de paylaşımlarda bulunacağım.</p>
+
+<p><strong>Scala Nedir?</strong></p>
+
+<p>Hepsinden önce Scala Java SE gibi bir programlama dilidir. Java sadece nesne yönelimli kod yazmaya imkan tanırken Scala C++ gibi hem nesne yönelimli hem de fonksiyonel programlama yapmaya
+imkan tanıyan bir dildir. Yani bu ifade Scala’nın Hybrit bir dil olduğu anlamına gelir. Scala Java SE gibi JVM (Java Virtual Machine) üzerinde çalışan bir programlama dilidir.</p>
+
+<p>Java SE dilinde bir tarafta nesneler diğer tarafta ise primitive tipler yer almaktadır. Scala dili ise primitive tip kavramını bünyesinde barındırmayan bir dildir. Yani Scala’da 
+primitive tip diye bir tanım yoktur. Bu da primitive tip- nesne tipi arasında casting, geçişler vs. gibi işlemler yapma gerekliliğini ortadan kaldırır.</p>
+
+<p><strong>Scala İle Hello World İçin Adımlar</strong></p>
+
+<p>Scala’nın ne olduğunu az çok anladıktan sonra şimdi Scala ile <strong><em>Hello World</em></strong> uygulaması yapalım. Ben bu yazıda Scala ile Hello World için iki yol anlatacağım. Birinci yol, Scala’nın
+binary dosyalarını indirip PATH’e atıp derleme yolu ile Hello World olacak. İkinci yol ise NetBeans IDE üzerinde Scala uygulaması açmak olacak.</p>
+
+<p style="text-align: center;color: red"><strong>Birinci Yol</strong></p>
+
+<p>Birinci yolu uygulamak için tabii ki önce Scala’yı indirmemiz gerekecek. 😊</p>
+
+<ol>
+  <li><a href="http://scala-lang.org/download/">http://scala-lang.org/download/</a> adresinden 1 numaralı kısımdan Scala’nın sisteminize uygun sürümünü indirin.</li>
+</ol>
+
+<p><a href="/images/scala/scalaGiris1.png">
+<img src="/images/scala/scalaGiris1.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<ol>
+  <li>İndirmiş olduğunuz sıkıştırılmış dosyayı herhangi bir yere açın. Şimdi bilgisayarımızın PATH’ine Scala’yı eklememiz gerekiyor. MacOS çalıştıran bilgisayarlar için $HOME dizini 
+altındaki <strong><em>.bash_profile</em></strong> dosyasını güncellemeniz gerekiyor. Şu iki satırı .bash_profile dosyanıza eklemeniz yeterli:</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">export SCALA_HOME=/Users/ilkaygunel/Downloads/scala-2.12.1
+export PATH=$SCALA_HOME/bin:$PATH</code></pre></figure>
+
+<ol>
+  <li>PATH ayarının düzgün yapılıp yapılmadığını anlamak için komut satırına gelip <strong><em>scalac -version</em></strong> komutunu çalıştırın. Şöyle bir çıktı almanız gerekiyor:</li>
+</ol>
+
+<p><a href="/images/scala/scalaGiris2.png">
+<img src="/images/scala/scalaGiris2.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Eğer komut satırından doğru çıktıyı alabildi iseniz Scala kodu yazmaya hazırız demektir. Şimdi komut satırı üzerinde bir <strong><em>Hello World</em></strong> uyglaması yazalım.</p>
+
+<p>İlk olarak komut satırında <strong><em>scala</em></strong> komutunu vererek Scala’yı çalıştırmış olalım.</p>
+
+<p><a href="/images/scala/scalaGiris3.png">
+<img src="/images/scala/scalaGiris3.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Akabinde şu satırları komut satırında yazmak sureti ile ilk örnek uygulamamızı yapmış olalım:</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">object</span> <span class="nc">HelloWorld</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="n">println</span><span class="o">(</span><span class="s">&quot;Hello, world!&quot;</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Bu kodları komut satırında yazdıktan sonra Scala bize <strong><em>defined object HelloWorld</em></strong> şeklinde bir mesaj dönecek. Buradaki <strong><em>object</em></strong> keywordü Java SE’deki sınıf gibi düşünülebilir.
+<strong><em>def</em></strong> keywordü ise definition’dan geliyor ve adı üzerinde bir tanımla yapmak için kullanılıyor. def’in akabinde tanımlama yapacağımız metodun ismi yazılıyor, biz de main metodu 
+tanımladık. Java SE’de main metodu String[] args şeklinde bir parametre alıyordu. Scala’da da benzer şekilde args: Array[String] şeklinde. println komutu da yazdırma işlemi için 
+kullanılıyor. C dilinde <strong><em>printf</em></strong>, C++’da <strong><em>cout</em></strong>, Java’da <strong><em>println</em></strong> yazdırma işlemleri için kullanılabilen metotlardan bazıları. Scala’da da println’i kullanabiliriz.</p>
+
+<p>defined object … yazısını gördükten sonra metodumuzu koşturabiliriz. Bunun için tanımlanan object adı.metot adı şekinde çağırım yapabiliriz. Yani bizim için 
+<strong><em>HelloWorld.main(Array())</em></strong> şeklinde bir çağırım yeterli olacaktır. Bu çağırım akabinde konsolda <strong><em>Hello, world!</em></strong>‘ü göreceğiz.</p>
+
+<p><a href="/images/scala/scalaGiris4.png">
+<img src="/images/scala/scalaGiris4.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Peki bir dosya üzerinde Scala kodu çalıştırmak istesek? Onun için de uzantısı <strong><em>.scala</em></strong> olan bir dosyaya kodumuzu yazdıktan sonra onu derlememiz ve çalıştırmamız gerekiyor.</p>
+
+<p>Şimdi herhangi bir yerde yukarıdaki Hello World kodunun barındığı .scala uzantılı bir dosya oluşturun. Bendeki dosyanın adı <strong><em>HelloWorld.scala</em></strong> şeklinde.</p>
+
+<p>Akabinde komut satırından bu dosyanın olduğu yere gelin ve</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="n">scalac</span> <span class="nc">HelloWorld</span><span class="o">.</span><span class="n">scala</span></code></pre></figure>
+
+<p>komutunu çalıştırın. scalac komutu bizim elimizdeki Scala dosyamızı derleyecek ve <strong><em>.class</em></strong> uzantılı bir dosya oluşturacak.</p>
+
+<p>Şimdi de</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="n">scala</span> <span class="nc">HelloWorld</span></code></pre></figure>
+
+<p>şeklinde bir komut çalıştıralım. Az önce biz HelloWorld$.class isminde bir dosya edindik. Buraki HelloWorld’ü scala komutuna vererek HelloWorld.scala içindeki main metodunu çalıştırmış
+olacağız.</p>
+
+<p>Aşağıdaki ekran görüntüsünden de görebileceğiniz gibi yine Hello World çıktısını aldık.</p>
+
+<p><a href="/images/scala/scalaGiris5.png">
+<img src="/images/scala/scalaGiris5.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p style="text-align: center;color: red"><strong>İkinci Yol</strong></p>
+
+<p>Sisteminizde kurulu değilse NetBeans IDE’yi kurunuz. Akabinde NetBeans IDE’yi açıp Tools -&gt; Plugins penceresini açın ve öncelikle <strong><em>Check For Newest</em></strong> butonuna tıklayın. Güncel ve
+kurulmaya uygun eklentiler listesini güncelledikten sonra sağ üstteki arama kutucuğuna Scala yazın ve çıkan tün sonuçları işaretleyin, ardından Install butonuna tıklayın.</p>
+
+<p><a href="/images/scala/scalaGiris6.png">
+<img src="/images/scala/scalaGiris6.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Karşınıza gelen pencereleri Next deyip geçebilirsiniz. Bir pencerede kullanım şartlarınızı kabul etmenizi isteyecek. Kabul tikine tıklayıp Install dediğinizde eklentiler kurulmaya başlanacak.</p>
+
+<p>Eklentiler kurulduktan sonra NetBeans IDE’yi yeniden başlatın. IDE açıldıktan sonra File -&gt; New Project deyip sol kısımdan Maven’ı sağ kısımdan da <strong><em>Project from Achetype</em></strong> seçeneğini 
+seçin ve Next deyin.</p>
+
+<p><a href="/images/scala/scalaGiris7.png">
+<img src="/images/scala/scalaGiris7.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p><a href="/images/scala/scalaGiris8.png">
+<img src="/images/scala/scalaGiris8.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Gelen ekranda arama kutusuna Scala yazın ve çıkan seçeneklerden maven-archetype-scala-executable’ı seçin, akabinde Next deyin.</p>
+
+<p><a href="/images/scala/scalaGiris9.png">
+<img src="/images/scala/scalaGiris9.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Şimdi gelen ekranda projeye ait bilgileri girebilirsiniz. Ben proje adı olarak ScalaTutorials diyorum. Finish butonuna tıklayarak projeyi oluşturuyoruz.</p>
+
+<p>Proje açıldıktan sonra hemen Project Files altındaki pom.xml dosyasına gidiyoruz ve</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;dependency&gt;</span>
+  <span class="nt">&lt;groupId&gt;</span>org.scala-lang<span class="nt">&lt;/groupId&gt;</span>
+  <span class="nt">&lt;artifactId&gt;</span>scala-library<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;version&gt;</span>2.9.1<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span></code></pre></figure>
+
+<p>şeklinde olan bağımlılıkdaki version kısmını şu anki en güncel sürüm olan 2.12.1 ile değiştiriyoruz. Akabinde pom.xml’i kaydediyoruz ve projeye sağ tıklayıp <strong><em>Clean&amp;Build</em></strong> diyoruz.</p>
+
+<p>Proje için gerekli ve güncel kütüphaneler eklendikten sonra projedeki <strong><em>Scala Packages</em></strong> altındaki pakete sağ tıklayıp New seçip <strong><em>Scala Object</em></strong>‘i seçiyoruz.</p>
+
+<p><a href="/images/scala/scalaGiris10.png">
+<img src="/images/scala/scalaGiris10.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Gelen ekranda Class Name alanına <strong><em>HelloWorld</em></strong> yazıp Finish diyoruz ve gelen kodu yukarıda konsolda kullandığımız kod ile değiştiriyoruz. Kodu değiştirdikten sonra projeye sağ
+tıklayıp <strong><em>Build</em></strong> diyoruz ve akabinde Build işlemi bitince HelloWorld.scala’ya sağ tıklayıp <strong><em>Run File</em></strong> diyoruz.</p>
+
+<p><a href="/images/scala/scalaGiris11.png">
+<img src="/images/scala/scalaGiris11.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Gördüğünüz gibi Hello, world! çıktısını aldık.</p>
+
+<p>Bu yazıda anlatacaklarım bu kadar arkadaşlar. Scala’ya bir giriş yaptık, binary dosyalar ile komut satırı üzerinden derleme yaptık, NetBeans IDE üzerinde Scala kodunun nasıl
+yazılabileceğini görmüş olduk. Gelecek derslerde ben NetBeans IDE üzerinden devam edeceğim ve bu ScalaTutorials projesi üzerinden dersleri anlatacağım.</p>
+
+<p>Başka bir yazıda görüşenece kadar sağlıcakla kalın.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="http://github.com/ilkgunel" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="http://twitter.com/ilkgunel" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+  <li><a href="https://www.instagram.com/first.month/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2016 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>

@@ -5,9 +5,197 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 08 Dec 2016 23:10:48 +0300</pubDate>
-    <lastBuildDate>Thu, 08 Dec 2016 23:10:48 +0300</lastBuildDate>
+    <pubDate>Sat, 10 Dec 2016 16:26:53 +0300</pubDate>
+    <lastBuildDate>Sat, 10 Dec 2016 16:26:53 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Scala Giriş - Scala Nedir? Scala İle Hello World</title>
+        <description>&lt;p&gt;Merhabalar arkadaşlar.&lt;/p&gt;
+
+&lt;p&gt;Bir süredir Java’nın yanına başka bir programalama dili koymak için niyetli idim ve bu niyeti Scala dilininden yana kullandım. Scala programalama dilini öğrenmeye karar verdim ve
+öğrenirken de paylaşımlarda bulunacağım.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Scala Nedir?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Hepsinden önce Scala Java SE gibi bir programlama dilidir. Java sadece nesne yönelimli kod yazmaya imkan tanırken Scala C++ gibi hem nesne yönelimli hem de fonksiyonel programlama yapmaya
+imkan tanıyan bir dildir. Yani bu ifade Scala’nın Hybrit bir dil olduğu anlamına gelir. Scala Java SE gibi JVM (Java Virtual Machine) üzerinde çalışan bir programlama dilidir.&lt;/p&gt;
+
+&lt;p&gt;Java SE dilinde bir tarafta nesneler diğer tarafta ise primitive tipler yer almaktadır. Scala dili ise primitive tip kavramını bünyesinde barındırmayan bir dildir. Yani Scala’da 
+primitive tip diye bir tanım yoktur. Bu da primitive tip- nesne tipi arasında casting, geçişler vs. gibi işlemler yapma gerekliliğini ortadan kaldırır.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Scala İle Hello World İçin Adımlar&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Scala’nın ne olduğunu az çok anladıktan sonra şimdi Scala ile &lt;strong&gt;&lt;em&gt;Hello World&lt;/em&gt;&lt;/strong&gt; uygulaması yapalım. Ben bu yazıda Scala ile Hello World için iki yol anlatacağım. Birinci yol, Scala’nın
+binary dosyalarını indirip PATH’e atıp derleme yolu ile Hello World olacak. İkinci yol ise NetBeans IDE üzerinde Scala uygulaması açmak olacak.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center;color: red&quot;&gt;&lt;strong&gt;Birinci Yol&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Birinci yolu uygulamak için tabii ki önce Scala’yı indirmemiz gerekecek. 😊&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://scala-lang.org/download/&quot;&gt;http://scala-lang.org/download/&lt;/a&gt; adresinden 1 numaralı kısımdan Scala’nın sisteminize uygun sürümünü indirin.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/scala/scalaGiris1.png&quot;&gt;
+&lt;img src=&quot;/images/scala/scalaGiris1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;İndirmiş olduğunuz sıkıştırılmış dosyayı herhangi bir yere açın. Şimdi bilgisayarımızın PATH’ine Scala’yı eklememiz gerekiyor. MacOS çalıştıran bilgisayarlar için $HOME dizini 
+altındaki &lt;strong&gt;&lt;em&gt;.bash_profile&lt;/em&gt;&lt;/strong&gt; dosyasını güncellemeniz gerekiyor. Şu iki satırı .bash_profile dosyanıza eklemeniz yeterli:&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;export SCALA_HOME=/Users/ilkaygunel/Downloads/scala-2.12.1
+export PATH=$SCALA_HOME/bin:$PATH&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;PATH ayarının düzgün yapılıp yapılmadığını anlamak için komut satırına gelip &lt;strong&gt;&lt;em&gt;scalac -version&lt;/em&gt;&lt;/strong&gt; komutunu çalıştırın. Şöyle bir çıktı almanız gerekiyor:&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/scala/scalaGiris2.png&quot;&gt;
+&lt;img src=&quot;/images/scala/scalaGiris2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Eğer komut satırından doğru çıktıyı alabildi iseniz Scala kodu yazmaya hazırız demektir. Şimdi komut satırı üzerinde bir &lt;strong&gt;&lt;em&gt;Hello World&lt;/em&gt;&lt;/strong&gt; uyglaması yazalım.&lt;/p&gt;
+
+&lt;p&gt;İlk olarak komut satırında &lt;strong&gt;&lt;em&gt;scala&lt;/em&gt;&lt;/strong&gt; komutunu vererek Scala’yı çalıştırmış olalım.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/scala/scalaGiris3.png&quot;&gt;
+&lt;img src=&quot;/images/scala/scalaGiris3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Akabinde şu satırları komut satırında yazmak sureti ile ilk örnek uygulamamızı yapmış olalım:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloWorld&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Unit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Hello, world!&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Bu kodları komut satırında yazdıktan sonra Scala bize &lt;strong&gt;&lt;em&gt;defined object HelloWorld&lt;/em&gt;&lt;/strong&gt; şeklinde bir mesaj dönecek. Buradaki &lt;strong&gt;&lt;em&gt;object&lt;/em&gt;&lt;/strong&gt; keywordü Java SE’deki sınıf gibi düşünülebilir.
+&lt;strong&gt;&lt;em&gt;def&lt;/em&gt;&lt;/strong&gt; keywordü ise definition’dan geliyor ve adı üzerinde bir tanımla yapmak için kullanılıyor. def’in akabinde tanımlama yapacağımız metodun ismi yazılıyor, biz de main metodu 
+tanımladık. Java SE’de main metodu String[] args şeklinde bir parametre alıyordu. Scala’da da benzer şekilde args: Array[String] şeklinde. println komutu da yazdırma işlemi için 
+kullanılıyor. C dilinde &lt;strong&gt;&lt;em&gt;printf&lt;/em&gt;&lt;/strong&gt;, C++’da &lt;strong&gt;&lt;em&gt;cout&lt;/em&gt;&lt;/strong&gt;, Java’da &lt;strong&gt;&lt;em&gt;println&lt;/em&gt;&lt;/strong&gt; yazdırma işlemleri için kullanılabilen metotlardan bazıları. Scala’da da println’i kullanabiliriz.&lt;/p&gt;
+
+&lt;p&gt;defined object … yazısını gördükten sonra metodumuzu koşturabiliriz. Bunun için tanımlanan object adı.metot adı şekinde çağırım yapabiliriz. Yani bizim için 
+&lt;strong&gt;&lt;em&gt;HelloWorld.main(Array())&lt;/em&gt;&lt;/strong&gt; şeklinde bir çağırım yeterli olacaktır. Bu çağırım akabinde konsolda &lt;strong&gt;&lt;em&gt;Hello, world!&lt;/em&gt;&lt;/strong&gt;‘ü göreceğiz.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/scala/scalaGiris4.png&quot;&gt;
+&lt;img src=&quot;/images/scala/scalaGiris4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Peki bir dosya üzerinde Scala kodu çalıştırmak istesek? Onun için de uzantısı &lt;strong&gt;&lt;em&gt;.scala&lt;/em&gt;&lt;/strong&gt; olan bir dosyaya kodumuzu yazdıktan sonra onu derlememiz ve çalıştırmamız gerekiyor.&lt;/p&gt;
+
+&lt;p&gt;Şimdi herhangi bir yerde yukarıdaki Hello World kodunun barındığı .scala uzantılı bir dosya oluşturun. Bendeki dosyanın adı &lt;strong&gt;&lt;em&gt;HelloWorld.scala&lt;/em&gt;&lt;/strong&gt; şeklinde.&lt;/p&gt;
+
+&lt;p&gt;Akabinde komut satırından bu dosyanın olduğu yere gelin ve&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;n&quot;&gt;scalac&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloWorld&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scala&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;komutunu çalıştırın. scalac komutu bizim elimizdeki Scala dosyamızı derleyecek ve &lt;strong&gt;&lt;em&gt;.class&lt;/em&gt;&lt;/strong&gt; uzantılı bir dosya oluşturacak.&lt;/p&gt;
+
+&lt;p&gt;Şimdi de&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;n&quot;&gt;scala&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloWorld&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;şeklinde bir komut çalıştıralım. Az önce biz HelloWorld$.class isminde bir dosya edindik. Buraki HelloWorld’ü scala komutuna vererek HelloWorld.scala içindeki main metodunu çalıştırmış
+olacağız.&lt;/p&gt;
+
+&lt;p&gt;Aşağıdaki ekran görüntüsünden de görebileceğiniz gibi yine Hello World çıktısını aldık.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/scala/scalaGiris5.png&quot;&gt;
+&lt;img src=&quot;/images/scala/scalaGiris5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center;color: red&quot;&gt;&lt;strong&gt;İkinci Yol&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Sisteminizde kurulu değilse NetBeans IDE’yi kurunuz. Akabinde NetBeans IDE’yi açıp Tools -&amp;gt; Plugins penceresini açın ve öncelikle &lt;strong&gt;&lt;em&gt;Check For Newest&lt;/em&gt;&lt;/strong&gt; butonuna tıklayın. Güncel ve
+kurulmaya uygun eklentiler listesini güncelledikten sonra sağ üstteki arama kutucuğuna Scala yazın ve çıkan tün sonuçları işaretleyin, ardından Install butonuna tıklayın.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/scala/scalaGiris6.png&quot;&gt;
+&lt;img src=&quot;/images/scala/scalaGiris6.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Karşınıza gelen pencereleri Next deyip geçebilirsiniz. Bir pencerede kullanım şartlarınızı kabul etmenizi isteyecek. Kabul tikine tıklayıp Install dediğinizde eklentiler kurulmaya başlanacak.&lt;/p&gt;
+
+&lt;p&gt;Eklentiler kurulduktan sonra NetBeans IDE’yi yeniden başlatın. IDE açıldıktan sonra File -&amp;gt; New Project deyip sol kısımdan Maven’ı sağ kısımdan da &lt;strong&gt;&lt;em&gt;Project from Achetype&lt;/em&gt;&lt;/strong&gt; seçeneğini 
+seçin ve Next deyin.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/scala/scalaGiris7.png&quot;&gt;
+&lt;img src=&quot;/images/scala/scalaGiris7.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/scala/scalaGiris8.png&quot;&gt;
+&lt;img src=&quot;/images/scala/scalaGiris8.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Gelen ekranda arama kutusuna Scala yazın ve çıkan seçeneklerden maven-archetype-scala-executable’ı seçin, akabinde Next deyin.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/scala/scalaGiris9.png&quot;&gt;
+&lt;img src=&quot;/images/scala/scalaGiris9.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi gelen ekranda projeye ait bilgileri girebilirsiniz. Ben proje adı olarak ScalaTutorials diyorum. Finish butonuna tıklayarak projeyi oluşturuyoruz.&lt;/p&gt;
+
+&lt;p&gt;Proje açıldıktan sonra hemen Project Files altındaki pom.xml dosyasına gidiyoruz ve&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.scala-lang&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;scala-library&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;2.9.1&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;şeklinde olan bağımlılıkdaki version kısmını şu anki en güncel sürüm olan 2.12.1 ile değiştiriyoruz. Akabinde pom.xml’i kaydediyoruz ve projeye sağ tıklayıp &lt;strong&gt;&lt;em&gt;Clean&amp;amp;Build&lt;/em&gt;&lt;/strong&gt; diyoruz.&lt;/p&gt;
+
+&lt;p&gt;Proje için gerekli ve güncel kütüphaneler eklendikten sonra projedeki &lt;strong&gt;&lt;em&gt;Scala Packages&lt;/em&gt;&lt;/strong&gt; altındaki pakete sağ tıklayıp New seçip &lt;strong&gt;&lt;em&gt;Scala Object&lt;/em&gt;&lt;/strong&gt;‘i seçiyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/scala/scalaGiris10.png&quot;&gt;
+&lt;img src=&quot;/images/scala/scalaGiris10.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Gelen ekranda Class Name alanına &lt;strong&gt;&lt;em&gt;HelloWorld&lt;/em&gt;&lt;/strong&gt; yazıp Finish diyoruz ve gelen kodu yukarıda konsolda kullandığımız kod ile değiştiriyoruz. Kodu değiştirdikten sonra projeye sağ
+tıklayıp &lt;strong&gt;&lt;em&gt;Build&lt;/em&gt;&lt;/strong&gt; diyoruz ve akabinde Build işlemi bitince HelloWorld.scala’ya sağ tıklayıp &lt;strong&gt;&lt;em&gt;Run File&lt;/em&gt;&lt;/strong&gt; diyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/scala/scalaGiris11.png&quot;&gt;
+&lt;img src=&quot;/images/scala/scalaGiris11.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Gördüğünüz gibi Hello, world! çıktısını aldık.&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda anlatacaklarım bu kadar arkadaşlar. Scala’ya bir giriş yaptık, binary dosyalar ile komut satırı üzerinden derleme yaptık, NetBeans IDE üzerinde Scala kodunun nasıl
+yazılabileceğini görmüş olduk. Gelecek derslerde ben NetBeans IDE üzerinden devam edeceğim ve bu ScalaTutorials projesi üzerinden dersleri anlatacağım.&lt;/p&gt;
+
+&lt;p&gt;Başka bir yazıda görüşenece kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Sun, 04 Dec 2016 20:40:21 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/scala-nedir-giris/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/scala-nedir-giris/</guid>
+        
+        <category>scala nedir?</category>
+        
+        <category>scala programlama dili</category>
+        
+        <category>scala türkçe tutorial</category>
+        
+        <category>scala dersleri</category>
+        
+        <category>scala türkçe kaynak</category>
+        
+        <category>scala tutorial</category>
+        
+        <category>scala on netbeans</category>
+        
+        <category>how write scala code on netbeans</category>
+        
+        <category>netbeans de scala kodu nasıl yazılır</category>
+        
+        <category>scala ve netbeans kullanımı</category>
+        
+        
+      </item>
     
       <item>
         <title>Bir Karşı Ütopya - Cesur Yeni Dünya</title>
@@ -1223,6 +1411,7 @@ Ya ortasındasındır AŞK’ın merkezinde; ya da dışındasındır hasretinde
 &lt;a href=&quot;http://www.kitapyurdu.com/kitap/kurk-mantolu-madonna/12064.html&quot;&gt;http://www.kitapyurdu.com/kitap/kurk-mantolu-madonna/12064.html&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Kuyucaklı Yusuf: Sabahattin Ali’nin kaleminden çıkan, ilk kez 1937’de kitap olarak basılan ve bir ölümle başlayıp bir ölümle biten, okurken bazen sevindiğiniz bazen üzüldüğünüz bazen de çok sinirlendiğiniz bir kitap. Kaymakam Selahattin Bey, onun evlat edindiği Kuyucaklı Yusuf, kaymakam’ın karısı, Muazzez ve bir takım yan karakterler ile Kuyucaklı Yusuf’un başından geçenlerin anlatıldığı bu kitap gerçekten bir edebiyat ustasının kaleminden çıktığını her sayfasını okurken size hissettiriyor.
 &lt;a href=&quot;http://alisveris.yapikredi.com.tr/tanim.asp?sid=TAUH2URM5Y8Y30G4ZSLB&quot;&gt;http://alisveris.yapikredi.com.tr/tanim.asp?sid=TAUH2URM5Y8Y30G4ZSLB&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://t.co/RjMjKS9cG2&quot;&gt;Cesur Yeni Dünya&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
         <pubDate>Fri, 25 Nov 2016 20:40:21 +0300</pubDate>
@@ -1450,33 +1639,6 @@ bir yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
         <pubDate>Fri, 25 Nov 2016 20:40:21 +0300</pubDate>
         <link>http://ilkaygunel.com/blog/2016/lokbok-nedir-ornek-kod/</link>
         <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/lokbok-nedir-ornek-kod/</guid>
-        
-        <category>lombok nedir?</category>
-        
-        <category>lombok nasıl kullanılır?</category>
-        
-        <category>lombok getter</category>
-        
-        <category>lombok setter</category>
-        
-        <category>lombok nonnull</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Yazılım Testine Dair Yazılar</title>
-        <description>&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://t.co/i4BwVfxJh4&quot;&gt;TDD Nedir? Java İle TDD Örneği&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://ilkaygunel.com/blog/2016/selenium-3-calling-browsers/&quot;&gt;Selenium 3.0 İle Tarayıcıların Çağırılması&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://ilkaygunel.com/blog/2016/rest-assured-ile-web-servis-testi/&quot;&gt;Rest Assured İle Web Servis Testi 1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://ilkaygunel.com/blog/2016/rest-assured-ile-web-servis-testi-2-json-schema-validation-ve-expected-values/&quot;&gt;Rest Assured İle Web Servis Testi 2 – JSON Schema Validation Ve Expected Values&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://ilkaygunel.com/blog/2016/testng-nedir-ornek-uygulama&quot;&gt;TestNG Nedir? Örnek Uygulama İle TestNG’ye Giriş&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Fri, 25 Nov 2016 20:40:21 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2016/test/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/test/</guid>
         
         <category>lombok nedir?</category>
         
