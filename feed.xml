@@ -5,8 +5,8 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 11 Dec 2016 23:22:52 +0300</pubDate>
-    <lastBuildDate>Sun, 11 Dec 2016 23:22:52 +0300</lastBuildDate>
+    <pubDate>Sun, 11 Dec 2016 23:33:16 +0300</pubDate>
+    <lastBuildDate>Sun, 11 Dec 2016 23:33:16 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
     
       <item>
@@ -69,7 +69,9 @@ toplayan bir sınıftır. Scala ile kod yazarken bizim tanımlayacağımız sın
 değer tipleri için yukarıdaki diyagramın en tepesinde gördüğümüz &lt;strong&gt;&lt;em&gt;Any&lt;/em&gt;&lt;/strong&gt; sınıfını kullanıyoruz. Bu set’e += ifadeleri ile değerler ekliyoruz. Eklediğimiz değerlere dikkat edersek 
 String, number, karakter, boolean ve fonksiyon tipindeki değerler yer alıyor. Hepsi de Any sınıfından dolayı sorunsuzca set’e eklenebiliyor ve bunların her birisi Scala için bir nesne.&lt;/p&gt;
 
-&lt;p&gt;Örneğin Java dili için 732 integer bir değerken, true boolean bir değerken yani ikisi de primitive bir değerken Scala için ikisi de object’tir.&lt;/p&gt;
+&lt;p&gt;Örneğin Java dili için 732 integer bir değerken, true boolean bir değerken yani ikisi de primitive bir değerken Scala için ikisi de object’tir. 732 değeri Scala’daki Int sınıfından
+türerken Java’daki en tabandaki primitive int gibi çalışır fakat yaptığı iş Int sınıfı üzerinden türemektir. Keza true değeri de burada Java’daki primitive tip gibi kullanılabilirken
+aslında scala.Boolean sınıfından türeyerek kullanılıyor.&lt;/p&gt;
 
 &lt;p&gt;val iter: Iterator[Any] = set.iterator ifadesi ile Any sınıfı tipinde değerler üzerinde dönecek bir Iterator sınıfından bir nesne tanımlayıp bu set nesnesinden alınan iterator ile 
 &lt;strong&gt;&lt;em&gt;iter&lt;/em&gt;&lt;/strong&gt; nesnesi oluşturuyoruz. Akabinde while döngüsü ile de set içinde dönüyoruz.&lt;/p&gt;

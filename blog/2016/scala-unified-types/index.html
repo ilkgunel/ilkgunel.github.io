@@ -158,7 +158,9 @@ toplayan bir sınıftır. Scala ile kod yazarken bizim tanımlayacağımız sın
 değer tipleri için yukarıdaki diyagramın en tepesinde gördüğümüz <strong><em>Any</em></strong> sınıfını kullanıyoruz. Bu set’e += ifadeleri ile değerler ekliyoruz. Eklediğimiz değerlere dikkat edersek 
 String, number, karakter, boolean ve fonksiyon tipindeki değerler yer alıyor. Hepsi de Any sınıfından dolayı sorunsuzca set’e eklenebiliyor ve bunların her birisi Scala için bir nesne.</p>
 
-<p>Örneğin Java dili için 732 integer bir değerken, true boolean bir değerken yani ikisi de primitive bir değerken Scala için ikisi de object’tir.</p>
+<p>Örneğin Java dili için 732 integer bir değerken, true boolean bir değerken yani ikisi de primitive bir değerken Scala için ikisi de object’tir. 732 değeri Scala’daki Int sınıfından
+türerken Java’daki en tabandaki primitive int gibi çalışır fakat yaptığı iş Int sınıfı üzerinden türemektir. Keza true değeri de burada Java’daki primitive tip gibi kullanılabilirken
+aslında scala.Boolean sınıfından türeyerek kullanılıyor.</p>
 
 <p>val iter: Iterator[Any] = set.iterator ifadesi ile Any sınıfı tipinde değerler üzerinde dönecek bir Iterator sınıfından bir nesne tanımlayıp bu set nesnesinden alınan iterator ile 
 <strong><em>iter</em></strong> nesnesi oluşturuyoruz. Akabinde while döngüsü ile de set içinde dönüyoruz.</p>
