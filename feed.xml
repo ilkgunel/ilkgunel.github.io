@@ -5,9 +5,114 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 10 Dec 2016 16:45:48 +0300</pubDate>
-    <lastBuildDate>Sat, 10 Dec 2016 16:45:48 +0300</lastBuildDate>
+    <pubDate>Sun, 11 Dec 2016 23:22:52 +0300</pubDate>
+    <lastBuildDate>Sun, 11 Dec 2016 23:22:52 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Scala 2 - Unified Types</title>
+        <description>&lt;p&gt;Merhabalar. Scala’ya Giriş yazısında Scala’nın ne olduğundan bahsetmiştik ve Hello World uygulamamızı yapmıştık. Bu yazıda da &lt;strong&gt;&lt;em&gt;Unified Types&lt;/em&gt;&lt;/strong&gt; konusuna değineceğiz.&lt;/p&gt;
+
+&lt;p&gt;Önceki yazıda da değindiğim gibi Scala’da primitive tip-nesne ayrımı yoktur. Scala’da her şey nesnedir. Scala mimarisi sınıf tabanlı olmasından ötürü de tüm değerler bir sınıf
+instance’dır.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Scala Class Hierarchy&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/scala/scala-class-hierarchy.png&quot;&gt;
+&lt;img src=&quot;/images/scala/scala-class-hierarchy.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Yukarıdaki resim Scala dilinin sınıf hiyerarşisini anlatıyor. Scala’da en üst sınıf yani tüm sınıfların atası &lt;strong&gt;&lt;em&gt;scala.Any&lt;/em&gt;&lt;/strong&gt; sınıfıdır. scala.Any iki alt sınıfa sahiptir. scala.AnyVal
+ve scala.AnyRef. scala.AnyVal sınıfı Java’daki primitive tiplere karşılık gelen değerlerin yer aldığı sınıfları kendi altında tutar. Buradaki sınıflar tipinde olabilecek verile ön tanımlıdır.
+Yani bir number, bir boolean değer ön tanımlı olarak bize gelir ve bunlar da object’tir. scala.AnyRef ise diğer tüm sınıfları altına
+toplayan bir sınıftır. Scala ile kod yazarken bizim tanımlayacağımız sınıflar da scala.AnyRef altındaki scala.ScalaObject sınıfını extend ederek oluşur. Scala’yı biz JRE üzerinde 
+çalıştırdığımız için scala.AnyRef sınıfı aslında java.lang.Object sınıfına karşılık gelmektedir.&lt;/p&gt;
+
+&lt;p&gt;Ayrıca yukarıdaki diyagramdan göreceğimiz bir şey de şudur ki scala.AnyVal atındaki sınıflar arasındaki dönüşümler otomatik olarak Scala içinde gerçekleşiyor.&lt;/p&gt;
+
+&lt;p&gt;Scala dili 1 + 2 * 3 / x artimetik işlemini her şeyi obje olarak gördüğünden (1).+(((2).*(3))./(x)) ifadesine çevirip işlemini yapar.&lt;/p&gt;
+
+&lt;p&gt;Şimdi basit bir örnek yapalım.&lt;/p&gt;
+
+&lt;p&gt;Önceki yazıda sağ tıklayıp Object eklediğimiz gibi şimdi de App isminde Class ekleyin projenize ve içeriğini sadece main metodunu barındıracak şu şekilde düzenleyin:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;App.scala&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;package com.ilkaygunel.scalatutorials&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;App&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Unit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Şimdi de bir object ekleyin ve içeriğini şöyle değiştirin:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;UnifiedTypes.scala&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scala&quot; data-lang=&quot;scala&quot;&gt;&lt;span class=&quot;k&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.ilkaygunel.scalatutorials&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UnifiedTypes&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;App&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scala&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mutable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;LinkedHashSet&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;This is a string&amp;quot;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// add a string&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;732&lt;/span&gt;                 &lt;span class=&quot;c1&quot;&gt;// add a number&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;-Symbol&quot;&gt;&amp;#39;c&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;                 &lt;span class=&quot;c1&quot;&gt;// add a character&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;                &lt;span class=&quot;c1&quot;&gt;// add a boolean value&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;              &lt;span class=&quot;c1&quot;&gt;// add the main function&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iter&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iterator&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hasNext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;UnifiedTypes object’ini ilk olarak main metodu barındıran App sınıfından kalıtıyoruz. İçerisinde ise Java’daki Set interface’ine benzer bir set tanımlıyoruz. Set’in tutacağı
+değer tipleri için yukarıdaki diyagramın en tepesinde gördüğümüz &lt;strong&gt;&lt;em&gt;Any&lt;/em&gt;&lt;/strong&gt; sınıfını kullanıyoruz. Bu set’e += ifadeleri ile değerler ekliyoruz. Eklediğimiz değerlere dikkat edersek 
+String, number, karakter, boolean ve fonksiyon tipindeki değerler yer alıyor. Hepsi de Any sınıfından dolayı sorunsuzca set’e eklenebiliyor ve bunların her birisi Scala için bir nesne.&lt;/p&gt;
+
+&lt;p&gt;Örneğin Java dili için 732 integer bir değerken, true boolean bir değerken yani ikisi de primitive bir değerken Scala için ikisi de object’tir.&lt;/p&gt;
+
+&lt;p&gt;val iter: Iterator[Any] = set.iterator ifadesi ile Any sınıfı tipinde değerler üzerinde dönecek bir Iterator sınıfından bir nesne tanımlayıp bu set nesnesinden alınan iterator ile 
+&lt;strong&gt;&lt;em&gt;iter&lt;/em&gt;&lt;/strong&gt; nesnesi oluşturuyoruz. Akabinde while döngüsü ile de set içinde dönüyoruz.&lt;/p&gt;
+
+&lt;p&gt;UndefinedTypes’ı çalıştırdığımızda konsol çıktımız şöyle oluyor:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/scala/scala2-1.png&quot;&gt;
+&lt;img src=&quot;/images/scala/scala2-1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda anlatacaklarım da bu kadar arkadaşlar. Basitçe Scala’da sınıf hiyerarşisine değinmiş olduk. Gelecek yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+
+&lt;p&gt;NOT: Diyagramın alındığı kaynak: 
+&lt;a href=&quot;http://1.bp.blogspot.com/-is7hpMTwGkc/VS6gzAxOQfI/AAAAAAAADPk/zmkBv7GlTo4/s1600/class-hierarchy.png&quot;&gt;http://1.bp.blogspot.com/-is7hpMTwGkc/VS6gzAxOQfI/AAAAAAAADPk/zmkBv7GlTo4/s1600/class-hierarchy.png&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 10 Dec 2016 20:40:21 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/scala-unified-types/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/scala-unified-types/</guid>
+        
+        <category>scala nedir?</category>
+        
+        <category>scala programlama dili</category>
+        
+        <category>scala türkçe tutorial</category>
+        
+        <category>scala dersleri</category>
+        
+        <category>scala türkçe kaynak</category>
+        
+        <category>scala tutorial</category>
+        
+        <category>scala on netbeans</category>
+        
+        <category>how write scala code on netbeans</category>
+        
+        <category>netbeans de scala kodu nasıl yazılır</category>
+        
+        <category>scala ve netbeans kullanımı</category>
+        
+        
+      </item>
     
       <item>
         <title>Scala Giriş - Scala Nedir? Scala İle Hello World</title>
@@ -1417,228 +1522,6 @@ Ya ortasındasındır AŞK’ın merkezinde; ya da dışındasındır hasretinde
         <pubDate>Fri, 25 Nov 2016 20:40:21 +0300</pubDate>
         <link>http://ilkaygunel.com/blog/2016/kitaplar/</link>
         <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/kitaplar/</guid>
-        
-        <category>lombok nedir?</category>
-        
-        <category>lombok nasıl kullanılır?</category>
-        
-        <category>lombok getter</category>
-        
-        <category>lombok setter</category>
-        
-        <category>lombok nonnull</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Lombok Nedir? Nasıl Kullanılır?</title>
-        <description>&lt;p&gt;Merhabalar arkadaşlar.&lt;/p&gt;
-
-&lt;p&gt;Bu yazıda size &lt;strong&gt;&lt;em&gt;Lombok Kütüphanesi&lt;/em&gt;&lt;/strong&gt;‘nden bahsetmeye çalışacağım.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Lombok Nedir?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Lombok ana mantık olarak projelerimizde kullandığımız bir takım metotları bir satırlık notasyona indirgemeyi amaç edinmiş bir kütüphanedir. Bunlar arasında en bilindikleri Get/Set
-metotlarıdır. Az sonra işi örneğe döktüğümüzde ne demek istediğimi anlayacaksınız.&lt;/p&gt;
-
-&lt;p&gt;Şimdi örnek kodlarla Lombok’un nasıl kullanıldığına bakalım.&lt;/p&gt;
-
-&lt;p&gt;Öncelikle IDE’mizde bir Maven projesi açalım ve şu bağımlılığı pom.xml dosyamıza eklemek sureti ile Lombok kütüphanesini projemize ekleyelim:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- https://mvnrepository.com/artifact/org.projectlombok/lombok --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.projectlombok&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;lombok&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.16.10&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Lombok kullanabilmek için sadece yukarıda yaptığımız işlem eğer benim en sevdiğim IDE olan NetBeans IDE’yi kullanıyorsanız yeterli. Fakat Eclipse, IntelliJ Idea gibi IDE’ler kullanıyorsanız
-yeterli değil arkadaşlar. Lombok’un bir de kurulum işlemi yapılması, IDE’nin ona gösterilmesi gerekiyor. IntelliJ Idea için plugin kurulması gerekiyor fakat bende IntelliJ’nin lisansı
-sürümü yok o yüzden onu anlatamıyorum. Eclipse IDE için ise .jar dosyası ile kurulum yapılması gerekiyor. Ona değinelim :)&lt;/p&gt;
-
-&lt;p&gt;Eclipse IDE’nizde Lombok kullanmak için local maven reponuzun içinden, &lt;strong&gt;&lt;em&gt;.m2&lt;/em&gt;&lt;/strong&gt; klasörünüzden Lombok’un .jar dosyasına ulaşın ve ona çift tıklayın. Bendeki hali şöyle:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/lombok/lombok1.png&quot;&gt;
-&lt;img src=&quot;/images/lombok/lombok1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;.jar doyasına çift tıklamanız akabinde şöyle bir ekran gelecek. Sizden kullandığınız IDE’yi Lombok’a göstermenizi sitiyor. Can’t find IDE penceresi için OK deyip kapatın. Akabinde
-&lt;strong&gt;&lt;em&gt;Specify Location&lt;/em&gt;&lt;/strong&gt; butonuna tıklayarak IDE’nizi gösterin. Ben elimdeki Eclipse IDE’yi gösteriyorum. IDE’yi gösterme işlemi eclipse.ini dosyasının gösterilmesi vasıtası ile olur.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/lombok/lombok2.png&quot;&gt;
-&lt;img src=&quot;/images/lombok/lombok2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/lombok/lombok3.png&quot;&gt;
-&lt;img src=&quot;/images/lombok/lombok3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/lombok/lombok4.png&quot;&gt;
-&lt;img src=&quot;/images/lombok/lombok4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Şimdi burdaki Install/Update butonuna tıklıyoruz. Eclipse IDE için bu işlem daha önce yapılmadı ise Lombok kurulacak, yapıldı ise sürüm güncellemesi yapılacak. Ben daha önce yapmadığım
-için Eclipse IDE’me Lombok kurulacak. Install/Update butonuna tıkladığınızda IDE’yi yeniden başlatmanızı söyleyen bir ekran çıkacak. OK butonuna tıklayın ve Eclipse’i yeniden başlatın.&lt;/p&gt;
-
-&lt;p&gt;NetBeans kullananların pom.xml’e eklemek dışında bir şey yapmalarına gerek olmadan hazırlardı, Eclipse kullananlar da şimdi hazırlar :)&lt;/p&gt;
-
-&lt;p&gt;Şimdi yeni bir adet POJO olarak nitelendirebileceğimiz bir Java sınıfı oluşturalım. POJO nedir derseniz açılımı &lt;strong&gt;&lt;em&gt;Plain Old Java Object&lt;/em&gt;&lt;/strong&gt; olan bu kavram bir Java sınıfın içerisinde
-en basit hali ile alanlar ve o alanların get-set metotlarının barınmasını ve başka bir sınıf tarafından kısıtlanmamış olmayı amaçlayan kavramdır. Şöyle bir &lt;strong&gt;&lt;em&gt;Person&lt;/em&gt;&lt;/strong&gt; sınıfımız olsun.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pojo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;surname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;city&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;telephoneNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;surname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;city&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;telephoneNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;surname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;surname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;city&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;city&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;telephoneNumber&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;telephoneNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getSurname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;surname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setSurname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;surname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;surname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;surname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getCity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;city&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setCity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;city&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;city&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;city&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getTelephoneNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;telephoneNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setTelephoneNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;telephoneNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;telephoneNumber&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;telephoneNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Şöyle de basitçe bir Main sınıfımız olsun:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.ilkaygunel.pojo.Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MainClass&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;person&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Ali Emrah&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Pekesen&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Los Angelas&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;(202)358-0000&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSurname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getCity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getTelephoneNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Bu main metodunu çalıştırdığımızda doğal olarak konsolda &lt;strong&gt;&lt;em&gt;person&lt;/em&gt;&lt;/strong&gt; objesinin alanlarındaki değerleri göreceğiz.&lt;/p&gt;
-
-&lt;p&gt;Şimdi Person.java sınıfı üzerinde Lombok ile ne yapabiliriz ona bakalım. İlk olarak kod içerisinde Getter/Setter metotlarını bir notasyonlara yıkabiliriz. Tüm Getter/Setter metotlarını
-silelim ve sınıf içindeki alanlarımızı @Getter ve @Setter notasyonları ile işaretleyelim. Şöyle ki:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pojo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;lombok.Getter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;lombok.Setter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Getter&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@Setter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Getter&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@Setter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;surname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Getter&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@Setter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;city&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Getter&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@Setter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;telephoneNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;surname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;city&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;telephoneNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;surname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;surname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;city&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;city&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;telephoneNumber&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;telephoneNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Şimdi main metodumuzu çalıştıralım:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/lombok/lombok5.png&quot;&gt;
-&lt;img src=&quot;/images/lombok/lombok5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Gördüğünüz gibi yine aynı çıktıyı aldık.&lt;/p&gt;
-
-&lt;p&gt;Peki orada duran Constructor için bir şey yapamaz mıyız? O constructor’dan da kurtulabiliriz. Şimdi constructor’ı silelim ve sınıfı &lt;strong&gt;&lt;em&gt;@AllArgsConstructor&lt;/em&gt;&lt;/strong&gt; notasyonu ile 
-işaretleyelim. Akabinde main metodunu yeniden çalıştıralım. Person sınıfının yeni hali şöyle olacak:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pojo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;lombok.AllArgsConstructor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;lombok.Getter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;lombok.Setter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;nd&quot;&gt;@AllArgsConstructor&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Getter&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@Setter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Getter&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@Setter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;surname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Getter&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@Setter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;city&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Getter&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@Setter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;telephoneNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Main metodunu çalıştırdığımızda yine aynı çıktıyı alacağız.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/lombok/lombok5.png&quot;&gt;
-&lt;img src=&quot;/images/lombok/lombok5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Bunların yanında bir de &lt;strong&gt;&lt;em&gt;@Data&lt;/em&gt;&lt;/strong&gt; notasyonu bulunmaktadır. Biz an önceki örneğimizde Person sınıfımızdaki nesneleri ayrı ayrı @Getter/@Setter’lar ile işaretlemiştik. Bunun yerine
-sınıfı @Data notasyonu ile işaretlersek tüm alanlar için Gettter/Setter tanımlanmış olur. Ayrıca Lombok bizim için &lt;strong&gt;&lt;em&gt;null check&lt;/em&gt;&lt;/strong&gt; işlemi yapan bir notasyon da bulundurmaktadır.
-@NonNull notasyonu null gelen değer olur NullPointerException fırlatmaktadır. Bu durumda sınıfımızın yeni hali şöyle olur:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pojo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;lombok.AllArgsConstructor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;lombok.Data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;lombok.NonNull&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;nd&quot;&gt;@AllArgsConstructor&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@Data&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;surname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;city&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@NonNull&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;telephoneNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Main sınıfındaki Person objesini şu şekilde oluşturup çalıştırırsak hata alırız:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;person&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Ali Emrah&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Pekesen&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Los Angelas&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/lombok/lombok6.png&quot;&gt;
-&lt;img src=&quot;/images/lombok/lombok6.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Bu yazıda anlatacaklarım bu kadar arkadaşlar. Temel olarak Lombok’un ne olduğunu anlatmaya, kullanımı için ne yapmak gerektiğine ve belli başlı bazı özelliklerine değinmiş olduk. Başka
-bir yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-</description>
-        <pubDate>Fri, 25 Nov 2016 20:40:21 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2016/lokbok-nedir-ornek-kod/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/lokbok-nedir-ornek-kod/</guid>
         
         <category>lombok nedir?</category>
         

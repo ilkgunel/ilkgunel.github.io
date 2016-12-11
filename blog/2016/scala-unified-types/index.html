@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Scala 2 - Unified Types</title>
+    <meta name="description" content="Merhabalar. Scala’ya Giriş yazısında Scala’nın ne olduğundan bahsetmiştik ve Hello World uygulamamızı yapmıştık. Bu yazıda da Unified Types konusuna değinece...">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/scala-unified-types/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>Scala 2 - Unified Types - İlkay Günel - Blog</title>
+<meta property="og:title" content="Scala 2 - Unified Types" />
+<meta name="description" content="Scala 2 - Unified Types" />
+<meta property="og:description" content="Scala 2 - Unified Types" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/scala-unified-types/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/scala-unified-types/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-12-10T20:40:21+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Scala 2 - Unified Types",
+    "datePublished": "2016-12-10T20:40:21+03:00",
+    "description": "Scala 2 - Unified Types",
+    "url": "http://ilkaygunel.com/blog/2016/scala-unified-types/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/blog/2016/jsf-tutorials-list" title="JSF">JSF</a></li>
+        
+          <li><a href="/blog/2016/spring-tutorials" title="Spring 4">Spring 4</a></li>
+        
+          <li><a href="/blog/2016/eclipselink" title="Eclipselink">Eclipselink</a></li>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/blog/2016/test" title="Test">Test</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog/2016/eclipse-notes" title="Eclipse">Eclipse</a></li>
+        
+          <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
+        
+          <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Scala 2 - Unified Types</h1>
+      <p class="post-meta">Dec 10, 2016</p>
+    </header>
+
+    <div class="post-content">
+      <p>Merhabalar. Scala’ya Giriş yazısında Scala’nın ne olduğundan bahsetmiştik ve Hello World uygulamamızı yapmıştık. Bu yazıda da <strong><em>Unified Types</em></strong> konusuna değineceğiz.</p>
+
+<p>Önceki yazıda da değindiğim gibi Scala’da primitive tip-nesne ayrımı yoktur. Scala’da her şey nesnedir. Scala mimarisi sınıf tabanlı olmasından ötürü de tüm değerler bir sınıf
+instance’dır.</p>
+
+<p><strong>Scala Class Hierarchy</strong></p>
+
+<p><a href="/images/scala/scala-class-hierarchy.png">
+<img src="/images/scala/scala-class-hierarchy.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Yukarıdaki resim Scala dilinin sınıf hiyerarşisini anlatıyor. Scala’da en üst sınıf yani tüm sınıfların atası <strong><em>scala.Any</em></strong> sınıfıdır. scala.Any iki alt sınıfa sahiptir. scala.AnyVal
+ve scala.AnyRef. scala.AnyVal sınıfı Java’daki primitive tiplere karşılık gelen değerlerin yer aldığı sınıfları kendi altında tutar. Buradaki sınıflar tipinde olabilecek verile ön tanımlıdır.
+Yani bir number, bir boolean değer ön tanımlı olarak bize gelir ve bunlar da object’tir. scala.AnyRef ise diğer tüm sınıfları altına
+toplayan bir sınıftır. Scala ile kod yazarken bizim tanımlayacağımız sınıflar da scala.AnyRef altındaki scala.ScalaObject sınıfını extend ederek oluşur. Scala’yı biz JRE üzerinde 
+çalıştırdığımız için scala.AnyRef sınıfı aslında java.lang.Object sınıfına karşılık gelmektedir.</p>
+
+<p>Ayrıca yukarıdaki diyagramdan göreceğimiz bir şey de şudur ki scala.AnyVal atındaki sınıflar arasındaki dönüşümler otomatik olarak Scala içinde gerçekleşiyor.</p>
+
+<p>Scala dili 1 + 2 * 3 / x artimetik işlemini her şeyi obje olarak gördüğünden (1).+(((2).*(3))./(x)) ifadesine çevirip işlemini yapar.</p>
+
+<p>Şimdi basit bir örnek yapalım.</p>
+
+<p>Önceki yazıda sağ tıklayıp Object eklediğimiz gibi şimdi de App isminde Class ekleyin projenize ve içeriğini sadece main metodunu barındıracak şu şekilde düzenleyin:</p>
+
+<p><strong>App.scala</strong></p>
+
+<p>package com.ilkaygunel.scalatutorials</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">class</span> <span class="nc">App</span> <span class="o">{</span>
+<span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+    
+  <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Şimdi de bir object ekleyin ve içeriğini şöyle değiştirin:</p>
+
+<p><strong>UnifiedTypes.scala</strong></p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">package</span> <span class="nn">com.ilkaygunel.scalatutorials</span>
+
+<span class="k">object</span> <span class="nc">UnifiedTypes</span> <span class="k">extends</span> <span class="nc">App</span><span class="o">{</span>
+<span class="k">val</span> <span class="n">set</span> <span class="k">=</span> <span class="k">new</span> <span class="n">scala</span><span class="o">.</span><span class="n">collection</span><span class="o">.</span><span class="n">mutable</span><span class="o">.</span><span class="nc">LinkedHashSet</span><span class="o">[</span><span class="kt">Any</span><span class="o">]</span>
+  <span class="n">set</span> <span class="o">+=</span> <span class="s">&quot;This is a string&quot;</span>  <span class="c1">// add a string</span>
+  <span class="n">set</span> <span class="o">+=</span> <span class="mi">732</span>                 <span class="c1">// add a number</span>
+  <span class="n">set</span> <span class="o">+=</span> <span class="-Symbol">&#39;c</span><span class="err">&#39;</span>                 <span class="c1">// add a character</span>
+  <span class="n">set</span> <span class="o">+=</span> <span class="kc">true</span>                <span class="c1">// add a boolean value</span>
+  <span class="n">set</span> <span class="o">+=</span> <span class="n">main</span> <span class="k">_</span>              <span class="c1">// add the main function</span>
+  <span class="k">val</span> <span class="n">iter</span><span class="k">:</span> <span class="kt">Iterator</span><span class="o">[</span><span class="kt">Any</span><span class="o">]</span> <span class="k">=</span> <span class="n">set</span><span class="o">.</span><span class="n">iterator</span>
+  <span class="k">while</span> <span class="o">(</span><span class="n">iter</span><span class="o">.</span><span class="n">hasNext</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">println</span><span class="o">(</span><span class="n">iter</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">toString</span><span class="o">())</span>
+  <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>UnifiedTypes object’ini ilk olarak main metodu barındıran App sınıfından kalıtıyoruz. İçerisinde ise Java’daki Set interface’ine benzer bir set tanımlıyoruz. Set’in tutacağı
+değer tipleri için yukarıdaki diyagramın en tepesinde gördüğümüz <strong><em>Any</em></strong> sınıfını kullanıyoruz. Bu set’e += ifadeleri ile değerler ekliyoruz. Eklediğimiz değerlere dikkat edersek 
+String, number, karakter, boolean ve fonksiyon tipindeki değerler yer alıyor. Hepsi de Any sınıfından dolayı sorunsuzca set’e eklenebiliyor ve bunların her birisi Scala için bir nesne.</p>
+
+<p>Örneğin Java dili için 732 integer bir değerken, true boolean bir değerken yani ikisi de primitive bir değerken Scala için ikisi de object’tir.</p>
+
+<p>val iter: Iterator[Any] = set.iterator ifadesi ile Any sınıfı tipinde değerler üzerinde dönecek bir Iterator sınıfından bir nesne tanımlayıp bu set nesnesinden alınan iterator ile 
+<strong><em>iter</em></strong> nesnesi oluşturuyoruz. Akabinde while döngüsü ile de set içinde dönüyoruz.</p>
+
+<p>UndefinedTypes’ı çalıştırdığımızda konsol çıktımız şöyle oluyor:</p>
+
+<p><a href="/images/scala/scala2-1.png">
+<img src="/images/scala/scala2-1.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Bu yazıda anlatacaklarım da bu kadar arkadaşlar. Basitçe Scala’da sınıf hiyerarşisine değinmiş olduk. Gelecek yazıda görüşene kadar sağlıcakla kalın.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
+
+<p>NOT: Diyagramın alındığı kaynak: 
+<a href="http://1.bp.blogspot.com/-is7hpMTwGkc/VS6gzAxOQfI/AAAAAAAADPk/zmkBv7GlTo4/s1600/class-hierarchy.png">http://1.bp.blogspot.com/-is7hpMTwGkc/VS6gzAxOQfI/AAAAAAAADPk/zmkBv7GlTo4/s1600/class-hierarchy.png</a></p>
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="http://github.com/ilkgunel" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="http://twitter.com/ilkgunel" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+  <li><a href="https://www.instagram.com/first.month/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2016 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>
