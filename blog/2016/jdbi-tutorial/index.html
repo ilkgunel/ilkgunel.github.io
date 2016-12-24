@@ -116,7 +116,7 @@
 frameworkleri de (Hibernate, Eclipselink, MyBatis vs.) tabanda JDBC üzerinde çalışmaktadır. Aynı şekilde JDBI da JDBC katmanı üzerinde çalışan ve veritabanı işlemleri gerçekleştirmeyi sağlayan
 bir kütüphanedir.</p>
 
-<p>JDBI geliştiricilerinin amacı JDBC’nin sağladığı avantajları daha da kolaylaştırarak geliştiriciye sağlamaktır. Bu işlem içinde beanler (pojo sınıfları) ve collection sınıflarını kullanarak
+<p>JDBI geliştiricilerinin amacı JDBC’nin sağladığı avantajları daha da kolaylaştırarak geliştiriciye sağlamaktır. Bu işlem için de beanler (pojo sınıfları) ve collection sınıflarını kullanarak
 yapmayı uygun görmüşler.</p>
 
 <p>Aynı zamanda JDBI bize veri tabanı işlemlerimizi bir Interface içerisinde tanımlayıp implementasyonunu JDBI’a yaptırarak bakımı çok daha kolay kodlar yazma imkanı sunar.</p>
@@ -250,7 +250,8 @@ SQL cümleciğine geçirilecek. Bu nedenle @Bind notasyonunun aldığı parametr
 <span class="o">}</span></code></pre></figure>
 
 <p>JDBI ile bir veritabanı işlemi gerçekleştireceğimiz zaman kullandığımız veritabanına göre bir DataSource oluşturmamız gerekiyor. Bu örnek için biz MySQL veritabanı kullanıyoruz ve bu nedenle bir
-<strong><em>MySqlDataSource</em></strong> nesnesi oluşturuyoruz. Bu nesnenin setURL metodu ile database linkini veriyoruz, setUser metodu ile database kullanıcısı ve setPassword metodu ile database parolasını tanımlıyoruz.</p>
+<strong><em>MySqlDataSource</em></strong> nesnesi oluşturuyoruz. Bu nesnenin setURL metodu ile database linkini veriyoruz, setUser metodu ile database kullanıcısı ve setPassword metodu ile database parolasını tanımlıyoruz.
+Biz her ne kadar burada direk String olarak veritabanı kullanıcı adı ve şifresini yazmış olsak da proje geliştirirken bunların bir dosyadan okunup bildirilmesi daha iyi ve geçerlidir.</p>
 
 <p>Akabinde bir adet DBI nesnesini DBI sınıfının yapılandırıcısına MySqlDataSource nesnesini vererek oluşturuyoruz. Bu nesne MySqlDataSource’u kullanarak bizi veritabanına ulaştıracak.</p>
 

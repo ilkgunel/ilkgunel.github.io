@@ -5,8 +5,8 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 24 Dec 2016 22:30:09 +0300</pubDate>
-    <lastBuildDate>Sat, 24 Dec 2016 22:30:09 +0300</lastBuildDate>
+    <pubDate>Sat, 24 Dec 2016 22:41:49 +0300</pubDate>
+    <lastBuildDate>Sat, 24 Dec 2016 22:41:49 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
     
       <item>
@@ -231,7 +231,7 @@ devreye girecek. Sorguyu çalıştırıp değeri ResultSet’e değeri alacak ar
 frameworkleri de (Hibernate, Eclipselink, MyBatis vs.) tabanda JDBC üzerinde çalışmaktadır. Aynı şekilde JDBI da JDBC katmanı üzerinde çalışan ve veritabanı işlemleri gerçekleştirmeyi sağlayan
 bir kütüphanedir.&lt;/p&gt;
 
-&lt;p&gt;JDBI geliştiricilerinin amacı JDBC’nin sağladığı avantajları daha da kolaylaştırarak geliştiriciye sağlamaktır. Bu işlem içinde beanler (pojo sınıfları) ve collection sınıflarını kullanarak
+&lt;p&gt;JDBI geliştiricilerinin amacı JDBC’nin sağladığı avantajları daha da kolaylaştırarak geliştiriciye sağlamaktır. Bu işlem için de beanler (pojo sınıfları) ve collection sınıflarını kullanarak
 yapmayı uygun görmüşler.&lt;/p&gt;
 
 &lt;p&gt;Aynı zamanda JDBI bize veri tabanı işlemlerimizi bir Interface içerisinde tanımlayıp implementasyonunu JDBI’a yaptırarak bakımı çok daha kolay kodlar yazma imkanı sunar.&lt;/p&gt;
@@ -365,7 +365,8 @@ SQL cümleciğine geçirilecek. Bu nedenle @Bind notasyonunun aldığı parametr
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;JDBI ile bir veritabanı işlemi gerçekleştireceğimiz zaman kullandığımız veritabanına göre bir DataSource oluşturmamız gerekiyor. Bu örnek için biz MySQL veritabanı kullanıyoruz ve bu nedenle bir
-&lt;strong&gt;&lt;em&gt;MySqlDataSource&lt;/em&gt;&lt;/strong&gt; nesnesi oluşturuyoruz. Bu nesnenin setURL metodu ile database linkini veriyoruz, setUser metodu ile database kullanıcısı ve setPassword metodu ile database parolasını tanımlıyoruz.&lt;/p&gt;
+&lt;strong&gt;&lt;em&gt;MySqlDataSource&lt;/em&gt;&lt;/strong&gt; nesnesi oluşturuyoruz. Bu nesnenin setURL metodu ile database linkini veriyoruz, setUser metodu ile database kullanıcısı ve setPassword metodu ile database parolasını tanımlıyoruz.
+Biz her ne kadar burada direk String olarak veritabanı kullanıcı adı ve şifresini yazmış olsak da proje geliştirirken bunların bir dosyadan okunup bildirilmesi daha iyi ve geçerlidir.&lt;/p&gt;
 
 &lt;p&gt;Akabinde bir adet DBI nesnesini DBI sınıfının yapılandırıcısına MySqlDataSource nesnesini vererek oluşturuyoruz. Bu nesne MySqlDataSource’u kullanarak bizi veritabanına ulaştıracak.&lt;/p&gt;
 
