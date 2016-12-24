@@ -5,20 +5,22 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 24 Dec 2016 22:41:49 +0300</pubDate>
-    <lastBuildDate>Sat, 24 Dec 2016 22:41:49 +0300</lastBuildDate>
+    <pubDate>Sat, 24 Dec 2016 22:46:22 +0300</pubDate>
+    <lastBuildDate>Sat, 24 Dec 2016 22:46:22 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
     
       <item>
         <title>JDBI İle Database İşlemleri 2 - Kayıt Çekme</title>
         <description>&lt;p&gt;Merhabalar. Önceki yazımızda JDBI ile veritabanına nasıl kayıt girilir onu görmüştük. Bu yazıda ise kayıt çekme işlemini göreceğiz.&lt;/p&gt;
 
-&lt;p&gt;Şimdi JDBI ile kayıt çekme işlemini örnekleyelim. Ben az önce eklediğim kayıttaki ismi çekmek istiyorum diyelim ki. O zaman PersonOperationsInterface’e şu iki satırı ekliyorum.&lt;/p&gt;
+&lt;p&gt;Şimdi JDBI ile kayıt çekme işlemini örnekleyelim. Ben önceki yazıda eklediğim Can Kahveci kaydındaki ismi çekmek istiyorum diyelim ki. O kaydın id bilgisi de 1 idi.
+O zaman PersonOperationsInterface’e şu iki satırı ekliyorum.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@SqlQuery&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;select name from people where id = :id&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;selectField&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@Bind&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;Yukarıdaki kodda gördüğümüz gibi selectField metodumuz yukarıda bahsettiğim gibi @SqlQuery notasyonu ile işaretli. Bu notasyona parametre olarak SQL cümleciğimizi verdik ve yine parametreyi iki
+&lt;p&gt;Yukarıdaki kodda gördüğümüz gibi selectField metodumuz tablo üzerinde manüpilasyon metodu olmadığı, bir veri çekme işlemi olduğu için @SqlQuery notasyonu ile işaretli. 
+Bu notasyona parametre olarak SQL cümleciğimizi verdik ve yine parametreyi iki
 nokta ve akabinde ismi şeklinde tanımladık. SQL cümleciğinde tanımlı parametreyi metodun parametre kısmında da @Bind notasyonu ile tanımlıyoruz.&lt;/p&gt;
 
 &lt;p&gt;Akabinde sadece try bloğunun içerisini değiştirmek sureti ile kodumuzu çalıştıralım. Kodumuzun yeni hali şöyledir:&lt;/p&gt;
@@ -143,7 +145,7 @@ devreye girecek. Sorguyu çalıştırıp değeri ResultSet’e değeri alacak ar
 &lt;span class=&quot;nd&quot;&gt;@Mapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PersonMapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;selectAllRecords&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;Tek bir Person kaydı çekmek için kullandığımız aynı şekilde burada da kullanıyoruz. Metodumuza bir liste döndür diyoruz. İşlemi gerçekleştirecek kodumuz şu şekilde:&lt;/p&gt;
+&lt;p&gt;Tek bir Person kaydı çekmek için kullandığımız Mapper’ı aynı şekilde burada da kullanıyoruz. Metodumuza bir liste döndür diyoruz. İşlemi gerçekleştirecek kodumuz şu şekilde:&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;jdbitutorial&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;operation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 

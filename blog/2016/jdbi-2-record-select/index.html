@@ -108,12 +108,14 @@
     <div class="post-content">
       <p>Merhabalar. Önceki yazımızda JDBI ile veritabanına nasıl kayıt girilir onu görmüştük. Bu yazıda ise kayıt çekme işlemini göreceğiz.</p>
 
-<p>Şimdi JDBI ile kayıt çekme işlemini örnekleyelim. Ben az önce eklediğim kayıttaki ismi çekmek istiyorum diyelim ki. O zaman PersonOperationsInterface’e şu iki satırı ekliyorum.</p>
+<p>Şimdi JDBI ile kayıt çekme işlemini örnekleyelim. Ben önceki yazıda eklediğim Can Kahveci kaydındaki ismi çekmek istiyorum diyelim ki. O kaydın id bilgisi de 1 idi.
+O zaman PersonOperationsInterface’e şu iki satırı ekliyorum.</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nd">@SqlQuery</span><span class="o">(</span><span class="s">&quot;select name from people where id = :id&quot;</span><span class="o">)</span>
 <span class="kd">public</span> <span class="n">String</span> <span class="nf">selectField</span><span class="o">(</span><span class="nd">@Bind</span><span class="o">(</span><span class="s">&quot;id&quot;</span><span class="o">)</span> <span class="kt">int</span> <span class="n">id</span><span class="o">);</span></code></pre></figure>
 
-<p>Yukarıdaki kodda gördüğümüz gibi selectField metodumuz yukarıda bahsettiğim gibi @SqlQuery notasyonu ile işaretli. Bu notasyona parametre olarak SQL cümleciğimizi verdik ve yine parametreyi iki
+<p>Yukarıdaki kodda gördüğümüz gibi selectField metodumuz tablo üzerinde manüpilasyon metodu olmadığı, bir veri çekme işlemi olduğu için @SqlQuery notasyonu ile işaretli. 
+Bu notasyona parametre olarak SQL cümleciğimizi verdik ve yine parametreyi iki
 nokta ve akabinde ismi şeklinde tanımladık. SQL cümleciğinde tanımlı parametreyi metodun parametre kısmında da @Bind notasyonu ile tanımlıyoruz.</p>
 
 <p>Akabinde sadece try bloğunun içerisini değiştirmek sureti ile kodumuzu çalıştıralım. Kodumuzun yeni hali şöyledir:</p>
@@ -238,7 +240,7 @@ devreye girecek. Sorguyu çalıştırıp değeri ResultSet’e değeri alacak ar
 <span class="nd">@Mapper</span><span class="o">(</span><span class="n">PersonMapper</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
 <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="nf">selectAllRecords</span><span class="o">();</span></code></pre></figure>
 
-<p>Tek bir Person kaydı çekmek için kullandığımız aynı şekilde burada da kullanıyoruz. Metodumuza bir liste döndür diyoruz. İşlemi gerçekleştirecek kodumuz şu şekilde:</p>
+<p>Tek bir Person kaydı çekmek için kullandığımız Mapper’ı aynı şekilde burada da kullanıyoruz. Metodumuza bir liste döndür diyoruz. İşlemi gerçekleştirecek kodumuz şu şekilde:</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">jdbitutorial</span><span class="o">.</span><span class="na">operation</span><span class="o">;</span>
 
