@@ -5,9 +5,178 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 28 Dec 2016 21:45:32 +0300</pubDate>
-    <lastBuildDate>Wed, 28 Dec 2016 21:45:32 +0300</lastBuildDate>
+    <pubDate>Sat, 31 Dec 2016 15:21:11 +0300</pubDate>
+    <lastBuildDate>Sat, 31 Dec 2016 15:21:11 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>JDBI İle Database İşlemleri 3 - Kayıt Güncelleme</title>
+        <description>&lt;p&gt;Merhabalar.&lt;/p&gt;
+
+&lt;p&gt;Önceki yazıda JDBI Api ile nasıl çekeceğimizi görmüştük. Bu yazıda ise kayıt güncelleme konusuna değineceğiz.&lt;/p&gt;
+
+&lt;p&gt;Elimdeki People tablosunda şu şekilde 3 kayıt yer almakta:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jdbi/jdbi8.png&quot;&gt;
+&lt;img src=&quot;/images/jdbi/jdbi8.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Ben şimdi buradaki id’si 2 olan kaydın &lt;strong&gt;&lt;em&gt;city&lt;/em&gt;&lt;/strong&gt; bilgisini İstanbul olarak güncellemek istiyorum. Bu işlem için öncelikle PersonOperationInterface içerisinde şu iki satır 
+kodu yazıyorum:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@SqlUpdate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;update people set city = :city where id= :id&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;updatePerson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@Bind&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;city&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;city&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@Bind&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Veritabanı üzerindeki bir manipülasyon yani değişiklik yapılacağı için metodu @SqlUpdate ile işaretledik. Notasyona parametre olarak da update işlemini gerçekleştirecek SQL cümleciğini
+verdik. SQL komutunda alanı değiştirilecek city ve alan değişimi sırasında belirleyici olacak id alanlarını parametre olarak geçirdik. Metot içerisinde de önceki yazılardan hatırlayacağımız
+gibi bu parametreleri @Bind notasyonu ile metodun parametre kısmında da tanımladık.&lt;/p&gt;
+
+&lt;p&gt;Tablo üzerinde güncelleme işlemini yapacak metodumuz da şu şekilde olacak:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;jdbitutorial&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;operation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.mysql.cj.jdbc.MysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.skife.jdbi.v2.DBI&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UpdateOneField&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;MysqlDataSource&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mysqlDataSource&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;mysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setURL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;jdbc:mysql://localhost:3306/JDBIDatabase?useUnicode=true&amp;amp;characterEncoding=UTF-8&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;mysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;root&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;mysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setPassword&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;DBI&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dbi&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;DBI&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;PersonOperationsInterface&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;personOperationsInterface&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;personOperationsInterface&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dbi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PersonOperationsInterface&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;personOperationsInterface&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;updatePerson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;İstanbul&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;The Record Updated Successfully!&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;An Error Occured!\n Error is:&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;finally&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;personOperationsInterface&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;personOperationsInterface&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;UpdateOneField sınıfımız tabloya bağlanmak için önceki yazılarımız ile hemen hemen aynı main metoduna sahip. Burada fazlalık olarak bir de veritabanı URL’nin sonunda 
+&lt;strong&gt;&lt;em&gt;?useUnicode=true&amp;amp;characterEncoding=UTF-8&lt;/em&gt;&lt;/strong&gt; komutunu ekledik. Daha önce de dediğim gibi JDBI JDBC katmanının üzerine kurulu. Java ile geliştirilen uygulamarda veri tabanını UTF-8
+tanımlamak yeterli olmuyor ve veri tabanına bağlantı açılan URL’in Türkçe karakter ile çalışacağı söylenmesi gerekiyor. JDBC için de bağlantı URL’nin sonuna 
+&lt;strong&gt;&lt;em&gt;?useUnicode=true&amp;amp;characterEncoding=UTF-8&lt;/em&gt;&lt;/strong&gt; ifadesini eklediğimizde Türkçe karakter ile çalışabilir hale geliyor.&lt;/p&gt;
+
+&lt;p&gt;try bloğuiçerisinde JDBI vasıtası ile bir PersonOperationsInterface nesnesi elde ediyoruz ve bu nesne ile &lt;strong&gt;&lt;em&gt;updatePerson()&lt;/em&gt;&lt;/strong&gt; metodunu çağırıyoruz. Metoda güncellenecek şehir bilgisini
+ve güncellenek kaydın id bilgisini geçirdik. Son olarak işlem update sırasında hata vermez ise işlemin başarılı gerçekleştiği mesajını yazdırıyoruz. Hata olursa da catch içinde yakalıyoruz.&lt;/p&gt;
+
+&lt;p&gt;finally içinde de kapatım işlemini yapıyoruz.&lt;/p&gt;
+
+&lt;p&gt;Kodu çalıştırdığımda konsol çıktısı şu şekilde olmakta:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jdbi/jdbi9.png&quot;&gt;
+&lt;img src=&quot;/images/jdbi/jdbi9.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Veri tabanı üzerinden baktığımda da kaydın güncellenmiş olduğunu görüyorum:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jdbi/jdbi10.png&quot;&gt;
+&lt;img src=&quot;/images/jdbi/jdbi10.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Birden fazla kayıt güncellemek istediğimiz durumu düşünelim şimdi. Örneğin name alanı Vedat olan tüm kayıtların city alanlarını Çanakkale olarak değiştirmek istiyorum.
+Orada da yukarıdaki ile aynı işlem söz konusu olacak. Sadece parametre olarak id gibi tanımlayıcı bir alan yerine tekrarlanan alan olan name’i vereceğim.&lt;/p&gt;
+
+&lt;p&gt;Şu 2 satır kodu PersonOperationsInterface arabirimine ekliyorum:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@SqlUpdate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;update people set city = :city where name= :name&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;updateMultiplePerson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@Bind&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;city&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;city&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@Bind&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;İşlemi yapacak kodum da şu şekilde:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;jdbitutorial&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;operation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.mysql.cj.jdbc.MysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.skife.jdbi.v2.DBI&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UpdateMultipleRecord&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;MysqlDataSource&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mysqlDataSource&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;mysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setURL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;jdbc:mysql://localhost:3306/JDBIDatabase?useUnicode=true&amp;amp;characterEncoding=UTF-8&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;mysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;root&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;mysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setPassword&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;DBI&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dbi&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;DBI&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;PersonOperationsInterface&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;personOperationsInterface&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;personOperationsInterface&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dbi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PersonOperationsInterface&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;personOperationsInterface&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;updateMultiplePerson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Çanakkale&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Vedat&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;The Records Updated Successfully!&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;An Error Occured!\n Error is:&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;finally&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;personOperationsInterface&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;personOperationsInterface&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Kodu çalıştırdığımda tablonun yeri hali şu şekilde oluyor:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/jdbi/jdbi11.png&quot;&gt;
+&lt;img src=&quot;/images/jdbi/jdbi11.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda anlatacaklarım da bu kadar arkadaşlar. Gelecek yazıda kayıt silme konusuna değineceğiz.&lt;/p&gt;
+
+&lt;p&gt;Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Fri, 23 Dec 2016 20:40:22 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2016/jdbi-3-update-record/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/jdbi-3-update-record/</guid>
+        
+        <category>jdbi nedir?</category>
+        
+        <category>jdbi nasıl kullanılır?</category>
+        
+        <category>jdbi tutorial</category>
+        
+        <category>jdbi ile veritabanı işlemleri</category>
+        
+        <category>jdbi ile database işlemleri</category>
+        
+        <category>jdbi databse operations</category>
+        
+        <category>how to use jdbi</category>
+        
+        <category>jdbi kayıt güncelleme</category>
+        
+        <category>jdbi update multiple rows</category>
+        
+        <category>jdbi update</category>
+        
+        <category>jdbi ile nasıl güncellenir</category>
+        
+        <category>jdbc türkçe karakter sorunu</category>
+        
+        <category>jdbc türkçe karakter sorunu nasıl çözülür</category>
+        
+        <category>jdbc turkish character problem</category>
+        
+        <category>jdbc utf8</category>
+        
+        <category>jdbc utf8 character problem</category>
+        
+        
+      </item>
     
       <item>
         <title>JDBI İle Database İşlemleri 2 - Kayıt Çekme</title>
@@ -1548,111 +1717,6 @@ o elementin &lt;strong&gt;&lt;em&gt;data-src&lt;/em&gt;&lt;/strong&gt; özelliğ
         <category>html parsing with jsoup</category>
         
         <category>javada html parse etme</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Sonar İle Kod Kalitesini Arttırın</title>
-        <description>&lt;p&gt;Merhabalar arkadaşlar.&lt;/p&gt;
-
-&lt;p&gt;Bu yazıda Java projesi geliştirirken Eclipse IDE üzerinde kod kalitesini arttırmaya yardımcı olan &lt;strong&gt;&lt;em&gt;Sonar&lt;/em&gt;&lt;/strong&gt; eklentisinin Eclipse IDE üzerinde kurulum ve basitçe kullanımı konusunu anlatmaya
-çalışacağım. Basitçe bir kaç örnekle de Sonar’ın analizini örneklendirmeye çalışacağım.&lt;/p&gt;
-
-&lt;p&gt;İlk olarak Eclipse’de &lt;strong&gt;&lt;em&gt;Help -&amp;gt; Eclipse Marketplace&lt;/em&gt;&lt;/strong&gt; Eclipse’in mağazasını açalım ve arama kutusuna &lt;strong&gt;&lt;em&gt;Sonar&lt;/em&gt;&lt;/strong&gt; yazalım. &lt;strong&gt;&lt;em&gt;Go&lt;/em&gt;&lt;/strong&gt; butonuna tıklayarak aratalım.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/sonar/sonar1.png&quot;&gt;
-&lt;img src=&quot;/images/sonar/sonar1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Arama işleminin ardından &lt;strong&gt;&lt;em&gt;SonarLint 2.4.0&lt;/em&gt;&lt;/strong&gt; eklentisini Install butonuna tıklayarak IDE’mize kuralım. Sürüm sizin bu yazıyı okuduğunuz zamanda değişebilir.&lt;/p&gt;
-
-&lt;p&gt;Bu ekranda ikisini de işaretleyelim.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/sonar/sonar2.png&quot;&gt;
-&lt;img src=&quot;/images/sonar/sonar2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Bu ekranda da şartları kabul edip &lt;strong&gt;&lt;em&gt;Finish&lt;/em&gt;&lt;/strong&gt; butonuna tıklayalım.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/sonar/sonar3.png&quot;&gt;
-&lt;img src=&quot;/images/sonar/sonar3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Eclipse bir süre sürecek şekilde eklentiyi kuracak. Kurulum işlemi bittiğinde Eclipse sizden IDE’yi Restart etmenizi isteyecek. IDE’yi yeniden başlatın.&lt;/p&gt;
-
-&lt;p&gt;Şimdi bir proje açın ve main metodunu barındıran bir Java sınıfı oluşturun. Sonar hemen analiz yapmaya ve sizi kod kalitesini arttırmaya yöneltmeye başlayacak. Şu resimden de 
-görebileceğiniz gibi Sonar Sonar analiz yaparken sorunlu gördüğü bölgelerin altını mavi bir çizgi ile çizip size düzeltmeniz gerektiğini söyleyecek.&lt;/p&gt;
-
-&lt;p&gt;Eclipse’in hızlı ulaşım kutucuğu olan arama kutusuna SonarLint yazıp &lt;strong&gt;&lt;em&gt;SonarLint Issues&lt;/em&gt;&lt;/strong&gt; tabını açın. SonarLint bu tabda düzeltilmesi gereken yerleri söylüyor olacak.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/sonar/sonar4.png&quot;&gt;
-&lt;img src=&quot;/images/sonar/sonar4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Yukarıdaki mesela iki adet düzeltilmesi gereken şey olduğunu söylüyor. Birinci madde main metodu boş ve en azından yorum satırları ile niye metodun boş olduğunu bildir diyor.&lt;/p&gt;
-
-&lt;p&gt;İkinci madde ise her Java sınıfında default olarak üretilen public constructor yerine private bir constructor bir yaz.&lt;/p&gt;
-
-&lt;p&gt;Ben bunları yaptığımda Sonar’ın iki uyarısı da gitti.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/sonar/sonar5.png&quot;&gt;
-&lt;img src=&quot;/images/sonar/sonar5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Java’da JDK tarafından şart koşulmayan ama de-facto bir şekilde kodlama standartı olmuş şeyler vardır. Örneğin sınıf isimleri büyük harfle başlar, metot ve değişken isimleri küçük harfle
-başlar gibi. Şimdi bunları yaptığımızda Sonar bir tepki veriyor mu bakalım.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;sonarTutorialClass&lt;/em&gt;&lt;/strong&gt; isminde küçük harfle başlayan bir sınıf, ismi büyük harfle başlayan bir method, ismi büyük harfle başlayan bir değişken ve bir de System.out kullanıyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/sonar/sonar6.png&quot;&gt;
-&lt;img src=&quot;/images/sonar/sonar6.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;SonarLint Issues kısmında 4 adet düzeltilmesi gereken yer olduğunu görüyoruz.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Birinci madde System.out ya da System.err gibi şeylerin loglama yapmamız gerektiğini söylüyor.&lt;/li&gt;
-  &lt;li&gt;İkinci madde local değişkenlerin adlarının küçük harfle başlaması gerektiğini ve bu yönde düzeltme yapmamızı söylüyor.&lt;/li&gt;
-  &lt;li&gt;Üçüncü madde metot adlarının küçük harfle başlaması gerektiğini ve bu yönde düzeltme yapmamızı söylüyor.&lt;/li&gt;
-  &lt;li&gt;Dördüncü madde sınıf isimlerinin büyük harfle başlaması gerektiğini ve küçük harfle başlaması gerektiğini ve bu yönde düzeltme yapmamızı söylüyor.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Şimdi bu dediklerini düzenleyelim ve Sonar’ın analizine bırakalım. Gördüğünüz gibi hatalar gitti.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/sonar/sonar7.png&quot;&gt;
-&lt;img src=&quot;/images/sonar/sonar7.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Bu şekilde kodunuzun içerisinde derleme zamanı için hatalı olmayan ama düzeltilmeye ihtiyaç duyulan kodları Sonar eklentisi ile görüp iyileştirebiliriz. Tabii benim yukarıda verdiğim
-örneklerin basit olduğunu düşünebilirsiniz ancak Sonar’ın çalıştığını örneklemek amacı ile verdim. Bir yazılım geliştirme sırasında çok daha çeşitli durumlar ile karşılaşabilir, Sonar ile
-durumların farkında olabilirsiniz.&lt;/p&gt;
-
-&lt;p&gt;Başka bir yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-</description>
-        <pubDate>Sun, 04 Dec 2016 20:40:21 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2016/sonar-plugin/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/sonar-plugin/</guid>
-        
-        <category>sonar nedir?</category>
-        
-        <category>sonar nasıl kullanılır?</category>
-        
-        <category>java sonar nedir?</category>
-        
-        <category>java sonar nasıl kullanılır?</category>
-        
-        <category>java sonar nasıl kurulur?</category>
-        
-        <category>sonar ile kod analizi</category>
-        
-        <category>eclipse sonar plugin</category>
-        
-        <category>sonar plugin ile kod kalitenizi arttırın.</category>
-        
-        <category>eclipse sonar plugin</category>
         
         
       </item>
