@@ -346,6 +346,139 @@ JsonArray’in ilgili gözündeki parametre olarak veriyoruz zira JsonArray’in
 <img src="/images/gson/gson4.png" style="width: 958px; height= 400px;" />
 </a></p>
 
+<p style="text-align: center;color: red">9 Ocak 2017 Güncelleme</p>
+
+<p>Bugün işte bir arkadaşımla çalışırken GSON kütüphanesinin bir özelliğinin bu yazıda eksik kaldığını fark ettim. Yukarıdaki işlemlerde hep Java sınıfındaki alanlar ile JSON’daki alanlar aynı isimde.
+Eğer okuma yapacağımız JSON dosyasındaki alanların isimleri ile JSON dosyasını temsil eden Java sınıfındaki alanların isimlerinin farklı olmasını istersek ne yapmalıyız?</p>
+
+<p>GSON kütüphanesi herhangi bir tanımlama yapılmadığında (az sonra göstereceğim notasyon kullanılmadığında) elimizdeki JSON ile Java sınıfındaki tüm alanların isimlerinin
+aynı olduğu varsayımını yapıyor ve nesne oluşturacağı zaman da bu şekilde oluşturuyor. Eğer GSON bu varsayımı yaparken JSON’daki alanlar ile Java sınıfındaki alanlar farklı ise GSON size alanları
+boş bir nesne oluşturup veriyor. Yani JSON’dan okuduğu değerleri alanlara kaydetmiyor, daha doğrusu kaydedemiyor çünkü alanları eşleştiremiyor.</p>
+
+<p>Örneğin JSON dosyasına <strong><em>Name</em></strong> şeklinde bir alan varken biz Java sınıfı içinde bunu <strong><em>String Name;</em></strong> şeklinde tanımlamamalıyız, yine <strong><em>String name</em></strong> şeklinde kullanmalıyız. Bu durumda da 
+JSON’daki Name ile Java sınıfındaki name isim olarak eşleşmediği için GSON objeyi oluştururken değer yüklemesi yapamaıyor. İşte bu durumda
+imdadımıza <strong><em>@SerializedName</em></strong> notasyonu yetişiyor. Eğer JSON içindeki alanı Java sınıfı içinde başka bir isimle temsil etmek istersek bu notasyon vasıtası ile tanımlama yapabiliriz. Şimdi 
+nasıl kullanıldığına bakalım.</p>
+
+<p>Önceki JSON’daki alan isimlerinin baş harflerini büyük yaparak JSON’ımızı şu hale getirelim:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">[</span>  
+   <span class="p">{</span>  
+      <span class="nt">&quot;Id&quot;</span><span class="p">:</span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;Name&quot;</span><span class="p">:</span><span class="s2">&quot;Perihan&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;Surname&quot;</span><span class="p">:</span><span class="s2">&quot;İmamoğlu&quot;</span>
+   <span class="p">},</span>
+   <span class="p">{</span>  
+      <span class="nt">&quot;Id&quot;</span><span class="p">:</span><span class="s2">&quot;2&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;Name&quot;</span><span class="p">:</span><span class="s2">&quot;Sümeyye&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;Surname&quot;</span><span class="p">:</span><span class="s2">&quot;Demirel&quot;</span>
+   <span class="p">},</span>
+   <span class="p">{</span>  
+      <span class="nt">&quot;Id&quot;</span><span class="p">:</span><span class="s2">&quot;3&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;Name&quot;</span><span class="p">:</span><span class="s2">&quot;Toker&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;Surname&quot;</span><span class="p">:</span><span class="s2">&quot;Turgut&quot;</span>
+   <span class="p">},</span>
+   <span class="p">{</span>  
+      <span class="nt">&quot;Id&quot;</span><span class="p">:</span><span class="s2">&quot;4&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;Name&quot;</span><span class="p">:</span><span class="s2">&quot;Enes&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;Surname&quot;</span><span class="p">:</span><span class="s2">&quot;Özmen&quot;</span>
+   <span class="p">}</span>
+<span class="p">]</span></code></pre></figure>
+
+<p>Bu JSON’ı temsil edecek Java sınıfımız da şu şekilde olacak:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">gson</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.google.gson.annotations.SerializedName</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SerializedPerson</span> <span class="o">{</span>
+	<span class="nd">@SerializedName</span><span class="o">(</span><span class="s">&quot;Id&quot;</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">id</span><span class="o">;</span>
+
+	<span class="nd">@SerializedName</span><span class="o">(</span><span class="s">&quot;Name&quot;</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+
+	<span class="nd">@SerializedName</span><span class="o">(</span><span class="s">&quot;Surname&quot;</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">surname</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="n">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getSurname</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSurname</span><span class="o">(</span><span class="n">String</span> <span class="n">surname</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">surname</span> <span class="o">=</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>SerializedPerson sınıfı içerisinde alanlarımız @SerializedName notasyonu ile işaretli. Bu notasyona biz JSON’ımızın içindeki alanın ismini veriyoruz. Böylece GSON JSON ile Java sınıfı alanları 
+arasındaki eşleştirmeleri en doğru şekilde yapmaya mukabil oluyor. Örneğin</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nd">@SerializedName</span><span class="o">(</span><span class="s">&quot;Name&quot;</span><span class="o">)</span>
+<span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span></code></pre></figure>
+
+<p>kodu ile GSON kütüphanesi dönüşüm ve nesne oluşturma işlemi sırasında JSON içerisinde <strong><em>Name</em></strong> ismindeki alanı Java sınıfı içindeki <strong><em>String name</em></strong> alanına dolduracaktır.</p>
+
+<p>Main metodunu barındıran kodumuzun yeni hali de şöyle olacaktır:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">gson</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.FileNotFoundException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.FileReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.google.gson.Gson</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.google.gson.JsonArray</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.google.gson.JsonParser</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FromJsonToJava</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">List</span><span class="o">&lt;</span><span class="n">SerializedPerson</span><span class="o">&gt;</span> <span class="n">serializedPersons</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">SerializedPerson</span><span class="o">&gt;();</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">FileReader</span> <span class="n">fileReader</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">FileReader</span><span class="o">(</span><span class="s">&quot;src/main/resources/jsonForSerialized.json&quot;</span><span class="o">);</span>
+			<span class="n">Gson</span> <span class="n">gson</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Gson</span><span class="o">();</span>
+			<span class="n">JsonParser</span> <span class="n">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">JsonParser</span><span class="o">();</span>
+			<span class="n">JsonArray</span> <span class="n">jsonArray</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">fileReader</span><span class="o">).</span><span class="na">getAsJsonArray</span><span class="o">();</span>
+			<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">jsonArray</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+				<span class="n">SerializedPerson</span> <span class="n">serializedPerson</span> <span class="o">=</span> <span class="n">gson</span><span class="o">.</span><span class="na">fromJson</span><span class="o">(</span><span class="n">jsonArray</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="n">SerializedPerson</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+				<span class="n">serializedPersons</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">serializedPerson</span><span class="o">);</span>
+			<span class="o">}</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">FileNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Bir Hata Meydana Geldi! Hata:&quot;</span> <span class="o">+</span> <span class="n">e</span><span class="o">);</span>
+		<span class="o">}</span>
+
+		<span class="k">for</span> <span class="o">(</span><span class="n">SerializedPerson</span> <span class="n">p</span> <span class="o">:</span> <span class="n">serializedPersons</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">getId</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="na">getSurname</span><span class="o">());</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Yazının üst kısımlarında bu metoda dair bilgiler verdiğim için tekrar girmiyorum arkadaşlar.</p>
+
+<p>Konsol çıktısı da şöyle:</p>
+
+<p><a href="/images/gson/gson4.png">
+<img src="/images/gson/gson4.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Gördüğünüz gibi JSON’daki alan isimleri ile Java sınıfındaki alan isimleri farklı olunca bu şekilde okuma yapabiliyoruz.</p>
+
 <p>Bu yazıda anlatacaklarım bu kadar arkadaşlar. Başka bir yazıda görüşene kadar sağlıcakla kalın.</p>
 
 <p>Görüşmek üzere.</p>
