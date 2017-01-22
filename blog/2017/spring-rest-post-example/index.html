@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+	  (adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-0980023289791742",
+		enable_page_level_ads: true
+	  });
+	</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Spring Rest - POST Örneği</title>
+    <meta name="description" content="Merhabalar arkadaşlar.">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2017/spring-rest-post-example/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>Spring Rest - POST Örneği - İlkay Günel - Blog</title>
+<meta property="og:title" content="Spring Rest - POST Örneği" />
+<meta name="description" content="Spring Rest - POST Örneği" />
+<meta property="og:description" content="Spring Rest - POST Örneği" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2017/spring-rest-post-example/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2017/spring-rest-post-example/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-01-21T20:40:21+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Spring Rest - POST Örneği",
+    "datePublished": "2017-01-21T20:40:21+03:00",
+    "description": "Spring Rest - POST Örneği",
+    "url": "http://ilkaygunel.com/blog/2017/spring-rest-post-example/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/cv.pdf" title="Bana Ait CV">Bana Ait CV</a></li>
+        
+          <li><a href="/blog/2016/git-nedir" title="Git Nedir? Nasıl Kullanılır?">Git Nedir? Nasıl Kullanılır?</a></li>
+        
+          <li><a href="/blog/2016/jsf-tutorials-list" title="JSF">JSF</a></li>
+        
+          <li><a href="/blog/2016/spring-tutorials" title="Spring 4">Spring 4</a></li>
+        
+          <li><a href="/blog/2016/eclipselink" title="Eclipselink">Eclipselink</a></li>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/blog/2016/test" title="Test">Test</a></li>
+        
+          <li><a href="/blog/2016/useful-libraries-for-java" title="Java İçin Faydalı Kütüphaneler">Java İçin Faydalı Kütüphaneler</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog/2016/eclipse-notes" title="Eclipse">Eclipse</a></li>
+        
+          <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
+        
+          <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Spring Rest - POST Örneği</h1>
+      <p class="post-meta">Jan 21, 2017</p>
+    </header>
+
+    <div class="post-content">
+      <p>Merhabalar arkadaşlar.</p>
+
+<p>Bu yazıda Spring Boot kullanarak bir adet Spring Rest Post örneği yapacağız.</p>
+
+<p>Daha önce <a href="http://ilkaygunel.com/blog/2016/spring-rest-get-example/">Spring Rest GET Örneği</a> yazımızda Spring Boot ile Spring Rest GET örneği yaparken ortamımızı hazırlamıştık ve sınıflarımızı
+yazmıştık. Bu yazı da o yazının bir devamı niteliğinde olacak. Bu nedenle ortam hazırlığı vs. konularına girmiyorum. Şimdi POST işlemi için yapmamız gerekene bakalım.</p>
+
+<p>Ben bu yazıda kullanmak için MySQL veritabanı sunucusunda SpringRestPost adından bir veritabanı oluşturdum ve içinede de person adında şöyle bir tablo oluşturdum.</p>
+
+<p><a href="/images/springRest/post2.png">
+<img src="/images/springRest/post2.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Web servisi yazdıktan sonra Postman ile istek yapıp kaydın düşüp düşmediğine bakacağız.</p>
+
+<p>Şimdi ilk olarak <strong><em>PersonRegisterPojo</em></strong> adında yeni bir sınıf oluşturuyoruz. Bu sınıfı oluşturmaktaki amaç kullanıcıya döndürelecek response içerisinde hem gelen Person objesini hem de bizim ilave
+alan(lar)ımızı kullanmak olacaktır.</p>
+
+<p><strong>PersonRegisterPojo.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">pojo</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PersonRegisterPojo</span> <span class="o">{</span>
+	<span class="n">String</span> <span class="n">registeringResult</span><span class="o">;</span>
+	<span class="n">Person</span> <span class="n">person</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="n">Person</span> <span class="nf">getPerson</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">person</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPerson</span><span class="o">(</span><span class="n">Person</span> <span class="n">person</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">person</span> <span class="o">=</span> <span class="n">person</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getRegisteringResult</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">registeringResult</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setRegisteringResult</span><span class="o">(</span><span class="n">String</span> <span class="n">registeringResult</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">registeringResult</span> <span class="o">=</span> <span class="n">registeringResult</span><span class="o">;</span>
+	<span class="o">}</span>
+
+<span class="o">}</span></code></pre></figure>
+
+<p>PersonRegisterPojo sınıfı içerisinde POST ile gelen verilerin veritabanına yazılması işleminin neticesini tutacak bir String ve gelen Person objesini tutacak person değişkeni yer alıyor.</p>
+
+<p><strong>PostExampleController.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">postExample</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.sql.Connection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.DriverManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.PreparedStatement</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.SQLException</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.http.HttpStatus</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.ResponseEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestBody</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMethod</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">pojo.Person</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">pojo.PersonRegisterPojo</span><span class="o">;</span>
+
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PostExampleController</span> <span class="o">{</span>
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/postPerson&quot;</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">PersonRegisterPojo</span><span class="o">&gt;</span> <span class="nf">postPerson</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="n">Person</span> <span class="n">person</span><span class="o">)</span> <span class="o">{</span>
+
+		<span class="n">PersonRegisterPojo</span> <span class="n">registerPojo</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">PersonRegisterPojo</span><span class="o">();</span>
+		<span class="n">registerPojo</span><span class="o">.</span><span class="na">setPerson</span><span class="o">(</span><span class="n">person</span><span class="o">);</span>
+
+		<span class="n">PreparedStatement</span> <span class="n">ps</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="n">Connection</span> <span class="n">con</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">&quot;com.mysql.jdbc.Driver&quot;</span><span class="o">);</span>
+			<span class="n">con</span> <span class="o">=</span> <span class="n">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span>
+					<span class="s">&quot;jdbc:mysql://localhost:3306/SpringRestPost?useUnicode=true&amp;characterEncoding=UTF-8&quot;</span><span class="o">,</span> <span class="s">&quot;root&quot;</span><span class="o">,</span> <span class="s">&quot;&quot;</span><span class="o">);</span>
+			<span class="n">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">&quot;INSERT INTO person(id,name,surname,	neighborhood,borough, city,	country) VALUES(?,?,?,?,?,?,?)&quot;</span><span class="o">;</span>
+			<span class="n">ps</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span>
+			<span class="n">ps</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">person</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
+			<span class="n">ps</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">person</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+			<span class="n">ps</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="n">person</span><span class="o">.</span><span class="na">getSurname</span><span class="o">());</span>
+			<span class="n">ps</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="n">person</span><span class="o">.</span><span class="na">getAddress</span><span class="o">().</span><span class="na">getNeighborhood</span><span class="o">());</span>
+			<span class="n">ps</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="n">person</span><span class="o">.</span><span class="na">getAddress</span><span class="o">().</span><span class="na">getBorough</span><span class="o">());</span>
+			<span class="n">ps</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">6</span><span class="o">,</span> <span class="n">person</span><span class="o">.</span><span class="na">getAddress</span><span class="o">().</span><span class="na">getCity</span><span class="o">());</span>
+			<span class="n">ps</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">7</span><span class="o">,</span> <span class="n">person</span><span class="o">.</span><span class="na">getAddress</span><span class="o">().</span><span class="na">getCountry</span><span class="o">());</span>
+			<span class="n">ps</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">();</span>
+			<span class="n">registerPojo</span><span class="o">.</span><span class="na">setRegisteringResult</span><span class="o">(</span><span class="s">&quot;Kyıt Başarı İle Eklendi&quot;</span><span class="o">);</span>
+
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ClassNotFoundException</span> <span class="o">|</span> <span class="n">SQLException</span> <span class="n">exception</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">registerPojo</span><span class="o">.</span><span class="na">setRegisteringResult</span><span class="o">(</span><span class="s">&quot;Kayıt Sırasında Bir Hata Meydana Geldi! &quot;</span> <span class="o">+</span> <span class="n">exception</span><span class="o">);</span>
+			<span class="n">exception</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+			<span class="k">try</span> <span class="o">{</span>
+				<span class="k">if</span> <span class="o">(</span><span class="n">con</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+					<span class="n">con</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+				<span class="o">}</span>
+				<span class="k">if</span> <span class="o">(</span><span class="n">ps</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+					<span class="n">ps</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+				<span class="o">}</span>
+			<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">SQLException</span> <span class="n">sqlException</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">sqlException</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+
+		<span class="k">return</span> <span class="k">new</span> <span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">PersonRegisterPojo</span><span class="o">&gt;(</span><span class="n">registerPojo</span><span class="o">,</span> <span class="n">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<ul>
+  <li>PostExampleController sınıfımız ilk olarak <strong><em>@RestController</em></strong> notasyonu ile işaretli.</li>
+  <li>Post işlemini gerçekleştirecek postPerson metodumuz @RequestMapping notasyonu ile işaretli ve bu notasyona bu metodun hangi URL isteklerine cevap vereceğini tanımlayan RequestMapping ve hangi 
+görevi yerine getireceğini gösteren method parametreleri geçiriliyor.</li>
+  <li>postPerson metodu parametre alma kısmında @RequestBody notasyonu ile işaretli bir Person nesnesi alıyor. Burada metot default olarak bir JSON bekliyor ve gelen JSON’dan bir Person nesnesi 
+oluşturulacak.</li>
+  <li>Metot içerisinde ise PersonRegisterPojo nesnesi elde ediyoruz ve gelen Person’ı bu PersonRegisterPojo nesnesinin içine koyuyoruz.</li>
+  <li>Kodun devam eden kısmında JDBC ile SpringRestPost veritabanına kayıt açılıyor ve person tablosuna kayıt yollanmaya çalışılıyor. Eğer kayıt işlemi başarılı olursa PersonRegisterPojo nesnesinin
+registeringResult alanına kaydın başarılı olduğuna dair mesaj geçiliyor. Eğer kayıt sırasında bir hata olursa da hata mesajı registeringResult alanına koyuluyor.</li>
+  <li>Son kısımda ise PersonRegisterPojo sınıfını kullanarak bir ResponseEntity nesnesini oluşturup döndürüyoruz. Burada da default olarak JSON şeklinde cevap döndürülecek.</li>
+</ul>
+
+<p>Şimdi projeye sağ tıklayıp Rus As kısmından <strong><em>Maven Build</em></strong>‘i seçelim ve şu komutu girelim. Akabinde Run butonuna tıklayalım.</p>
+
+<p><a href="/images/springRest/get1.png">
+<img src="/images/springRest/get1.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p><strong><em>Started Application in … seconds</em></strong> yazısını gördükten sonra Postman uygulamasını açalım.</p>
+
+<p><a href="/images/springRest/post1.png">
+<img src="/images/springRest/post1.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Postman içerisinde kullanıcalacak HTTP metodu olarak POST’u seçiyoruz ve URL olarak <a href="http://localhost:8080/SpringRestTutorial/postPerson">http://localhost:8080/SpringRestTutorial/postPerson</a> adresini
+veriyoruz. Akabinde Body tabına tıklıyoruz ve raw seçeneğini seçiyoruz. raw’ın olduğu satırın en sağ kısmından da <strong><em>JSON (application/json)</em></strong> seçeneğini seçiyoruz. TextArea alanına da 
+web servisin beklediği şekilde bir JSON yazıyoruz. Beklediği şekildeden kasıt ise önceki yazıdaki Person sınıfı alanlarını taşıyan bir JSON olmasıdır. Burada adress alanının iç içe olduğuna dikkat
+etmek gerekir. Biz şöyle bir JSON gönderiyoruz:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span>  
+   <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Onur&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;surname&quot;</span><span class="p">:</span><span class="s2">&quot;Özcan&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;address&quot;</span><span class="p">:{</span>  
+      <span class="nt">&quot;neighborhood&quot;</span><span class="p">:</span><span class="s2">&quot;Cennet Mah.&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;borough&quot;</span><span class="p">:</span><span class="s2">&quot;K.Çekmece&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;İstanbul&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;TÜRKİYE&quot;</span>
+   <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p><a href="/images/springRest/post3.png">
+<img src="/images/springRest/post3.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Sol üstteki <strong><em>Send</em></strong> butonuna tıkladığımızda Postman bizim için web servise, verdiğimiz JSON’ı post edecek ve alttaki TextArea alanında POST işleminin neticesi yazacak. Ben butona tıkladığımda
+kaydın başarı ile ekleniğine dair Response döndü.</p>
+
+<p><a href="/images/springRest/post4.png">
+<img src="/images/springRest/post4.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Veritabanına gidip baktığımda da kaydın aynen eklendiğini görüyorum.</p>
+
+<p><a href="/images/springRest/post5.png">
+<img src="/images/springRest/post5.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Şimdi az önce gönderdiğimiz JSON’ın id alanı aynı kalsın ve içeriğini biraz değiştirelim. Sonra Postman’e bu JSON’ı verip POST edelim.</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span>  
+   <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Alican&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;surname&quot;</span><span class="p">:</span><span class="s2">&quot;Akkuş&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;address&quot;</span><span class="p">:{</span>  
+      <span class="nt">&quot;neighborhood&quot;</span><span class="p">:</span><span class="s2">&quot;Cennet Mah.&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;borough&quot;</span><span class="p">:</span><span class="s2">&quot;K.Çekmece&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;İstanbul&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;TÜRKİYE&quot;</span>
+   <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Aşağıdaki resimde göreceğiniz gibi bir duplicate hatası alacağız çünkü id alanı bir PrimaryKey alan ve tekrarlı veriye izin vermez. Bu nedenle de JDBC hata veriyor. Biz de hatayı dönen JSON içinde
+görüyoruz.</p>
+
+<p><a href="/images/springRest/post6.png">
+<img src="/images/springRest/post6.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Bu yazıda anlatacaklarım bu kadar arkadaşlar. Başka bir yazıda görüşene kadar sağlıcakla kalın.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="http://github.com/ilkgunel" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="http://twitter.com/ilkgunel" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+  <li><a href="https://www.instagram.com/first.month/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2017 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>
