@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+	  (adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-0980023289791742",
+		enable_page_level_ads: true
+	  });
+	</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Android Web Service Kullanımı - GET Örneği</title>
+    <meta name="description" content="Merhabalar arkadaşlar. Bu yazıda Android’de GET hizmeti sunan bir web servisin kullanımını anlatmaya çalışacağım.">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2017/webservice-usage-on-android/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>Android Web Service Kullanımı - GET Örneği - İlkay Günel - Blog</title>
+<meta property="og:title" content="Android Web Service Kullanımı - GET Örneği" />
+<meta name="description" content="Android Web Service Kullanımı - GET Örneği" />
+<meta property="og:description" content="Android Web Service Kullanımı - GET Örneği" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2017/webservice-usage-on-android/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2017/webservice-usage-on-android/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-01-27T20:40:21+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Android Web Service Kullanımı - GET Örneği",
+    "datePublished": "2017-01-27T20:40:21+03:00",
+    "description": "Android Web Service Kullanımı - GET Örneği",
+    "url": "http://ilkaygunel.com/blog/2017/webservice-usage-on-android/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/cv.pdf" title="Bana Ait CV">Bana Ait CV</a></li>
+        
+          <li><a href="/blog/2016/git-nedir" title="Git Nedir? Nasıl Kullanılır?">Git Nedir? Nasıl Kullanılır?</a></li>
+        
+          <li><a href="/blog/2016/jsf-tutorials-list" title="JSF">JSF</a></li>
+        
+          <li><a href="/blog/2016/spring-tutorials" title="Spring 4">Spring 4</a></li>
+        
+          <li><a href="/blog/2016/eclipselink" title="Eclipselink">Eclipselink</a></li>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/blog/2016/test" title="Test">Test</a></li>
+        
+          <li><a href="/blog/2016/useful-libraries-for-java" title="Java İçin Faydalı Kütüphaneler">Java İçin Faydalı Kütüphaneler</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog/2016/eclipse-notes" title="Eclipse">Eclipse</a></li>
+        
+          <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
+        
+          <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Android Web Service Kullanımı - GET Örneği</h1>
+      <p class="post-meta">Jan 27, 2017</p>
+    </header>
+
+    <div class="post-content">
+      <p>Merhabalar arkadaşlar. Bu yazıda Android’de GET hizmeti sunan bir web servisin kullanımını anlatmaya çalışacağım.</p>
+
+<p>Benim daha önce yazmış olduğum ve GET hizmeti sunan bir web servise request atıldığında şu şekilde, JSON formatında bir dönüş yapıyor.</p>
+
+<p><a href="/images/androidWebService/androidWebService1.png">
+<img src="/images/androidWebService/androidWebService1.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Biz de bu dönen JSON’ı anlamlı hale getirip Android uygulamamız içerisinde kullanıcıya göstereceğiz.</p>
+
+<p>Şimdi ilk olarak yapmamız gereken JSON’daki verilere göre POJO sınıfları oluşturmak olacaktır. JSON’a baktığımızda şunları görüyoruz:</p>
+
+<ul>
+  <li>Dönen cevap başındaki ve sonundaki köşeli parantezlerden ötürü bir JSON Array.</li>
+  <li>Bu JSON Array içindeki bir JSON objesi id, name, surname ve address alanlarına sahip.</li>
+  <li>JSON içindeki address alanı ise iç içe JSON objesi. Dolayısı ile bu alan için bir POJO daha gerekli olacak.</li>
+</ul>
+
+<p>Address alanı için şu şekilde bir POJO yazalım:</p>
+
+<p><strong>Address.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">webserviceusage</span><span class="o">.</span><span class="na">pojo</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Address</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">Address</span><span class="o">(){</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nf">Address</span><span class="o">(</span><span class="n">String</span> <span class="n">neighborhood</span><span class="o">,</span><span class="n">String</span> <span class="n">borough</span><span class="o">,</span><span class="n">String</span> <span class="n">city</span><span class="o">,</span><span class="n">String</span> <span class="n">country</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">neighborhood</span> <span class="o">=</span> <span class="n">neighborhood</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">borough</span> <span class="o">=</span> <span class="n">borough</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">city</span> <span class="o">=</span> <span class="n">city</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">country</span> <span class="o">=</span> <span class="n">country</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">neighborhood</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">borough</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">city</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">country</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getNeighborhood</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">neighborhood</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setNeighborhood</span><span class="o">(</span><span class="n">String</span> <span class="n">neighborhood</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">neighborhood</span> <span class="o">=</span> <span class="n">neighborhood</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getBorough</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">borough</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setBorough</span><span class="o">(</span><span class="n">String</span> <span class="n">borough</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">borough</span> <span class="o">=</span> <span class="n">borough</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getCity</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">city</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCity</span><span class="o">(</span><span class="n">String</span> <span class="n">city</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">city</span> <span class="o">=</span> <span class="n">city</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getCountry</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">country</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCountry</span><span class="o">(</span><span class="n">String</span> <span class="n">country</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">country</span> <span class="o">=</span> <span class="n">country</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Address sınıfı dönen cevap içindeki address alanının sahip olduğu tüm alanlara ve onların get-set metotlarına sahip bir sınıf.</p>
+
+<p>Şimdi bir de Person adında bir sınıf oluşturalım.</p>
+
+<p><strong>Person.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">webserviceusage</span><span class="o">.</span><span class="na">pojo</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">Person</span><span class="o">(){</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="n">String</span> <span class="n">id</span><span class="o">,</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span><span class="n">String</span> <span class="n">surname</span><span class="o">,</span><span class="n">Address</span> <span class="n">address</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">surname</span> <span class="o">=</span> <span class="n">surname</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">address</span><span class="o">=</span> <span class="n">address</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">surname</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">Address</span> <span class="n">address</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="n">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getSurname</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">surname</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSurname</span><span class="o">(</span><span class="n">String</span> <span class="n">surname</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">surname</span> <span class="o">=</span> <span class="n">surname</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">Address</span> <span class="nf">getAddress</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">address</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAddress</span><span class="o">(</span><span class="n">Address</span> <span class="n">address</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">address</span> <span class="o">=</span> <span class="n">address</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">&quot;Person [id=&quot;</span> <span class="o">+</span> <span class="n">id</span> <span class="o">+</span> <span class="s">&quot;, name=&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot;, surname=&quot;</span> <span class="o">+</span> <span class="n">surname</span> <span class="o">+</span> <span class="s">&quot;, address=&quot;</span> <span class="o">+</span> <span class="n">address</span><span class="o">.</span><span class="na">getNeighborhood</span><span class="o">()</span>
+                <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">address</span><span class="o">.</span><span class="na">getBorough</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">address</span><span class="o">.</span><span class="na">getCity</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">address</span><span class="o">.</span><span class="na">getCountry</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;]&quot;</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Person sınıfı içersinde de JSON içindeki alanları temsil eden değişkenlerimiz mevcut.</p>
+
+<p>Android tarafında kullanıcıya bilgileri MainActivity üzerinde göstreceğiz. Bu nedenle MainActivity sınıfımız içinde gerekli çağırımları yapmamız gerekiyor. MainActiviy sınıfımız da
+şu şekilde:</p>
+
+<p><strong>MainActiviy.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">ilkaygunel</span><span class="o">.</span><span class="na">com</span><span class="o">.</span><span class="na">webserviceusagetutorial</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">android.app.ListActivity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.content.Intent</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.support.v7.app.AppCompatActivity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.os.Bundle</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.widget.ArrayAdapter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.widget.ListView</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.google.gson.Gson</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.google.gson.JsonArray</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.google.gson.JsonParser</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">webserviceusage.operations.GetDataFromWebWervice</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">webserviceusage.pojo.Person</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainActivity</span> <span class="kd">extends</span> <span class="n">AppCompatActivity</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">activity_main</span><span class="o">);</span>
+
+        <span class="n">GetDataFromWebWervice</span> <span class="n">getDataFromWebWervice</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">GetDataFromWebWervice</span><span class="o">();</span>
+
+        <span class="n">ArrayAdapter</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">personArrayAdapter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayAdapter</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;(</span><span class="k">this</span><span class="o">,</span> <span class="n">android</span><span class="o">.</span><span class="na">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">simple_list_item_1</span><span class="o">,</span>
+                <span class="n">getDataFromWebWervice</span><span class="o">.</span><span class="na">getPersonListFromWebService</span><span class="o">());</span>
+
+        <span class="n">ListView</span> <span class="n">listView</span> <span class="o">=</span> <span class="o">(</span><span class="n">ListView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">android</span><span class="o">.</span><span class="na">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">list</span><span class="o">);</span>
+        
+        <span class="n">listView</span><span class="o">.</span><span class="na">setAdapter</span><span class="o">(</span><span class="n">personArrayAdapter</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>MainActivity sınıfımızın onCreate metodu içerisinde Activity’nin oluşturulması ve layout’un atanması işlemlerinin ardından bir adet <strong><em>GetDataFromWebWervice</em></strong> nesnesi elde ediyoruz.
+Bu nesneyi web servisden verileri liste halinde getirecek metodu çağırırken kullanacağız.</p>
+
+<p>Akabinde ise <strong><em>personArrayAdapter</em></strong> isminde, Person tipinde veri ile tanımlanan ArrayAdapter oluşturuyoruz. ArrayAdapter’ın yapılandırıcısına this anahtarı ile bu sınıfı, 
+<strong><em>android.R.layout.simple_list_item_1</em></strong> ile Layout’umuzu ve getDataFromWebWervice.getPersonListFromWebService() ifadesi ile de yazdırılacak verileri veriyoruz.</p>
+
+<p>ListView listView = (ListView) findViewById(android.R.id.list); ifadesi ile activity_main.xml içerisindeki ListView’a erişiyoruz ve listView.setAdapter(personArrayAdapter); satırı ile de
+az önce oluşturduğumuz Adapter’ı bu listView’a koyuyoruz.</p>
+
+<p>Şimdi web servisden veri çekme ve bize liste şeklinde dönme işlemini yapacak olan GetDataFromWebService sınıfını inceleyelim.</p>
+
+<p><strong>GetDataFromWebWervice.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">webserviceusage</span><span class="o">.</span><span class="na">operations</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">android.os.AsyncTask</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.google.gson.Gson</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.google.gson.JsonArray</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.google.gson.JsonParser</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.BufferedReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.InputStream</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.InputStreamReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">webserviceusage.pojo.Person</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GetDataFromWebWervice</span> <span class="kd">extends</span> <span class="n">AsyncTask</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Void</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="n">String</span> <span class="nf">doInBackground</span><span class="o">(</span><span class="n">String</span><span class="o">...</span> <span class="n">strings</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">webServiceAddress</span> <span class="o">=</span> <span class="n">strings</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+        <span class="n">String</span> <span class="n">json</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">;</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">URL</span><span class="o">(</span><span class="n">webServiceAddress</span><span class="o">);</span>
+            <span class="n">json</span> <span class="o">=</span> <span class="n">getStringFromInputStream</span><span class="o">(</span><span class="n">url</span><span class="o">.</span><span class="na">openStream</span><span class="o">());</span>
+        <span class="o">}</span>
+        <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">exception</span><span class="o">){</span>
+            <span class="n">exception</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span>  <span class="n">json</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="nf">getPersonListFromWebService</span><span class="o">(){</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">personList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;();</span>
+
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">String</span> <span class="n">json</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">GetDataFromWebWervice</span><span class="o">().</span><span class="na">execute</span><span class="o">(</span><span class="s">&quot;http://10.0.2.2:8080/SpringRestTutorial/getExample&quot;</span><span class="o">).</span><span class="na">get</span><span class="o">();</span>
+            <span class="n">Gson</span> <span class="n">gson</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Gson</span><span class="o">();</span>
+            <span class="n">JsonParser</span> <span class="n">jsonParser</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">JsonParser</span><span class="o">();</span>
+            <span class="n">JsonArray</span> <span class="n">jsonArray</span> <span class="o">=</span> <span class="n">jsonParser</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">json</span><span class="o">).</span><span class="na">getAsJsonArray</span><span class="o">();</span>
+
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">jsonArray</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="n">gson</span><span class="o">.</span><span class="na">fromJson</span><span class="o">(</span><span class="n">jsonArray</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="n">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+                <span class="n">personList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">person</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="n">personList</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="n">String</span> <span class="nf">getStringFromInputStream</span><span class="o">(</span><span class="n">InputStream</span> <span class="n">is</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="n">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="n">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">StringBuilder</span><span class="o">();</span>
+
+        <span class="n">String</span> <span class="n">line</span><span class="o">;</span>
+        <span class="k">try</span> <span class="o">{</span>
+
+            <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">));</span>
+            <span class="k">while</span> <span class="o">((</span><span class="n">line</span> <span class="o">=</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">line</span><span class="o">);</span>
+            <span class="o">}</span>
+
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">br</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">br</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>GetDataFromWebWervice sınıfı AsyncTask sınıfını kalıtan bir sınıf. AsyncTask sınıfından kalıtmadan uygulamayı çalıştırdığımda uygulama çalışmıyordu. Sebep olarak da MainActivty sınıfından
+başlamak üzere internet tabanlı bir işlem yapılacağı zaman Android buna izin vermiyor. AsyncTask sınıfı üzerinden bu işlemin yapılması tavsiye ediliyor.</p>
+
+<p>Metotların çağırılması sırasına göre metotları inceleyelim.</p>
+
+<p>getPersonListFromWebService metodu içerisinde bir adet PersonList oluşturuyoruz. try bloğu içerisinde 
+<strong><em>String json = new GetDataFromWebWervice().execute(“http://10.0.2.2:8080/SpringRestTutorial/getExample”).get();</em></strong> ifadesindeki execute ifadesi ile GetDataFromWebWervice sınıfı 
+içerisindeki doInBackGround metodunu çağırıyoruz. İfadenin sonundaki .get() ile de doInBackGround’un döndürdüğü String’i alıyoruz.</p>
+
+<p>doInBackGround metodu String tipinde değişken sayılı parametre alma durumuna sahip. Bizim execute içerisinde gönderdiğimiz URL’i strings[0] diyerek elde ediyoruz. try bloğu içerisinde
+gelen parametre olarak gelen URL ile bir URL nesnesi oluşturuyoruz. Bir alt satırda da getStringFromInputStream metoduna url.openStream() ifadesinden gelen InputStream’i
+göndererek metodu çağırıyoruz . getStringFromInputStream metodu az önce tarayıcıda gördüğümüz JSON’ı bize String olarak olarak döndürecek metot.
+getStringFromInputStream metodundan dönen String’i de metot içindeki json String’ine atayıp json String’ini döndürüyoruz. Döndürdüğümüz json String’i JSON formatına sahip bir String.</p>
+
+<p>getPersonListFromWebService metodu json String’ini elde ettikten Google’ın GSON kütüphanesini kullanarak bu JSON formatındaki String’i parçalıyor. Person objelerini oluşturup listeyi
+doldurup döndürüyoruz. GSON kullanımını <a href="http://ilkaygunel.com/blog/2016/gson-tutorial/">http://ilkaygunel.com/blog/2016/gson-tutorial/</a> adresinde anlatmıştım. İlgili adresteki
+yazıyı okuyarak buradaki kod bloğunu daha iyi anlayabilirsiniz.</p>
+
+<p>getStringFromInputStream metodu kendisine gelen InputStream’i String’e çevirip bize göndermekle yükümlü. Metot içerisinde BufferedReader ve StringBuilder nesneleri tanımlıyoruz.
+try bloğu içerisinde, br = new BufferedReader(new InputStreamReader(is)); satırında metoda gelen InputStream ile bir InputStreamReader oluşturuyoruz ve bunu da BufferedReader sınıfının
+yapılandırıcısına vererek BufferedReader nesnemizi oluşturuyoruz. while döngüsü ile de BufferedReader’ı satır satır okuyarak her bir satırı StringBuilder’a ekliyoruz. Metot çıkışında da
+StringBuilder’ı String’e çevirerek return ediyoruz.</p>
+
+<p>Uygulamayı çalıştırdığımızda şu şekilde bir ekran görüntüsü bizi karşılıyor:</p>
+
+<p><a href="/images/androidWebService/androidWebService2.png">
+<img src="/images/androidWebService/androidWebService2.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Gördüğünüz gibi web servisden veriyi alıp ekrana başarı ile yazdırabildik. Ekrandaki yazım şekli Person sınıfındaki toString metodundan gelmektedir. Burada ListView için özel bir
+(Custom) adapter yazılıp görünüm daha iyi bir formata sokulabilir. Onu da başka bir yazıda anlatırım arkadaşlar.</p>
+
+<p>Gelecek yazıda görüşene kadar sağlıcakla kalın arkadaşlar.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="http://github.com/ilkgunel" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="http://twitter.com/ilkgunel" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+  <li><a href="https://www.instagram.com/first.month/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2017 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>
