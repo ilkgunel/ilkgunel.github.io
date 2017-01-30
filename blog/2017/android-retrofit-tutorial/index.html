@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+	  (adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-0980023289791742",
+		enable_page_level_ads: true
+	  });
+	</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Android Retrofit Kütüphanesi İle Web Service GET ve POST Örneği</title>
+    <meta name="description" content="Merhabalar arkadaşlar. Bu yazıda size Android Retrofit kütüphanesi ile GET ve POST örneğini anlatmaya çalışacağım.">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2017/android-retrofit-tutorial/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>Android Retrofit Kütüphanesi İle Web Service GET ve POST Örneği - İlkay Günel - Blog</title>
+<meta property="og:title" content="Android Retrofit Kütüphanesi İle Web Service GET ve POST Örneği" />
+<meta name="description" content="Android Retrofit Kütüphanesi İle Web Service GET ve POST Örneği" />
+<meta property="og:description" content="Android Retrofit Kütüphanesi İle Web Service GET ve POST Örneği" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2017/android-retrofit-tutorial/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2017/android-retrofit-tutorial/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-01-29T20:40:21+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Android Retrofit Kütüphanesi İle Web Service GET ve POST Örneği",
+    "datePublished": "2017-01-29T20:40:21+03:00",
+    "description": "Android Retrofit Kütüphanesi İle Web Service GET ve POST Örneği",
+    "url": "http://ilkaygunel.com/blog/2017/android-retrofit-tutorial/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/cv.pdf" title="Bana Ait CV">Bana Ait CV</a></li>
+        
+          <li><a href="/blog/2016/git-nedir" title="Git Nedir? Nasıl Kullanılır?">Git Nedir? Nasıl Kullanılır?</a></li>
+        
+          <li><a href="/blog/2016/jsf-tutorials-list" title="JSF">JSF</a></li>
+        
+          <li><a href="/blog/2016/spring-tutorials" title="Spring 4">Spring 4</a></li>
+        
+          <li><a href="/blog/2016/eclipselink" title="Eclipselink">Eclipselink</a></li>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/blog/2016/test" title="Test">Test</a></li>
+        
+          <li><a href="/blog/2016/useful-libraries-for-java" title="Java İçin Faydalı Kütüphaneler">Java İçin Faydalı Kütüphaneler</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog/2016/eclipse-notes" title="Eclipse">Eclipse</a></li>
+        
+          <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
+        
+          <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Android Retrofit Kütüphanesi İle Web Service GET ve POST Örneği</h1>
+      <p class="post-meta">Jan 29, 2017</p>
+    </header>
+
+    <div class="post-content">
+      <p>Merhabalar arkadaşlar. Bu yazıda size Android Retrofit kütüphanesi ile GET ve POST örneğini anlatmaya çalışacağım.</p>
+
+<p>Bu yazıdaki uygulamanın kaynak kodlarına <a href="https://github.com/ilkgunel/AndroidWebServiceUsageTutorial">https://github.com/ilkgunel/AndroidWebServiceUsageTutorial</a>
+adresinden erişebilirsiniz arkadaşlar.</p>
+
+<p>Başlayalım 💪</p>
+
+<p>İlk olarak web servis çağrılarında kullanılacak metotların tanımlandığı <strong><em>PersonAPI.java</em></strong> interface’ine bakalım:</p>
+
+<p><strong>PersonAPI.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">webserviceusage</span><span class="o">.</span><span class="na">operations</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">retrofit2.Call</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">retrofit2.http.Body</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">retrofit2.http.GET</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">retrofit2.http.POST</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">webserviceusage.pojo.Person</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">PersonAPI</span> <span class="o">{</span>
+    <span class="nd">@GET</span><span class="o">(</span><span class="s">&quot;/SpringRestTutorial/getExample&quot;</span><span class="o">)</span>
+    <span class="n">Call</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">[]&gt;</span> <span class="nf">getSonValues</span><span class="o">();</span>
+
+    <span class="nd">@POST</span><span class="o">(</span><span class="s">&quot;/SpringRestTutorial/postPerson&quot;</span><span class="o">)</span>
+    <span class="n">Call</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="nf">postPerson</span><span class="o">(</span><span class="nd">@Body</span> <span class="n">Person</span> <span class="n">person</span><span class="o">);</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>PersonAPI interface’i içerisinde getSonValues() metodunu <strong><em>@GET(“/SpringRestTutorial/getExample”)</em></strong> ifadesi ile işaretleyerek /SpringRestTutorial/getExample adresine bir GET isteği 
+atılacağını söylüyoruz. getSonValues metodunun implementasyonunu az Retrofit yardımı ile yapacağız.</p>
+
+<p>Aynı şekilde postPerson() metodunu da <strong><em>@POST(“/SpringRestTutorial/postPerson”)</em></strong> ifadesi ile işaretleyerek /SpringRestTutorial/postPerson adresine bir POST isteği atılacağını
+söylüyoruz. postPerson() metodunu da Retrofit yardımı ile implemente edeceğiz.</p>
+
+<p>Retrofit kütüphanesini kullanacağımız zaman <strong><em>Retrofit</em></strong> sınıfından bir nesneye ihtiyacımız olacak. Bunun RetroClient adında bir sınıfımız var ve bu sınıfımız içinde bize
+Retrofit nesnesi sunan bir bir getClient metodumuz var:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">ilkaygunel</span><span class="o">.</span><span class="na">com</span><span class="o">.</span><span class="na">webserviceusagetutorial</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">okhttp3.OkHttpClient</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">retrofit2.Retrofit</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">retrofit2.converter.gson.GsonConverterFactory</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">RetroClient</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">BASE_URL</span> <span class="o">=</span> <span class="s">&quot;http://10.0.2.2:8080/&quot;</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Retrofit</span> <span class="n">retrofit</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Retrofit</span> <span class="nf">getClient</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">retrofit</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">retrofit</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Retrofit</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">baseUrl</span><span class="o">(</span><span class="n">BASE_URL</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">addConverterFactory</span><span class="o">(</span><span class="n">GsonConverterFactory</span><span class="o">.</span><span class="na">create</span><span class="o">()).</span><span class="na">client</span><span class="o">(</span><span class="k">new</span> <span class="nf">OkHttpClient</span><span class="o">())</span>
+                    <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">retrofit</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>getClient metodu içinde new Retrofit.Builder() bir Retrofit builder elde ediyor, .baseUrl(BASE_URL) ifadesi ile web servis root URL’ini Retrofit nesnesine atıyor, 
+.addConverterFactory(GsonConverterFactory.create()) ifadesi ile JSON ile Java sınıfları arasında otomatik dönüşümler sırasında GSON’ı kullanmasını söylüyor, client(new OkHttpClient())
+ifadesi ile HTTP client’ı ataması yapıyor, build() ifadesi ile de retrofit nesnesini oluşturuyoruz. Metot çıkışında da retrofit nesnesini döndürüyoruz.</p>
+
+<p>Şimdi web servisden veri çekip ekrana yazdıracak ListActiviy sınıfına bakalım:</p>
+
+<p><strong><em>ListActivity.java</em></strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">ilkaygunel</span><span class="o">.</span><span class="na">com</span><span class="o">.</span><span class="na">webserviceusagetutorial</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">android.app.ListActivity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.os.Bundle</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.util.Log</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.widget.ListView</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">retrofit2.Call</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">retrofit2.Callback</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">retrofit2.Response</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">webserviceusage.operations.PersonAPI</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">webserviceusage.pojo.Person</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ListUsersActivity</span> <span class="kd">extends</span> <span class="n">ListActivity</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">personList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="n">CustomAdapter</span> <span class="n">customAdapter</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">activity_list_people</span><span class="o">);</span>
+
+
+        <span class="kd">final</span> <span class="n">PersonAPI</span> <span class="n">personAPI</span> <span class="o">=</span> <span class="n">RetroClient</span><span class="o">.</span><span class="na">getClient</span><span class="o">().</span><span class="na">create</span><span class="o">(</span><span class="n">PersonAPI</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="kd">final</span> <span class="n">Call</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">[]&gt;</span> <span class="n">call</span> <span class="o">=</span> <span class="n">personAPI</span><span class="o">.</span><span class="na">getSonValues</span><span class="o">();</span>
+        <span class="n">call</span><span class="o">.</span><span class="na">enqueue</span><span class="o">(</span><span class="k">new</span> <span class="n">Callback</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">[]&gt;()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onResponse</span><span class="o">(</span><span class="n">Call</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">[]&gt;</span> <span class="n">call</span><span class="o">,</span> <span class="n">Response</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">[]&gt;</span> <span class="n">response</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">for</span> <span class="o">(</span><span class="n">Person</span> <span class="n">p</span> <span class="o">:</span> <span class="n">response</span><span class="o">.</span><span class="na">body</span><span class="o">()){</span>
+                    <span class="n">personList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onFailure</span><span class="o">(</span><span class="n">Call</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">[]&gt;</span> <span class="n">call</span><span class="o">,</span> <span class="n">Throwable</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="s">&quot;MainActivit Class:&quot;</span><span class="o">,</span> <span class="s">&quot;HATA: &quot;</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+
+        <span class="n">ListView</span> <span class="n">listView</span> <span class="o">=</span> <span class="o">(</span><span class="n">ListView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">android</span><span class="o">.</span><span class="na">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">list</span><span class="o">);</span>
+        <span class="n">customAdapter</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">CustomAdapter</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">personList</span><span class="o">);</span>
+        <span class="n">listView</span><span class="o">.</span><span class="na">setAdapter</span><span class="o">(</span><span class="n">customAdapter</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>ListUsersActivity sınıfımızın onCreate metodu içerisinde PersonAPI interface’i tipinde bir personAPI nesnesini <strong><em>RetroClient.getClient().create(PersonAPI.class);</em></strong> ifadesi ile elde
+ediyoruz. Az önce de gördüğümüz gibi RetroClient.getClient() ifadesi bize Retrofit sınıfından bir nesne döndürecek ve biz de bu nesnenin create metoduna PersonAPI sınıfını parametre 
+olarak geçiriyoruz. Yani aslında senin yapacağın web servis işlemleri PersonAPI içerisinde tanımlı diyoruz.</p>
+
+<p><strong><em>final Call&lt;Person[]&gt; call = personAPI.getSonValues();</em></strong> ifadesi ile GET metodunu çalıştırıyoruz ve dönen sonucu call nesnesine atıyoruz. call.enqueue ifadesi ile call nesnesinin
+içine giriyoruz. enqueue metoduna new Callback&lt;Person[]&gt;() diyerek bir CallBack sınıfı nesnesi geçiriyoruz. Bu ifadeyi yazdığımızda Android Studio onResponse ve ve onFailure metotlarını
+Override ediyor. onResponse metodunun parametre kısmındaki response nesnesin call nesnesinden geliyor. response.body() ifadesi bize bir Person dizisi sunuyor, biz de dizideki Person
+nesnelerini personList listesine ekliyoruz.</p>
+
+<p>Kodun son aşamalarında ise ListView nesnesimizi elde ediyoruz ve CustomAdapter sınıfından bir nesneyi ListView’a koyuyoruz.</p>
+
+<p><strong>CustomAdapter.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">ilkaygunel</span><span class="o">.</span><span class="na">com</span><span class="o">.</span><span class="na">webserviceusagetutorial</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">android.app.Activity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.content.Context</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.view.View</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.view.LayoutInflater</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.view.ViewGroup</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.widget.BaseAdapter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.widget.TextView</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">webserviceusage.pojo.Person</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomAdapter</span> <span class="kd">extends</span> <span class="n">BaseAdapter</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="n">LayoutInflater</span> <span class="n">layoutInflater</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">personList</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">CustomAdapter</span><span class="o">(</span><span class="n">Activity</span> <span class="n">activity</span><span class="o">,</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">personList</span><span class="o">){</span>
+        <span class="n">layoutInflater</span> <span class="o">=</span> <span class="o">(</span><span class="n">LayoutInflater</span><span class="o">)</span> <span class="n">activity</span><span class="o">.</span><span class="na">getSystemService</span><span class="o">(</span><span class="n">Context</span><span class="o">.</span><span class="na">LAYOUT_INFLATER_SERVICE</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">personList</span> <span class="o">=</span> <span class="n">personList</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getCount</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">personList</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">getItem</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">personList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">long</span> <span class="nf">getItemId</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">i</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">View</span> <span class="nf">getView</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="n">View</span> <span class="n">view</span><span class="o">,</span> <span class="n">ViewGroup</span> <span class="n">viewGroup</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">View</span> <span class="n">satirView</span><span class="o">;</span>
+
+        <span class="n">satirView</span> <span class="o">=</span> <span class="n">layoutInflater</span><span class="o">.</span><span class="na">inflate</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">list_layout</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+        <span class="n">TextView</span> <span class="n">idNumber</span> <span class="o">=</span>
+                <span class="o">(</span><span class="n">TextView</span><span class="o">)</span> <span class="n">satirView</span><span class="o">.</span><span class="na">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">idNumber</span><span class="o">);</span>
+
+        <span class="n">TextView</span> <span class="n">name</span> <span class="o">=</span>
+                <span class="o">(</span><span class="n">TextView</span><span class="o">)</span> <span class="n">satirView</span><span class="o">.</span><span class="na">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">name</span><span class="o">);</span>
+
+        <span class="n">TextView</span> <span class="n">surname</span> <span class="o">=</span>
+                <span class="o">(</span><span class="n">TextView</span><span class="o">)</span> <span class="n">satirView</span><span class="o">.</span><span class="na">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">surname</span><span class="o">);</span>
+
+        <span class="n">TextView</span> <span class="n">address</span> <span class="o">=</span>
+                <span class="o">(</span><span class="n">TextView</span><span class="o">)</span> <span class="n">satirView</span><span class="o">.</span><span class="na">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">address</span><span class="o">);</span>
+
+
+        <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="n">personList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+
+        <span class="n">idNumber</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">person</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
+        <span class="n">name</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">person</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+        <span class="n">surname</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">person</span><span class="o">.</span><span class="na">getSurname</span><span class="o">());</span>
+        <span class="n">address</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">person</span><span class="o">.</span><span class="na">getAddress</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
+
+
+        <span class="k">return</span> <span class="n">satirView</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>CustomAdapter sınıfı BaseAdapter sınıfını kalıtan ve <strong><em>list_layout</em></strong> yerleşim düzenini uygulayan bir sınıftır. Odaklanılması gereken metot getView metodudur. Bu metot içerisinde 
+list_layout yerleşim düzenindeki nesneler bulunuyor ve değerler o elementlere koyuluyor.</p>
+
+<p>list_layout.xml dosyamız da şu şekilde:</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="na">xmlns:tools=</span><span class="s">&quot;http://schemas.android.com/tools&quot;</span>
+    <span class="na">android:layout_width=</span><span class="s">&quot;match_parent&quot;</span>
+    <span class="na">android:layout_height=</span><span class="s">&quot;match_parent&quot;</span>
+    <span class="na">android:orientation=</span><span class="s">&quot;horizontal&quot;</span> <span class="nt">&gt;</span>
+
+    <span class="nt">&lt;TextView</span>
+        <span class="na">android:id=</span><span class="s">&quot;@+id/idNumber&quot;</span>
+        <span class="na">android:layout_width=</span><span class="s">&quot;48dp&quot;</span>
+        <span class="na">android:layout_height=</span><span class="s">&quot;48dp&quot;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;TextView</span>
+        <span class="na">android:id=</span><span class="s">&quot;@+id/name&quot;</span>
+        <span class="na">android:layout_width=</span><span class="s">&quot;48dp&quot;</span>
+        <span class="na">android:layout_height=</span><span class="s">&quot;48dp&quot;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;TextView</span>
+        <span class="na">android:id=</span><span class="s">&quot;@+id/surname&quot;</span>
+        <span class="na">android:layout_width=</span><span class="s">&quot;48dp&quot;</span>
+        <span class="na">android:layout_height=</span><span class="s">&quot;48dp&quot;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;TextView</span>
+        <span class="na">android:id=</span><span class="s">&quot;@+id/address&quot;</span>
+        <span class="na">android:layout_width=</span><span class="s">&quot;48dp&quot;</span>
+        <span class="na">android:layout_height=</span><span class="s">&quot;48dp&quot;</span> <span class="nt">/&gt;</span>
+
+<span class="nt">&lt;/LinearLayout&gt;</span></code></pre></figure>
+
+<p>Uygulamayı çalıştırdığımızdaki ekran görüntüsü şu şekilde, GET işlemi için tıklıyoruz:</p>
+
+<p><a href="/images/androidWebService/retrofit1.png">
+<img src="/images/androidWebService/retrofit1.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Web servisden bilgiler alınıp ekrana yazdırıldı.</p>
+
+<p><a href="/images/androidWebService/retrofit2.png">
+<img src="/images/androidWebService/retrofit2.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Şimdi de POST işlemi için olan kodlara bakalım:</p>
+
+<p><strong>PostUserActivity.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">ilkaygunel</span><span class="o">.</span><span class="na">com</span><span class="o">.</span><span class="na">webserviceusagetutorial</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">android.app.Activity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.os.Bundle</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.os.PersistableBundle</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.view.View</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.widget.EditText</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">retrofit2.Call</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">retrofit2.Callback</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">retrofit2.Response</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">webserviceusage.operations.PersonAPI</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">webserviceusage.pojo.Address</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">webserviceusage.pojo.Person</span><span class="o">;</span>
+
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PostUserActivity</span> <span class="kd">extends</span> <span class="n">Activity</span><span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">post_user_activity</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">postPersonToWebService</span><span class="o">(</span><span class="n">View</span> <span class="n">view</span><span class="o">){</span>
+        <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Person</span><span class="o">();</span>
+
+        <span class="n">EditText</span> <span class="n">idEditText</span> <span class="o">=</span> <span class="o">(</span><span class="n">EditText</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">idField</span><span class="o">);</span>
+        <span class="n">EditText</span> <span class="n">nameEditText</span> <span class="o">=</span> <span class="o">(</span><span class="n">EditText</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">nameField</span><span class="o">);</span>
+        <span class="n">EditText</span> <span class="n">surnameEditText</span> <span class="o">=</span> <span class="o">(</span><span class="n">EditText</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">surnameField</span><span class="o">);</span>
+
+        <span class="n">person</span><span class="o">.</span><span class="na">setId</span><span class="o">(</span><span class="n">idEditText</span><span class="o">.</span><span class="na">getText</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
+        <span class="n">person</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="n">nameEditText</span><span class="o">.</span><span class="na">getText</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
+        <span class="n">person</span><span class="o">.</span><span class="na">setSurname</span><span class="o">(</span><span class="n">surnameEditText</span><span class="o">.</span><span class="na">getText</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
+
+        <span class="n">Address</span> <span class="n">address</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Address</span><span class="o">();</span>
+        <span class="n">address</span><span class="o">.</span><span class="na">setNeighborhood</span><span class="o">(</span><span class="s">&quot;Cennet Mahallesi&quot;</span><span class="o">);</span>
+        <span class="n">address</span><span class="o">.</span><span class="na">setBorough</span><span class="o">(</span><span class="s">&quot;Küçükçekmece&quot;</span><span class="o">);</span>
+        <span class="n">address</span><span class="o">.</span><span class="na">setCity</span><span class="o">(</span><span class="s">&quot;İstanbul&quot;</span><span class="o">);</span>
+        <span class="n">address</span><span class="o">.</span><span class="na">setCountry</span><span class="o">(</span><span class="s">&quot;Türkiye&quot;</span><span class="o">);</span>
+
+        <span class="n">person</span><span class="o">.</span><span class="na">setAddress</span><span class="o">(</span><span class="n">address</span><span class="o">);</span>
+
+        <span class="n">PersonAPI</span> <span class="n">personAPI</span> <span class="o">=</span> <span class="n">RetroClient</span><span class="o">.</span><span class="na">getClient</span><span class="o">().</span><span class="na">create</span><span class="o">(</span><span class="n">PersonAPI</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">Call</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">call</span> <span class="o">=</span> <span class="n">personAPI</span><span class="o">.</span><span class="na">postPerson</span><span class="o">(</span><span class="n">person</span><span class="o">);</span>
+        <span class="n">call</span><span class="o">.</span><span class="na">enqueue</span><span class="o">(</span><span class="k">new</span> <span class="n">Callback</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onResponse</span><span class="o">(</span><span class="n">Call</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">call</span><span class="o">,</span> <span class="n">Response</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">response</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;POST işlemi başarılı&quot;</span><span class="o">);</span>
+            <span class="o">}</span>
+
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onFailure</span><span class="o">(</span><span class="n">Call</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">call</span><span class="o">,</span> <span class="n">Throwable</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Bir Hata Meydana Geldi! &quot;</span><span class="o">+</span><span class="n">t</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>PostUserActivity sınıfında içinde butona tıklandığında devreye girecek <strong><em>postPersonToWebService</em></strong> metodumuz yer alıyor. Bu metot içinde bir person nesnesi oluşturulup EditText’lerden 
+gelen veriler ile bu person nesnesi dolduruluyor. Akabinde yine aynı şekilde bir personAPI nesnesi elde ediyoruz ve postPerson metoduna person nesnesini geçirerek POST işlemini
+tetikliyoruz. enqueue metodu içerisinde onResponse’da konsola dönen response’un kodunu yazdırıyoruz. Eğer bir hata meydana gelirse onFailure metodu devreye girecek.</p>
+
+<p>post_user_activity layout’umuz da şu şekilde:</p>
+
+<?xml version="1.0" encoding="utf-8"?>
+<gridlayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" android:paddingbottom="@dimen/activity_vertical_margin" android:paddingleft="@dimen/activity_horizontal_margin" android:paddingright="@dimen/activity_horizontal_margin" android:paddingtop="@dimen/activity_vertical_margin" tools:context="ilkaygunel.com.webserviceusagetutorial.PostUserActivity" android:weightsum="1">
+
+    <textview android:text="Id Giriniz:" android:layout_row="0" android:layout_column="0" android:width="120dp" />
+
+    <edittext android:id="@+id/idField" android:layout_row="0" android:layout_column="1" android:width="120dp" />
+
+    <textview android:text="İsim Giriniz:" android:layout_row="1" android:layout_column="0" android:width="120dp" />
+
+    <edittext android:id="@+id/nameField" android:layout_row="1" android:layout_column="1" android:width="120dp" />
+
+    <textview android:text="Soyisim Giriniz:" android:layout_row="2" android:layout_column="0" android:width="120dp" />
+
+    <edittext android:id="@+id/surnameField" android:layout_row="2" android:layout_column="1" android:width="120dp" />
+
+    <button android:layout_row="3" android:layout_column="1" android:text="GÖNDER" android:onclick="postPersonToWebService" />
+
+</gridlayout>
+
+<p>Şimdi az önceki ana ekrandan POST işlemi için tıklıyorum ve gelen ekrandaki input’ları dolduruyorum:</p>
+
+<p><a href="/images/androidWebService/retrofit3.png">
+<img src="/images/androidWebService/retrofit3.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Bu web servis gelen isteği gidip veri tabanına yazan bir web servis. Veri tabanını kontrol ettiğimde girilen bilgilerin yazıldığını görüyorum:</p>
+
+<p><a href="/images/androidWebService/retrofit4.png">
+<img src="/images/androidWebService/retrofit4.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="http://github.com/ilkgunel" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="http://twitter.com/ilkgunel" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+  <li><a href="https://www.instagram.com/first.month/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2017 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>
