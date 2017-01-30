@@ -422,24 +422,61 @@ tetikliyoruz. enqueue metodu içerisinde onResponse’da konsola dönen response
 
 <p>post_user_activity layout’umuz da şu şekilde:</p>
 
-<?xml version="1.0" encoding="utf-8"?>
-<gridlayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" android:paddingbottom="@dimen/activity_vertical_margin" android:paddingleft="@dimen/activity_horizontal_margin" android:paddingright="@dimen/activity_horizontal_margin" android:paddingtop="@dimen/activity_vertical_margin" tools:context="ilkaygunel.com.webserviceusagetutorial.PostUserActivity" android:weightsum="1">
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;GridLayout</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="na">xmlns:tools=</span><span class="s">&quot;http://schemas.android.com/tools&quot;</span>
+    <span class="na">android:layout_width=</span><span class="s">&quot;match_parent&quot;</span>
+    <span class="na">android:layout_height=</span><span class="s">&quot;match_parent&quot;</span>
+    <span class="na">android:paddingBottom=</span><span class="s">&quot;@dimen/activity_vertical_margin&quot;</span>
+    <span class="na">android:paddingLeft=</span><span class="s">&quot;@dimen/activity_horizontal_margin&quot;</span>
+    <span class="na">android:paddingRight=</span><span class="s">&quot;@dimen/activity_horizontal_margin&quot;</span>
+    <span class="na">android:paddingTop=</span><span class="s">&quot;@dimen/activity_vertical_margin&quot;</span>
+    <span class="na">tools:context=</span><span class="s">&quot;ilkaygunel.com.webserviceusagetutorial.PostUserActivity&quot;</span>
+    <span class="na">android:weightSum=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
 
-    <textview android:text="Id Giriniz:" android:layout_row="0" android:layout_column="0" android:width="120dp" />
+    <span class="nt">&lt;TextView</span>
+        <span class="na">android:text=</span><span class="s">&quot;Id Giriniz:&quot;</span>
+        <span class="na">android:layout_row=</span><span class="s">&quot;0&quot;</span>
+        <span class="na">android:layout_column=</span><span class="s">&quot;0&quot;</span>
+        <span class="na">android:width=</span><span class="s">&quot;120dp&quot;</span><span class="nt">/&gt;</span>
 
-    <edittext android:id="@+id/idField" android:layout_row="0" android:layout_column="1" android:width="120dp" />
+    <span class="nt">&lt;EditText</span>
+        <span class="na">android:id=</span><span class="s">&quot;@+id/idField&quot;</span>
+        <span class="na">android:layout_row=</span><span class="s">&quot;0&quot;</span>
+        <span class="na">android:layout_column=</span><span class="s">&quot;1&quot;</span>
+        <span class="na">android:width=</span><span class="s">&quot;120dp&quot;</span><span class="nt">/&gt;</span>
 
-    <textview android:text="İsim Giriniz:" android:layout_row="1" android:layout_column="0" android:width="120dp" />
+    <span class="nt">&lt;TextView</span>
+        <span class="na">android:text=</span><span class="s">&quot;İsim Giriniz:&quot;</span>
+        <span class="na">android:layout_row=</span><span class="s">&quot;1&quot;</span>
+        <span class="na">android:layout_column=</span><span class="s">&quot;0&quot;</span>
+        <span class="na">android:width=</span><span class="s">&quot;120dp&quot;</span><span class="nt">/&gt;</span>
 
-    <edittext android:id="@+id/nameField" android:layout_row="1" android:layout_column="1" android:width="120dp" />
+    <span class="nt">&lt;EditText</span>
+        <span class="na">android:id=</span><span class="s">&quot;@+id/nameField&quot;</span>
+        <span class="na">android:layout_row=</span><span class="s">&quot;1&quot;</span>
+        <span class="na">android:layout_column=</span><span class="s">&quot;1&quot;</span>
+        <span class="na">android:width=</span><span class="s">&quot;120dp&quot;</span><span class="nt">/&gt;</span>
 
-    <textview android:text="Soyisim Giriniz:" android:layout_row="2" android:layout_column="0" android:width="120dp" />
+    <span class="nt">&lt;TextView</span>
+        <span class="na">android:text=</span><span class="s">&quot;Soyisim Giriniz:&quot;</span>
+        <span class="na">android:layout_row=</span><span class="s">&quot;2&quot;</span>
+        <span class="na">android:layout_column=</span><span class="s">&quot;0&quot;</span>
+        <span class="na">android:width=</span><span class="s">&quot;120dp&quot;</span><span class="nt">/&gt;</span>
 
-    <edittext android:id="@+id/surnameField" android:layout_row="2" android:layout_column="1" android:width="120dp" />
+    <span class="nt">&lt;EditText</span>
+        <span class="na">android:id=</span><span class="s">&quot;@+id/surnameField&quot;</span>
+        <span class="na">android:layout_row=</span><span class="s">&quot;2&quot;</span>
+        <span class="na">android:layout_column=</span><span class="s">&quot;1&quot;</span>
+        <span class="na">android:width=</span><span class="s">&quot;120dp&quot;</span><span class="nt">/&gt;</span>
 
-    <button android:layout_row="3" android:layout_column="1" android:text="GÖNDER" android:onclick="postPersonToWebService" />
+    <span class="nt">&lt;Button</span>
+        <span class="na">android:layout_row=</span><span class="s">&quot;3&quot;</span>
+        <span class="na">android:layout_column=</span><span class="s">&quot;1&quot;</span>
+        <span class="na">android:text=</span><span class="s">&quot;GÖNDER&quot;</span>
+        <span class="na">android:onClick=</span><span class="s">&quot;postPersonToWebService&quot;</span><span class="nt">/&gt;</span>
 
-</gridlayout>
+<span class="nt">&lt;/GridLayout&gt;</span></code></pre></figure>
 
 <p>Şimdi az önceki ana ekrandan POST işlemi için tıklıyorum ve gelen ekrandaki input’ları dolduruyorum:</p>
 
