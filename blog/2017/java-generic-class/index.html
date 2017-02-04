@@ -242,10 +242,12 @@ kullanılabilir. Bizim örneğimizdeki ServiceClass bize gönderilen POJO’nun 
 <span class="o">}</span></code></pre></figure>
 
 <p>ServiceClass sınıfımız bir abstract sınıf. Az sonra göreceğimiz Operation sınıfları bu sınıfı kaltıcağından ötürü bu sınıfın içinde gövdesi tanımlanmamış metotlar da yer alabilir ve abstract olması bana göre 
-kullanıma daha uygun. Sınıf tanımlanması sırasında bu sınıfın bir parametre alacağını söylüyoruz ve ***<t>*** ifadesi bu sınıfa Generic olma özelliği kazandırıyor. Artık bu sınıftan kalıtım yaparken istenen
-tüm sınıflar parametre olarak kullanılabilir. Sınıf içerisinde ***entityClass*** adında bir nesnemiz mevcut. Bu sınıfı kalıtmış bir sınftan nesne oluşturulurken oluşturalacak bu nesne ile hangi sınıfın geldiğini
-konsola yazdıracağız. ***getStringFromEntity()*** metodu T tpinde bir parametre bekliyor. Yani bu metot birden farklı tipte parametreyi karşılayabilecek vaziyette. Metot içerisinde ise önce  entityClass nesnesinden
-hangi sınıf tipinde parametre geldiğini yazdırıyoruz sonra da gelen entity'nin String halini döndürüyoruz.</t></p>
+kullanıma daha uygun. Sınıf tanımlanması sırasında bu sınıfın bir parametre alacağını söylüyoruz ve</p>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span></code></pre></figure>
+<p>ifadesi bu sınıfa Generic olma özelliği kazandırıyor. Artık bu sınıftan kalıtım yaparken istenen
+tüm sınıflar parametre olarak kullanılabilir. Sınıf içerisinde <strong><em>entityClass</em></strong> adında bir nesnemiz mevcut. Bu sınıfı kalıtmış bir sınftan nesne oluşturulurken oluşturalacak bu nesne ile hangi sınıfın geldiğini
+konsola yazdıracağız. <strong><em>getStringFromEntity()</em></strong> metodu T tpinde bir parametre bekliyor. Yani bu metot birden farklı tipte parametreyi karşılayabilecek vaziyette. Metot içerisinde ise önce  entityClass nesnesinden
+hangi sınıf tipinde parametre geldiğini yazdırıyoruz sonra da gelen entity’nin String halini döndürüyoruz.</p>
 
 <p><strong><em>StudenOperationClass.java &amp; TeacherOperationClass.java</em></strong></p>
 
