@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+	  (adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-0980023289791742",
+		enable_page_level_ads: true
+	  });
+	</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>JAXB Marshalling and Unmarshalling</title>
+    <meta name="description" content="Merhabalar arkadaşlar. Bu yazıda sizlere Java’da Marshalling ve Unmarshalling konusunu anlatmaya çalışacağım.">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2017/marshalling-and-unmarshalling/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>JAXB Marshalling and Unmarshalling - İlkay Günel - Blog</title>
+<meta property="og:title" content="JAXB Marshalling and Unmarshalling" />
+<meta name="description" content="JAXB Marshalling and Unmarshalling" />
+<meta property="og:description" content="JAXB Marshalling and Unmarshalling" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2017/marshalling-and-unmarshalling/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2017/marshalling-and-unmarshalling/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-04-08T21:23:21+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "JAXB Marshalling and Unmarshalling",
+    "datePublished": "2017-04-08T21:23:21+03:00",
+    "description": "JAXB Marshalling and Unmarshalling",
+    "url": "http://ilkaygunel.com/blog/2017/marshalling-and-unmarshalling/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/ilkay-gunel-cv.pdf" title="Bana Ait CV">Bana Ait CV</a></li>
+        
+          <li><a href="/blog/2016/git-nedir" title="Git Nedir? Nasıl Kullanılır?">Git Nedir? Nasıl Kullanılır?</a></li>
+        
+          <li><a href="/blog/2016/jsf-tutorials-list" title="JSF">JSF</a></li>
+        
+          <li><a href="/blog/2016/spring-tutorials" title="Spring 4">Spring 4</a></li>
+        
+          <li><a href="/blog/2016/eclipselink" title="Eclipselink">Eclipselink</a></li>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/blog/2016/test" title="Test">Test</a></li>
+        
+          <li><a href="/blog/2016/useful-libraries-for-java" title="Java İçin Faydalı Kütüphaneler">Java İçin Faydalı Kütüphaneler</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog/2016/eclipse-notes" title="Eclipse">Eclipse</a></li>
+        
+          <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
+        
+          <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">JAXB Marshalling and Unmarshalling</h1>
+      <p class="post-meta">Apr 8, 2017</p>
+    </header>
+
+    <div class="post-content">
+      <p>Merhabalar arkadaşlar. Bu yazıda sizlere Java’da Marshalling ve Unmarshalling konusunu anlatmaya çalışacağım.</p>
+
+<p>Marshalling ve Unmarshalling dediğimiz konu aslında Java’dan XML veri tipine dönüşüm ve XML veri tipinden Java’ya dönüşüm manasına gelmektedir.  JAXB dediğimiz ve açılımı <strong><em>Java Architecture for XML Binding</em></strong> olan 
+mesele Java geliştiricilerine nesneler ile XML arasında dönüşüm yapmada rahatlık sunmayı amaçlayan bir çatıdır. Bu yazıda biz de bu yapıyı pratiğe dökmeye çalışacağız. Başlayalım 💪</p>
+
+<p>İlk olarak bir adet POJO sınıfına ihtiyacımız var. Person isminde şu şekilde bir class oluşturuyoruz:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">marshallingandmarshalling</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.xml.bind.annotation.XmlAccessType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.xml.bind.annotation.XmlAccessorType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.xml.bind.annotation.XmlRootElement</span><span class="o">;</span>
+
+<span class="nd">@XmlRootElement</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;person&quot;</span><span class="o">)</span>
+<span class="nd">@XmlAccessorType</span> <span class="o">(</span><span class="n">XmlAccessType</span><span class="o">.</span><span class="na">FIELD</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="nf">Person</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="n">String</span> <span class="n">surname</span><span class="o">,</span> <span class="n">String</span> <span class="n">city</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">surname</span> <span class="o">=</span> <span class="n">surname</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">city</span> <span class="o">=</span> <span class="n">city</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">surname</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">city</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getSurname</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">surname</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSurname</span><span class="o">(</span><span class="n">String</span> <span class="n">surname</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">surname</span> <span class="o">=</span> <span class="n">surname</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getCity</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">city</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCity</span><span class="o">(</span><span class="n">String</span> <span class="n">city</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">city</span> <span class="o">=</span> <span class="n">city</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">&quot;Person{&quot;</span> <span class="o">+</span> <span class="s">&quot;name=&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot;, surname=&quot;</span> <span class="o">+</span> <span class="n">surname</span> <span class="o">+</span> <span class="s">&quot;, city=&quot;</span> <span class="o">+</span> <span class="n">city</span> <span class="o">+</span> <span class="sc">&#39;}&#39;</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Person sınıfımız içerisinde <strong><em>@XmlRootElement(name = “person”)</em></strong> kısmı bu sınıf üzerinden dönüşüm yapıldığında kök elemanın <strong><em>person</em></strong> olacağını bildiriyor. Onun dışında bildiğimiz bir POJO sınıfı.</p>
+
+<p>Şimdi bu sınıf üzerinden basit Marshalling örneği yapalım:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">marshallingandmarshalling</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.logging.Level</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.logging.Logger</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.xml.bind.JAXBContext</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.xml.bind.JAXBException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.xml.bind.Marshaller</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MarshallingAndUnMarshalling</span> <span class="o">{</span>
+    
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Person</span><span class="o">();</span>
+        <span class="n">person</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">&quot;ilkay&quot;</span><span class="o">);</span>
+        <span class="n">person</span><span class="o">.</span><span class="na">setSurname</span><span class="o">(</span><span class="s">&quot;günel&quot;</span><span class="o">);</span>
+        <span class="n">person</span><span class="o">.</span><span class="na">setCity</span><span class="o">(</span><span class="s">&quot;istanbul&quot;</span><span class="o">);</span>
+        
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">JAXBContext</span> <span class="n">jaxbContext</span> <span class="o">=</span> <span class="n">JAXBContext</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+            <span class="n">Marshaller</span> <span class="n">jaxbMarshaller</span> <span class="o">=</span> <span class="n">jaxbContext</span><span class="o">.</span><span class="na">createMarshaller</span><span class="o">();</span>
+            <span class="n">jaxbMarshaller</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="n">Marshaller</span><span class="o">.</span><span class="na">JAXB_FORMATTED_OUTPUT</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+            <span class="n">jaxbMarshaller</span><span class="o">.</span><span class="na">marshal</span><span class="o">(</span><span class="n">person</span><span class="o">,</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">JAXBException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">Logger</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">MarshallingAndUnMarshalling</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getName</span><span class="o">()).</span><span class="na">log</span><span class="o">(</span><span class="n">Level</span><span class="o">.</span><span class="na">SEVERE</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>   
+<span class="o">}</span></code></pre></figure>
+
+<p>Main metodumuz içerisinde Person sınıfından bir nesne oluşturup dolduruyoruz. Akabinde try bloğu içerisinde 
+- JAXBContext jaxbContext = JAXBContext.newInstance(Person.class); ifadesi ile Marshalling işlemini yapacağımız temel nesneyi elde ediyoruz.
+- Marshaller jaxbMarshaller = jaxbContext.createMarshaller(); ifadesi ile jaxbContext nesnesi üzerinden jaxbMarshaller nesnesini elde ediyoruz.
+- jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true); Marshalling işleminin çıktısının formatını bildiriyoruz.
+-jaxbMarshaller.marshal(person, System.out); ifadesi ile de person nesnesi üzerindeki Marshalling işlemini çalıştırıyoruz ve System.out’a oluşan çıktıyı gönderiyoruz.</p>
+
+<p>Kodu çalıştırdığımızda ortaya şu şekilde bir XML çıkıyor:</p>
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<person>
+    <name>ilkay</name>
+    <surname>günel</surname>
+    <city>istanbul</city>
+</person>
+
+<p>Eğer size bir XML gelirse ve sizden bunu Java nesnesine çevirmeniz istenirse de o zaman Unmarshalling işlemi yapmamız gerekir. Bu durumda yukarıdaki XML çıktısını bir XML dosyasına kaydedlim ve o dosya üzerinden 
+Unmarshalling işlemi yapalım. Örneğin ben yukarıdaki çıktıyı /Users/ilkaygunel/Desktop/unmarshalling.xml adresindeki dosyaya kaydediyorum. Bu dosya üzerinden Unmarshalling işlemi de şu şekilde olacak:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">marshallingandmarshalling</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.logging.Level</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.logging.Logger</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.xml.bind.JAXBContext</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.xml.bind.JAXBException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.xml.bind.Marshaller</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.xml.bind.Unmarshaller</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MarshallingAndUnMarshalling</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">JAXBContext</span> <span class="n">jaxbContext</span> <span class="o">=</span> <span class="n">JAXBContext</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+            <span class="n">Unmarshaller</span> <span class="n">jaxbUnmarshaller</span> <span class="o">=</span> <span class="n">jaxbContext</span><span class="o">.</span><span class="na">createUnmarshaller</span><span class="o">();</span>
+            <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="o">(</span><span class="n">Person</span><span class="o">)</span> <span class="n">jaxbUnmarshaller</span><span class="o">.</span><span class="na">unmarshal</span><span class="o">(</span><span class="k">new</span> <span class="nf">File</span><span class="o">(</span><span class="s">&quot;/Users/ilkaygunel/Desktop/unmarshalling.xml&quot;</span><span class="o">));</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">person</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">JAXBException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">Logger</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">MarshallingAndUnMarshalling</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getName</span><span class="o">()).</span><span class="na">log</span><span class="o">(</span><span class="n">Level</span><span class="o">.</span><span class="na">SEVERE</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<ul>
+  <li>JAXBContext jaxbContext = JAXBContext.newInstance(Person.class); ifadesi ile yine aynı şekilde Unmarshalling işlemi için bir JAXBContext nesnesi elde ediyoruz.</li>
+  <li>Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller(); ifadesi ile bir adet Unmarshaller nesnesi elde ediyoruz. Bu nesne XML’den Java’ya dönüşüm yapabilecek.</li>
+  <li>Person person = (Person) jaxbUnmarshaller.unmarshal(new File(“/Users/ilkaygunel/Desktop/unmarshalling.xml”)); ifadesi ile dosya üzerinden unmarshalling yapıp Person nesnesini dolduruyoruz.</li>
+</ul>
+
+<p>Bu kodu çalıştırdığımızda şu şekil bir çıktı gelecek:</p>
+
+<p><strong><em>Person{name=ilkay, surname=günel, city=istanbul}</em></strong></p>
+
+<p>Yukarıdaki kodlar sadece bir Person nesnesi için işlemler içeriyor. Şimdi de Liste üzerinde operasyonlara bakalım.</p>
+
+<p>Öncelikle Liste kullancağımız zaman bir sınıf daha yazmamız gerekiyor. JAXB şu an doğrudan liste üzerinden işlemleri desteklemiyor. Bu nedenle içerisinde Liste’yi kapsayan bir sınıf yazacağız. Yazacağımız sınıf
+şu şekilde olacak:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">marshallingandmarshalling</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.xml.bind.annotation.XmlAccessType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.xml.bind.annotation.XmlAccessorType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.xml.bind.annotation.XmlElement</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.xml.bind.annotation.XmlRootElement</span><span class="o">;</span>
+
+<span class="nd">@XmlRootElement</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;personList&quot;</span><span class="o">)</span>
+<span class="nd">@XmlAccessorType</span> <span class="o">(</span><span class="n">XmlAccessType</span><span class="o">.</span><span class="na">FIELD</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PersonListClass</span> <span class="o">{</span>
+    <span class="nd">@XmlElement</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;person&quot;</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">personList</span><span class="o">=</span><span class="kc">null</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="nf">getPersonList</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">personList</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPersonList</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">personList</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">personList</span> <span class="o">=</span> <span class="n">personList</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>PersonListClass sınıfımız içerisinde bir adet Person listesi tanımlıyoruz ve bu listeyi <strong><em>@XmlElement(name = “person”)</em></strong> notasyonu ile işaretliyoruz. Bu liste içindeki tüm elemanlar için root-path’in <strong><em>person</em></strong>
+olacağı manasına geliyor.</p>
+
+<p>Şimdi Marshalling işlemini liste üzerinde uygulayan kodumuzu yazalım.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">marshallingandmarshalling</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.logging.Level</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.logging.Logger</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.xml.bind.JAXBContext</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.xml.bind.JAXBException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.xml.bind.Marshaller</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.xml.bind.Unmarshaller</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MarshallingAndUnMarshalling</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="n">PersonListClass</span> <span class="n">personListClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">PersonListClass</span><span class="o">();</span>
+        <span class="n">personListClass</span><span class="o">.</span><span class="na">setPersonList</span><span class="o">(</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;());</span>
+
+        <span class="n">personListClass</span><span class="o">.</span><span class="na">getPersonList</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nf">Person</span><span class="o">(</span><span class="s">&quot;ilkay&quot;</span><span class="o">,</span> <span class="s">&quot;günel&quot;</span><span class="o">,</span> <span class="s">&quot;samsun&quot;</span><span class="o">));</span>
+        <span class="n">personListClass</span><span class="o">.</span><span class="na">getPersonList</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nf">Person</span><span class="o">(</span><span class="s">&quot;levent&quot;</span><span class="o">,</span> <span class="s">&quot;ergüder&quot;</span><span class="o">,</span> <span class="s">&quot;kocaeli&quot;</span><span class="o">));</span>
+        <span class="n">personListClass</span><span class="o">.</span><span class="na">getPersonList</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nf">Person</span><span class="o">(</span><span class="s">&quot;mustafa&quot;</span><span class="o">,</span> <span class="s">&quot;demir&quot;</span><span class="o">,</span> <span class="s">&quot;ısparta&quot;</span><span class="o">));</span>
+        <span class="n">personListClass</span><span class="o">.</span><span class="na">getPersonList</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nf">Person</span><span class="o">(</span><span class="s">&quot;alican&quot;</span><span class="o">,</span> <span class="s">&quot;akkuş&quot;</span><span class="o">,</span> <span class="s">&quot;bağcılar&quot;</span><span class="o">));</span>
+
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">JAXBContext</span> <span class="n">jaxbContext</span> <span class="o">=</span> <span class="n">JAXBContext</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">PersonListClass</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+            <span class="n">Marshaller</span> <span class="n">jaxbMarshaller</span> <span class="o">=</span> <span class="n">jaxbContext</span><span class="o">.</span><span class="na">createMarshaller</span><span class="o">();</span>
+            <span class="n">jaxbMarshaller</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="n">Marshaller</span><span class="o">.</span><span class="na">JAXB_FORMATTED_OUTPUT</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+            <span class="n">jaxbMarshaller</span><span class="o">.</span><span class="na">marshal</span><span class="o">(</span><span class="n">personListClass</span><span class="o">,</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">JAXBException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">Logger</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">MarshallingAndUnMarshalling</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getName</span><span class="o">()).</span><span class="na">log</span><span class="o">(</span><span class="n">Level</span><span class="o">.</span><span class="na">SEVERE</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+
+<span class="o">}</span></code></pre></figure>
+
+<p>Main metodumuz içinde bir PersonListClass nesnesi oluşturuyoruz ve personListClass.setPersonList(new ArrayList&lt;&gt;()); ifadesi ile personListClass objesi içindeki listeyi referans atıyoruz. Akabinde listenin 
+doldurulma işlemini gerçekleştiriyoruz. Kodun try bloğu içerisinde ise jaxbContext nesnesini PersonListClass sınıfını parametre olarak geçirerek oluşturuyoruz ve marshal metoduna personListClass nesnesini geçiriyoruz.</p>
+
+<p>Kodu çalıştırdığımızda çıktımız şu şekilde oluyor:</p>
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<personlist>
+    <person>
+        <name>ilkay</name>
+        <surname>günel</surname>
+        <city>samsun</city>
+    </person>
+    <person>
+        <name>levent</name>
+        <surname>ergüder</surname>
+        <city>kocaeli</city>
+    </person>
+    <person>
+        <name>mustafa</name>
+        <surname>demir</surname>
+        <city>ısparta</city>
+    </person>
+    <person>
+        <name>alican</name>
+        <surname>akkuş</surname>
+        <city>bağcılar</city>
+    </person>
+</personlist>
+
+<p>Şimdi son olarak da Liste vasıtası ile Unmarshalling işlemini görelim.</p>
+
+<p>Az önce yaptığımız gibi /Users/ilkaygunel/Desktop/unmarshalling.xml adresinde bir XML dosyası oluşturuyoruz ve içeriğine yukarıdaki XML’i koyuyoruz. Akabinde Unmarshalling için şu kodu yazıyoruz:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">marshallingandmarshalling</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.logging.Level</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.logging.Logger</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.xml.bind.JAXBContext</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.xml.bind.JAXBException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.xml.bind.Unmarshaller</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MarshallingAndUnMarshalling</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">JAXBContext</span> <span class="n">jaxbContext</span> <span class="o">=</span> <span class="n">JAXBContext</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="n">PersonListClass</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+            <span class="n">Unmarshaller</span> <span class="n">jaxbMarshaller</span> <span class="o">=</span> <span class="n">jaxbContext</span><span class="o">.</span><span class="na">createUnmarshaller</span><span class="o">();</span>
+            <span class="n">PersonListClass</span> <span class="n">personListClass</span> <span class="o">=</span> <span class="o">(</span><span class="n">PersonListClass</span><span class="o">)</span> <span class="n">jaxbMarshaller</span><span class="o">.</span><span class="na">unmarshal</span><span class="o">(</span><span class="k">new</span> <span class="nf">File</span><span class="o">(</span><span class="s">&quot;/Users/ilkaygunel/Desktop/unmarshalling.xml&quot;</span><span class="o">));</span>
+            <span class="k">for</span> <span class="o">(</span><span class="n">Person</span> <span class="n">p</span> <span class="o">:</span> <span class="n">personListClass</span><span class="o">.</span><span class="na">getPersonList</span><span class="o">())</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">JAXBException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">Logger</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">MarshallingAndUnMarshalling</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getName</span><span class="o">()).</span><span class="na">log</span><span class="o">(</span><span class="n">Level</span><span class="o">.</span><span class="na">SEVERE</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Önceki unmarshalling işleminden farklı olarak jaxbContext nesnesini PersonListClass sınıfını parametre olarak geçiriyoruz ve unmarshal metodundan dönen sonucu personListClass nesnesine atıyoruz. Akabinde personListClass
+nesnesi içerisindeki liste içinde dönerek Person değerlerini ekrana yazdıyoruz. Kodu çalıştıdğımızda çıktımız şu şekilde olacak:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Person</span><span class="o">{</span><span class="n">name</span><span class="o">=</span><span class="n">ilkay</span><span class="o">,</span> <span class="n">surname</span><span class="o">=</span><span class="n">günel</span><span class="o">,</span> <span class="n">city</span><span class="o">=</span><span class="n">samsun</span><span class="o">}</span>
+<span class="n">Person</span><span class="o">{</span><span class="n">name</span><span class="o">=</span><span class="n">levent</span><span class="o">,</span> <span class="n">surname</span><span class="o">=</span><span class="n">ergüder</span><span class="o">,</span> <span class="n">city</span><span class="o">=</span><span class="n">kocaeli</span><span class="o">}</span>
+<span class="n">Person</span><span class="o">{</span><span class="n">name</span><span class="o">=</span><span class="n">mustafa</span><span class="o">,</span> <span class="n">surname</span><span class="o">=</span><span class="n">demir</span><span class="o">,</span> <span class="n">city</span><span class="o">=</span><span class="n">ısparta</span><span class="o">}</span>
+<span class="n">Person</span><span class="o">{</span><span class="n">name</span><span class="o">=</span><span class="n">alican</span><span class="o">,</span> <span class="n">surname</span><span class="o">=</span><span class="n">akkuş</span><span class="o">,</span> <span class="n">city</span><span class="o">=</span><span class="n">bağcılar</span><span class="o">}</span></code></pre></figure>
+
+<p>Bu yazıda anlatacaklarım bu kadar arkadaşlar. JAXB Marshalling and Unmarshalling konusunu işlemiş olduk bu yazıda. Başka bir yazıda görüşene kadar sağlıcakla kalın.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="http://github.com/ilkgunel" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="http://twitter.com/ilkgunel" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><i class="icon icon-facebook"></i></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2017 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>
