@@ -116,6 +116,8 @@
       <p>Merhabalar arkadaşlar. Bu yazıda sizlere son zamanlardaki yeni öğrenme ve uğraş alanım olan Angular 2’nin web servis işlemleri
 üzerindeki kullanımını anlatmaya çalışacağım. Angular 2 ile bu yazıda GET ve POST işlemini örnekleyeceğiz.</p>
 
+<p>Bu yazıda Angular 2 tarafında yazdığım proje için kaynak kodlara şu adresten ulaşabilirsiniz: <a href="https://github.com/ilkgunel/AngularAndRestUsageSample">https://github.com/ilkgunel/AngularAndRestUsageSample</a></p>
+
 <p>Öncelikle özet olarak olayın web service tarafına bakalım. Benim MySQL veri tabanında Formula1 adında bir veri tabanım var ve içinde Drivers tablosu var.Drivers tablosu şu şekilde:</p>
 
 <p><a href="/images/angular2/ws1.png">
@@ -198,7 +200,8 @@ app.component.ts dosyamız içerisinde
 - <strong>*selector</strong></em> ifadesi bu bileşenin tanımlayacısı konumundadır. Yani html içerisinde ben bu bileşeni kullanmak istersem selector özelliğinde tanımlı değer ile ulaşıyorum. 
 - <strong><em>template</em></strong> kısmında ise bu bileşen çağırıldığı sayfa içerisinde yer alacak şablonu tanımlıyoruz. title kısmı sabit olarak AppComponent sınıfından gelecek. router-outlet yazan 
 kısımda ise ifade edilmek istenen bu componenet’in içerğinin URL path’ine göre gelecek bileşenin template’i olacağıdır. Az sonra app.routes.ts dosyasını inceleyeceğiz ve oradaki 
-tanımları inceleyince burası daha iyi oturacak.</p>
+tanımları inceleyince burası daha iyi oturacak.
+- Web servisten GET ve POST işlemlerini yapacak metotları barındıran DriverService sınıfını da burada app bileşenine kayda geçiriyoruz.</p>
 
 <p><strong>app.routes.ts</strong></p>
 
@@ -291,6 +294,295 @@ export ediyoruz ve diğer bileşenler içinde import etmek üzere hazır hale ge
     <span class="nx">driverTeam</span>: <span class="kt">string</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
+<p>driver.ts dosyamız bizim Java, C# gibi dillerdeki pure sınıflara karşılık gelen bir dosya. Bu dosya içerisinde sadece kullanacağımız objenin özelliklerini tanımlıyoruz.</p>
+
+<p><strong>driver.service.ts</strong></p>
+
+<p>Şimdi bu blog yazısını yazmamızın asıl sebep noktasıne geldik. Web servise get ve post isteğinde bulunacak service sınıfımızı yazacağız.</p>
+
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">Http</span><span class="p">,</span> <span class="nx">Response</span><span class="p">,</span> <span class="nx">Headers</span><span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/http&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;rxjs/Rx&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">Driver</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./driver&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="s1">&#39;rxjs/add/operator/map&#39;</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Injectable</span><span class="p">()</span>
+<span class="kr">export</span> <span class="kr">class</span> <span class="nx">DriverService</span><span class="p">{</span>
+  <span class="kr">private</span> <span class="nx">baseUrl</span>: <span class="kt">string</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:8080/RestfulWebServiceTutorials/webservice/formula1&#39;</span><span class="p">;</span>
+
+  <span class="kr">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">http</span> : <span class="kt">Http</span><span class="p">){</span>
+  <span class="p">}</span>
+
+  <span class="nx">getAll</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">baseUrl</span><span class="p">}</span><span class="o">/</span><span class="nx">driverList</span><span class="o">/</span><span class="err">`</span><span class="p">).</span><span class="nx">map</span><span class="p">((</span><span class="nx">response</span>:<span class="kt">Response</span><span class="p">)</span><span class="o">=&gt;</span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="nx">get</span><span class="p">(</span><span class="nx">driverId</span>: <span class="kt">number</span><span class="p">)</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">Driver</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">driver$</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span>
+      <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">baseUrl</span><span class="p">}</span><span class="o">/</span><span class="nx">getViaId</span><span class="o">/</span><span class="nx">$</span><span class="p">{</span><span class="nx">driverId</span><span class="p">}</span><span class="err">`</span><span class="p">,</span> <span class="p">{</span><span class="nx">headers</span>: <span class="kt">this.getHeaders</span><span class="p">()})</span>
+      <span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">mapDriver</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">driver$</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">save</span><span class="p">(</span><span class="nx">driver</span>: <span class="kt">Driver</span><span class="p">)</span> <span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">Response</span><span class="o">&gt;</span><span class="p">{</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span>
+      <span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">baseUrl</span><span class="p">}</span><span class="o">/</span><span class="nx">updateDriver</span><span class="err">`</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">driver</span><span class="p">),</span> <span class="p">{</span><span class="nx">headers</span>: <span class="kt">this.getHeaders</span><span class="p">()});</span>
+  <span class="p">}</span>
+
+  <span class="kr">private</span> <span class="nx">getHeaders</span><span class="p">(){</span>
+    <span class="kd">let</span> <span class="nx">headers</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+    <span class="nx">headers</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;Accept&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span><span class="p">);</span>
+    <span class="nx">headers</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">headers</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">toDriver</span><span class="p">(</span><span class="nx">r</span>:<span class="kt">any</span><span class="p">)</span><span class="o">:</span> <span class="nx">Driver</span><span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">driver</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">Driver</span><span class="o">&gt;</span><span class="p">({</span>
+    <span class="nx">driverId</span>: <span class="kt">r.driverId</span><span class="p">,</span>
+    <span class="nx">driverName</span>: <span class="kt">r.driverName</span><span class="p">,</span>
+    <span class="nx">driverSurname</span>: <span class="kt">r.driverSurname</span><span class="p">,</span>
+    <span class="nx">driverCountry</span>: <span class="kt">r.driverCountry</span><span class="p">,</span>
+    <span class="nx">driverTeam</span>: <span class="kt">r.driverTeam</span>
+  <span class="p">});</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Parsed driver:&#39;</span><span class="p">,</span> <span class="nx">driver</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">driver</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">mapDriver</span><span class="p">(</span><span class="nx">response</span>:<span class="kt">Response</span><span class="p">)</span><span class="o">:</span> <span class="nx">Driver</span><span class="p">{</span>
+  <span class="k">return</span> <span class="nx">toDriver</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">handleError</span> <span class="p">(</span><span class="nx">error</span>: <span class="kt">any</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">errorMsg</span> <span class="o">=</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="o">||</span> <span class="err">`</span><span class="nx">Yikes</span><span class="o">!</span> <span class="nx">There</span> <span class="nx">was</span> <span class="nx">was</span> <span class="nx">a</span> <span class="nx">problem</span> <span class="kd">with</span> <span class="nx">our</span> <span class="nx">hyperdrive</span> <span class="nx">device</span> <span class="nx">and</span> <span class="nx">we</span> <span class="nx">couldn</span><span class="err">&#39;</span><span class="nx">t</span> <span class="nx">retrieve</span> <span class="nx">your</span> <span class="nx">data</span><span class="o">!</span><span class="err">`</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">errorMsg</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">Observable</span><span class="p">.</span><span class="k">throw</span><span class="p">(</span><span class="nx">errorMsg</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<ul>
+  <li>import satırları ile işlemler için gerekli Angular sınıflarını dahil ediyoruz. Bizim için önemli satır <strong><em>import { Http, Response, Headers} from ‘@angular/http’;</em></strong> satırıdır. HTTP GET
+ve POST isteği yapacağımız için Angular’ın Http sınıfından faydalanacağız. Onu dahil ediyoruz.</li>
+  <li>import ‘rxjs/add/operator/map’; satırını response’u JSON veri tipine veri almak için kullanmak için ve map’leme yapabilmek için dahil ediyoruz.</li>
+  <li>@Injectable() olarak işaretlenen sınıflar diğer sınıflara kayıt edilebiliyorlar. Biz de bu sınıfı app.component.ts altına almıştık.</li>
+  <li>Sınıf içerisinde bir <strong><em>baseUrl</em></strong> tanımlıyoruz. Bu baseUrl webservisimizin kök path’ini belirtir. GET ve POST işlemlerinde kullanılacak path’ler ise bu baseUrl’e eklemeler yapılarak
+kullanılırlar.</li>
+  <li>Yine C#, Java gibi OOP dillerine benzer şekilde burada da constructor’ımız var. Bu constructor içerisinde sınıfımıza Http tipinde bir nesne dahil ediyoruz.</li>
+  <li>getAll() metodu tüm sürücüleri listeleyen web servis metodunu çağıracak ve kayıtları döndürecek sınıftır. Metot içerisinde 
+http://localhost:8080/RestfulWebServiceTutorials/webservice/formula1/driverList adresine bir get isteği atılıyor, dönen cevap map metodu ile JSON’a map ediliyor.</li>
+  <li>get(driverId: number) metodu ise gelecek sürücü id bilgisine göre değer döndüren web servis metodunu çağıracak metottur. Parametre olarak driverId bilgisi web servise yapılan
+istek path’ine ekliyoruz ve isteğimizi yapıp map metodunun içinde mapDriver() metodunu çağırıyoruz. mapDriver() metodu gelen response’u JSON formatında toDriver metoduna
+veriyor ve toDriver metodu da JSON’dan bir driver nesnesi oluşturup döndürüyor.</li>
+  <li>save metodu da web servis’in update metodunu tetikleyen path’i çağırıyor ve kendine gelen Driver nesnesini JSON.stringify(driver) ifadesi ile JSON’a çevirip postluyor.</li>
+  <li>getHeaders metodu Headers sınıfı tipinden bir nesne oluşturuyor. HTTP GET ve POST isteklerinde header bilgileri mühimdir, sunucuların sorunsuz veri alışverişi yapabilmesi için 
+header bilgilerinin uyuşması gerekmektedir. Bu yüzden biz Accept header’ı ile application/json tipinde veri kabul ettiğimizi ve Content-Type header’ı ile de application/json formatında
+veri gönderdiğimizi söylüyoruz.</li>
+  <li>en sondaki handleError() metodu da meydana gelen bir hatayı browser console’una basacak.</li>
+</ul>
+
+<p><strong>driver-list.component.ts</strong></p>
+
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">Driver</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./driver&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">DriverService</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./driver.service&#39;</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;driver-list&#39;</span><span class="p">,</span>
+  <span class="nx">template</span><span class="o">:</span> <span class="err">`</span>
+  <span class="o">&lt;</span><span class="nx">section</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">section</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">&quot;isLoading &amp;&amp; !errorMessage&quot;</span><span class="o">&gt;</span>
+    <span class="nx">Loading</span> <span class="nx">our</span> <span class="nx">hyperdrives</span><span class="o">!!!</span> <span class="nx">Retrieving</span> <span class="nx">data</span><span class="p">...</span>
+    <span class="o">&lt;</span><span class="err">/section&gt;</span>
+      <span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
+        <span class="c">&lt;!--</span> <span class="k">this</span> <span class="nx">is</span> <span class="nx">the</span> <span class="k">new</span> <span class="nx">syntax</span> <span class="k">for</span> <span class="nx">ng</span><span class="o">-</span><span class="nx">repeat</span> <span class="o">--&gt;</span>
+        <span class="o">&lt;</span><span class="nx">li</span> <span class="o">*</span><span class="nx">ngFor</span><span class="o">=</span><span class="s2">&quot;let driver of drivers&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&quot;#&quot;</span> <span class="p">[</span><span class="nx">routerLink</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;[&#39;/drivers&#39;, driver.driverId]&quot;</span><span class="o">&gt;</span>
+           
+          <span class="o">&lt;</span><span class="err">/a&gt;</span>
+        <span class="o">&lt;</span><span class="err">/li&gt;</span>
+      <span class="o">&lt;</span><span class="err">/ul&gt;</span>
+      <span class="o">&lt;</span><span class="nx">section</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">&quot;errorMessage&quot;</span><span class="o">&gt;</span>
+        
+      <span class="o">&lt;</span><span class="err">/section&gt;</span>
+  <span class="o">&lt;</span><span class="err">/section&gt;</span>
+  <span class="err">`</span>
+<span class="p">})</span>
+<span class="kr">export</span> <span class="kr">class</span> <span class="nx">DriverListComponent</span> <span class="kr">implements</span> <span class="nx">OnInit</span><span class="p">{</span>
+  <span class="nx">drivers</span>: <span class="kt">Driver</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="nx">errorMessage</span>: <span class="kt">string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+  <span class="nx">isLoading</span>: <span class="kt">boolean</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+  <span class="kr">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">driverService</span> : <span class="kt">DriverService</span><span class="p">){</span> <span class="p">}</span>
+
+  <span class="nx">ngOnInit</span><span class="p">(){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">driverService</span>
+      <span class="p">.</span><span class="nx">getAll</span><span class="p">()</span>
+      <span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span>
+          <span class="nx">d</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">drivers</span> <span class="o">=</span> <span class="nx">d</span><span class="p">,</span>
+          <span class="nx">e</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">errorMessage</span> <span class="o">=</span> <span class="nx">e</span><span class="p">,</span>
+          <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">isLoading</span> <span class="o">=</span> <span class="kc">false</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<ul>
+  <li>driver-list.component.ts dosyamız sürücü listesini gösterecek bileşenimizdir. driver-list bilgisi ile selector bilgisini tanımlıyoruz. template kısmında da bu bileşenin render edildiğinde
+ortaya çıkacak şablonu tanımlıyoruz. Şablon içerisinde Angular’ın *ngFor yapısı ile drivers dizisi içinde döndürüyoruz ve her bir driver’ı bir linke bağlıyoruz.</li>
+  <li>DriverListComponent sınıfının gövdesi içinde Driver[] tipinde drivers nesnemizi tanımlıyoruz. Constructor içerisinde bu sınıfa DriverService tipinde driverService nesnesi koyuyoruz.</li>
+  <li>ngOnInit() metodunda ise bu component oluşturulurken yani initialization aşamsında yapılacak işlemleri tanımlıyoruz. ngOnInit() metodunu kullanmak için de sınfımızı OnInit’den
+implement ediyoruz. ngOnInit() içerisinde driverService nesnesi üzerinden DriverService sınıfı içindeki getAll() metodunu çağırıyoruz ve dönen cevap içindeki değerleri drivers dizisine
+ekliyoruz.</li>
+</ul>
+
+<p><strong>driver-details.component.ts</strong></p>
+
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">OnDestroy</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">ActivatedRoute</span><span class="p">,</span> <span class="nx">Router</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">Response</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/http&#39;</span><span class="p">;</span>
+
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">Driver</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./driver&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">DriverService</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./driver.service&#39;</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;driver-details&#39;</span><span class="p">,</span>
+  <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;app/driver-details.component.html&#39;</span>
+<span class="p">})</span>
+<span class="kr">export</span> <span class="kr">class</span> <span class="nx">DriverDetailsComponent</span> <span class="kr">implements</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">OnDestroy</span> <span class="p">{</span>
+    <span class="nx">driver</span>: <span class="kt">Driver</span><span class="p">;</span>
+    <span class="nx">sub</span>: <span class="kt">any</span><span class="p">;</span>
+    <span class="nx">teams</span>: <span class="kt">string</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Scuderia Ferrari&#39;</span><span class="p">,</span> <span class="s1">&#39;McLaren&#39;</span><span class="p">,</span> <span class="s1">&#39;Mercedes AMG Petronas&#39;</span><span class="p">,</span><span class="s1">&#39;Toyota&#39;</span><span class="p">];</span>
+
+    <span class="kr">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">driverService</span>: <span class="kt">DriverService</span><span class="p">,</span>
+                <span class="kr">private</span> <span class="nx">route</span>: <span class="kt">ActivatedRoute</span><span class="p">,</span>
+                <span class="kr">private</span> <span class="nx">router</span>: <span class="kt">Router</span><span class="p">){</span>
+    <span class="p">}</span>
+
+    <span class="nx">ngOnInit</span><span class="p">(){</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">sub</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">params</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="kd">let</span> <span class="nx">driverId</span> <span class="o">=</span> <span class="nb">Number</span><span class="p">.</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">params</span><span class="p">[</span><span class="s1">&#39;driverId&#39;</span><span class="p">]);</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;getting person with id: &#39;</span><span class="p">,</span> <span class="nx">driverId</span><span class="p">);</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">driverService</span>
+            <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">driverId</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">p</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">driver</span> <span class="o">=</span> <span class="nx">p</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+
+    <span class="nx">ngOnDestroy</span><span class="p">(){</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">sub</span><span class="p">.</span><span class="nx">unsubscribe</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="nx">gotoDriversList</span><span class="p">(){</span>
+        <span class="kd">let</span> <span class="nx">link</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;/drivers&#39;</span><span class="p">];</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">navigate</span><span class="p">(</span><span class="nx">link</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nx">saveDriverDetails</span><span class="p">(){</span>
+      <span class="kd">let</span> <span class="nx">link</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;/drivers&#39;</span><span class="p">];</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">driverService</span>
+          <span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">driver</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span>
+            <span class="p">(</span><span class="nx">r</span>: <span class="kt">Response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">navigate</span><span class="p">(</span><span class="nx">link</span><span class="p">);}</span>
+          <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>driver-details.component.ts dosyamız sürücü detaylarının gösterileceği sayfa çağırılınca render edilecek bileşenimizi tanımladığımız dosyamız.</p>
+
+<ul>
+  <li>driver-details ile selector tanımımızı gerçekleştiriyoruz.</li>
+  <li>templateUrl ile bir html dosyasını şablon olarak geçiriyoruz. driver-list bileşeni içinde şablon’umuzu direk HTML’i ts dosyası içine yazarak tanımlamıştık. İstersek o şablonu bir HTML
+dosyasına kaydedip o şekilde de çağırabilirdik.</li>
+  <li>DriverDetailsComponent sınıfının gövdesi içinde öncelikle constructor’da driverService, route ve router nesnelerimizi tanımlıyoruz. app.routes.ts dosyası içinde
+hatırlayacağınız gibi DriverDetailsComponent bileşeni drivers/:driverId path’i için tanımlanmıştı. ngOnInit() içerisinde de bu gelen driverId bilgisi ile driverService nesnesi üzerinden
+web servise GET isteği yapılıyor ve o id’ye sahip sürücü getirilip subscribe ile sınıfa ait nesne olan driver’a atanıyor.</li>
+  <li>gotoDriversList() metodu değişikliklerden vazgeçip sürücü listesine döndürüyor bizi. Bu işlemi de constructor içerisinden sınıfa inject edilmiş <strong><em>router</em></strong> nesnesi ile yapıyor.
+this.router.navigate(link); ifadesi ile gotoDriversList() metodu çağırıldığında drivers path’ine yönleneceğiz ve dolayısı ile DriverListComponent render edilecek.</li>
+</ul>
+
+<p><strong>driver-details.component.html</strong></p>
+
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="c">&lt;!--</span> <span class="k">new</span> <span class="nx">syntax</span> <span class="k">for</span> <span class="nx">ng</span><span class="o">-</span><span class="k">if</span> <span class="o">--&gt;</span>
+<span class="o">&lt;</span><span class="nx">section</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">&quot;driver&quot;</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">section</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="nx">You</span> <span class="nx">selected</span><span class="o">:</span>  <span class="o">&lt;</span><span class="err">/h2&gt;</span>
+    <span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span><span class="nx">Description</span><span class="o">&lt;</span><span class="err">/h3&gt;</span>
+    <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>
+       
+    <span class="o">&lt;</span><span class="err">/p&gt;</span>
+  <span class="o">&lt;</span><span class="err">/section&gt;</span>
+  <span class="o">&lt;</span><span class="nx">section</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">form</span> <span class="p">(</span><span class="nx">ngSubmit</span><span class="p">)</span><span class="o">=</span><span class="s2">&quot;saveDriverDetails()&quot;</span> <span class="err">#</span><span class="nx">driverForm</span><span class="o">=</span><span class="s2">&quot;ngForm&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">label</span> <span class="k">for</span><span class="o">=</span><span class="s2">&quot;driverName&quot;</span><span class="o">&gt;</span><span class="nx">Name</span><span class="o">:</span> <span class="o">&lt;</span><span class="err">/label&gt;</span>
+            <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text&quot;</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&quot;driverName&quot;</span> <span class="nx">required</span> <span class="p">[(</span><span class="nx">ngModel</span><span class="p">)]</span><span class="o">=</span><span class="s2">&quot;driver.driverName&quot;</span> <span class="err">#</span><span class="nx">name</span><span class="o">=</span><span class="s2">&quot;ngModel&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">div</span> <span class="p">[</span><span class="nx">hidden</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;name.valid || name.pristine&quot;</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="o">&gt;</span>
+                <span class="nx">Name</span> <span class="nx">is</span> <span class="nx">required</span> <span class="nx">my</span> <span class="nx">good</span> <span class="nx">sir</span><span class="o">/</span><span class="nx">lady</span><span class="o">!</span>
+            <span class="o">&lt;</span><span class="err">/div&gt;</span>
+      <span class="o">&lt;</span><span class="err">/div&gt;</span>
+      <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">label</span> <span class="k">for</span><span class="o">=</span><span class="s2">&quot;driverSurname&quot;</span><span class="o">&gt;</span><span class="nx">Surname</span><span class="o">:</span> <span class="o">&lt;</span><span class="err">/label&gt;</span>
+        <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text&quot;</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&quot;driverSurname&quot;</span> <span class="p">[(</span><span class="nx">ngModel</span><span class="p">)]</span><span class="o">=</span><span class="s2">&quot;driver.driverSurname&quot;</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="err">/div&gt;</span>
+      <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">label</span> <span class="k">for</span><span class="o">=</span><span class="s2">&quot;driverCountry&quot;</span><span class="o">&gt;</span><span class="nx">Country</span><span class="o">:</span> <span class="o">&lt;</span><span class="err">/label&gt;</span>
+        <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text&quot;</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&quot;driverCountry&quot;</span> <span class="p">[(</span><span class="nx">ngModel</span><span class="p">)]</span><span class="o">=</span><span class="s2">&quot;driver.driverCountry&quot;</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="err">/div&gt;</span>
+      <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">label</span> <span class="k">for</span><span class="o">=</span><span class="s2">&quot;driverTeam&quot;</span><span class="o">&gt;</span><span class="nx">Team</span><span class="o">:&lt;</span><span class="err">/label&gt;</span>
+        <span class="o">&lt;</span><span class="nx">select</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&quot;driverTeam&quot;</span> <span class="p">[(</span><span class="nx">ngModel</span><span class="p">)]</span><span class="o">=</span><span class="s2">&quot;driver.driverTeam&quot;</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">option</span> <span class="o">*</span><span class="nx">ngFor</span><span class="o">=</span><span class="s2">&quot;let team of teams&quot;</span> <span class="p">[</span><span class="nx">value</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;team&quot;</span><span class="o">&gt;&lt;</span><span class="err">/option&gt;</span>
+        <span class="o">&lt;</span><span class="err">/select&gt;</span>
+      <span class="o">&lt;</span><span class="err">/div&gt;</span>
+      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span> <span class="p">[</span><span class="nx">disabled</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;!driverForm.form.valid&quot;</span><span class="o">&gt;</span><span class="nx">Save</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+    <span class="o">&lt;</span><span class="err">/form&gt;</span>
+  <span class="o">&lt;</span><span class="err">/section&gt;</span>
+
+  <span class="o">&lt;</span><span class="nx">button</span> <span class="p">(</span><span class="nx">click</span><span class="p">)</span><span class="o">=</span><span class="s2">&quot;gotoDriversList()&quot;</span><span class="o">&gt;</span><span class="nx">Back</span> <span class="nx">to</span> <span class="nx">drivers</span> <span class="nx">list</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+<span class="o">&lt;</span><span class="nx">section</span><span class="o">&gt;</span></code></pre></figure>
+
+<p>driver-details.component.html dosyamız bizim DriverDetailsComponent bileşenimiz için templateUrl kısmında tanımladığımız şablon dosyamızdı. Bu şablon dosya içerisinde DriverDetailsComponent’den
+gelen <strong><em>driver</em></strong> nesnesi üzerinden ilgili özellikler alınıp input’lar <strong><em>[(ngModel)]</em></strong> ifadeleri ile dolduruluyor. Save butonu bu formu DriverDetailsComponent içinde tanımlı olan 
+saveDriverDetails() metoduna gönderirken, <strong><em>Back to drivers list</em></strong> butonu da bizi sürücü listesine döndürecek.</p>
+
+<p><strong>Ekran Çıktıları</strong></p>
+
+<p>Web servisi yazdığım sunucuyu başlatıp akabinde komut satırı üzerinden bu projenin olduğu klasöre girip <strong><em>npm install</em></strong> ve <strong><em>npm start</em></strong> komutlarını veriyorum.</p>
+
+<p>Proje açıldığında karşıma gelen ekranda veritabanında kayıtlı olan tüm sürücüleri görebiliyorum:</p>
+
+<p><a href="/images/angular2/ws4.png">
+<img src="/images/angular2/ws4.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Şimdi ben ilgili linkler arasından Mika Salo’ya tıklıyorum ve Mika Salo’ya ait bilgiler listeleniyor. URL’e de dikkat edelim, Mika Salo’nun id bilgisi ile diğer bilgileri getiriliyor.</p>
+
+<p><a href="/images/angular2/ws5.png">
+<img src="/images/angular2/ws5.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Bilgileri şu şekilde değiştiriyorum ve Save butonuna tıklıyorum:</p>
+
+<p><a href="/images/angular2/ws6.png">
+<img src="/images/angular2/ws6.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Mika Salo’nun yerinde girdiğim bilgileri görüyorum.</p>
+
+<p><a href="/images/angular2/ws7.png">
+<img src="/images/angular2/ws7.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Veri tabanına gidip baktğımda da bilgilerin gerçekten kalıcı şekilde değiştiğini görüyorum.</p>
+
+<p><a href="/images/angular2/ws8.png">
+<img src="/images/angular2/ws8.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Bu yazıda anlatacaklarım bu kadar arkadaşlar. Yeni hevesim olan Angular 2’nin web servis ile kullanımını öğrendikten sonra bu şekilde sizinle de paylaşmak istedim. Umarım güzel bir yazı
+olmuştur.</p>
+
+<p>Gelecek yazıda görüşene kadar sağlıcakla kalın arkadaşlar.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
 
     </div>
 
