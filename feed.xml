@@ -5,8 +5,8 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 28 Apr 2017 20:42:15 +0300</pubDate>
-    <lastBuildDate>Fri, 28 Apr 2017 20:42:15 +0300</lastBuildDate>
+    <pubDate>Tue, 02 May 2017 23:25:59 +0300</pubDate>
+    <lastBuildDate>Tue, 02 May 2017 23:25:59 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
     
       <item>
@@ -485,6 +485,116 @@ olmuştur.&lt;/p&gt;
         <pubDate>Tue, 25 Apr 2017 20:40:21 +0300</pubDate>
         <link>http://ilkaygunel.com/blog/2017/angular-2-webservice-get-post/</link>
         <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/angular-2-webservice-get-post/</guid>
+        
+        <category>angular 2 web service</category>
+        
+        <category>angular 2 rest get</category>
+        
+        <category>angular 2 rest post</category>
+        
+        <category>angular 2 rest</category>
+        
+        <category>angular 2 calling web service</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Angular 2 Ders 1 - Giriş</title>
+        <description>&lt;p&gt;Merhabalar arkadaşlar.&lt;/p&gt;
+
+&lt;p&gt;Günümüz yazılım dünyasında bana göre önemi ve popülerliği giderek artan bir JS framework’ü olan Angular’ın 2. versiyonunu kendimi geliştirmek ve ilerisi için yatırım yapmak adına öğrenmeye
+başladım. Bu yazı ile beraber de öğrendiklerimi sizlerle paylaşacağım.&lt;/p&gt;
+
+&lt;p&gt;Bu yazı dizisi ile ilgili olsun olmasın &lt;strong&gt;Terbiye Sınırları Aşılmadığı ve Saygısızlık Yapılmadığı&lt;/strong&gt; sürece her türlü eleştiri ve iyileştirme fikrine açığım arkadaşlar. O yüzden düşüncelerinizi de
+beklerim.&lt;/p&gt;
+
+&lt;p&gt;Şimdi Angular 2 derslerimize başlayalım.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Nedir Bu Angular 2?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Javascript dünyası deyim yerinde ise zibilyon tane framework’e sahip. JQuery, Backbone, Ember, Angular, React vs. vs. Liste uzayıp gidiyor. Fakat zaman içerisinde Singe Page Web Application
+adında bir yapı çıktı ve bu yapıyı da Angular en sağlam şekilde geliştiricilere sunan JS framework’lerinden birisi oldu.&lt;/p&gt;
+
+&lt;p&gt;Birinci sürümünden tamamen farklı bir şekilde gelen Angular 2 ile mimari &lt;strong&gt;Type Script&lt;/strong&gt; yapısına geçti. Type Script yapısı dediğimiz olay da derlendiği zaman ortaya Javasctipt çıkaran bir 
+mekanizma arkadaşlar. Peki ne sağlıyor bize bu Type Script? Aslında benim gördüğüm kadarı ile JS’in anlaşılmaz noktaları anlaşılır hale getirmeyi, daha bir OOP mantığında JS geliştirmeyi 
+sağlamayı amaçlamışlar. Bir de type-safe güvenliği sağlanması amaçlanmış. Buradaki amaç tür dönüşümleri arasıda sorun olduğunda direk derlenirken haberimiz olmasıdır.&lt;/p&gt;
+
+&lt;p&gt;Ayrıca Angular 2 ile modül bazlı bir yapıya geçilmiş. Bileşenlerimizi modülleri yazıp oluşturup import ediyor kullanıyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Angular 2 Yazmak İçin Ne Yapmamız Lazım?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Hepsinden önce Angular 2 öğrenmek, çalışmak, geliştirme yapabilmek için makinanızda Node.js kurulu olmalıdır arkadaşlar. &lt;a href=&quot;https://nodejs.org/en/&quot;&gt;https://nodejs.org/en/&lt;/a&gt; adresinden Node.js’i 
+indirip makinanıza kurabilirsiniz. Node.js kurulumundan sonra Angular 2 ile geliştirme yapmak için hazır hale geleceğiz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Angular 2 Konfigürasyon Dosyaları ve Hello World&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Adettendir, yeni bir dil, framework vs.’ye başlandığında Hello World uygulamaları yapılır. Biz de bir Hello World app yapacağız.&lt;/p&gt;
+
+&lt;p&gt;Normalde Angular 2 ile geliştirme yapmak için gereken konfigürasyon dosyası, yapılması gereken ayarlar bana göre böylesi bir framework için çok. Ama bu noktada güzel olay şu ki insanların
+bir şeyler öğrenebilmesi için çabalayan arkadaşlar bizlere direk Angular öğrenmeye başlayabilmemiz için konfigürasyon dosyalarını barındıran bir Template sunuyorlar.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/gopinav/Angular-2-Tutorials/tree/master/Template&quot;&gt;https://github.com/gopinav/Angular-2-Tutorials/tree/master/Template&lt;/a&gt; adresinde yer alan Template projesi konfigürasyon dosyaları
+hazırlanmış, direk yazmaya başlayabileceğimiz bir projedir. Bu Template projesinin de içerisinde yer aldığı &lt;strong&gt;&lt;em&gt;Angular-2-Tutorials&lt;/em&gt;&lt;/strong&gt; projesini bilgisayarınıza indirin arkadaşlar. Biz bu yazıda 
+sadece proje içerisindeki Template projesinden yararlanacağız.&lt;/p&gt;
+
+&lt;p&gt;Şimdi buradaki dosyaların ne işe yaradığını inceleyelim. İsmi yazan dosyayı herhangi bir editör ile açın arkadaşlar. Burada kalabalık olmaması için ben dosya içeriklerini buraya yapıştırmıyorum.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;package.json&lt;/strong&gt; : Angular 2’nin yazılabilmesi ve çalışabilmesi için gerekli olan bağımlılıklar bu dosya içerisinde tanımlanır ve komut satırından &lt;strong&gt;&lt;em&gt;npm install&lt;/em&gt;&lt;/strong&gt; komutu verildiğinde 
+bu dosyada tanımlı kütüphaneler, modüller indirilerek projeye konulur. npm install komutu verildiğinde proje dizini içinde &lt;strong&gt;&lt;em&gt;node_modules&lt;/em&gt;&lt;/strong&gt; adında bir klasör oluşur ve bu bahsettiğimiz kütüphaneler
+oraya konulur. Ayrıca package.json içerisinde &lt;strong&gt;&lt;em&gt;scripts&lt;/em&gt;&lt;/strong&gt; adında bir kısım yer almaktadır. Bu kısımdaki &lt;strong&gt;&lt;em&gt;start&lt;/em&gt;&lt;/strong&gt; satırı &lt;strong&gt;&lt;em&gt;npm start&lt;/em&gt;&lt;/strong&gt; komutu veirilince .ts uzantılı Type Script dosyaları
+Javascripte’e derlensin ve proje lite server üzerinde çalışmaya başlasın demektir. &lt;strong&gt;&lt;em&gt;tsc:w&lt;/em&gt;&lt;/strong&gt; satırı Type Script’lerin watch mode ile derlenmesi demektir ve bu da .ts uzantılı dosyalar üzerinde
+değişiklik yapıldığında otomatik yansıması demektir. &lt;strong&gt;&lt;em&gt;postinstall&lt;/em&gt;&lt;/strong&gt; satırı da typings.json içindeki bağımlılıkların package.json içindeki dosyaların indirilip kurulmasından sonra indirilip
+kurulması anlamına gelmektedir.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;tsconfig.json&lt;/strong&gt; : Bilgisayarlarımızda kullandığımız browserlar Type Script’den anlamazlar ve Javascript’ten anlarlar. Bu nedenle Type Script’lerimizin Javascript’e dönüştürülmeleri gerekir.
+tsconfig.json dosyası içerisinde de Type Script’ten JavaScript’e derleme yapılması için gerekli konfigürasyonlar belirtilir.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;systemjs.config.js&lt;/strong&gt; : Bu dosya modüllerin yüklenmesi ve varsayılan dosya uzantıları ile ilgilenir arkadaşlar.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;index.html&lt;/strong&gt; : Html dosyamız içerisinde ilk 4 script tag’i Angular’ın çalışması için gerekli modüllerin yüklenmesi vazifesini üstlenir. Son iki script tag’i systemjs.config.js dosyasındaki
+tanımları yükler. body içerisindeki my-app tag’i ise app.component.ts dosyası içerisinde tanımlı bir bileşen. Ona az sonra geleceğiz.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;app.component.ts&lt;/strong&gt; : Bu dosya içerisinde öncelikle bir Component tanımlanacağı için &lt;strong&gt;&lt;em&gt;@angular/core&lt;/em&gt;&lt;/strong&gt; altından Component’i dahil ediyoruz. Ardından @Componenet ile bileşeni tanımlıyoruz ve
+içerisinde &lt;strong&gt;selector&lt;/strong&gt;* özelliği ile bu component’in nasıl çağırılıp kullanılacağını söylüyoruz. index.html içinden de hatırlayacağınız üzere direk my-app diyerek çağırmıştık. @Componenet içindeli
+&lt;strong&gt;&lt;em&gt;template&lt;/em&gt;&lt;/strong&gt; özelliği de bu compoment’in çağırıldığı zaman nasıl bir şablon gösterilmesi gerektiğini söyler. Bizim için olan durumda bu component çağırıldığında Hello World çağırılacak. Son
+olarak &lt;strong&gt;&lt;em&gt;export class AppComponent&lt;/em&gt;&lt;/strong&gt; satırı ile AppComponent’imizi sınıf bazında diper yerlerde kullanıma hazır hale getiriyoruz.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;main.ts&lt;/strong&gt; : main.ts dosyası içerisinde ilk satırda &lt;strong&gt;&lt;em&gt;bootstrap&lt;/em&gt;&lt;/strong&gt; import ediliyor ve biz bootstrap’ı bizim uygulamamız başlarken hangi componenet’den başlayacak onu bildirmek için kullanacağız.&lt;/p&gt;
+    &lt;ol&gt;
+      &lt;li&gt;satırda ise az önce tanımladığımız AppComponenet’i import ediyoruz. &lt;strong&gt;&lt;em&gt;bootstrap(AppComponent);&lt;/em&gt;&lt;/strong&gt; satırı ile uygulamayı AppComponent’den başlatıyoruz.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Şimdi (Node.js’i kurdunuz varsayıyorum) terminal üzerinden bu Template klasörüne girin ve &lt;strong&gt;&lt;em&gt;npm install&lt;/em&gt;&lt;/strong&gt; komutunu verin. İşlem tamamlandığında şu şekilde bır çıktı alacağız:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/gettingStarted/1.png&quot;&gt;
+&lt;img src=&quot;/images/angularTutorials/gettingStarted/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Ardından &lt;strong&gt;npm start&lt;/strong&gt; komutunu verdiğimizde varsayılan tarayıcımız üerinde &lt;strong&gt;&lt;em&gt;http://localhost:3000&lt;/em&gt;&lt;/strong&gt; adresi üzerinde projemiz çalışacak. İşte browser çıktımız:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/gettingStarted/2.png&quot;&gt;
+&lt;img src=&quot;/images/angularTutorials/gettingStarted/2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Evet, bu yazıda anlatacaklarım bu kadar arkadaşlar. Angular 2’ye giriş yaptık, Hello World uygulamamızı gördük. Gelecek yazıdan itibaren Angular’a dalmaya başlayacağız.&lt;/p&gt;
+
+&lt;p&gt;Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Tue, 25 Apr 2017 20:40:21 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2017/angular-2-lesson-1/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/angular-2-lesson-1/</guid>
         
         <category>angular 2 web service</category>
         
@@ -2580,173 +2690,6 @@ için uğraşılmaktadır.&lt;/li&gt;
         <category>android web service get</category>
         
         <category>android call web service</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>JDBI İle Database İşlemleri 4 - Kayıt Silme</title>
-        <description>&lt;p&gt;Merhabalar.&lt;/p&gt;
-
-&lt;p&gt;JDBI yazılarının sonuncusu olan bu yazıda JDBI ile kayıt silme işlemine değineceğiz.&lt;/p&gt;
-
-&lt;p&gt;Benim elimde şöyle bir People tablosu bulunuyor:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/jdbi/jdbi12.png&quot;&gt;
-&lt;img src=&quot;/images/jdbi/jdbi12.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Şimdi burada id bilgisi 3 olan kaydı silme işlemi yapmak istediğimizi varsayalım. Bu durumda PersonOperationsInterface arabirimine şu iki satır kodu ekliyorum:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@SqlUpdate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;delete from people where id= :id&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;deleteOneRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@Bind&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;id&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Yine veri tabanı üzerinde bir değişim durumu söz konusu olduğu için metot @SqlUpdate notasyonu ile işaretli. Notasyona id’si verilecek kaydın silinme işlemini yapacak SQL komutunu
-parametre olarak verdik. SQL komutu içinde kullanılacak parametreyi de metodun parametre kısmında @Bind notasyonu ile tanıttık.&lt;/p&gt;
-
-&lt;p&gt;Silme işlemini yapmak için de kodumuz şu şekilde olacak:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;jdbitutorial&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;operation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.mysql.cj.jdbc.MysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.skife.jdbi.v2.DBI&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DeleteOneRecord&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;MysqlDataSource&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mysqlDataSource&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;mysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setURL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;jdbc:mysql://localhost:3306/JDBIDatabase&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;mysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;root&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;mysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setPassword&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-        &lt;span class=&quot;n&quot;&gt;DBI&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dbi&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;DBI&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-        &lt;span class=&quot;n&quot;&gt;PersonOperationsInterface&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;personOperationsInterface&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;personOperationsInterface&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dbi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PersonOperationsInterface&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;personOperationsInterface&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;deleteOneRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;The Record Deleted Successfully!&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;An Error Occured!\n Error is:&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;finally&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;personOperationsInterface&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;personOperationsInterface&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;personOperationsInterface.deleteOneRecord(3); diyerek tablodaki id bilgisi 3 olan kaydın silme işlemi yapılacak.&lt;/p&gt;
-
-&lt;p&gt;Metodu çalıştırdığımda konsol çıktısı şu şekilde oluyor:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/jdbi/jdbi13.png&quot;&gt;
-&lt;img src=&quot;/images/jdbi/jdbi13.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Tabloya gidip baktığımda ise kaydın gerçekten silindiğini görmekteyim:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/jdbi/jdbi14.png&quot;&gt;
-&lt;img src=&quot;/images/jdbi/jdbi14.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Eğer tablodaki tüm verileri silmek istersek de şu 2 satır kodu PersonOperationsInterface sınıfımıza ekleyip çağırmamız gerekecektir:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@SqlUpdate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;delete from people&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;deleteAllRecords&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Metodumuzun görevi tüm kayıtları silmek olduğu için herhangi bir parametre geçişine ihtiyaç duymuyor.&lt;/p&gt;
-
-&lt;p&gt;DeleteAllRecords sınıfımız da şu şekildedir:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;jdbitutorial&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;operation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.mysql.cj.jdbc.MysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.skife.jdbi.v2.DBI&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DeleteAllRecords&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;MysqlDataSource&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mysqlDataSource&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;mysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setURL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;jdbc:mysql://localhost:3306/JDBIDatabase&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;mysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;root&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;mysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setPassword&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-        &lt;span class=&quot;n&quot;&gt;DBI&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dbi&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;DBI&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mysqlDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-        &lt;span class=&quot;n&quot;&gt;PersonOperationsInterface&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;personOperationsInterface&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;personOperationsInterface&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dbi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PersonOperationsInterface&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;personOperationsInterface&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;deleteAllRecords&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;All Records Deleted Successfully!&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;An Error Occured!\n Error is:&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;finally&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;personOperationsInterface&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;personOperationsInterface&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Kodu çalıştırdığımızda konsol çıktısı şu şekilde olmaktadır:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/jdbi/jdbi15.png&quot;&gt;
-&lt;img src=&quot;/images/jdbi/jdbi15.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Veritabanına gidip baktığımda ise tüm kayıtların gerçekten silinmiş olduğunu görmekteyim:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/jdbi/jdbi16.png&quot;&gt;
-&lt;img src=&quot;/images/jdbi/jdbi16.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Bu yazıda anlatacaklarım da bu kadar arkadaşlar. JDBI yazı dizisini tamamlamış olduk. Başka yazılarda görüşmek üzere sağlıcakla kalın.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-</description>
-        <pubDate>Fri, 30 Dec 2016 20:40:23 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2016/jdbi-4-deleting-record/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2016/jdbi-4-deleting-record/</guid>
-        
-        <category>jdbi nedir?</category>
-        
-        <category>jdbi nasıl kullanılır?</category>
-        
-        <category>jdbi tutorial</category>
-        
-        <category>jdbi ile veritabanı işlemleri</category>
-        
-        <category>jdbi ile database işlemleri</category>
-        
-        <category>jdbi databse operations</category>
-        
-        <category>how to use jdbi</category>
-        
-        <category>jdbi kayıt güncelleme</category>
-        
-        <category>jdbi update multiple rows</category>
-        
-        <category>jdbi update</category>
-        
-        <category>jdbi ile nasıl güncellenir</category>
-        
-        <category>jdbc türkçe karakter sorunu</category>
-        
-        <category>jdbc türkçe karakter sorunu nasıl çözülür</category>
-        
-        <category>jdbc turkish character problem</category>
-        
-        <category>jdbc utf8</category>
-        
-        <category>jdbc utf8 character problem</category>
-        
-        <category>jdbi kayıt silme</category>
-        
-        <category>jdbi record deleting</category>
-        
-        <category>jdbi how to delete record</category>
         
         
       </item>
