@@ -5,9 +5,111 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 02 May 2017 23:32:46 +0300</pubDate>
-    <lastBuildDate>Tue, 02 May 2017 23:32:46 +0300</lastBuildDate>
+    <pubDate>Sat, 06 May 2017 14:55:50 +0300</pubDate>
+    <lastBuildDate>Sat, 06 May 2017 14:55:50 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Angular 2 Ders 2 - Component Oluşturalım</title>
+        <description>&lt;p&gt;Merhabalar arkadaşlar.&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda Angular 2 üzerinde kendi component’imizi oluşturmayı göreceğiz. &lt;a href=&quot;http://ilkaygunel.com/blog/2017/angular-2-lesson-1/&quot;&gt;Angular 2 Giriş&lt;/a&gt; yazımızda Angular 2’ye giriş yapmış, konfigürasyon dosyalarını öğrenmiş,
+Hello World uygulaması yapmıştık. Bu yazıda da kendi component’imizi yapıp uyglamanın başlatıldığı AppComponent’e ekleyecek ve ekranda göreceğiz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;angular2tutorials.component.ts&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2Tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;h2&amp;gt;Angular 2 Tutorials&amp;lt;/h2&amp;gt;&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+
+&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Yeni bir component oluşturacağımız zaman ilk olarak dosya ismini düzgün hazırlamamız gerekiyor. Angular 2 anladığım kadarı dosya isimlendirmelerinde bir zorunluluk getirmemiş ancak hangi dosyanın ne işe yaradığının 
+net anlaşılabilmesi adına dosya adının peşine türünü de yazmak oldukça faydalı olacaktır. Temiz kod yaklaşımında kodun, dosyanın vs. ne iş yaptığının isminden anlaşılabilmesi iyi bir pratiktir. 
+Bu örneğimizde biz bir Component dosyası hazıladığımız için &lt;strong&gt;&lt;em&gt;dosyaAdi.component.ts&lt;/em&gt;&lt;/strong&gt; şeklinde isimlendirme. Mesela ,ilerde göreceğiz,
+service işleri yapan kısımları barındıracak dosyalarımız olacak. O zamanda &lt;strong&gt;&lt;em&gt;dosyaAdi.service.ts.&lt;/em&gt;&lt;/strong&gt; bir isimlendirme yoluna gideceğiz.&lt;/p&gt;
+
+&lt;p&gt;angular2tutorials.component.ts dosyamızın içerisine adım adım bakalım:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;İlk olarak bir Component oluşturacağımız için Angular’ın kütüphanesinden &lt;strong&gt;&lt;em&gt;Component&lt;/em&gt;&lt;/strong&gt;‘i import ediyoruz.&lt;/li&gt;
+  &lt;li&gt;Akabinde &lt;strong&gt;&lt;em&gt;@Component&lt;/em&gt;&lt;/strong&gt; notasyonu ile bir Component tanımlayacağımızı söylüyoruz.&lt;/li&gt;
+  &lt;li&gt;@Component’in gövde kısmında ise &lt;strong&gt;&lt;em&gt;selector&lt;/em&gt;&lt;/strong&gt; özelliği ile bu Component’in diğer Component’ler ya da HTML dosyaları içinde nasıl çağırılabileceğini tanımlıyoruz. Bir nevi id bilgisi ataması gibi düşünülebilir.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;em&gt;template&lt;/em&gt;&lt;/strong&gt; özelliğinde ise Component’in çağırıldığında ekranda gözükecek şablonu tanımlıyoruz. Bu component için çağırıldığı zaman &lt;strong&gt;Angular 2 Tutorials&lt;/strong&gt; metnini görmeyi bekliyoruz.&lt;/li&gt;
+  &lt;li&gt;Son olarak da &lt;strong&gt;&lt;em&gt;export class Angular2Tutorials{}&lt;/em&gt;&lt;/strong&gt; satırı ile bu Component’i diğer .ts dosyaları içinde çağırılmaya ve kullanılmaya hazır hale getiriyoruz.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;app.component.ts&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;./angular2tutorials.component&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;my-app&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;h1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Hello&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;World&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/h1&amp;gt;&lt;/span&gt;
+              &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;angular2Tutorials&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/angular2Tutorials&amp;gt;`,&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;directives&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AppComponent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Önceki yazıdan da hatırlayacağınız üzere uygulama başlatılırken (bootstrap) AppComponent ile başlatılıyordu. Biz de yeni component’lerimizi AppComponent içinden çağırmak sureti ile kullanabiliriz.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;app.component.ts dosyamız içerisinde ilk olarak az önce kullanıma hazır hale getirdiğimiz Angular2Tutorials’ı import ederek başlıyoruz.&lt;/li&gt;
+  &lt;li&gt;Akabinde Component’in tanımlandığı @Component notasyonunun gövde kısmında, template özelliğinde Angular2Tutorials içerisinde tanımladığımız selector özelliğini HTML tag’i kullanır gibi kullanıyoruz. Bildiğimiz gibi HTML’de
+etiketleri kullanırken etiket açma-kapama şeklinde kullanıyoruz. Burada da aynı şekilde angular2Tutorials ifadesi ile HTML tag’i açıp kapatıyoruz.&lt;/li&gt;
+  &lt;li&gt;Burada dikkat edilmesi gereken bir nokta mevcut. Hello World yazısı içerisinde template kısmı tek tırnaklar yani &lt;strong&gt;’ ‘&lt;/strong&gt; arasına yazılıp kullanılmıştı. Fakat burada dikkat ederseniz eğik tırnaklar yani &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt; &lt;/code&gt;&lt;/strong&gt; arasında. Angular 2’de
+kendi oluşturdumuz Component’leri çağıracağımız zaman bu şekilde bir yazım şekli kullanmamız gerekiyor.&lt;/li&gt;
+  &lt;li&gt;Template kısmında kendi oluşturduğumuz bir Component’i çağıracağımız zaman bir de export edilen class’ı &lt;strong&gt;&lt;em&gt;directives&lt;/em&gt;&lt;/strong&gt; özelliği ile tanıtmamız gerekiyor. AppComponent, template içindeki tag’i bu sayede tanıyor.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Hali hazırda npm start komutu verilmiş durumda ise bir şey yapmamıza lüzum yok. Bu dosyalar otomatik derlenip yüklenecek ve tarayıcıda hemen görebileceğiz. Komut verilmemiş durumda ise npm start diyelim ve projemiz açılsın.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson2/1.png&quot;&gt;
+&lt;img src=&quot;/images/angularTutorials/lesson2/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Proje açıldığında gördüğümüz gibi yeni oluşturduğumuz Component’imiz de sayfamızda yer alıyor. Sayfanın kodunu incelediğimizde de my-app component’imizin içerisinde angular2Tutorials component’imizi görüyoruz.&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda anlatacaklarım bu kadar arkadaşlar. Yeni bir Component oluşturmayı ve kullanmayı görmüş olduk. Gelecek yazıda görüşmek üzere.&lt;/p&gt;
+
+&lt;p&gt;Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Fri, 05 May 2017 20:40:21 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2017/angular-2-lesson-2-create-component/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/angular-2-lesson-2-create-component/</guid>
+        
+        <category>angular 2 web service</category>
+        
+        <category>angular 2 rest get</category>
+        
+        <category>angular 2 rest post</category>
+        
+        <category>angular 2 rest</category>
+        
+        <category>angular 2 calling web service</category>
+        
+        <category>angular 2 giriş</category>
+        
+        <category>angular 2 tutorials</category>
+        
+        <category>angular 2 hello world</category>
+        
+        <category>angular 2 dersleri</category>
+        
+        <category>angular 2 kaynak</category>
+        
+        <category>angular 2 türkçe kaynak</category>
+        
+        <category>angular 2 türkçe dersleri</category>
+        
+        
+      </item>
     
       <item>
         <title>Angular 2 Ders 1 - Giriş ve Hello World</title>
@@ -2654,53 +2756,6 @@ faydalanılmıştır.&lt;/p&gt;
         <category>builder design pattern</category>
         
         <category>builder design pattern in java</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>İzlediğim ve Tavsiye Ettiğim Filmler</title>
-        <description>&lt;p&gt;Bu sayfada izlediğim ve size de izlemenizi tavsiye ettiğim filmlerin listesi mevcuttur. Tabii ki herkesin film zevki farklıdır ve benim beğendiğimi siz beğenmeyebilir, sizin beğendiğinizi ben
-beğenmeyebilirim.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;The Godfather: Şimdiye kadar izlediğim filmler içerisinde en beğendiğim ve sevdiğim filmdir. Mafyatik olaylarla alakası olmayan, kendisi için temiz bir gelecek planlanan 
-Michael Corleone’nin nasıl mafya olayları içerisinde kendisini bulduğunu ve hayatının değiştiğini anlatan film.&lt;/li&gt;
-  &lt;li&gt;Kuzuların Sessizliği (The Silence of Lambs): Anthony Hopkins ve Jodie Foster’ın başrolünü paylaştığı bir gerilim filmi. Filmde özet olarak bir katil yakalanmaya çalışılırken meydana gelenler
-anlatılıyor.&lt;/li&gt;
-  &lt;li&gt;Hannibal: Kuzuların Sessizliği filminin devamı fakat kalite olarak Kuzuların Sessizliği’nin çok gerisinde. Yine de izlenesi.&lt;/li&gt;
-  &lt;li&gt;Yarının Kıyısında (Edge of Tomorrow): Tom Cruise ve Emily Blunt’ın başrollerini paylaştığı bir bilim kurgu filmi. Özet olarak bir zaman döngüsü içine giren karakter vasıtası ile sorunun çözümü
-için uğraşılmaktadır.&lt;/li&gt;
-  &lt;li&gt;Ceset (The Body): Öldüğü gün morg’dan kaybolan bir cesetle başlayan film bu cesedin bulunması için yapılan çalışmalar ve akabinde gelişen olayları anlatıyor. Bir İspanyol filmi.&lt;/li&gt;
-  &lt;li&gt;Forest Gump&lt;/li&gt;
-  &lt;li&gt;The Godfather Part 2&lt;/li&gt;
-  &lt;li&gt;Leon The Professional&lt;/li&gt;
-  &lt;li&gt;Kara Şövalye (The Dark Knight)&lt;/li&gt;
-  &lt;li&gt;Kara Şövalye Yükseliyor (The Dark Knight Rises)&lt;/li&gt;
-  &lt;li&gt;Mr. Nobody&lt;/li&gt;
-  &lt;li&gt;The Good, The Bad And The Ugly&lt;/li&gt;
-  &lt;li&gt;Dead Poets Society&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Sun, 01 Jan 2017 20:40:21 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2017/filmler/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/filmler/</guid>
-        
-        <category>android web servis kullanımı</category>
-        
-        <category>android web servis</category>
-        
-        <category>android how to use web service get</category>
-        
-        <category>android how to use web service</category>
-        
-        <category>android web service çağırma</category>
-        
-        <category>android restful web service</category>
-        
-        <category>android web service get</category>
-        
-        <category>android call web service</category>
         
         
       </item>
