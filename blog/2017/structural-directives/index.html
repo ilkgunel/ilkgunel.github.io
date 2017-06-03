@@ -135,7 +135,7 @@
 
 <span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
     <span class="nx">selector</span> <span class="o">:</span> <span class="s1">&#39;angular2Tutorials&#39;</span><span class="p">,</span>
-    <span class="nx">template</span> <span class="o">:</span> <span class="err">`</span><span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;&lt;</span><span class="err">/h2&gt;</span>
+    <span class="nx">template</span> <span class="o">:</span> <span class="err">`</span><span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">title</span><span class="p">}}</span><span class="o">&lt;</span><span class="err">/h2&gt;</span>
                 <span class="o">&lt;</span><span class="nx">p</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">&quot;showElement&quot;</span><span class="o">&gt;</span><span class="nx">Show</span> <span class="nx">Element</span><span class="o">&lt;</span><span class="err">/p&gt;`,</span>
 <span class="p">})</span>
 
@@ -166,7 +166,7 @@
 
 <span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
     <span class="nx">selector</span> <span class="o">:</span> <span class="s1">&#39;angular2Tutorials&#39;</span><span class="p">,</span>
-    <span class="nx">template</span> <span class="o">:</span> <span class="err">`</span><span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;&lt;</span><span class="err">/h2&gt;</span>
+    <span class="nx">template</span> <span class="o">:</span> <span class="err">`</span><span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">title</span><span class="p">}}</span><span class="o">&lt;</span><span class="err">/h2&gt;</span>
                 <span class="o">&lt;</span><span class="nx">p</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">&quot;showElement&quot;</span><span class="o">&gt;</span><span class="nx">Show</span> <span class="nx">Element</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
                 <span class="o">&lt;</span><span class="nx">div</span> <span class="p">[</span><span class="nx">ngSwitch</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;color&quot;</span><span class="o">&gt;</span>
                     <span class="o">&lt;</span><span class="nx">p</span> <span class="o">*</span><span class="nx">ngSwitchWhen</span><span class="o">=</span><span class="s2">&quot;&#39;red&#39;&quot;</span><span class="o">&gt;</span><span class="nx">Red</span> <span class="nx">paragraph</span> <span class="nx">is</span> <span class="nx">shown</span><span class="o">!&lt;</span><span class="err">/p&gt;</span>
@@ -211,7 +211,7 @@
 
 <span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
     <span class="nx">selector</span> <span class="o">:</span> <span class="s1">&#39;angular2Tutorials&#39;</span><span class="p">,</span>
-    <span class="nx">template</span> <span class="o">:</span> <span class="err">`</span><span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;&lt;</span><span class="err">/h2&gt;</span>
+    <span class="nx">template</span> <span class="o">:</span> <span class="err">`</span><span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">title</span><span class="p">}}</span><span class="o">&lt;</span><span class="err">/h2&gt;</span>
                 <span class="o">&lt;</span><span class="nx">p</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">&quot;showElement&quot;</span><span class="o">&gt;</span><span class="nx">Show</span> <span class="nx">Element</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
                 <span class="o">&lt;</span><span class="nx">div</span> <span class="p">[</span><span class="nx">ngSwitch</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;color&quot;</span><span class="o">&gt;</span>
                     <span class="o">&lt;</span><span class="nx">p</span> <span class="o">*</span><span class="nx">ngSwitchWhen</span><span class="o">=</span><span class="s2">&quot;&#39;red&#39;&quot;</span><span class="o">&gt;</span><span class="nx">Red</span> <span class="nx">paragraph</span> <span class="nx">is</span> <span class="nx">shown</span><span class="o">!&lt;</span><span class="err">/p&gt;</span>
@@ -219,7 +219,7 @@
                     <span class="o">&lt;</span><span class="nx">p</span> <span class="o">*</span><span class="nx">ngSwitchDefault</span><span class="o">&gt;</span><span class="nx">Invalid</span> <span class="nx">Colour</span><span class="o">!&lt;</span><span class="err">/p&gt;</span>
                 <span class="o">&lt;</span><span class="err">/div&gt;</span>
                 <span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
-                    <span class="o">&lt;</span><span class="nx">li</span> <span class="o">*</span><span class="nx">ngFor</span><span class="o">=</span><span class="s2">&quot;let driver of drivers&quot;</span><span class="o">&gt;&lt;</span><span class="err">/li&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">li</span> <span class="o">*</span><span class="nx">ngFor</span><span class="o">=</span><span class="s2">&quot;let driver of drivers&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">driver</span><span class="p">}}</span><span class="o">&lt;</span><span class="err">/li&gt;</span>
                 <span class="o">&lt;</span><span class="err">/ul&gt;`,</span>
 <span class="p">})</span>
 
