@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+	  (adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-0980023289791742",
+		enable_page_level_ads: true
+	  });
+	</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Angular 2 Tutorials 8 - Structural Directives</title>
+    <meta name="description" content="Merhabalar.">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2017/structural-directives/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>Angular 2 Tutorials 8 - Structural Directives - İlkay Günel - Blog</title>
+<meta property="og:title" content="Angular 2 Tutorials 8 - Structural Directives" />
+<meta name="description" content="Angular 2 Tutorials 8 - Structural Directives" />
+<meta property="og:description" content="Angular 2 Tutorials 8 - Structural Directives" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2017/structural-directives/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2017/structural-directives/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-05-29T20:40:21+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Angular 2 Tutorials 8 - Structural Directives",
+    "datePublished": "2017-05-29T20:40:21+03:00",
+    "description": "Angular 2 Tutorials 8 - Structural Directives",
+    "url": "http://ilkaygunel.com/blog/2017/structural-directives/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/ilkay-gunel-cv.pdf" title="Bana Ait CV">Bana Ait CV</a></li>
+        
+          <li><a href="/blog/2016/git-nedir" title="Git Nedir? Nasıl Kullanılır?">Git Nedir? Nasıl Kullanılır?</a></li>
+        
+          <li><a href="/blog/2017/angular-2-tutorials" title="Angular 2">Angular 2</a></li>
+        
+          <li><a href="/blog/2016/jsf-tutorials-list" title="JSF">JSF</a></li>
+        
+          <li><a href="/blog/2016/spring-tutorials" title="Spring 4">Spring 4</a></li>
+        
+          <li><a href="/blog/2016/eclipselink" title="Eclipselink">Eclipselink</a></li>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/blog/2016/test" title="Test">Test</a></li>
+        
+          <li><a href="/blog/2016/useful-libraries-for-java" title="Java İçin Faydalı Kütüphaneler">Java İçin Faydalı Kütüphaneler</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog/2016/eclipse-notes" title="Eclipse">Eclipse</a></li>
+        
+          <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
+        
+          <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Angular 2 Tutorials 8 - Structural Directives</h1>
+      <p class="post-meta">May 29, 2017</p>
+    </header>
+
+    <div class="post-content">
+      <p>Merhabalar.</p>
+
+<p>Bu yazıda Structural Directives konusunu öğreneceğiz.</p>
+
+<p>Angular 2 içerisinde 3 adet directive tipi vardır. Bunlardan birisi daha önce öğrendiğimiz ve öğrenmeye devam ettiğimiz Component konusu idi. İkincisi ise bu yazıda öğreneceğimiz Structural Directives olacak. Üçüncüsü ise Attribute Directives ve onu gelecek yazılarda öğreneceğiz.</p>
+
+<p>Structural Directives dediğimiz yapı Angular 2 içeirsinde DOM manipulation yapılmasından sorumlu olan bir yapıdır. Biz bu yazı içerisinde Structural Directive’in 3 parçasını göreceğiz. Bunlar:</p>
+
+<ul>
+  <li>ngIf</li>
+  <li>ngSwitch</li>
+  <li>ngFor</li>
+</ul>
+
+<p>Şimdi <strong><em>ngIf</em></strong> konusuna değinelim. ngIf directive’i isminden de anlaşılabileceği gibi sayfamızda belirli şartlara göre bir akış sağlamamıza yarayan bir directive’dir. Basit bir örnekle pratiğe dökelim:</p>
+
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="kr">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+    <span class="nx">selector</span> <span class="o">:</span> <span class="s1">&#39;angular2Tutorials&#39;</span><span class="p">,</span>
+    <span class="nx">template</span> <span class="o">:</span> <span class="err">`</span><span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;&lt;</span><span class="err">/h2&gt;</span>
+                <span class="o">&lt;</span><span class="nx">p</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">&quot;showElement&quot;</span><span class="o">&gt;</span><span class="nx">Show</span> <span class="nx">Element</span><span class="o">&lt;</span><span class="err">/p&gt;`,</span>
+<span class="p">})</span>
+
+<span class="kr">export</span> <span class="kr">class</span> <span class="nx">Angular2Tutorials</span><span class="p">{</span>
+    <span class="kr">public</span> <span class="nx">title</span> <span class="o">=</span> <span class="s2">&quot;Angular 2 Tutorials&quot;</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">showElement</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Component’imizin template özelliği içerisinde bir p tag’i tanımlı. Bu p tag’inde *ngIf ifadesi ile p tag’inin görünür olup olamayacağına karar veriliyor. *ngIf özelliğine ise class içerisinde tanımlı showElement nesnesi atanıyor. *ngIf özelliği bu element’in değerine göre p tag’inin görünür ya da görünür olmama durumuna karar verecek.</p>
+
+<p>Anasayfayı çalıştırdığımızda şu şekilde bir ekran çıktısı geliyor:</p>
+
+<p><a href="/images/angularTutorials/lesson8/1.png">
+<img src="/images/angularTutorials/lesson8/1.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Kod içerisinde showElement false olduğu için Show Element textine sahip p tag’i görünmedi. Şimdi showElement nesnesine true değer atayıp sayfayı kontrol ediyorum.</p>
+
+<p><a href="/images/angularTutorials/lesson8/2.png">
+<img src="/images/angularTutorials/lesson8/2.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Gördüğünüz gibi p tag’i görünür oldu.</p>
+
+<p>Şimdi <strong><em>ngSwitch</em></strong> konusunu işleyelim. ngSwitch konusu klasik programlama dillerinde yer alan switch-case mantığında bir yapı. Bu olursa şu olsun, şu olursa bu olsun şekilde çalışacak bir yapı ngSwitch. Yukarıdaki örneğimize eklemeler yaparak ngSwitch’i örnekleyelim.</p>
+
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="kr">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+    <span class="nx">selector</span> <span class="o">:</span> <span class="s1">&#39;angular2Tutorials&#39;</span><span class="p">,</span>
+    <span class="nx">template</span> <span class="o">:</span> <span class="err">`</span><span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;&lt;</span><span class="err">/h2&gt;</span>
+                <span class="o">&lt;</span><span class="nx">p</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">&quot;showElement&quot;</span><span class="o">&gt;</span><span class="nx">Show</span> <span class="nx">Element</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                <span class="o">&lt;</span><span class="nx">div</span> <span class="p">[</span><span class="nx">ngSwitch</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;color&quot;</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">p</span> <span class="o">*</span><span class="nx">ngSwitchWhen</span><span class="o">=</span><span class="s2">&quot;&#39;red&#39;&quot;</span><span class="o">&gt;</span><span class="nx">Red</span> <span class="nx">paragraph</span> <span class="nx">is</span> <span class="nx">shown</span><span class="o">!&lt;</span><span class="err">/p&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">p</span> <span class="o">*</span><span class="nx">ngSwitchWhen</span><span class="o">=</span><span class="s2">&quot;&#39;blue&#39;&quot;</span><span class="o">&gt;</span><span class="nx">Blue</span> <span class="nx">paragraph</span> <span class="nx">is</span> <span class="nx">shown</span><span class="o">!&lt;</span><span class="err">/p&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">p</span> <span class="o">*</span><span class="nx">ngSwitchDefault</span><span class="o">&gt;</span><span class="nx">Invalid</span> <span class="nx">Colour</span><span class="o">!&lt;</span><span class="err">/p&gt;</span>
+                <span class="o">&lt;</span><span class="err">/div&gt;`,</span>
+<span class="p">})</span>
+
+<span class="kr">export</span> <span class="kr">class</span> <span class="nx">Angular2Tutorials</span><span class="p">{</span>
+    <span class="kr">public</span> <span class="nx">title</span> <span class="o">=</span> <span class="s2">&quot;Angular 2 Tutorials&quot;</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">showElement</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">color</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Template’mize bir div tag’i ekledik ve bu tag içerisinde köşeli parantezler arasında <strong><em>ngSwitch</em></strong> özelliğimizi kullandık. ngSwitch özelliğimize class içerisinde tanımlı color nesnesini atadık. Div tag’inin içerisinde 3 adet p tag’i kullandık ve bu p tag’lerinde ngSwitchWhen ile ngSwitchDefault kullandık. ngSwitch özelliği kendisine atanan color değerinin kontrolünü gerçekleştiriyor ve akabinde içerideki ngSwitchWhen’lere göre işlemin gerçekleştirilmesini yapıyor. Eğer gelen color’ın değeri red ise birinci p tag’i yazdırılıyor. Eğer blue ise ikinci p tag’i yazdırılıyor. Eğer red ya da blue dışında bir renk gelirse ngSwitchDefault’a yönlendiriyor ve son sıradaki p tag’i yazdırılıyor. Color nesnesini değeri red olacak şekilde gönderelim ve ekran çıktısına bakalım:</p>
+
+<p><a href="/images/angularTutorials/lesson8/3.png">
+<img src="/images/angularTutorials/lesson8/3.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Color nesnesinin değerini red olarak gönderdik ve <strong><em>Red paragraph is shown!</em></strong> metni görüntülendi.</p>
+
+<p>Şimdi color’ı blue yapıp gönderelim:</p>
+
+<p><a href="/images/angularTutorials/lesson8/4.png">
+<img src="/images/angularTutorials/lesson8/4.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p><strong><em>Blue paragraph is shown!</em></strong> metni ekranda görüntülendi.</p>
+
+<p>Son olarak da color’ı green olarak gönderelim:</p>
+
+<p><a href="/images/angularTutorials/lesson8/5.png">
+<img src="/images/angularTutorials/lesson8/5.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Gönderdiğimiz color nesnesi değeri red ya da blue olmadığı için ngSwitch işlemi ngSwitchDefault özelliği kullanılan p tag’ine yönlendirdi ve <strong><em>Invalid Colour!</em></strong> metni görüntülendi.</p>
+
+<p>Şimdi bu yazımıdaki son directive’miz olan <strong><em>ngFor</em></strong> directive’ini öğrenelim. ngFor directive’de bize bir döngü döndürme imkanı sunuyor. ngFor’u örnekleyelim:</p>
+
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="kr">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+    <span class="nx">selector</span> <span class="o">:</span> <span class="s1">&#39;angular2Tutorials&#39;</span><span class="p">,</span>
+    <span class="nx">template</span> <span class="o">:</span> <span class="err">`</span><span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;&lt;</span><span class="err">/h2&gt;</span>
+                <span class="o">&lt;</span><span class="nx">p</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">&quot;showElement&quot;</span><span class="o">&gt;</span><span class="nx">Show</span> <span class="nx">Element</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                <span class="o">&lt;</span><span class="nx">div</span> <span class="p">[</span><span class="nx">ngSwitch</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;color&quot;</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">p</span> <span class="o">*</span><span class="nx">ngSwitchWhen</span><span class="o">=</span><span class="s2">&quot;&#39;red&#39;&quot;</span><span class="o">&gt;</span><span class="nx">Red</span> <span class="nx">paragraph</span> <span class="nx">is</span> <span class="nx">shown</span><span class="o">!&lt;</span><span class="err">/p&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">p</span> <span class="o">*</span><span class="nx">ngSwitchWhen</span><span class="o">=</span><span class="s2">&quot;&#39;blue&#39;&quot;</span><span class="o">&gt;</span><span class="nx">Blue</span> <span class="nx">paragraph</span> <span class="nx">is</span> <span class="nx">shown</span><span class="o">!&lt;</span><span class="err">/p&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">p</span> <span class="o">*</span><span class="nx">ngSwitchDefault</span><span class="o">&gt;</span><span class="nx">Invalid</span> <span class="nx">Colour</span><span class="o">!&lt;</span><span class="err">/p&gt;</span>
+                <span class="o">&lt;</span><span class="err">/div&gt;</span>
+                <span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">li</span> <span class="o">*</span><span class="nx">ngFor</span><span class="o">=</span><span class="s2">&quot;let driver of drivers&quot;</span><span class="o">&gt;&lt;</span><span class="err">/li&gt;</span>
+                <span class="o">&lt;</span><span class="err">/ul&gt;`,</span>
+<span class="p">})</span>
+
+<span class="kr">export</span> <span class="kr">class</span> <span class="nx">Angular2Tutorials</span><span class="p">{</span>
+    <span class="kr">public</span> <span class="nx">title</span> <span class="o">=</span> <span class="s2">&quot;Angular 2 Tutorials&quot;</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">showElement</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">color</span> <span class="o">=</span> <span class="s2">&quot;green&quot;</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">drivers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Michael Schumacher&quot;</span><span class="p">,</span><span class="s2">&quot;Mika Hakkinen&quot;</span><span class="p">,</span><span class="s2">&quot;Rubens Barichello&quot;</span><span class="p">,</span><span class="s2">&quot;David Coulthard&quot;</span><span class="p">];</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Class içerisinde bir drivers array’i tanımladık ve içerisine değerler koyduk. Template içerisinde de ul tag’i içerisinde li tag’i ile array içindeki değerleri ekrana yazdıracağız. Normalde array içinde 4 değer olduğu için ul içerisinde 4 li kullanarak yazıdrabilirdik ama ngFor sayesinde tek satırda, tek li tag’i ile işi halledeceğiz. Kod içerisinde <em>ngFor ifadesi ile bir döngü, repeat işlemi yapılacağını söylüyoruz. ngFor’a atanan <strong>*let driver of drivers</strong></em> ifadesi ile klasik programlama dillerindeki forEach döngüsüne benzer şekilde drivers içinde dönerken her birini driver olarak kabul edip işlem yapacak. Ekrana yazdırma kısmında ise daha önce öğrendiğimiz interpolation devreye giriyor ve driver’ı yazdırıyoruz.</p>
+
+<p>Ekran çıktımız da şu şekilde:</p>
+
+<p><a href="/images/angularTutorials/lesson8/6.png">
+<img src="/images/angularTutorials/lesson8/6.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Gördüğümüz gibi Drivers array’i içindeki değerler ekrana yazdırıldı.</p>
+
+<p>Bu yazıda anlatacaklarım da bu kadar arkadaşlar. 3 directive ifadesi ile Structural Directives konusunu öğrenmiş olduk. Gelecek yazıda görüşmek üzere.</p>
+
+<p>Görüşene kadar sağlıcakla kalın.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
+  
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2017 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>

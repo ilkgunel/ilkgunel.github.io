@@ -5,9 +5,185 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 29 May 2017 19:57:53 +0300</pubDate>
-    <lastBuildDate>Mon, 29 May 2017 19:57:53 +0300</lastBuildDate>
+    <pubDate>Sat, 03 Jun 2017 19:49:26 +0300</pubDate>
+    <lastBuildDate>Sat, 03 Jun 2017 19:49:26 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Angular 2 Tutorials 8 - Structural Directives</title>
+        <description>&lt;p&gt;Merhabalar.&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda Structural Directives konusunu öğreneceğiz.&lt;/p&gt;
+
+&lt;p&gt;Angular 2 içerisinde 3 adet directive tipi vardır. Bunlardan birisi daha önce öğrendiğimiz ve öğrenmeye devam ettiğimiz Component konusu idi. İkincisi ise bu yazıda öğreneceğimiz Structural Directives olacak. Üçüncüsü ise Attribute Directives ve onu gelecek yazılarda öğreneceğiz.&lt;/p&gt;
+
+&lt;p&gt;Structural Directives dediğimiz yapı Angular 2 içeirsinde DOM manipulation yapılmasından sorumlu olan bir yapıdır. Biz bu yazı içerisinde Structural Directive’in 3 parçasını göreceğiz. Bunlar:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;ngIf&lt;/li&gt;
+  &lt;li&gt;ngSwitch&lt;/li&gt;
+  &lt;li&gt;ngFor&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Şimdi &lt;strong&gt;&lt;em&gt;ngIf&lt;/em&gt;&lt;/strong&gt; konusuna değinelim. ngIf directive’i isminden de anlaşılabileceği gibi sayfamızda belirli şartlara göre bir akış sağlamamıza yarayan bir directive’dir. Basit bir örnekle pratiğe dökelim:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2Tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;h2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/h2&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngIf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;showElement&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Show&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/p&amp;gt;`,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+
+&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Angular 2 Tutorials&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;showElement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Component’imizin template özelliği içerisinde bir p tag’i tanımlı. Bu p tag’inde *ngIf ifadesi ile p tag’inin görünür olup olamayacağına karar veriliyor. *ngIf özelliğine ise class içerisinde tanımlı showElement nesnesi atanıyor. *ngIf özelliği bu element’in değerine göre p tag’inin görünür ya da görünür olmama durumuna karar verecek.&lt;/p&gt;
+
+&lt;p&gt;Anasayfayı çalıştırdığımızda şu şekilde bir ekran çıktısı geliyor:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson8/1.png&quot;&gt;
+&lt;img src=&quot;/images/angularTutorials/lesson8/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Kod içerisinde showElement false olduğu için Show Element textine sahip p tag’i görünmedi. Şimdi showElement nesnesine true değer atayıp sayfayı kontrol ediyorum.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson8/2.png&quot;&gt;
+&lt;img src=&quot;/images/angularTutorials/lesson8/2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Gördüğünüz gibi p tag’i görünür oldu.&lt;/p&gt;
+
+&lt;p&gt;Şimdi &lt;strong&gt;&lt;em&gt;ngSwitch&lt;/em&gt;&lt;/strong&gt; konusunu işleyelim. ngSwitch konusu klasik programlama dillerinde yer alan switch-case mantığında bir yapı. Bu olursa şu olsun, şu olursa bu olsun şekilde çalışacak bir yapı ngSwitch. Yukarıdaki örneğimize eklemeler yaparak ngSwitch’i örnekleyelim.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2Tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;h2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/h2&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngIf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;showElement&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Show&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/p&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngSwitch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;color&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngSwitchWhen&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;#39;red&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Red&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;paragraph&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;shown&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/p&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngSwitchWhen&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;#39;blue&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Blue&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;paragraph&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;shown&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/p&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngSwitchDefault&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Invalid&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Colour&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/p&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/div&amp;gt;`,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+
+&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Angular 2 Tutorials&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;showElement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Template’mize bir div tag’i ekledik ve bu tag içerisinde köşeli parantezler arasında &lt;strong&gt;&lt;em&gt;ngSwitch&lt;/em&gt;&lt;/strong&gt; özelliğimizi kullandık. ngSwitch özelliğimize class içerisinde tanımlı color nesnesini atadık. Div tag’inin içerisinde 3 adet p tag’i kullandık ve bu p tag’lerinde ngSwitchWhen ile ngSwitchDefault kullandık. ngSwitch özelliği kendisine atanan color değerinin kontrolünü gerçekleştiriyor ve akabinde içerideki ngSwitchWhen’lere göre işlemin gerçekleştirilmesini yapıyor. Eğer gelen color’ın değeri red ise birinci p tag’i yazdırılıyor. Eğer blue ise ikinci p tag’i yazdırılıyor. Eğer red ya da blue dışında bir renk gelirse ngSwitchDefault’a yönlendiriyor ve son sıradaki p tag’i yazdırılıyor. Color nesnesini değeri red olacak şekilde gönderelim ve ekran çıktısına bakalım:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson8/3.png&quot;&gt;
+&lt;img src=&quot;/images/angularTutorials/lesson8/3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Color nesnesinin değerini red olarak gönderdik ve &lt;strong&gt;&lt;em&gt;Red paragraph is shown!&lt;/em&gt;&lt;/strong&gt; metni görüntülendi.&lt;/p&gt;
+
+&lt;p&gt;Şimdi color’ı blue yapıp gönderelim:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson8/4.png&quot;&gt;
+&lt;img src=&quot;/images/angularTutorials/lesson8/4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Blue paragraph is shown!&lt;/em&gt;&lt;/strong&gt; metni ekranda görüntülendi.&lt;/p&gt;
+
+&lt;p&gt;Son olarak da color’ı green olarak gönderelim:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson8/5.png&quot;&gt;
+&lt;img src=&quot;/images/angularTutorials/lesson8/5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Gönderdiğimiz color nesnesi değeri red ya da blue olmadığı için ngSwitch işlemi ngSwitchDefault özelliği kullanılan p tag’ine yönlendirdi ve &lt;strong&gt;&lt;em&gt;Invalid Colour!&lt;/em&gt;&lt;/strong&gt; metni görüntülendi.&lt;/p&gt;
+
+&lt;p&gt;Şimdi bu yazımıdaki son directive’miz olan &lt;strong&gt;&lt;em&gt;ngFor&lt;/em&gt;&lt;/strong&gt; directive’ini öğrenelim. ngFor directive’de bize bir döngü döndürme imkanı sunuyor. ngFor’u örnekleyelim:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2Tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;h2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/h2&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngIf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;showElement&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Show&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/p&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngSwitch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;color&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngSwitchWhen&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;#39;red&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Red&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;paragraph&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;shown&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/p&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngSwitchWhen&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;#39;blue&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Blue&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;paragraph&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;shown&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/p&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngSwitchDefault&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Invalid&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Colour&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/p&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/div&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ul&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;li&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngFor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;let driver of drivers&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/li&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/ul&amp;gt;`,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+
+&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Angular 2 Tutorials&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;showElement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;green&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;drivers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Michael Schumacher&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Mika Hakkinen&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Rubens Barichello&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;David Coulthard&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Class içerisinde bir drivers array’i tanımladık ve içerisine değerler koyduk. Template içerisinde de ul tag’i içerisinde li tag’i ile array içindeki değerleri ekrana yazdıracağız. Normalde array içinde 4 değer olduğu için ul içerisinde 4 li kullanarak yazıdrabilirdik ama ngFor sayesinde tek satırda, tek li tag’i ile işi halledeceğiz. Kod içerisinde &lt;em&gt;ngFor ifadesi ile bir döngü, repeat işlemi yapılacağını söylüyoruz. ngFor’a atanan &lt;strong&gt;*let driver of drivers&lt;/strong&gt;&lt;/em&gt; ifadesi ile klasik programlama dillerindeki forEach döngüsüne benzer şekilde drivers içinde dönerken her birini driver olarak kabul edip işlem yapacak. Ekrana yazdırma kısmında ise daha önce öğrendiğimiz interpolation devreye giriyor ve driver’ı yazdırıyoruz.&lt;/p&gt;
+
+&lt;p&gt;Ekran çıktımız da şu şekilde:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson8/6.png&quot;&gt;
+&lt;img src=&quot;/images/angularTutorials/lesson8/6.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Gördüğümüz gibi Drivers array’i içindeki değerler ekrana yazdırıldı.&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda anlatacaklarım da bu kadar arkadaşlar. 3 directive ifadesi ile Structural Directives konusunu öğrenmiş olduk. Gelecek yazıda görüşmek üzere.&lt;/p&gt;
+
+&lt;p&gt;Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Mon, 29 May 2017 20:40:21 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2017/structural-directives/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/structural-directives/</guid>
+        
+        <category>angular 2 web service</category>
+        
+        <category>angular 2 rest get</category>
+        
+        <category>angular 2 rest post</category>
+        
+        <category>angular 2 rest</category>
+        
+        <category>angular 2 calling web service</category>
+        
+        <category>angular 2 giriş</category>
+        
+        <category>angular 2 tutorials</category>
+        
+        <category>angular 2 hello world</category>
+        
+        <category>angular 2 dersleri</category>
+        
+        <category>angular 2 kaynak</category>
+        
+        <category>angular 2 türkçe kaynak</category>
+        
+        <category>angular 2 türkçe dersleri</category>
+        
+        <category>angular 2 ngIf</category>
+        
+        <category>angular 2 ngSwitch</category>
+        
+        <category>angular 2 ngSwitchWhen</category>
+        
+        <category>angular 2 ngSwitchDefault</category>
+        
+        <category>angular 2 ngFor</category>
+        
+        <category>angular 2 Structural Directives</category>
+        
+        
+      </item>
     
       <item>
         <title>Formula 1 2017 Monaco GP Ardından</title>
@@ -1125,127 +1301,6 @@ kendi oluşturdumuz Component’leri çağıracağımız zaman bu şekilde bir y
         <category>angular 2 nasıl component oluşturulur</category>
         
         <category>angular 2 component nasıl oluşturulur</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Angular 2 Ders 1 - Giriş ve Hello World</title>
-        <description>&lt;p&gt;Merhabalar arkadaşlar.&lt;/p&gt;
-
-&lt;p&gt;Günümüz yazılım dünyasında bana göre önemi ve popülerliği giderek artan bir JS framework’ü olan Angular’ın 2. versiyonunu kendimi geliştirmek ve ilerisi için yatırım yapmak adına öğrenmeye
-başladım. Bu yazı ile beraber de öğrendiklerimi sizlerle paylaşacağım.&lt;/p&gt;
-
-&lt;p&gt;Bu yazı dizisi ile ilgili olsun olmasın &lt;strong&gt;Terbiye Sınırları Aşılmadığı ve Saygısızlık Yapılmadığı&lt;/strong&gt; sürece her türlü eleştiri ve iyileştirme fikrine açığım arkadaşlar. O yüzden düşüncelerinizi de
-beklerim.&lt;/p&gt;
-
-&lt;p&gt;Şimdi Angular 2 derslerimize başlayalım.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Nedir Bu Angular 2?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Javascript dünyası deyim yerinde ise zibilyon tane framework’e sahip. JQuery, Backbone, Ember, Angular, React vs. vs. Liste uzayıp gidiyor. Fakat zaman içerisinde Singe Page Web Application
-adında bir yapı çıktı ve bu yapıyı da Angular en sağlam şekilde geliştiricilere sunan JS framework’lerinden birisi oldu.&lt;/p&gt;
-
-&lt;p&gt;Birinci sürümünden tamamen farklı bir şekilde gelen Angular 2 ile mimari &lt;strong&gt;Type Script&lt;/strong&gt; yapısına geçti. Type Script yapısı dediğimiz olay da derlendiği zaman ortaya Javasctipt çıkaran bir 
-mekanizma arkadaşlar. Peki ne sağlıyor bize bu Type Script? Aslında benim gördüğüm kadarı ile JS’in anlaşılmaz noktaları anlaşılır hale getirmeyi, daha bir OOP mantığında JS geliştirmeyi 
-sağlamayı amaçlamışlar. Bir de type-safe güvenliği sağlanması amaçlanmış. Buradaki amaç tür dönüşümleri arasıda sorun olduğunda direk derlenirken haberimiz olmasıdır.&lt;/p&gt;
-
-&lt;p&gt;Ayrıca Angular 2 ile modül bazlı bir yapıya geçilmiş. Bileşenlerimizi modülleri yazıp oluşturup import ediyor kullanıyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Angular 2 Yazmak İçin Ne Yapmamız Lazım?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Hepsinden önce Angular 2 öğrenmek, çalışmak, geliştirme yapabilmek için makinanızda Node.js kurulu olmalıdır arkadaşlar. &lt;a href=&quot;https://nodejs.org/en/&quot;&gt;https://nodejs.org/en/&lt;/a&gt; adresinden Node.js’i 
-indirip makinanıza kurabilirsiniz. Node.js kurulumundan sonra Angular 2 ile geliştirme yapmak için hazır hale geleceğiz.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Angular 2 Konfigürasyon Dosyaları ve Hello World&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Adettendir, yeni bir dil, framework vs.’ye başlandığında Hello World uygulamaları yapılır. Biz de bir Hello World app yapacağız.&lt;/p&gt;
-
-&lt;p&gt;Normalde Angular 2 ile geliştirme yapmak için gereken konfigürasyon dosyası, yapılması gereken ayarlar bana göre böylesi bir framework için çok. Ama bu noktada güzel olay şu ki insanların
-bir şeyler öğrenebilmesi için çabalayan arkadaşlar bizlere direk Angular öğrenmeye başlayabilmemiz için konfigürasyon dosyalarını barındıran bir Template sunuyorlar.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/gopinav/Angular-2-Tutorials/tree/master/Template&quot;&gt;https://github.com/gopinav/Angular-2-Tutorials/tree/master/Template&lt;/a&gt; adresinde yer alan Template projesi konfigürasyon dosyaları
-hazırlanmış, direk yazmaya başlayabileceğimiz bir projedir. Bu Template projesinin de içerisinde yer aldığı &lt;strong&gt;&lt;em&gt;Angular-2-Tutorials&lt;/em&gt;&lt;/strong&gt; projesini bilgisayarınıza indirin arkadaşlar. Biz bu yazıda 
-sadece proje içerisindeki Template projesinden yararlanacağız.&lt;/p&gt;
-
-&lt;p&gt;Şimdi buradaki dosyaların ne işe yaradığını inceleyelim. İsmi yazan dosyayı herhangi bir editör ile açın arkadaşlar. Burada kalabalık olmaması için ben dosya içeriklerini buraya yapıştırmıyorum.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;package.json&lt;/strong&gt; : Angular 2’nin yazılabilmesi ve çalışabilmesi için gerekli olan bağımlılıklar bu dosya içerisinde tanımlanır ve komut satırından &lt;strong&gt;&lt;em&gt;npm install&lt;/em&gt;&lt;/strong&gt; komutu verildiğinde 
-bu dosyada tanımlı kütüphaneler, modüller indirilerek projeye konulur. npm install komutu verildiğinde proje dizini içinde &lt;strong&gt;&lt;em&gt;node_modules&lt;/em&gt;&lt;/strong&gt; adında bir klasör oluşur ve bu bahsettiğimiz kütüphaneler
-oraya konulur. Ayrıca package.json içerisinde &lt;strong&gt;&lt;em&gt;scripts&lt;/em&gt;&lt;/strong&gt; adında bir kısım yer almaktadır. Bu kısımdaki &lt;strong&gt;&lt;em&gt;start&lt;/em&gt;&lt;/strong&gt; satırı &lt;strong&gt;&lt;em&gt;npm start&lt;/em&gt;&lt;/strong&gt; komutu veirilince .ts uzantılı Type Script dosyaları
-Javascripte’e derlensin ve proje lite server üzerinde çalışmaya başlasın demektir. &lt;strong&gt;&lt;em&gt;tsc:w&lt;/em&gt;&lt;/strong&gt; satırı Type Script’lerin watch mode ile derlenmesi demektir ve bu da .ts uzantılı dosyalar üzerinde
-değişiklik yapıldığında otomatik yansıması demektir. &lt;strong&gt;&lt;em&gt;postinstall&lt;/em&gt;&lt;/strong&gt; satırı da typings.json içindeki bağımlılıkların package.json içindeki dosyaların indirilip kurulmasından sonra indirilip
-kurulması anlamına gelmektedir.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;tsconfig.json&lt;/strong&gt; : Bilgisayarlarımızda kullandığımız browserlar Type Script’den anlamazlar ve Javascript’ten anlarlar. Bu nedenle Type Script’lerimizin Javascript’e dönüştürülmeleri gerekir.
-tsconfig.json dosyası içerisinde de Type Script’ten JavaScript’e derleme yapılması için gerekli konfigürasyonlar belirtilir.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;systemjs.config.js&lt;/strong&gt; : Bu dosya modüllerin yüklenmesi ve varsayılan dosya uzantıları ile ilgilenir arkadaşlar.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;index.html&lt;/strong&gt; : Html dosyamız içerisinde ilk 4 script tag’i Angular’ın çalışması için gerekli modüllerin yüklenmesi vazifesini üstlenir. Son iki script tag’i systemjs.config.js dosyasındaki
-tanımları yükler. body içerisindeki my-app tag’i ise app.component.ts dosyası içerisinde tanımlı bir bileşen. Ona az sonra geleceğiz.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;app.component.ts&lt;/strong&gt; : Bu dosya içerisinde öncelikle bir Component tanımlanacağı için &lt;strong&gt;&lt;em&gt;@angular/core&lt;/em&gt;&lt;/strong&gt; altından Component’i dahil ediyoruz. Ardından @Componenet ile bileşeni tanımlıyoruz ve
-içerisinde &lt;strong&gt;selector&lt;/strong&gt;* özelliği ile bu component’in nasıl çağırılıp kullanılacağını söylüyoruz. index.html içinden de hatırlayacağınız üzere direk my-app diyerek çağırmıştık. @Componenet içindeli
-&lt;strong&gt;&lt;em&gt;template&lt;/em&gt;&lt;/strong&gt; özelliği de bu compoment’in çağırıldığı zaman nasıl bir şablon gösterilmesi gerektiğini söyler. Bizim için olan durumda bu component çağırıldığında Hello World çağırılacak. Son
-olarak &lt;strong&gt;&lt;em&gt;export class AppComponent&lt;/em&gt;&lt;/strong&gt; satırı ile AppComponent’imizi sınıf bazında diper yerlerde kullanıma hazır hale getiriyoruz.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;main.ts&lt;/strong&gt; : main.ts dosyası içerisinde ilk satırda &lt;strong&gt;&lt;em&gt;bootstrap&lt;/em&gt;&lt;/strong&gt; import ediliyor ve biz bootstrap’ı bizim uygulamamız başlarken hangi componenet’den başlayacak onu bildirmek için kullanacağız.3. satırda ise az önce tanımladığımız AppComponenet’i import ediyoruz. &lt;strong&gt;&lt;em&gt;bootstrap(AppComponent);&lt;/em&gt;&lt;/strong&gt; satırı ile uygulamayı AppComponent’den başlatıyoruz.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Şimdi (Node.js’i kurdunuz varsayıyorum) terminal üzerinden bu Template klasörüne girin ve &lt;strong&gt;&lt;em&gt;npm install&lt;/em&gt;&lt;/strong&gt; komutunu verin. İşlem tamamlandığında şu şekilde bır çıktı alacağız:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/gettingStarted/1.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/gettingStarted/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Ardından &lt;strong&gt;npm start&lt;/strong&gt; komutunu verdiğimizde varsayılan tarayıcımız üerinde &lt;strong&gt;&lt;em&gt;http://localhost:3000&lt;/em&gt;&lt;/strong&gt; adresi üzerinde projemiz çalışacak. İşte browser çıktımız:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/gettingStarted/2.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/gettingStarted/2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Evet, bu yazıda anlatacaklarım bu kadar arkadaşlar. Angular 2’ye giriş yaptık, Hello World uygulamamızı gördük. Gelecek yazıdan itibaren Angular’a dalmaya başlayacağız.&lt;/p&gt;
-
-&lt;p&gt;Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-</description>
-        <pubDate>Mon, 01 May 2017 20:40:21 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2017/angular-2-lesson-1/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/angular-2-lesson-1/</guid>
-        
-        <category>angular 2 web service</category>
-        
-        <category>angular 2 rest get</category>
-        
-        <category>angular 2 rest post</category>
-        
-        <category>angular 2 rest</category>
-        
-        <category>angular 2 calling web service</category>
-        
-        <category>angular 2 giriş</category>
-        
-        <category>angular 2 tutorials</category>
-        
-        <category>angular 2 hello world</category>
-        
-        <category>angular 2 dersleri</category>
-        
-        <category>angular 2 kaynak</category>
-        
-        <category>angular 2 türkçe kaynak</category>
-        
-        <category>angular 2 türkçe dersleri</category>
         
         
       </item>
