@@ -143,7 +143,7 @@ için sisteminizde JDK 1.7 veya üzeri bir JDK olduğundan emin olmanız gerekme
 verecektir.</p>
 
 <p><a href="/images/maven/1/1.png">
-<img src="/images/mavem/1/1.png" style="width: 958px; height= 400px;" />
+<img src="/images/maven/1/1.png" style="width: 958px; height= 400px;" />
 </a></p>
 
 <p>Bende JDK 1.8 kurulu olduğu için JDK taraflı bir engel yok.</p>
@@ -169,7 +169,7 @@ indirip klasöre çıkarttığınız maven klasörünün yeri olacak şekilde bi
 <p>Kurulum sonrası şu şekilde bir çıktı almalısınız:</p>
 
 <p><a href="/images/maven/1/2.png">
-<img src="/images/mavem/1/2.png" style="width: 958px; height= 400px;" />
+<img src="/images/maven/1/2.png" style="width: 958px; height= 400px;" />
 </a></p>
 
 <p><strong>İlk Maven Projesi</strong></p>
@@ -188,27 +188,27 @@ Choose a number sorularını enterlayıp default’u seçerek geçebilirsiniz.</
 <p>Bu işlemler başarı ile tamamlandığında konsolda <strong>BUILD SUCCESS</strong> yazısını görürüz.</p>
 
 <p><a href="/images/maven/1/3.png">
-<img src="/images/mavem/1/3.png" style="width: 958px; height= 400px;" />
+<img src="/images/maven/1/3.png" style="width: 958px; height= 400px;" />
 </a></p>
 
 <p>Proje oluşturulduktan sonra şöyle bir dizin yapısı bizi karşılar. Burada src klasörü Source kelimesinin kısaltmasından gelmektedir ve proje geliştirilirken yazılan kodlar bu klasör altında
 yer alır.<strong><em>main</em></strong> klasörü projenin kendisine ait kodları barındıracak kısım olurken <strong><em>test</em></strong> klasörü de projenin testi için yazılmış kodları barındıracaktır.</p>
 
 <p><a href="/images/maven/1/4.png">
-<img src="/images/mavem/1/4.png" style="width: 958px; height= 400px;" />
+<img src="/images/maven/1/4.png" style="width: 958px; height= 400px;" />
 </a></p>
 
 <p>Şimdi Maven ile projenin <strong><em>compile</em></strong> ve <strong><em>test</em></strong> işlemlerini yapalım. Öncelikle terminalden projenizin içine, pom.xml’in yer aldığı dizine geçiş yapın. Ardından <strong><em>mvn compile</em></strong>
 komutunu verin. Bu komut önce gerekli olan bağımlılıklar var mı, indireyim mi diye bakacak ardından da proje içerisindeki Java sınıflarını derleyecektir. BUILD SUCCESS yazısını gördü isek olay tamamdır.</p>
 
 <p><a href="/images/maven/1/5.png">
-<img src="/images/mavem/1/5.png" style="width: 958px; height= 400px;" />
+<img src="/images/maven/1/5.png" style="width: 958px; height= 400px;" />
 </a></p>
 
 <p>mvn compile komutu Java compiler’ı tetikleyecektir ve FirstMavenProject içerisinde derleşnmiş Java sınıflarının tutulacağı bir <strong><em>target</em></strong> klasörünün oluşmasını sağlayacaktır.</p>
 
 <p><a href="/images/maven/1/7.png">
-<img src="/images/mavem/1/7.png" style="width: 958px; height= 400px;" />
+<img src="/images/maven/1/7.png" style="width: 958px; height= 400px;" />
 </a></p>
 
 <p>Target 
@@ -216,14 +216,14 @@ klasörü içinde ileride göreceğimiz şekilde <em>.jar ya da *.war uzantılı
 çalıştırabildiğimiz için terminal üzerinde <strong>*Hello World!</strong></em> yazısını görebildik.</p>
 
 <p><a href="/images/maven/1/8.png">
-<img src="/images/mavem/1/8.png" style="width: 958px; height= 400px;" />
+<img src="/images/maven/1/8.png" style="width: 958px; height= 400px;" />
 </a></p>
 
 <p>Terminal üzerinden <strong><em>mvn test</em></strong> komutu verildiğinde de proje için yazılmış test kodları koşulur. Aşağıdaki ekran çıktısında göreceğiniz üzere test kodları koşulmadan önce gerekli test 
 kütüphanesi bağımlılıkları indirildi.</p>
 
 <p><a href="/images/maven/1/6.png">
-<img src="/images/mavem/1/6.png" style="width: 958px; height= 400px;" />
+<img src="/images/maven/1/6.png" style="width: 958px; height= 400px;" />
 </a></p>
 
 <p>Benim bu ilk yazıda anlatacaklarım bu kadar arkadaşlar. Gelecek yazıda pom.xml dosyasından ve Build Life Cycles konularından bahsedeceğiz.</p>
