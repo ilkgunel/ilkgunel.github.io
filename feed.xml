@@ -5,9 +5,164 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 03 Jun 2017 23:57:19 +0300</pubDate>
-    <lastBuildDate>Sat, 03 Jun 2017 23:57:19 +0300</lastBuildDate>
+    <pubDate>Sat, 10 Jun 2017 16:22:15 +0300</pubDate>
+    <lastBuildDate>Sat, 10 Jun 2017 16:22:15 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Maven Yazıları 1 - Giriş</title>
+        <description>&lt;p&gt;Merhabalar arkadaşlar. Bu yazı ile birlikte birkaç yazı yazacağım Maven yazılarına başlamış oluyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Maven Nedir&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Maven Apache Vakfı tarafından geliştirilen ve projenin inşası ile yönetimini kolaylaştırmayı amaçlayan bir araçtır. İlk olarak dışarıya kapalı şekilde Apache’nin bir başka projesi olan
+Jakarta Alexandria projesinin inşa aşamalarının basitleştirme adına geliştirilmeye başlanmıştır fakat ilerleyen zamanlarda Apache Vakfı bu yazılımı açık kaynak olarak tüm yazılımcılara
+sunmuştur.&lt;/p&gt;
+
+&lt;p&gt;Maven projenin ihtiyaç duyduğu bağımlılıkları
+yönetme vazifesini üzerine alır ve proje geliştiricileri arasında muhtemel bağımlılık farklarından ortaya çıkacak çakışmaları veyahut olmayan bağımlılık problemlerini ortadan kaldırır.
+Ayrıca Maven projenin IDE bağımlı geliştirilmesinin önüne geçmeye çalışır. Teoride Maven projenin IDE bağımsız geliştirilmesini amaçlar fakat pratikte geliştirme aşamasında kullanılan 
+diğer araçlar projenin yine IDE bağımlı olmasına sebep olabilir.&lt;/p&gt;
+
+&lt;p&gt;Ayrıca Meven’ın üzerine aldığı diğer sorumluluk da projenin versiyon kontrolü’nü basitize etmek ve kolaylaştırmaktır.&lt;/p&gt;
+
+&lt;p&gt;Yani en basit tabiri ile proje geliştirme sürecini basitize etmeye amaçlayan bir araçtır.&lt;/p&gt;
+
+&lt;p&gt;Maven’dan önceleri yine Apache’nin bir başka build tool’u olan ANT kullanılıyordu fakat Maven’ın popülerleşmesi ile ANT kullanımı da bir hayli azalmış.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Sistem Gereksinimleri ve Kurulum Aşaması&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Maven cross-paltform bir araç olmasındna ötürü onu Windows, Mac OS ve GNU/Linux işletim sistemlerinde kullanabilirsiniz. Fakat öncelikli olarak bilgisayarınızda JDK’nın (JRE değil buraya dikkat,
+JDK olacak) kurulu olması gerekmektedir. Maven’ın 3.3 ve sonraki sürümleri bilgisayarınızda JDK 1.7 ve üzerinin kurulu olmasını istemektedir. Yazılarımız boyunca maven 3.3 üzerini kullanacağımız
+için sisteminizde JDK 1.7 veya üzeri bir JDK olduğundan emin olmanız gerekmektedir. Bilgiyarınız konsol/terminal ekranında &lt;strong&gt;&lt;em&gt;java -version&lt;/em&gt;&lt;/strong&gt; yazmanız halinde size kurulu olan JDK bilgisini
+verecektir.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/maven/1/1.png&quot;&gt;
+&lt;img src=&quot;/images/mavem/1/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bende JDK 1.8 kurulu olduğu için JDK taraflı bir engel yok.&lt;/p&gt;
+
+&lt;p&gt;Maven memory açısından herhangi bir minimum gereklilik tutmuyor.&lt;/p&gt;
+
+&lt;p&gt;Disk kapasitesi olarak kurulum için 10 MB bir disk alanının olması gerekiyor fakat proje geliştirme aşamasında Maven bizim için birçok kütüphane indirip koyacağı için Maven’ın sitesinde
+en azından 500 MB bir disk alanının Maven Local Repo için gerekli olduğu bildiriliyor.&lt;/p&gt;
+
+&lt;p&gt;Son olarak da Maven kurulmadan önce JAVA_HOME parametresinin işletim sisteminde ayarlanmış olması gerekiyor. Eğer ayarlanmış değilse bunu araştırıp ayarlayıp yazıya o şekilde devam etmelisiniz.&lt;/p&gt;
+
+&lt;p&gt;Kurulum işlemleri de şu şekilde:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Windows İçin&lt;/strong&gt;: &lt;a href=&quot;https://maven.apache.org/download.cgi&quot;&gt;https://maven.apache.org/download.cgi&lt;/a&gt; adresinden şu anki en güncel sürüm olan 3.5 için apache-maven-3.5.0-bin.tar.gz ya da 
+apache-maven-3.5.0-bin.zip dosyalarından birisini indirin ve herhangi bir yerde klasöre çıkartın. Ardından Control Panel -&amp;gt; System And Security -&amp;gt; System -&amp;gt; Advanced System Settings yolu ile gelişmiş
+ayarlar ekranını açın. Ardından Environment Variables butonuna tıklayın. System Environments alanındaki New butonuna tıklayarak &lt;strong&gt;&lt;em&gt;M2_HOME&lt;/em&gt;&lt;/strong&gt; adında ve değeri de az önce 
+indirip klasöre çıkarttığınız maven klasörünün yeri olacak şekilde bir variable tanımlayın. Bu adımdan sonra zaten tanımlı &lt;strong&gt;&lt;em&gt;PATH&lt;/em&gt;&lt;/strong&gt; variable’ını bulup Edit deyin ve sonuna 
+&lt;strong&gt;&lt;em&gt;;%M2_HOME%\bin&lt;/em&gt;&lt;/strong&gt; ekleyip kaydedin. Son olarak konsol ekranından &lt;strong&gt;&lt;em&gt;mvn -v&lt;/em&gt;&lt;/strong&gt; deyip çıktı alabiliyorsanız maven kurulumu başarılı olmuş demektir.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Linux ve Mac OS&lt;/strong&gt;: Linux ve Mac OS ortamlarında ise &lt;strong&gt;&lt;em&gt;export PATH=/açılan yer/apache-maven-3.5.0/bin:$PATH&lt;/em&gt;&lt;/strong&gt; diyerek maven’ı kurabilirsiniz.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Kurulum sonrası şu şekilde bir çıktı almalısınız:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/maven/1/2.png&quot;&gt;
+&lt;img src=&quot;/images/mavem/1/2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;İlk Maven Projesi&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi Maven’ı sistemimize kurduk ve ilk projemizi oluşturabiliriz. Genel ve Maven projesini tanıma amaçlı bir proje oluşturalım. Bunun için terminalde &lt;strong&gt;&lt;em&gt;mvn archetype:generate&lt;/em&gt;&lt;/strong&gt;
+komutunu çalıştıralım. Komut bizim için bir adet basit, genel amaçlı bir Maven projesi oluşturacak. Bu komutu ilk kez verdiğinizde Maven proje oluşturma için bazı gerekli kütüphaneleri indirecektir. Ayrıca size konsol ekranında bazı sorular soracaktır.
+Choose a number sorularını enterlayıp default’u seçerek geçebilirsiniz.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;em&gt;Define value for property ‘groupId’:&lt;/em&gt;&lt;/strong&gt; sorusunda projenizin bağlı olacağı bir grubun id bilgisini girmiş olursunuz.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;em&gt;Define value for property ‘artifactId’:&lt;/em&gt;&lt;/strong&gt; sorusunda bu projeyi tanımlayıcı bir anahtar girmiş olursunuz. Proje ismi de budur.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;em&gt;Define value for property ‘version’:&lt;/em&gt;&lt;/strong&gt; sorusunda projeniz için versiyon bilgisi girmiş olursunuz.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;em&gt;Define value for property ‘package’:&lt;/em&gt;&lt;/strong&gt; sorusunda ise projeniz için default oluşturulacak bir bir paket ismi girmiş olursunuz.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Bu işlemler başarı ile tamamlandığında konsolda &lt;strong&gt;BUILD SUCCESS&lt;/strong&gt; yazısını görürüz.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/maven/1/3.png&quot;&gt;
+&lt;img src=&quot;/images/mavem/1/3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Proje oluşturulduktan sonra şöyle bir dizin yapısı bizi karşılar. Burada src klasörü Source kelimesinin kısaltmasından gelmektedir ve proje geliştirilirken yazılan kodlar bu klasör altında
+yer alır.&lt;strong&gt;&lt;em&gt;main&lt;/em&gt;&lt;/strong&gt; klasörü projenin kendisine ait kodları barındıracak kısım olurken &lt;strong&gt;&lt;em&gt;test&lt;/em&gt;&lt;/strong&gt; klasörü de projenin testi için yazılmış kodları barındıracaktır.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/maven/1/4.png&quot;&gt;
+&lt;img src=&quot;/images/mavem/1/4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi Maven ile projenin &lt;strong&gt;&lt;em&gt;compile&lt;/em&gt;&lt;/strong&gt; ve &lt;strong&gt;&lt;em&gt;test&lt;/em&gt;&lt;/strong&gt; işlemlerini yapalım. Öncelikle terminalden projenizin içine, pom.xml’in yer aldığı dizine geçiş yapın. Ardından &lt;strong&gt;&lt;em&gt;mvn compile&lt;/em&gt;&lt;/strong&gt;
+komutunu verin. Bu komut önce gerekli olan bağımlılıklar var mı, indireyim mi diye bakacak ardından da proje içerisindeki Java sınıflarını derleyecektir. BUILD SUCCESS yazısını gördü isek olay tamamdır.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/maven/1/5.png&quot;&gt;
+&lt;img src=&quot;/images/mavem/1/5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;mvn compile komutu Java compiler’ı tetikleyecektir ve FirstMavenProject içerisinde derleşnmiş Java sınıflarının tutulacağı bir &lt;strong&gt;&lt;em&gt;target&lt;/em&gt;&lt;/strong&gt; klasörünün oluşmasını sağlayacaktır.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/maven/1/7.png&quot;&gt;
+&lt;img src=&quot;/images/mavem/1/7.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Target 
+klasörü içinde ileride göreceğimiz şekilde &lt;em&gt;.jar ya da *.war uzantılı dosyalarımız da olacak. Biz şimdi derlenmiş olan App sınıfını çalıştıralım. java komutu ile derlenmiş Java sınıflarını 
+çalıştırabildiğimiz için terminal üzerinde &lt;strong&gt;*Hello World!&lt;/strong&gt;&lt;/em&gt; yazısını görebildik.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/maven/1/8.png&quot;&gt;
+&lt;img src=&quot;/images/mavem/1/8.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Terminal üzerinden &lt;strong&gt;&lt;em&gt;mvn test&lt;/em&gt;&lt;/strong&gt; komutu verildiğinde de proje için yazılmış test kodları koşulur. Aşağıdaki ekran çıktısında göreceğiniz üzere test kodları koşulmadan önce gerekli test 
+kütüphanesi bağımlılıkları indirildi.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/maven/1/6.png&quot;&gt;
+&lt;img src=&quot;/images/mavem/1/6.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Benim bu ilk yazıda anlatacaklarım bu kadar arkadaşlar. Gelecek yazıda pom.xml dosyasından ve Build Life Cycles konularından bahsedeceğiz.&lt;/p&gt;
+
+&lt;p&gt;Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Fri, 09 Jun 2017 20:41:20 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2017/maven-introduction/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/maven-introduction/</guid>
+        
+        <category>microsoft sql jdbc driver</category>
+        
+        <category>microsoft jdbc driver</category>
+        
+        <category>how to add microsoft sql jdbc driver to local maven repository</category>
+        
+        <category>add microsoft sql jdbc driver to maven repository</category>
+        
+        <category>microsoft jdbc driver mavem</category>
+        
+        <category>microsft jdbc driver nasıl kullanılır</category>
+        
+        <category>microsoft sql jdbc driver nasıl kullanılır</category>
+        
+        <category>microsoft jdbc driver nasıl kullanılır</category>
+        
+        <category>maven nedir?</category>
+        
+        <category>maven windows nasıl kurulur?</category>
+        
+        <category>maven linux nasıl kurulur?</category>
+        
+        <category>maven mac os x nasıl kurulur?</category>
+        
+        <category>apache maven</category>
+        
+        <category>maven kurulumu</category>
+        
+        <category>ilk maven projesi</category>
+        
+        
+      </item>
     
       <item>
         <title>Angular 2 Tutorials 8 - Structural Directives</title>
@@ -1189,118 +1344,6 @@ etkili olmayacak. Hemen bu durumu ispatlayalım.&lt;/p&gt;
         <category>angular 2 component&#39;e style atanması</category>
         
         <category>angular 2 component styles</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Angular 2 Ders 2 - Component Oluşturalım</title>
-        <description>&lt;p&gt;Merhabalar arkadaşlar.&lt;/p&gt;
-
-&lt;p&gt;Bu yazıda Angular 2 üzerinde kendi component’imizi oluşturmayı göreceğiz. &lt;a href=&quot;http://ilkaygunel.com/blog/2017/angular-2-lesson-1/&quot;&gt;Angular 2 Giriş&lt;/a&gt; yazımızda Angular 2’ye giriş yapmış, konfigürasyon dosyalarını öğrenmiş,
-Hello World uygulaması yapmıştık. Bu yazıda da kendi component’imizi yapıp uyglamanın başlatıldığı AppComponent’e ekleyecek ve ekranda göreceğiz.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;angular2tutorials.component.ts&lt;/strong&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2Tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;h2&amp;gt;Angular 2 Tutorials&amp;lt;/h2&amp;gt;&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Yeni bir component oluşturacağımız zaman ilk olarak dosya ismini düzgün hazırlamamız gerekiyor. Angular 2 anladığım kadarı dosya isimlendirmelerinde bir zorunluluk getirmemiş ancak hangi dosyanın ne işe yaradığının 
-net anlaşılabilmesi adına dosya adının peşine türünü de yazmak oldukça faydalı olacaktır. Temiz kod yaklaşımında kodun, dosyanın vs. ne iş yaptığının isminden anlaşılabilmesi iyi bir pratiktir. 
-Bu örneğimizde biz bir Component dosyası hazıladığımız için &lt;strong&gt;&lt;em&gt;dosyaAdi.component.ts&lt;/em&gt;&lt;/strong&gt; şeklinde isimlendirme. Mesela ,ilerde göreceğiz,
-service işleri yapan kısımları barındıracak dosyalarımız olacak. O zamanda &lt;strong&gt;&lt;em&gt;dosyaAdi.service.ts.&lt;/em&gt;&lt;/strong&gt; bir isimlendirme yoluna gideceğiz.&lt;/p&gt;
-
-&lt;p&gt;angular2tutorials.component.ts dosyamızın içerisine adım adım bakalım:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;İlk olarak bir Component oluşturacağımız için Angular’ın kütüphanesinden &lt;strong&gt;&lt;em&gt;Component&lt;/em&gt;&lt;/strong&gt;‘i import ediyoruz.&lt;/li&gt;
-  &lt;li&gt;Akabinde &lt;strong&gt;&lt;em&gt;@Component&lt;/em&gt;&lt;/strong&gt; notasyonu ile bir Component tanımlayacağımızı söylüyoruz.&lt;/li&gt;
-  &lt;li&gt;@Component’in gövde kısmında ise &lt;strong&gt;&lt;em&gt;selector&lt;/em&gt;&lt;/strong&gt; özelliği ile bu Component’in diğer Component’ler ya da HTML dosyaları içinde nasıl çağırılabileceğini tanımlıyoruz. Bir nevi id bilgisi ataması gibi düşünülebilir.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;em&gt;template&lt;/em&gt;&lt;/strong&gt; özelliğinde ise Component’in çağırıldığında ekranda gözükecek şablonu tanımlıyoruz. Bu component için çağırıldığı zaman &lt;strong&gt;Angular 2 Tutorials&lt;/strong&gt; metnini görmeyi bekliyoruz.&lt;/li&gt;
-  &lt;li&gt;Son olarak da &lt;strong&gt;&lt;em&gt;export class Angular2Tutorials{}&lt;/em&gt;&lt;/strong&gt; satırı ile bu Component’i diğer .ts dosyaları içinde çağırılmaya ve kullanılmaya hazır hale getiriyoruz.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;app.component.ts&lt;/strong&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;./angular2tutorials.component&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;my-app&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;h1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Hello&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;World&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/h1&amp;gt;&lt;/span&gt;
-              &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;angular2Tutorials&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/angular2Tutorials&amp;gt;`,&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;directives&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AppComponent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Önceki yazıdan da hatırlayacağınız üzere uygulama başlatılırken (bootstrap) AppComponent ile başlatılıyordu. Biz de yeni component’lerimizi AppComponent içinden çağırmak sureti ile kullanabiliriz.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;app.component.ts dosyamız içerisinde ilk olarak az önce kullanıma hazır hale getirdiğimiz Angular2Tutorials’ı import ederek başlıyoruz.&lt;/li&gt;
-  &lt;li&gt;Akabinde Component’in tanımlandığı @Component notasyonunun gövde kısmında, template özelliğinde Angular2Tutorials içerisinde tanımladığımız selector özelliğini HTML tag’i kullanır gibi kullanıyoruz. Bildiğimiz gibi HTML’de
-etiketleri kullanırken etiket açma-kapama şeklinde kullanıyoruz. Burada da aynı şekilde angular2Tutorials ifadesi ile HTML tag’i açıp kapatıyoruz.&lt;/li&gt;
-  &lt;li&gt;Burada dikkat edilmesi gereken bir nokta mevcut. Hello World yazısı içerisinde template kısmı tek tırnaklar yani &lt;strong&gt;’ ‘&lt;/strong&gt; arasına yazılıp kullanılmıştı. Fakat burada dikkat ederseniz eğik tırnaklar yani &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt; &lt;/code&gt;&lt;/strong&gt; arasında. Angular 2’de
-kendi oluşturdumuz Component’leri çağıracağımız zaman bu şekilde bir yazım şekli kullanmamız gerekiyor.&lt;/li&gt;
-  &lt;li&gt;Template kısmında kendi oluşturduğumuz bir Component’i çağıracağımız zaman bir de export edilen class’ı &lt;strong&gt;&lt;em&gt;directives&lt;/em&gt;&lt;/strong&gt; özelliği ile tanıtmamız gerekiyor. AppComponent, template içindeki tag’i bu sayede tanıyor.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Hali hazırda npm start komutu verilmiş durumda ise bir şey yapmamıza lüzum yok. Bu dosyalar otomatik derlenip yüklenecek ve tarayıcıda hemen görebileceğiz. Komut verilmemiş durumda ise npm start diyelim ve projemiz açılsın.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson2/1.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson2/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Proje açıldığında gördüğümüz gibi yeni oluşturduğumuz Component’imiz de sayfamızda yer alıyor. Sayfanın kodunu incelediğimizde de my-app component’imizin içerisinde angular2Tutorials component’imizi görüyoruz.&lt;/p&gt;
-
-&lt;p&gt;Bu yazıda anlatacaklarım bu kadar arkadaşlar. Yeni bir Component oluşturmayı ve kullanmayı görmüş olduk. Gelecek yazıda görüşmek üzere.&lt;/p&gt;
-
-&lt;p&gt;Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-</description>
-        <pubDate>Fri, 05 May 2017 20:40:21 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2017/angular-2-lesson-2-create-component/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/angular-2-lesson-2-create-component/</guid>
-        
-        <category>angular 2 web service</category>
-        
-        <category>angular 2 rest get</category>
-        
-        <category>angular 2 rest post</category>
-        
-        <category>angular 2 rest</category>
-        
-        <category>angular 2 calling web service</category>
-        
-        <category>angular 2 giriş</category>
-        
-        <category>angular 2 tutorials</category>
-        
-        <category>angular 2 hello world</category>
-        
-        <category>angular 2 dersleri</category>
-        
-        <category>angular 2 kaynak</category>
-        
-        <category>angular 2 türkçe kaynak</category>
-        
-        <category>angular 2 türkçe dersleri</category>
-        
-        <category>angular 2 component oluşturma</category>
-        
-        <category>angular 2 creating component</category>
-        
-        <category>angular 2 how to create component</category>
-        
-        <category>angular 2 nasıl component oluşturulur</category>
-        
-        <category>angular 2 component nasıl oluşturulur</category>
         
         
       </item>
