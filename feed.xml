@@ -5,9 +5,123 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 10 Jun 2017 16:37:04 +0300</pubDate>
-    <lastBuildDate>Sat, 10 Jun 2017 16:37:04 +0300</lastBuildDate>
+    <pubDate>Wed, 14 Jun 2017 22:37:19 +0300</pubDate>
+    <lastBuildDate>Wed, 14 Jun 2017 22:37:19 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Maven Yazıları 2 - Project Object Model, Build Lifecycle ,Build Profiles</title>
+        <description>&lt;p&gt;Merhabalar arkadaşlar. &lt;a href=&quot;http://ilkaygunel.com/blog/2017/maven-introduction/&quot;&gt;Maven Giriş&lt;/a&gt; yazımızda basitçe Maven’a giriş yapmıştık. Bu yazımızda da konumuz Project Object Model, 
+Build Lifecycle ve Build Profiles konularını anlamak olacak.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Project Object Model&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Her bir maven projesi kendi içerisinde kendine has konfigürasyon ve özelliklerin tanımlandığı bir &lt;strong&gt;&lt;em&gt;pom.xml&lt;/em&gt;&lt;/strong&gt; dosyası barındırır. Project Object Model ifadesinin kısaltması ile isimlendirilen
+bu xml dosyası proje organizasyonu, lisanslar, bağımlılıklar, path ayarları gibi bilgileri içerir.&lt;/p&gt;
+
+&lt;p&gt;Bir pom.xml dosyası Apache 3 CookBook kitabında şu şekilde tasvir edilmiştir:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/maven/2/1.png&quot;&gt;
+&lt;img src=&quot;/images/maven/2/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Yukarıdaki ekran görüntüsünden de görebileceğiniz gibi bir pom.xml dosyası yapısal olarak 4 alana ayrılır. Şe şekilde:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The Basics: Project co-ordinates,bağımlılık yönetimi ve miras alma detaylarını barındıran kısımdır. Project co-ordinates ifadesinden kastedilen bilgi de groupId, artifactId ve version
+bilgilerinin toplandığı kümedir. Bir pom.xml dosyası bu üç bilgiyisi dolayısı ile Project co-ordinates kümesini barındırmak zorundadır. Basics alanı ayrıca modül ve project level bilgileri de
+barındırabilir.&lt;/li&gt;
+  &lt;li&gt;Build Settings: Projenin inşa (build) aşaması içindeki ayarların tanımlandığı kısımdır.&lt;/li&gt;
+  &lt;li&gt;Project Metadata: Bu alan projeye özel bilgilerin tanımlandığı alandır. Projenin ismi, açıklması, geliştiricileri ve katkı sağlayıcıları gibi bilgiler bu alanda yer alır.&lt;/li&gt;
+  &lt;li&gt;Environment: Versiyon kontrol sistemi, issue yönetimi, continuous integration, mail listesi, repository’ler gibi environment bilgileri de bu alanda yer alır.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Build Lifecycle&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Build Lifecycle konusu hoş bir tabir ile Maven projelerinin kalbi olarak nitelendirilir. Çünkü projenin inşası, testi, dağıtımı ile ilgili işlemler Build Lifecycle içerisinde yer alır. Maven
+içerisinde 3 adet Build Lifecycle yer alır: &lt;strong&gt;&lt;em&gt;Default&lt;/em&gt;&lt;/strong&gt;, &lt;strong&gt;&lt;em&gt;Clean&lt;/em&gt;&lt;/strong&gt; ve &lt;strong&gt;**Site&lt;/strong&gt;*.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Default Lifecycle&lt;/em&gt;&lt;/strong&gt;: Projenin derlenmesi, testi ve deoploy edilmesi olaylarını kapsayan lifecycle’dır. 20’den fazla build phase içerisinde yer alır. En önemlileri şunlardır&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Validate: Projenin bilgilerinin eksik olup olmadığı ve doğru olup olmadığı kontrolleri yapılır.&lt;/li&gt;
+  &lt;li&gt;Compile: Kaynak kodları derler.&lt;/li&gt;
+  &lt;li&gt;Test: Unit Test kodlarını koşturur.&lt;/li&gt;
+  &lt;li&gt;Package: Derlenmiş kodu paketleme formatına uygun olarak paketler.&lt;/li&gt;
+  &lt;li&gt;Integration-test: Entegrasyon testlerinin uygulanması aşamasıdır.&lt;/li&gt;
+  &lt;li&gt;Verify: Package’ın geçerli olup olmadığını kontrol eder.&lt;/li&gt;
+  &lt;li&gt;Install: Oluşturulan paketin lokal repo’ya kurar.&lt;/li&gt;
+  &lt;li&gt;Deploy: Uzak sunucuya paketin kurulumunu gerçekleştirir.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Biz bir build phase’i çalıştırdığımız zaman ondan önce çalışması gereken build phase’ler de maven tarafından çalışıtırırlar. Örneğin &lt;strong&gt;&lt;em&gt;mvn integration-test&lt;/em&gt;&lt;/strong&gt; komutu verildiği zaman 
+Maven gidip validate, compile, test, ve package build phase’lerini çalıştıracak, ardından mvn integration-test komutunu çalıştıracaktır.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Clean Lifecycle&lt;/em&gt;&lt;/strong&gt;: Clean lifecycle projenin clean edilmesi yani derlenmiş dosyaların target altından silinerek yeni derlenmiş dosyalara zemin hazırlması görevini üstlenir. Ayrıca&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Pre-clean: Clean işleminden önce yapılması gerekenleri tanımlar.&lt;/li&gt;
+  &lt;li&gt;Clean: Önceki build işleminden gelen derlenmiş dosyaları siler.&lt;/li&gt;
+  &lt;li&gt;Post-clean: Clean işleminin bitirilmesi için yapılması gereken adımları tanımlar.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Site lifecycle&lt;/em&gt;&lt;/strong&gt;: Bu konu benim anladığım kadarı ile Maven tabanlı yazmış olduğunuz projeniz için bir web sayfası şeklinde dökümantasyonunun oluşturulması ve deploy edilmesi aşamasındaki 
+işlemleri belirler.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Pre-site: Web sayfası oluşturulmadan önceki aşamaları kapsar.&lt;/li&gt;
+  &lt;li&gt;Site: Web sayfası halinde olacak olan dökümanın oluşturulması işlemini yapar.&lt;/li&gt;
+  &lt;li&gt;Post-site: Site’ın tamamlanması için yapılmasıgerekenleri uygular ve deploy için hazır hale getirir.&lt;/li&gt;
+  &lt;li&gt;Site-deploy: Tanımlanmış olan bir web sunucusuna oluşturulan bu dökümanın deploy işlemini yapar.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Build Profiles&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Maven’ın sağlamayı amaçladığı büyük şeylerden birisi de projenin tamamı ile portable olmasıdır. Fakat Apache’nin kendisinin de dediği gibi %100 bir portability çok zordur. Örneğin kullanılan
+bir plugin portability konusunu zora sokabilir.&lt;/p&gt;
+
+&lt;p&gt;Benim bu  yazıda anlatacaklarım bu kadar arkadaşlar. Gelecek yazıda Maven tabanlı bir Java Web projesi oluşturacağız ve sunucu üzerinde çalıştıracağız.&lt;/p&gt;
+
+&lt;p&gt;Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Fri, 09 Jun 2017 20:41:20 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2017/maven-tutorials-2/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/maven-tutorials-2/</guid>
+        
+        <category>microsoft sql jdbc driver</category>
+        
+        <category>microsoft jdbc driver</category>
+        
+        <category>how to add microsoft sql jdbc driver to local maven repository</category>
+        
+        <category>add microsoft sql jdbc driver to maven repository</category>
+        
+        <category>microsoft jdbc driver maven</category>
+        
+        <category>microsft jdbc driver nasıl kullanılır</category>
+        
+        <category>microsoft sql jdbc driver nasıl kullanılır</category>
+        
+        <category>microsoft jdbc driver nasıl kullanılır</category>
+        
+        <category>maven nedir?</category>
+        
+        <category>maven windows nasıl kurulur?</category>
+        
+        <category>maven linux nasıl kurulur?</category>
+        
+        <category>maven mac os x nasıl kurulur?</category>
+        
+        <category>apache maven</category>
+        
+        <category>maven kurulumu</category>
+        
+        <category>ilk maven projesi</category>
+        
+        
+      </item>
     
       <item>
         <title>Maven Yazıları 1 - Giriş</title>
@@ -1199,151 +1313,6 @@ atanması yoluna gidilirse element’in value property’si üzerinde işlem yap
         <category>angular 2 Property Data Binding</category>
         
         <category>angular 2 Interpolation</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Angular 2 Ders 3 - Component&#39;e Style Atanması</title>
-        <description>&lt;p&gt;Merhabalar arkadaşlar. &lt;a href=&quot;http://ilkaygunel.com/blog/2017/angular-2-lesson-2-create-component/&quot;&gt;http://ilkaygunel.com/blog/2017/angular-2-lesson-2-create-component/&lt;/a&gt; yazımızda kendi Component’imizi 
-oluşturmayı ve AppComponent içinden onu ekranda göstermeyi görmüştük. Bu yazıda ise bu kendi oluşturduğumuz Component’e Style ataması yapacağız.&lt;/p&gt;
-
-&lt;p&gt;Github üzerinden direk Angular 2 çalışmaya başlamak için edindiğimiz bir Template projemiz vardı ve biz onu kullanıyorduk. O proje içerisinde &lt;strong&gt;&lt;em&gt;style.css&lt;/em&gt;&lt;/strong&gt; adında ve index.html içinde kullanılan
-bir dosyamız vardı. O dosyayı editörünüz üzerinde açınız.&lt;/p&gt;
-
-&lt;p&gt;Bir önceki yazıda yazdığımız Angular2Tutorials component’imiz şu şekilde idi:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2Tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;h2&amp;gt;Angular 2 Tutorials&amp;lt;/h2&amp;gt;&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Şimdi bu Component’imizin template kısmında bir de &lt;strong&gt;&lt;em&gt;h4&lt;/em&gt;&lt;/strong&gt; tag’ini kullanalım ve bu h4 tag’ine style ataması yapalım.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2Tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;h2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Angular&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Tutorials&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/h2&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;h4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Header&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;From&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Tutorials&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/h4&amp;gt;`,&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;styles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;h4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt;:&lt;span class=&quot;kt&quot;&gt;red&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Angular2Tutorials component’imizin template özelliği içerisinde tek tırnaklar arasında olan Template özelliğini yan tırnaklar arasına aldık (&lt;code class=&quot;highlighter-rouge&quot;&gt; &lt;/code&gt;).&lt;/li&gt;
-  &lt;li&gt;h4 HTML tag’i ile bir metin tanımladık.&lt;/li&gt;
-  &lt;li&gt;Bir component’e style özelliği atamak istediğimiz zaman @Component içerisinde onun &lt;strong&gt;&lt;em&gt;styles&lt;/em&gt;&lt;/strong&gt; özelliğinden faydalanıyoruz. Bu özelliğe değer atandığı kısımda ise hangi tag’in style özelliği
-ile oynanmak isteniyorsa ona uygun değer ataması yapıyoruz. Bizim örneğimizde h4 HTML tag’inin rengi kırmızı olacak şekilde ayarlandı.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Sunucu çalışmıyorsa npm start verdikten sonra, çalışıyor ise tarayıcıya direk gidip baktığımızda bu Component içerisinde h4’e kırmızı rengin atandığını göreceğiz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson3/1.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson3/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Burada şunu unutmamak lazım ki bizim buradaki h4 tag’ine atadığımız style özelliği sadece bu Component’i kapsar. Yani başka Component’ler içerisinde de h4 kullanılırsa buradaki style özelliği
-etkili olmayacak. Hemen bu durumu ispatlayalım.&lt;/p&gt;
-
-&lt;p&gt;app.component.ts dosyamız içerisinde şu şekilde düzenlemeye gidelim:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;./angular2tutorials.component&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;my-app&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;h1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Hello&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;World&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/h1&amp;gt;&lt;/span&gt;
-              &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;angular2Tutorials&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/angular2Tutorials&amp;gt;&lt;/span&gt;
-              &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;h4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Header&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;From&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;App&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/h4&amp;gt;`,&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;styles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;h4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt;:&lt;span class=&quot;kt&quot;&gt;blue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;            
-  &lt;span class=&quot;nx&quot;&gt;directives&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AppComponent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;AppComponent içerisinde Angular2Tutorials içinde yaptığımız gibi template kısmında h4 tag’ini kullandık ve styles özelliği kısmında h4 tag’ine mavi renk ataması yaptık.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson3/2.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson3/2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Ekran çıktısında gördüğümüz gibi Angular2Tutorials component’i içinden h4 kırmızı renkte iken AppComponent içinden gelen h4 mavi renkte.&lt;/p&gt;
-
-&lt;p&gt;Son olarak da index.html içinde bir h4 tag’i kullanalım ve style.css dosyası içerisinde buna özel tanımlama yapalım.&lt;/p&gt;
-
-&lt;p&gt;style.css dosyamız içerisinde şu satırları ekleyelim ve HTML içinde h4 tag’ini kullandığımızda rengi turuncu olsun:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;h4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;orange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;index.html dosyamızın body kısmını da şu şekilde değiştirelim ve bir h4 tag’i de HTML içinde kullanmış olalım:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;h4&amp;gt;&lt;/span&gt;Header 4 From index.html&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h4&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;my-app&amp;gt;&lt;/span&gt;Loading...&lt;span class=&quot;nt&quot;&gt;&amp;lt;/my-app&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson3/3.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson3/3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Ekran çıktısında gördüğümüz gibi her h4 tag’i kendisine nerede bir style özelliği atanmışsa oradakini kullandı.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;İlk h4 tag’i style.css içerisinde tanımlı rengini aldı çünkü index.html dosyası içerisinde doğrudan gelen (Component’ler içerisinden gelmeyen) tagler özelleliklerini style.css’den alıyor.&lt;/li&gt;
-  &lt;li&gt;İkinci h4 tag’i Angular2Tutorials Component’i içerisinde tanımlı rengini aldı.&lt;/li&gt;
-  &lt;li&gt;Üçüncü h4 tag’i de AppComponent içerisinde tanımlı rengini aldı.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Bu yazıda anlatacaklarım da bu kadar arkadaşlar. Oluşturulan Component’e style atanması durumunu basitçe görmüş olduk. Gelecek yazıda görüşmek üzere.&lt;/p&gt;
-
-&lt;p&gt;Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-</description>
-        <pubDate>Sat, 06 May 2017 20:40:21 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2017/angular-2-lesson-3-styling-components/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/angular-2-lesson-3-styling-components/</guid>
-        
-        <category>angular 2 web service</category>
-        
-        <category>angular 2 rest get</category>
-        
-        <category>angular 2 rest post</category>
-        
-        <category>angular 2 rest</category>
-        
-        <category>angular 2 calling web service</category>
-        
-        <category>angular 2 giriş</category>
-        
-        <category>angular 2 tutorials</category>
-        
-        <category>angular 2 hello world</category>
-        
-        <category>angular 2 dersleri</category>
-        
-        <category>angular 2 kaynak</category>
-        
-        <category>angular 2 türkçe kaynak</category>
-        
-        <category>angular 2 türkçe dersleri</category>
-        
-        <category>angular 2 styling components</category>
-        
-        <category>angular 2 component&#39;e style atanması</category>
-        
-        <category>angular 2 component styles</category>
         
         
       </item>
