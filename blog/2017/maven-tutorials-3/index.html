@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+	  (adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-0980023289791742",
+		enable_page_level_ads: true
+	  });
+	</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Maven Yazıları 3 - Maven Tabanlı Java Web Projesi</title>
+    <meta name="description" content="Merhabalar arkadaşlar. Bu yazıda Maven tabanlı bir Java web projesi için uğraşacağız. Yapacaklarımız şu şekilde:">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2017/maven-tutorials-3/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>Maven Yazıları 3 - Maven Tabanlı Java Web Projesi - İlkay Günel - Blog</title>
+<meta property="og:title" content="Maven Yazıları 3 - Maven Tabanlı Java Web Projesi" />
+<meta name="description" content="Maven Yazıları 3 - Maven Tabanlı Java Web Projesi" />
+<meta property="og:description" content="Maven Yazıları 3 - Maven Tabanlı Java Web Projesi" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2017/maven-tutorials-3/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2017/maven-tutorials-3/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-06-09T20:41:20+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Maven Yazıları 3 - Maven Tabanlı Java Web Projesi",
+    "datePublished": "2017-06-09T20:41:20+03:00",
+    "description": "Maven Yazıları 3 - Maven Tabanlı Java Web Projesi",
+    "url": "http://ilkaygunel.com/blog/2017/maven-tutorials-3/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/ilkay-gunel-cv.pdf" title="Bana Ait CV">Bana Ait CV</a></li>
+        
+          <li><a href="/blog/2016/git-nedir" title="Git Nedir? Nasıl Kullanılır?">Git Nedir? Nasıl Kullanılır?</a></li>
+        
+          <li><a href="/blog/2017/angular-2-tutorials" title="Angular 2">Angular 2</a></li>
+        
+          <li><a href="/blog/2016/jsf-tutorials-list" title="JSF">JSF</a></li>
+        
+          <li><a href="/blog/2016/spring-tutorials" title="Spring 4">Spring 4</a></li>
+        
+          <li><a href="/blog/2016/eclipselink" title="Eclipselink">Eclipselink</a></li>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/blog/2016/test" title="Test">Test</a></li>
+        
+          <li><a href="/blog/2016/useful-libraries-for-java" title="Java İçin Faydalı Kütüphaneler">Java İçin Faydalı Kütüphaneler</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog/2016/eclipse-notes" title="Eclipse">Eclipse</a></li>
+        
+          <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
+        
+          <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+        <li><a href="https://1000kitap.com/ilkaygunel">1000Kitap</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Maven Yazıları 3 - Maven Tabanlı Java Web Projesi</h1>
+      <p class="post-meta">Jun 9, 2017</p>
+    </header>
+
+    <div class="post-content">
+      <p>Merhabalar arkadaşlar. Bu yazıda Maven tabanlı bir Java web projesi için uğraşacağız. Yapacaklarımız şu şekilde:</p>
+
+<ul>
+  <li>Komut satırı üzerinden Maven tabanlı bir Java Web projesi oluşturacağız.</li>
+  <li>Compiler Plugin edineceğiz.</li>
+  <li>war dosyası çıkartacağız.</li>
+  <li>Maven Plug’ini olan Jetty ile projemizi çalıştıracağız.</li>
+</ul>
+
+<p><strong>Projeyi Oluşturalım</strong></p>
+
+<p>Maven giriş yazısında sizlere ArtifactId, GroupId gibi konulardan bahsetmiştim. Şimdi onları da kullanarak şu komut vasıtası ile bir adet Plain Old Web Application (POWA) oluşturalım:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">mvn</span> <span class="nl">archetype:</span><span class="n">generate</span> <span class="o">-</span><span class="n">DarchetypeArtifactId</span><span class="o">=</span><span class="n">maven</span><span class="o">-</span><span class="n">archetype</span><span class="o">-</span>
+<span class="n">webapp</span> <span class="o">-</span><span class="n">DartifactId</span><span class="o">=</span><span class="n">WebAppProject</span> <span class="o">-</span><span class="n">DgroupId</span><span class="o">=</span><span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span>
+<span class="o">-</span><span class="n">Dversion</span><span class="o">=</span><span class="mf">1.0</span><span class="o">-</span><span class="n">SNAPSHOT</span> <span class="o">-</span><span class="n">Dpackage</span><span class="o">=</span><span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span></code></pre></figure>
+
+<p>Komut içerisinde</p>
+
+<ul>
+  <li><strong><em>archetype:generate</em></strong> ifadesi ile bir proje generate edileceğini söylüyoruz.</li>
+  <li><strong><em>-DarchetypeArtifactId=maven-archetype-webapp</em></strong> ifadesi ile bir webapp projesinin oluşturulmasını istediğimizi söylüyoruz. -DarchetypeArtifactId özelliğine atanan değer projenin 
+türünü belirler. Burada projemizin türü web projesi.</li>
+  <li>-DartifactId projenin ArtifactId’sini, -DgroupId GroupId’sini, -Dpackage da paket ismi bilgisini belirleri. -Dversion da projenin versiyonunu.</li>
+</ul>
+
+<p>Komut verildiği zaman terminalde şu şekilde bir akış gerçekleşecek:</p>
+
+<p><a href="/images/maven/3/1.png">
+<img src="/images/maven/3/1.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Önce gidip Maven’ın repository’isinden webapp oluşturmak için gerekli jar’ları indirecek sonra <strong><em>Confirm properties configuration:</em></strong> sorusu ile bizden az önce komut satırında
+girdiğimiz ArtifactId vs. bilgilerini doğrulamamızı istiyor.</p>
+
+<p>Proje klasörüne gidip baktığımızda da durum şu şekilde:</p>
+
+<p><a href="/images/maven/3/2.png">
+<img src="/images/maven/3/2.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Maven tabanlı Java Web projelerinde src/main klasörünün altında bir <strong><em>webapp</em></strong> klasörü bulunur. Projenin deployment descriptor’ı olan web.xml’in yer aldığı WEB-INF klasörü ve web 
+sayfaları yer alır. JSP sayfaları, XHTML sayfaları gibi.</p>
+
+<p>Projenin klasör yapısı içindeki pom.xml dosyasını herhangi bir text editör’de açarsanız şu şekilde bir görünüm ile karşılacaksınız:</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+  <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+  <span class="nt">&lt;groupId&gt;</span>com.ilkaygunel<span class="nt">&lt;/groupId&gt;</span>
+  <span class="nt">&lt;artifactId&gt;</span>WebAppProject<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;packaging&gt;</span>war<span class="nt">&lt;/packaging&gt;</span>
+  <span class="nt">&lt;version&gt;</span>1.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+  <span class="nt">&lt;name&gt;</span>WebAppProject Maven Webapp<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;url&gt;</span>http://maven.apache.org<span class="nt">&lt;/url&gt;</span>
+  <span class="nt">&lt;dependencies&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
+      <span class="nt">&lt;version&gt;</span>3.8.1<span class="nt">&lt;/version&gt;</span>
+      <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+  <span class="nt">&lt;/dependencies&gt;</span>
+  <span class="nt">&lt;build&gt;</span>
+    <span class="nt">&lt;finalName&gt;</span>WebAppProject<span class="nt">&lt;/finalName&gt;</span>
+  <span class="nt">&lt;/build&gt;</span>
+<span class="nt">&lt;/project&gt;</span></code></pre></figure>
+
+<p>Komut satırında girdiğimiz bilgiler buraya girilmiş gördüğünüz gibi. Proje generate edildiği için maven test kütüphanesi olan JUnit’i de eklemiş projeye.</p>
+
+<p>Projeyi çalıştırmadan önce yapmamız gereken bir diğer konu ise bir compiler plugin’i eklemek olacaktır. Elimizdeki JSP dosyalarının derlenebilmesi için bu tarz bir plugin’e ihtiyacımız
+olacak. Bu plug’ini edinmek için de yapmamız gereken şey çok basit. pom.xml dosyasındaki buid tag’lerinin arasına <strong><em>maven-compiler-plugin</em></strong>‘i eklemek. Onu da şu şekilde yapıyoruz:</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;build&gt;</span>
+    <span class="nt">&lt;finalName&gt;</span>WebAppProject<span class="nt">&lt;/finalName&gt;</span>
+    <span class="nt">&lt;plugins&gt;</span>
+        <span class="nt">&lt;plugin&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>maven-compiler-plugin<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>3.6.1<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;configuration&gt;</span>
+            <span class="nt">&lt;source&gt;</span>1.8<span class="nt">&lt;/source&gt;</span>
+            <span class="nt">&lt;target&gt;</span>1.8<span class="nt">&lt;/target&gt;</span>
+        <span class="nt">&lt;/configuration&gt;</span>
+        <span class="nt">&lt;/plugin&gt;</span>
+    <span class="nt">&lt;/plugins&gt;</span>
+<span class="nt">&lt;/build&gt;</span></code></pre></figure>
+
+<p>pom.xml dosyamıza yaptığımız bu güncelleme ile Java 1.8’i kullanacak şekilde maven-compiler-plugin’imizi eklemiş olduk.</p>
+
+<p>Projeyi çalıştırmadan önce yapılması gereken son işlem de war dosyasını edinmek olacaktır. pom.xml dosyasına baktığımızda <strong><em>packaging</em></strong> tag’inde <strong><em>war</em></strong> değerinin olduğunu görüyoruz.
+Açılımı <strong><em>Web Application Archive</em></strong> olan war dosyasını Java Web projelerinin çıktılanmış hali olarak düşünebiliriz. Tüm web sayfları, sınıflar, kütüphaneler derlenip bu dosya içerisine 
+koyulur ve sunucu tarafından çalıştırabilir hale getirilir. Önce yazılardan hatırlarsanız bir <strong><em>target</em></strong> klasöründen bahsetmiştim. İşte proje derlenip işlem tamamlandığında bu war 
+dosyası target klasörünün altında yer alır.</p>
+
+<p>Şimdi komut satırından proje klasörüne girip <strong><em>mvn install</em></strong> komutunu verelim.</p>
+
+<p><a href="/images/maven/3/3.png">
+<img src="/images/maven/3/3.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Üstteki ekran görüntüsünde <strong><em>Building war:</em></strong> ile başlayan ilk satıra dikkat ettiğimizde target klasörünün altında <strong><em>WebAppProject.war</em></strong> adında dosyanın oluşturulmuş olduğunu görüyoruz.</p>
+
+<p>Projenin klasörüne gidip baktığımızda da durum şöyle:</p>
+
+<p><a href="/images/maven/3/4.png">
+<img src="/images/maven/3/4.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>WebAppProject.war dosyamız yerini almış.</p>
+
+<p><strong>Projeyi Çalıştıralım</strong></p>
+
+<p>Şimdi artık projenin çalıştırlması aşamasına geldik. Projeyi çalıştırmak için yapmamız gereken şey az önceki maven-compiler-plugin eklemesi gibi maven-jetty-plugin’i eklemek olacaktır.
+pom.xml’deki build tag’inin yeni hali şöyle olacak:</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml">...
+<span class="nt">&lt;build&gt;</span>
+    <span class="nt">&lt;finalName&gt;</span>WebAppProject<span class="nt">&lt;/finalName&gt;</span>
+    <span class="nt">&lt;plugins&gt;</span>
+       <span class="nt">&lt;plugin&gt;</span>
+         <span class="nt">&lt;artifactId&gt;</span>maven-compiler-plugin<span class="nt">&lt;/artifactId&gt;</span>
+         <span class="nt">&lt;version&gt;</span>3.6.1<span class="nt">&lt;/version&gt;</span>
+         <span class="nt">&lt;configuration&gt;</span>
+         <span class="nt">&lt;source&gt;</span>1.8<span class="nt">&lt;/source&gt;</span>
+         <span class="nt">&lt;target&gt;</span>1.8<span class="nt">&lt;/target&gt;</span>
+       <span class="nt">&lt;/configuration&gt;</span>
+       <span class="nt">&lt;/plugin&gt;</span>
+       <span class="nt">&lt;plugin&gt;</span>
+		  <span class="nt">&lt;groupId&gt;</span>org.eclipse.jetty<span class="nt">&lt;/groupId&gt;</span>
+		  <span class="nt">&lt;artifactId&gt;</span>jetty-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+		  <span class="nt">&lt;version&gt;</span>9.4.6.v20170531<span class="nt">&lt;/version&gt;</span>
+		<span class="nt">&lt;/plugin&gt;</span>
+     <span class="nt">&lt;/plugins&gt;</span>
+  <span class="nt">&lt;/build&gt;</span>
+  ...</code></pre></figure>
+
+<p>maven-jetty-plugin ile biz proje içerisinde taşınabilecek bir web sunucusu elde etmiş oluyoruz. Projemiz bu sunucu üzerinde çalışacak.</p>
+
+<p>Proje klasöründeki index.jsp dosyasını herhangi bir text editör ile açıp baktığımızda çok basit bir Hello World kodu ile karşılacağız, projeyi çalıştırınca ekranda Hello World görmeyi bekliyoruz:</p>
+
+<figure class="highlight"><pre><code class="language-jsp" data-lang="jsp"><span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;h2&gt;</span>Hello World!<span class="nt">&lt;/h2&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span></code></pre></figure>
+
+<p>Şimdi komut satırından proje klasörü içerisinde iken <strong><em>mvn jetty:run</em></strong> komutunu verelim. Eğer bu komutu verdikten sonra 
+<strong><em>No plugin found for prefix ‘jetty’ in the current project and in the plugin groups</em></strong> şeklinde bir hata alırsanız <strong><em>${user.home}/.m2/settings.xml</em></strong> dosyanızı açın
+içerisine</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;pluginGroup&gt;</span>org.mortbay.jetty<span class="nt">&lt;/pluginGroup&gt;</span></code></pre></figure>
+
+<p>satırını ekleyin. Dosya eğer yoks ise içeriği şu şekilde olacak şekilde oluşturabilirsiniz:</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;settings</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/SETTINGS/1.0.0&quot;</span>
+  <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+  <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/SETTINGS/1.0.0</span>
+<span class="s">                      http://maven.apache.org/xsd/settings-1.0.0.xsd&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;localRepository&gt;</span>${user.home}/.m2/repository<span class="nt">&lt;/localRepository&gt;</span>
+  <span class="nt">&lt;interactiveMode&gt;</span>true<span class="nt">&lt;/interactiveMode&gt;</span>
+  <span class="nt">&lt;usePluginRegistry&gt;</span>false<span class="nt">&lt;/usePluginRegistry&gt;</span>
+  <span class="nt">&lt;offline&gt;</span>false<span class="nt">&lt;/offline&gt;</span>
+  <span class="nt">&lt;pluginGroups&gt;</span>
+    <span class="nt">&lt;pluginGroup&gt;</span>org.mortbay.jetty<span class="nt">&lt;/pluginGroup&gt;</span>
+  <span class="nt">&lt;/pluginGroups&gt;</span>
+<span class="nt">&lt;/settings&gt;</span></code></pre></figure>
+
+<p>Bu işlemi yaptıktan sonra <strong><em>mvn jetty:run</em></strong> komutunu tekrar verin ve konsolda <strong><em>Started Jetty Server</em></strong> yazısını görene kadar bekleyin. Maven Jetty için jar’ları indirecek ve sunucuyu 
+başlatacak.</p>
+
+<p><a href="/images/maven/3/5.png">
+<img src="/images/maven/3/5.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Ardından tarayıcınız üzerinden <a href="http://localhost:8080/index.jsp">http://localhost:8080/index.jsp</a> adresine gidin ve işte Hello World karşımızda 😎</p>
+
+<p><a href="/images/maven/3/6.png">
+<img src="/images/maven/3/6.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Burada projenin direk localhost:8080 üzerinden değil de localhost:8080/WebAppProject üzerinde çalışmasını istersek de plugin’i şu şekilde konfigüre edebiliriz:</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;plugin&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.eclipse.jetty<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>jetty-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>9.4.6.v20170531<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;configuration&gt;</span>
+        <span class="nt">&lt;scanIntervalSeconds&gt;</span>10<span class="nt">&lt;/scanIntervalSeconds&gt;</span>
+        <span class="nt">&lt;webApp&gt;</span>
+            <span class="nt">&lt;contextPath&gt;</span>/WebAppProject<span class="nt">&lt;/contextPath&gt;</span>
+        <span class="nt">&lt;/webApp&gt;</span>
+    <span class="nt">&lt;/configuration&gt;</span>
+<span class="nt">&lt;/plugin&gt;</span></code></pre></figure>
+
+<p>webApp tag’lerinin contextPath tag’leri ile projenin Jetty üzerinde hangi path’de çalışacağını söylemiş oluyoruz. İstediğimiz path’i buraya verebiliriz. Örneğin projenin <strong><em>Test</em></strong> path’i 
+üzerinde çalışmasını istersek</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;contextPath&gt;</span>/Test<span class="nt">&lt;/contextPath&gt;</span></code></pre></figure>
+
+<p>şeklinde bir değişiklik yeterli olur. Terminal üzerinden kontrol+z ile stop işlemi yapıp tekrar mvn jetty:run dediğimde proje WebAppProject path’i üzerinde çalışıyor durumda.</p>
+
+<p><a href="/images/maven/3/7.png">
+<img src="/images/maven/3/7.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Bu yazıda anlatacaklarım da bu kadar arkadaşlar. Gelecek yazılarda Eclipse ve NetBeans IDE’leri üzerinde Maven projeleri ile işlemler yapacağız.</p>
+
+<p>Görüşene kadar sağlıcakla kalın.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
+  
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2017 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>
