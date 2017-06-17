@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
+  <script type="text/javascript">
+        function setVoice() {
+            var vid = document.getElementById("voice");
+            if(vid!=null){
+            	vid.volume = 0.2;
+            }
+        }
+        window.onload = setVoice;
+        </script>
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	<script>
 	  (adsbygoogle = window.adsbygoogle || []).push({
@@ -74,7 +83,7 @@
 
   </div>
   <br/>
-  <audio width="300" height="32" src="/images/islak-islak.mp3" controls="controls" autoplay="autoplay"></audio>
+  <audio id="voice" width="300" height="32" src="/images/islak-islak.mp3" controls="controls" autoplay="autoplay"></audio>
   <br/>
 
 </section>
