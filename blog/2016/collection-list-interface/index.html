@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <script type="text/javascript">
+        function setVoice() {
+            var vid = document.getElementById("voice");
+            if(vid!=null){
+            	vid.volume = 0.2;
+            }
+        }
+        window.onload = setVoice;
+        </script>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+	  (adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-0980023289791742",
+		enable_page_level_ads: true
+	  });
+	</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Collections 2 – List Interface</title>
+    <meta name="description" content="Merhabalar. Önceki yazıda Collection’a Giriş yapmıştık. Bu yazıda Collection Interface’den türetilmiş olan List interface’i inceleyeceğiz.">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/collection-list-interface/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>Collections 2 – List Interface - İlkay Günel - Blog</title>
+<meta property="og:title" content="Collections 2 – List Interface" />
+<meta name="description" content="Collections 2 – List Interface" />
+<meta property="og:description" content="Collections 2 – List Interface" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/collection-list-interface/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/collection-list-interface/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-09-04T19:38:20+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Collections 2 – List Interface",
+    "datePublished": "2016-09-04T19:38:20+03:00",
+    "description": "Collections 2 – List Interface",
+    "url": "http://ilkaygunel.com/blog/2016/collection-list-interface/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/ilkay-gunel-cv.pdf" title="Bana Ait CV">Bana Ait CV</a></li>
+        
+          <li><a href="/blog/2016/git-nedir" title="Git Nedir? Nasıl Kullanılır?">Git Nedir? Nasıl Kullanılır?</a></li>
+        
+          <li><a href="/blog/2017/angular-2-tutorials" title="Angular 2">Angular 2</a></li>
+        
+          <li><a href="/blog/2016/maven-tutorials" title="Maven">Maven</a></li>
+        
+          <li><a href="/blog/2016/jsf-tutorials-list" title="JSF">JSF</a></li>
+        
+          <li><a href="/blog/2016/spring-tutorials" title="Spring 4">Spring 4</a></li>
+        
+          <li><a href="/blog/2016/eclipselink" title="Eclipselink">Eclipselink</a></li>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/blog/2016/test" title="Test">Test</a></li>
+        
+          <li><a href="/blog/2016/useful-libraries-for-java" title="Java İçin Faydalı Kütüphaneler">Java İçin Faydalı Kütüphaneler</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog/2016/eclipse-notes" title="Eclipse">Eclipse</a></li>
+        
+          <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
+        
+          <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+        <li><a href="https://1000kitap.com/ilkaygunel">1000Kitap</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Collections 2 – List Interface</h1>
+      <p class="post-meta">Sep 4, 2016</p>
+    </header>
+
+    <div class="post-content">
+      <p>Merhabalar. <a href="http://ilkgunel.github.io/collection-giris/">Önceki</a> yazıda Collection’a Giriş yapmıştık. Bu yazıda Collection Interface’den türetilmiş olan <strong><em>List interface’i</em></strong> inceleyeceğiz.</p>
+
+<p>List interface tekrarlı veri içerebilen, sıralı olma özelliğine sahip bir collection yapısıdır. List’in tıpkı Array gibi indis yapısı vardır ve 0’dan başlar. Bu sayede List interface’i bu indis sayesinde ilgili indisdeki ve belli bir aralıktaki veriyi  değiştirme imkanı sunar. List Interfaces miras aldığı Collection Interface’i metotları dışında şu işlemler için de metotlar sunar:</p>
+
+<ul>
+  <li>İndis yapısı sayesinde Pozisyonel Ulaşım (Positional Access): Elimizdeki verileri sayısal pozisyonları (indisleri) sayesinde değiştirme (manipüle etme) imkanı sunar. Get, Set, Add, AddAll ve Remove metotları pozisyonel ulaşım ile kullanılabilen metotlara örnektir.</li>
+  <li>Arama: Liste içindeki özel bir değeri, veriyi arar ve onun sayısal pozisyonunu döndürür. Bu işlem için indexOf metodu kullanılır. Yalnız List Interface’in tekrarlı veri tutabileceğini söylemiştik. Burada indexOf metodunu tekrarlanan bir verinin indisini bulmak için kullanırsanız değer ile ilk karşılaştığı yerdeki indis değerini size döndürür. Şöyle ki;</li>
+  <li>Sizin listeniz içinde Akın Kaldıroğlu ismi 3. ve 6. yerlerde iki defa geçiyorsa ve siz de indexOf(“Akın Kaldıroğlu”) derseniz 3 değerini elde ederseniz. Bu durumdan dolayı bir de lastIndexOf adlı bir metot daha yazılmış. Bu da aradığınız verinin en son nerede görüldüğünü söylüyor. lastIndexOf(“Akın Kaldıroğlu”) size 6 değerini döndürür.</li>
+  <li>İterasyon (Iteration): List düzenli (ordered) bir  koleksiyon olduğu için onun üzerinde seri bir şekilde dolaşan metot yazılması amaçlanarak listIterator metodu oluşturulmuş. iterator() metodu Collection arabiriminde de vardır fakat o sadece bir sonraki elemanı verir. İndis yapısı Collection için geçerli olmadığından ileri geri durumu da söz konusu olmaz. Fakat List indisli yapıda olduğu için onun için yazılan listIterator metodu ileri geri gitme özelliğine de sahiptir.</li>
+  <li>Belli Aralık (Range): List Interface indisli yapıda olduğu için listenin belli bir aralığı ile de işlem yapılabilir. Burada List Interface’in sublist metodu kullanılır. <strong><em>listeNesnesi.sublist(3,9);</em></strong> diyerek elimideki listenin 3. ile 9. indisleri arasındaki değerleri kullanabileceğimiz yeni bir liste oluşturduğumuzu düşünebiliriz.</li>
+</ul>
+
+<p>Collections sınıfı içinden List Interce ve onu uygulamış nesneler için hazırlanmış olan bazı metotlar da şöyledir:</p>
+
+<ul>
+  <li>
+    <p>Sort — Merge Sort algoritması kullanarak bir listeyi sıralar. Merge Sort kullanılmasının amacı hızlı ve stabil bir sıralama elde etmektir.
+  Şu örnek kullanımda liste içindeki değerleri String  öceliklerine göre sıralanıyor:</p>
+
+    <pre><code>listObject.sort(String::compareTo);</code></pre>
+  </li>
+  <li>
+    <p>Shuffle — Liste içindeki verileri rastgele yer değiştirir.
+  Şu örnek kullanımda liste içindeki veriler Random sınıfı yardımı ile ratgele yer değiştirilir. Burada shuffle metodunun sadece List ya da List’i kalıtmış objeleri kabul ettiği unutulmamalıdır.</p>
+
+    <pre><code>Collections.shuffle(listObject,new Random());</code></pre>
+  </li>
+  <li>
+    <p>reverse — Listedeki elementleri ters çevirir.</p>
+
+    <pre><code>Collections.reverse(listObject);</code></pre>
+  </li>
+  <li>
+    <p>rotate — Verilen uzaklık kadar listeyi öteleme işlemi yapar. Örneğin parametre olarak 2 verilirse listenin başındaki eleman sondan bir önceye, 2. sıradaki eleman da son sıraya gider.</p>
+
+    <p>Şu örnek kod 2 birim öteleme yapar:</p>
+
+    <pre><code>Collections.rotate(listObject,2);</code></pre>
+  </li>
+  <li>
+    <p>swap — Swap metodu verilen List içindeki verilen iki indisdeki verinin yer değiştirmesini sağlar. Şu örnek kodumuzda listObect nesnemizdeki 1. ve 3. indisler yer değiştirir.</p>
+
+    <pre><code>Collections.swap(listObject,1,3);</code></pre>
+  </li>
+  <li>
+    <p>replaceAll — List nesnesi içindeki tekrar eden verilerin hepsini istediğiniz başka bir değerle değiştirme imkanı sunar. Örneğin liste içinde 3 adet Günel varsa şu kod ile hepsini Öneyr yapabiliriz.</p>
+
+    <pre><code>Collections.replaceAll(listObject,"Günel","Öner");</code></pre>
+  </li>
+  <li>
+    <p>fill — List içindeki tüm verileri bir seferde istediğiniz bir başka bir veriye çevirme imkanı sunar. Şu örnek kodda liste içindeki tüm veriler Turgay ile değiştirilir.</p>
+
+    <pre><code>Collections.fill(listObject,"Turgay");</code></pre>
+  </li>
+  <li>
+    <p>copy — Bir listeyi dğer listeye kopyalama imkanı sunar. Yalnız bu yapılırken hedef listenin eski verileri koruyacağı ve kopyalananları mevcut verilerin peşine ekleyeceği anlaşılmamalıdır. Kaynak listenin indislerindeki veriler hedef listenin karşılık gelen indisindeki veri ile değiştirilir. Yani 10 tane veri tutan bir listeyi yine 10 tane veri tutan diğer listeye kopyalarsak iki liste birbirinin aynı duruma gelir. Şu örnek kodumuzda listObject hedef listeyi (verilerin aktarılacağı) nameList de kaynak listeyi (verilerin alınacağı) listeyi temsil etmektedir.</p>
+
+    <pre><code>Collections.copy(listObject,nameList);</code></pre>
+  </li>
+  <li>
+    <p>binarySearch — Bu metot aranmak istenen veriyi BinarySearch algoritmasını kullanarak arar.</p>
+
+    <p>Şu örnek kodumuzda ListObject içinde Han kelimesi aranıp indisi döndürülüyor.</p>
+
+    <pre><code>Collections.binarySearch(listObject,"Han");</code></pre>
+  </li>
+  <li>
+    <p>indexOfSubList — Bir listeyi diğer bir listenin içinde arayıp onun başladığı indisi döndüren metotdur. Şu örnek kodda listObject içinde nameList listesi aranıyor ve nameList’in ilk indisi ile karşılaşıldığı yer döndürülüyor.  Burada nameList’in bir bütün olarak listObject içinde arandığını unutmamak gerek.</p>
+
+    <pre><code>Collections.indexOfSubList(listObject,nameList)</code></pre>
+  </li>
+  <li>
+    <p>lastIndexOfSubList — List nesnesi içerisinde aynı listeden iki adet barındırabilir tekrarlı veri tutma özelliğinden dolayı. Bu metot da en son karşılaşılan indisi döndürür.</p>
+
+    <pre><code>Collections.lastIndexOfSubList(listObject,nameList)</code></pre>
+  </li>
+</ul>
+
+<p>Java Platformu içerisinde iki mühim List uyglaması (implementation) bulunur. Birisi ArrayList, diğeri LinkedList’tir. Biz gelecek yazıda ArrayList‘e, onu takip eden yazıda da LinkedList’e değineceğiz. Gelecek yazıda görüşene kadar sağlıcakla kalın.</p>
+
+<p><a href="https://docs.oracle.com/javase/tutorial/collections/interfaces/list.html">https://docs.oracle.com/javase/tutorial/collections/interfaces/list.html</a></p>
+
+<p><a href="https://docs.oracle.com/javase/tutorial/collections/interfaces/list.html">https://docs.oracle.com/javase/tutorial/collections/algorithms/index.html</a></p>
+
+<div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//ilkgunelgithubio.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+<script id="dsq-count-scr" src="//ilkgunelgithubio.disqus.com/count.js" async=""></script>
+
+<!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
+
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
+  
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2017 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>

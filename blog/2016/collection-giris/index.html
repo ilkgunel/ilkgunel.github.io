@@ -21,29 +21,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>İlkay Günel - Blog</title>
-    <meta name="description" content="İlkay Günel Blog">
+    <title>Collections 1 – Giriş, Java’da Collections Nedir?</title>
+    <meta name="description" content="Merhabalar. Bu yazı ile birkaç yazı sürecek olan Java’da Collections konusuna başlamış oluyoruz. Yazıları yazarken kaynak olarak Deitel&amp;Deitel’in How To ...">
 
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="http://ilkaygunel.com/blog/page/23/">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/collection-giris/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
       <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>İlkay Günel - Blog - İlkay Günel Blog</title>
-<meta property="og:title" content="İlkay Günel - Blog" />
-<meta name="description" content="İlkay Günel Blog" />
-<meta property="og:description" content="İlkay Günel Blog" />
-<link rel="canonical" href="http://ilkaygunel.com/blog/page/23/" />
-<meta property="og:url" content="http://ilkaygunel.com/blog/page/23/" />
+<title>Collections 1 – Giriş, Java’da Collections Nedir? - İlkay Günel - Blog</title>
+<meta property="og:title" content="Collections 1 – Giriş, Java’da Collections Nedir?" />
+<meta name="description" content="Collections 1 – Giriş, Java’da Collections Nedir?" />
+<meta property="og:description" content="Collections 1 – Giriş, Java’da Collections Nedir?" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/collection-giris/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/collection-giris/" />
 <meta property="og:site_name" content="İlkay Günel - Blog" />
-<link rel="prev" href="http://ilkaygunel.com/blog/page/22/">
-<link rel="next" href="http://ilkaygunel.com/blog/page/24/">
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-09-04T19:38:20+03:00" />
 <script type="application/ld+json">
   {
     "@context": "http://schema.org",
-    "@type": "WebPage",
-    "headline": "İlkay Günel - Blog",
-    "description": "İlkay Günel Blog",
-    "url": "http://ilkaygunel.com/blog/page/23/"
+    "@type": "BlogPosting",
+    "headline": "Collections 1 – Giriş, Java’da Collections Nedir?",
+    "datePublished": "2016-09-04T19:38:20+03:00",
+    "description": "Collections 1 – Giriş, Java’da Collections Nedir?",
+    "url": "http://ilkaygunel.com/blog/2016/collection-giris/"
   }
 </script>
 <!-- End Jekyll SEO tag -->
@@ -117,90 +118,77 @@
 
 
       <div class="container">
-        <section class="post-list">
-    
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title">
-      <a class="post-link" href="/blog/2016/javada-JSon-Kullanarak-Restful-Web-Servis-Olus-turma-Ve-Web-Projesinde-Kullanma/">Java’da JSon Kullanarak Restful Web Servis Oluşturma Ve Web Projesinde Kullanma</a>
-    </h1>
-    <div class="post-meta">
-      <time>Sep 4, 2016</time>
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Collections 1 – Giriş, Java’da Collections Nedir?</h1>
+      <p class="post-meta">Sep 4, 2016</p>
+    </header>
+
+    <div class="post-content">
+      <p>Merhabalar. Bu yazı ile birkaç yazı sürecek olan Java’da Collections konusuna başlamış oluyoruz. Yazıları yazarken kaynak olarak Deitel&amp;Deitel’in How To Program Java kitabını ve birtakım internet sitelerini kullanıyor olacağım. Sitelerin linklerini de vereceğim. Bu ilk yazıda <strong><em>Collections Nedir?</em></strong> sorusuna cevap arayacağız.</p>
+
+<p>Yazılımların kodlanması aşamasında veriler tek tek objelere atanmaz. Çünkü bu yönetimi zor ve bellek açısından riskli durumlar doğurabilir. Bunun yerine aynı türden verileri bir arada tutan yapılardan yararlanılır. Örneğin her programlama dilinde mevcut olan dizileri düşündüğümüz zaman int, char ya String olsun aynı türden veriler bir arada tutulmaktadır. İşte bu dizi mantığının Java’da geliştirilmiş, daha fazla özellik özellik mevcut olan halinin barındığı kümeye Collection Framework adı verilir. İstediğimiz türden veri tutup üzerinde işlemler yapmayı sağlayan bu kümede Collection Interface ve Collections Class adında iki yapı kaşımıza çıkar.</p>
+
+<h3 id="collection-interface">Collection Interface</h3>
+
+<p>Collection Framework hiyerarşisi içinde en üst interface Collection Interface’dir. Framework içindeki birtakım interface’ler bu Collection Interface’i extend ederek oluşturulmuşlardır. Onlardan bazıları şöyledir:</p>
+
+<ul>
+  <li>SET: Collection Framework’ü extend eder ve içinde tekrarlı (duplicate) veri tutmaz.</li>
+  <li>LIST: Sıralı bir koleksiyon yapısıdır. Tekrarlı veri tutmaya müsaittir.</li>
+  <li>QUEUE: İsminden de anlayacağımız üzere ilk giren ilk çıkan mantığında işleyen koleksiyon yapısıdır.</li>
+</ul>
+
+<h3 id="collections-class">Collections Class</h3>
+
+<p>Bu sınıf ile arama, sıralama vb. birtakım işlemler yapılabilir ve bunun yanında <strong><em>Wrapper Metot</em></strong> denilen metotlarından da yararlanabiliriz. (Wrapper Metot işi başka bir metodu çağırmak olan metotdur.) Örneğin Collection sınıfı içerisine gidip baktığınızda  synchronizedCollection metodunun bir wrapper metot olduğunu göreceksiniz.</p>
+
+<p>Ayrıca Alican Akkuş da yazıya şöyle bir resim eklememin faydalı olacağını. Kendisine teşekkür ederim.</p>
+
+<p>[<img src="/images/interfacesHierarchy.png" alt="Constructocat by https://github.com/jasoncostello" style="width: 806px; height:308px;" />]</p>
+
+<p>Arabirimler arası hiyerarşinin anlatıldığı resimden gördüğümüz üzere Collection arabirimi kullanılarak ondan Set, List ve Queue arabirimleri türetilmiştir. Set arabiriminden SortedList, Queue arabirinden de Deque ve BlockingQueue arabirimleri türetilmiştir.</p>
+
+<p>Bu yazıda kısaca Collection Framework’ e giriş yapmış olduk. Gelecek yazıda List Interface konusunu işleyeceğiz. Görüşene kadar sağlıcakla kalın.</p>
+
+<p>Resim kaynağı (Source of The Image: <a href="http://www.jusfortechies.com/java/core-java/collections/collections.php">http://www.jusfortechies.com/java/core-java/collections/collections.php</a>)</p>
+
     </div>
-  </header>
 
-  <p><a href="/blog/2016/javada-JSon-Kullanarak-Restful-Web-Servis-Olus-turma-Ve-Web-Projesinde-Kullanma/" title="Permalink to: Java’da JSon Kullanarak Restful Web Servis Oluşturma Ve Web Projesinde Kullanma" class="read-more">Merhaba arkadaşlar. Bu yazıda sizlere Java EE standartlarından biri olan JAX RS ile Json kullanan Restful bir servis yazmayı ve başka bir projede de bu Restful web servisi kullanmayı anlatmaya...</a></p>
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
 </article>
-    
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title">
-      <a class="post-link" href="/blog/2016/java-ve-heap&stack-memory/">Java Ve Heap&Stack Memory</a>
-    </h1>
-    <div class="post-meta">
-      <time>Sep 4, 2016</time>
-    </div>
-  </header>
-
-  <p><a href="/blog/2016/java-ve-heap&stack-memory/" title="Permalink to: Java Ve Heap&Stack Memory" class="read-more">Merhabalar arkadaşlar. Bu yazıda Java ve Heap&amp;Stack Memory ilişkisini anlatmaya çalışacağım. Java Heap Memory Heap memory Java çalışma ortamı (Java Runtime) tarafından objelere ve JRE sınıflarına yer vermek için kullanılır.Biz...</a></p>
-</article>
-    
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title">
-      <a class="post-link" href="/blog/2016/java-neden-harika-bir-dil/">Java Neden Harika Bir Dil?</a>
-    </h1>
-    <div class="post-meta">
-      <time>Sep 4, 2016</time>
-    </div>
-  </header>
-
-  <p><a href="/blog/2016/java-neden-harika-bir-dil/" title="Permalink to: Java Neden Harika Bir Dil?" class="read-more">NOT Bu yazıyı okumanızdan önce size söylemek istediğim bir şey var. “Java Harika Bir Dil Değil”. Dünya üzerindeki hiçbir programlama dili harika değil. Bu nedenle açıkçası hangisi olursa olsun bir...</a></p>
-</article>
-    
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title">
-      <a class="post-link" href="/blog/2016/collection/">Collection Framework Yazı Dizisi</a>
-    </h1>
-    <div class="post-meta">
-      <time>Sep 4, 2016</time>
-    </div>
-  </header>
-
-  <p><a href="/blog/2016/collection/" title="Permalink to: Collection Framework Yazı Dizisi" class="read-more">Collections 1 – Giriş, Java’da Collections Nedir? Collections 2 – List Interface Collections 3 – List Implementation ArrayList Collections 4 – List Implementation LinkedList Collections 5 – Set Interface Collections...</a></p>
-</article>
-    
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title">
-      <a class="post-link" href="/blog/2016/uni-yeni-mezun-askerlik-erteletme/">Üniversiteden Mezun Olunca Askerliği Erteletmek İçin Ne Yapmak Gerekiyor?</a>
-    </h1>
-    <div class="post-meta">
-      <time>Sep 4, 2016</time>
-    </div>
-  </header>
-
-  <p><a href="/blog/2016/uni-yeni-mezun-askerlik-erteletme/" title="Permalink to: Üniversiteden Mezun Olunca Askerliği Erteletmek İçin Ne Yapmak Gerekiyor?" class="read-more">Merhabalar. Haziran 2016 itibari ile Bilgisayar Mühendisliği bölümünden mezun oldum ve geçici mezuniyet belgemi talebime müteakip okuldan mezun olduğum askerlik sistemine bildirilmiş ve okula başlarken 2019 başına tecil etmiş olduğum...</a></p>
-</article>
-    
-
-    
-<nav class="pagination" role="pagination">
-  <ul>
-    
-    
-      
-      <li><a class="prev btn btn-ghost" href="/blog/page/22" title="Articles new">&laquo; Prev</a></li>
-    
-    <li><span class="page-number">Page 23 of 28</span></li>
-    
-      <li><a class="next btn btn-ghost" href="/blog/page/24" title="Articles old">Next &raquo;</a></li>
-    
-  </ul>
-</nav>
-
-</section>
 
       </div>
 

@@ -21,30 +21,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Maven Yazıları</title>
-    <meta name="description" content="  Maven Yazıları 1 - Giriş  Maven Yazıları 2 - Project Object Model, Build Lifecycle ,Build Profiles  Maven Yazıları 3 - Maven Tabanlı Java Web Projesi Oluşt...">
+    <title>Queue Implementation PriorityQueue</title>
+    <meta name="description" content="Merhabalar arkadaşlar. Bu yazıda Queue Interface’in implementasyonu olan PriorityQueue sınıfını inceleyeceğiz.Önceki yazıda genel amaçlı olarak Queue Interfa...">
 
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/maven-tutorials/">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/collection-queue-implementation-priorityqueue/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
       <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Maven Yazıları - İlkay Günel - Blog</title>
-<meta property="og:title" content="Maven Yazıları" />
-<meta name="description" content="Maven Yazıları" />
-<meta property="og:description" content="Maven Yazıları" />
-<link rel="canonical" href="http://ilkaygunel.com/blog/2016/maven-tutorials/" />
-<meta property="og:url" content="http://ilkaygunel.com/blog/2016/maven-tutorials/" />
+<title>Queue Implementation PriorityQueue - İlkay Günel - Blog</title>
+<meta property="og:title" content="Queue Implementation PriorityQueue" />
+<meta name="description" content="Queue Implementation PriorityQueue" />
+<meta property="og:description" content="Queue Implementation PriorityQueue" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2016/collection-queue-implementation-priorityqueue/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2016/collection-queue-implementation-priorityqueue/" />
 <meta property="og:site_name" content="İlkay Günel - Blog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2016-01-01T19:41:20+02:00" />
+<meta property="article:published_time" content="2016-09-04T19:38:20+03:00" />
 <script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "Maven Yazıları",
-    "datePublished": "2016-01-01T19:41:20+02:00",
-    "description": "Maven Yazıları",
-    "url": "http://ilkaygunel.com/blog/2016/maven-tutorials/"
+    "headline": "Queue Implementation PriorityQueue",
+    "datePublished": "2016-09-04T19:38:20+03:00",
+    "description": "Queue Implementation PriorityQueue",
+    "url": "http://ilkaygunel.com/blog/2016/collection-queue-implementation-priorityqueue/"
   }
 </script>
 <!-- End Jekyll SEO tag -->
@@ -122,17 +122,89 @@
 
   <div class="card">
     <header class="post-header">
-      <h1 class="post-title">Maven Yazıları</h1>
-      <p class="post-meta">Jan 1, 2016</p>
+      <h1 class="post-title">Queue Implementation PriorityQueue</h1>
+      <p class="post-meta">Sep 4, 2016</p>
     </header>
 
     <div class="post-content">
-      <ol>
-  <li><a href="http://ilkaygunel.com/blog/2017/maven-introduction/">Maven Yazıları 1 - Giriş</a></li>
-  <li><a href="http://ilkaygunel.com/blog/2017/maven-tutorials-2/">Maven Yazıları 2 - Project Object Model, Build Lifecycle ,Build Profiles</a></li>
-  <li><a href="http://ilkaygunel.com/blog/2017/maven-tutorials-3/">Maven Yazıları 3 - Maven Tabanlı Java Web Projesi Oluşturalım Ve Çalıştıralım</a></li>
-  <li><a href="http://ilkaygunel.com/blog/2017/maven-tutorials-4/">Maven Yazıları 4 - NetBeans IDE’de Maven Desteği</a></li>
-</ol>
+      <p>Merhabalar arkadaşlar. Bu yazıda Queue Interface’in implementasyonu olan PriorityQueue sınıfını inceleyeceğiz.
+Önceki yazıda genel amaçlı olarak Queue Interface’in iki implementasyonu olduğunu söylemiştik: LinkedList ve PriorityQueue. LinkedList üzerinde ArrayList’in bir implementasyonu olarak daha önce durmuştuk. LinkedList Dequeue adındaki bir interface’i uygular ve Dequeue interface’i de aslında Queue interfcaeni kalıtmış bir interfacedir.</p>
+
+<p>[<img src="/images/linkedListDequeue.png" style="width: 1364px; height= 577px;" />]</p>
+
+<p>[<img src="/images/dequeue.png" style="width: 1364px; height= 634px;" />]</p>
+
+<p>(Sebebini bilmediğim bir nedenden ötürü resimler direk okunaklı çıkmamış. Cntrl + Mouse’un scroll tuşu ile yakınlaşma uzaklaşma yaparak resimleri netçe görebilirsiniz.)</p>
+
+<p>PriorityQueue’nun ismi içinde tuttuğu elemanları öncelikli olarak tutmasından gelir. Öncelikten kastımız da PriorityQueue’nun elemanları doğal sırada yada Comparator kullanarak
+bir sıralamada tutmasından ibarettir.
+PrioritQueue null eleman olmasına izin vermez.
+PriorityQueue sınıfının 6 adet yapılandırıcısı bulunmaktadır. Yapılandırıcılar şöyle:
+* PriorityQueue() : Başlangıç kapasitesi 11 olacak şekilde elemanları doğal sırada tutacak bir PriorityQueue nesnesi üretir.
+* PriorityQueue(Collection&lt;? extends E&gt; c) : c collection nesnesinin elemanlarını barındırarak PriorityQueue nesnesi üretir.
+* PriorityQueue(int initialCapacity) : Elemanları doğal sırada tutacak başlangıç kapasitesini bizim belirlediğimiz bir PriorityQueue nesnesi üretir.
+* PriorityQueue(int initialCapacity, Comparator&lt;? super E&gt; comparator) : Elemanların sıralanmasını parametre olarak verilmiş olan comparator nesnesine göre yapacak,başlangıç kapasitesini bizim belirlediğimiz bir PriorityQueue nesnesi üretir.
+* PriorityQueue(PriorityQueue&lt;? extends E&gt; c): Var olan bir PriorityQueue nesnesinin elemanları ile yeni bir PriorityQueue nesnesi üretir.
+* PriorityQueue(SortedSet&lt;? extends E&gt; c): c SortedSet parametresininin elemanları ile yeni bir PriorityQueue nesnesi üretir.</p>
+
+<p>Şimdi bir örnek yapalım.</p>
+
+<p>```java
+import java.util.LinkedList;
+import java.util.PriorityQueue;</p>
+
+<p>public class PriorityQueueExample {</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public static void main (String [] args){
+    PriorityQueue&lt;String&gt; priorityQueue = new PriorityQueue&lt;&gt;();
+    priorityQueue.add("ilkay");
+    priorityQueue.add("adem");
+    priorityQueue.add("zahit");
+
+    LinkedList&lt;String&gt; linkedList = new LinkedList&lt;&gt;();
+    linkedList.add("ilkay");
+    linkedList.add("adem");
+    linkedList.add("zahit");
+    
+    System.err.println(priorityQueue);
+    System.err.println("--------");
+    System.err.println(linkedList);
+    
+    System.err.println("--------");
+    
+    String firstElementWithPeek = priorityQueue.peek();
+    System.err.println(firstElementWithPeek);
+    
+    System.err.println("--------");
+    for (int i = 0; i &lt; 5; i++) {
+        String object = priorityQueue.poll();
+        System.out.println(object);
+    }
+    /*for (int i = 0; i &lt; 5; i++) {
+        String object = priorityQueue.remove();
+        System.out.println(object);
+    }*/
+} } ```
+</code></pre>
+</div>
+
+<p>Örneğimizde Queue arabirimini uygulayan LinkedList ve PriorityQueue sınıflarının birer örneğini oluşturduk ve eklemeler yaptık. Akabinde konsola bu iki veri yapısındaki değerleri bastık.
+Peek metoduna örnek olması açısından firstElementWithPeek nesnesi oluşturduk ve peek metodu ile veri çekip koyduk.
+Son olarak da poll ve remove metotlarını örnekleyen bir for döngüleri yazdık. Birinci for döngüsünde poll metodu priorityQueue nesnesinde 4 eleman olmasına ve döngü 5 defa çalıştırılmasına rağmen exception fırlatmayacak, null dönecek.
+İkinci for döngüsünde ise NoSuchElementException hatası alcağız.</p>
+
+<p>Ekran çıktısına bakalım.</p>
+
+<p>[<img src="/images/priorityqueue.png" style="width: 1600px; height= 900px;" />]</p>
+
+<p>Resimde gördüğümüz üzere Priority Queue String tipinde veri tuttuğu için harflerin sıralamasına göre elemanlarını sıraladı. LinkedList ise eklenme sırasına göre tuttu.
+Ayrıca konsol çıktısında dikkatinizi null olan yerlere de çekmek istiyorum. poll() metodunun exception fırlatmadığından bahsetmiştik, onun yerine null döner. Şimdi 1. for döngüsünü yoruma alıp 2. for döngüsünü çalıştıralım ve konsolda ne oluyor bakalım.</p>
+
+<p>[<img src="/images/priorityqueue2.png" style="width: 1600px; height= 900px;" />]</p>
+
+<p>Gördüğünüz gibi remove metodu silecek eleman bulamayınca exception fırlattı.</p>
+
+<p>Bu yazıda temel olarak bir Queue implementasyonu olan  PriorityQueue sınıfından bahsettik arkadaşlar. Başka yazıda görüşene kadar sağlıcakla kalın.</p>
 
     </div>
 
