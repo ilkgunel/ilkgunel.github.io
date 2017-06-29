@@ -5,9 +5,311 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 28 Jun 2017 22:59:58 +0300</pubDate>
-    <lastBuildDate>Wed, 28 Jun 2017 22:59:58 +0300</lastBuildDate>
+    <pubDate>Thu, 29 Jun 2017 23:45:55 +0300</pubDate>
+    <lastBuildDate>Thu, 29 Jun 2017 23:45:55 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Maven Yazıları 5 - Eclipse IDE&#39;de Maven Desteği</title>
+        <description>&lt;p&gt;Merhabalar arkadaşlar. Bu yazıda sizlere Eclipse IDE üzerinde Maven projesi açma ve çalıştırma işlemlerini anlatmaya çalışacağım. Bu yazı için Eclipse’in Oxygen sürümünü ve 
+Tomcat’in 9 versiyonunu kullanacağız. Eclipse Oxygen üzerinde Tomcat 9 kurulumu için 
+&lt;a href=&quot;http://ilkaygunel.com/blog/2017/tomcat-installation-on-eclipse&quot;&gt;http://ilkaygunel.com/blog/2017/tomcat-installation-on-eclipse&lt;/a&gt; adresindeki yazımı okuyabilirsiniz.&lt;/p&gt;
+
+&lt;p&gt;Şimdi Eclipse üzerinde File -&amp;gt; New Project yolunu takip edelim. Eğer bendeki gibi en başta Maven Project görünür halde ise Maven Project’i seçelim, eğer görünür halde 
+değilse &lt;strong&gt;&lt;em&gt;Other&lt;/em&gt;&lt;/strong&gt; seçeneğini seçip buradan Maven Project’i seçip Next diyelim.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/maven/5/1.png&quot;&gt;
+&lt;img src=&quot;/images/maven/5/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi gelen ekranda &lt;strong&gt;&lt;em&gt;Create a simple project&lt;/em&gt;&lt;/strong&gt; seçeneğine tik koyalım ve Next butonuna tıklayalım.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/maven/5/2.png&quot;&gt;
+&lt;img src=&quot;/images/maven/5/2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi gelen ekranda önceki yazılardan hatırlyacağımız GroupId, ArtifactId gibi bilgilerin doldurlması işlemini gerçekleştirelim. Ben bilgileri aşağıdaki şekilde dolduruyorum.
+Burada dikkat etmemiz gereken &lt;strong&gt;&lt;em&gt;Packaking&lt;/em&gt;&lt;/strong&gt; konusudur. Bir web projesi oluşturacağımız için önceki yazılardan hatırlayacağınız gibi &lt;strong&gt;&lt;em&gt;war&lt;/em&gt;&lt;/strong&gt; tipini seçmemiz gerekmektedir.
+Finish butonuna tıklayarak projeyi oluşturuyorum.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/maven/5/3.png&quot;&gt;
+&lt;img src=&quot;/images/maven/5/3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Proje oluşturulduktan sonra pom.xml dosyası üzerinde şu şekilde bir hata ile karşılaşabilirsiniz:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/maven/5/4.png&quot;&gt;
+&lt;img src=&quot;/images/maven/5/4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Java web projeleri içerisinde deployment descriptor adı verilen web.xml dosyaları yer alır ve her Java web projesinin sağlıklı ve düzgün çalışabilmesi için bu dosyaya ihtiyaç vardır.
+İşte Eclipse de Maven tabanlı proje oluşturulduğu sırada web.xml dosyası generate edilmiyor fakat bu dosyanın eksikliğine de vurgu yapılıyor. 
+Şimdi biz bu dosyayı ekleyeceğiz. Yapmamız gereken tek şey projeye sağ tıklayıp &lt;strong&gt;&lt;em&gt;Java EE Tools&lt;/em&gt;&lt;/strong&gt; kısmından &lt;strong&gt;Generate Deployment Descriptor Stub&lt;/strong&gt; seçeneğini seçiyoruz. Eclipse bizim
+için web.xml’in oluşturulması işlemini yapacak.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/maven/5/5.png&quot;&gt;
+&lt;img src=&quot;/images/maven/5/5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi pom.xml dosyamızın içeriğini şu şekilde güncelleyelim:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;project&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://maven.apache.org/POM/4.0.0&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;modelVersion&amp;gt;&lt;/span&gt;4.0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/modelVersion&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.ilkaygunel&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;MavenOnEclipse&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;0.0.1-SNAPSHOT&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;packaging&amp;gt;&lt;/span&gt;war&lt;span class=&quot;nt&quot;&gt;&amp;lt;/packaging&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;MavenOnEclipse&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;description&amp;gt;&lt;/span&gt;MavenOnEclipse&lt;span class=&quot;nt&quot;&gt;&amp;lt;/description&amp;gt;&lt;/span&gt;
+  
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;properties&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;endorsed.dir&amp;gt;&lt;/span&gt;${project.build.directory}/endorsed&lt;span class=&quot;nt&quot;&gt;&amp;lt;/endorsed.dir&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;project.build.sourceEncoding&amp;gt;&lt;/span&gt;UTF-8&lt;span class=&quot;nt&quot;&gt;&amp;lt;/project.build.sourceEncoding&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/properties&amp;gt;&lt;/span&gt;
+  
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;javax&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;javaee-web-api&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;7.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;scope&amp;gt;&lt;/span&gt;provided&lt;span class=&quot;nt&quot;&gt;&amp;lt;/scope&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugins&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.apache.maven.plugins&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-compiler-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;3.1&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;source&amp;gt;&lt;/span&gt;1.8&lt;span class=&quot;nt&quot;&gt;&amp;lt;/source&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;target&amp;gt;&lt;/span&gt;1.8&lt;span class=&quot;nt&quot;&gt;&amp;lt;/target&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;compilerArguments&amp;gt;&lt;/span&gt;
+                        &lt;span class=&quot;nt&quot;&gt;&amp;lt;endorseddirs&amp;gt;&lt;/span&gt;${endorsed.dir}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/endorseddirs&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/compilerArguments&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.apache.maven.plugins&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-war-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;2.3&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;failOnMissingWebXml&amp;gt;&lt;/span&gt;false&lt;span class=&quot;nt&quot;&gt;&amp;lt;/failOnMissingWebXml&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.apache.maven.plugins&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-dependency-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;2.6&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugins&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/build&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Ardından projeye sağ tıklayıp New -&amp;gt; JSP File seçeneğini seçelim.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/maven/5/6.png&quot;&gt;
+&lt;img src=&quot;/images/maven/5/6.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Dosya isimini index olarak girip Finish butonuna tıklayarak dosyayı oluşturalım.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/maven/5/7.png&quot;&gt;
+&lt;img src=&quot;/images/maven/5/7.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Oluşturlan index.jsp dosyasının içeriğini şu şekilde güncelleyelim:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-jsp&quot; data-lang=&quot;jsp&quot;&gt;&lt;span class=&quot;k&quot;&gt;&amp;lt;%@&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;page&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;language&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;java&amp;quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contentType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;text/html; charset=UTF-8&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;pageEncoding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;UTF-8&amp;quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;%&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html PUBLIC &amp;quot;-//W3C//DTD HTML 4.01 Transitional//EN&amp;quot; &amp;quot;http://www.w3.org/TR/html4/loose.dtd&amp;quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;http-equiv=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Content-Type&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;text/html; charset=UTF-8&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Insert title here&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;&amp;lt;%o&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ut&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Hello Maven on Eclipse IDE!&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;%&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Bu işlemlerin ardından projeye sağ tıklayalım ve Run As -&amp;gt; Run On Server diyelim.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/maven/5/8.png&quot;&gt;
+&lt;img src=&quot;/images/maven/5/8.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Gelen ekranda kurulu olan Tomcat sunucumuzu seçelim ve Next diyelim.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/maven/5/9.png&quot;&gt;
+&lt;img src=&quot;/images/maven/5/9.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Son gelen ekranda Finish diyelim, sunucuyu ve projeyi çalıştıralım:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/maven/5/10.png&quot;&gt;
+&lt;img src=&quot;/images/maven/5/10.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Size Tomcat’i yeniden başlatmak isteyip istemediğinizi soracak Restart Server seçeneği seçili iken OK butonuna tıklayalım.&lt;/p&gt;
+
+&lt;p&gt;İşlem tamamlandığında tarayıcımızdan &lt;a href=&quot;http://localhost:8080/MavenOnEclipse/&quot;&gt;http://localhost:8080/MavenOnEclipse/&lt;/a&gt; adresine gittiğimizde şununla karşılaşacağız:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/maven/5/11.png&quot;&gt;
+&lt;img src=&quot;/images/maven/5/11.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Başarı ile Eclipse IDE’de Maven projesi oluşturup onu çalıştırdık arkadaşlar. Başka yazıda görüşmek üzere.&lt;/p&gt;
+
+&lt;p&gt;Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Wed, 28 Jun 2017 20:41:20 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2017/maven-tutorials-5/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/maven-tutorials-5/</guid>
+        
+        <category>microsoft sql jdbc driver</category>
+        
+        <category>microsoft jdbc driver</category>
+        
+        <category>how to add microsoft sql jdbc driver to local maven repository</category>
+        
+        <category>add microsoft sql jdbc driver to maven repository</category>
+        
+        <category>microsoft jdbc driver maven</category>
+        
+        <category>microsft jdbc driver nasıl kullanılır</category>
+        
+        <category>microsoft sql jdbc driver nasıl kullanılır</category>
+        
+        <category>microsoft jdbc driver nasıl kullanılır</category>
+        
+        <category>maven nedir?</category>
+        
+        <category>maven windows nasıl kurulur?</category>
+        
+        <category>maven linux nasıl kurulur?</category>
+        
+        <category>maven mac os x nasıl kurulur?</category>
+        
+        <category>apache maven</category>
+        
+        <category>maven kurulumu</category>
+        
+        <category>ilk maven projesi</category>
+        
+        <category>maven projesi oluşturmak</category>
+        
+        <category>maven jetty plugin</category>
+        
+        <category>maven ile jetty çalıştırmak</category>
+        
+        <category>maven on netbeans</category>
+        
+        <category>maven project on netbeans</category>
+        
+        <category>how to open a maven project on netbeans</category>
+        
+        <category>create a maven project on netbeans</category>
+        
+        <category>maven on eclipse</category>
+        
+        <category>how to create maven project on eclipse</category>
+        
+        <category>eclipse maven projesi</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Eclipse IDE&#39;de Tomcat Kurulumu</title>
+        <description>&lt;p&gt;Merhabalar arkadaşlar. Bu yazıda size Eclipse IDE üzerinde Tomcat sunucusunun kurulumundan bahsedeceğim. Bu yazıda şu an için Eclipse’in Java EE geliştiricileri için son sürümü olan
+Oxygen versiyonunu ve Tomcat’in son sürümü olan 9 versiyonunu kullanacağız.&lt;/p&gt;
+
+&lt;p&gt;İlk olarak &lt;a href=&quot;https://tomcat.apache.org/download-90.cgi&quot;&gt;https://tomcat.apache.org/download-90.cgi&lt;/a&gt; adresinden &lt;strong&gt;&lt;em&gt;Binary Distributions&lt;/em&gt;&lt;/strong&gt; alanında yer alan &lt;strong&gt;&lt;em&gt;Core&lt;/em&gt;&lt;/strong&gt; alanından
+seçeneklerden zip ya da tar.gz sıkıştırılmış dosyalarından birisini indirelim ve istediğimiz herhangi bir yere klasöre çıkartalım.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/eclipse/tomcatInstallation/1.png&quot;&gt;
+&lt;img src=&quot;/images/eclipse/tomcatInstallation/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Ardından &lt;a href=&quot;https://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/oxygenr&quot;&gt;https://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/oxygenr&lt;/a&gt; adresinden 
+Eclipse’in işletim sistemimie uygun halini indirelim ve Windows için inen zip’i klasöre çıkartalım, Mac OS X için dmg dosyasına çift tıklama yolu ile kurulumu yapalım.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/eclipse/tomcatInstallation/2.png&quot;&gt;
+&lt;img src=&quot;/images/eclipse/tomcatInstallation/2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Eclipse IDE’mizi açtıktan sonra eğer &lt;strong&gt;&lt;em&gt;Start Page&lt;/em&gt;&lt;/strong&gt; açılırsa onu kapatalım ve alt kısımdaki tabdan &lt;strong&gt;&lt;em&gt;Servers&lt;/em&gt;&lt;/strong&gt; tabında yer alan &lt;strong&gt;&lt;em&gt;No Servers Avaliable&lt;/em&gt;&lt;/strong&gt; seçeneğine tıklayalım.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/eclipse/tomcatInstallation/3.png&quot;&gt;
+&lt;img src=&quot;/images/eclipse/tomcatInstallation/3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Tıklama işleminin ardından açılan ekranda &lt;strong&gt;&lt;em&gt;Apache&lt;/em&gt;&lt;/strong&gt; klasörü altından &lt;strong&gt;&lt;em&gt;Tomcat v9.0 Server at localhost&lt;/em&gt;&lt;/strong&gt; seçeneğini seçelim ve Next diyelim.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/eclipse/tomcatInstallation/4.png&quot;&gt;
+&lt;img src=&quot;/images/eclipse/tomcatInstallation/4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi açılan ekranda &lt;strong&gt;&lt;em&gt;Browse&lt;/em&gt;&lt;/strong&gt; butonuna tıklayarak az önce indirdip klasöre çıkarttığımız Tomcat’in klasör adresini gösterelim. Ayrıca JRE kısmından da sistemimizde kurulu olan Java SE 
+sürümünü seçelim. Benim makinamda Java SE 8 kurulu olduğu için onu seçiyorum. Bu aşamada Next diyip sonraki ekranda Finish de diyebiliriz bu ekranda direk Finish de diyebiliriz. 
+Ben direk Finish butonuna tıklıyorum.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/eclipse/tomcatInstallation/5.png&quot;&gt;
+&lt;img src=&quot;/images/eclipse/tomcatInstallation/5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi tekrar alt tabdaki Servers tabına gelelim ve Server’a sağ tıklayıp &lt;strong&gt;&lt;em&gt;Start&lt;/em&gt;&lt;/strong&gt; diyelim.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/eclipse/tomcatInstallation/6.png&quot;&gt;
+&lt;img src=&quot;/images/eclipse/tomcatInstallation/6.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Server üzerinde Started yazısını gördü isek herşey yolunda demektir.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/eclipse/tomcatInstallation/7.png&quot;&gt;
+&lt;img src=&quot;/images/eclipse/tomcatInstallation/7.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi tarayıcımız üzerinden &lt;a href=&quot;localhost:8080&quot;&gt;localhost:8080&lt;/a&gt; adresine gidelim. Aşağıdaki gibi bir ekran görüyorsak Tomcat’imiz düzgün bir şekilde çalışıyor demektir.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/eclipse/tomcatInstallation/8.png&quot;&gt;
+&lt;img src=&quot;/images/eclipse/tomcatInstallation/8.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda anlatacağım bu kadar arkadaşlar. Eclipse üzerinde Tomcat kurulumu bu şekilde yapılmaktadır. Başka bir yazıda görüşmek üzere.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Wed, 28 Jun 2017 18:38:20 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2017/tomcat-installation-on-eclipse/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/tomcat-installation-on-eclipse/</guid>
+        
+        <category>eclipse ide</category>
+        
+        <category>eclipse Code Assist</category>
+        
+        <category>eclipse auto Code Assist</category>
+        
+        <category>eclipse ide kod tamamlama</category>
+        
+        <category>eclipse ide otomatik kod tamamlama</category>
+        
+        <category>eclipse otomatik kod tamamlama</category>
+        
+        <category>how to remove unused import automatically in eclipse ide</category>
+        
+        <category>tomcat installation on eclipse</category>
+        
+        <category>eclipse tomcat</category>
+        
+        <category>tomcat install eclipse</category>
+        
+        <category>how to install eclipse on tomcat</category>
+        
+        <category>eclipse üerinde tomcat kurulumu</category>
+        
+        <category>eclipse&#39;de tomcat nasıl kurulur</category>
+        
+        <category>eclipse tomcat kurulumu</category>
+        
+        
+      </item>
     
       <item>
         <title>Maven Yazıları 4 - NetBeans IDE&#39;de Maven Desteği</title>
@@ -1107,295 +1409,6 @@ oluşturuyorum . Ardından da main paketine sağ tıklayıp &lt;strong&gt;&lt;em
         <category>golang nedir</category>
         
         <category>golang dersleri</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Angular 2 Tutorials 7 - Two Way Bindings</title>
-        <description>&lt;p&gt;Merhabalar arkadaşlar. Bu yazıda &lt;strong&gt;&lt;em&gt;Two Way Bindings&lt;/em&gt;&lt;/strong&gt; konusunu öğreneceğiz.&lt;/p&gt;
-
-&lt;p&gt;Two Way Data Binding dediğimiz olay Event Binding ve Data Binding işlemlerinin birlikte yapılabilmesidr.&lt;/p&gt;
-
-&lt;p&gt;Şu şekilde elimizde oldukça sade bir Angular2Tutorials component’imiz olsun:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2Tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;h2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/h2&amp;gt;`,&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Angular 2 Tutorials&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Burada bizim Two Way Binding olarak bahsettiğimiz olay da şudur ki aynı anda hem data binding hem de event binding yapabilmektir. Örneğin elimizde iki adet input olsun, bu inputlara girilen veri hemen
-arkadaki değişkenlere atansın ve ardından du değişkenlerden alınıp ekrana yazdırılsın.&lt;/p&gt;
-
-&lt;p&gt;Şimdi bunu örnekleyecek şekilde component’imizi değiştirelim.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2Tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;h2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/h2&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;text&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;text&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;lName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;p&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;lName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Angular 2 Tutorials&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;lName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Angular2Tutorials component’imiz içerisinde template kısmında güncelleme yaptık. 2 input ekledik. Bu input’ların ngModel kısımlarında yukarıda bahsettiğimiz Two Way Binding olayını işlemiş oluyoruz.
-Kullanıcı bu ngModel özellikleri tanımlanmış input’lara değerleri girildiğinde ngModel’a atanmış ve class içinde tanımlı olan nesnelere değerler atanır. &lt;strong&gt;&lt;em&gt;[()]&lt;/em&gt;&lt;/strong&gt; ifadeleri iki yönlü bağlama olayını
-gerçekleştirir. Kullanıcıdan değeri alır, class içindeki property’e atar. Bu data binding kısmı. Kullanıcı input’lara farklı değer girdiğinde ekranda metin de güncellenir. Bu da event binding kısmı.&lt;/li&gt;
-  &lt;li&gt;Template kısmında ayrıca &lt;a href=&quot;http://ilkaygunel.com/blog/2017/interpolation-and-property-data-binding/&quot;&gt;Interpolation&lt;/a&gt; yazısından hatırlayacağımız &lt;em&gt;** {{}} **&lt;/em&gt; işaretlerini kullandık.
-Sınıf içerisindeki nesnelerden değerleri alıp direk ekrana yazdırıyoruz.&lt;/li&gt;
-  &lt;li&gt;Angular2Tutorials sınıfı içerisinde de ngModel özelliklerine atanacak nesneleri tanımladık.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Ekran çıktımızda iki adet input eklenmiş vaziyette. Şimdi bunlara değerler girelim:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson7/1.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson7/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Gördüğümüz gibi inputlara değerler girilir girilmez ekrana yazdırılıyor. Bu olayın Property Data Binding kısmını temsil eidyor.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson7/2.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson7/2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Input’lardaki değerleri değiştirip başka şeyler girdiğimde de hemen veriler değişiyor. Bu da olayın Event Binding kısmını temsil ediyor.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson7/3.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson7/3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Bu yazıda anlatacaklarım da bu kadar arkadaşlar. Two Way Data Binding konusunu görmüş olduk. Gelecek yazıda görüşmek üzere.&lt;/p&gt;
-
-&lt;p&gt;Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-</description>
-        <pubDate>Sat, 20 May 2017 20:40:21 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2017/two-way-bindings/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/two-way-bindings/</guid>
-        
-        <category>angular 2 web service</category>
-        
-        <category>angular 2 rest get</category>
-        
-        <category>angular 2 rest post</category>
-        
-        <category>angular 2 rest</category>
-        
-        <category>angular 2 calling web service</category>
-        
-        <category>angular 2 giriş</category>
-        
-        <category>angular 2 tutorials</category>
-        
-        <category>angular 2 hello world</category>
-        
-        <category>angular 2 dersleri</category>
-        
-        <category>angular 2 kaynak</category>
-        
-        <category>angular 2 türkçe kaynak</category>
-        
-        <category>angular 2 türkçe dersleri</category>
-        
-        <category>angular 2 styling components</category>
-        
-        <category>angular 2 component&#39;e style atanması</category>
-        
-        <category>angular 2 component styles</category>
-        
-        <category>angular 2 Interpolation and Property Data Binding</category>
-        
-        <category>angular 2 Property Data Binding</category>
-        
-        <category>angular 2 Interpolation</category>
-        
-        <category>CSS class binding in Agular 2</category>
-        
-        <category>CSS style binding in Agular 2</category>
-        
-        <category>style binding in Agular 2</category>
-        
-        <category>class binding in Agular 2</category>
-        
-        <category>Event Binding and References in agular 2</category>
-        
-        <category>Event Binding in Angular 2</category>
-        
-        <category>References in Angular 2</category>
-        
-        <category>angular 2 two way binding</category>
-        
-        <category>angular 2 ngModel</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Angular 2 Tutorials 6 - Event Binding and References</title>
-        <description>&lt;p&gt;Hi everyone. In this tutorial, I’m gonna talk about &lt;strong&gt;&lt;em&gt;Event Binding and References&lt;/em&gt;&lt;/strong&gt; topic in Angular 2.&lt;/p&gt;
-
-&lt;p&gt;Event Binding means that some actions occur in view and these actions trigger our components. Now, let’s define a button in template attribute of our component.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2Tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;clickEvent()&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Click&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Me&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/button&amp;gt;`,&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;clickEvent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;The Button Clicked!&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;In our template attribute of our component, we defined a button and defined an event between parenthesis. In Angular 2, when we use events, we defines it between parenthesis like 
-&lt;strong&gt;&lt;em&gt;(click)&lt;/em&gt;&lt;/strong&gt;. Here, we defined a click event that is triggered when button clicks. Also, we assigned the clickEvent() method to this event. When we clicked the button, 
-&lt;strong&gt;&lt;em&gt;The Button Clicked!&lt;/em&gt;&lt;/strong&gt; text will be written to browser’s console.&lt;/p&gt;
-
-&lt;p&gt;After I opened browser console and clicked the button, I could see the text.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson6/1.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson6/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Now, let’s take a look at the &lt;strong&gt;&lt;em&gt;References&lt;/em&gt;&lt;/strong&gt; topic.&lt;/p&gt;
-
-&lt;p&gt;I developing web applications with Angular 2, we need to pass element values to our components and In Angular 2, References is easy.&lt;/p&gt;
-
-&lt;p&gt;We will change template of our component and clickEvent() method. Like this:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2Tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;clickEvent(inputTag.value)&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Click&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Me&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/button&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;text&amp;quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;inputTag&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;clickEvent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Above,&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;we added an input tag to our template and defined it with  &lt;strong&gt;&lt;em&gt;#inputTag&lt;/em&gt;&lt;/strong&gt; expression. When we use References in Angular 2, we define our reference with &lt;strong&gt;&lt;em&gt;#&lt;/em&gt;&lt;/strong&gt; and then use it in
-where we want. Here, we passed it’s value to clickEvent method by using &lt;strong&gt;&lt;em&gt;inputTag.value&lt;/em&gt;&lt;/strong&gt; expression.&lt;/li&gt;
-  &lt;li&gt;We also changed clickEvent method that accepts a value to write console. When we click the button, the value of input (#inputTag) will be passed to this method that writes the value
-to the console.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I opened main page, entered a text, clicked the button and checked the console of browser.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson6/2.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson6/2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Well, what happens when we send only inputTag instead of inputTag.value to the clickEvent method?&lt;/p&gt;
-
-&lt;p&gt;If we do this, reference element will be sent to clickEvent method instead of it’s value. Like this screen output:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson6/3.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson6/3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;When we wat to detect or send the event type to our method, we can use &lt;strong&gt;&lt;em&gt;$event&lt;/em&gt;&lt;/strong&gt; expression. Now, change the template attribute like this:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mouseover&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;clickEvent($event)&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Click&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Me&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/button&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;text&amp;quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;inputTag&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;In this template attribute, when the mouse come on the button, event type will be sent to clickEvent method and clickEvent method will write that to console.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson6/4.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson6/4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;In this tutorial, we learnt&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Event Binding&lt;/li&gt;
-  &lt;li&gt;Reference Value&lt;/li&gt;
-  &lt;li&gt;Reference Element&lt;/li&gt;
-  &lt;li&gt;Event From Reference Element&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Until the next article, take you care.&lt;/p&gt;
-
-&lt;p&gt;See you.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;With Greetings And Love&lt;/p&gt;
-</description>
-        <pubDate>Sat, 13 May 2017 20:40:21 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2017/event-binding-and-references/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/event-binding-and-references/</guid>
-        
-        <category>angular 2 web service</category>
-        
-        <category>angular 2 rest get</category>
-        
-        <category>angular 2 rest post</category>
-        
-        <category>angular 2 rest</category>
-        
-        <category>angular 2 calling web service</category>
-        
-        <category>angular 2 giriş</category>
-        
-        <category>angular 2 tutorials</category>
-        
-        <category>angular 2 hello world</category>
-        
-        <category>angular 2 dersleri</category>
-        
-        <category>angular 2 kaynak</category>
-        
-        <category>angular 2 türkçe kaynak</category>
-        
-        <category>angular 2 türkçe dersleri</category>
-        
-        <category>angular 2 styling components</category>
-        
-        <category>angular 2 component&#39;e style atanması</category>
-        
-        <category>angular 2 component styles</category>
-        
-        <category>angular 2 Interpolation and Property Data Binding</category>
-        
-        <category>angular 2 Property Data Binding</category>
-        
-        <category>angular 2 Interpolation</category>
-        
-        <category>CSS class binding in Agular 2</category>
-        
-        <category>CSS style binding in Agular 2</category>
-        
-        <category>style binding in Agular 2</category>
-        
-        <category>class binding in Agular 2</category>
-        
-        <category>Event Binding and References in agular 2</category>
-        
-        <category>Event Binding in Angular 2</category>
-        
-        <category>References in Angular 2</category>
         
         
       </item>

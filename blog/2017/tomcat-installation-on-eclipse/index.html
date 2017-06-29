@@ -21,30 +21,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Eclipse IDE'ye Ait Notlarım</title>
-    <meta name="description" content="Hem NetBeans hem de Eclipse geliştime ortamlarını kişisel ve iş için kod yazarken bolca kullanıyorum. Bu sayfada Eclipse IDE kullanırken sağdan soldan öğrend...">
+    <title>Eclipse IDE'de Tomcat Kurulumu</title>
+    <meta name="description" content="Merhabalar arkadaşlar. Bu yazıda size Eclipse IDE üzerinde Tomcat sunucusunun kurulumundan bahsedeceğim. Bu yazıda şu an için Eclipse’in Java EE geliştiricil...">
 
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/eclipse-notes/">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2017/tomcat-installation-on-eclipse/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
       <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Eclipse IDE’ye Ait Notlarım - İlkay Günel - Blog</title>
-<meta property="og:title" content="Eclipse IDE’ye Ait Notlarım" />
-<meta name="description" content="Eclipse IDE’ye Ait Notlarım" />
-<meta property="og:description" content="Eclipse IDE’ye Ait Notlarım" />
-<link rel="canonical" href="http://ilkaygunel.com/blog/2016/eclipse-notes/" />
-<meta property="og:url" content="http://ilkaygunel.com/blog/2016/eclipse-notes/" />
+<title>Eclipse IDE’de Tomcat Kurulumu - İlkay Günel - Blog</title>
+<meta property="og:title" content="Eclipse IDE’de Tomcat Kurulumu" />
+<meta name="description" content="Eclipse IDE’de Tomcat Kurulumu" />
+<meta property="og:description" content="Eclipse IDE’de Tomcat Kurulumu" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2017/tomcat-installation-on-eclipse/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2017/tomcat-installation-on-eclipse/" />
 <meta property="og:site_name" content="İlkay Günel - Blog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2016-01-01T18:38:20+02:00" />
+<meta property="article:published_time" content="2017-06-28T18:38:20+03:00" />
 <script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "Eclipse IDE’ye Ait Notlarım",
-    "datePublished": "2016-01-01T18:38:20+02:00",
-    "description": "Eclipse IDE’ye Ait Notlarım",
-    "url": "http://ilkaygunel.com/blog/2016/eclipse-notes/"
+    "headline": "Eclipse IDE’de Tomcat Kurulumu",
+    "datePublished": "2017-06-28T18:38:20+03:00",
+    "description": "Eclipse IDE’de Tomcat Kurulumu",
+    "url": "http://ilkaygunel.com/blog/2017/tomcat-installation-on-eclipse/"
   }
 </script>
 <!-- End Jekyll SEO tag -->
@@ -122,19 +122,61 @@
 
   <div class="card">
     <header class="post-header">
-      <h1 class="post-title">Eclipse IDE'ye Ait Notlarım</h1>
-      <p class="post-meta">Jan 1, 2016</p>
+      <h1 class="post-title">Eclipse IDE'de Tomcat Kurulumu</h1>
+      <p class="post-meta">Jun 28, 2017</p>
     </header>
 
     <div class="post-content">
-      <p>Hem NetBeans hem de Eclipse geliştime ortamlarını kişisel ve iş için kod yazarken bolca kullanıyorum. Bu sayfada Eclipse IDE kullanırken sağdan soldan öğrendiğim püf noktalara ait notlarımı sizlerle paylaşıyor olacağım.</p>
+      <p>Merhabalar arkadaşlar. Bu yazıda size Eclipse IDE üzerinde Tomcat sunucusunun kurulumundan bahsedeceğim. Bu yazıda şu an için Eclipse’in Java EE geliştiricileri için son sürümü olan
+Oxygen versiyonunu ve Tomcat’in son sürümü olan 9 versiyonunu kullanacağız.</p>
 
-<ol>
-  <li><a href="http://ilkgunel.github.io/blog/2016/eclipse-remove-unused-imports-automatically">Kullanılmayan Importların Otomatik Kaldırılması</a></li>
-  <li><a href="http://ilkgunel.github.io/blog/2016/content-assist-on-eclipse">Kod Tamamlama Özelliğinin Açıllmas</a></li>
-  <li>[Eclipse Oxygen ve Tomcat 9 Kurulumu][http://ilkaygunel.com/blog/2017/tomcat-installation-on-eclipse]</li>
-</ol>
+<p>İlk olarak <a href="https://tomcat.apache.org/download-90.cgi">https://tomcat.apache.org/download-90.cgi</a> adresinden <strong><em>Binary Distributions</em></strong> alanında yer alan <strong><em>Core</em></strong> alanından
+seçeneklerden zip ya da tar.gz sıkıştırılmış dosyalarından birisini indirelim ve istediğimiz herhangi bir yere klasöre çıkartalım.</p>
 
+<p><a href="/images/eclipse/tomcatInstallation/1.png">
+<img src="/images/eclipse/tomcatInstallation/1.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Ardından <a href="https://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/oxygenr">https://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/oxygenr</a> adresinden 
+Eclipse’in işletim sistemimie uygun halini indirelim ve Windows için inen zip’i klasöre çıkartalım, Mac OS X için dmg dosyasına çift tıklama yolu ile kurulumu yapalım.</p>
+
+<p><a href="/images/eclipse/tomcatInstallation/2.png">
+<img src="/images/eclipse/tomcatInstallation/2.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Eclipse IDE’mizi açtıktan sonra eğer <strong><em>Start Page</em></strong> açılırsa onu kapatalım ve alt kısımdaki tabdan <strong><em>Servers</em></strong> tabında yer alan <strong><em>No Servers Avaliable</em></strong> seçeneğine tıklayalım.</p>
+
+<p><a href="/images/eclipse/tomcatInstallation/3.png">
+<img src="/images/eclipse/tomcatInstallation/3.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Tıklama işleminin ardından açılan ekranda <strong><em>Apache</em></strong> klasörü altından <strong><em>Tomcat v9.0 Server at localhost</em></strong> seçeneğini seçelim ve Next diyelim.</p>
+
+<p><a href="/images/eclipse/tomcatInstallation/4.png">
+<img src="/images/eclipse/tomcatInstallation/4.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Şimdi açılan ekranda <strong><em>Browse</em></strong> butonuna tıklayarak az önce indirdip klasöre çıkarttığımız Tomcat’in klasör adresini gösterelim. Ayrıca JRE kısmından da sistemimizde kurulu olan Java SE 
+sürümünü seçelim. Benim makinamda Java SE 8 kurulu olduğu için onu seçiyorum. Bu aşamada Next diyip sonraki ekranda Finish de diyebiliriz bu ekranda direk Finish de diyebiliriz. 
+Ben direk Finish butonuna tıklıyorum.</p>
+
+<p><a href="/images/eclipse/tomcatInstallation/5.png">
+<img src="/images/eclipse/tomcatInstallation/5.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Şimdi tekrar alt tabdaki Servers tabına gelelim ve Server’a sağ tıklayıp <strong><em>Start</em></strong> diyelim.</p>
+
+<p><a href="/images/eclipse/tomcatInstallation/6.png">
+<img src="/images/eclipse/tomcatInstallation/6.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Server üzerinde Started yazısını gördü isek herşey yolunda demektir.</p>
+
+<p><a href="/images/eclipse/tomcatInstallation/7.png">
+<img src="/images/eclipse/tomcatInstallation/7.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Şimdi tarayıcımız üzerinden <a href="localhost:8080">localhost:8080</a> adresine gidelim. Aşağıdaki gibi bir ekran görüyorsak Tomcat’imiz düzgün bir şekilde çalışıyor demektir.</p>
+
+<p><a href="/images/eclipse/tomcatInstallation/8.png">
+<img src="/images/eclipse/tomcatInstallation/8.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Bu yazıda anlatacağım bu kadar arkadaşlar. Eclipse üzerinde Tomcat kurulumu bu şekilde yapılmaktadır. Başka bir yazıda görüşmek üzere.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
 
     </div>
 
