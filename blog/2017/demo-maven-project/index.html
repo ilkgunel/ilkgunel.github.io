@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <script type="text/javascript">
+        function setVoice() {
+            var vid = document.getElementById("voice");
+            if(vid!=null){
+            	vid.volume = 0.2;
+            }
+        }
+        window.onload = setVoice;
+        </script>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+	  (adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-0980023289791742",
+		enable_page_level_ads: true
+	  });
+	</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Maven Yazıları 6 - Demo Maven Projesi Yapalım</title>
+    <meta name="description" content="Merhabalar arkadaşlar. Daha önceki yazdığımız Maven yazılarının ardından bu yazıda demo bir maven projesi yapacağız.">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2017/demo-maven-project/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>Maven Yazıları 6 - Demo Maven Projesi Yapalım - İlkay Günel - Blog</title>
+<meta property="og:title" content="Maven Yazıları 6 - Demo Maven Projesi Yapalım" />
+<meta name="description" content="Maven Yazıları 6 - Demo Maven Projesi Yapalım" />
+<meta property="og:description" content="Maven Yazıları 6 - Demo Maven Projesi Yapalım" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2017/demo-maven-project/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2017/demo-maven-project/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-07-05T20:41:20+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Maven Yazıları 6 - Demo Maven Projesi Yapalım",
+    "datePublished": "2017-07-05T20:41:20+03:00",
+    "description": "Maven Yazıları 6 - Demo Maven Projesi Yapalım",
+    "url": "http://ilkaygunel.com/blog/2017/demo-maven-project/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/ilkay-gunel-cv.pdf" title="Bana Ait CV">Bana Ait CV</a></li>
+        
+          <li><a href="/blog/2016/git-nedir" title="Git Nedir? Nasıl Kullanılır?">Git Nedir? Nasıl Kullanılır?</a></li>
+        
+          <li><a href="/blog/2017/angular-2-tutorials" title="Angular 2">Angular 2</a></li>
+        
+          <li><a href="/blog/2016/maven-tutorials" title="Maven">Maven</a></li>
+        
+          <li><a href="/blog/2016/jsf-tutorials-list" title="JSF">JSF</a></li>
+        
+          <li><a href="/blog/2016/spring-tutorials" title="Spring 4">Spring 4</a></li>
+        
+          <li><a href="/blog/2016/eclipselink" title="Eclipselink">Eclipselink</a></li>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/blog/2016/test" title="Test">Test</a></li>
+        
+          <li><a href="/blog/2016/useful-libraries-for-java" title="Java İçin Faydalı Kütüphaneler">Java İçin Faydalı Kütüphaneler</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog/2016/eclipse-notes" title="Eclipse">Eclipse</a></li>
+        
+          <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
+        
+          <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+        <li><a href="https://1000kitap.com/ilkaygunel">1000Kitap</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Maven Yazıları 6 - Demo Maven Projesi Yapalım</h1>
+      <p class="post-meta">Jul 5, 2017</p>
+    </header>
+
+    <div class="post-content">
+      <p>Merhabalar arkadaşlar. Daha önceki yazdığımız Maven yazılarının ardından bu yazıda demo bir maven projesi yapacağız.</p>
+
+<ul>
+  <li>IDE’miz üzerinde bir Maven projesi oluşturacağız.</li>
+  <li>Önyüzde Jsp ve onu beslemesi için Servlet kullanacağız.</li>
+  <li>MySQL db’de tutulan verileri çekip ekrana yazdıracağız.</li>
+</ul>
+
+<p>Maven projesinin oluşturulma aşamasını önceki yazılarda anlatmıştım. Ben bu yazıyı yazarken IDE desteği kullanarak yazıyorum. Siz de Eclipse için <a href="http://ilkaygunel.com/blog/2017/maven-tutorials-5/">buradan</a>
+NetBeans için <a href="http://ilkaygunel.com/blog/2017/maven-tutorials-4/">buradan</a> ilgili yazılara erişip IDE’nizde Maven projesini açabilirsiniz.</p>
+
+<p>Şimdi projedeki dosya ve sınıfları inceleyelim.</p>
+
+<p><strong>pom.xml</strong></p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+	<span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+	<span class="nt">&lt;groupId&gt;</span>com.ilkaygunel<span class="nt">&lt;/groupId&gt;</span>
+	<span class="nt">&lt;artifactId&gt;</span>DemoMavenProject<span class="nt">&lt;/artifactId&gt;</span>
+	<span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+	<span class="nt">&lt;packaging&gt;</span>war<span class="nt">&lt;/packaging&gt;</span>
+	<span class="nt">&lt;name&gt;</span>DemoMavenProject<span class="nt">&lt;/name&gt;</span>
+	<span class="nt">&lt;dependencies&gt;</span>
+		<span class="c">&lt;!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api --&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>javax.servlet<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>javax.servlet-api<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;version&gt;</span>3.1.0<span class="nt">&lt;/version&gt;</span>
+			<span class="nt">&lt;scope&gt;</span>provided<span class="nt">&lt;/scope&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+		<span class="c">&lt;!-- https://mvnrepository.com/artifact/javax.servlet/jstl --&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>javax.servlet<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>jstl<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;version&gt;</span>1.2<span class="nt">&lt;/version&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+		<span class="c">&lt;!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java --&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>mysql<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>mysql-connector-java<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;version&gt;</span>6.0.6<span class="nt">&lt;/version&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+	<span class="nt">&lt;/dependencies&gt;</span>
+	<span class="nt">&lt;build&gt;</span>
+    <span class="nt">&lt;pluginManagement&gt;</span>
+      <span class="nt">&lt;plugins&gt;</span>
+        <span class="nt">&lt;plugin&gt;</span>
+          <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+          <span class="nt">&lt;artifactId&gt;</span>maven-compiler-plugin<span class="nt">&lt;/artifactId&gt;</span>
+          <span class="nt">&lt;version&gt;</span>3.6.1<span class="nt">&lt;/version&gt;</span>
+          <span class="nt">&lt;configuration&gt;</span>
+            <span class="nt">&lt;source&gt;</span>1.8<span class="nt">&lt;/source&gt;</span>
+            <span class="nt">&lt;target&gt;</span>1.8<span class="nt">&lt;/target&gt;</span>
+          <span class="nt">&lt;/configuration&gt;</span>
+        <span class="nt">&lt;/plugin&gt;</span>
+      <span class="nt">&lt;/plugins&gt;</span>
+    <span class="nt">&lt;/pluginManagement&gt;</span>
+  <span class="nt">&lt;/build&gt;</span>
+<span class="nt">&lt;/project&gt;</span></code></pre></figure>
+
+<p>Önceki yazılarda da bahsettiğim gibi pom.xml dosyası Maven projelerinin konfigürasyon dosyasıdır. Şimdi dosyayı bir inceleyelim:</p>
+
+<ul>
+  <li>Önceden de bahsettiğim gibi Maven’ın amaçlarından biri bağımlılık yönetimini kolaylaştırmaktır. Biz de ihtiyaç duyduğumuz kütüphaneleri <strong><em>dependencies</em></strong> tagleri arasına yazarak
+projemize dahil ediyoruz. Bu proje için 3 adet kütüphaneye ihtiyacımız var. Servlet&amp;JSP kullandığımız için Servlet API, JSP içerisinde kullanmak için JSTL ve veri tabanı yazılımımız olan
+MySQL’in JDBC sürücüsü.</li>
+  <li>Ayrıca pom.xml içerisinde projemizin esas alacağı Java sürümünü de içerein bir compiler-plugin tanımı yer alıyor.</li>
+  <li>Dependencies eklemesi yapmak için kütüphanelerin bu bağımlılık kodlarına nereden erişeceğiz derseniz önünüzde iki yol mevcut. Birincisi Maven Repo’da yer alan aşağı yukarı tüm kütüphaneler 
+kendi web sitelerinde bu bağımlılık kodunu verirler. İkinci yol ise <a href="https://mvnrepository.com/">https://mvnrepository.com/</a> adresinde ilgili kütüphaneyi arayıp kodu bulmaktır. 
+Ben genellikle hızlı ve eski sürümler de kolaylıkla bulunabildiği için mvnrepository’i kullanıyorum.</li>
+  <li>groupId, artifactId, version ve packaging gibi alanlar hakkında daha önce bilgi vermiştim. Bu alanlara ait tanımlamalarımız proje için tanımlıyacı alanlardır.</li>
+</ul>
+
+<p>Şimdi hızlıca Java kodlarına bakalım.</p>
+
+<p>Benim veritabanımda <strong><em>Formula1</em></strong> adında vir veritabanı mevcut ve bu veritabanı içerisinde <strong><em>Drivers</em></strong> adında bir tablo mevcut. O tabloda da şu kayıtlar yer almaktadır:</p>
+
+<p><a href="/images/maven/6/1.png">
+<img src="/images/maven/6/1.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Şimdi bu kayıtları çekip ekrana yazdırmaya bakalım.</p>
+
+<p><strong>Driver.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">pojo</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Driver</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">driverId</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">driverName</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">driverSurname</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">driverCountry</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">driverTeam</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getDriverId</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">driverId</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDriverId</span><span class="o">(</span><span class="kt">int</span> <span class="n">driverId</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">driverId</span> <span class="o">=</span> <span class="n">driverId</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getDriverName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">driverName</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDriverName</span><span class="o">(</span><span class="n">String</span> <span class="n">driverName</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">driverName</span> <span class="o">=</span> <span class="n">driverName</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getDriverSurname</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">driverSurname</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDriverSurname</span><span class="o">(</span><span class="n">String</span> <span class="n">driverSurname</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">driverSurname</span> <span class="o">=</span> <span class="n">driverSurname</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getDriverCountry</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">driverCountry</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDriverCountry</span><span class="o">(</span><span class="n">String</span> <span class="n">driverCountry</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">driverCountry</span> <span class="o">=</span> <span class="n">driverCountry</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getDriverTeam</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">driverTeam</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDriverTeam</span><span class="o">(</span><span class="n">String</span> <span class="n">driverTeam</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">driverTeam</span> <span class="o">=</span> <span class="n">driverTeam</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Driver sınıfı bizim veritabanımızdaki Drivers tablosuna karşılık gelen, o tablodaki alanları içerisinde barındıran bir sınıftır. Herhangi bir ORM framework’ü kullanmadığımız için 
+tabloya karşılık gelen sınıfı kendimiz yazdık. Eğer bir ORM tool’u kullanmış olsaydık tablonun Java sınıfı karşılığını otomatik oluşturabilirdik. Bu tarz sadece değişken ve onların get-set 
+metotlarını barındıran sınıflar POJO (Plain Old Java Object) olarak adlandırılırlar.</p>
+
+<p><strong>DriverService.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">service</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.sql.Connection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.DriverManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.PreparedStatement</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.ResultSet</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.SQLException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.ilkaygunel.pojo.Driver</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DriversService</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Driver</span><span class="o">&gt;</span> <span class="n">driverList</span><span class="o">;</span>
+	
+	<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Driver</span><span class="o">&gt;</span> <span class="nf">getDriverList</span><span class="o">(){</span>
+		<span class="n">driverList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Driver</span><span class="o">&gt;();</span>
+		
+		<span class="n">PreparedStatement</span> <span class="n">ps</span><span class="o">=</span><span class="kc">null</span><span class="o">;</span>
+	    <span class="n">Connection</span> <span class="n">con</span><span class="o">=</span><span class="kc">null</span><span class="o">;</span>
+	    
+	    
+	    <span class="k">try</span> <span class="o">{</span>
+            <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">&quot;com.mysql.jdbc.Driver&quot;</span><span class="o">);</span>
+            <span class="n">con</span><span class="o">=</span><span class="n">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="s">&quot;jdbc:mysql://localhost:3306/Formula1&quot;</span><span class="o">,</span><span class="s">&quot;root&quot;</span><span class="o">,</span><span class="s">&quot;&quot;</span><span class="o">);</span>
+            <span class="n">ps</span><span class="o">=</span><span class="n">con</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="s">&quot;SELECT * FROM drivers&quot;</span><span class="o">);</span>
+            <span class="n">ResultSet</span> <span class="n">rs</span><span class="o">=</span><span class="n">ps</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">();</span>
+            
+            <span class="k">while</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">next</span><span class="o">())</span>
+            <span class="o">{</span>
+            	<span class="n">Driver</span> <span class="n">driver</span><span class="o">=</span><span class="k">new</span> <span class="nf">Driver</span><span class="o">();</span>
+                <span class="n">driver</span><span class="o">.</span><span class="na">setDriverId</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="s">&quot;driverId&quot;</span><span class="o">));</span>
+                <span class="n">driver</span><span class="o">.</span><span class="na">setDriverName</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;driverName&quot;</span><span class="o">));</span>
+                <span class="n">driver</span><span class="o">.</span><span class="na">setDriverSurname</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;driverSurname&quot;</span><span class="o">));</span>
+                <span class="n">driver</span><span class="o">.</span><span class="na">setDriverCountry</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;driverCountry&quot;</span><span class="o">));</span>
+                <span class="n">driver</span><span class="o">.</span><span class="na">setDriverTeam</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;driverTeam&quot;</span><span class="o">));</span>
+                <span class="n">driverList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">driver</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="n">driverList</span><span class="o">;</span>
+        <span class="o">}</span> 
+        <span class="k">catch</span> <span class="o">(</span><span class="n">ClassNotFoundException</span> <span class="o">|</span> <span class="n">SQLException</span> <span class="n">exception</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Bir hata meydana geldi:&quot;</span><span class="o">+</span><span class="n">exception</span><span class="o">);</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">finally</span><span class="o">{</span> 
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">con</span><span class="o">!=</span><span class="kc">null</span><span class="o">){</span> 
+                    <span class="n">con</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                <span class="o">}</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">ps</span><span class="o">!=</span><span class="kc">null</span><span class="o">){</span> 
+                    <span class="n">ps</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                <span class="o">}</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">SQLException</span> <span class="n">sqlException</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Bir hata meydana geldi:&quot;</span><span class="o">+</span><span class="n">sqlException</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>DriverService sınıfı mantık olarak Drivers tablosu üzerinde yapılacak operasyonları karşılayacak sınıftır. Bizim sınıfımız da Driver listesini getirmekle yükümlüdür. Sınıf içerisinde 
+MySQL db’ye bağlantı açılıp Drivers tablosundan veriler çekiliyor ve listeye dolduruluyor. Yukarıdaki JDBC operasyonunu <a href="http://kod5.org/jsf-veri-tabanindan-kayit-cekme/">şurada</a> 
+biraz daha detaylı olarak anlatmıştım. Yazıyı uzatmamak adına tekrar burada paylaşmıyorum arkadaşlar, operasyon hakkında bilgi almak için linki tıklayabilirsiniz.</p>
+
+<p><strong>GetDriversServlet.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">servlet</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.servlet.RequestDispatcher</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.ServletException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.annotation.WebServlet</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServlet</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletResponse</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.ilkaygunel.service.DriversService</span><span class="o">;</span>
+
+<span class="nd">@WebServlet</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;getDrivers&quot;</span><span class="o">,</span> <span class="n">urlPatterns</span> <span class="o">=</span> <span class="o">{</span><span class="s">&quot;/getDrivers&quot;</span><span class="o">})</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GetDriversServlet</span> <span class="kd">extends</span> <span class="n">HttpServlet</span><span class="o">{</span>
+	
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">doGet</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">DriversService</span> <span class="n">driversService</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">DriversService</span><span class="o">();</span>
+		<span class="n">request</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">&quot;driverList&quot;</span><span class="o">,</span> <span class="n">driversService</span><span class="o">.</span><span class="na">getDriverList</span><span class="o">());</span>
+		<span class="n">RequestDispatcher</span> <span class="n">view</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getRequestDispatcher</span><span class="o">(</span><span class="s">&quot;/index.jsp&quot;</span><span class="o">);</span>
+        <span class="k">try</span> <span class="o">{</span>
+			<span class="n">view</span><span class="o">.</span><span class="na">forward</span><span class="o">(</span><span class="n">request</span><span class="o">,</span> <span class="n">response</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ServletException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">// TODO Auto-generated catch block</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">// TODO Auto-generated catch block</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>GetDriversServlet sınıfı gelen isteği karşılayıp bir JSP sayfasına yönlendirme vazifesini üstlenmiş sınıftır. doGet metodu içerisinde DriversService sınıfından bir nesne oluşturulup 
+driver listesini veren metot çağırılıyor ve gelen liste request objesi içerisine konuluyor. Ardından bir RequestDispatcher nesnesi edinilip forward işlemi yapılıyor. Biz kod içerisinde 
+bu Servlet’e istek gelirse son aşamada index.jsp’ye yönlendirme yap dedik.</p>
+
+<p><strong>index.jsp</strong></p>
+
+<figure class="highlight"><pre><code class="language-jsp" data-lang="jsp"><span class="k">&lt;%@</span> <span class="n">page</span> <span class="n">language</span><span class="o">=</span><span class="s">&quot;java&quot;</span> <span class="n">contentType</span><span class="o">=</span><span class="s">&quot;text/html; charset=UTF-8&quot;</span>
+    <span class="n">pageEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="k">%&gt;</span>
+<span class="k">&lt;%@</span><span class="n">taglib</span> <span class="n">prefix</span><span class="o">=</span><span class="s">&quot;c&quot;</span> <span class="n">uri</span><span class="o">=</span><span class="s">&quot;http://java.sun.com/jsp/jstl/core&quot;</span><span class="k">%&gt;</span>
+<span class="cp">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;Content-Type&quot;</span> <span class="na">content=</span><span class="s">&quot;text/html; charset=UTF-8&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;title&gt;</span>Insert title here<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+	<span class="nt">&lt;c:forEach</span> <span class="na">var =</span> <span class="s">&quot;driver&quot;</span> <span class="na">items=</span><span class="s">&quot;${driverList}&quot;</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;c:out</span> <span class="na">value =</span> <span class="s">&quot;${driver.driverId} ${driver.driverName} ${driver.driverSurname} ${driver.driverCountry} ${driver.driverTeam}&quot;</span><span class="nt">/&gt;&lt;p&gt;</span>
+      <span class="nt">&lt;/c:forEach&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span></code></pre></figure>
+
+<p>JSP sayfamız içerisinde JSTL kütüphanemizden edindiğimiz c tag’i ile bir forEach döngüsü kuruyoruz ve <strong><em>items</em></strong> özelliğine az önce GetDriversServlet sınıfının doGet metodu içerisinde 
+request objesine koyduğumuz driverList değerini atıyoruz. var özelliği ise döngü sırasında ayrı ayrı her bir objeye karşılık gelecek özelliğimizdir. c:forEach içerisinde c:out ile de 
+driver var’ındaki alanlarımızı ekrana yazdırıyoruz.</p>
+
+<p><strong>web.xml</strong></p>
+
+<p>Son olarak bir de web.xml dosyasına göz atalım:</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;web-app</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;http://java.sun.com/xml/ns/javaee&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd&quot;</span> <span class="na">version=</span><span class="s">&quot;2.5&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;display-name&gt;</span>DemoMavenProject<span class="nt">&lt;/display-name&gt;</span>
+  <span class="nt">&lt;welcome-file-list&gt;</span>
+    <span class="nt">&lt;welcome-file&gt;</span>getDrivers<span class="nt">&lt;/welcome-file&gt;</span>
+  <span class="nt">&lt;/welcome-file-list&gt;</span>
+<span class="nt">&lt;/web-app&gt;</span></code></pre></figure>
+
+<p>web.xml dosyamız oldukça basit ve sade. Servlet’ler normale web.xml içerisinde de tanımlanabilir ancak ben bu yazı için notasyon ile tanım yöntemini kullandım. web.xml içerisinde 
+projenin karşılama sayfası yani projeye doğrudan istek yapıldığında otomatik açılacak sayfanın kim olduğunun tanımı <strong><em>welcome-file</em></strong> tag’i ile yapılıyor. Burada jsp, html, xhtml 
+sayfaları tanımlanabilir. Ben GetDriversServlet sınıfının kayda geçirildiği isim olan <strong><em>getDrivers</em></strong>‘ı veriyorum ve projeye yapılan isteği Servlet’in karşılayacağını söylüyorum.</p>
+
+<p>Şimdi <a href="http://localhost:8080/DemoMavenProject/">http://localhost:8080/DemoMavenProject/</a> adresine gidiyorum ve şu ekran ile karşılaşıyorum:</p>
+
+<p><a href="/images/maven/6/2.png">
+<img src="/images/maven/6/2.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Veritabanından bilgiler çekilmiş ve ekrana yazdırılmış.</p>
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
+  
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2017 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>
