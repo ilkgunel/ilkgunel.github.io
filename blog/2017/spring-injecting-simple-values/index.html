@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <script type="text/javascript">
+        function setVoice() {
+            var vid = document.getElementById("voice");
+            if(vid!=null){
+            	vid.volume = 0.2;
+            }
+        }
+        window.onload = setVoice;
+        </script>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+	  (adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-0980023289791742",
+		enable_page_level_ads: true
+	  });
+	</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Spring Framework Dersleri 4 - Injecting Simple Values & by Using SpEL</title>
+    <meta name="description" content="Merhabalar arkdaşlar. Bu yazıda Spring içerisinde Simple Values Injecting ve Injecting Values by Using SpEL konularını işleyeceğiz.">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2017/spring-injecting-simple-values/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>Spring Framework Dersleri 4 - Injecting Simple Values &amp; by Using SpEL - İlkay Günel - Blog</title>
+<meta property="og:title" content="Spring Framework Dersleri 4 - Injecting Simple Values &amp; by Using SpEL" />
+<meta name="description" content="Spring Framework Dersleri 4 - Injecting Simple Values &amp; by Using SpEL" />
+<meta property="og:description" content="Spring Framework Dersleri 4 - Injecting Simple Values &amp; by Using SpEL" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2017/spring-injecting-simple-values/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2017/spring-injecting-simple-values/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-07-08T20:30:21+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Spring Framework Dersleri 4 - Injecting Simple Values &amp; by Using SpEL",
+    "datePublished": "2017-07-08T20:30:21+03:00",
+    "description": "Spring Framework Dersleri 4 - Injecting Simple Values &amp; by Using SpEL",
+    "url": "http://ilkaygunel.com/blog/2017/spring-injecting-simple-values/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/ilkay-gunel-cv.pdf" title="Bana Ait CV">Bana Ait CV</a></li>
+        
+          <li><a href="/blog/2016/git-nedir" title="Git Nedir? Nasıl Kullanılır?">Git Nedir? Nasıl Kullanılır?</a></li>
+        
+          <li><a href="/blog/2017/angular-2-tutorials" title="Angular 2">Angular 2</a></li>
+        
+          <li><a href="/blog/2016/maven-tutorials" title="Maven">Maven</a></li>
+        
+          <li><a href="/blog/2016/jsf-tutorials-list" title="JSF">JSF</a></li>
+        
+          <li><a href="/blog/2016/spring-tutorials" title="Spring 4">Spring 4</a></li>
+        
+          <li><a href="/blog/2016/eclipselink" title="Eclipselink">Eclipselink</a></li>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/blog/2016/test" title="Test">Test</a></li>
+        
+          <li><a href="/blog/2016/useful-libraries-for-java" title="Java İçin Faydalı Kütüphaneler">Java İçin Faydalı Kütüphaneler</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog/2016/eclipse-notes" title="Eclipse">Eclipse</a></li>
+        
+          <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
+        
+          <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+        <li><a href="https://1000kitap.com/ilkaygunel">1000Kitap</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Spring Framework Dersleri 4 - Injecting Simple Values & by Using SpEL</h1>
+      <p class="post-meta">Jul 8, 2017</p>
+    </header>
+
+    <div class="post-content">
+      <p>Merhabalar arkdaşlar. Bu yazıda Spring içerisinde <strong><em>Simple Values Injecting</em></strong> ve <strong><em>Injecting Values by Using SpEL</em></strong> konularını işleyeceğiz.</p>
+
+<p><strong>Simple Values Injecting</strong></p>
+
+<p>Simple Values Injecting konusundan anlamamız gereken basit değerleri yani önceden tanımlı değerleri XML içinde tanımlayıp kullanabilmek ya da class içerisinde yine Spring yardımı ile 
+kullanabilmektir.</p>
+
+<p><strong>InjectSimple.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">springtutorials</span><span class="o">.</span><span class="na">injectingsimplevalues</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.context.support.GenericXmlApplicationContext</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">InjectSimple</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getSurname</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSurname</span><span class="o">(</span><span class="n">String</span> <span class="n">surname</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">surname</span> <span class="o">=</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">age</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAge</span><span class="o">(</span><span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">GenericXmlApplicationContext</span> <span class="n">genericXmlApplicationContext</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">GenericXmlApplicationContext</span><span class="o">();</span>
+		<span class="n">genericXmlApplicationContext</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="s">&quot;injecting-simple-values.xml&quot;</span><span class="o">);</span>
+		<span class="n">genericXmlApplicationContext</span><span class="o">.</span><span class="na">refresh</span><span class="o">();</span>
+		<span class="n">InjectSimple</span> <span class="n">injectSimple</span> <span class="o">=</span> <span class="o">(</span><span class="n">InjectSimple</span><span class="o">)</span><span class="n">genericXmlApplicationContext</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">&quot;injectsimple&quot;</span><span class="o">);</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">injectSimple</span><span class="o">);</span>
+		<span class="n">genericXmlApplicationContext</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">surname</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">age</span><span class="o">;</span>
+	<span class="o">}</span>
+
+<span class="o">}</span></code></pre></figure>
+
+<p>InjectSimple sınıfı içerisinde name, surname ve age adında üç paramtre ve bunların get-set metotlarını tanımlıyoruz. Main metodu içerisinde de injecting-simple-values.xml dosyasını 
+yükleyip içerisinden injectsimple bean’ini çağırıyoruz. Son olarak da çağırdığımız bean’den oluşan nesneyi konsola yazdırıyoruz.</p>
+
+<p><strong>injecting-simple-values.xml</strong></p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;beans</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.springframework.org/schema/beans&quot;</span>
+	<span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="na">xmlns:p=</span><span class="s">&quot;http://www.springframework.org/schema/p&quot;</span>
+	<span class="na">xmlns:context=</span><span class="s">&quot;http://www.springframework.org/schema/context&quot;</span>
+	<span class="na">xmlns:c=</span><span class="s">&quot;http://www.springframework.org/schema/c&quot;</span>
+	<span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.springframework.org/schema/beans </span>
+<span class="s">						http://www.springframework.org/schema/beans/spring-beans.xsd</span>
+<span class="s">						http://www.springframework.org/schema/context</span>
+<span class="s">          				http://www.springframework.org/schema/context/spring-context.xsd&quot;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;context:component-scan</span> <span class="na">base-package=</span><span class="s">&quot;com.ilkaygunel.springtutorials.injectingsimplevalues&quot;</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;injectsimple&quot;</span>
+		<span class="na">class=</span><span class="s">&quot;com.ilkaygunel.springtutorials.injectingsimplevalues.InjectSimple&quot;</span>
+		<span class="na">p:name=</span><span class="s">&quot;Onur&quot;</span> <span class="na">p:surname=</span><span class="s">&quot;Özcan&quot;</span> <span class="na">p:age=</span><span class="s">&quot;23&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/beans&gt;</span></code></pre></figure>
+
+<p>injecting-simple-values.xml dosyasında InjectSimple sınıfını kullanarak injectsimple id’li bean’i tanımlıyoruz. Bu tanımlama sırasında da <strong><em>p:</em></strong> ifadeleri ile sınıf içerisindeki 
+alanları çağırarak değerler atıyoruz. Örneğin name alanı için <strong><em>p:name=”Onur”</em></strong> şeklinde bir atama yapıyoruz.</p>
+
+<p><strong>Ekran Çıktısı</strong></p>
+
+<p>Ekran çıktısında görebildiğimiz gibi XML içinde tanımlı değerler injectsimple değişkenine set edildi.</p>
+
+<p><a href="/images/spring/4/1.png">
+<img src="/images/spring/4/1.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Spring bize ayrıca XML kullanmadan direk sınıf içerisinde de değer ataması yapma imkanı sunar. Hemen bunu örneklediğimiz sınıfımıza bakalım. Öncelikle yukarıdaki XML içerisindeki 
+injectsimple id’li bean tanımlamasını silelim.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">springtutorials</span><span class="o">.</span><span class="na">injectingsimplevalues</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Value</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.support.GenericXmlApplicationContext</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="o">;</span>
+
+<span class="nd">@Service</span><span class="o">(</span><span class="s">&quot;injectsimple&quot;</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">InjectSimple</span> <span class="o">{</span>
+	<span class="nd">@Value</span><span class="o">(</span><span class="s">&quot;Alican&quot;</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="nd">@Value</span><span class="o">(</span><span class="s">&quot;Akkuş&quot;</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="nd">@Value</span><span class="o">(</span><span class="s">&quot;24&quot;</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getSurname</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSurname</span><span class="o">(</span><span class="n">String</span> <span class="n">surname</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">surname</span> <span class="o">=</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">age</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAge</span><span class="o">(</span><span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">GenericXmlApplicationContext</span> <span class="n">genericXmlApplicationContext</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">GenericXmlApplicationContext</span><span class="o">();</span>
+		<span class="n">genericXmlApplicationContext</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="s">&quot;injecting-simple-values.xml&quot;</span><span class="o">);</span>
+		<span class="n">genericXmlApplicationContext</span><span class="o">.</span><span class="na">refresh</span><span class="o">();</span>
+		<span class="n">InjectSimple</span> <span class="n">injectSimple</span> <span class="o">=</span> <span class="o">(</span><span class="n">InjectSimple</span><span class="o">)</span><span class="n">genericXmlApplicationContext</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">&quot;injectsimple&quot;</span><span class="o">);</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">injectSimple</span><span class="o">);</span>
+		<span class="n">genericXmlApplicationContext</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+	<span class="o">}</span>
+	
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">surname</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">age</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Sınıf içerisinde <strong><em>@Service(“injectsimple”)</em></strong> satırı ile sınıfımızı XML’de yer almaksızın Spring’e kaydettirdik. Her bir değişkenimizi ise <strong><em>@Value</em></strong> notasyonu ile işaretleyip 
+notasyona verilen değerler ile atama yapıyoruz. Main metodu içerisinde de her ne kadar bean’imiz içerisinde tanımlı olmasa da XML’i çağırıp yüklüyoruz ve ardından injectsimple 
+değişkenimizi oluşturup konsola yazdırıyoruz.</p>
+
+<p><a href="/images/spring/4/2.png">
+<img src="/images/spring/4/2.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p><strong>Injecting Values by Using SpEL</strong></p>
+
+<p>Spring 3’den itibaren Spring içerisine değerleri Spring Expression Language ile inject etme imkanı getirilmiş. İster XML yolu ile ister de notasyon yolu ile bir bean içindeki alanlar 
+SpEL ile diğer bean içerisinde inject edilebiliyor. Şimdi bu işlemin nasıl yapıldığına bakalım.</p>
+
+<p><strong>InjectSimpleConfig.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">springtutorials</span><span class="o">.</span><span class="na">spelinjecting</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">InjectSimpleConfig</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;ilkay&quot;</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">surname</span><span class="o">=</span> <span class="s">&quot;günel&quot;</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">=</span><span class="mi">24</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getSurname</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSurname</span><span class="o">(</span><span class="n">String</span> <span class="n">surname</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">surname</span> <span class="o">=</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">age</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAge</span><span class="o">(</span><span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">surname</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">age</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>InjectSimpleConfig sınıfı içerisinde name, surname ve age alanalrının tanımı ve onlara ait get-set metotları yer alıyor. Sınıf içerisinde alanalrın ataması baştan yapılmış vaziyette.</p>
+
+<p><strong>InjectSimpleSpel.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">springtutorials</span><span class="o">.</span><span class="na">spelinjecting</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.context.support.GenericXmlApplicationContext</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">InjectSimpleSpel</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getSurname</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSurname</span><span class="o">(</span><span class="n">String</span> <span class="n">surname</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">surname</span> <span class="o">=</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">age</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAge</span><span class="o">(</span><span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+
+		<span class="k">return</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">surname</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">age</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">GenericXmlApplicationContext</span> <span class="n">genericXmlApplicationContext</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">GenericXmlApplicationContext</span><span class="o">();</span>
+			<span class="n">genericXmlApplicationContext</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="s">&quot;injectspel.xml&quot;</span><span class="o">);</span>
+			<span class="n">genericXmlApplicationContext</span><span class="o">.</span><span class="na">refresh</span><span class="o">();</span>
+			
+			<span class="n">InjectSimpleSpel</span> <span class="n">injectSimpleSpel</span> <span class="o">=</span> <span class="o">(</span><span class="n">InjectSimpleSpel</span><span class="o">)</span> <span class="n">genericXmlApplicationContext</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">&quot;injectsimplespel&quot;</span><span class="o">);</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">injectSimpleSpel</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>		
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>InjectSimpleSpel sınıfı InjectSimpleConfig sınıfındaki ön tanımlı değerleri az sonra XML içerisinde inject edeceğimiz sınıf. Gördüğümüz gibi InjectSimpleConfig ile aynı alanlara sahip.</p>
+
+<p><strong>injectspel.xml</strong></p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;beans</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.springframework.org/schema/beans&quot;</span>
+	<span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="na">xmlns:p=</span><span class="s">&quot;http://www.springframework.org/schema/p&quot;</span>
+	<span class="na">xmlns:context=</span><span class="s">&quot;http://www.springframework.org/schema/context&quot;</span> <span class="na">xmlns:c=</span><span class="s">&quot;http://www.springframework.org/schema/c&quot;</span>
+	<span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.springframework.org/schema/beans </span>
+<span class="s">						http://www.springframework.org/schema/beans/spring-beans.xsd</span>
+<span class="s">						http://www.springframework.org/schema/context</span>
+<span class="s">          				http://www.springframework.org/schema/context/spring-context.xsd&quot;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;context:component-scan</span> <span class="na">base-package=</span><span class="s">&quot;com.ilkaygunel.springtutorials.spelinjecting&quot;</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;injectsimpleconfig&quot;</span>
+		<span class="na">class=</span><span class="s">&quot;com.ilkaygunel.springtutorials.spelinjecting.InjectSimpleConfig&quot;</span><span class="nt">&gt;&lt;/bean&gt;</span>
+	<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;injectsimplespel&quot;</span>
+		<span class="na">class=</span><span class="s">&quot;com.ilkaygunel.springtutorials.spelinjecting.InjectSimpleSpel&quot;</span>
+		<span class="na">p:name=</span><span class="s">&quot;#{injectsimpleconfig.name}&quot;</span> <span class="na">p:surname=</span><span class="s">&quot;#{injectsimpleconfig.surname}&quot;</span>
+		<span class="na">p:age=</span><span class="s">&quot;#{injectsimpleconfig.age}&quot;</span><span class="nt">&gt;&lt;/bean&gt;</span>
+<span class="nt">&lt;/beans&gt;</span></code></pre></figure>
+
+<p>injectspel.xml dosyası içerisinde 2 adet bean tanımı var. Bunlardan birisi default değerlerin tanımlı olduğu InjectSimpleConfig sınıfını tanımlayan injectsimpleconfig bean’i, diğeri ise 
+InjectSimpleSpel sınıfını tanımlayan injectsimplespel bean’i. Spring Expression Language adı verilen ifade içerisinde <strong><em>#{}</em></strong> ifadesi ile bizler başka bir bean içerisinde değeri 
+alabiliyoruz. Örneğin burada <strong><em>p:name=”#{injectsimpleconfig.name}”</em></strong> ifadesi injectsimpleconfig bean’inden name alanını al ve injectsimplespel bean’indeki name alanına ata demektir.</p>
+
+<p>Main metodu olan sınıfı çalıştırdığımda sonuç şöyle:</p>
+
+<p><a href="/images/spring/4/3.png">
+<img src="/images/spring/4/3.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Bu yazı için son olarak da notasyonla bu işi nasıl yapabildiğimize bakalım.</p>
+
+<p>Yukadıraki XML’de yer alan injectsimplespel id’li bean tanımını silelim ve InjectSimpleSpel sınıfımızı şu şekilde güncelleyelim:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">springtutorials</span><span class="o">.</span><span class="na">spelinjecting</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Value</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.support.GenericXmlApplicationContext</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="o">;</span>
+
+<span class="nd">@Service</span><span class="o">(</span><span class="s">&quot;injectsimplespel&quot;</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">InjectSimpleSpel</span> <span class="o">{</span>
+	<span class="nd">@Value</span><span class="o">(</span><span class="s">&quot;#{injectsimpleconfig.name}&quot;</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+	
+	<span class="nd">@Value</span><span class="o">(</span><span class="s">&quot;#{injectsimpleconfig.surname}&quot;</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">surname</span><span class="o">;</span>
+	
+	<span class="nd">@Value</span><span class="o">(</span><span class="s">&quot;#{injectsimpleconfig.age}&quot;</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getSurname</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSurname</span><span class="o">(</span><span class="n">String</span> <span class="n">surname</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">surname</span> <span class="o">=</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">age</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAge</span><span class="o">(</span><span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+
+		<span class="k">return</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">surname</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">age</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">GenericXmlApplicationContext</span> <span class="n">genericXmlApplicationContext</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">GenericXmlApplicationContext</span><span class="o">();</span>
+			<span class="n">genericXmlApplicationContext</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="s">&quot;injectspel.xml&quot;</span><span class="o">);</span>
+			<span class="n">genericXmlApplicationContext</span><span class="o">.</span><span class="na">refresh</span><span class="o">();</span>
+			
+			<span class="n">InjectSimpleSpel</span> <span class="n">injectSimpleSpel</span> <span class="o">=</span> <span class="o">(</span><span class="n">InjectSimpleSpel</span><span class="o">)</span> <span class="n">genericXmlApplicationContext</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">&quot;injectsimplespel&quot;</span><span class="o">);</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">injectSimpleSpel</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>		
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>InjectSimpleSpel sınıfımızı @Service notasyonu ile işaretledik ve XML’e kaydettirmeden kullanıma hazır hale getrdik. Az önce XML dosyasında yaptığımız gibi #{} ifadesini @Value 
+notasyonu içerisinde kullanarak aynı şekilde injectsimpleconfig üzerinden diğer bean’deki alanlara ulaşarak onları kendi bean’imize set ettik. Main metodu içerisinde de injectSimpleSpel
+nesnesini çağırarak ekrana yazdırdık. Sonuç da şu şekilde:</p>
+
+<p><a href="/images/spring/4/4.png">
+<img src="/images/spring/4/4.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Bu yazıda anlatacaklarım bu kadar arkadaşlar. Simple Value Injection konusunu öğrenmiş olduk. Başka yazıda görüşmek üzere.</p>
+
+<p>Görüşene kadar sağlıcakla kalın.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
+  
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2017 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>
