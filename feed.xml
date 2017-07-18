@@ -5,9 +5,117 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 09 Jul 2017 20:14:28 +0300</pubDate>
-    <lastBuildDate>Sun, 09 Jul 2017 20:14:28 +0300</lastBuildDate>
+    <pubDate>Tue, 18 Jul 2017 20:26:47 +0300</pubDate>
+    <lastBuildDate>Tue, 18 Jul 2017 20:26:47 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Singleton Design Pattern</title>
+        <description>&lt;p&gt;Merhabalar arkadaşlar. Bu yazıda &lt;strong&gt;&lt;em&gt;Singleton Design Pattern&lt;/em&gt;&lt;/strong&gt; hakkında size bilgi vermeye çalışacağım.&lt;/p&gt;
+
+&lt;p&gt;Projelerimiz çoğunlukla gelen parametrele göre farklı şekilde çıktılar üretecek şekilde yazılsalar bile projenin bazı kısımlarında ne olursa olsun
+standart çıktıyı vermesi gerekir. Örneğin diyelim ki bir üyelik sistemi projeniz var ve bu üyelik sistemi içerisinde kullanıcı bir hareket gerçekleştirdi. Bu
+gerçekleşen hareketin tarihini, saatini vs. kaydetmeniz gerekiyor. İşte bu durumda sistem kullanıcıya özel bir veri değil standart bir veri üretmesi
+gerekir. Bu durumda da Singleton Design Pattern uygulanarak bu ihtiyaç karşılanabilir.&lt;/p&gt;
+
+&lt;p&gt;Şimdi Java dili ile basit bir şekilde Singleton Design Pattern kullanımını örnekleyelim.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.time.ZoneOffset&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.time.ZonedDateTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SingletonDesignPattern&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SingletonDesignPattern&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;SingletonDesignPattern&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+        
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;synchronized&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SingletonDesignPattern&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;instance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;instance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;SingletonDesignPattern&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ZonedDateTime&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getUTCDateTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ZonedDateTime&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;now&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ZonedDateTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ZoneOffset&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;UTC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;SingletonDesignPattern sınıfımızı inceleyelim:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Az önce de bahsettiğim gibi Singleton Design Pattern uygulanacağı zaman kullanıcıya ya da parametreye bağlı olarak çıktı üretilmeyeceği yani 
+herkes için standart bir akış uygulanacak demektir. Bu durumda bu pattern’in uygulandığı sınıf nesnesinin static olması bizim için iyidir. Biz de
+bunun için &lt;strong&gt;instance&lt;/strong&gt;* nesnemizi static olarak tanımladık.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Sınıfımızın constructor’ını Thread Safe bir mekanizma oluşturmak için private olacak şekilde tanımladık.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;getInstance() metodumuz bize bu sınıftan bir nesne üretip verecek bir metotdur. Yine Thread Safe bir mekanizma için metodumuz synchronized olarak 
+tanımlı. Metodun tek görevi bize sınıftan nesne sunmak olduğu için static olarak olarak tanımlanmasında sakınca yoktur. Metot içerisinde az önce 
+tanımladığımız instance nesnemiz null ise yenisini oluşturup, değilse var olanı bize verecek şekilde kodumuzu yazıyoruz.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;getUTCDateTime() metodu da şu anki zamanı UTC diliminde bize verecek metotdur. Türkiye UTC+3’de yer aldığı için şu anki zamandan 3 saat öncesini
+bize verecektir metot.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;MainClass.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MainClass&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;SingletonDesignPattern&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SingletonDesignPattern&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;instance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getUTCDateTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;MainClass içerinse SingletonDesignPattern sınıfı içindeki static getInstance metoud üzerinden nesnemizi elde ediyoruz ve konsola UTC zamanı
+yazdırıyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Ekran Çıktısı&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;MainClass’ı çalıştırdığımda konsol çıktım şu şekilde olmakta:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/designPattern/singletonDesignPattern1.png&quot;&gt;
+    &lt;img src=&quot;/images/designPattern/singletonDesignPattern1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Gördüğümüz gibi saat 20:21 olmasına karşın UTC date time istediğimiz için saat 17:21 olarak geliyor.&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda anlatacağım bu kadar arkadaşlar. Singleton Design Pattern kullanımını örneklemiş olduk.&lt;/p&gt;
+
+&lt;p&gt;Başka bir yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p&gt;Görüşmek üzere.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Mon, 17 Jul 2017 20:40:22 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2017/singleton-design-pattern/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/singleton-design-pattern/</guid>
+        
+        <category>Singleton pattern</category>
+        
+        <category>Singleton pattern in java</category>
+        
+        <category>utc date in java</category>
+        
+        <category>utc date time in java</category>
+        
+        <category>utc date time in java 8</category>
+        
+        
+      </item>
     
       <item>
         <title>Spring Framework Dersleri 4 - Injecting Simple Values &amp; by Using SpEL</title>
@@ -1918,90 +2026,6 @@ kütüphanesi bağımlılıkları indirildi.&lt;/p&gt;
         <category>angular 2 ngFor</category>
         
         <category>angular 2 Structural Directives</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Formula 1 2017 Monaco GP Ardından</title>
-        <description>&lt;p&gt;Formula 1 2017 sezonunda 6. yarış olan Monaco GP Monte Carlo caddelerinde gerçekleştirildi ve Tifosi için müthiş mutluluk verici bir sonuçla tamamlandı.&lt;/p&gt;
-
-&lt;p&gt;Önce Cumartesi günü yapılan sıralama turlarına bir göz atalım.&lt;/p&gt;
-
-&lt;p&gt;Mercedes pilotu Lewis Hamilton Perşembe günü yapılan antremanda her ne kadar hızlı gözüküp 1. sırayı elde etmiş olsa da Mercedes’in uzun dingil mesafesi yüzünden burada sıkıntı yaşaması
-bekleniyordu ve Hamilton devam eden 2. ve 3. antremanlarda geride kaldı.Takım arkadaşı Bottas ise yine makul sayılabilecek dereceler elde etti. İş sıralama turlarına geldiğinde ise
-Hamilton adına durum da ha kötüye gitti. Q2 içerisinde üst üste kötü turlar atıp Q3’e geçememe tehlikesi beliren Hamilton son hakkında Q3’e kalabilecek bir dereceye çok yaklaşmışken 
-McLaren pilotu Vandoorne’un kaza yapması ile turunu bırakmak zorunda kaldı ve Q2’de 14. olarak sıralamalara veda etti. Bottas ise Q3’de 3. sırayı aldı.&lt;/p&gt;
-
-&lt;p&gt;Ferrari pilotları ise 2. antremandan itibaren yakaladıkları momentumu daha ileri taşıyarak sıralama turlarında başarılı turlar atarak bu seneki Rusya GP’nin ardından ikinci kez 
-1-2 sra başlangıcı yapmaya hak kazandılar. Kimi Raikkonen 2008 Fransa GP’den bu yana ilk kez pole pozisyonu kazanarak F1 fanlarına nostalji yaşattı. Sebastian Vettel ise kendini
-Bottas’ın önünde tutmayı başardı ve 2. sırayı aldı.&lt;/p&gt;
-
-&lt;p&gt;Q3 sonucunda Bottas’ı Red Bull pilotları Verstappen ve Ricciardo takip ettiler.&lt;/p&gt;
-
-&lt;p&gt;Carlos Sainz gayet başarılı sıralama geçirerek 6. sırayı aldı, onu Perez ve Grosjean takip ettiler. McLaren pilotları Jenson Button ve Vandoorne motor gücünün az öneme indiği bu pistte
-McLaren’i Q3’e taşıdılar. Fakat Vandoorne Q2 sonunda yaptığı kaza nedeni ile Q3’de tur atamadı. Button ise Q3’ü son sırada tamamlamasına karşın parça değişim cezaları ile yarışa
-pit yolundan başlama cezası aldı.&lt;/p&gt;
-
-&lt;p&gt;Sıralamaların bitiş sonucu şöyle oldu fakat Button cezası nedeni ile son sıraya indiği için Hamilton 13. sıraya yükseldi.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/f12017/monaco/1.png&quot;&gt;
-&lt;img src=&quot;/images/f12017/monaco/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Yarışta ise start anında Kimi ve Sebastian yerlerini korudular. İlk pit stoplara kadar Kimi 1. sıradaki yerini korurken Sebastin Vettel’den önce pit-stop yaptı ve önü açılan Vettel
-oldukça hızlı turlar attı ve üst üste 2 turda en hızlı tur kaydı yaptı. Raikkonen’den 5 tur sonra pit’e gelen Vettel arada açtığı farkın da yardımı ile piste Raikkonen’in önünde döndü
-ve yarış sonuna kadar yerini koruyarak zafere ulaştı. Raikkonen ise 2. sıradaki yerini muhafaza etti ve Ferrari 2010 Hockenheim’dan 7 yıl sonra ilk dublesini yapmış oldu.&lt;/p&gt;
-
-&lt;p&gt;Mercedes pilotu Valtteri Bottas pit-stoplar sayesinde Red Bull pilotu Daniel Ricciardo’ya geçildi ve podyumu elinden kaçırarak 4. oldu. Red Bull’un diğer pilotu Max Verstappen ise
-tüm yarışı Bottas’ın ardında geçirerek 5. oldu. Sainz ise sıralamalardaki başarısını devam ettirdi ve 6. sırada yer aldı. 13. sıradan start alan Hamilton ise Mercedes’in de deyimi ile
-yarışı en optimum seviye olan 7. sırada tamamladı.&lt;/p&gt;
-
-&lt;p&gt;Son zamanlarda çok üst düzey bir performans sergileyen Renault pilotu Nico Hulkenberg ise ciddi bir vites kutusu problemi yüzünden yarışa veda etti.&lt;/p&gt;
-
-&lt;p&gt;Yarışın sonuçlanması ise şöyle oldu:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/f12017/monaco/2.png&quot;&gt;
-&lt;img src=&quot;/images/f12017/monaco/2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Ferrari bu dublesi ile Mercedes’in 17 puan önüne geçerek takımlar liderliğini devraldı. Vettel ise Hamilton ile puan farkını bir tam yarış kadar olan 25’e çıkardı.&lt;/p&gt;
-
-&lt;p&gt;Bir sonraki yarış Kuzay Amerika’da Kanada’da 11 Haziran tarihinde koşulacak.&lt;/p&gt;
-
-&lt;p&gt;Gelecek yazıda görüşmek üzere.&lt;/p&gt;
-
-&lt;p&gt;Sağlıcakla kalım.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-</description>
-        <pubDate>Sun, 28 May 2017 20:41:21 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2017/f1monaco2017gp/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/f1monaco2017gp/</guid>
-        
-        <category>formula 1 2016 brazil gp</category>
-        
-        <category>formula 1 brazil gp</category>
-        
-        <category>formula 1 2016 Brezilya gp</category>
-        
-        <category>formula 1 2016 Brezilya gp</category>
-        
-        <category>formula 1 2016 sao paolo</category>
-        
-        <category>formula 1 2017 monaco gp</category>
-        
-        <category>formula 1 monaco gp</category>
-        
-        <category>formula 1 2017 Monaco gp</category>
-        
-        <category>formula 1 2017 Monte Carlo</category>
-        
-        <category>formula 1 2017 Monaco Sebastian Vettel</category>
-        
-        <category>formula 1 2017 Monaco Kimi Raikkonen</category>
-        
-        <category>formula 1 2017 Monaco GP Lewis Hamilton</category>
         
         
       </item>
