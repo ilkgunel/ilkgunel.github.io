@@ -5,9 +5,251 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 29 Jul 2017 17:10:56 +0300</pubDate>
-    <lastBuildDate>Sat, 29 Jul 2017 17:10:56 +0300</lastBuildDate>
+    <pubDate>Sat, 05 Aug 2017 14:35:06 +0300</pubDate>
+    <lastBuildDate>Sat, 05 Aug 2017 14:35:06 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Java Exception Handling Best Practices</title>
+        <description>&lt;p&gt;Merhabalar.&lt;/p&gt;
+
+&lt;p&gt;Bu yazı içerisinde size Java dilinde &lt;strong&gt;&lt;em&gt;Hata Yakalama (Exception Handling)&lt;/em&gt;&lt;/strong&gt; konusundan Best Practice’ler anlatmaya çalışacağım.&lt;/p&gt;
+
+&lt;p&gt;Yazıya başlamadan önce belirtmek gerekir ki bu yazı sırasında
+&lt;a href=&quot;http://howtodoinjava.com/best-practices/java-exception-handling-best-practices/&quot;&gt;http://howtodoinjava.com/best-practices/java-exception-handling-best-practices/&lt;/a&gt;
+adresindeki makaleden faydalanarak bu yazıyı yazıyorum.&lt;/p&gt;
+
+&lt;p&gt;Exception Handling konusuna girmeden önce Java’daki Exception mekanizması üzerine biraz konuşmak gerekiyor. Java dilindeki exception hiyerarşisini gösteren 
+bir görüntü şu şekilde:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/coreJava/eh1.png&quot;&gt;
+&lt;img src=&quot;/images/coreJava/eh1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Görüntüde gördüğümüz gibi en tepede tüm hata mekanizmasının hiyerarşik olarak tepesinde Throwable bulunuyor ve &lt;strong&gt;&lt;em&gt;Checked&lt;/em&gt;&lt;/strong&gt; olarak belirtilmiş. Throwable kendi
+altında ikiye bölünüyor ve bunlar Exception ve Error mekanizmaları. Exception Checked iken Error Unchecked. Yine Exception kendi altında çalışma zamanında meydana
+gelebilecek hataları kapsayacak olan fakat Unchecked olan RuntimeException ve Checked olan diğer Exception’lar şeklinde ikiye ayrılıyor. Bu noktada Checked&amp;amp;Unchecked
+Exception ve Error konusundan da bahsetmek gerekiyor.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Checked Exceptions&lt;/strong&gt;: Java dilinde kod yazılırken meydana gelebilecek bir takım exception türlerinin kod içerisinde zorunlu olarak belirtildiği exception türü
+diyebiliriz bu türe. Exception sınıfını kalıtarak gelirler. Eğer kod yazılırken Java bizi bir Exception’ı metotlarımızın throws özelliği ile ya da try-catch yapısı ile tanıtmaya mecbur bırakıyorsa
+bu bir Checked Exception örneğidir arkadaşlar. Mesela Java’da dosya işlemleri ile uğraşırken hepimiz FileNotFoundException, IOExcetion gibi exception’ları 
+bir şekilde kod içerisinde tanıtmak zorunda kalmışızdır. IOExcetion da bir Checked Exception’dır arkadaşlar. Java’nın bizi bu Exception’ları kod içerisinde yakalamaya
+yönelik zorlaması bu hataların harici faktörlerden gelebileceği ve JVM’in bu durumda bir şey yapamıyacağıdır. Örneğin yazmış olduğunuz bir dosya işlemi kodu
+içerisinde aradığınız dosya yoksa bu durumda JVM’in yapabileceği bir şey yoktur ve bu harici bir faktördür.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Unchecked Exception&lt;/strong&gt;:  Java’nın bizi kod içerisinde tanımlamaya zorlamadığı Exception türüdür. Bu hatalar genel olarak programlama hatalarından dolayı oluşan ve
+çalışma zamanı ortaya çıkan hatalardır.Unchecked Exception’lar RuntimeException sınıfını kalıtarak oluşurlar. RuntimeException her ne kadar Checked olan Exception 
+sınıfını kalıtsa da kendisi Unchecked Exception klasmanında yer almaktadır. Unchecked Exception’ları en iyi anlamanın ve çözüm üretmenin yolu ise loglama yapılmasıdır.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Error&lt;/strong&gt;: Error’un açıklaması olarak çalışma zamanında meydana gelen ve ciddi sonuçları olan durumlar gösterilir. Örneğin OutOfMemoryError, StackOverFlowError gibi 
+Error’lar programın bütününü ya da bir kısmını çalışamayacak hale getirebilirler. Error’ları yakalamanın ve çözmenin en garanti yolu loglama yapmaktır.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Best practices&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Exception’lar hakkında bilgi edindikten sonra şimdi Best Practice’leri konusuna değinebiliriz.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;em&gt;Exception’ı **&lt;/em&gt;catch&lt;/strong&gt;* bloğu içerisinde yutmayın.*** Şu şekilde bir kodunuz olduğunu düşünün:&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NoSuchMethodException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Bu kod bir şekilde Exception yakalansa hiç Exception hakkında bilgi vermeden ve düzeltilebilecek bir şey varsa düzeltmeden null dönüp işi bitiriyor. Bu kodlama açısından
+yanlış bir yaklaşımdır. Sebebi bilinmeyen bir hatayı çözmek de mümkün olmayacaktır. Burada hata loglanabilir ya da kodun gidişatına göre önlemler alınabilinir.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;em&gt;Geniş yerine dar kapsamlı Exception tanımlaması yapın.&lt;/em&gt;&lt;/strong&gt; Şu şekilde bir kodumuz olsun:&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;doAnything&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//Doğru yaklaşım değil!&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Yukarıdaki kod bir hata olduğunda en tepedeki Exception sınıfı türünden bir hata fılatacaktır. Kodun yazılması sırasında doğru olan yaklaşım Exception’ların en 
+spesifik olacak şekilde tanımlanması ve hata mesajlarının buna uygun veirlmesidir. Yukarıdaki yaklaşım genellikle bir metot yazımında Java’nın zorladığı Checked Exception
+sayısı bir kaç tane olduğunda toptan hepsinden kurtulmak için başvurulan bir yoldur ama yanlıştır. Yukarıdaki kodun doğru hali şöyle olmalıdır:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;doAnything&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SpecificException1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SpecificException2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//Doğru Yaklaşım&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;em&gt;Catch içerisinde genel kapsamlı yakalama yapmayın.&lt;/em&gt;&lt;/strong&gt; İkinci maddedekine benzer sebeplerle try-catch bloğunun catch kısmı içerisinde genel kapsamlı bir Excetion
+tanımlaması yapılması yanlış bir yaklaşımdır. Şu koddaki catch kısmında &lt;strong&gt;&lt;em&gt;Exception e&lt;/em&gt;&lt;/strong&gt; yerine IOExcetion, FileNotFoundException vs. gibi daha spesifik olacak 
+Exception sınıflarını kullanmak daha doğru bir yaklaşımdır.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;someMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;LOGGER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;method has failed&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;&lt;em&gt;Throwable Sınıfı Catch İçerisine Almayın.&lt;/em&gt;&lt;/strong&gt; Yukarıdaki görüntüde fark ettiğimiz gibi Throwable hata mekanizmasının en üstünde yer alan sınıftır. JVM 
+implementasyonlarındaki farklılıklar ve Throwable’ın en üst seviye hata sınıfı olması Throwable catch içerisine alındığında hata tetikleme mekanizmasının 
+çalışamamsına sebep olabilir.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Meydana gelen bir hatayı Catch içerisinde yakaladığınız zaman hatanın mesajını e.getMessage() şeklinde alabiliyoruz fakat bu yaklaşım hatanın Stack Trace’ini yok ediyor.
+Bu durumda hata üzerinde etki alanımızı daraltıyor. Bunun için hata fırlatılırken hata nesnesinin kendisinin kullanılması doğru bir yaklaşım olacaktır.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NoSuchMethodException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MyServiceException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Some information: &amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//Yanlış Yaklaşım!&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NoSuchMethodException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MyServiceException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Some information: &amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//Doğru Yaklaşım &lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;&lt;em&gt;Hatalarınızı Loglayın.&lt;/em&gt;&lt;/strong&gt; Catch içerisinde hatalarınızı yakaladığınız zaman hatayı anlamak ve çözümünü kolaylaştırmak için hatalarınızı loglayın. Burada aklınıza
+konsola yazdırsak olmaz mı şeklinde bir soru gelebilir 😊 Bu proje geliştirme sırasında çok yanlış bir yaklaşımdır arkadaşlar. Verilerin, yakalanan hataların 
+konsola yazdırılması yerine loglara yazılması doğru yaklaşımdır çünkü takibi ve okunması hem çok daha kolay hem de daha okunabilirdir.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;&lt;em&gt;finally içinde Throw yapmayın.&lt;/em&gt;&lt;/strong&gt; Kullanılan kaynakların kapatılması, temizlenmesi durumları söz konusu olduğunda finally bloğu try-catch bloğunun hemen peşinden
+kullanılabilir. Bu durumda bizim yapmamamız gereken finally bloğu içerisinde herhangi bir hata fırlatma işlemi yapmamaktır.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Eğer catch içerisinde yakaladığınız bir hata ile catch içerisinde başa çıkamıyorsanız, onu yeniden throw işlemine tabi tutun.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;&lt;em&gt;printStackTrace()&lt;/em&gt;&lt;/strong&gt; metodunu kullanmaktan kaçının. printStackTrace() metodu hatanın context bilgisi hakkında bir bilgi vermediği için sorun çözümüne de yardımcı
+olmaz.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Try bloğunun genellikle catch bloğu ile birlikte kullanıldığını görürüz fakat bu bir zorunluluk değildir. Eğer try içerisinde yapılacak işlem neticesinde bir hata 
+olsa da yakalamak, üstesinden gelmek istemiyorsanız, catch kullanmayıp finnaly bloğu ile kaynaklarınızı kapatabilirsiniz.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;someMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;  
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;finally&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;cleanUp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Exception Handling konusunda bize tavsiye edilen bir başka nokta da eğer bir hata yakalıyorsak bunu hemen o anda throw ile fırlatmalıyız fakat catch işlemini 
+olabildiğince geciktirmeliyiz. Bunun tavsiye edilme nedeni meydana gelen hata hakkında olabildiğince fazla bilgi edinmektir.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Hatayı yakalayıp başa çıktıktan sonra mutlaka finally bloğu ile o an kullandığınız veri tabanı bağlantısı, ağ bağlantısı vs. gibi bağlantıları kapatın.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;&lt;em&gt;İlgili hatayı throw edin.&lt;/em&gt;&lt;/strong&gt; Bir dosya okuma işlemi sırasında dosyanın bulunamaması sırasında NullPointerException da fırlatılabilir fakat meydana gelen 
+hata için doğru bir hata fırlatma yaklaşımı olmaz. Burada örneğin NoSuchFileFoundException fırlatılması hata ile ilgili daha doğru yaklaşım olacaktır.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;&lt;em&gt;Input’ları en erken aşamada kontrolden geçirin.&lt;/em&gt;&lt;/strong&gt; Örneğin sizin bir kullanıcı ve bir de adres tablonuz var. Kullanıcı bilgileri giriyor ve siz önce kullanıcı
+bilgilerini validasyondan geçirip veritabanına kaydediyorsunuz sonra adresi bilgilerini validasyondan geçirip veritabanına kaydediyorsunuz. Bu yanlış bir yaklaşımdır
+arkadaşlar. Input’ların hepsini en erken aşamada, daha hiçbir controller’a girmeden validasyon geçirmeli, hata oluşursa geri göndermeliyiz. Bu noktada kullanıcının 
+girdiği veriler validasyondan geçse bile DB’ye kayıt sırasında hata olabilir. Bu noktada da mutlaka Rollback işlemi yapılmalı.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;&lt;em&gt;Tekrarlıyan try-catch’leri template metoda alın.&lt;/em&gt;&lt;/strong&gt; Diyelim ki DB bağlantısını kapatan bir try-catch bloğunuz var ve DB üzerinde operasyon yapılan her yerde
+bu try-catch tekrar ediyor. Bu noktada yapılması gereken bu kapama işlemini yapan bloğun bir Util sınıfı içerisinde metoda alınması ve diğer yerlerde oradan çağırılması
+olacaktır.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Şu şekilde bir DBUtil sınıfı içerisinde closeConnection metodu yazılabilir.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DBUtil&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;closeConnection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Connection&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;conn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;//Connection kapatılamadı ise oluşan hatayı loglayın.&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Aşağıdaki kodda da finally içerisinden DBUtil’deki closeConnection metodu çağıralarak kod tekrarının önüne geçilmiş oluyor.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;dataAccessCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Connection&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;conn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getConnection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;....&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;finally&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;DBUtil&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;closeConnection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;em&gt;Interrupted Olan Thread’i durdurun.&lt;/em&gt;&lt;/strong&gt; Eğer bir Thread çalışması sırasında InterruptedException ile Thread kesintiye uğrarsa bu Thread’i durdurmamız gerekir.
+Bu hatanın alınması bize o an yapılan işin durdurulması gerektiğine bir işarettir. Örneğin Thread Pool kapandığında bu hata verilebilir.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Şu kodda InterruptedException oluştuğunda Thread üzerinde hiçbir şey yapılmıyor. Bu yanlış yaklaşım olur.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;InterruptedException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//Don&amp;#39;t do this&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;doSomething&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Doğru olan yaklaşım şu şekilde o an yaptığı işi ve Thread’i sonlandırması olacaktır:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;InterruptedException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;doSomething&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Bu yazıda anlatacaklarım bu kadar arkadaşlar. 16 madde ile Exception Handling konusunu nasıl daha iyi hale getirebileceğimizi görmüş olduk. 
+Başka bir yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Fri, 04 Aug 2017 21:23:21 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2017/exception-handling-practices-in-java/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/exception-handling-practices-in-java/</guid>
+        
+        <category>JAXB Marshalling and Unmarshalling</category>
+        
+        <category>JAXB Marshalling</category>
+        
+        <category>JAXB Unmarshalling</category>
+        
+        <category>JAXB</category>
+        
+        <category>how to convert XML to Java</category>
+        
+        <category>how to convert Java to XML</category>
+        
+        <category>XML&#39;den Java&#39;ya dönüşüm</category>
+        
+        <category>Java&#39;dan XML&#39;e dönüşüm</category>
+        
+        <category>java exception handling</category>
+        
+        <category>java exception handling best practices</category>
+        
+        <category>exception handling in java</category>
+        
+        <category>how to handle exception in java</category>
+        
+        
+      </item>
     
       <item>
         <title>Singleton Design Pattern</title>
@@ -1842,182 +2084,6 @@ kütüphanesi bağımlılıkları indirildi.&lt;/p&gt;
         <category>maven kurulumu</category>
         
         <category>ilk maven projesi</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Angular 2 Tutorials 8 - Structural Directives</title>
-        <description>&lt;p&gt;Merhabalar.&lt;/p&gt;
-
-&lt;p&gt;Bu yazıda Structural Directives konusunu öğreneceğiz.&lt;/p&gt;
-
-&lt;p&gt;Angular 2 içerisinde 3 adet directive tipi vardır. Bunlardan birisi daha önce öğrendiğimiz ve öğrenmeye devam ettiğimiz Component konusu idi. İkincisi ise bu yazıda öğreneceğimiz Structural Directives olacak. Üçüncüsü ise Attribute Directives ve onu gelecek yazılarda öğreneceğiz.&lt;/p&gt;
-
-&lt;p&gt;Structural Directives dediğimiz yapı Angular 2 içeirsinde DOM manipulation yapılmasından sorumlu olan bir yapıdır. Biz bu yazı içerisinde Structural Directive’in 3 parçasını göreceğiz. Bunlar:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;ngIf&lt;/li&gt;
-  &lt;li&gt;ngSwitch&lt;/li&gt;
-  &lt;li&gt;ngFor&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Şimdi &lt;strong&gt;&lt;em&gt;ngIf&lt;/em&gt;&lt;/strong&gt; konusuna değinelim. ngIf directive’i isminden de anlaşılabileceği gibi sayfamızda belirli şartlara göre bir akış sağlamamıza yarayan bir directive’dir. Basit bir örnekle pratiğe dökelim:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2Tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;h2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/h2&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngIf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;showElement&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Show&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/p&amp;gt;`,&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Angular 2 Tutorials&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;showElement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Component’imizin template özelliği içerisinde bir p tag’i tanımlı. Bu p tag’inde *ngIf ifadesi ile p tag’inin görünür olup olamayacağına karar veriliyor. *ngIf özelliğine ise class içerisinde tanımlı showElement nesnesi atanıyor. *ngIf özelliği bu element’in değerine göre p tag’inin görünür ya da görünür olmama durumuna karar verecek.&lt;/p&gt;
-
-&lt;p&gt;Anasayfayı çalıştırdığımızda şu şekilde bir ekran çıktısı geliyor:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson8/1.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson8/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Kod içerisinde showElement false olduğu için Show Element textine sahip p tag’i görünmedi. Şimdi showElement nesnesine true değer atayıp sayfayı kontrol ediyorum.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson8/2.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson8/2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Gördüğünüz gibi p tag’i görünür oldu.&lt;/p&gt;
-
-&lt;p&gt;Şimdi &lt;strong&gt;&lt;em&gt;ngSwitch&lt;/em&gt;&lt;/strong&gt; konusunu işleyelim. ngSwitch konusu klasik programlama dillerinde yer alan switch-case mantığında bir yapı. Bu olursa şu olsun, şu olursa bu olsun şekilde çalışacak bir yapı ngSwitch. Yukarıdaki örneğimize eklemeler yaparak ngSwitch’i örnekleyelim.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2Tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;h2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/h2&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngIf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;showElement&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Show&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/p&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngSwitch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;color&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-                    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngSwitchWhen&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;#39;red&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Red&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;paragraph&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;shown&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/p&amp;gt;&lt;/span&gt;
-                    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngSwitchWhen&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;#39;blue&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Blue&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;paragraph&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;shown&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/p&amp;gt;&lt;/span&gt;
-                    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngSwitchDefault&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Invalid&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Colour&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/p&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/div&amp;gt;`,&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Angular 2 Tutorials&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;showElement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Template’mize bir div tag’i ekledik ve bu tag içerisinde köşeli parantezler arasında &lt;strong&gt;&lt;em&gt;ngSwitch&lt;/em&gt;&lt;/strong&gt; özelliğimizi kullandık. ngSwitch özelliğimize class içerisinde tanımlı color nesnesini atadık. Div tag’inin içerisinde 3 adet p tag’i kullandık ve bu p tag’lerinde ngSwitchWhen ile ngSwitchDefault kullandık. ngSwitch özelliği kendisine atanan color değerinin kontrolünü gerçekleştiriyor ve akabinde içerideki ngSwitchWhen’lere göre işlemin gerçekleştirilmesini yapıyor. Eğer gelen color’ın değeri red ise birinci p tag’i yazdırılıyor. Eğer blue ise ikinci p tag’i yazdırılıyor. Eğer red ya da blue dışında bir renk gelirse ngSwitchDefault’a yönlendiriyor ve son sıradaki p tag’i yazdırılıyor. Color nesnesini değeri red olacak şekilde gönderelim ve ekran çıktısına bakalım:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson8/3.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson8/3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Color nesnesinin değerini red olarak gönderdik ve &lt;strong&gt;&lt;em&gt;Red paragraph is shown!&lt;/em&gt;&lt;/strong&gt; metni görüntülendi.&lt;/p&gt;
-
-&lt;p&gt;Şimdi color’ı blue yapıp gönderelim:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson8/4.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson8/4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Blue paragraph is shown!&lt;/em&gt;&lt;/strong&gt; metni ekranda görüntülendi.&lt;/p&gt;
-
-&lt;p&gt;Son olarak da color’ı green olarak gönderelim:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson8/5.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson8/5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Gönderdiğimiz color nesnesi değeri red ya da blue olmadığı için ngSwitch işlemi ngSwitchDefault özelliği kullanılan p tag’ine yönlendirdi ve &lt;strong&gt;&lt;em&gt;Invalid Colour!&lt;/em&gt;&lt;/strong&gt; metni görüntülendi.&lt;/p&gt;
-
-&lt;p&gt;Şimdi bu yazımıdaki son directive’miz olan &lt;strong&gt;&lt;em&gt;ngFor&lt;/em&gt;&lt;/strong&gt; directive’ini öğrenelim. ngFor directive’de bize bir döngü döndürme imkanı sunuyor. ngFor’u örnekleyelim:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2Tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;h2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/h2&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngIf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;showElement&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Show&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/p&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngSwitch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;color&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-                    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngSwitchWhen&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;#39;red&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Red&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;paragraph&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;shown&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/p&amp;gt;&lt;/span&gt;
-                    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngSwitchWhen&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;#39;blue&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Blue&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;paragraph&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;shown&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/p&amp;gt;&lt;/span&gt;
-                    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngSwitchDefault&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Invalid&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Colour&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/p&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/div&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ul&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-                    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;li&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngFor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;let driver of drivers&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;driver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/li&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/ul&amp;gt;`,&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Angular 2 Tutorials&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;showElement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;green&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;drivers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Michael Schumacher&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Mika Hakkinen&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Rubens Barichello&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;David Coulthard&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Class içerisinde bir drivers array’i tanımladık ve içerisine değerler koyduk. Template içerisinde de ul tag’i içerisinde li tag’i ile array içindeki değerleri ekrana yazdıracağız. Normalde array içinde 4 değer olduğu için ul içerisinde 4 li kullanarak yazıdrabilirdik ama ngFor sayesinde tek satırda, tek li tag’i ile işi halledeceğiz. Kod içerisinde &lt;em&gt;ngFor ifadesi ile bir döngü, repeat işlemi yapılacağını söylüyoruz. ngFor’a atanan &lt;strong&gt;*let driver of drivers&lt;/strong&gt;&lt;/em&gt; ifadesi ile klasik programlama dillerindeki forEach döngüsüne benzer şekilde drivers içinde dönerken her birini driver olarak kabul edip işlem yapacak. Ekrana yazdırma kısmında ise daha önce öğrendiğimiz interpolation devreye giriyor ve driver’ı yazdırıyoruz.&lt;/p&gt;
-
-&lt;p&gt;Ekran çıktımız da şu şekilde:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson8/6.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson8/6.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Gördüğümüz gibi Drivers array’i içindeki değerler ekrana yazdırıldı.&lt;/p&gt;
-
-&lt;p&gt;Bu yazıda anlatacaklarım da bu kadar arkadaşlar. 3 directive ifadesi ile Structural Directives konusunu öğrenmiş olduk. Gelecek yazıda görüşmek üzere.&lt;/p&gt;
-
-&lt;p&gt;Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-</description>
-        <pubDate>Mon, 29 May 2017 20:40:21 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2017/structural-directives/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/structural-directives/</guid>
-        
-        <category>angular 2 web service</category>
-        
-        <category>angular 2 rest get</category>
-        
-        <category>angular 2 rest post</category>
-        
-        <category>angular 2 rest</category>
-        
-        <category>angular 2 calling web service</category>
-        
-        <category>angular 2 giriş</category>
-        
-        <category>angular 2 tutorials</category>
-        
-        <category>angular 2 hello world</category>
-        
-        <category>angular 2 dersleri</category>
-        
-        <category>angular 2 kaynak</category>
-        
-        <category>angular 2 türkçe kaynak</category>
-        
-        <category>angular 2 türkçe dersleri</category>
-        
-        <category>angular 2 ngIf</category>
-        
-        <category>angular 2 ngSwitch</category>
-        
-        <category>angular 2 ngSwitchWhen</category>
-        
-        <category>angular 2 ngSwitchDefault</category>
-        
-        <category>angular 2 ngFor</category>
-        
-        <category>angular 2 Structural Directives</category>
         
         
       </item>

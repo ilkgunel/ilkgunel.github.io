@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <script type="text/javascript">
+        function setVoice() {
+            var vid = document.getElementById("voice");
+            if(vid!=null){
+            	vid.volume = 0.2;
+            }
+        }
+        window.onload = setVoice;
+        </script>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+	  (adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-0980023289791742",
+		enable_page_level_ads: true
+	  });
+	</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Java Exception Handling Best Practices</title>
+    <meta name="description" content="Merhabalar.">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2017/exception-handling-practices-in-java/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>Java Exception Handling Best Practices - İlkay Günel - Blog</title>
+<meta property="og:title" content="Java Exception Handling Best Practices" />
+<meta name="description" content="Java Exception Handling Best Practices" />
+<meta property="og:description" content="Java Exception Handling Best Practices" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2017/exception-handling-practices-in-java/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2017/exception-handling-practices-in-java/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-08-04T21:23:21+03:00" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Java Exception Handling Best Practices",
+    "datePublished": "2017-08-04T21:23:21+03:00",
+    "description": "Java Exception Handling Best Practices",
+    "url": "http://ilkaygunel.com/blog/2017/exception-handling-practices-in-java/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/ilkay-gunel-cv.pdf" title="Bana Ait CV">Bana Ait CV</a></li>
+        
+          <li><a href="/blog/2016/git-nedir" title="Git Nedir? Nasıl Kullanılır?">Git Nedir? Nasıl Kullanılır?</a></li>
+        
+          <li><a href="/blog/2017/angular-2-tutorials" title="Angular 2">Angular 2</a></li>
+        
+          <li><a href="/blog/2016/maven-tutorials" title="Maven">Maven</a></li>
+        
+          <li><a href="/blog/2016/jsf-tutorials-list" title="JSF">JSF</a></li>
+        
+          <li><a href="/blog/2016/spring-tutorials" title="Spring 4">Spring 4</a></li>
+        
+          <li><a href="/blog/2016/eclipselink" title="Eclipselink">Eclipselink</a></li>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/blog/2016/test" title="Test">Test</a></li>
+        
+          <li><a href="/blog/2016/useful-libraries-for-java" title="Java İçin Faydalı Kütüphaneler">Java İçin Faydalı Kütüphaneler</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog/2016/eclipse-notes" title="Eclipse">Eclipse</a></li>
+        
+          <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
+        
+          <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+        <li><a href="https://1000kitap.com/ilkaygunel">1000Kitap</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Java Exception Handling Best Practices</h1>
+      <p class="post-meta">Aug 4, 2017</p>
+    </header>
+
+    <div class="post-content">
+      <p>Merhabalar.</p>
+
+<p>Bu yazı içerisinde size Java dilinde <strong><em>Hata Yakalama (Exception Handling)</em></strong> konusundan Best Practice’ler anlatmaya çalışacağım.</p>
+
+<p>Yazıya başlamadan önce belirtmek gerekir ki bu yazı sırasında
+<a href="http://howtodoinjava.com/best-practices/java-exception-handling-best-practices/">http://howtodoinjava.com/best-practices/java-exception-handling-best-practices/</a>
+adresindeki makaleden faydalanarak bu yazıyı yazıyorum.</p>
+
+<p>Exception Handling konusuna girmeden önce Java’daki Exception mekanizması üzerine biraz konuşmak gerekiyor. Java dilindeki exception hiyerarşisini gösteren 
+bir görüntü şu şekilde:</p>
+
+<p><a href="/images/coreJava/eh1.png">
+<img src="/images/coreJava/eh1.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Görüntüde gördüğümüz gibi en tepede tüm hata mekanizmasının hiyerarşik olarak tepesinde Throwable bulunuyor ve <strong><em>Checked</em></strong> olarak belirtilmiş. Throwable kendi
+altında ikiye bölünüyor ve bunlar Exception ve Error mekanizmaları. Exception Checked iken Error Unchecked. Yine Exception kendi altında çalışma zamanında meydana
+gelebilecek hataları kapsayacak olan fakat Unchecked olan RuntimeException ve Checked olan diğer Exception’lar şeklinde ikiye ayrılıyor. Bu noktada Checked&amp;Unchecked
+Exception ve Error konusundan da bahsetmek gerekiyor.</p>
+
+<ul>
+  <li>
+    <p><strong>Checked Exceptions</strong>: Java dilinde kod yazılırken meydana gelebilecek bir takım exception türlerinin kod içerisinde zorunlu olarak belirtildiği exception türü
+diyebiliriz bu türe. Exception sınıfını kalıtarak gelirler. Eğer kod yazılırken Java bizi bir Exception’ı metotlarımızın throws özelliği ile ya da try-catch yapısı ile tanıtmaya mecbur bırakıyorsa
+bu bir Checked Exception örneğidir arkadaşlar. Mesela Java’da dosya işlemleri ile uğraşırken hepimiz FileNotFoundException, IOExcetion gibi exception’ları 
+bir şekilde kod içerisinde tanıtmak zorunda kalmışızdır. IOExcetion da bir Checked Exception’dır arkadaşlar. Java’nın bizi bu Exception’ları kod içerisinde yakalamaya
+yönelik zorlaması bu hataların harici faktörlerden gelebileceği ve JVM’in bu durumda bir şey yapamıyacağıdır. Örneğin yazmış olduğunuz bir dosya işlemi kodu
+içerisinde aradığınız dosya yoksa bu durumda JVM’in yapabileceği bir şey yoktur ve bu harici bir faktördür.</p>
+  </li>
+  <li>
+    <p><strong>Unchecked Exception</strong>:  Java’nın bizi kod içerisinde tanımlamaya zorlamadığı Exception türüdür. Bu hatalar genel olarak programlama hatalarından dolayı oluşan ve
+çalışma zamanı ortaya çıkan hatalardır.Unchecked Exception’lar RuntimeException sınıfını kalıtarak oluşurlar. RuntimeException her ne kadar Checked olan Exception 
+sınıfını kalıtsa da kendisi Unchecked Exception klasmanında yer almaktadır. Unchecked Exception’ları en iyi anlamanın ve çözüm üretmenin yolu ise loglama yapılmasıdır.</p>
+  </li>
+  <li>
+    <p><strong>Error</strong>: Error’un açıklaması olarak çalışma zamanında meydana gelen ve ciddi sonuçları olan durumlar gösterilir. Örneğin OutOfMemoryError, StackOverFlowError gibi 
+Error’lar programın bütününü ya da bir kısmını çalışamayacak hale getirebilirler. Error’ları yakalamanın ve çözmenin en garanti yolu loglama yapmaktır.</p>
+  </li>
+</ul>
+
+<p><strong>Best practices</strong></p>
+
+<p>Exception’lar hakkında bilgi edindikten sonra şimdi Best Practice’leri konusuna değinebiliriz.</p>
+
+<ol>
+  <li><strong><em>Exception’ı **</em>catch</strong>* bloğu içerisinde yutmayın.*** Şu şekilde bir kodunuz olduğunu düşünün:</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchMethodException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+   <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Bu kod bir şekilde Exception yakalansa hiç Exception hakkında bilgi vermeden ve düzeltilebilecek bir şey varsa düzeltmeden null dönüp işi bitiriyor. Bu kodlama açısından
+yanlış bir yaklaşımdır. Sebebi bilinmeyen bir hatayı çözmek de mümkün olmayacaktır. Burada hata loglanabilir ya da kodun gidişatına göre önlemler alınabilinir.</p>
+
+<ol>
+  <li><strong><em>Geniş yerine dar kapsamlı Exception tanımlaması yapın.</em></strong> Şu şekilde bir kodumuz olsun:</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">doAnything</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span> <span class="c1">//Doğru yaklaşım değil!</span>
+<span class="o">}</span>  </code></pre></figure>
+
+<p>Yukarıdaki kod bir hata olduğunda en tepedeki Exception sınıfı türünden bir hata fılatacaktır. Kodun yazılması sırasında doğru olan yaklaşım Exception’ların en 
+spesifik olacak şekilde tanımlanması ve hata mesajlarının buna uygun veirlmesidir. Yukarıdaki yaklaşım genellikle bir metot yazımında Java’nın zorladığı Checked Exception
+sayısı bir kaç tane olduğunda toptan hepsinden kurtulmak için başvurulan bir yoldur ama yanlıştır. Yukarıdaki kodun doğru hali şöyle olmalıdır:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">doAnything</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">SpecificException1</span><span class="o">,</span> <span class="n">SpecificException2</span> <span class="o">{</span> <span class="c1">//Doğru Yaklaşım</span>
+<span class="o">}</span></code></pre></figure>
+
+<ol>
+  <li><strong><em>Catch içerisinde genel kapsamlı yakalama yapmayın.</em></strong> İkinci maddedekine benzer sebeplerle try-catch bloğunun catch kısmı içerisinde genel kapsamlı bir Excetion
+tanımlaması yapılması yanlış bir yaklaşımdır. Şu koddaki catch kısmında <strong><em>Exception e</em></strong> yerine IOExcetion, FileNotFoundException vs. gibi daha spesifik olacak 
+Exception sınıflarını kullanmak daha doğru bir yaklaşımdır.</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">try</span> <span class="o">{</span>
+   <span class="n">someMethod</span><span class="o">();</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+   <span class="n">LOGGER</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">&quot;method has failed&quot;</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+<span class="o">}</span></code></pre></figure>
+
+<ol>
+  <li>
+    <p><strong><em>Throwable Sınıfı Catch İçerisine Almayın.</em></strong> Yukarıdaki görüntüde fark ettiğimiz gibi Throwable hata mekanizmasının en üstünde yer alan sınıftır. JVM 
+implementasyonlarındaki farklılıklar ve Throwable’ın en üst seviye hata sınıfı olması Throwable catch içerisine alındığında hata tetikleme mekanizmasının 
+çalışamamsına sebep olabilir.</p>
+  </li>
+  <li>
+    <p>Meydana gelen bir hatayı Catch içerisinde yakaladığınız zaman hatanın mesajını e.getMessage() şeklinde alabiliyoruz fakat bu yaklaşım hatanın Stack Trace’ini yok ediyor.
+Bu durumda hata üzerinde etki alanımızı daraltıyor. Bunun için hata fırlatılırken hata nesnesinin kendisinin kullanılması doğru bir yaklaşım olacaktır.</p>
+  </li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchMethodException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+   <span class="k">throw</span> <span class="k">new</span> <span class="nf">MyServiceException</span><span class="o">(</span><span class="s">&quot;Some information: &quot;</span> <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>  <span class="c1">//Yanlış Yaklaşım!</span>
+<span class="o">}</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchMethodException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+   <span class="k">throw</span> <span class="k">new</span> <span class="nf">MyServiceException</span><span class="o">(</span><span class="s">&quot;Some information: &quot;</span> <span class="o">,</span> <span class="n">e</span><span class="o">);</span>  <span class="c1">//Doğru Yaklaşım </span>
+<span class="o">}</span></code></pre></figure>
+
+<ol>
+  <li>
+    <p><strong><em>Hatalarınızı Loglayın.</em></strong> Catch içerisinde hatalarınızı yakaladığınız zaman hatayı anlamak ve çözümünü kolaylaştırmak için hatalarınızı loglayın. Burada aklınıza
+konsola yazdırsak olmaz mı şeklinde bir soru gelebilir 😊 Bu proje geliştirme sırasında çok yanlış bir yaklaşımdır arkadaşlar. Verilerin, yakalanan hataların 
+konsola yazdırılması yerine loglara yazılması doğru yaklaşımdır çünkü takibi ve okunması hem çok daha kolay hem de daha okunabilirdir.</p>
+  </li>
+  <li>
+    <p><strong><em>finally içinde Throw yapmayın.</em></strong> Kullanılan kaynakların kapatılması, temizlenmesi durumları söz konusu olduğunda finally bloğu try-catch bloğunun hemen peşinden
+kullanılabilir. Bu durumda bizim yapmamamız gereken finally bloğu içerisinde herhangi bir hata fırlatma işlemi yapmamaktır.</p>
+  </li>
+  <li>
+    <p>Eğer catch içerisinde yakaladığınız bir hata ile catch içerisinde başa çıkamıyorsanız, onu yeniden throw işlemine tabi tutun.</p>
+  </li>
+  <li>
+    <p><strong><em>printStackTrace()</em></strong> metodunu kullanmaktan kaçının. printStackTrace() metodu hatanın context bilgisi hakkında bir bilgi vermediği için sorun çözümüne de yardımcı
+olmaz.</p>
+  </li>
+  <li>
+    <p>Try bloğunun genellikle catch bloğu ile birlikte kullanıldığını görürüz fakat bu bir zorunluluk değildir. Eğer try içerisinde yapılacak işlem neticesinde bir hata 
+olsa da yakalamak, üstesinden gelmek istemiyorsanız, catch kullanmayıp finnaly bloğu ile kaynaklarınızı kapatabilirsiniz.</p>
+  </li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">try</span> <span class="o">{</span>
+  <span class="n">someMethod</span><span class="o">();</span>  
+<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+  <span class="n">cleanUp</span><span class="o">();</span>
+<span class="o">}</span></code></pre></figure>
+
+<ol>
+  <li>
+    <p>Exception Handling konusunda bize tavsiye edilen bir başka nokta da eğer bir hata yakalıyorsak bunu hemen o anda throw ile fırlatmalıyız fakat catch işlemini 
+olabildiğince geciktirmeliyiz. Bunun tavsiye edilme nedeni meydana gelen hata hakkında olabildiğince fazla bilgi edinmektir.</p>
+  </li>
+  <li>
+    <p>Hatayı yakalayıp başa çıktıktan sonra mutlaka finally bloğu ile o an kullandığınız veri tabanı bağlantısı, ağ bağlantısı vs. gibi bağlantıları kapatın.</p>
+  </li>
+  <li>
+    <p><strong><em>İlgili hatayı throw edin.</em></strong> Bir dosya okuma işlemi sırasında dosyanın bulunamaması sırasında NullPointerException da fırlatılabilir fakat meydana gelen 
+hata için doğru bir hata fırlatma yaklaşımı olmaz. Burada örneğin NoSuchFileFoundException fırlatılması hata ile ilgili daha doğru yaklaşım olacaktır.</p>
+  </li>
+  <li>
+    <p><strong><em>Input’ları en erken aşamada kontrolden geçirin.</em></strong> Örneğin sizin bir kullanıcı ve bir de adres tablonuz var. Kullanıcı bilgileri giriyor ve siz önce kullanıcı
+bilgilerini validasyondan geçirip veritabanına kaydediyorsunuz sonra adresi bilgilerini validasyondan geçirip veritabanına kaydediyorsunuz. Bu yanlış bir yaklaşımdır
+arkadaşlar. Input’ların hepsini en erken aşamada, daha hiçbir controller’a girmeden validasyon geçirmeli, hata oluşursa geri göndermeliyiz. Bu noktada kullanıcının 
+girdiği veriler validasyondan geçse bile DB’ye kayıt sırasında hata olabilir. Bu noktada da mutlaka Rollback işlemi yapılmalı.</p>
+  </li>
+  <li>
+    <p><strong><em>Tekrarlıyan try-catch’leri template metoda alın.</em></strong> Diyelim ki DB bağlantısını kapatan bir try-catch bloğunuz var ve DB üzerinde operasyon yapılan her yerde
+bu try-catch tekrar ediyor. Bu noktada yapılması gereken bu kapama işlemini yapan bloğun bir Util sınıfı içerisinde metoda alınması ve diğer yerlerde oradan çağırılması
+olacaktır.</p>
+  </li>
+</ol>
+
+<p>Şu şekilde bir DBUtil sınıfı içerisinde closeConnection metodu yazılabilir.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">DBUtil</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">closeConnection</span><span class="o">(</span><span class="n">Connection</span> <span class="n">conn</span><span class="o">){</span>
+        <span class="k">try</span><span class="o">{</span>
+            <span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="o">){</span>
+            <span class="c1">//Connection kapatılamadı ise oluşan hatayı loglayın.</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Aşağıdaki kodda da finally içerisinden DBUtil’deki closeConnection metodu çağıralarak kod tekrarının önüne geçilmiş oluyor.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">dataAccessCode</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">Connection</span> <span class="n">conn</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="k">try</span><span class="o">{</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">getConnection</span><span class="o">();</span>
+        <span class="o">....</span>
+    <span class="o">}</span> <span class="k">finally</span><span class="o">{</span>
+        <span class="n">DBUtil</span><span class="o">.</span><span class="na">closeConnection</span><span class="o">(</span><span class="n">conn</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<ol>
+  <li><strong><em>Interrupted Olan Thread’i durdurun.</em></strong> Eğer bir Thread çalışması sırasında InterruptedException ile Thread kesintiye uğrarsa bu Thread’i durdurmamız gerekir.
+Bu hatanın alınması bize o an yapılan işin durdurulması gerektiğine bir işarettir. Örneğin Thread Pool kapandığında bu hata verilebilir.</li>
+</ol>
+
+<p>Şu kodda InterruptedException oluştuğunda Thread üzerinde hiçbir şey yapılmıyor. Bu yanlış yaklaşım olur.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">try</span> <span class="o">{</span>
+    <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">100000</span><span class="o">);</span>
+  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{}</span> <span class="c1">//Don&#39;t do this</span>
+  <span class="n">doSomething</span><span class="o">();</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Doğru olan yaklaşım şu şekilde o an yaptığı işi ve Thread’i sonlandırması olacaktır:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">try</span> <span class="o">{</span>
+    <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">100000</span><span class="o">);</span>
+  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">break</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+<span class="n">doSomething</span><span class="o">();</span></code></pre></figure>
+
+<p>Bu yazıda anlatacaklarım bu kadar arkadaşlar. 16 madde ile Exception Handling konusunu nasıl daha iyi hale getirebileceğimizi görmüş olduk. 
+Başka bir yazıda görüşene kadar sağlıcakla kalın.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
+  
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2017 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgune/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>
