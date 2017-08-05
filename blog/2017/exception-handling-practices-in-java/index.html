@@ -149,21 +149,21 @@ Exception ve Error konusundan da bahsetmek gerekiyor.</p>
 
 <ul>
   <li>
-    <p><strong>Checked Exceptions</strong>: Java dilinde kod yazılırken meydana gelebilecek bir takım exception türlerinin kod içerisinde zorunlu olarak belirtildiği exception türü
-diyebiliriz bu türe. Exception sınıfını kalıtarak gelirler. Eğer kod yazılırken Java bizi bir Exception’ı metotlarımızın throws özelliği ile ya da try-catch yapısı ile tanıtmaya mecbur bırakıyorsa
+    <h2 id="checked-exceptions-java-dilinde-kod-yazlrken-meydana-gelebilecek-bir-takm-exception-trlerinin-kod-ierisinde-zorunlu-olarak-belirtildii-exception-tr">Checked Exceptions: Java dilinde kod yazılırken meydana gelebilecek bir takım exception türlerinin kod içerisinde zorunlu olarak belirtildiği exception türü</h2>
+    <p>diyebiliriz bu türe. Exception sınıfını kalıtarak gelirler. Eğer kod yazılırken Java bizi bir Exception’ı metotlarımızın throws özelliği ile ya da try-catch yapısı ile tanıtmaya mecbur bırakıyorsa
 bu bir Checked Exception örneğidir arkadaşlar. Mesela Java’da dosya işlemleri ile uğraşırken hepimiz FileNotFoundException, IOExcetion gibi exception’ları 
 bir şekilde kod içerisinde tanıtmak zorunda kalmışızdır. IOExcetion da bir Checked Exception’dır arkadaşlar. Java’nın bizi bu Exception’ları kod içerisinde yakalamaya
 yönelik zorlaması bu hataların harici faktörlerden gelebileceği ve JVM’in bu durumda bir şey yapamıyacağıdır. Örneğin yazmış olduğunuz bir dosya işlemi kodu
 içerisinde aradığınız dosya yoksa bu durumda JVM’in yapabileceği bir şey yoktur ve bu harici bir faktördür.</p>
   </li>
   <li>
-    <p><strong>Unchecked Exception</strong>:  Java’nın bizi kod içerisinde tanımlamaya zorlamadığı Exception türüdür. Bu hatalar genel olarak programlama hatalarından dolayı oluşan ve
-çalışma zamanı ortaya çıkan hatalardır.Unchecked Exception’lar RuntimeException sınıfını kalıtarak oluşurlar. RuntimeException her ne kadar Checked olan Exception 
+    <h2 id="unchecked-exception--javann-bizi-kod-ierisinde-tanmlamaya-zorlamad-exception-trdr-bu-hatalar-genel-olarak-programlama-hatalarndan-dolay-oluan-ve">Unchecked Exception:  Java’nın bizi kod içerisinde tanımlamaya zorlamadığı Exception türüdür. Bu hatalar genel olarak programlama hatalarından dolayı oluşan ve</h2>
+    <p>çalışma zamanı ortaya çıkan hatalardır.Unchecked Exception’lar RuntimeException sınıfını kalıtarak oluşurlar. RuntimeException her ne kadar Checked olan Exception 
 sınıfını kalıtsa da kendisi Unchecked Exception klasmanında yer almaktadır. Unchecked Exception’ları en iyi anlamanın ve çözüm üretmenin yolu ise loglama yapılmasıdır.</p>
   </li>
   <li>
-    <p><strong>Error</strong>: Error’un açıklaması olarak çalışma zamanında meydana gelen ve ciddi sonuçları olan durumlar gösterilir. Örneğin OutOfMemoryError, StackOverFlowError gibi 
-Error’lar programın bütününü ya da bir kısmını çalışamayacak hale getirebilirler. Error’ları yakalamanın ve çözmenin en garanti yolu loglama yapmaktır.</p>
+    <h2 id="error-errorun-aklamas-olarak-alma-zamannda-meydana-gelen-ve-ciddi-sonular-olan-durumlar-gsterilir-rnein-outofmemoryerror-stackoverflowerror-gibi">Error: Error’un açıklaması olarak çalışma zamanında meydana gelen ve ciddi sonuçları olan durumlar gösterilir. Örneğin OutOfMemoryError, StackOverFlowError gibi</h2>
+    <p>Error’lar programın bütününü ya da bir kısmını çalışamayacak hale getirebilirler. Error’ları yakalamanın ve çözmenin en garanti yolu loglama yapmaktır.</p>
   </li>
 </ul>
 
@@ -171,9 +171,7 @@ Error’lar programın bütününü ya da bir kısmını çalışamayacak hale g
 
 <p>Exception’lar hakkında bilgi edindikten sonra şimdi Best Practice’leri konusuna değinebiliriz.</p>
 
-<ol>
-  <li><strong><em>Exception’ı **</em>catch</strong>* bloğu içerisinde yutmayın.*** Şu şekilde bir kodunuz olduğunu düşünün:</li>
-</ol>
+<p><strong><em>Exception’ı catch bloğu içerisinde yutmayın.</em></strong>: Şu şekilde bir kodunuz olduğunu düşünün:</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchMethodException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
    <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
@@ -182,9 +180,7 @@ Error’lar programın bütününü ya da bir kısmını çalışamayacak hale g
 <p>Bu kod bir şekilde Exception yakalansa hiç Exception hakkında bilgi vermeden ve düzeltilebilecek bir şey varsa düzeltmeden null dönüp işi bitiriyor. Bu kodlama açısından
 yanlış bir yaklaşımdır. Sebebi bilinmeyen bir hatayı çözmek de mümkün olmayacaktır. Burada hata loglanabilir ya da kodun gidişatına göre önlemler alınabilinir.</p>
 
-<ol>
-  <li><strong><em>Geniş yerine dar kapsamlı Exception tanımlaması yapın.</em></strong> Şu şekilde bir kodumuz olsun:</li>
-</ol>
+<p><strong><em>Geniş yerine dar kapsamlı Exception tanımlaması yapın</em></strong>: Şu şekilde bir kodumuz olsun:</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">doAnything</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span> <span class="c1">//Doğru yaklaşım değil!</span>
 <span class="o">}</span>  </code></pre></figure>
@@ -196,11 +192,9 @@ sayısı bir kaç tane olduğunda toptan hepsinden kurtulmak için başvurulan b
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">doAnything</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">SpecificException1</span><span class="o">,</span> <span class="n">SpecificException2</span> <span class="o">{</span> <span class="c1">//Doğru Yaklaşım</span>
 <span class="o">}</span></code></pre></figure>
 
-<ol>
-  <li><strong><em>Catch içerisinde genel kapsamlı yakalama yapmayın.</em></strong> İkinci maddedekine benzer sebeplerle try-catch bloğunun catch kısmı içerisinde genel kapsamlı bir Excetion
+<p><strong><em>Catch içerisinde genel kapsamlı yakalama yapmayın</em></strong>: İkinci maddedekine benzer sebeplerle try-catch bloğunun catch kısmı içerisinde genel kapsamlı bir Excetion
 tanımlaması yapılması yanlış bir yaklaşımdır. Şu koddaki catch kısmında <strong><em>Exception e</em></strong> yerine IOExcetion, FileNotFoundException vs. gibi daha spesifik olacak 
-Exception sınıflarını kullanmak daha doğru bir yaklaşımdır.</li>
-</ol>
+Exception sınıflarını kullanmak daha doğru bir yaklaşımdır.</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">try</span> <span class="o">{</span>
    <span class="n">someMethod</span><span class="o">();</span>
@@ -208,17 +202,12 @@ Exception sınıflarını kullanmak daha doğru bir yaklaşımdır.</li>
    <span class="n">LOGGER</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">&quot;method has failed&quot;</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
 <span class="o">}</span></code></pre></figure>
 
-<ol>
-  <li>
-    <p><strong><em>Throwable Sınıfı Catch İçerisine Almayın.</em></strong> Yukarıdaki görüntüde fark ettiğimiz gibi Throwable hata mekanizmasının en üstünde yer alan sınıftır. JVM 
+<p><strong><em>Throwable Sınıfı Catch İçerisine Almayın</em></strong>: Yukarıdaki görüntüde fark ettiğimiz gibi Throwable hata mekanizmasının en üstünde yer alan sınıftır. JVM 
 implementasyonlarındaki farklılıklar ve Throwable’ın en üst seviye hata sınıfı olması Throwable catch içerisine alındığında hata tetikleme mekanizmasının 
 çalışamamsına sebep olabilir.</p>
-  </li>
-  <li>
-    <p>Meydana gelen bir hatayı Catch içerisinde yakaladığınız zaman hatanın mesajını e.getMessage() şeklinde alabiliyoruz fakat bu yaklaşım hatanın Stack Trace’ini yok ediyor.
+
+<p><strong><em>Hata Nesnesinin Kendisini Kullanın</em></strong>: Meydana gelen bir hatayı Catch içerisinde yakaladığınız zaman hatanın mesajını e.getMessage() şeklinde alabiliyoruz fakat bu yaklaşım hatanın Stack Trace’ini yok ediyor.
 Bu durumda hata üzerinde etki alanımızı daraltıyor. Bunun için hata fırlatılırken hata nesnesinin kendisinin kullanılması doğru bir yaklaşım olacaktır.</p>
-  </li>
-</ol>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchMethodException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
    <span class="k">throw</span> <span class="k">new</span> <span class="nf">MyServiceException</span><span class="o">(</span><span class="s">&quot;Some information: &quot;</span> <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>  <span class="c1">//Yanlış Yaklaşım!</span>
@@ -228,28 +217,20 @@ Bu durumda hata üzerinde etki alanımızı daraltıyor. Bunun için hata fırla
    <span class="k">throw</span> <span class="k">new</span> <span class="nf">MyServiceException</span><span class="o">(</span><span class="s">&quot;Some information: &quot;</span> <span class="o">,</span> <span class="n">e</span><span class="o">);</span>  <span class="c1">//Doğru Yaklaşım </span>
 <span class="o">}</span></code></pre></figure>
 
-<ol>
-  <li>
-    <p><strong><em>Hatalarınızı Loglayın.</em></strong> Catch içerisinde hatalarınızı yakaladığınız zaman hatayı anlamak ve çözümünü kolaylaştırmak için hatalarınızı loglayın. Burada aklınıza
+<p><strong><em>Hatalarınızı Loglayın</em></strong>: Catch içerisinde hatalarınızı yakaladığınız zaman hatayı anlamak ve çözümünü kolaylaştırmak için hatalarınızı loglayın. Burada aklınıza
 konsola yazdırsak olmaz mı şeklinde bir soru gelebilir 😊 Bu proje geliştirme sırasında çok yanlış bir yaklaşımdır arkadaşlar. Verilerin, yakalanan hataların 
 konsola yazdırılması yerine loglara yazılması doğru yaklaşımdır çünkü takibi ve okunması hem çok daha kolay hem de daha okunabilirdir.</p>
-  </li>
-  <li>
-    <p><strong><em>finally içinde Throw yapmayın.</em></strong> Kullanılan kaynakların kapatılması, temizlenmesi durumları söz konusu olduğunda finally bloğu try-catch bloğunun hemen peşinden
+
+<p><strong><em>finally içinde Throw yapmayın</em></strong>: Kullanılan kaynakların kapatılması, temizlenmesi durumları söz konusu olduğunda finally bloğu try-catch bloğunun hemen peşinden
 kullanılabilir. Bu durumda bizim yapmamamız gereken finally bloğu içerisinde herhangi bir hata fırlatma işlemi yapmamaktır.</p>
-  </li>
-  <li>
-    <p>Eğer catch içerisinde yakaladığınız bir hata ile catch içerisinde başa çıkamıyorsanız, onu yeniden throw işlemine tabi tutun.</p>
-  </li>
-  <li>
-    <p><strong><em>printStackTrace()</em></strong> metodunu kullanmaktan kaçının. printStackTrace() metodu hatanın context bilgisi hakkında bir bilgi vermediği için sorun çözümüne de yardımcı
+
+<p><strong><em>Yeniden Throw Edin</em></strong>: Eğer catch içerisinde yakaladığınız bir hata ile catch içerisinde başa çıkamıyorsanız, onu yeniden throw işlemine tabi tutun.</p>
+
+<p><strong><em>printStackTrace() Kullanmayın</em></strong> metodunu kullanmaktan kaçının. printStackTrace() metodu hatanın context bilgisi hakkında bir bilgi vermediği için sorun çözümüne de yardımcı
 olmaz.</p>
-  </li>
-  <li>
-    <p>Try bloğunun genellikle catch bloğu ile birlikte kullanıldığını görürüz fakat bu bir zorunluluk değildir. Eğer try içerisinde yapılacak işlem neticesinde bir hata 
+
+<p><strong><em>Hata Yakalamayacaksanız Catch Kullanmayın</em></strong>: Try bloğunun genellikle catch bloğu ile birlikte kullanıldığını görürüz fakat bu bir zorunluluk değildir. Eğer try içerisinde yapılacak işlem neticesinde bir hata 
 olsa da yakalamak, üstesinden gelmek istemiyorsanız, catch kullanmayıp finnaly bloğu ile kaynaklarınızı kapatabilirsiniz.</p>
-  </li>
-</ol>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">try</span> <span class="o">{</span>
   <span class="n">someMethod</span><span class="o">();</span>  
@@ -257,30 +238,22 @@ olsa da yakalamak, üstesinden gelmek istemiyorsanız, catch kullanmayıp finnal
   <span class="n">cleanUp</span><span class="o">();</span>
 <span class="o">}</span></code></pre></figure>
 
-<ol>
-  <li>
-    <p>Exception Handling konusunda bize tavsiye edilen bir başka nokta da eğer bir hata yakalıyorsak bunu hemen o anda throw ile fırlatmalıyız fakat catch işlemini 
+<p><strong><em>Throw early catch late</em></strong>: Exception Handling konusunda bize tavsiye edilen bir başka nokta da eğer bir hata yakalıyorsak bunu hemen o anda throw ile fırlatmalıyız fakat catch işlemini 
 olabildiğince geciktirmeliyiz. Bunun tavsiye edilme nedeni meydana gelen hata hakkında olabildiğince fazla bilgi edinmektir.</p>
-  </li>
-  <li>
-    <p>Hatayı yakalayıp başa çıktıktan sonra mutlaka finally bloğu ile o an kullandığınız veri tabanı bağlantısı, ağ bağlantısı vs. gibi bağlantıları kapatın.</p>
-  </li>
-  <li>
-    <p><strong><em>İlgili hatayı throw edin.</em></strong> Bir dosya okuma işlemi sırasında dosyanın bulunamaması sırasında NullPointerException da fırlatılabilir fakat meydana gelen 
+
+<p><strong><em>Bağlantıları Kapatın</em></strong>: Hatayı yakalayıp başa çıktıktan sonra mutlaka finally bloğu ile o an kullandığınız veri tabanı bağlantısı, ağ bağlantısı vs. gibi bağlantıları kapatın.</p>
+
+<p><strong><em>İlgili hatayı throw edin.</em></strong> Bir dosya okuma işlemi sırasında dosyanın bulunamaması sırasında NullPointerException da fırlatılabilir fakat meydana gelen 
 hata için doğru bir hata fırlatma yaklaşımı olmaz. Burada örneğin NoSuchFileFoundException fırlatılması hata ile ilgili daha doğru yaklaşım olacaktır.</p>
-  </li>
-  <li>
-    <p><strong><em>Input’ları en erken aşamada kontrolden geçirin.</em></strong> Örneğin sizin bir kullanıcı ve bir de adres tablonuz var. Kullanıcı bilgileri giriyor ve siz önce kullanıcı
+
+<p><strong><em>Input’ları en erken aşamada kontrolden geçirin.</em></strong> Örneğin sizin bir kullanıcı ve bir de adres tablonuz var. Kullanıcı bilgileri giriyor ve siz önce kullanıcı
 bilgilerini validasyondan geçirip veritabanına kaydediyorsunuz sonra adresi bilgilerini validasyondan geçirip veritabanına kaydediyorsunuz. Bu yanlış bir yaklaşımdır
 arkadaşlar. Input’ların hepsini en erken aşamada, daha hiçbir controller’a girmeden validasyon geçirmeli, hata oluşursa geri göndermeliyiz. Bu noktada kullanıcının 
 girdiği veriler validasyondan geçse bile DB’ye kayıt sırasında hata olabilir. Bu noktada da mutlaka Rollback işlemi yapılmalı.</p>
-  </li>
-  <li>
-    <p><strong><em>Tekrarlıyan try-catch’leri template metoda alın.</em></strong> Diyelim ki DB bağlantısını kapatan bir try-catch bloğunuz var ve DB üzerinde operasyon yapılan her yerde
+
+<p><strong><em>Tekrarlıyan try-catch’leri template metoda alın.</em></strong> Diyelim ki DB bağlantısını kapatan bir try-catch bloğunuz var ve DB üzerinde operasyon yapılan her yerde
 bu try-catch tekrar ediyor. Bu noktada yapılması gereken bu kapama işlemini yapan bloğun bir Util sınıfı içerisinde metoda alınması ve diğer yerlerde oradan çağırılması
 olacaktır.</p>
-  </li>
-</ol>
 
 <p>Şu şekilde bir DBUtil sınıfı içerisinde closeConnection metodu yazılabilir.</p>
 
@@ -306,10 +279,8 @@ olacaktır.</p>
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 
-<ol>
-  <li><strong><em>Interrupted Olan Thread’i durdurun.</em></strong> Eğer bir Thread çalışması sırasında InterruptedException ile Thread kesintiye uğrarsa bu Thread’i durdurmamız gerekir.
-Bu hatanın alınması bize o an yapılan işin durdurulması gerektiğine bir işarettir. Örneğin Thread Pool kapandığında bu hata verilebilir.</li>
-</ol>
+<p><strong><em>Interrupted Olan Thread’i durdurun.</em></strong> Eğer bir Thread çalışması sırasında InterruptedException ile Thread kesintiye uğrarsa bu Thread’i durdurmamız gerekir.
+Bu hatanın alınması bize o an yapılan işin durdurulması gerektiğine bir işarettir. Örneğin Thread Pool kapandığında bu hata verilebilir.</p>
 
 <p>Şu kodda InterruptedException oluştuğunda Thread üzerinde hiçbir şey yapılmıyor. Bu yanlış yaklaşım olur.</p>
 
