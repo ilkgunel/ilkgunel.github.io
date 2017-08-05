@@ -5,8 +5,8 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 05 Aug 2017 14:54:37 +0300</pubDate>
-    <lastBuildDate>Sat, 05 Aug 2017 14:54:37 +0300</lastBuildDate>
+    <pubDate>Sat, 05 Aug 2017 14:57:57 +0300</pubDate>
+    <lastBuildDate>Sat, 05 Aug 2017 14:57:57 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
     
       <item>
@@ -33,21 +33,21 @@ Exception ve Error konusundan da bahsetmek gerekiyor.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;h2 id=&quot;checked-exceptions-java-dilinde-kod-yazlrken-meydana-gelebilecek-bir-takm-exception-trlerinin-kod-ierisinde-zorunlu-olarak-belirtildii-exception-tr&quot;&gt;Checked Exceptions: Java dilinde kod yazılırken meydana gelebilecek bir takım exception türlerinin kod içerisinde zorunlu olarak belirtildiği exception türü&lt;/h2&gt;
-    &lt;p&gt;diyebiliriz bu türe. Exception sınıfını kalıtarak gelirler. Eğer kod yazılırken Java bizi bir Exception’ı metotlarımızın throws özelliği ile ya da try-catch yapısı ile tanıtmaya mecbur bırakıyorsa
+    &lt;p&gt;&lt;strong&gt;Checked Exceptions&lt;/strong&gt;: Java dilinde kod yazılırken meydana gelebilecek bir takım exception türlerinin kod içerisinde zorunlu olarak belirtildiği exception türü
+diyebiliriz bu türe. Exception sınıfını kalıtarak gelirler. Eğer kod yazılırken Java bizi bir Exception’ı metotlarımızın throws özelliği ile ya da try-catch yapısı ile tanıtmaya mecbur bırakıyorsa
 bu bir Checked Exception örneğidir arkadaşlar. Mesela Java’da dosya işlemleri ile uğraşırken hepimiz FileNotFoundException, IOExcetion gibi exception’ları 
 bir şekilde kod içerisinde tanıtmak zorunda kalmışızdır. IOExcetion da bir Checked Exception’dır arkadaşlar. Java’nın bizi bu Exception’ları kod içerisinde yakalamaya
 yönelik zorlaması bu hataların harici faktörlerden gelebileceği ve JVM’in bu durumda bir şey yapamıyacağıdır. Örneğin yazmış olduğunuz bir dosya işlemi kodu
 içerisinde aradığınız dosya yoksa bu durumda JVM’in yapabileceği bir şey yoktur ve bu harici bir faktördür.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;h2 id=&quot;unchecked-exception--javann-bizi-kod-ierisinde-tanmlamaya-zorlamad-exception-trdr-bu-hatalar-genel-olarak-programlama-hatalarndan-dolay-oluan-ve&quot;&gt;Unchecked Exception:  Java’nın bizi kod içerisinde tanımlamaya zorlamadığı Exception türüdür. Bu hatalar genel olarak programlama hatalarından dolayı oluşan ve&lt;/h2&gt;
-    &lt;p&gt;çalışma zamanı ortaya çıkan hatalardır.Unchecked Exception’lar RuntimeException sınıfını kalıtarak oluşurlar. RuntimeException her ne kadar Checked olan Exception 
+    &lt;p&gt;&lt;strong&gt;Unchecked Exception&lt;/strong&gt;*:  Java’nın bizi kod içerisinde tanımlamaya zorlamadığı Exception türüdür. Bu hatalar genel olarak programlama hatalarından dolayı oluşan ve
+çalışma zamanı ortaya çıkan hatalardır.Unchecked Exception’lar RuntimeException sınıfını kalıtarak oluşurlar. RuntimeException her ne kadar Checked olan Exception 
 sınıfını kalıtsa da kendisi Unchecked Exception klasmanında yer almaktadır. Unchecked Exception’ları en iyi anlamanın ve çözüm üretmenin yolu ise loglama yapılmasıdır.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;h2 id=&quot;error-errorun-aklamas-olarak-alma-zamannda-meydana-gelen-ve-ciddi-sonular-olan-durumlar-gsterilir-rnein-outofmemoryerror-stackoverflowerror-gibi&quot;&gt;Error: Error’un açıklaması olarak çalışma zamanında meydana gelen ve ciddi sonuçları olan durumlar gösterilir. Örneğin OutOfMemoryError, StackOverFlowError gibi&lt;/h2&gt;
-    &lt;p&gt;Error’lar programın bütününü ya da bir kısmını çalışamayacak hale getirebilirler. Error’ları yakalamanın ve çözmenin en garanti yolu loglama yapmaktır.&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Error&lt;/strong&gt;: Error’un açıklaması olarak çalışma zamanında meydana gelen ve ciddi sonuçları olan durumlar gösterilir. Örneğin OutOfMemoryError, StackOverFlowError gibi 
+Error’lar programın bütününü ya da bir kısmını çalışamayacak hale getirebilirler. Error’ları yakalamanın ve çözmenin en garanti yolu loglama yapmaktır.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 

@@ -149,21 +149,21 @@ Exception ve Error konusundan da bahsetmek gerekiyor.</p>
 
 <ul>
   <li>
-    <h2 id="checked-exceptions-java-dilinde-kod-yazlrken-meydana-gelebilecek-bir-takm-exception-trlerinin-kod-ierisinde-zorunlu-olarak-belirtildii-exception-tr">Checked Exceptions: Java dilinde kod yazılırken meydana gelebilecek bir takım exception türlerinin kod içerisinde zorunlu olarak belirtildiği exception türü</h2>
-    <p>diyebiliriz bu türe. Exception sınıfını kalıtarak gelirler. Eğer kod yazılırken Java bizi bir Exception’ı metotlarımızın throws özelliği ile ya da try-catch yapısı ile tanıtmaya mecbur bırakıyorsa
+    <p><strong>Checked Exceptions</strong>: Java dilinde kod yazılırken meydana gelebilecek bir takım exception türlerinin kod içerisinde zorunlu olarak belirtildiği exception türü
+diyebiliriz bu türe. Exception sınıfını kalıtarak gelirler. Eğer kod yazılırken Java bizi bir Exception’ı metotlarımızın throws özelliği ile ya da try-catch yapısı ile tanıtmaya mecbur bırakıyorsa
 bu bir Checked Exception örneğidir arkadaşlar. Mesela Java’da dosya işlemleri ile uğraşırken hepimiz FileNotFoundException, IOExcetion gibi exception’ları 
 bir şekilde kod içerisinde tanıtmak zorunda kalmışızdır. IOExcetion da bir Checked Exception’dır arkadaşlar. Java’nın bizi bu Exception’ları kod içerisinde yakalamaya
 yönelik zorlaması bu hataların harici faktörlerden gelebileceği ve JVM’in bu durumda bir şey yapamıyacağıdır. Örneğin yazmış olduğunuz bir dosya işlemi kodu
 içerisinde aradığınız dosya yoksa bu durumda JVM’in yapabileceği bir şey yoktur ve bu harici bir faktördür.</p>
   </li>
   <li>
-    <h2 id="unchecked-exception--javann-bizi-kod-ierisinde-tanmlamaya-zorlamad-exception-trdr-bu-hatalar-genel-olarak-programlama-hatalarndan-dolay-oluan-ve">Unchecked Exception:  Java’nın bizi kod içerisinde tanımlamaya zorlamadığı Exception türüdür. Bu hatalar genel olarak programlama hatalarından dolayı oluşan ve</h2>
-    <p>çalışma zamanı ortaya çıkan hatalardır.Unchecked Exception’lar RuntimeException sınıfını kalıtarak oluşurlar. RuntimeException her ne kadar Checked olan Exception 
+    <p><strong>Unchecked Exception</strong>*:  Java’nın bizi kod içerisinde tanımlamaya zorlamadığı Exception türüdür. Bu hatalar genel olarak programlama hatalarından dolayı oluşan ve
+çalışma zamanı ortaya çıkan hatalardır.Unchecked Exception’lar RuntimeException sınıfını kalıtarak oluşurlar. RuntimeException her ne kadar Checked olan Exception 
 sınıfını kalıtsa da kendisi Unchecked Exception klasmanında yer almaktadır. Unchecked Exception’ları en iyi anlamanın ve çözüm üretmenin yolu ise loglama yapılmasıdır.</p>
   </li>
   <li>
-    <h2 id="error-errorun-aklamas-olarak-alma-zamannda-meydana-gelen-ve-ciddi-sonular-olan-durumlar-gsterilir-rnein-outofmemoryerror-stackoverflowerror-gibi">Error: Error’un açıklaması olarak çalışma zamanında meydana gelen ve ciddi sonuçları olan durumlar gösterilir. Örneğin OutOfMemoryError, StackOverFlowError gibi</h2>
-    <p>Error’lar programın bütününü ya da bir kısmını çalışamayacak hale getirebilirler. Error’ları yakalamanın ve çözmenin en garanti yolu loglama yapmaktır.</p>
+    <p><strong>Error</strong>: Error’un açıklaması olarak çalışma zamanında meydana gelen ve ciddi sonuçları olan durumlar gösterilir. Örneğin OutOfMemoryError, StackOverFlowError gibi 
+Error’lar programın bütününü ya da bir kısmını çalışamayacak hale getirebilirler. Error’ları yakalamanın ve çözmenin en garanti yolu loglama yapmaktır.</p>
   </li>
 </ul>
 
