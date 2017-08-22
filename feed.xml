@@ -5,9 +5,206 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 18 Aug 2017 22:33:06 +0300</pubDate>
-    <lastBuildDate>Fri, 18 Aug 2017 22:33:06 +0300</lastBuildDate>
+    <pubDate>Tue, 22 Aug 2017 22:08:01 +0300</pubDate>
+    <lastBuildDate>Tue, 22 Aug 2017 22:08:01 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>XSTream İle XML&#39;den Java&#39;ya Veri Dönüşümü</title>
+        <description>&lt;p&gt;Merhabalar arkadaşlar. &lt;a href=&quot;http://ilkaygunel.com/blog/2017/marshalling-with-xstream/&quot;&gt;XSTream İle Java’dan XML’e Veri Dönüşümü&lt;/a&gt; yazısında elimizdeki Java 
+nesnelerinde tutulan verilerin XML’ dönüşümünü görmüştük. Bu yazıda da elimizdeki XML formatındaki verilerden nasıl Java nesnelerinde veriler elde edeceğiz
+onu göreceğiz.&lt;/p&gt;
+
+&lt;p&gt;Bizim şöyle bir XML dosyamızın olduğunu varsayalım:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;person&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;İlkay&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;surname&amp;gt;&lt;/span&gt;Günel&lt;span class=&quot;nt&quot;&gt;&amp;lt;/surname&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;address&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;district&amp;gt;&lt;/span&gt;Şişli&lt;span class=&quot;nt&quot;&gt;&amp;lt;/district&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;city&amp;gt;&lt;/span&gt;İstanbul&lt;span class=&quot;nt&quot;&gt;&amp;lt;/city&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/address&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/person&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;XSTream ile bu XML dosyasını okumak için ihtiyacımız olan Java kodu şu şekilde olacaktır:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;mainclasses&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.io.File&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.ilkaygunel.pojo.Address&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.ilkaygunel.pojo.Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.thoughtworks.xstream.XStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SinglePersonFromXML&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;XStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xStream&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;XStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;xStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;alias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;person&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;xStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;alias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;address&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Address&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+		&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;File&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xmlFile&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;/Users/ilkaygunel/Desktop/person1.xml&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;person&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;fromXML&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xmlFile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;The Error is:&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Java’dan XML’e dönüşüm yaparken yaptığımız gibi XML’den Java’ya dönüşüm yaparken de alias atamaları yapıyoruz. Person ve Address sınıfılarını alias() metodu
+ile tanıtıyoruz.&lt;/p&gt;
+
+&lt;p&gt;try-catch bloğu içerisinde de XML dosyamıza referans olan File nesnemizi oluşturuyoruz ve xStream nesnesi üzerinden &lt;strong&gt;&lt;em&gt;fromXML()&lt;/em&gt;&lt;/strong&gt; metoduna File nesnesini
+parametre vererek Person nesnemizi elde ediyoruz. fromXML() metodu Object tipinde bir nesne döndüğü için dönen nesnenin ilgili sınıfa cast edilmesi gerekmektedir.
+Bu sınıf örneğimizde bizim için Person sınıfıdır.&lt;/p&gt;
+
+&lt;p&gt;Son olarak da person nesnemizi konsola yazdırıyoruz. Person nesnesinin düzgün ve anlamlı yazdırılabilmesi için toString metodunun override edilmesi gerekmektidir:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot; &amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;surname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot; &amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Kodu çalıştırdığımızda ekran çıktımız da şu şekilde olmaktadır:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/coreJava/xs3.png&quot;&gt;
+&lt;img src=&quot;/images/coreJava/xs3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Ekran çıktısında gördüğünüz&lt;/p&gt;
+
+&lt;p style=&quot;color: red&quot;&gt;Security framework of XStream not initialized, XStream is probably vulnerable.&lt;/p&gt;
+
+&lt;p&gt;yazısı XSTream içerisinde henüz kullanımı zorunlu tutulmayan güvenlik yapısına işaret etmektedir. Bu uyarıyı çözümlemek için default security alanını kayda geçirip
+Person ve Address sınıflarını izin verilen sınıflar arasına ekleyebiliriz. Bu işlem için koda şu ekleme yeterli olacaktır:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;XStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setupDefaultSecurity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&amp;gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;classes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Address&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;allowTypes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;classes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Şimdi de birden fazla veri barındıran bir XML dosyasından nasıl Java nesneleri elde ederiz bu konuya değinelim.&lt;/p&gt;
+
+&lt;p&gt;XML dosyamızın şu şekilde olduğunu varsayalım:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;personList&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;person&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Michael&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;surname&amp;gt;&lt;/span&gt;Schumacher&lt;span class=&quot;nt&quot;&gt;&amp;lt;/surname&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;address&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;district&amp;gt;&lt;/span&gt;Hürth-Hermülheim&lt;span class=&quot;nt&quot;&gt;&amp;lt;/district&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;city&amp;gt;&lt;/span&gt;Germany&lt;span class=&quot;nt&quot;&gt;&amp;lt;/city&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/address&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/person&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;person&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Mika&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;surname&amp;gt;&lt;/span&gt;Hakkinen&lt;span class=&quot;nt&quot;&gt;&amp;lt;/surname&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;address&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;district&amp;gt;&lt;/span&gt;Helsinki&lt;span class=&quot;nt&quot;&gt;&amp;lt;/district&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;city&amp;gt;&lt;/span&gt;Finland&lt;span class=&quot;nt&quot;&gt;&amp;lt;/city&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/address&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/person&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;person&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Fernando&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;surname&amp;gt;&lt;/span&gt;Alonso&lt;span class=&quot;nt&quot;&gt;&amp;lt;/surname&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;address&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;district&amp;gt;&lt;/span&gt;Oviedo&lt;span class=&quot;nt&quot;&gt;&amp;lt;/district&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;city&amp;gt;&lt;/span&gt;Spain&lt;span class=&quot;nt&quot;&gt;&amp;lt;/city&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/address&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/person&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/personList&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Bu XML’i okumak için Java sınıfımız da şu şekilde olacaktır:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;mainclasses&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.io.File&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.ilkaygunel.pojo.Address&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.ilkaygunel.pojo.Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.ilkaygunel.pojo.PersonList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.thoughtworks.xstream.XStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MultiplePersonFromXML&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;XStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xStream&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;XStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;XStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setupDefaultSecurity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;xStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;alias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;person&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;xStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;alias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;address&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Address&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;xStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;alias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;personList&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PersonList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;xStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addImplicitCollection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PersonList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;list&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&amp;gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;classes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Address&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PersonList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;xStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;allowTypes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;classes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;File&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xmlFile&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;/Users/ilkaygunel/Desktop/person1.xml&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;PersonList&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;personList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PersonList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;fromXML&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xmlFile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;personList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+				&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+			&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;MultiplePersonFromXML sınıfı içerisinde az önce bahsettiğim security işlemi için bir default security kayda geçiriyoruz ve &lt;strong&gt;&lt;em&gt;XStream.setupDefaultSecurity(xStream);&lt;/em&gt;&lt;/strong&gt; satırı 
+ile bu işlemi gerçekleştiriyoruz. Bu işlemi yapıyorsak eğer işimiz olan sınıflara da izin vermemiz gerekiyor. 
+&lt;strong&gt;&lt;em&gt;Class&amp;lt;?&amp;gt;[] classes = new Class[] { Person.class, Address.class, PersonList.class };&lt;/em&gt;&lt;/strong&gt; satırı ile bizim işimiz olan 3 sınıfı bir dizide tanımladık ve 
+&lt;strong&gt;&lt;em&gt;xStream.allowTypes(classes);&lt;/em&gt;&lt;/strong&gt; satırı ile de bu sınıflara izni veriyoruz. Aksi takdirde bize ForbiddenClass şeklinde bir hata dönecektir.&lt;/p&gt;
+
+&lt;p&gt;tyr-catch bloğu içerisinde de önceki örnekte yaptığımız gibi File nesnesini oluşturup, fromXML metoduna veriyoruz. Burada XML’e dikakt ettiğimizde en üst eleman personList
+elemanı. Yani XML birden fazla person barındırıyor ve cast işleminin de PersonList metoduna yapılması gerekiyor.&lt;/p&gt;
+
+&lt;p&gt;PersonList nesnesini elde ettikten sonra da nesne içerisindeki liste üzerinde dönerek konsola yazdırıyoruz.&lt;/p&gt;
+
+&lt;p&gt;Kodu çalıştırınca ekran çıktısı şöyle olmakta:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/coreJava/xs4.png&quot;&gt;
+&lt;img src=&quot;/images/coreJava/xs4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda anlatacaklarım da bu kadar arkadaşlar. Önceki yazı ve bu yazı ile birlikte XStrem ile Java’dan XML’e ve XML’den Java’ya dönüşüm yapmayı öğrenmiş olduk. Başka bir
+yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Mon, 21 Aug 2017 21:23:21 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2017/unmarshalling-with-xstream/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/unmarshalling-with-xstream/</guid>
+        
+        <category>JAXB Marshalling and Unmarshalling</category>
+        
+        <category>JAXB Marshalling</category>
+        
+        <category>JAXB Unmarshalling</category>
+        
+        <category>JAXB</category>
+        
+        <category>how to convert XML to Java</category>
+        
+        <category>how to convert Java to XML</category>
+        
+        <category>XML&#39;den Java&#39;ya dönüşüm</category>
+        
+        <category>Java&#39;dan XML&#39;e dönüşüm</category>
+        
+        <category>XStream java</category>
+        
+        <category>how to use XSTream in java</category>
+        
+        <category>xstream ile java&#39;dan xml&#39;e dönüşüm</category>
+        
+        <category>xstream java xml</category>
+        
+        <category>Marshalling with xstream in java</category>
+        
+        <category>Unmarshalling with xstream in java</category>
+        
+        <category>Unmarshalling in java</category>
+        
+        <category>Unmarshalling java</category>
+        
+        
+      </item>
     
       <item>
         <title>XSTream İle Java&#39;dan XML&#39;e Veri Dönüşümü</title>
@@ -2044,120 +2241,6 @@ başlatacak.&lt;/p&gt;
         <category>maven jetty plugin</category>
         
         <category>maven ile jetty çalıştırmak</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Maven Yazıları 2 - Project Object Model, Build Lifecycle ,Build Profiles</title>
-        <description>&lt;p&gt;Merhabalar arkadaşlar. &lt;a href=&quot;http://ilkaygunel.com/blog/2017/maven-introduction/&quot;&gt;Maven Giriş&lt;/a&gt; yazımızda basitçe Maven’a giriş yapmıştık. Bu yazımızda da konumuz Project Object Model, 
-Build Lifecycle ve Build Profiles konularını anlamak olacak.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Project Object Model&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Her bir maven projesi kendi içerisinde kendine has konfigürasyon ve özelliklerin tanımlandığı bir &lt;strong&gt;&lt;em&gt;pom.xml&lt;/em&gt;&lt;/strong&gt; dosyası barındırır. Project Object Model ifadesinin kısaltması ile isimlendirilen
-bu xml dosyası proje organizasyonu, lisanslar, bağımlılıklar, path ayarları gibi bilgileri içerir.&lt;/p&gt;
-
-&lt;p&gt;Bir pom.xml dosyası Apache 3 CookBook kitabında şu şekilde tasvir edilmiştir:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/maven/2/1.png&quot;&gt;
-&lt;img src=&quot;/images/maven/2/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Yukarıdaki ekran görüntüsünden de görebileceğiniz gibi bir pom.xml dosyası yapısal olarak 4 alana ayrılır. Şe şekilde:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;The Basics: Project co-ordinates,bağımlılık yönetimi ve miras alma detaylarını barındıran kısımdır. Project co-ordinates ifadesinden kastedilen bilgi de groupId, artifactId ve version
-bilgilerinin toplandığı kümedir. Bir pom.xml dosyası bu üç bilgiyisi dolayısı ile Project co-ordinates kümesini barındırmak zorundadır. Basics alanı ayrıca modül ve project level bilgileri de
-barındırabilir.&lt;/li&gt;
-  &lt;li&gt;Build Settings: Projenin inşa (build) aşaması içindeki ayarların tanımlandığı kısımdır.&lt;/li&gt;
-  &lt;li&gt;Project Metadata: Bu alan projeye özel bilgilerin tanımlandığı alandır. Projenin ismi, açıklması, geliştiricileri ve katkı sağlayıcıları gibi bilgiler bu alanda yer alır.&lt;/li&gt;
-  &lt;li&gt;Environment: Versiyon kontrol sistemi, issue yönetimi, continuous integration, mail listesi, repository’ler gibi environment bilgileri de bu alanda yer alır.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Build Lifecycle&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Build Lifecycle konusu hoş bir tabir ile Maven projelerinin kalbi olarak nitelendirilir. Çünkü projenin inşası, testi, dağıtımı ile ilgili işlemler Build Lifecycle içerisinde yer alır. Maven
-içerisinde 3 adet Build Lifecycle yer alır: &lt;strong&gt;&lt;em&gt;Default&lt;/em&gt;&lt;/strong&gt;, &lt;strong&gt;&lt;em&gt;Clean&lt;/em&gt;&lt;/strong&gt; ve &lt;strong&gt;**Site&lt;/strong&gt;*.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Default Lifecycle&lt;/em&gt;&lt;/strong&gt;: Projenin derlenmesi, testi ve deoploy edilmesi olaylarını kapsayan lifecycle’dır. 20’den fazla build phase içerisinde yer alır. En önemlileri şunlardır&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Validate: Projenin bilgilerinin eksik olup olmadığı ve doğru olup olmadığı kontrolleri yapılır.&lt;/li&gt;
-  &lt;li&gt;Compile: Kaynak kodları derler.&lt;/li&gt;
-  &lt;li&gt;Test: Unit Test kodlarını koşturur.&lt;/li&gt;
-  &lt;li&gt;Package: Derlenmiş kodu paketleme formatına uygun olarak paketler.&lt;/li&gt;
-  &lt;li&gt;Integration-test: Entegrasyon testlerinin uygulanması aşamasıdır.&lt;/li&gt;
-  &lt;li&gt;Verify: Package’ın geçerli olup olmadığını kontrol eder.&lt;/li&gt;
-  &lt;li&gt;Install: Oluşturulan paketin lokal repo’ya kurar.&lt;/li&gt;
-  &lt;li&gt;Deploy: Uzak sunucuya paketin kurulumunu gerçekleştirir.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Biz bir build phase’i çalıştırdığımız zaman ondan önce çalışması gereken build phase’ler de maven tarafından çalışıtırırlar. Örneğin &lt;strong&gt;&lt;em&gt;mvn integration-test&lt;/em&gt;&lt;/strong&gt; komutu verildiği zaman 
-Maven gidip validate, compile, test, ve package build phase’lerini çalıştıracak, ardından mvn integration-test komutunu çalıştıracaktır.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Clean Lifecycle&lt;/em&gt;&lt;/strong&gt;: Clean lifecycle projenin clean edilmesi yani derlenmiş dosyaların target altından silinerek yeni derlenmiş dosyalara zemin hazırlması görevini üstlenir. Ayrıca&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Pre-clean: Clean işleminden önce yapılması gerekenleri tanımlar.&lt;/li&gt;
-  &lt;li&gt;Clean: Önceki build işleminden gelen derlenmiş dosyaları siler.&lt;/li&gt;
-  &lt;li&gt;Post-clean: Clean işleminin bitirilmesi için yapılması gereken adımları tanımlar.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Site lifecycle&lt;/em&gt;&lt;/strong&gt;: Bu konu benim anladığım kadarı ile Maven tabanlı yazmış olduğunuz projeniz için bir web sayfası şeklinde dökümantasyonunun oluşturulması ve deploy edilmesi aşamasındaki 
-işlemleri belirler.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Pre-site: Web sayfası oluşturulmadan önceki aşamaları kapsar.&lt;/li&gt;
-  &lt;li&gt;Site: Web sayfası halinde olacak olan dökümanın oluşturulması işlemini yapar.&lt;/li&gt;
-  &lt;li&gt;Post-site: Site’ın tamamlanması için yapılmasıgerekenleri uygular ve deploy için hazır hale getirir.&lt;/li&gt;
-  &lt;li&gt;Site-deploy: Tanımlanmış olan bir web sunucusuna oluşturulan bu dökümanın deploy işlemini yapar.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Build Profiles&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Maven’ın sağlamayı amaçladığı büyük şeylerden birisi de projenin tamamı ile portable olmasıdır. Fakat Apache’nin kendisinin de dediği gibi %100 bir portability çok zordur. Örneğin kullanılan
-bir plugin portability konusunu zora sokabilir.&lt;/p&gt;
-
-&lt;p&gt;Benim bu  yazıda anlatacaklarım bu kadar arkadaşlar. Gelecek yazıda Maven tabanlı bir Java Web projesi oluşturacağız ve sunucu üzerinde çalıştıracağız.&lt;/p&gt;
-
-&lt;p&gt;Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-</description>
-        <pubDate>Fri, 09 Jun 2017 20:41:20 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2017/maven-tutorials-2/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/maven-tutorials-2/</guid>
-        
-        <category>microsoft sql jdbc driver</category>
-        
-        <category>microsoft jdbc driver</category>
-        
-        <category>how to add microsoft sql jdbc driver to local maven repository</category>
-        
-        <category>add microsoft sql jdbc driver to maven repository</category>
-        
-        <category>microsoft jdbc driver maven</category>
-        
-        <category>microsft jdbc driver nasıl kullanılır</category>
-        
-        <category>microsoft sql jdbc driver nasıl kullanılır</category>
-        
-        <category>microsoft jdbc driver nasıl kullanılır</category>
-        
-        <category>maven nedir?</category>
-        
-        <category>maven windows nasıl kurulur?</category>
-        
-        <category>maven linux nasıl kurulur?</category>
-        
-        <category>maven mac os x nasıl kurulur?</category>
-        
-        <category>apache maven</category>
-        
-        <category>maven kurulumu</category>
-        
-        <category>ilk maven projesi</category>
         
         
       </item>
