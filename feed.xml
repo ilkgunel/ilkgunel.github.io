@@ -5,9 +5,192 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 05 Sep 2017 21:24:57 +0300</pubDate>
-    <lastBuildDate>Tue, 05 Sep 2017 21:24:57 +0300</lastBuildDate>
+    <pubDate>Sun, 10 Sep 2017 14:22:42 +0300</pubDate>
+    <lastBuildDate>Sun, 10 Sep 2017 14:22:42 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Angular 2 Tutorials 9 - Attribute Directives</title>
+        <description>&lt;p&gt;Merhabalar arkadaşlar. Angular 2 yazılarına Attribute Directives konusu ile devam ediyoruz.&lt;/p&gt;
+
+&lt;p&gt;Bir önceki yazıda öğrendiğimiz Structural Directives konusu DOM Manipülasyonu üzerine odaklanan bir directive iken Attribute Directive ise DOM Elementinin davranışını 
+değiştirmeye odaklanmıştır. Biz de bu yazıda Attribute Directives konusuna ait olan &lt;strong&gt;&lt;em&gt;ngClass&lt;/em&gt;&lt;/strong&gt; ve &lt;strong&gt;&lt;em&gt;ngStyle&lt;/em&gt;&lt;/strong&gt; özelliklerini öğreneceğiz.&lt;/p&gt;
+
+&lt;p&gt;angular2tutorials.component.ts dosyamızın içeriğini şu şekilde güncelleyelim:&lt;/p&gt;
+
+&lt;p&gt;import {Component} from ‘@angular/core’;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2Tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;h2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/h2&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngClass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;{classOne:cone,classTwo:ctwo}&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngClass&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Paragraph&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/p&amp;gt;`,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;styles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;classOne&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt;:&lt;span class=&quot;kt&quot;&gt;white&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+             &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;classTwo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt;:&lt;span class=&quot;kt&quot;&gt;black&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+
+&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Angular 2 Tutorials&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cone&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ctwo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;angular2tutorials.component.ts dosyamızda template kısmı içerisinde bir tag’i tanımladık ve bu paragraph içerisinde &lt;strong&gt;ngClass Paragraph&lt;/strong&gt; yazsın dedik. p tag’inde özellik 
+olarak &lt;strong&gt;&lt;em&gt;ngClass&lt;/em&gt;&lt;/strong&gt; kullandık ve ngClass aslında bizim HTML’den bildiğimiz class attribute’nu yönetmek için geliştirilmiş bir özellik ve class attribute’u da bildiğimiz 
+CSS özelliğinden geiyor. Burada da ngClass atama yapabilmek için öncelikle selector gibi, template gibi &lt;strong&gt;&lt;em&gt;styles&lt;/em&gt;&lt;/strong&gt; özelliğinin tanımınınn yapılması gerekiyor.&lt;/p&gt;
+
+&lt;p&gt;styles özelliği içerisinde iki adet class tanımı yaptık. CSS dosyalarında ifadenin “.” ile başlaması bildiğiniz class tanımı yapıldığına işaret eder ve “.” ile başlayan 
+classOne ve classTwo’yu yazmamız ile birlikte iki adet class özelliğini kayda geçirmiş olduk. classOne atandığını elementin rengini beyaz yaparken, classTwo arka plan rengini
+siyah yapmaktadır.&lt;/p&gt;
+
+&lt;p&gt;ngClass özelliğine geri dönersek ngClass’a atanan değer içerisinde classOne:cone ifadesi ile classOne’ın aktif olup olmamasına cone değişkeninin değeri karar verecek diyoruz.
+Aynı durum classTwo için de geçerli.&lt;/p&gt;
+
+&lt;p&gt;Angular2Tutorials class’ı içerisinde cone ve ctwo’ya true değerleri atalı. Bu iki CSS class’ının da aktif olacağı anlamına geliyor.&lt;/p&gt;
+
+&lt;p&gt;Şimdi anasayfamızı kontrol edelim:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson9/1.png&quot;&gt;
+&lt;img src=&quot;/images/angularTutorials/lesson9/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Gördüğünüz gibi elementin style’ı çalışır vaziyette.&lt;/p&gt;
+
+&lt;p&gt;Şimdi bir butonumuz olsun ve bu buton tıklandığında yukarıdaki p tag’inin içindeki elementin style’ını değiştirsin. angular2tutorials.component.ts dosyamızı şu şekilde 
+güncelleyelim:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2Tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;h2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/h2&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngClass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;{classOne:cone,classTwo:ctwo}&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngClass&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Paragraph&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/p&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toggle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Toggle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/button&amp;gt;`,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;styles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;classOne&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt;:&lt;span class=&quot;kt&quot;&gt;white&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+             &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;classTwo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt;:&lt;span class=&quot;kt&quot;&gt;black&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+
+&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Angular 2 Tutorials&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cone&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ctwo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;toggle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cone&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ctwo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ctwo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Template özelliğimizin içerisinde bir button tanımladık ve click özelliğine &lt;strong&gt;&lt;em&gt;toggle()&lt;/em&gt;&lt;/strong&gt; isminde bir metot atandık yani butona tıklandığından toggle metodu çağırılacak.
+Class içerisinde de toggle metodumuzu tanımladık ve bu metodun işlevi cone ve ctwo değişkenlerinin değerini tersine çevirmektir.&lt;/p&gt;
+
+&lt;p&gt;Şimdi sayfamızı kontrol edelim:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson9/2.png&quot;&gt;
+&lt;img src=&quot;/images/angularTutorials/lesson9/2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Toggle butonumuz sayfamızda yerini aldı, şimdi butona tıklıyorum:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson9/3.png&quot;&gt;
+&lt;img src=&quot;/images/angularTutorials/lesson9/3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Gördüğünüz gibi p tag’inin style özellikleri devre dışı kaldı.&lt;/p&gt;
+
+&lt;p&gt;Web sayfamızdaki elementlerimize istersek class özelliği ile istersek style özelliği ile şekil verebiliyoruz. Angular içerisinde de ngClass attribute’nun yanında ngStyle
+attribute’unu da kullanabiliriz. Şimdi ngClass nasıl kullanılır ona bakalım, kodumuzu şu şekilde güncelleyelim:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2Tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;h2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/h2&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngClass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;{classOne:cone,classTwo:ctwo}&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngClass&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Paragraph&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/p&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toggle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Toggle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/button&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;{&amp;#39;font-style&amp;#39;:style,&amp;#39;font-size&amp;#39;:size}&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngStyle&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Paragraph&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/p&amp;gt;`,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;styles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;classOne&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt;:&lt;span class=&quot;kt&quot;&gt;white&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+             &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;classTwo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt;:&lt;span class=&quot;kt&quot;&gt;black&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+
+&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Angular 2 Tutorials&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cone&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ctwo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;italic&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;30px&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;toggle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cone&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ctwo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ctwo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Kodumuz içerisinde template özelliği içerisinde yeni bir p tag’i tanımladık ve bu tag içerisinde HTML’den tanıdığımız style özelliğini yönetmek için geliştirilmiş &lt;strong&gt;&lt;em&gt;ngStyle&lt;/em&gt;&lt;/strong&gt;
+özelliğini kullandık. Angular2Tutorials sınıfı içerisinde değeri &lt;strong&gt;&lt;em&gt;italic&lt;/em&gt;&lt;/strong&gt; olan style değişkeni ve değeri &lt;strong&gt;&lt;em&gt;30px&lt;/em&gt;&lt;/strong&gt; olan size değişkeni tanımladık.ngStyle özelliğimize 
+atanan değer içerisinde de HTML’den tanıdığımız &lt;strong&gt;&lt;em&gt;font-style&lt;/em&gt;&lt;/strong&gt; ve &lt;strong&gt;&lt;em&gt;font-size&lt;/em&gt;&lt;/strong&gt; özelliklerini kullandık. font-style özellliğine Angular2Tutorials sınıfı içerisinde tanımlı
+style değişkenini atadık ve font-size özelliğine de size değişkenini atadık.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson9/4.png&quot;&gt;
+&lt;img src=&quot;/images/angularTutorials/lesson9/4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Sayfamıza gittiğimiz zaman yeni p tag’imizi görüyoruz ve öğeyi incelediğimizde style özelliğine bizim değerlerimizin atanmış olduğunu görüyoruz.&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda anlatacaklarım da bu kadar arkadaşlar. Attribute Directives konusunu da böylece öğrenmiş olduk. Gelecek yazıda görüşmek üzere.&lt;/p&gt;
+
+&lt;p&gt;Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 09 Sep 2017 20:40:21 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2017/angular-2-attribute-directive/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/angular-2-attribute-directive/</guid>
+        
+        <category>angular 2 web service</category>
+        
+        <category>angular 2 rest get</category>
+        
+        <category>angular 2 rest post</category>
+        
+        <category>angular 2 rest</category>
+        
+        <category>angular 2 calling web service</category>
+        
+        <category>angular 2 giriş</category>
+        
+        <category>angular 2 tutorials</category>
+        
+        <category>angular 2 hello world</category>
+        
+        <category>angular 2 dersleri</category>
+        
+        <category>angular 2 kaynak</category>
+        
+        <category>angular 2 türkçe kaynak</category>
+        
+        <category>angular 2 türkçe dersleri</category>
+        
+        <category>angular 2 ngIf</category>
+        
+        <category>angular 2 ngSwitch</category>
+        
+        <category>angular 2 ngSwitchWhen</category>
+        
+        <category>angular 2 ngSwitchDefault</category>
+        
+        <category>angular 2 ngFor</category>
+        
+        <category>angular 2 Structural Directives</category>
+        
+        <category>angular 2 Attribute Directives</category>
+        
+        <category>angular 2 ngClass</category>
+        
+        <category>angular 2 ngStyle</category>
+        
+        <category>angular ngClass ngStyle</category>
+        
+        
+      </item>
     
       <item>
         <title>KLON - Kevin Guilfoile</title>
@@ -1908,155 +2091,6 @@ Ben direk Finish butonuna tıklıyorum.&lt;/p&gt;
         <category>eclipse&#39;de tomcat nasıl kurulur</category>
         
         <category>eclipse tomcat kurulumu</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Maven Yazıları 4 - NetBeans IDE&#39;de Maven Desteği</title>
-        <description>&lt;p&gt;Merhabalar arkadaşlar. Bu yazıda size NetBeans IDE üzerinde Maven tabanlı proje oluşturma ve çalıştırma işlemlerini anlatmaya çalışacağım.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;NetBeans Hakkında Kısaca Bilgilenelim&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://netbeans.org/&quot;&gt;https://netbeans.org/&lt;/a&gt; adresinden edinebileceğiniz NetBeans’ın şu anki en güncel sürümü 8.2’dir. Ben bu yazı sırasında makinemde kurulu 
-8.1 versiyonu üzerinden işlemleri anlatıyor olacağım. NetBeans 3 platform üzerinde desteği olan bir IDE’dir. Windows, MacOS ve GNU/Linux tabnalı işletim sistemlerinde
-kullanabileceğiniz NetBeans IDE sadece Java tabanlı projeler için değil PHP, Scala, C/C++ dilleri için de proje geliştirmeye elverişli bir IDE’dir. NetBeans IDE açık kaynak kodlu ve 
-özgür yazılım lisansı altında dağıtılan bir IDE olmakla beraber yakın zamana kadar Oracle çatısı altında iken Apache vakfına devri gerçekleşmiştir.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;NetBeans Üzerinde Maven Tabanlı Java Web Projesi&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;NetBeans hakkında kısaca bilgilendikten sonra şimdi Maven tabanlı Java Web projesi açıp çalıştırma işlemine geçelim.&lt;/p&gt;
-
-&lt;p&gt;Üst kısımdan File -&amp;gt; New Project yolunu takip ederek ya da üzerinde yeşil artı işareti bulunan turuncu butona tıklayarak yeni proje oluşturma ekranını açalım.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/maven/4/1.png&quot;&gt;
-&lt;img src=&quot;/images/maven/4/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Ardından gelen ekranda sol kısımdan Maven’ı sağ kısımdan da Web Application’ı seçelim, Next butonuna tıklayalım.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/maven/4/2.png&quot;&gt;
-&lt;img src=&quot;/images/maven/4/2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Şimdi gelen ekrandaki bazı ifadeler size önceki yazılardan tanıdık gelecektir. Project Name alanına projemizin ismini giriyoruz, ArtifactId alanı doğrudan proje ismimiz ile aynı oluyor,
-GroupId alanına da yine istediğimiz bir değer girip package tanımını da yapıp Next butonuna tıklayalım.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/maven/4/3.png&quot;&gt;
-&lt;img src=&quot;/images/maven/4/3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Şimdi gelecek olan bu ekranda NetBeans bize bu web projesinin hangi lokal sunucumuz üzerinde çalışacağını soruyor. Bu ekranı geçebilmek için NetBeans içerisinde herhangi bir web sunucunuzun
-olması yeterlidir. Maven tüm Java web sunucuları ile uyumlu çalışmaktadır. Bu açıdan Maven için kullanılacak sunucu yazılımları fark oluşturmamaktadır. 
-NetBeans bilgisayarınıza kurulurken default olarak Glassfish’i kuracak şekilde konfigüre edilmiş halde gelir ve opsiyonel olarak Tomcat kurma seçeneğini de içerisindedir. Kurulumun hemen
-başında &lt;strong&gt;&lt;em&gt;Customize (Özelleştir)&lt;/em&gt;&lt;/strong&gt; butonuna tıklarsanız Tomcat’e de tik koyup kurulmasını sağlayabilirsiniz. Yalnız şunu da belirtmem gerekir ki benim şimdiye kadar gördüğüm Tomcat ve 
-NetBeans en uyumsuz çalışan ikililer. Kendi başınıza bir Tomcat kurmak istediğinizde NetBeans olur olmadık problemler çıkartmaktadır fakat kendi içerisinde gelip kurulan Tomcat ile fazla
-bir sorun çıkartmamaktadır. Bu konuda da bir yazmak istiyorum, yakın zamanda yazarım inşaAllah :)&lt;/p&gt;
-
-&lt;p&gt;Ben IDE’mde kurulu olan Tomcat
-ile devam ediyorum ve Finish butonuna tıklıyorum.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/maven/4/4.png&quot;&gt;
-&lt;img src=&quot;/images/maven/4/4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Finish butonuna tıkladığımızda NetBeans bizim için Maven tabanlı Java web projesinin oluşturulması işlemini gerçekleştiricek. Önceki yazıda hatırlarsanız biz konsol üzerinden bir Maven 
-komutu koşturarak projeyi oluşturmuştuk. NetBeans da arka planda aynı komutu çalıştırarak bizim için bir proje üretiyor. Build Success yazısını gördü isek proje oluşturma işlemimiz
-bitmiştir demektir.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/maven/4/5.png&quot;&gt;
-&lt;img src=&quot;/images/maven/4/5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Proje oluştuktan sonra pom.xml dosyasına bir göz attığımızda göreceğiz ki bizim önceki yazıda kendimizin eklediği maven compiler plugin de direk burada eklenmiş vaziyette. Bunun yanında
-war çıktısı alabileceğimiz war plugin gibi yardımcı başka pluginler de ekli vaziyette. NetBeans burada geliştiriciyi mümkün mertebe konfigürasyon ve kurulum işlemlerinden kurtararak 
-direk proje geliştirmeye geçebilmesini amaçlamaktadır.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/maven/4/6.png&quot;&gt;
-&lt;img src=&quot;/images/maven/4/6.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Şimdi sol kısımda projenin şeması içerisinde index.html dosyası göreceksiniz. Bu dosyayı silelim. Ardından projeye sağ tıklayıp New -&amp;gt; JSP diyelim.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/maven/4/7.png&quot;&gt;
-&lt;img src=&quot;/images/maven/4/7.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Gelen ekranda File Name alanına index yazıp Finish butonuna tıklayalım ve index.jsp’nin içeriğini şu kod ile değiştirip kaydedelim:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-jsp&quot; data-lang=&quot;jsp&quot;&gt;&lt;span class=&quot;k&quot;&gt;&amp;lt;%@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;page&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contentType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;text/html&amp;quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pageEncoding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;UTF-8&amp;quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;%&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;http-equiv=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Content-Type&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;text/html; charset=UTF-8&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Hello Maven&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;&amp;lt;%o&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ut&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Hello Maven on NetBeans!&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;%&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Bu işlemin ardından projeye sağ tıklayıp önce bir &lt;strong&gt;&lt;em&gt;Build&lt;/em&gt;&lt;/strong&gt; diyelim, &lt;strong&gt;&lt;em&gt;Build Successfull&lt;/em&gt;&lt;/strong&gt; yazısını gördükten sonra yine sağ tıklayıp &lt;strong&gt;&lt;em&gt;Run&lt;/em&gt;&lt;/strong&gt; diyelim.&lt;/p&gt;
-
-&lt;p&gt;Ve işte karşımızda Maven tabanlı projemizin çalışan hali:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/maven/4/8.png&quot;&gt;
-&lt;img src=&quot;/images/maven/4/8.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Bu yazıda anlatacaklarım da bu kadar arkadaşlar. Gelecek yazıda Eclipse IDE üzerinde Maven projesi oluşturup çalıştıracağız.&lt;/p&gt;
-
-&lt;p&gt;Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-</description>
-        <pubDate>Thu, 22 Jun 2017 20:41:20 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2017/maven-tutorials-4/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/maven-tutorials-4/</guid>
-        
-        <category>microsoft sql jdbc driver</category>
-        
-        <category>microsoft jdbc driver</category>
-        
-        <category>how to add microsoft sql jdbc driver to local maven repository</category>
-        
-        <category>add microsoft sql jdbc driver to maven repository</category>
-        
-        <category>microsoft jdbc driver maven</category>
-        
-        <category>microsft jdbc driver nasıl kullanılır</category>
-        
-        <category>microsoft sql jdbc driver nasıl kullanılır</category>
-        
-        <category>microsoft jdbc driver nasıl kullanılır</category>
-        
-        <category>maven nedir?</category>
-        
-        <category>maven windows nasıl kurulur?</category>
-        
-        <category>maven linux nasıl kurulur?</category>
-        
-        <category>maven mac os x nasıl kurulur?</category>
-        
-        <category>apache maven</category>
-        
-        <category>maven kurulumu</category>
-        
-        <category>ilk maven projesi</category>
-        
-        <category>maven projesi oluşturmak</category>
-        
-        <category>maven jetty plugin</category>
-        
-        <category>maven ile jetty çalıştırmak</category>
-        
-        <category>maven on netbeans</category>
-        
-        <category>maven project on netbeans</category>
-        
-        <category>how to open a maven project on netbeans</category>
-        
-        <category>create a maven project on netbeans</category>
         
         
       </item>
