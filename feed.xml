@@ -5,9 +5,175 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 17 Sep 2017 23:11:00 +0300</pubDate>
-    <lastBuildDate>Sun, 17 Sep 2017 23:11:00 +0300</lastBuildDate>
+    <pubDate>Sat, 30 Sep 2017 21:34:30 +0300</pubDate>
+    <lastBuildDate>Sat, 30 Sep 2017 21:34:30 +0300</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Spring AOP 1 - AOP Nedir? Basitçe Spring İle AOP Nasıl Uygulanır? </title>
+        <description>&lt;p&gt;Merhabalar. Bu ve gelecek bir kaç yazıda Spring Framework’ün AOP uygulama mantığını öğreniyor olacağız.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;AOP Nedir?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Geliştirdiğimiz uygulamalarımız içerisinde bir çok layer olabilir ve bu layer’lar da kendi içlerinde modüllere sahip olabilir. Projemiz içerisinde hedeflediğimiz belli bir 
+işlevi yerine getiren fonksiyonalitelere de &lt;strong&gt;&lt;em&gt;concern&lt;/em&gt;&lt;/strong&gt; adını veriyoruz. Proje içerisinde bu concern’lerden birisine farklı farklı layer’larda ihtiyaç duyuluyor olabilir.
+Örneğin yetkilendirme mekanizması proje içerisinde bir çok farklı nokta için başvurulan bir mekanizma olabilir. Keza yine loglama mekanizması da hemen hemen bütün concern’lerin
+kullanma ihtiyacı duyduğu bir mekanizma (concern). İşte bu şekilde bir çok farklı noktada kullanımına ihtiyaç duyulan concern’lere &lt;strong&gt;&lt;em&gt;Cross-Cutting Concern&lt;/em&gt;&lt;/strong&gt; adı verilir.&lt;/p&gt;
+
+&lt;p&gt;AOP yani &lt;strong&gt;&lt;em&gt;Aspect-Oriented Programming&lt;/em&gt;&lt;/strong&gt; terimi ise işte bu Cross-Cutting Concern’lerin implementasyonunu en iyi seviyede yapmayı amaçlayan bir programlama yaklaşımıdır.
+Bir projede Cross-Cutting Concern’ler duplicate kodun çokça yer almasına sebep olabilecek yapılardır. AOP ile bu kod tekrarının minimum seviyeye çekilmesi hedeflenir.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;AOP Concepts&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;AOP yaklaşımının kendine ait bir takım kavramları (Concepts) vardır. AOP’u iyi anlayabilmek için bu kavramların da anlaşılması gerekir.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Joinpoints: Joinpoint aslında programın çalışması sırasında meydana gelen tüm olayları niteler. Örneğin method çağırılması, hata fırlatılması Joinpoint’e birer örnektir.&lt;/li&gt;
+  &lt;li&gt;Advice: Belirli bir Joinpoint’de alınması gereken aksiyonu tanımlayan kelime bizim için Advice’dır. Birkaç çeşit Advice yapısı bulunur, örneğin &lt;strong&gt;&lt;em&gt;before&lt;/em&gt;&lt;/strong&gt; advice’ı 
+ilgili Joinpoint çalıştırılmadan önce devreye girer, &lt;strong&gt;&lt;em&gt;after&lt;/em&gt;&lt;/strong&gt; advice’ı ise çalıştırıldıktan sonra devreye girer.&lt;/li&gt;
+  &lt;li&gt;Pointcuts: Az önce bahsettiğimiz Joinpoint’lerin bir kümesidir. Kullanım amacı ise bir Advice’ın hangi Joinpoint için çalıştırılacağının belirlenmesidir. Yani bir bakıma
+advice ne zaman çalışsın sorusuna cevap verme görevi vardır.&lt;/li&gt;
+  &lt;li&gt;Aspects: Aspect dediğimiz kavram advice ve Pointcuts’ı içerisinde barındıran bir sınıftır.&lt;/li&gt;
+  &lt;li&gt;Weaving: En uygun noktada aspect’lerin uygulama koduna eklenmesi işlemine Weaving denir.&lt;/li&gt;
+  &lt;li&gt;Target: Bir AOP işlemi ile modifiye edilen ve çalışma akışı bilgisine sahip olan nesnelere Target ismi verilir.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;AOP İle Hello World&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi AOP kullanarak bir Hello World uygulaması yapacağız.&lt;/p&gt;
+
+&lt;p&gt;Elimizde içerisinde konsola World yazdıran writeMessage metodunu barındıran MessageWriter sınıfımız olsun ve bizim Case’miz de runtime sırasında World olan bu mesajı 
+Hello World’a çevirmek olsun.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;aopexamples&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MessageWriter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;writeMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;World&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;writeMessage metodu konsola &lt;strong&gt;&lt;em&gt;World&lt;/em&gt;&lt;/strong&gt; yazdıracak olsa da biz AOP ile konsola yazdırılan metnin Hello World olmasını sağlayacağız.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;aopexamples&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.aopalliance.intercept.MethodInterceptor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.aopalliance.intercept.MethodInvocation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MessageDecorator&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MethodInterceptor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;invoke&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MethodInvocation&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;invocation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Throwable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Hello &amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;retVal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;invocation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;proceed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;!&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;retVal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;MethodInterceptor interface’ı Spring AOP içerisinde advice implementasyonu için kullanılan standarttır arkadaşlar. İçerisinde implement edilmek üzere bir invoke metodu yer 
+alır ve Joinpoint’de buradaki invoke çağırılır. MessageDecorator sınıfı bizim için bu noktada advice olacaktır çünkü bizim için belirli noktada alınması gereken aksiyon bu 
+sınıfta yer almaktadır.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;aopexamples&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.aop.framework.ProxyFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloWorldAOPExample&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;MessageWriter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;target&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MessageWriter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		
+		&lt;span class=&quot;n&quot;&gt;ProxyFactory&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ProxyFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;pf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addAdvice&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MessageDecorator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;pf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setTarget&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		
+		&lt;span class=&quot;n&quot;&gt;MessageWriter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;proxy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MessageWriter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getProxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;writeMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		
+		&lt;span class=&quot;n&quot;&gt;proxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;writeMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;HelloWorldAOPExample sınıfımız içerisinde maim metodumuz yer alıyor. Main metodu içerisindeki target nesnesi klasik nesne edinme yöntemi ile elde ediliyor. Kodun devam kısmında
+ProxyFactory sınıfından bir nesne elde ediyoruz ve &lt;strong&gt;&lt;em&gt;addAdvice()&lt;/em&gt;&lt;/strong&gt; metodu ile az önce advice’mız olacağından bahsettiğimiz sınıf advice olarak ekliyoruz. 
+addAdvice metoduna parametre olarak MessageDecorator sınıfından bir nesneyi geçirerek advice ekleme işlemimizi tamamlıyoruz. Akabinde pf nesnesi üzerinden setTarget metodunu 
+çağırarak az önce klasik şekilde ürettiğimiz MessageWriter tipinde nesne olan target nesnesini setTarget metoduna parametre olarak veriyoruz. ProxyFactory sınıfından üretilen
+bir nesne için target zorunlu bir nesnedir arkadaşlar. Eğer setTarget metodunu kullanmadan uygulamayı çalıştırırsak zorunlu alan doldurulmadığı gerekçesi ile Exception 
+alırız.&lt;/p&gt;
+
+&lt;p&gt;pf nesnesi üzerinden getProxy metodunu çağırarak ve casting işlemine tabi tutarak MessageWriter nesnesi elde ediyoruz.&lt;/p&gt;
+
+&lt;p&gt;Önce target nesnesi üzerinden writeMessage metodunu çağırıyoruz ardından pf.getProxy() üzerinden elde ettiğimiz MessageWriter tipindeki proxy nesnesi üzerinden writeMessage()
+metodunu çağırıyoruz.&lt;/p&gt;
+
+&lt;p&gt;Konsol çıktısı şu şekilde olmakta:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/springAop/1.png&quot;&gt;
+&lt;img src=&quot;/images/springAop/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi burada bir nokta dikkatimizi vermemiz gerekiyor. Advice’ın tanımını yaptığımız nokta örnek olarak before, after gibi örnekler vermiştirk. Fakat burada kullandığımız advice
+için before, after gibi bir şeyi ne tanımladık ne de ona değindik.&lt;/p&gt;
+
+&lt;p&gt;Eğer biz MethodInterceptor’ı implement edip advise olarak o sınıfı geçirirsek bu durumda default olarak bizim iş yapan metodumuz çağırılmadan önce 
+(bizim örneğimizde writeMessage metodu) advise olarak verilen sınıf nesnesi içindeki invoke çağırılır ve işlem yapılır. Bizim örneğimizde de invoke metodu önce çağırılıp
+konsola Hello yazdırılıyor, invocation.proceed() ile writeMessage metodu çağırılıp World yazdırılıyor ve son olarak konsola ! yazdırılıp işlem tamamlanyor.&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda anlatacağım bu kadar arkadaşlar. AOP’a bir giriş yapıp Spring ile basitçe bir örnek yaptık ve bizim iş metodumuz koşulmadan önce başka bir metodun devreye girmesi
+durumunu görmüş olduk. Gelecek yazıda Spring’teki Advice Tipleri konusuna değineceğiz.&lt;/p&gt;
+
+&lt;p&gt;Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Fri, 29 Sep 2017 20:30:21 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2017/spring-aop-introduction/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/spring-aop-introduction/</guid>
+        
+        <category>spring framework</category>
+        
+        <category>spring framework dersleri</category>
+        
+        <category>spring framework giriş</category>
+        
+        <category>spring framework tutorial</category>
+        
+        <category>spring framework türkçe kaynak</category>
+        
+        <category>spring framework hello world örneği</category>
+        
+        <category>spring framework hello world example</category>
+        
+        <category>spring framework hello world tutorial</category>
+        
+        <category>spring framework öğren</category>
+        
+        <category>spring framework türkçe</category>
+        
+        <category>spring framework nedir</category>
+        
+        <category>spring framework nasıl kullanılır</category>
+        
+        <category>spring inversion of control nedir?</category>
+        
+        <category>spring dependency injection nedir?</category>
+        
+        <category>spring ioc</category>
+        
+        <category>spring di</category>
+        
+        <category>spring setter injection</category>
+        
+        <category>spring constructor injection</category>
+        
+        <category>spring aop</category>
+        
+        <category>spring aop hello world</category>
+        
+        <category>aop nedir?</category>
+        
+        
+      </item>
     
       <item>
         <title>Apache Tiles Demo Project</title>
@@ -2065,220 +2231,6 @@ sayfaları tanımlanabilir. Ben GetDriversServlet sınıfının kayda geçirildi
         <pubDate>Wed, 05 Jul 2017 20:41:20 +0300</pubDate>
         <link>http://ilkaygunel.com/blog/2017/demo-maven-project/</link>
         <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/demo-maven-project/</guid>
-        
-        <category>microsoft sql jdbc driver</category>
-        
-        <category>microsoft jdbc driver</category>
-        
-        <category>how to add microsoft sql jdbc driver to local maven repository</category>
-        
-        <category>add microsoft sql jdbc driver to maven repository</category>
-        
-        <category>microsoft jdbc driver maven</category>
-        
-        <category>microsft jdbc driver nasıl kullanılır</category>
-        
-        <category>microsoft sql jdbc driver nasıl kullanılır</category>
-        
-        <category>microsoft jdbc driver nasıl kullanılır</category>
-        
-        <category>maven nedir?</category>
-        
-        <category>maven windows nasıl kurulur?</category>
-        
-        <category>maven linux nasıl kurulur?</category>
-        
-        <category>maven mac os x nasıl kurulur?</category>
-        
-        <category>apache maven</category>
-        
-        <category>maven kurulumu</category>
-        
-        <category>ilk maven projesi</category>
-        
-        <category>maven projesi oluşturmak</category>
-        
-        <category>maven jetty plugin</category>
-        
-        <category>maven ile jetty çalıştırmak</category>
-        
-        <category>maven on netbeans</category>
-        
-        <category>maven project on netbeans</category>
-        
-        <category>how to open a maven project on netbeans</category>
-        
-        <category>create a maven project on netbeans</category>
-        
-        <category>maven on eclipse</category>
-        
-        <category>how to create maven project on eclipse</category>
-        
-        <category>eclipse maven projesi</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Maven Yazıları 5 - Eclipse IDE&#39;de Maven Desteği</title>
-        <description>&lt;p&gt;Merhabalar arkadaşlar. Bu yazıda sizlere Eclipse IDE üzerinde Maven projesi açma ve çalıştırma işlemlerini anlatmaya çalışacağım. Bu yazı için Eclipse’in Oxygen sürümünü ve 
-Tomcat’in 9 versiyonunu kullanacağız. Eclipse Oxygen üzerinde Tomcat 9 kurulumu için 
-&lt;a href=&quot;http://ilkaygunel.com/blog/2017/tomcat-installation-on-eclipse&quot;&gt;http://ilkaygunel.com/blog/2017/tomcat-installation-on-eclipse&lt;/a&gt; adresindeki yazımı okuyabilirsiniz.&lt;/p&gt;
-
-&lt;p&gt;Şimdi Eclipse üzerinde File -&amp;gt; New Project yolunu takip edelim. Eğer bendeki gibi en başta Maven Project görünür halde ise Maven Project’i seçelim, eğer görünür halde 
-değilse &lt;strong&gt;&lt;em&gt;Other&lt;/em&gt;&lt;/strong&gt; seçeneğini seçip buradan Maven Project’i seçip Next diyelim.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/maven/5/1.png&quot;&gt;
-&lt;img src=&quot;/images/maven/5/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Şimdi gelen ekranda &lt;strong&gt;&lt;em&gt;Create a simple project&lt;/em&gt;&lt;/strong&gt; seçeneğine tik koyalım ve Next butonuna tıklayalım.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/maven/5/2.png&quot;&gt;
-&lt;img src=&quot;/images/maven/5/2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Şimdi gelen ekranda önceki yazılardan hatırlyacağımız GroupId, ArtifactId gibi bilgilerin doldurlması işlemini gerçekleştirelim. Ben bilgileri aşağıdaki şekilde dolduruyorum.
-Burada dikkat etmemiz gereken &lt;strong&gt;&lt;em&gt;Packaking&lt;/em&gt;&lt;/strong&gt; konusudur. Bir web projesi oluşturacağımız için önceki yazılardan hatırlayacağınız gibi &lt;strong&gt;&lt;em&gt;war&lt;/em&gt;&lt;/strong&gt; tipini seçmemiz gerekmektedir.
-Finish butonuna tıklayarak projeyi oluşturuyorum.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/maven/5/3.png&quot;&gt;
-&lt;img src=&quot;/images/maven/5/3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Proje oluşturulduktan sonra pom.xml dosyası üzerinde şu şekilde bir hata ile karşılaşabilirsiniz:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/maven/5/4.png&quot;&gt;
-&lt;img src=&quot;/images/maven/5/4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Java web projeleri içerisinde deployment descriptor adı verilen web.xml dosyaları yer alır ve her Java web projesinin sağlıklı ve düzgün çalışabilmesi için bu dosyaya ihtiyaç vardır.
-İşte Eclipse de Maven tabanlı proje oluşturulduğu sırada web.xml dosyası generate edilmiyor fakat bu dosyanın eksikliğine de vurgu yapılıyor. 
-Şimdi biz bu dosyayı ekleyeceğiz. Yapmamız gereken tek şey projeye sağ tıklayıp &lt;strong&gt;&lt;em&gt;Java EE Tools&lt;/em&gt;&lt;/strong&gt; kısmından &lt;strong&gt;Generate Deployment Descriptor Stub&lt;/strong&gt; seçeneğini seçiyoruz. Eclipse bizim
-için web.xml’in oluşturulması işlemini yapacak.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/maven/5/5.png&quot;&gt;
-&lt;img src=&quot;/images/maven/5/5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Şimdi pom.xml dosyamızın içeriğini şu şekilde güncelleyelim:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;project&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://maven.apache.org/POM/4.0.0&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;modelVersion&amp;gt;&lt;/span&gt;4.0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/modelVersion&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.ilkaygunel&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;MavenOnEclipse&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;0.0.1-SNAPSHOT&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;packaging&amp;gt;&lt;/span&gt;war&lt;span class=&quot;nt&quot;&gt;&amp;lt;/packaging&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;MavenOnEclipse&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;description&amp;gt;&lt;/span&gt;MavenOnEclipse&lt;span class=&quot;nt&quot;&gt;&amp;lt;/description&amp;gt;&lt;/span&gt;
-  
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;properties&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;endorsed.dir&amp;gt;&lt;/span&gt;${project.build.directory}/endorsed&lt;span class=&quot;nt&quot;&gt;&amp;lt;/endorsed.dir&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;project.build.sourceEncoding&amp;gt;&lt;/span&gt;UTF-8&lt;span class=&quot;nt&quot;&gt;&amp;lt;/project.build.sourceEncoding&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/properties&amp;gt;&lt;/span&gt;
-  
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;javax&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;javaee-web-api&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;7.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;scope&amp;gt;&lt;/span&gt;provided&lt;span class=&quot;nt&quot;&gt;&amp;lt;/scope&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugins&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.apache.maven.plugins&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-compiler-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;3.1&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
-                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;source&amp;gt;&lt;/span&gt;1.8&lt;span class=&quot;nt&quot;&gt;&amp;lt;/source&amp;gt;&lt;/span&gt;
-                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;target&amp;gt;&lt;/span&gt;1.8&lt;span class=&quot;nt&quot;&gt;&amp;lt;/target&amp;gt;&lt;/span&gt;
-                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;compilerArguments&amp;gt;&lt;/span&gt;
-                        &lt;span class=&quot;nt&quot;&gt;&amp;lt;endorseddirs&amp;gt;&lt;/span&gt;${endorsed.dir}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/endorseddirs&amp;gt;&lt;/span&gt;
-                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/compilerArguments&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.apache.maven.plugins&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-war-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;2.3&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
-                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;failOnMissingWebXml&amp;gt;&lt;/span&gt;false&lt;span class=&quot;nt&quot;&gt;&amp;lt;/failOnMissingWebXml&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.apache.maven.plugins&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-dependency-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;2.6&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugins&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/build&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Ardından projeye sağ tıklayıp New -&amp;gt; JSP File seçeneğini seçelim.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/maven/5/6.png&quot;&gt;
-&lt;img src=&quot;/images/maven/5/6.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Dosya isimini index olarak girip Finish butonuna tıklayarak dosyayı oluşturalım.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/maven/5/7.png&quot;&gt;
-&lt;img src=&quot;/images/maven/5/7.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Oluşturlan index.jsp dosyasının içeriğini şu şekilde güncelleyelim:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-jsp&quot; data-lang=&quot;jsp&quot;&gt;&lt;span class=&quot;k&quot;&gt;&amp;lt;%@&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;page&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;language&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;java&amp;quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contentType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;text/html; charset=UTF-8&amp;quot;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;pageEncoding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;UTF-8&amp;quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;%&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html PUBLIC &amp;quot;-//W3C//DTD HTML 4.01 Transitional//EN&amp;quot; &amp;quot;http://www.w3.org/TR/html4/loose.dtd&amp;quot;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;http-equiv=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Content-Type&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;text/html; charset=UTF-8&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Insert title here&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;&amp;lt;%o&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ut&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Hello Maven on Eclipse IDE!&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;%&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Bu işlemlerin ardından projeye sağ tıklayalım ve Run As -&amp;gt; Run On Server diyelim.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/maven/5/8.png&quot;&gt;
-&lt;img src=&quot;/images/maven/5/8.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Gelen ekranda kurulu olan Tomcat sunucumuzu seçelim ve Next diyelim.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/maven/5/9.png&quot;&gt;
-&lt;img src=&quot;/images/maven/5/9.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Son gelen ekranda Finish diyelim, sunucuyu ve projeyi çalıştıralım:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/maven/5/10.png&quot;&gt;
-&lt;img src=&quot;/images/maven/5/10.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Size Tomcat’i yeniden başlatmak isteyip istemediğinizi soracak Restart Server seçeneği seçili iken OK butonuna tıklayalım.&lt;/p&gt;
-
-&lt;p&gt;İşlem tamamlandığında tarayıcımızdan &lt;a href=&quot;http://localhost:8080/MavenOnEclipse/&quot;&gt;http://localhost:8080/MavenOnEclipse/&lt;/a&gt; adresine gittiğimizde şununla karşılaşacağız:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/maven/5/11.png&quot;&gt;
-&lt;img src=&quot;/images/maven/5/11.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Başarı ile Eclipse IDE’de Maven projesi oluşturup onu çalıştırdık arkadaşlar. Başka yazıda görüşmek üzere.&lt;/p&gt;
-
-&lt;p&gt;Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-</description>
-        <pubDate>Wed, 28 Jun 2017 20:41:20 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2017/maven-tutorials-5/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/maven-tutorials-5/</guid>
         
         <category>microsoft sql jdbc driver</category>
         
