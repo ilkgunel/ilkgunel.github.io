@@ -210,7 +210,7 @@ sınıfta yer almaktadır.</p>
 	<span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 
-<p>HelloWorldAOPExample sınıfımız içerisinde maim metodumuz yer alıyor. Main metodu içerisindeki target nesnesi klasik nesne edinme yöntemi ile elde ediliyor. Kodun devam kısmında
+<p>HelloWorldAOPExample sınıfımız içerisinde main metodumuz yer alıyor. Main metodu içerisindeki target nesnesi klasik nesne edinme yöntemi ile elde ediliyor. Kodun devam kısmında
 ProxyFactory sınıfından bir nesne elde ediyoruz ve <strong><em>addAdvice()</em></strong> metodu ile az önce advice’mız olacağından bahsettiğimiz sınıf advice olarak ekliyoruz. 
 addAdvice metoduna parametre olarak MessageDecorator sınıfından bir nesneyi geçirerek advice ekleme işlemimizi tamamlıyoruz. Akabinde pf nesnesi üzerinden setTarget metodunu 
 çağırarak az önce klasik şekilde ürettiğimiz MessageWriter tipinde nesne olan target nesnesini setTarget metoduna parametre olarak veriyoruz. ProxyFactory sınıfından üretilen
