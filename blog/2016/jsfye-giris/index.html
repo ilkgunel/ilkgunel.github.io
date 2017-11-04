@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsfye-giris/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>JSF Dersleri – JSF Nedir? Giriş,IDE Kurulumu Ve İlk Uygulama - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>JSF Dersleri – JSF Nedir? Giriş,IDE Kurulumu Ve İlk Uygulama | İlkay Günel - Blog</title>
 <meta property="og:title" content="JSF Dersleri – JSF Nedir? Giriş,IDE Kurulumu Ve İlk Uygulama" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="JSF Dersleri – JSF Nedir? Giriş,IDE Kurulumu Ve İlk Uygulama" />
 <meta property="og:description" content="JSF Dersleri – JSF Nedir? Giriş,IDE Kurulumu Ve İlk Uygulama" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsfye-giris/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-10-14T20:38:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "JSF Dersleri – JSF Nedir? Giriş,IDE Kurulumu Ve İlk Uygulama",
-    "datePublished": "2016-10-14T20:38:20+03:00",
-    "description": "JSF Dersleri – JSF Nedir? Giriş,IDE Kurulumu Ve İlk Uygulama",
-    "url": "http://ilkaygunel.com/blog/2016/jsfye-giris/"
-  }
-</script>
+{"name":null,"description":"JSF Dersleri – JSF Nedir? Giriş,IDE Kurulumu Ve İlk Uygulama","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/jsfye-giris/","publisher":null,"image":null,"headline":"JSF Dersleri – JSF Nedir? Giriş,IDE Kurulumu Ve İlk Uygulama","dateModified":"2016-10-14T20:38:20+03:00","datePublished":"2016-10-14T20:38:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/jsfye-giris/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -150,13 +145,12 @@ bileşenler yer almaktadır. Örneğin HTML’deki table etiketine karşılık �
 
 <p>Eğer Debian tabanlı bir GNU/Linux dağıtımı  kullanıyorsanız  terminalden / konsol ekranından şu komutları vererek JDK’yı kurabilirsiniz:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">sudo</span> <span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span> <span class="nl">ppa:</span><span class="n">webupd8team</span><span class="o">/</span><span class="n">java</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sudo</span> <span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span> <span class="nl">ppa:</span><span class="n">webupd8team</span><span class="o">/</span><span class="n">java</span>
 
 <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
 
 <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">oracle</span><span class="o">-</span><span class="n">java8</span><span class="o">-</span><span class="n">installer</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>MAC OS X ortamı için de kurulum Windows ile aynıdır. Bilgisayarınıza uygun JDK’yı indirip çift tıklayarak kurabilirsiniz.</p>
 
@@ -174,10 +168,9 @@ bileşenler yer almaktadır. Örneğin HTML’deki table etiketine karşılık �
 
 <p>Linux ortamında indirilen .sh script dosyasını terminal aracılığı çalıştırıp Netbeans’i kurabilirsiniz. Bunun için yapmanız gereken şöyledir:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="n">indirilenDosyaninAdi</span><span class="o">.</span><span class="na">sh</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="n">indirilenDosyaninAdi</span><span class="o">.</span><span class="na">sh</span>
 <span class="n">sudo</span> <span class="n">sh</span> <span class="o">./</span><span class="n">indirilenDosyaninAdi</span><span class="o">.</span><span class="na">sh</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>İLK PROJE: MERHABA DÜNYA</strong></p>
 
@@ -213,7 +206,7 @@ bileşenler yer almaktadır. Örneğin HTML’deki table etiketine karşılık �
 
 <p><strong><em><h:body> ve </h:body></em></strong> etiketleri arasına ise asıl işi yapacak kodlarımızı yazacağız. Aşağıdaki kod bir Merhaba Dünya örneğidir. JSF kodlarımızı bir h:form etiketinin arasına yazarız ve h:outputText ile de ekrana çıktı alırız. Bu kısımlara sonraki yazılarda yine değineceğimiz için bu kısım üzerinde şimdilik fazla durmaya gerek yok.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
 <span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
       <span class="na">xmlns:h=</span><span class="s">"http://xmlns.jcp.org/jsf/html"</span><span class="nt">&gt;</span>
@@ -226,8 +219,7 @@ bileşenler yer almaktadır. Örneğin HTML’deki table etiketine karşılık �
         <span class="nt">&lt;/h:form&gt;</span>
     <span class="nt">&lt;/h:body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>F6 tuşuna basarak ya da üst menüden Run butonuna tıklayarak projemizi çalıştırıyoruz. Tarayıcımızda ilgili kodlar çalışacak ve ekranda yazımız görüntülenecek.</p>
 

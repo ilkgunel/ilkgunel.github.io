@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/tdd-nedir-java-ile-tdd-ornegi/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>TDD Nedir? Java ile TDD Örneği - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>TDD Nedir? Java ile TDD Örneği | İlkay Günel - Blog</title>
 <meta property="og:title" content="TDD Nedir? Java ile TDD Örneği" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="TDD Nedir? Java ile TDD Örneği" />
 <meta property="og:description" content="TDD Nedir? Java ile TDD Örneği" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/tdd-nedir-java-ile-tdd-ornegi/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-11-25T20:40:21+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "TDD Nedir? Java ile TDD Örneği",
-    "datePublished": "2016-11-25T20:40:21+03:00",
-    "description": "TDD Nedir? Java ile TDD Örneği",
-    "url": "http://ilkaygunel.com/blog/2016/tdd-nedir-java-ile-tdd-ornegi/"
-  }
-</script>
+{"name":null,"description":"TDD Nedir? Java ile TDD Örneği","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/tdd-nedir-java-ile-tdd-ornegi/","publisher":null,"image":null,"headline":"TDD Nedir? Java ile TDD Örneği","dateModified":"2016-11-25T20:40:21+03:00","datePublished":"2016-11-25T20:40:21+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/tdd-nedir-java-ile-tdd-ornegi/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -154,7 +149,7 @@ testleri yapılabilir.</p>
 <p>Kullandığınız IDE’de <strong><em>TDDWithJava</em></strong> adında bir <strong>Maven</strong> projesi oluşturalım arkadaşlar. Ben bu yazı için Eclipse IDE kullanıyor olacağım. Projenin açılması akabinde pom.xml 
 dosyamıza şu bağımlılığı eklemek sureti ile JUnit kütüphanesinin bu yazı yazılırkenki son sürümünü projemize ekleyelim.</p>
 
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;dependencies&gt;</span>
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="nt">&lt;dependencies&gt;</span>
 	<span class="c">&lt;!-- https://mvnrepository.com/artifact/junit/junit --&gt;</span>
 	<span class="nt">&lt;dependency&gt;</span>
 		<span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
@@ -167,7 +162,7 @@ dosyamıza şu bağımlılığı eklemek sureti ile JUnit kütüphanesinin bu ya
 
 <p><strong>Adder.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">interfaces</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.interfaces</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Adder</span> <span class="o">{</span>
 	<span class="kd">public</span> <span class="kt">long</span> <span class="nf">add</span><span class="o">(</span><span class="kt">long</span><span class="o">...</span> <span class="n">operands</span><span class="o">);</span>
@@ -175,7 +170,7 @@ dosyamıza şu bağımlılığı eklemek sureti ile JUnit kütüphanesinin bu ya
 
 <p><strong>Subtractor.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">interfaces</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.interfaces</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Subtractor</span> <span class="o">{</span>
 	<span class="kd">public</span> <span class="kt">long</span> <span class="nf">subtract</span><span class="o">(</span><span class="kt">long</span><span class="o">...</span> <span class="n">operands</span><span class="o">);</span>
@@ -184,7 +179,7 @@ dosyamıza şu bağımlılığı eklemek sureti ile JUnit kütüphanesinin bu ya
 <p>Şimdi de <strong><em>implementation</em></strong> adında bir package oluşturalım ve yukarıdaki interface’lerin implemente edildiği classları oluşturalım. Eclipse IDE’ye interfacele’ri implement ettirdiğimizde default olarak dönüş değeri 0 olan
 metotlar yazılır.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">implementation</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.implementation</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.ilkaygunel.interfaces.Adder</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.ilkaygunel.interfaces.Subtractor</span><span class="o">;</span>
@@ -225,9 +220,9 @@ Next butonuna tıklayalım.</p>
 
 <p>Şu şekilde bir kod gelicek:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">tests</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.tests</span><span class="o">;</span>
 
-<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">junit</span><span class="o">.</span><span class="na">Assert</span><span class="o">.</span><span class="na">fail</span><span class="o">;</span>
+<span class="kn">import static</span> <span class="nn">org.junit.Assert.fail</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">org.junit.Before</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
@@ -260,7 +255,7 @@ beklentimiz toplama ve çıkarma yapan metotların doğru sonuçlar vermesidir.<
 
 <p>Test sınıfımızı şöyle düzenleyelim:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">tests</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.tests</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">org.junit.Assert</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.junit.Before</span><span class="o">;</span>
@@ -274,7 +269,7 @@ beklentimiz toplama ve çıkarma yapan metotların doğru sonuçlar vermesidir.<
 
 	<span class="nd">@Before</span>
 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUp</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-		<span class="n">calculator</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Calculator</span><span class="o">();</span>
+		<span class="n">calculator</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Calculator</span><span class="o">();</span>
 	<span class="o">}</span>
 
 	<span class="nd">@Test</span>
@@ -309,7 +304,7 @@ Test sınıfımıza göre yazmaya ve testimizi geçecek hale getirmeye geldi.</p
 
 <p>add ve subtract metotlarınızı şu şekilde toplama ve çıkarma yapıp sonucu döndürecek şekilde güncelleyelim:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">implementation</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.implementation</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.ilkaygunel.interfaces.Adder</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.ilkaygunel.interfaces.Subtractor</span><span class="o">;</span>

@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2015/resteasy-servlet-initializer/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>RestEasy İle Restful Web Servis Dersleri 3-Resteasy Servlet Initializer - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>RestEasy İle Restful Web Servis Dersleri 3-Resteasy Servlet Initializer | İlkay Günel - Blog</title>
 <meta property="og:title" content="RestEasy İle Restful Web Servis Dersleri 3-Resteasy Servlet Initializer" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Merhabalar arkadaşlar. Bu yazıda RestEasy’de bize sunulan bir özellik olan Servlet Initializer konusundan bahsedeceğim." />
 <meta property="og:description" content="Merhabalar arkadaşlar. Bu yazıda RestEasy’de bize sunulan bir özellik olan Servlet Initializer konusundan bahsedeceğim." />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2015/resteasy-servlet-initializer/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2015-11-26T15:46:52+02:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "RestEasy İle Restful Web Servis Dersleri 3-Resteasy Servlet Initializer",
-    "datePublished": "2015-11-26T15:46:52+02:00",
-    "description": "Merhabalar arkadaşlar. Bu yazıda RestEasy’de bize sunulan bir özellik olan Servlet Initializer konusundan bahsedeceğim.",
-    "url": "http://ilkaygunel.com/blog/2015/resteasy-servlet-initializer/"
-  }
-</script>
+{"name":null,"description":"Merhabalar arkadaşlar. Bu yazıda RestEasy’de bize sunulan bir özellik olan Servlet Initializer konusundan bahsedeceğim.","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2015/resteasy-servlet-initializer/","publisher":null,"image":null,"headline":"RestEasy İle Restful Web Servis Dersleri 3-Resteasy Servlet Initializer","dateModified":"2015-11-26T15:46:52+02:00","datePublished":"2015-11-26T15:46:52+02:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2015/resteasy-servlet-initializer/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -135,13 +130,12 @@
 
 <p>Önceki yazıda da bahsettiğim üzere eğer bir Wildfly Application Server kullanıyorsanız (son sürüm kullanmanızı tavsiye ederim) Rest Easy için gerekli bağımlılıkların tamamına yakını size sunulmuş olacak. Eğer Glassfish, Tomcat, weblogic vs. kullanıyorsanız bağımlılıkları sizin eklemeniz gerekecek. Bu durumda Rest Easy kullanırken onun Servlet Inıtializer özelliğini kullanmak için şu bağımlılığı kullanabilirsiniz:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;dependency&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;dependency&gt;
    &lt;groupId&gt;org.jboss.resteasy&lt;/groupId&gt;
    &lt;artifactId&gt;resteasy-servlet-initializer&lt;/artifactId&gt;
    &lt;version&gt;3.0.16.Final&lt;/version&gt;
 &lt;/dependency&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Bu bağımlılık sizi web.xml içerisinde tanımlama yapmaktan kurtaracak.</p>
 
@@ -150,12 +144,11 @@
 <p>import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>@ApplicationPath("root-path")
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@ApplicationPath("root-path")
 public class MyApplication extends Application
 {
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>MyApplication sınıfımız içerisinde dikkatinizi sınıfın işaretlendiği notasyona çekmek istiyorum. @ApplicationPath notasyonuna parametre olarak verilen String ifadesi bizim web servisimiz için tanımadığımız bir kök yoldur arkadaşlar. Gelecek derste bu konuyu bir adım öteye götüreceğiz ancak şunu söyliyeyim ki yazacağımız web servis bu kök yolun altında çalışacak.</p>
 
@@ -163,7 +156,7 @@ public class MyApplication extends Application
 
 <p>Normalde şu an sizin kullandığınız IDE’lerinizin ve uygulama sunucularınızın/katmanlarınızın son sürümde olduğunu ve güncel versiyonlarını kullandığınızı varsayıyorum arkadaşlar. Ancak bu noktaya da değinmeden geçmek istemedim. Servlet 3.0 öncesi için bu notasyon ile tanıtma vs. çalışmıyor arkadaşlar. Gidip web.xml’e yazmamız gerekiyor. web.xml’e yazacağımız kod şu şekilde:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;web-app&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;web-app&gt;
     &lt;display-name&gt;Archetype Created Web Application&lt;/display-name&gt;
     &lt;servlet&gt;
         &lt;servlet-name&gt;Resteasy&lt;/servlet-name&gt;
@@ -181,18 +174,16 @@ value&gt;
         &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
     &lt;/servlet-mapping&gt;
 &lt;/web-app&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Burada gerekli olan sınıflar Wildfly içerisinde bize sunulmuştur.  Ama Wildfly dışında sunucu kullanacaksınız şu bağımlılık ile Rest Easy implementasyonunu elde ederken buradaki bağımlılıkları da elde edersiniz.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;dependency&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;dependency&gt;
     &lt;groupId&gt;org.jboss.resteasy&lt;/groupId&gt;
     &lt;artifactId&gt;resteasy-jaxrs&lt;/artifactId&gt;
     &lt;version&gt;3.0.16.Final&lt;/version&gt;
 &lt;/dependency&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Bu yazıda da bu arkadaşlar. Rest Easy’nin Servlet Initializer konusunu öğrenmiş olduk. Gelecek yazıda ilk Rest kodumuzu yazıp çıktımızı alacağız. Gelecek yazıda görüşene kadar sağlıcakla kalın arkadaşlar.</p>
 

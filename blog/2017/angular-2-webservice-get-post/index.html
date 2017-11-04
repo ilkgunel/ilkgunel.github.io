@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2017/angular-2-webservice-get-post/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Angular 2 İle Web Service GET &amp; POST - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Angular 2 İle Web Service GET &amp; POST | İlkay Günel - Blog</title>
 <meta property="og:title" content="Angular 2 İle Web Service GET &amp; POST" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Angular 2 İle Web Service GET &amp; POST" />
 <meta property="og:description" content="Angular 2 İle Web Service GET &amp; POST" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2017/angular-2-webservice-get-post/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2017-04-25T20:40:21+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Angular 2 İle Web Service GET &amp; POST",
-    "datePublished": "2017-04-25T20:40:21+03:00",
-    "description": "Angular 2 İle Web Service GET &amp; POST",
-    "url": "http://ilkaygunel.com/blog/2017/angular-2-webservice-get-post/"
-  }
-</script>
+{"name":null,"description":"Angular 2 İle Web Service GET &amp; POST","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2017/angular-2-webservice-get-post/","publisher":null,"image":null,"headline":"Angular 2 İle Web Service GET &amp; POST","dateModified":"2017-04-25T20:40:21+03:00","datePublished":"2017-04-25T20:40:21+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/angular-2-webservice-get-post/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -160,31 +155,31 @@ gelen id bilgisine göre bir driver gösterecek. Şu şekilde:</p>
 
 <p>Hedeflediğimiz GET ve POST işlemleri bir sayfa üzerinden yürüyecek ve burada bu iş index.html üzerinden olacak.</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Angular 2 QuickStart<span class="nt">&lt;/title&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;UTF-8&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;base</span> <span class="na">href=</span><span class="s">&quot;/&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;width=device-width, initial-scale=1&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;styles.css&quot;</span><span class="nt">&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Angular 2 QuickStart<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">base</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;styles.css&quot;</span><span class="p">&gt;</span>
 
     <span class="c">&lt;!-- Polyfill(s) for older browsers --&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;node_modules/core-js/client/shim.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;node_modules/core-js/client/shim.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;node_modules/zone.js/dist/zone.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;node_modules/reflect-metadata/Reflect.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;node_modules/systemjs/dist/system.src.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;node_modules/zone.js/dist/zone.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;node_modules/reflect-metadata/Reflect.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;node_modules/systemjs/dist/system.src.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;systemjs.config.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;systemjs.config.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
       <span class="nx">System</span><span class="p">.</span><span class="kr">import</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span> <span class="p">});</span>
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
 
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;my-app&gt;</span>Loading...<span class="nt">&lt;/my-app&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span></code></pre></figure>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">my-app</span><span class="p">&gt;</span>Loading...<span class="p">&lt;/</span><span class="nt">my-app</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span></code></pre></figure>
 
 <p>Index sayfası üzerinde dikkatinizi iki noktaya çekmek istiyorum. Birincisi <strong><em>System.import(‘app’)</em></strong> ifadesi ile biz bu sayfaya Angular’ın çalışması için gerekli 
 bileşenleri yüklemiş olduk. Bu yükleme işlemi <strong><em>systemjs.config.js</em></strong> dosyası içindeki tanımlamalar sayesinde gerçekleşiyor. İkinci nokta ise body tag’inin içi. Buradaki <strong><em>my-app</em></strong>
@@ -193,33 +188,35 @@ kullanabildik.</p>
 
 <p><strong>app.component.ts</strong></p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">DriverService</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./driver.service&#39;</span><span class="p">;</span>
 
 
-<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+<span class="kd">@Component</span><span class="p">({</span>
   <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;my-app&#39;</span><span class="p">,</span>
-  <span class="nx">template</span><span class="o">:</span> <span class="err">`</span>
-  <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span>  <span class="o">&lt;</span><span class="err">/h1&gt;</span>
-  <span class="o">&lt;</span><span class="nx">router</span><span class="o">-</span><span class="nx">outlet</span><span class="o">&gt;</span>
-  <span class="err">`</span><span class="p">,</span>
+  <span class="nx">template</span><span class="o">:</span> <span class="sb">`</span>
+<span class="sb">  &lt;h1&gt;  &lt;/h1&gt;</span>
+<span class="sb">  &lt;router-outlet&gt;</span>
+<span class="sb">  `</span><span class="p">,</span>
   <span class="nx">providers</span><span class="o">:</span> <span class="p">[</span><span class="nx">DriverService</span><span class="p">]</span>
 <span class="p">})</span>
 <span class="kr">export</span> <span class="kr">class</span> <span class="nx">AppComponent</span> <span class="p">{</span>
   <span class="nx">title</span>:<span class="kt">string</span> <span class="o">=</span> <span class="s1">&#39;Formula 1 Drivers&#39;</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><em>.component.ts şeklindeki isim kalıbına sahip dosyalar içinde bileşen tanımlarımız gerçekleştiriliyor. Bu bileşen tanımlarını html sayfamız içinde çağırıp kullanabiliyoruz. 
-app.component.ts dosyamız içerisinde 
-- <strong>*selector</strong></em> ifadesi bu bileşenin tanımlayacısı konumundadır. Yani html içerisinde ben bu bileşeni kullanmak istersem selector özelliğinde tanımlı değer ile ulaşıyorum. 
-- <strong><em>template</em></strong> kısmında ise bu bileşen çağırıldığı sayfa içerisinde yer alacak şablonu tanımlıyoruz. title kısmı sabit olarak AppComponent sınıfından gelecek. router-outlet yazan 
+<p>*.component.ts şeklindeki isim kalıbına sahip dosyalar içinde bileşen tanımlarımız gerçekleştiriliyor. Bu bileşen tanımlarını html sayfamız içinde çağırıp kullanabiliyoruz. 
+app.component.ts dosyamız içerisinde</p>
+<ul>
+  <li><strong><em>selector</em></strong> ifadesi bu bileşenin tanımlayacısı konumundadır. Yani html içerisinde ben bu bileşeni kullanmak istersem selector özelliğinde tanımlı değer ile ulaşıyorum.</li>
+  <li><strong><em>template</em></strong> kısmında ise bu bileşen çağırıldığı sayfa içerisinde yer alacak şablonu tanımlıyoruz. title kısmı sabit olarak AppComponent sınıfından gelecek. router-outlet yazan 
 kısımda ise ifade edilmek istenen bu componenet’in içerğinin URL path’ine göre gelecek bileşenin template’i olacağıdır. Az sonra app.routes.ts dosyasını inceleyeceğiz ve oradaki 
-tanımları inceleyince burası daha iyi oturacak.
-- Web servisten GET ve POST işlemlerini yapacak metotları barındıran DriverService sınıfını da burada app bileşenine kayda geçiriyoruz.</p>
+tanımları inceleyince burası daha iyi oturacak.</li>
+  <li>Web servisten GET ve POST işlemlerini yapacak metotları barındıran DriverService sınıfını da burada app bileşenine kayda geçiriyoruz.</li>
+</ul>
 
 <p><strong>app.routes.ts</strong></p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Routes</span><span class="p">,</span> <span class="nx">RouterModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">Routes</span><span class="p">,</span> <span class="nx">RouterModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
 
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">DriverListComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./driver-list.component&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">DriverDetailsComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./driver-details.component&#39;</span><span class="p">;</span>
@@ -260,7 +257,7 @@ tanımları inceleyince burası daha iyi oturacak.
 
 <p><strong>app.module.ts</strong></p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="kr">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span>      <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span>      <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">BrowserModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/platform-browser&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">FormsModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/forms&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">HttpModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/http&#39;</span><span class="p">;</span>
@@ -271,7 +268,7 @@ tanımları inceleyince burası daha iyi oturacak.
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">DriverListComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./driver-list.component&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">DriverDetailsComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./driver-details.component&#39;</span><span class="p">;</span>
 
-<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+<span class="kd">@NgModule</span><span class="p">({</span>
   <span class="nx">imports</span><span class="o">:</span> <span class="p">[</span> <span class="nx">BrowserModule</span><span class="p">,</span> <span class="nx">routing</span><span class="p">,</span> <span class="nx">FormsModule</span><span class="p">,</span> <span class="nx">HttpModule</span><span class="p">],</span>
   <span class="nx">declarations</span><span class="o">:</span> <span class="p">[</span> <span class="nx">AppComponent</span><span class="p">,</span> <span class="nx">DriverListComponent</span><span class="p">,</span> <span class="nx">DriverDetailsComponent</span><span class="p">],</span>
   <span class="nx">bootstrap</span><span class="o">:</span> <span class="p">[</span> <span class="nx">AppComponent</span> <span class="p">]</span>
@@ -284,7 +281,7 @@ export ediyoruz ve diğer bileşenler içinde import etmek üzere hazır hale ge
 
 <p><strong>main.ts</strong></p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="kr">import</span> <span class="p">{</span> <span class="nx">platformBrowserDynamic</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/platform-browser-dynamic&#39;</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">platformBrowserDynamic</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/platform-browser-dynamic&#39;</span><span class="p">;</span>
 
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">AppModule</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./app.module&#39;</span><span class="p">;</span>
 
@@ -300,7 +297,7 @@ export ediyoruz ve diğer bileşenler içinde import etmek üzere hazır hale ge
 
 <p><strong>driver.ts</strong></p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">Driver</span><span class="p">{</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span></span><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">Driver</span><span class="p">{</span>
     <span class="nx">driverId</span>: <span class="kt">number</span><span class="p">;</span>
     <span class="nx">driverName</span>: <span class="kt">string</span><span class="p">;</span>
     <span class="nx">driverSurname</span>: <span class="kt">string</span><span class="p">;</span>
@@ -314,13 +311,13 @@ export ediyoruz ve diğer bileşenler içinde import etmek üzere hazır hale ge
 
 <p>Şimdi bu blog yazısını yazmamızın asıl sebep noktasıne geldik. Web servise get ve post isteğinde bulunacak service sınıfımızı yazacağız.</p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">Http</span><span class="p">,</span> <span class="nx">Response</span><span class="p">,</span> <span class="nx">Headers</span><span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/http&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;rxjs/Rx&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">Driver</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./driver&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="s1">&#39;rxjs/add/operator/map&#39;</span><span class="p">;</span>
 
-<span class="err">@</span><span class="nx">Injectable</span><span class="p">()</span>
+<span class="kd">@Injectable</span><span class="p">()</span>
 <span class="kr">export</span> <span class="kr">class</span> <span class="nx">DriverService</span><span class="p">{</span>
   <span class="kr">private</span> <span class="nx">baseUrl</span>: <span class="kt">string</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:8080/RestfulWebServiceTutorials/webservice/formula1&#39;</span><span class="p">;</span>
 
@@ -328,12 +325,12 @@ export ediyoruz ve diğer bileşenler içinde import etmek üzere hazır hale ge
   <span class="p">}</span>
 
   <span class="nx">getAll</span><span class="p">(){</span>
-    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">baseUrl</span><span class="p">}</span><span class="o">/</span><span class="nx">driverList</span><span class="o">/</span><span class="err">`</span><span class="p">).</span><span class="nx">map</span><span class="p">((</span><span class="nx">response</span>:<span class="kt">Response</span><span class="p">)</span><span class="o">=&gt;</span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">baseUrl</span><span class="si">}</span><span class="sb">/driverList/`</span><span class="p">).</span><span class="nx">map</span><span class="p">((</span><span class="nx">response</span>:<span class="kt">Response</span><span class="p">)</span><span class="o">=&gt;</span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
   <span class="p">}</span>
 
   <span class="nx">get</span><span class="p">(</span><span class="nx">driverId</span>: <span class="kt">number</span><span class="p">)</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">Driver</span><span class="o">&gt;</span> <span class="p">{</span>
     <span class="kd">let</span> <span class="nx">driver$</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span>
-      <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">baseUrl</span><span class="p">}</span><span class="o">/</span><span class="nx">getViaId</span><span class="o">/</span><span class="nx">$</span><span class="p">{</span><span class="nx">driverId</span><span class="p">}</span><span class="err">`</span><span class="p">,</span> <span class="p">{</span><span class="nx">headers</span>: <span class="kt">this.getHeaders</span><span class="p">()})</span>
+      <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">baseUrl</span><span class="si">}</span><span class="sb">/getViaId/</span><span class="si">${</span><span class="nx">driverId</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="p">{</span><span class="nx">headers</span>: <span class="kt">this.getHeaders</span><span class="p">()})</span>
       <span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">mapDriver</span><span class="p">);</span>
       <span class="k">return</span> <span class="nx">driver$</span><span class="p">;</span>
   <span class="p">}</span>
@@ -341,7 +338,7 @@ export ediyoruz ve diğer bileşenler içinde import etmek üzere hazır hale ge
   <span class="nx">save</span><span class="p">(</span><span class="nx">driver</span>: <span class="kt">Driver</span><span class="p">)</span> <span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">Response</span><span class="o">&gt;</span><span class="p">{</span>
 
     <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span>
-      <span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">baseUrl</span><span class="p">}</span><span class="o">/</span><span class="nx">updateDriver</span><span class="err">`</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">driver</span><span class="p">),</span> <span class="p">{</span><span class="nx">headers</span>: <span class="kt">this.getHeaders</span><span class="p">()});</span>
+      <span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">baseUrl</span><span class="si">}</span><span class="sb">/updateDriver`</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">driver</span><span class="p">),</span> <span class="p">{</span><span class="nx">headers</span>: <span class="kt">this.getHeaders</span><span class="p">()});</span>
   <span class="p">}</span>
 
   <span class="kr">private</span> <span class="nx">getHeaders</span><span class="p">(){</span>
@@ -369,7 +366,7 @@ export ediyoruz ve diğer bileşenler içinde import etmek üzere hazır hale ge
 <span class="p">}</span>
 
 <span class="kd">function</span> <span class="nx">handleError</span> <span class="p">(</span><span class="nx">error</span>: <span class="kt">any</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">errorMsg</span> <span class="o">=</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="o">||</span> <span class="err">`</span><span class="nx">Yikes</span><span class="o">!</span> <span class="nx">There</span> <span class="nx">was</span> <span class="nx">was</span> <span class="nx">a</span> <span class="nx">problem</span> <span class="kd">with</span> <span class="nx">our</span> <span class="nx">hyperdrive</span> <span class="nx">device</span> <span class="nx">and</span> <span class="nx">we</span> <span class="nx">couldn</span><span class="err">&#39;</span><span class="nx">t</span> <span class="nx">retrieve</span> <span class="nx">your</span> <span class="nx">data</span><span class="o">!</span><span class="err">`</span>
+  <span class="kd">let</span> <span class="nx">errorMsg</span> <span class="o">=</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="o">||</span> <span class="sb">`Yikes! There was was a problem with our hyperdrive device and we couldn&#39;t retrieve your data!`</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">errorMsg</span><span class="p">);</span>
   <span class="k">return</span> <span class="nx">Observable</span><span class="p">.</span><span class="k">throw</span><span class="p">(</span><span class="nx">errorMsg</span><span class="p">);</span>
 <span class="p">}</span></code></pre></figure>
@@ -396,30 +393,30 @@ veri gönderdiğimizi söylüyoruz.</li>
 
 <p><strong>driver-list.component.ts</strong></p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">Driver</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./driver&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">DriverService</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./driver.service&#39;</span><span class="p">;</span>
 
-<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+<span class="kd">@Component</span><span class="p">({</span>
   <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;driver-list&#39;</span><span class="p">,</span>
-  <span class="nx">template</span><span class="o">:</span> <span class="err">`</span>
-  <span class="o">&lt;</span><span class="nx">section</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="nx">section</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">&quot;isLoading &amp;&amp; !errorMessage&quot;</span><span class="o">&gt;</span>
-    <span class="nx">Loading</span> <span class="nx">our</span> <span class="nx">hyperdrives</span><span class="o">!!!</span> <span class="nx">Retrieving</span> <span class="nx">data</span><span class="p">...</span>
-    <span class="o">&lt;</span><span class="err">/section&gt;</span>
-      <span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
-        <span class="c">&lt;!--</span> <span class="k">this</span> <span class="nx">is</span> <span class="nx">the</span> <span class="k">new</span> <span class="nx">syntax</span> <span class="k">for</span> <span class="nx">ng</span><span class="o">-</span><span class="nx">repeat</span> <span class="o">--&gt;</span>
-        <span class="o">&lt;</span><span class="nx">li</span> <span class="o">*</span><span class="nx">ngFor</span><span class="o">=</span><span class="s2">&quot;let driver of drivers&quot;</span><span class="o">&gt;</span>
-            <span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&quot;#&quot;</span> <span class="p">[</span><span class="nx">routerLink</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;[&#39;/drivers&#39;, driver.driverId]&quot;</span><span class="o">&gt;</span>
-           
-          <span class="o">&lt;</span><span class="err">/a&gt;</span>
-        <span class="o">&lt;</span><span class="err">/li&gt;</span>
-      <span class="o">&lt;</span><span class="err">/ul&gt;</span>
-      <span class="o">&lt;</span><span class="nx">section</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">&quot;errorMessage&quot;</span><span class="o">&gt;</span>
-        
-      <span class="o">&lt;</span><span class="err">/section&gt;</span>
-  <span class="o">&lt;</span><span class="err">/section&gt;</span>
-  <span class="err">`</span>
+  <span class="nx">template</span><span class="o">:</span> <span class="sb">`</span>
+<span class="sb">  &lt;section&gt;</span>
+<span class="sb">    &lt;section *ngIf=&quot;isLoading &amp;&amp; !errorMessage&quot;&gt;</span>
+<span class="sb">    Loading our hyperdrives!!! Retrieving data...</span>
+<span class="sb">    &lt;/section&gt;</span>
+<span class="sb">      &lt;ul&gt;</span>
+<span class="sb">        &lt;!-- this is the new syntax for ng-repeat --&gt;</span>
+<span class="sb">        &lt;li *ngFor=&quot;let driver of drivers&quot;&gt;</span>
+<span class="sb">            &lt;a href=&quot;#&quot; [routerLink]=&quot;[&#39;/drivers&#39;, driver.driverId]&quot;&gt;</span>
+<span class="sb">           </span>
+<span class="sb">          &lt;/a&gt;</span>
+<span class="sb">        &lt;/li&gt;</span>
+<span class="sb">      &lt;/ul&gt;</span>
+<span class="sb">      &lt;section *ngIf=&quot;errorMessage&quot;&gt;</span>
+<span class="sb">        </span>
+<span class="sb">      &lt;/section&gt;</span>
+<span class="sb">  &lt;/section&gt;</span>
+<span class="sb">  `</span>
 <span class="p">})</span>
 <span class="kr">export</span> <span class="kr">class</span> <span class="nx">DriverListComponent</span> <span class="kr">implements</span> <span class="nx">OnInit</span><span class="p">{</span>
   <span class="nx">drivers</span>: <span class="kt">Driver</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
@@ -449,14 +446,14 @@ ekliyoruz.</li>
 
 <p><strong>driver-details.component.ts</strong></p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">OnDestroy</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">OnDestroy</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">ActivatedRoute</span><span class="p">,</span> <span class="nx">Router</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">Response</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/http&#39;</span><span class="p">;</span>
 
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">Driver</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./driver&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">DriverService</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./driver.service&#39;</span><span class="p">;</span>
 
-<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+<span class="kd">@Component</span><span class="p">({</span>
   <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;driver-details&#39;</span><span class="p">,</span>
   <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;app/driver-details.component.html&#39;</span>
 <span class="p">})</span>
@@ -514,7 +511,7 @@ this.router.navigate(link); ifadesi ile gotoDriversList() metodu çağırıldı�
 
 <p><strong>driver-details.component.html</strong></p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="c">&lt;!--</span> <span class="k">new</span> <span class="nx">syntax</span> <span class="k">for</span> <span class="nx">ng</span><span class="o">-</span><span class="k">if</span> <span class="o">--&gt;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span></span><span class="c">&lt;!--</span> <span class="k">new</span> <span class="nx">syntax</span> <span class="k">for</span> <span class="nx">ng</span><span class="o">-</span><span class="k">if</span> <span class="o">--&gt;</span>
 <span class="o">&lt;</span><span class="nx">section</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">&quot;driver&quot;</span><span class="o">&gt;</span>
   <span class="o">&lt;</span><span class="nx">section</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="nx">You</span> <span class="nx">selected</span><span class="o">:</span>  <span class="o">&lt;</span><span class="err">/h2&gt;</span>

@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2017/apache-tiles-demo-project/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Apache Tiles Demo Project - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Apache Tiles Demo Project | İlkay Günel - Blog</title>
 <meta property="og:title" content="Apache Tiles Demo Project" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Apache Tiles Demo Project" />
 <meta property="og:description" content="Apache Tiles Demo Project" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2017/apache-tiles-demo-project/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2017-09-09T20:40:21+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Apache Tiles Demo Project",
-    "datePublished": "2017-09-09T20:40:21+03:00",
-    "description": "Apache Tiles Demo Project",
-    "url": "http://ilkaygunel.com/blog/2017/apache-tiles-demo-project/"
-  }
-</script>
+{"name":null,"description":"Apache Tiles Demo Project","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2017/apache-tiles-demo-project/","publisher":null,"image":null,"headline":"Apache Tiles Demo Project","dateModified":"2017-09-09T20:40:21+03:00","datePublished":"2017-09-09T20:40:21+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/apache-tiles-demo-project/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -145,7 +140,7 @@ adresinden erişebilirsiniz.</p>
 <p>Öncelikle örneği yaptığımız uygulama Maven tabanlı bir Spring Boot projesi olacak ve Spring MVC ile beraber Apache Tiles kullanımını örnekleyeceğiz. İlk olarak 
 tiles.xml dosyasına göz gezdirelim:</p>
 
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
 <span class="cp">&lt;!DOCTYPE tiles-definitions PUBLIC</span>
 <span class="cp">       &quot;-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN&quot;</span>
 <span class="cp">       &quot;http://tiles.apache.org/dtds/tiles-config_3_0.dtd&quot;&gt;</span>
@@ -197,7 +192,7 @@ eğer tanım varsa mevcut şablon içerisinde onu gösteriyor, eğer yoksa direk
 
 <p><strong>defaultLayout.jsp</strong></p>
 
-<figure class="highlight"><pre><code class="language-jsp" data-lang="jsp"><span class="k">&lt;%@</span> <span class="n">page</span> <span class="n">language</span><span class="o">=</span><span class="s">&quot;java&quot;</span> <span class="n">contentType</span><span class="o">=</span><span class="s">&quot;text/html; charset=ISO-8859-1&quot;</span>
+<figure class="highlight"><pre><code class="language-jsp" data-lang="jsp"><span></span><span class="k">&lt;%@</span> <span class="n">page</span> <span class="n">language</span><span class="o">=</span><span class="s">&quot;java&quot;</span> <span class="n">contentType</span><span class="o">=</span><span class="s">&quot;text/html; charset=ISO-8859-1&quot;</span>
 	<span class="n">pageEncoding</span><span class="o">=</span><span class="s">&quot;ISO-8859-9&quot;</span><span class="k">%&gt;</span>
 <span class="k">&lt;%@</span> <span class="n">page</span> <span class="n">isELIgnored</span><span class="o">=</span><span class="s">&quot;false&quot;</span><span class="k">%&gt;</span>
 <span class="k">&lt;%@</span> <span class="n">taglib</span> <span class="n">prefix</span><span class="o">=</span><span class="s">&quot;c&quot;</span> <span class="n">uri</span><span class="o">=</span><span class="s">&quot;http://java.sun.com/jsp/jstl/core&quot;</span><span class="k">%&gt;</span>
@@ -249,7 +244,7 @@ hangi jsp’lerin karşılık geleceği yani path tanımlamaları Spring MVC’n
 
 <p><strong>AppController.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">controllers</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.controllers</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Controller</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.ui.ModelMap</span><span class="o">;</span>
@@ -286,7 +281,7 @@ Apache Tiles devreye girer ve kendisinde “home” şeklinde bir tanım olup ol
 
 <p><strong>AppConfig.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">tiles</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.tiles</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.ComponentScan</span><span class="o">;</span>
@@ -302,7 +297,7 @@ Apache Tiles devreye girer ve kendisinde “home” şeklinde bir tanım olup ol
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AppConfig</span> <span class="kd">extends</span> <span class="n">WebMvcConfigurerAdapter</span> <span class="o">{</span>
 	<span class="nd">@Bean</span>
 	<span class="kd">public</span> <span class="n">TilesConfigurer</span> <span class="nf">tilesConfigurer</span><span class="o">()</span> <span class="o">{</span>
-		<span class="n">TilesConfigurer</span> <span class="n">tilesConfigurer</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">TilesConfigurer</span><span class="o">();</span>
+		<span class="n">TilesConfigurer</span> <span class="n">tilesConfigurer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TilesConfigurer</span><span class="o">();</span>
 		<span class="n">tilesConfigurer</span><span class="o">.</span><span class="na">setDefinitions</span><span class="o">(</span><span class="k">new</span> <span class="n">String</span><span class="o">[]</span> <span class="o">{</span> <span class="s">&quot;/WEB-INF/tiles/tiles.xml&quot;</span> <span class="o">});</span>
 		<span class="n">tilesConfigurer</span><span class="o">.</span><span class="na">setCheckRefresh</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
 		<span class="k">return</span> <span class="n">tilesConfigurer</span><span class="o">;</span>
@@ -310,7 +305,7 @@ Apache Tiles devreye girer ve kendisinde “home” şeklinde bir tanım olup ol
 
 	<span class="nd">@Override</span>
 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">configureViewResolvers</span><span class="o">(</span><span class="n">ViewResolverRegistry</span> <span class="n">registry</span><span class="o">)</span> <span class="o">{</span>
-		<span class="n">TilesViewResolver</span> <span class="n">viewResolver</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">TilesViewResolver</span><span class="o">();</span>
+		<span class="n">TilesViewResolver</span> <span class="n">viewResolver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TilesViewResolver</span><span class="o">();</span>
 		<span class="n">registry</span><span class="o">.</span><span class="na">viewResolver</span><span class="o">(</span><span class="n">viewResolver</span><span class="o">);</span>
 	<span class="o">}</span>
 
@@ -331,7 +326,7 @@ yeterlidir. addResourceHandlers metodu içerisinde resim gibi, css dosyaları gi
 
 <p><strong>SpringBootClass.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">test</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">test</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.boot.SpringApplication</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.boot.autoconfigure.SpringBootApplication</span><span class="o">;</span>

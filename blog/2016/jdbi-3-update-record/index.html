@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jdbi-3-update-record/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>JDBI İle Database İşlemleri 3 - Kayıt Güncelleme - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>JDBI İle Database İşlemleri 3 - Kayıt Güncelleme | İlkay Günel - Blog</title>
 <meta property="og:title" content="JDBI İle Database İşlemleri 3 - Kayıt Güncelleme" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="JDBI İle Database İşlemleri 3 - Kayıt Güncelleme" />
 <meta property="og:description" content="JDBI İle Database İşlemleri 3 - Kayıt Güncelleme" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jdbi-3-update-record/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-12-30T20:40:22+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "JDBI İle Database İşlemleri 3 - Kayıt Güncelleme",
-    "datePublished": "2016-12-30T20:40:22+03:00",
-    "description": "JDBI İle Database İşlemleri 3 - Kayıt Güncelleme",
-    "url": "http://ilkaygunel.com/blog/2016/jdbi-3-update-record/"
-  }
-</script>
+{"name":null,"description":"JDBI İle Database İşlemleri 3 - Kayıt Güncelleme","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/jdbi-3-update-record/","publisher":null,"image":null,"headline":"JDBI İle Database İşlemleri 3 - Kayıt Güncelleme","dateModified":"2016-12-30T20:40:22+03:00","datePublished":"2016-12-30T20:40:22+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/jdbi-3-update-record/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -140,7 +135,7 @@
 <p>Ben şimdi buradaki id’si 2 olan kaydın <strong><em>city</em></strong> bilgisini İstanbul olarak güncellemek istiyorum. Bu işlem için öncelikle PersonOperationInterface içerisinde şu iki satır 
 kodu yazıyorum:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nd">@SqlUpdate</span><span class="o">(</span><span class="s">&quot;update people set city = :city where id= :id&quot;</span><span class="o">)</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@SqlUpdate</span><span class="o">(</span><span class="s">&quot;update people set city = :city where id= :id&quot;</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">updatePerson</span><span class="o">(</span><span class="nd">@Bind</span><span class="o">(</span><span class="s">&quot;city&quot;</span><span class="o">)</span> <span class="n">String</span> <span class="n">city</span><span class="o">,</span> <span class="nd">@Bind</span><span class="o">(</span><span class="s">&quot;id&quot;</span><span class="o">)</span> <span class="kt">int</span> <span class="n">id</span><span class="o">);</span></code></pre></figure>
 
 <p>Veritabanı üzerindeki bir manipülasyon yani değişiklik yapılacağı için metodu @SqlUpdate ile işaretledik. Notasyona parametre olarak da update işlemini gerçekleştirecek SQL cümleciğini
@@ -149,7 +144,7 @@ gibi bu parametreleri @Bind notasyonu ile metodun parametre kısmında da tanım
 
 <p>Tablo üzerinde güncelleme işlemini yapacak metodumuz da şu şekilde olacak:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">jdbitutorial</span><span class="o">.</span><span class="na">operation</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.jdbitutorial.operation</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.mysql.cj.jdbc.MysqlDataSource</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.skife.jdbi.v2.DBI</span><span class="o">;</span>
@@ -157,12 +152,12 @@ gibi bu parametreleri @Bind notasyonu ile metodun parametre kısmında da tanım
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">UpdateOneField</span> <span class="o">{</span>
 
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">MysqlDataSource</span> <span class="n">mysqlDataSource</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">MysqlDataSource</span><span class="o">();</span>
+        <span class="n">MysqlDataSource</span> <span class="n">mysqlDataSource</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MysqlDataSource</span><span class="o">();</span>
         <span class="n">mysqlDataSource</span><span class="o">.</span><span class="na">setURL</span><span class="o">(</span><span class="s">&quot;jdbc:mysql://localhost:3306/JDBIDatabase?useUnicode=true&amp;characterEncoding=UTF-8&quot;</span><span class="o">);</span>
         <span class="n">mysqlDataSource</span><span class="o">.</span><span class="na">setUser</span><span class="o">(</span><span class="s">&quot;root&quot;</span><span class="o">);</span>
         <span class="n">mysqlDataSource</span><span class="o">.</span><span class="na">setPassword</span><span class="o">(</span><span class="s">&quot;&quot;</span><span class="o">);</span>
 
-        <span class="n">DBI</span> <span class="n">dbi</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">DBI</span><span class="o">(</span><span class="n">mysqlDataSource</span><span class="o">);</span>
+        <span class="n">DBI</span> <span class="n">dbi</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DBI</span><span class="o">(</span><span class="n">mysqlDataSource</span><span class="o">);</span>
 
         <span class="n">PersonOperationsInterface</span> <span class="n">personOperationsInterface</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
@@ -207,12 +202,12 @@ Orada da yukarıdaki ile aynı işlem söz konusu olacak. Sadece parametre olara
 
 <p>Şu 2 satır kodu PersonOperationsInterface arabirimine ekliyorum:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nd">@SqlUpdate</span><span class="o">(</span><span class="s">&quot;update people set city = :city where name= :name&quot;</span><span class="o">)</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@SqlUpdate</span><span class="o">(</span><span class="s">&quot;update people set city = :city where name= :name&quot;</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">updateMultiplePerson</span><span class="o">(</span><span class="nd">@Bind</span><span class="o">(</span><span class="s">&quot;city&quot;</span><span class="o">)</span> <span class="n">String</span> <span class="n">city</span><span class="o">,</span> <span class="nd">@Bind</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">)</span> <span class="n">String</span> <span class="n">name</span><span class="o">);</span></code></pre></figure>
 
 <p>İşlemi yapacak kodum da şu şekilde:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">jdbitutorial</span><span class="o">.</span><span class="na">operation</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.jdbitutorial.operation</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.mysql.cj.jdbc.MysqlDataSource</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.skife.jdbi.v2.DBI</span><span class="o">;</span>
@@ -220,12 +215,12 @@ Orada da yukarıdaki ile aynı işlem söz konusu olacak. Sadece parametre olara
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">UpdateMultipleRecord</span> <span class="o">{</span>
 
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">MysqlDataSource</span> <span class="n">mysqlDataSource</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">MysqlDataSource</span><span class="o">();</span>
+        <span class="n">MysqlDataSource</span> <span class="n">mysqlDataSource</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MysqlDataSource</span><span class="o">();</span>
         <span class="n">mysqlDataSource</span><span class="o">.</span><span class="na">setURL</span><span class="o">(</span><span class="s">&quot;jdbc:mysql://localhost:3306/JDBIDatabase?useUnicode=true&amp;characterEncoding=UTF-8&quot;</span><span class="o">);</span>
         <span class="n">mysqlDataSource</span><span class="o">.</span><span class="na">setUser</span><span class="o">(</span><span class="s">&quot;root&quot;</span><span class="o">);</span>
         <span class="n">mysqlDataSource</span><span class="o">.</span><span class="na">setPassword</span><span class="o">(</span><span class="s">&quot;&quot;</span><span class="o">);</span>
 
-        <span class="n">DBI</span> <span class="n">dbi</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">DBI</span><span class="o">(</span><span class="n">mysqlDataSource</span><span class="o">);</span>
+        <span class="n">DBI</span> <span class="n">dbi</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DBI</span><span class="o">(</span><span class="n">mysqlDataSource</span><span class="o">);</span>
 
         <span class="n">PersonOperationsInterface</span> <span class="n">personOperationsInterface</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 

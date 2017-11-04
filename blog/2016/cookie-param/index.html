@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/cookie-param/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>RestEasy İle Restful Web Servis Dersleri 10 – CookieParam - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>RestEasy İle Restful Web Servis Dersleri 10 – CookieParam | İlkay Günel - Blog</title>
 <meta property="og:title" content="RestEasy İle Restful Web Servis Dersleri 10 – CookieParam" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="RestEasy İle Restful Web Servis Dersleri 10 – CookieParam" />
 <meta property="og:description" content="RestEasy İle Restful Web Servis Dersleri 10 – CookieParam" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/cookie-param/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-10-02T19:38:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "RestEasy İle Restful Web Servis Dersleri 10 – CookieParam",
-    "datePublished": "2016-10-02T19:38:20+03:00",
-    "description": "RestEasy İle Restful Web Servis Dersleri 10 – CookieParam",
-    "url": "http://ilkaygunel.com/blog/2016/cookie-param/"
-  }
-</script>
+{"name":null,"description":"RestEasy İle Restful Web Servis Dersleri 10 – CookieParam","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/cookie-param/","publisher":null,"image":null,"headline":"RestEasy İle Restful Web Servis Dersleri 10 – CookieParam","dateModified":"2016-10-02T19:38:20+03:00","datePublished":"2016-10-02T19:38:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/cookie-param/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -135,7 +130,7 @@
 
 <p><strong>AddCookie.java</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cm">/*
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -157,7 +152,7 @@
  */</span>
 <span class="nd">@WebServlet</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"AddCookie"</span><span class="o">,</span> <span class="n">urlPatterns</span> <span class="o">=</span> <span class="o">{</span><span class="s">"/AddCookie"</span><span class="o">})</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AddCookie</span> <span class="kd">extends</span> <span class="n">HttpServlet</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">doGet</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doGet</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span>
                     <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span>
             <span class="kd">throws</span> <span class="n">ServletException</span><span class="o">,</span> <span class="n">IOException</span>
   <span class="o">{</span>
@@ -179,21 +174,19 @@
   <span class="o">}</span>
 <span class="o">}</span>
 <span class="c1">//Kaynak:http://www.tutorialspoint.com/servlets/servlets-cookies-handling.htm</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Bu kod Servlet bilenler için çok kolay ama bilmeyenler için şöyle söyleyelim, Servlet kütüphanesi içerisinde yer alan Cookie sınıfından iki adet Cookie nesnesi oluşturuluyor, bu cookie’lere setMaxAge ile ne kadar süre yaşayacağı söyleniyor ve döndürülen response’a cookiler’in koyulması ile tarayıcıya ilgili çerezler koyulmuş oluyor.</p>
 
 <p>Bu kodun çalışabilmesi için projenizin Servlet Api kütüphanesine sahip olması gerekiyor. Eğer kütüphane yoksa şu bağımlılık ile edinebilirsiniz:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>javax.servlet<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>javax.servlet-api<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>3.1.0<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Servlet’i çalıştırıp Chrome’un çerezleri arasına baktığımda localhost’ta <strong><em>fist_name</em></strong> ve <strong><em>last_name</em></strong> çerezlerinin eklenmiş olduğunu görüyorum.</p>
 
@@ -205,7 +198,7 @@
 
 <p><strong>CookieParamExample.java</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">restService</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">restService</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">javax.ws.rs.CookieParam</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">javax.ws.rs.GET</span><span class="o">;</span>
@@ -222,13 +215,12 @@
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CookieParamExample</span> <span class="o">{</span>
     <span class="nd">@GET</span>
     <span class="nd">@Produces</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">TEXT_HTML</span><span class="o">+</span><span class="s">";charset=UTF-8"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">getCookie</span><span class="o">(</span><span class="nd">@CookieParam</span><span class="o">(</span><span class="s">"first_name"</span><span class="o">)</span> <span class="n">Cookie</span> <span class="n">firstName</span><span class="o">,</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getCookie</span><span class="o">(</span><span class="nd">@CookieParam</span><span class="o">(</span><span class="s">"first_name"</span><span class="o">)</span> <span class="n">Cookie</span> <span class="n">firstName</span><span class="o">,</span>
 							<span class="nd">@CookieParam</span><span class="o">(</span><span class="s">"last_name"</span><span class="o">)</span> <span class="n">Cookie</span> <span class="n">lastName</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="s">"Ad Soyad:"</span><span class="o">+</span><span class="n">firstName</span><span class="o">.</span><span class="na">getValue</span><span class="o">()+</span><span class="s">" "</span><span class="o">+</span><span class="n">lastName</span><span class="o">.</span><span class="na">getValue</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Kodumuz oldukça basit arkadaşlar. Tek yaptığı iş first_name ve last_name cookie’lerini <strong><em>@CookieParam</em></strong> notasyonu ile metoda paramete olarak geçirmek. @CookieParam notasyonuna tarayıcıda tutulan cookie’nin adını veriyoruz arkadaşlar. O da o domaine ait olan o isimdeki cookie’yi bulup getiriyor. Burada parametrelerimizi javax.ws.rs.Cookie tipinde tanımladık ve metot içinde bu tipin metotundan faydalandık.</p>
 

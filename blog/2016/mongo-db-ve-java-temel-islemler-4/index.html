@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-4/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Mongo DB Ve Java Temel İşlemler 4 - Kayıt Güncelleme - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Mongo DB Ve Java Temel İşlemler 4 - Kayıt Güncelleme | İlkay Günel - Blog</title>
 <meta property="og:title" content="Mongo DB Ve Java Temel İşlemler 4 - Kayıt Güncelleme" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Mongo DB Ve Java Temel İşlemler 4 - Kayıt Güncelleme" />
 <meta property="og:description" content="Mongo DB Ve Java Temel İşlemler 4 - Kayıt Güncelleme" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-4/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-09-05T19:38:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Mongo DB Ve Java Temel İşlemler 4 - Kayıt Güncelleme",
-    "datePublished": "2016-09-05T19:38:20+03:00",
-    "description": "Mongo DB Ve Java Temel İşlemler 4 - Kayıt Güncelleme",
-    "url": "http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-4/"
-  }
-</script>
+{"name":null,"description":"Mongo DB Ve Java Temel İşlemler 4 - Kayıt Güncelleme","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-4/","publisher":null,"image":null,"headline":"Mongo DB Ve Java Temel İşlemler 4 - Kayıt Güncelleme","dateModified":"2016-09-05T19:38:20+03:00","datePublished":"2016-09-05T19:38:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-4/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -132,66 +127,64 @@ nasıl güncellenebileceğine değineceğiz.</p>
 
 <p>Üzerinde update işlemi uygulayacağımız örnek Bson’larımızdan birisi şu arkadaşlar:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57c19b523e9b4210f7353280"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 Avenue"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10078"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"building"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1480"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"coord"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="mf">-73.9557413</span><span class="p">,</span><span class="w">
-        </span><span class="mf">40.7720266</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"borough"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Manhattan"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuisine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Russian"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"grades"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27-08-2016"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"grade"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27-08-2016"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"grade"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vella"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"restaurant_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"41704620"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+    "_id": "57c19b523e9b4210f7353280",
+    "address": {
+      "street": "2 Avenue",
+      "zipcode": "10078",
+      "building": "1480",
+      "coord": [
+        -73.9557413,
+        40.7720266
+      ]
+    },
+    "borough": "Manhattan",
+    "cuisine": "Russian",
+    "grades": [
+      {
+        "date": "27-08-2016",
+        "grade": "A",
+        "score": 16
+      },
+      {
+        "date": "27-08-2016",
+        "grade": "B",
+        "score": 17
+      }
+    ],
+    "name": "Vella",
+    "restaurant_id": "41704620"
+  }
+</code></pre></div></div>
 
 <p>Biz şimdi update kodumuzda <strong><em>borough</em></strong> alanını St.Petersburg olarak güncelleyeceğiz. Güncelleme kodumuz şöyle:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>package io.github.ilkgunel.mongodb;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">io</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">ilkgunel</span><span class="p">.</span><span class="n">mongodb</span><span class="p">;</span>
 
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
+<span class="n">import</span> <span class="n">com</span><span class="p">.</span><span class="n">mongodb</span><span class="p">.</span><span class="n">MongoClient</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">com</span><span class="p">.</span><span class="n">mongodb</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">MongoDatabase</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">bson</span><span class="p">.</span><span class="n">Document</span><span class="p">;</span>
 
-public class MongoDBUpdateRecords {
-    public static void main(String[] args){
-        MongoClient mongoClient=null;
-        try {
-            mongoClient = new MongoClient("localhost", 27017);
-            MongoDatabase database = mongoClient.getDatabase("MongoDB");
+<span class="k">public</span> <span class="n">class</span> <span class="n">MongoDBUpdateRecords</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="k">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">){</span>
+        <span class="n">MongoClient</span> <span class="n">mongoClient</span><span class="p">=</span><span class="n">null</span><span class="p">;</span>
+        <span class="n">try</span> <span class="p">{</span>
+            <span class="n">mongoClient</span> <span class="p">=</span> <span class="n">new</span> <span class="n">MongoClient</span><span class="p">(</span><span class="s2">"localhost"</span><span class="p">,</span> <span class="m">27017</span><span class="p">);</span>
+            <span class="n">MongoDatabase</span> <span class="n">database</span> <span class="p">=</span> <span class="n">mongoClient</span><span class="p">.</span><span class="n">getDatabase</span><span class="p">(</span><span class="s2">"MongoDB"</span><span class="p">);</span>
             
-            database.getCollection("Records").updateOne(new Document("cuisine","Russian"), 
-                    new Document("$set",new Document("borough","St.Petersburg")));
+            <span class="n">database</span><span class="p">.</span><span class="n">getCollection</span><span class="p">(</span><span class="s2">"Records"</span><span class="p">).</span><span class="n">updateOne</span><span class="p">(</span><span class="n">new</span> <span class="n">Document</span><span class="p">(</span><span class="s2">"cuisine"</span><span class="p">,</span><span class="s2">"Russian"</span><span class="p">),</span> 
+                    <span class="n">new</span> <span class="n">Document</span><span class="p">(</span><span class="s2">"$set"</span><span class="p">,</span><span class="n">new</span> <span class="n">Document</span><span class="p">(</span><span class="s2">"borough"</span><span class="p">,</span><span class="s2">"St.Petersburg"</span><span class="p">)));</span>
         
-        } catch (Exception e) {
-            System.out.println("An Error Occured! Error is:"+e);
-        }
-        finally{
-            mongoClient.close();
-        }
+        <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"An Error Occured! Error is:"</span><span class="p">+</span><span class="n">e</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">finally</span><span class="p">{</span>
+            <span class="n">mongoClient</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+        <span class="p">}</span>
         
-    }
-}
-</code></pre>
-</div>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>Kod içerisinde database.getCollection(“Records”) diyerek Records collection’ını elde ediyoruz ve updateOne metodu ile bir kaydı güncelleyeceğimizi söylüyoruz.
 updateOne metoduna iki parametre veriyoruz. Birinci parametre bizim şartımızı bildiriyor. Bir döküman parametresi geçirerek cuisine alanı Russian olan kayıt üzerinde güncelleme yapılacak diyoruz.
@@ -208,10 +201,9 @@ yine bir döküman ve bu dökümanda da key alanına güncellenecek alanı, valu
 <p>Yukarıdaki güncelleme işlemi kaydın doğrudan bir alanına yönelikti. Biz bir de bir alanın altındaki alanı güncelleyebiliriz. Örneğin yukarıdaki BSON üzerinde address alanı altındaki building
 alanını güncelleyelim ve bunun için şu kodu kullanalım. Bu arada MongoDB’nin dökümantasyonunda bu alanlara yani bir alanın içine açılmış alt alanların barındığı kısıma <strong><em>Embedded Document</em></strong> deniyor.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>	database.getCollection("Records").updateOne(new Document("cuisine", "Russian"), 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	database.getCollection("Records").updateOne(new Document("cuisine", "Russian"), 
 	new Document("$set", new Document("address.building", "1481")));
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Kodda az önce yaptığımızdan bir fark yok. Sadece daha önce de gördüğümüz gibi iç içe alanlar için “.” operaötürnü kullanarak ulaşıyoruz. Kodu çalıştırıp MongoClient’a baktığımızda kaydın ilgili alanının başarılı bir şekilde güncellendiğini görebiliyoruz.</p>
 
@@ -220,73 +212,71 @@ alanını güncelleyelim ve bunun için şu kodu kullanalım. Bu arada MongoDB�
 
 <p>Bu kısıma kadar tek kayıt güncellemeye yarayan updateOne metodunu gördük. Birden fazla kayıt güncellemek istediğimizde ise updateMany metodunu kullanmamız gerekiyor. Üzerinde update işlemi gerçekleştireceğimiz iki BSON’a şöyle bakalım:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-</span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57c19b523e9b4210f7353281"</span><span class="p">,</span><span class="w">
-</span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-  </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 Avenue"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10079"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"building"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1480"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"coord"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="mf">-73.9557413</span><span class="p">,</span><span class="w">
-    </span><span class="mf">40.7720266</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">},</span><span class="w">
-</span><span class="nt">"borough"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Manhattan"</span><span class="p">,</span><span class="w">
-</span><span class="nt">"cuisine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Italian"</span><span class="p">,</span><span class="w">
-</span><span class="nt">"grades"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27-08-2016"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"grade"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27-08-2016"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"grade"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">19</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">],</span><span class="w">
-</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vella"</span><span class="p">,</span><span class="w">
-</span><span class="nt">"restaurant_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"41704620"</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+"_id": "57c19b523e9b4210f7353281",
+"address": {
+  "street": "2 Avenue",
+  "zipcode": "10079",
+  "building": "1480",
+  "coord": [
+    -73.9557413,
+    40.7720266
+  ]
+},
+"borough": "Manhattan",
+"cuisine": "Italian",
+"grades": [
+  {
+    "date": "27-08-2016",
+    "grade": "A",
+    "score": 18
+  },
+  {
+    "date": "27-08-2016",
+    "grade": "B",
+    "score": 19
+  }
+],
+"name": "Vella",
+"restaurant_id": "41704620"
+}
   
-</span><span class="p">{</span><span class="w">
-</span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57c19b523e9b4210f735327e"</span><span class="p">,</span><span class="w">
-</span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-  </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 Avenue"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10076"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"building"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1480"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"coord"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="mf">-73.9557413</span><span class="p">,</span><span class="w">
-    </span><span class="mf">40.7720266</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">},</span><span class="w">
-</span><span class="nt">"borough"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Manhattan"</span><span class="p">,</span><span class="w">
-</span><span class="nt">"cuisine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Italian"</span><span class="p">,</span><span class="w">
-</span><span class="nt">"grades"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27-08-2016"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"grade"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27-08-2016"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"grade"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">],</span><span class="w">
-</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vella"</span><span class="p">,</span><span class="w">
-</span><span class="nt">"restaurant_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"41704620"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+{
+"_id": "57c19b523e9b4210f735327e",
+"address": {
+  "street": "2 Avenue",
+  "zipcode": "10076",
+  "building": "1480",
+  "coord": [
+    -73.9557413,
+    40.7720266
+  ]
+},
+"borough": "Manhattan",
+"cuisine": "Italian",
+"grades": [
+  {
+    "date": "27-08-2016",
+    "grade": "A",
+    "score": 12
+  },
+  {
+    "date": "27-08-2016",
+    "grade": "B",
+    "score": 13
+  }
+],
+"name": "Vella",
+"restaurant_id": "41704620"
+}
+</code></pre></div></div>
 
 <p>Az önce de söylediğim gibi updateOne metodu kendisine verilen şarta göre ilk bulduğu kayıt üzerinde update yapar. Yukarıdaki kayıtların cuisine alanları aynı değerleri taşıyorlar.
   Bu şartı updateMany metoduna verdiğimiz zaman aynı şartı taşıyan tüm kayıtlara update uygulanacak. Örnek kodumuz şöyle:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>	database.getCollection("Records").updateMany(new Document("cuisine", "Italian"), 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	database.getCollection("Records").updateMany(new Document("cuisine", "Italian"), 
 	new Document("$set", new Document("borough", "Sicily")));
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Kodumuz cuisine alanı Italian olan tüm kayıtları bulacak ve akabinde borough alanlarını Sicily olarak güncelleyecek.</p>
 
@@ -298,88 +288,86 @@ alanını güncelleyelim ve bunun için şu kodu kullanalım. Bu arada MongoDB�
 <p>Bunların yanında bir de döküman değiştirme metodu kütüphane içerisinde yer alıyor. <strong><em>replaceOne</em></strong> adındaki metot ile mevcut kaydın tek seferde yeni bir kayıt ile değiştirilmesini sağlayabiliriz.
 Şimdi şu kayıt üzerinde replaceOne metodunu uygulayalım. Burada ayırt edici alan olarak yine cuisine alanını kullanabiliriz.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-</span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57c1991a3e9b4210c9d291c9"</span><span class="p">,</span><span class="w">
-</span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-  </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 Avenue"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10075"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"building"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1480"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"coord"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="mf">-73.9557413</span><span class="p">,</span><span class="w">
-    </span><span class="mf">40.7720266</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">},</span><span class="w">
-</span><span class="nt">"borough"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Manhattan"</span><span class="p">,</span><span class="w">
-</span><span class="nt">"cuisine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Turkish"</span><span class="p">,</span><span class="w">
-</span><span class="nt">"grades"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27-08-2016"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"grade"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27-08-2016"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"grade"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">],</span><span class="w">
-</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vella"</span><span class="p">,</span><span class="w">
-</span><span class="nt">"restaurant_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"41704620"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+"id": "57c1991a3e9b4210c9d291c9",
+"address": {
+  "street": "2 Avenue",
+  "zipcode": "10075",
+  "building": "1480",
+  "coord": [
+    -73.9557413,
+    40.7720266
+  ]
+},
+"borough": "Manhattan",
+"cuisine": "Turkish",
+"grades": [
+  {
+    "date": "27-08-2016",
+    "grade": "A",
+    "score": 10
+  },
+  {
+    "date": "27-08-2016",
+    "grade": "B",
+    "score": 11
+  }
+],
+"name": "Vella",
+"restaurant_id": "41704620"
+}
+</code></pre></div></div>
 
 <p>Şimdi bu kayıt üzerinde replaceOne metodunu kullanarak kaydı değiştirme işlemini uygulayalım:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> package io.github.ilkgunel.mongodb;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">package</span> <span class="n">io</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">ilkgunel</span><span class="p">.</span><span class="n">mongodb</span><span class="p">;</span>
 
- import com.mongodb.MongoClient;
-import com.mongodb.client.MongoDatabase;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import static java.util.Arrays.asList;
-import java.util.Date;
-import java.util.Locale;
-import org.bson.Document;
+ <span class="n">import</span> <span class="n">com</span><span class="p">.</span><span class="n">mongodb</span><span class="p">.</span><span class="n">MongoClient</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">com</span><span class="p">.</span><span class="n">mongodb</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">MongoDatabase</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">DateFormat</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">SimpleDateFormat</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">static</span> <span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">Arrays</span><span class="p">.</span><span class="n">asList</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">Date</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">Locale</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">bson</span><span class="p">.</span><span class="n">Document</span><span class="p">;</span>
 
-public class MongoDBUpdateRecords {
+<span class="k">public</span> <span class="n">class</span> <span class="n">MongoDBUpdateRecords</span> <span class="p">{</span>
 
-public static void main(String[] args) {
-    MongoClient mongoClient = null;
-    DateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-    try {
-        mongoClient = new MongoClient("localhost", 27017);
-        MongoDatabase database = mongoClient.getDatabase("MongoDB");
-        database.getCollection("Records").replaceOne(new Document("cuisine", "Turkish"),
-                new Document("address",
-                        new Document()
-                        .append("street", "Samsun Sinop Yolu")
-                        .append("zipcode", "5255")
-                        .append("building", "5255")
-                        .append("coord", asList(-73.9557413, 40.7720266)))
-                .append("borough", "Ünye")
-                .append("cuisine", "Turkish")
-                .append("grades", asList(
-                        new Document()
-                        .append("date", format.format(new Date()))
-                        .append("grade", "A")
-                        .append("score", 11),
-                        new Document()
-                        .append("date", format.format(new Date()))
-                        .append("grade", "B")
-                        .append("score", 17)))
-                .append("name", "Cabbar Usta")
-                .append("restaurant_id", "41704620"));
+<span class="k">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="k">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">MongoClient</span> <span class="n">mongoClient</span> <span class="p">=</span> <span class="n">null</span><span class="p">;</span>
+    <span class="n">DateFormat</span> <span class="n">format</span> <span class="p">=</span> <span class="n">new</span> <span class="n">SimpleDateFormat</span><span class="p">(</span><span class="s2">"dd-MM-yyyy"</span><span class="p">,</span> <span class="n">Locale</span><span class="p">.</span><span class="n">ENGLISH</span><span class="p">);</span>
+    <span class="n">try</span> <span class="p">{</span>
+        <span class="n">mongoClient</span> <span class="p">=</span> <span class="n">new</span> <span class="n">MongoClient</span><span class="p">(</span><span class="s2">"localhost"</span><span class="p">,</span> <span class="m">27017</span><span class="p">);</span>
+        <span class="n">MongoDatabase</span> <span class="n">database</span> <span class="p">=</span> <span class="n">mongoClient</span><span class="p">.</span><span class="n">getDatabase</span><span class="p">(</span><span class="s2">"MongoDB"</span><span class="p">);</span>
+        <span class="n">database</span><span class="p">.</span><span class="n">getCollection</span><span class="p">(</span><span class="s2">"Records"</span><span class="p">).</span><span class="n">replaceOne</span><span class="p">(</span><span class="n">new</span> <span class="n">Document</span><span class="p">(</span><span class="s2">"cuisine"</span><span class="p">,</span> <span class="s2">"Turkish"</span><span class="p">),</span>
+                <span class="n">new</span> <span class="n">Document</span><span class="p">(</span><span class="s2">"address"</span><span class="p">,</span>
+                        <span class="n">new</span> <span class="n">Document</span><span class="p">()</span>
+                        <span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"street"</span><span class="p">,</span> <span class="s2">"Samsun Sinop Yolu"</span><span class="p">)</span>
+                        <span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"zipcode"</span><span class="p">,</span> <span class="s2">"5255"</span><span class="p">)</span>
+                        <span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"building"</span><span class="p">,</span> <span class="s2">"5255"</span><span class="p">)</span>
+                        <span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"coord"</span><span class="p">,</span> <span class="n">asList</span><span class="p">(-</span><span class="m">73.9557413</span><span class="p">,</span> <span class="m">40.7720266</span><span class="p">)))</span>
+                <span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"borough"</span><span class="p">,</span> <span class="s2">"Ünye"</span><span class="p">)</span>
+                <span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"cuisine"</span><span class="p">,</span> <span class="s2">"Turkish"</span><span class="p">)</span>
+                <span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"grades"</span><span class="p">,</span> <span class="n">asList</span><span class="p">(</span>
+                        <span class="n">new</span> <span class="n">Document</span><span class="p">()</span>
+                        <span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"date"</span><span class="p">,</span> <span class="n">format</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="n">new</span> <span class="n">Date</span><span class="p">()))</span>
+                        <span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"grade"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">)</span>
+                        <span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"score"</span><span class="p">,</span> <span class="m">11</span><span class="p">),</span>
+                        <span class="n">new</span> <span class="n">Document</span><span class="p">()</span>
+                        <span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"date"</span><span class="p">,</span> <span class="n">format</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="n">new</span> <span class="n">Date</span><span class="p">()))</span>
+                        <span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"grade"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">)</span>
+                        <span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"score"</span><span class="p">,</span> <span class="m">17</span><span class="p">)))</span>
+                <span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"name"</span><span class="p">,</span> <span class="s2">"Cabbar Usta"</span><span class="p">)</span>
+                <span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"restaurant_id"</span><span class="p">,</span> <span class="s2">"41704620"</span><span class="p">));</span>
 
-    } catch (Exception e) {
-        System.out.println("An Error Occured! Error is:" + e);
-    } finally {
-        mongoClient.close();
-    }
-  }
- }
-</code></pre>
-</div>
+    <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"An Error Occured! Error is:"</span> <span class="p">+</span> <span class="n">e</span><span class="p">);</span>
+    <span class="p">}</span> <span class="n">finally</span> <span class="p">{</span>
+        <span class="n">mongoClient</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+ <span class="p">}</span>
+</code></pre></div></div>
 
 <p>Kodun çalıştırılması neticesinde kayıt şu hale geliyor:</p>
 
@@ -389,7 +377,7 @@ public static void main(String[] args) {
 <p>ReplaceOne metodunda bir püf nokta bulunuyor arkadaşlar. Bu metot güncellemeden ziyade değiştirme işlemi uyguladığından ilgili şarta uyan kayıt silinerek yerine gönderilen döküman girilir.
 Bu nedenle replaceOne metodu ile güncelleme yapmamaya çalışmamak önemlidir çünkü mevcut verileriniz silinebilir ve kaydı tamamen bozabilirsiniz. Şimdi bu durumu da örnekleyelim. Yukarıdaki kodu şu şekilde değiştirelim:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> public static void main(String[] args) {
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> public static void main(String[] args) {
     MongoClient mongoClient = null;
     DateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
     try {
@@ -414,8 +402,7 @@ Bu nedenle replaceOne metodu ile güncelleme yapmamaya çalışmamak önemlidir 
         mongoClient.close();
     }
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Önceki koddaki <strong><em>grades</em></strong> alanını ve altında tuttuğu alanları çıkardık. Şimdi kodumuzu çalıştıralım ve kaydın durumuna bakalım:</p>
 

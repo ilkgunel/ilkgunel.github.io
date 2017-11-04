@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/matrix-param/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>RestEasy İle Restful Web Servis Dersleri 9 – MatrixParam - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>RestEasy İle Restful Web Servis Dersleri 9 – MatrixParam | İlkay Günel - Blog</title>
 <meta property="og:title" content="RestEasy İle Restful Web Servis Dersleri 9 – MatrixParam" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="RestEasy İle Restful Web Servis Dersleri 9 – MatrixParam" />
 <meta property="og:description" content="RestEasy İle Restful Web Servis Dersleri 9 – MatrixParam" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/matrix-param/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-09-15T19:38:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "RestEasy İle Restful Web Servis Dersleri 9 – MatrixParam",
-    "datePublished": "2016-09-15T19:38:20+03:00",
-    "description": "RestEasy İle Restful Web Servis Dersleri 9 – MatrixParam",
-    "url": "http://ilkaygunel.com/blog/2016/matrix-param/"
-  }
-</script>
+{"name":null,"description":"RestEasy İle Restful Web Servis Dersleri 9 – MatrixParam","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/matrix-param/","publisher":null,"image":null,"headline":"RestEasy İle Restful Web Servis Dersleri 9 – MatrixParam","dateModified":"2016-09-15T19:38:20+03:00","datePublished":"2016-09-15T19:38:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/matrix-param/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -131,38 +126,37 @@
 
 <p><strong>MatrixParam.java</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>package com.mycompany.resteasytutorials;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">com</span><span class="p">.</span><span class="n">mycompany</span><span class="p">.</span><span class="n">resteasytutorials</span><span class="p">;</span>
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.ws.rs.GET;
-import javax.ws.rs.MatrixParam;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">ArrayList</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="k">List</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">javax</span><span class="p">.</span><span class="n">ws</span><span class="p">.</span><span class="n">rs</span><span class="p">.</span><span class="n">GET</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">javax</span><span class="p">.</span><span class="n">ws</span><span class="p">.</span><span class="n">rs</span><span class="p">.</span><span class="n">MatrixParam</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">javax</span><span class="p">.</span><span class="n">ws</span><span class="p">.</span><span class="n">rs</span><span class="p">.</span><span class="n">Path</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">javax</span><span class="p">.</span><span class="n">ws</span><span class="p">.</span><span class="n">rs</span><span class="p">.</span><span class="n">Produces</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">javax</span><span class="p">.</span><span class="n">ws</span><span class="p">.</span><span class="n">rs</span><span class="p">.</span><span class="n">core</span><span class="p">.</span><span class="n">MediaType</span><span class="p">;</span>
 
-@Path("/matrixParam")
-public class MatrixParamExample {
-    @GET
-    @Produces(MediaType.TEXT_HTML+";charset=UTF-8")
-    public String getBook(@MatrixParam("bookName") String bookName) {
-        String returnedBook="";
-        List&lt;String&gt; books = new ArrayList&lt;&gt;();
+<span class="p">@</span><span class="n">Path</span><span class="p">(</span><span class="s2">"/matrixParam"</span><span class="p">)</span>
+<span class="k">public</span> <span class="n">class</span> <span class="n">MatrixParamExample</span> <span class="p">{</span>
+    <span class="p">@</span><span class="n">GET</span>
+    <span class="p">@</span><span class="n">Produces</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="n">TEXT_HTML</span><span class="p">+</span><span class="s2">";charset=UTF-8"</span><span class="p">)</span>
+    <span class="k">public</span> <span class="k">String</span> <span class="n">getBook</span><span class="p">(@</span><span class="n">MatrixParam</span><span class="p">(</span><span class="s2">"bookName"</span><span class="p">)</span> <span class="k">String</span> <span class="n">bookName</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">String</span> <span class="n">returnedBook</span><span class="p">=</span><span class="s2">""</span><span class="p">;</span>
+        <span class="k">List</span><span class="p">&lt;</span><span class="k">String</span><span class="p">&gt;</span> <span class="n">books</span> <span class="p">=</span> <span class="n">new</span> <span class="n">ArrayList</span><span class="p">&lt;&gt;();</span>
         
-        books.add("1984");
-        books.add("Hayvan Çiftliği");
-        books.add("Cesur Yeni Dünya");
+        <span class="n">books</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"1984"</span><span class="p">);</span>
+        <span class="n">books</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"Hayvan Çiftliği"</span><span class="p">);</span>
+        <span class="n">books</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"Cesur Yeni Dünya"</span><span class="p">);</span>
         
-        for(String s : books) {
-            if (s.equals(bookName)) {
-                returnedBook = s;
-            }
-        }
-        return "Kitap Adı : "+returnedBook;
-    }           
-}
-</code></pre>
-</div>
+        <span class="n">for</span><span class="p">(</span><span class="k">String</span> <span class="n">s</span> <span class="p">:</span> <span class="n">books</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="n">bookName</span><span class="p">))</span> <span class="p">{</span>
+                <span class="n">returnedBook</span> <span class="p">=</span> <span class="n">s</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">return</span> <span class="s2">"Kitap Adı : "</span><span class="p">+</span><span class="n">returnedBook</span><span class="p">;</span>
+    <span class="p">}</span>           
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>MatrixParamExample sınıfımınız içinde @GET notasyonu ile işaretlediğimiz ve ekrana çıktı verecek olan getBook metodu parametresini @MatrixParam notasyonu ile alıyor. Burada yine dikkat edeceğimiz gibi path üzerinde herhangi bir parametre tanımlaması yok. Bu metot gelen parametreyi MatrixParam’ın özelliklerine göre algılayacak.</p>
 

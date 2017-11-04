@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2017/angular-2-lesson-2-create-component/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Angular 2 Ders 2 - Component Oluşturalım - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Angular 2 Ders 2 - Component Oluşturalım | İlkay Günel - Blog</title>
 <meta property="og:title" content="Angular 2 Ders 2 - Component Oluşturalım" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Angular 2 Ders 2 - Component Oluşturalım" />
 <meta property="og:description" content="Angular 2 Ders 2 - Component Oluşturalım" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2017/angular-2-lesson-2-create-component/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2017-05-05T20:40:21+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Angular 2 Ders 2 - Component Oluşturalım",
-    "datePublished": "2017-05-05T20:40:21+03:00",
-    "description": "Angular 2 Ders 2 - Component Oluşturalım",
-    "url": "http://ilkaygunel.com/blog/2017/angular-2-lesson-2-create-component/"
-  }
-</script>
+{"name":null,"description":"Angular 2 Ders 2 - Component Oluşturalım","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2017/angular-2-lesson-2-create-component/","publisher":null,"image":null,"headline":"Angular 2 Ders 2 - Component Oluşturalım","dateModified":"2017-05-05T20:40:21+03:00","datePublished":"2017-05-05T20:40:21+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/angular-2-lesson-2-create-component/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -134,9 +129,9 @@ Hello World uygulaması yapmıştık. Bu yazıda da kendi component’imizi yap�
 
 <p><strong>angular2tutorials.component.ts</strong></p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="kr">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span></span><span class="kr">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 
-<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+<span class="kd">@Component</span><span class="p">({</span>
     <span class="nx">selector</span> <span class="o">:</span> <span class="s1">&#39;angular2Tutorials&#39;</span><span class="p">,</span>
     <span class="nx">template</span> <span class="o">:</span> <span class="s1">&#39;&lt;h2&gt;Angular 2 Tutorials&lt;/h2&gt;&#39;</span>
 <span class="p">})</span>
@@ -160,13 +155,13 @@ service işleri yapan kısımları barındıracak dosyalarımız olacak. O zaman
 
 <p><strong>app.component.ts</strong></p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span><span class="nx">Angular2Tutorials</span><span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./angular2tutorials.component&#39;</span><span class="p">;</span>
 
-<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+<span class="kd">@Component</span><span class="p">({</span>
   <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;my-app&#39;</span><span class="p">,</span>
-  <span class="nx">template</span><span class="o">:</span> <span class="err">`</span><span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Hello</span> <span class="nx">World</span><span class="o">&lt;</span><span class="err">/h1&gt;</span>
-              <span class="o">&lt;</span><span class="nx">angular2Tutorials</span><span class="o">&gt;&lt;</span><span class="err">/angular2Tutorials&gt;`,</span>
+  <span class="nx">template</span><span class="o">:</span> <span class="sb">`&lt;h1&gt;Hello World&lt;/h1&gt;</span>
+<span class="sb">              &lt;angular2Tutorials&gt;&lt;/angular2Tutorials&gt;`</span><span class="p">,</span>
   <span class="nx">directives</span><span class="o">:</span><span class="p">[</span><span class="nx">Angular2Tutorials</span><span class="p">]</span>
 <span class="p">})</span>
 <span class="kr">export</span> <span class="kr">class</span> <span class="nx">AppComponent</span> <span class="p">{</span> <span class="p">}</span></code></pre></figure>

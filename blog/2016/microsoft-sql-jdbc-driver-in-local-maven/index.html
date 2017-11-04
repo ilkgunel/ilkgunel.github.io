@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/microsoft-sql-jdbc-driver-in-local-maven/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Microsoft SQL Server JDBC Driver’ının Local Maven Reposuna Eklenmesi - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Microsoft SQL Server JDBC Driver’ının Local Maven Reposuna Eklenmesi | İlkay Günel - Blog</title>
 <meta property="og:title" content="Microsoft SQL Server JDBC Driver’ının Local Maven Reposuna Eklenmesi" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Microsoft SQL Server JDBC Driver’ının Local Maven Reposuna Eklenmesi" />
 <meta property="og:description" content="Microsoft SQL Server JDBC Driver’ının Local Maven Reposuna Eklenmesi" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/microsoft-sql-jdbc-driver-in-local-maven/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-10-21T20:41:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Microsoft SQL Server JDBC Driver’ının Local Maven Reposuna Eklenmesi",
-    "datePublished": "2016-10-21T20:41:20+03:00",
-    "description": "Microsoft SQL Server JDBC Driver’ının Local Maven Reposuna Eklenmesi",
-    "url": "http://ilkaygunel.com/blog/2016/microsoft-sql-jdbc-driver-in-local-maven/"
-  }
-</script>
+{"name":null,"description":"Microsoft SQL Server JDBC Driver’ının Local Maven Reposuna Eklenmesi","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/microsoft-sql-jdbc-driver-in-local-maven/","publisher":null,"image":null,"headline":"Microsoft SQL Server JDBC Driver’ının Local Maven Reposuna Eklenmesi","dateModified":"2016-10-21T20:41:20+03:00","datePublished":"2016-10-21T20:41:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/microsoft-sql-jdbc-driver-in-local-maven/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -155,10 +150,10 @@ sürümünü indirin. Ben aşağıdaki resimdeki işaretli sürümü indiriyorum
 
 <p>Şimdi herhangi bir IDE’de bir Maven projesi açalım ve pom.xml’imizi şöyle düzenleyelim.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/POM/4.0.0"</span> 
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/POM/4.0.0"</span> 
 <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
-	<span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/POM/4.0.0</span> 
-	<span class="err">http://maven.apache.org/xsd/maven-4.0.0.xsd"</span><span class="nt">&gt;</span>
+	<span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/POM/4.0.0 
+	http://maven.apache.org/xsd/maven-4.0.0.xsd"</span><span class="nt">&gt;</span>
 	<span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
 	<span class="nt">&lt;groupId&gt;</span>com.ilkaygunel<span class="nt">&lt;/groupId&gt;</span>
 	<span class="nt">&lt;artifactId&gt;</span>MsSsqlJdbcInLocalRepo<span class="nt">&lt;/artifactId&gt;</span>
@@ -172,8 +167,7 @@ sürümünü indirin. Ben aşağıdaki resimdeki işaretli sürümü indiriyorum
 		<span class="nt">&lt;/dependency&gt;</span>
 	<span class="nt">&lt;/dependencies&gt;</span>
 <span class="nt">&lt;/project&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>IDE bu düzenlemenin ardından hata verecektir çünkü ne local repoda ne uzak sunucuda böyle bir bağımlılık bulunmaktadır.</p>
 
@@ -184,10 +178,9 @@ sürümünü indirin. Ben aşağıdaki resimdeki işaretli sürümü indiriyorum
 <p>Şimdi terminali açalım, az önce indridğimiz tar.gz uzantılı dosyayı açtığımız yere gidelim. Bu klasörün içinde <strong><em>enu</em></strong> isminde bir klasör var. cd komutu ile içine girelim 
 ve şu komutu işletelim:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">mvn</span> <span class="nl">install:</span><span class="n">install</span><span class="o">-</span><span class="n">file</span> <span class="o">-</span><span class="n">Dfile</span><span class="o">=</span><span class="n">sqljdbc42</span><span class="o">.</span><span class="na">jar</span> <span class="o">-</span><span class="n">DgroupId</span><span class="o">=</span><span class="n">com</span><span class="o">.</span><span class="na">microsoft</span><span class="o">.</span><span class="na">sqlserver</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mvn</span> <span class="nl">install:</span><span class="n">install</span><span class="o">-</span><span class="n">file</span> <span class="o">-</span><span class="n">Dfile</span><span class="o">=</span><span class="n">sqljdbc42</span><span class="o">.</span><span class="na">jar</span> <span class="o">-</span><span class="n">DgroupId</span><span class="o">=</span><span class="n">com</span><span class="o">.</span><span class="na">microsoft</span><span class="o">.</span><span class="na">sqlserver</span>
 <span class="o">-</span><span class="n">DartifactId</span><span class="o">=</span><span class="n">sqljdbc4</span> <span class="o">-</span><span class="n">Dversion</span><span class="o">=</span><span class="mf">4.0</span> <span class="o">-</span><span class="n">Dpackaging</span><span class="o">=</span><span class="n">jar</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>enu ismindeki klasör içinde 4 adet jar var. Biz bunlardan <strong><em>sqljdbc42.jar</em></strong> ismindeki jar’ı kullanıyoruz.</p>
 

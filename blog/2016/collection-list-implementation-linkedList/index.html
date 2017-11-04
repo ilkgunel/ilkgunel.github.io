@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/collection-list-implementation-linkedList/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Collections 4 – List Implementation LinkedList - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Collections 4 – List Implementation LinkedList | İlkay Günel - Blog</title>
 <meta property="og:title" content="Collections 4 – List Implementation LinkedList" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Collections 4 – List Implementation LinkedList" />
 <meta property="og:description" content="Collections 4 – List Implementation LinkedList" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/collection-list-implementation-linkedList/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-09-04T19:38:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Collections 4 – List Implementation LinkedList",
-    "datePublished": "2016-09-04T19:38:20+03:00",
-    "description": "Collections 4 – List Implementation LinkedList",
-    "url": "http://ilkaygunel.com/blog/2016/collection-list-implementation-linkedList/"
-  }
-</script>
+{"name":null,"description":"Collections 4 – List Implementation LinkedList","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/collection-list-implementation-linkedList/","publisher":null,"image":null,"headline":"Collections 4 – List Implementation LinkedList","dateModified":"2016-09-04T19:38:20+03:00","datePublished":"2016-09-04T19:38:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/collection-list-implementation-linkedList/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -135,9 +130,8 @@
 
 <p>ArrayList gibi LinkedList sınıfı da varsayılan olarak Synchronized özelliğine sahip değildir. Bir LinkedList nesnesinin senkronize olabilmesi için şöyle bir kod kullanmamız gerekmektedir:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>List list = Collections.synchronizedList(new LinkedList(...));
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>List list = Collections.synchronizedList(new LinkedList(...));
+</code></pre></div></div>
 
 <p>LinkedList sınıfının iki adet yapılandırıcısı bulunmaktadır.</p>
 
@@ -162,34 +156,34 @@ ArrayList’de ise veriyi yahut verinin indexini parametre olarak alıp işlemi 
   <li>
     <p>Listeyi tersten gezinme işlemi için LinkedList sınıfı içerisinde descendingIterator() isimli bir metot yer almaktadır. Sadece bu metot vasıtası ile liste tersten okunabilinir. Kullanımı şöyledir (Kodda sol tarafın List değil LinkedList olduğuna dikkat ediniz):</p>
 
-    <p>LinkedList<string> linkedList = new LinkedList&lt;&gt;();
- System.out.println(linkedList.descendingIterator());</string></p>
+    <p>LinkedList<String> linkedList = new LinkedList&lt;&gt;();
+ System.out.println(linkedList.descendingIterator());</String></p>
   </li>
 </ol>
 
 <p>ArrayList içerisinde ise listeyi tersten okuma işlemi için bizim ListIterator sınıfından bir nesne elde edip onunla tersten dolanan döngüyü yazmamız gerekir. Şöyle ki:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>List&lt;String&gt; liste = new ArrayList&lt;&gt;();
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>List&lt;String&gt; liste = new ArrayList&lt;&gt;();
 ListIterator&lt;String&gt; listIterator = liste.listIterator(liste.size());
 while (listIterator.hasPrevious())
 {
    System.out.println(listIterator.previous());
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<p>Bu kısımda şunu da söyliyeyim. Collection Interface içerisindeki Iterator’ın geri gitme özelliği yoktur. List Interface için yazılmış olan listIterator metodu ve ListIterator sınıfından yararlanarak ileri gitme özelliği olan iterator’ı kullanırız.
-4. ArrayList oluşturma işlemi sırasında eğer parametre alamayan yapılandırıcı (constructor) kullanılırsa başlangıç kapasitesi olarak 10 kullanılır (önceki yazıda değinmiştim). Fakat LinkedList oluşturma sırasında herhangi bir başlangıç kapasitesi belirlenmez. Boş bir liste oluşturulur o kadar.
-5. Bellek Kullanımı açısından bakıldığında ise ArrayList’in LinkedList’e bir üstünlüğü olduğu söylenebilir. Çünkü tıpatıp aynı verileri tutsalar bile LinkedList bir gözde veriyi, o veriden önceki ve sonraki veriyi işaret eden alanları tutarken ArrayList sadece veriyi tutar.
-ArrayList ile LinkedList ortak özellikler de muhteva etmektedir. Şimdi bunlara da bakalım.</p>
-
+<p>Bu kısımda şunu da söyliyeyim. Collection Interface içerisindeki Iterator’ın geri gitme özelliği yoktur. List Interface için yazılmış olan listIterator metodu ve ListIterator sınıfından yararlanarak ileri gitme özelliği olan iterator’ı kullanırız.</p>
 <ol>
+  <li>ArrayList oluşturma işlemi sırasında eğer parametre alamayan yapılandırıcı (constructor) kullanılırsa başlangıç kapasitesi olarak 10 kullanılır (önceki yazıda değinmiştim). Fakat LinkedList oluşturma sırasında herhangi bir başlangıç kapasitesi belirlenmez. Boş bir liste oluşturulur o kadar.</li>
+  <li>
+    <p>Bellek Kullanımı açısından bakıldığında ise ArrayList’in LinkedList’e bir üstünlüğü olduğu söylenebilir. Çünkü tıpatıp aynı verileri tutsalar bile LinkedList bir gözde veriyi, o veriden önceki ve sonraki veriyi işaret eden alanları tutarken ArrayList sadece veriyi tutar.
+ArrayList ile LinkedList ortak özellikler de muhteva etmektedir. Şimdi bunlara da bakalım.</p>
+  </li>
   <li>İkisi de senkronize değildir. LinkedList ve ArrayList snıflarından oluşturulmuş objeler üzerinde aynı anda birden fazla Thread işlem yapabilir.</li>
   <li>
     <p>clone() metodu ile ArrayList ve LinkedList sınıfları klonlama işlemi sunar. Klonlama işlemi sırasında listenin içindeki veriler klonlanmaz. Bunun yerine liste objesinin kendisi klonlanır. Kullanımı hakkında örnek bir kod şöyledir:</p>
 
-    <p>ArrayList<string> liste = new ArrayList&lt;&gt;();
- ArrayList<string> list = (ArrayList<string>)liste.clone();</string></string></string></p>
+    <p>ArrayList<String> liste = new ArrayList&lt;&gt;();
+ ArrayList<String> list = (ArrayList<String>)liste.clone();</String></String></String></p>
   </li>
   <li>İkisi de iterator ve listIterator metodları sayesinde iterasyon işlemine tabi tutulabilir. Buradaki listIterator metodu fail-fast metot olarak geçer. Yani tam bu metot çalışırken bir Thread işin içine girmeye kalkarsa ConcurrentModificationException fırlatılır.</li>
   <li>İki tüdeki objemiz de değerlerin eklenme sırasını muhafaza eder. Burada List arabirimi olmaları temel özellik teşkil eder.</li>

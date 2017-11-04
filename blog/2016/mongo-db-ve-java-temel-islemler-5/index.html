@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-5/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Mongo DB Ve Java Temel İşlemler 5 - Kayıt Silme - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Mongo DB Ve Java Temel İşlemler 5 - Kayıt Silme | İlkay Günel - Blog</title>
 <meta property="og:title" content="Mongo DB Ve Java Temel İşlemler 5 - Kayıt Silme" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Mongo DB Ve Java Temel İşlemler 5 - Kayıt Silme" />
 <meta property="og:description" content="Mongo DB Ve Java Temel İşlemler 5 - Kayıt Silme" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-5/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-09-10T19:38:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Mongo DB Ve Java Temel İşlemler 5 - Kayıt Silme",
-    "datePublished": "2016-09-10T19:38:20+03:00",
-    "description": "Mongo DB Ve Java Temel İşlemler 5 - Kayıt Silme",
-    "url": "http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-5/"
-  }
-</script>
+{"name":null,"description":"Mongo DB Ve Java Temel İşlemler 5 - Kayıt Silme","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-5/","publisher":null,"image":null,"headline":"Mongo DB Ve Java Temel İşlemler 5 - Kayıt Silme","dateModified":"2016-09-10T19:38:20+03:00","datePublished":"2016-09-10T19:38:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-5/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -134,77 +129,75 @@ sadece bir kayıt silmek deleteMany metodu da birden fazla kayıt silmek amacı 
 
 <p>Önceki yazılarda da yaptığımız gibi öncelikle üzerinde çalışacağımız kaydı görelim:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57c19b523e9b4210f735327f"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 Avenue"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10077"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"building"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1480"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"coord"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="mf">-73.9557413</span><span class="p">,</span><span class="w">
-        </span><span class="mf">40.7720266</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"borough"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Manhattan"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuisine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"American"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"grades"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27-08-2016"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"grade"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27-08-2016"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"grade"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vella"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"restaurant_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"41704620"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+    "_id": "57c19b523e9b4210f735327f",
+    "address": {
+      "street": "2 Avenue",
+      "zipcode": "10077",
+      "building": "1480",
+      "coord": [
+        -73.9557413,
+        40.7720266
+      ]
+    },
+    "borough": "Manhattan",
+    "cuisine": "American",
+    "grades": [
+      {
+        "date": "27-08-2016",
+        "grade": "A",
+        "score": 14
+      },
+      {
+        "date": "27-08-2016",
+        "grade": "B",
+        "score": 15
+      }
+    ],
+    "name": "Vella",
+    "restaurant_id": "41704620"
+}
+</code></pre></div></div>
 
 <p>Veritabanında cuisine alanı American olan sadece bir kayıt var. Şimdi benim bu kaydı silmek için kullanacağım şu şekildedir:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package io.github.ilkgunel.mongodb;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">/*</span>
+ <span class="p">*</span> <span class="k">To</span> <span class="n">change</span> <span class="n">this</span> <span class="n">license</span> <span class="n">header</span><span class="p">,</span> <span class="n">choose</span> <span class="n">License</span> <span class="n">Headers</span> <span class="k">in</span> <span class="n">Project</span> <span class="n">Properties</span><span class="p">.</span>
+ <span class="p">*</span> <span class="k">To</span> <span class="n">change</span> <span class="n">this</span> <span class="n">template</span> <span class="n">file</span><span class="p">,</span> <span class="n">choose</span> <span class="n">Tools</span> <span class="p">|</span> <span class="n">Templates</span>
+ <span class="p">*</span> <span class="k">and</span> <span class="n">open</span> <span class="n">the</span> <span class="n">template</span> <span class="k">in</span> <span class="n">the</span> <span class="n">editor</span><span class="p">.</span>
+ <span class="p">*/</span>
+<span class="k">package</span> <span class="n">io</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">ilkgunel</span><span class="p">.</span><span class="n">mongodb</span><span class="p">;</span>
 
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.result.DeleteResult;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import static java.util.Arrays.asList;
-import java.util.Locale;
-import org.bson.Document;
+<span class="n">import</span> <span class="n">com</span><span class="p">.</span><span class="n">mongodb</span><span class="p">.</span><span class="n">MongoClient</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">com</span><span class="p">.</span><span class="n">mongodb</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">MongoDatabase</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">com</span><span class="p">.</span><span class="n">mongodb</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">result</span><span class="p">.</span><span class="n">DeleteResult</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">DateFormat</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">SimpleDateFormat</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">static</span> <span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">Arrays</span><span class="p">.</span><span class="n">asList</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">Locale</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">bson</span><span class="p">.</span><span class="n">Document</span><span class="p">;</span>
 
-/**
- *
- * @author ilkaygunel
- */
-public class RemovingData {
-    public static void main(String[] args) {
-        MongoClient mongoClient = null;
-        try {
-            mongoClient = new MongoClient("localhost", 27017);
-            MongoDatabase database = mongoClient.getDatabase("MongoDB");
+<span class="p">/**</span>
+ <span class="p">*</span>
+ <span class="p">*</span> <span class="p">@</span><span class="n">author</span> <span class="n">ilkaygunel</span>
+ <span class="p">*/</span>
+<span class="k">public</span> <span class="n">class</span> <span class="n">RemovingData</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="k">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">MongoClient</span> <span class="n">mongoClient</span> <span class="p">=</span> <span class="n">null</span><span class="p">;</span>
+        <span class="n">try</span> <span class="p">{</span>
+            <span class="n">mongoClient</span> <span class="p">=</span> <span class="n">new</span> <span class="n">MongoClient</span><span class="p">(</span><span class="s2">"localhost"</span><span class="p">,</span> <span class="m">27017</span><span class="p">);</span>
+            <span class="n">MongoDatabase</span> <span class="n">database</span> <span class="p">=</span> <span class="n">mongoClient</span><span class="p">.</span><span class="n">getDatabase</span><span class="p">(</span><span class="s2">"MongoDB"</span><span class="p">);</span>
             
-            database.getCollection("Records").deleteOne(new Document("cuisine","American"));
+            <span class="n">database</span><span class="p">.</span><span class="n">getCollection</span><span class="p">(</span><span class="s2">"Records"</span><span class="p">).</span><span class="n">deleteOne</span><span class="p">(</span><span class="n">new</span> <span class="n">Document</span><span class="p">(</span><span class="s2">"cuisine"</span><span class="p">,</span><span class="s2">"American"</span><span class="p">));</span>
 
-        } catch (Exception e) {
-            System.out.println("An Error Occured! Error is:" + e);
-        } finally {
-            mongoClient.close();
-        }
-    }
-}
-</code></pre>
-</div>
+        <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"An Error Occured! Error is:"</span> <span class="p">+</span> <span class="n">e</span><span class="p">);</span>
+        <span class="p">}</span> <span class="n">finally</span> <span class="p">{</span>
+            <span class="n">mongoClient</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>Kod içerisinde deleteOne metoduna bir döküman geçirdik ve bu dökümanda cuisine keyine American valuesunu atadık. Kod çalıştığında veritabanında karşısına cuisine alanı
 American olup ilk gelen kaydı silecek.</p>
@@ -227,44 +220,43 @@ Kodumuz şöyle:</p>
 <p><a href="/images/mongoDelete3.png">
 <img src="/images/mongoDelete3.png" style="width: 958px; height= 400px;" /></a></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package io.github.ilkgunel.mongodb;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">/*</span>
+ <span class="p">*</span> <span class="k">To</span> <span class="n">change</span> <span class="n">this</span> <span class="n">license</span> <span class="n">header</span><span class="p">,</span> <span class="n">choose</span> <span class="n">License</span> <span class="n">Headers</span> <span class="k">in</span> <span class="n">Project</span> <span class="n">Properties</span><span class="p">.</span>
+ <span class="p">*</span> <span class="k">To</span> <span class="n">change</span> <span class="n">this</span> <span class="n">template</span> <span class="n">file</span><span class="p">,</span> <span class="n">choose</span> <span class="n">Tools</span> <span class="p">|</span> <span class="n">Templates</span>
+ <span class="p">*</span> <span class="k">and</span> <span class="n">open</span> <span class="n">the</span> <span class="n">template</span> <span class="k">in</span> <span class="n">the</span> <span class="n">editor</span><span class="p">.</span>
+ <span class="p">*/</span>
+<span class="k">package</span> <span class="n">io</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">ilkgunel</span><span class="p">.</span><span class="n">mongodb</span><span class="p">;</span>
 
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.result.DeleteResult;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import static java.util.Arrays.asList;
-import java.util.Locale;
-import org.bson.Document;
+<span class="n">import</span> <span class="n">com</span><span class="p">.</span><span class="n">mongodb</span><span class="p">.</span><span class="n">MongoClient</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">com</span><span class="p">.</span><span class="n">mongodb</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">MongoDatabase</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">com</span><span class="p">.</span><span class="n">mongodb</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">result</span><span class="p">.</span><span class="n">DeleteResult</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">DateFormat</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">SimpleDateFormat</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">static</span> <span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">Arrays</span><span class="p">.</span><span class="n">asList</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">Locale</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">bson</span><span class="p">.</span><span class="n">Document</span><span class="p">;</span>
 
-/**
- *
- * @author ilkaygunel
- */
-public class RemovingData {
-    public static void main(String[] args) {
-        MongoClient mongoClient = null;
-        try {
-            mongoClient = new MongoClient("localhost", 27017);
-            MongoDatabase database = mongoClient.getDatabase("MongoDB");
+<span class="p">/**</span>
+ <span class="p">*</span>
+ <span class="p">*</span> <span class="p">@</span><span class="n">author</span> <span class="n">ilkaygunel</span>
+ <span class="p">*/</span>
+<span class="k">public</span> <span class="n">class</span> <span class="n">RemovingData</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="k">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">MongoClient</span> <span class="n">mongoClient</span> <span class="p">=</span> <span class="n">null</span><span class="p">;</span>
+        <span class="n">try</span> <span class="p">{</span>
+            <span class="n">mongoClient</span> <span class="p">=</span> <span class="n">new</span> <span class="n">MongoClient</span><span class="p">(</span><span class="s2">"localhost"</span><span class="p">,</span> <span class="m">27017</span><span class="p">);</span>
+            <span class="n">MongoDatabase</span> <span class="n">database</span> <span class="p">=</span> <span class="n">mongoClient</span><span class="p">.</span><span class="n">getDatabase</span><span class="p">(</span><span class="s2">"MongoDB"</span><span class="p">);</span>
             
-            database.getCollection("Records").deleteMany(new Document("cuisine","Italian"));
+            <span class="n">database</span><span class="p">.</span><span class="n">getCollection</span><span class="p">(</span><span class="s2">"Records"</span><span class="p">).</span><span class="n">deleteMany</span><span class="p">(</span><span class="n">new</span> <span class="n">Document</span><span class="p">(</span><span class="s2">"cuisine"</span><span class="p">,</span><span class="s2">"Italian"</span><span class="p">));</span>
 
-        } catch (Exception e) {
-            System.out.println("An Error Occured! Error is:" + e);
-        } finally {
-            mongoClient.close();
-        }
-    }
-}
-</code></pre>
-</div>
+        <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"An Error Occured! Error is:"</span> <span class="p">+</span> <span class="n">e</span><span class="p">);</span>
+        <span class="p">}</span> <span class="n">finally</span> <span class="p">{</span>
+            <span class="n">mongoClient</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>MongoClient’a dönüp baktığımızda kayıt sayısının 2’ye indiğini görüyoruz.</p>
 
@@ -273,10 +265,9 @@ public class RemovingData {
 
 <p>MongoDB’de eğer istenirse bir seferde tüm kayıtlar silinebilinir. Bunun yapılması için deleteMany metoduna boş bir döküman geçirilmesi yeterlidir. Örnek kodumuzu şu şekilde güncellersek amacımıza uygun hale gelir:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>//database.getCollection("Records").deleteMany(new Document("cuisine","Italian"));
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//database.getCollection("Records").deleteMany(new Document("cuisine","Italian"));
 database.getCollection("Records").deleteMany(new Document());
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Kodun çalıştırılması akabinde durum şöyledir:</p>
 
@@ -286,11 +277,10 @@ database.getCollection("Records").deleteMany(new Document());
 <p>Bu kodun işletilmesi akabinde tüm kayıtlar silinmiş olmasına rağmen Collection yerinde durmaktadır. Eğer tüm kayıtlarla beraber Collection’ı da silmek istersek <strong><em>drop()</em></strong> metodunu
 kullanabiliriz. Kodumuzu şu şekilde düzenlemeliyiz:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>//database.getCollection("Records").deleteMany(new Document("cuisine","Italian"));
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//database.getCollection("Records").deleteMany(new Document("cuisine","Italian"));
 //database.getCollection("Records").deleteMany(new Document());
 database.getCollection("Records").drop();
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Collections’ın altındaki artık hiçbir Collection görünmüyor.</p>
 

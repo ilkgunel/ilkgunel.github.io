@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/java-common-and-not-common-elements-between-lists/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Java’da İki Listedeki Ortak ve Ortak Olmayan Elemanları Bulmak - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Java’da İki Listedeki Ortak ve Ortak Olmayan Elemanları Bulmak | İlkay Günel - Blog</title>
 <meta property="og:title" content="Java’da İki Listedeki Ortak ve Ortak Olmayan Elemanları Bulmak" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Java’da İki Listedeki Ortak ve Ortak Olmayan Elemanları Bulmak" />
 <meta property="og:description" content="Java’da İki Listedeki Ortak ve Ortak Olmayan Elemanları Bulmak" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/java-common-and-not-common-elements-between-lists/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-10-18T20:41:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Java’da İki Listedeki Ortak ve Ortak Olmayan Elemanları Bulmak",
-    "datePublished": "2016-10-18T20:41:20+03:00",
-    "description": "Java’da İki Listedeki Ortak ve Ortak Olmayan Elemanları Bulmak",
-    "url": "http://ilkaygunel.com/blog/2016/java-common-and-not-common-elements-between-lists/"
-  }
-</script>
+{"name":null,"description":"Java’da İki Listedeki Ortak ve Ortak Olmayan Elemanları Bulmak","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/java-common-and-not-common-elements-between-lists/","publisher":null,"image":null,"headline":"Java’da İki Listedeki Ortak ve Ortak Olmayan Elemanları Bulmak","dateModified":"2016-10-18T20:41:20+03:00","datePublished":"2016-10-18T20:41:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/java-common-and-not-common-elements-between-lists/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -132,11 +127,11 @@ onu anlatmaya çalışacağım.</p>
 
 <p>Şimdi bizim şu şekilde oluşturduğumuz ve Integer tipinde veri tutan iki adet listemiz olsun.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CommonAndNotCommon</span> <span class="o">{</span>
-	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
 		<span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
 		<span class="n">list1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
 		<span class="n">list1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
@@ -148,17 +143,16 @@ onu anlatmaya çalışacağım.</p>
 		<span class="n">list2</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">7</span><span class="o">);</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Öncelikle bu listedeki ortak elemanları nasıl edeceğimize bakalım. Collection framework içerisinde yer alan <strong><em>retainAll</em></strong> metodu bu iş için çözümümüz olacak. Hemen kodumuzu şu şekilde
 güncelleyelim:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CommonAndNotCommon</span> <span class="o">{</span>
-	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
 		<span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
 		<span class="n">list1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
 		<span class="n">list1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
@@ -175,8 +169,7 @@ güncelleyelim:</p>
 		<span class="n">commonElements</span><span class="o">.</span><span class="na">forEach</span><span class="o">((</span><span class="n">element</span><span class="o">)-&gt;{</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">element</span><span class="o">);});</span>	
 	<span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>İlk olarak <strong><em>commonElements</em></strong> listesini ArrayList sınıfının yapılandırıcısına list1 listesini parametre olarak geçirip oluşturuyoruz. Bu durumda oluşan commonElements listesi list1 ile
 aynı oluyor. Daha sonra <strong><em>commonElements.retainAll(list2);</em></strong> diyerek commonElements ve list2 içerisinde ortak olan elamanların commonElements listesinde kalmasını ve ortak olmayan elemanların
@@ -190,11 +183,11 @@ commonElements listesinden silinmesini söylüyoruz. Son aşamada ise ekrana yaz
 
 <p>Şimdi bir de aynı olmayan elemanları nasıl edinebiliriz ona bakalım. Eğer ki list1’de olup list2’de olmayan elemanları istiyorsak şu şekilde olabilir kodumuz:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CommonAndNotCommon</span> <span class="o">{</span>
-	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
 		<span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
 		<span class="n">list1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
 		<span class="n">list1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
@@ -219,8 +212,7 @@ commonElements listesinden silinmesini söylüyoruz. Son aşamada ise ekrana yaz
 		<span class="o">});</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Ekran çıktımız da şöyle:</p>
 
@@ -230,13 +222,12 @@ commonElements listesinden silinmesini söylüyoruz. Son aşamada ise ekrana yaz
 
 <p>Eğer list2’de olup da list1’de olmayan elemanları istersek de kodun son kısmındaki list1 ve list2’nin yerlerini değiştirip şöyle güncellememiz yeterli:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">notCommonElements</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;(</span><span class="n">list2</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">notCommonElements</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;(</span><span class="n">list2</span><span class="o">);</span>
 		<span class="n">notCommonElements</span><span class="o">.</span><span class="na">removeAll</span><span class="o">(</span><span class="n">list1</span><span class="o">);</span>
 		<span class="n">notCommonElements</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">element</span> <span class="o">-&gt;</span> <span class="o">{</span>
 			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">element</span><span class="o">);</span>
 		<span class="o">});</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Konsolda list2’de olup da list1’de olmayan 7 elemanını görüyoruz.</p>
 

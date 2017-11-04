@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsfde-yonlendirme-kurali-navigation-rule-in-jsf/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>JSF Dersleri-JSF’De Metot İle Sayfa Yönlendirme - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>JSF Dersleri-JSF’De Metot İle Sayfa Yönlendirme | İlkay Günel - Blog</title>
 <meta property="og:title" content="JSF Dersleri-JSF’De Metot İle Sayfa Yönlendirme" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="JSF Dersleri-JSF’De Metot İle Sayfa Yönlendirme" />
 <meta property="og:description" content="JSF Dersleri-JSF’De Metot İle Sayfa Yönlendirme" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsfde-yonlendirme-kurali-navigation-rule-in-jsf/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-10-17T20:39:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "JSF Dersleri-JSF’De Metot İle Sayfa Yönlendirme",
-    "datePublished": "2016-10-17T20:39:20+03:00",
-    "description": "JSF Dersleri-JSF’De Metot İle Sayfa Yönlendirme",
-    "url": "http://ilkaygunel.com/blog/2016/jsfde-yonlendirme-kurali-navigation-rule-in-jsf/"
-  }
-</script>
+{"name":null,"description":"JSF Dersleri-JSF’De Metot İle Sayfa Yönlendirme","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/jsfde-yonlendirme-kurali-navigation-rule-in-jsf/","publisher":null,"image":null,"headline":"JSF Dersleri-JSF’De Metot İle Sayfa Yönlendirme","dateModified":"2016-10-17T20:39:20+03:00","datePublished":"2016-10-17T20:39:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/jsfde-yonlendirme-kurali-navigation-rule-in-jsf/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -151,7 +146,7 @@ yönlendirme yetişiyor.</p>
 
 <p><strong>index.xhtml Kodu</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
 <span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
  	 <span class="na">xmlns:h=</span><span class="s">"http://xmlns.jcp.org/jsf/html"</span><span class="nt">&gt;</span>
@@ -166,8 +161,7 @@ yönlendirme yetişiyor.</p>
     	<span class="nt">&lt;/h:form&gt;</span>
 	<span class="nt">&lt;/h:body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>Kodun açıklaması:</strong></p>
 
@@ -175,7 +169,7 @@ yönlendirme yetişiyor.</p>
 
 <p><strong>kucuk.xhtml Kodu:</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
 <span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
   	<span class="na">xmlns:h=</span><span class="s">"http://xmlns.jcp.org/jsf/html"</span><span class="nt">&gt;</span>
@@ -186,12 +180,11 @@ yönlendirme yetişiyor.</p>
     	Girilen sayı 50'den küçük
 	<span class="nt">&lt;/h:body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>buyuk.xhtml Kodu:</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
 <span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
   	<span class="na">xmlns:h=</span><span class="s">"http://xmlns.jcp.org/jsf/html"</span><span class="nt">&gt;</span>
@@ -202,8 +195,7 @@ yönlendirme yetişiyor.</p>
     	Girilen sayı 50'den büyük
 	<span class="nt">&lt;/h:body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>Kodların Açıklaması:</strong></p>
 
@@ -211,21 +203,21 @@ yönlendirme yetişiyor.</p>
 
 <p><strong>ManagedBean.java kodu:</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">javax.faces.bean.ManagedBean</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">javax.faces.bean.ManagedBean</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">javax.faces.bean.RequestScoped</span><span class="o">;</span>
 <span class="nd">@ManagedBean</span>
 <span class="nd">@RequestScoped</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">managedbean</span> <span class="o">{</span>
 <span class="kt">int</span> <span class="n">sayi</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="kt">int</span> <span class="n">getSayi</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getSayi</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">sayi</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setSayi</span><span class="o">(</span><span class="kt">int</span> <span class="n">sayi</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSayi</span><span class="o">(</span><span class="kt">int</span> <span class="n">sayi</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">sayi</span> <span class="o">=</span> <span class="n">sayi</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">karsilastir</span><span class="o">()</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">karsilastir</span><span class="o">()</span>
     <span class="o">{</span>
         <span class="k">if</span><span class="o">(</span><span class="n">sayi</span><span class="o">&gt;</span><span class="mi">50</span><span class="o">)</span>
         <span class="o">{</span>
@@ -237,8 +229,7 @@ yönlendirme yetişiyor.</p>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>Kodun açıklaması:</strong></p>
 

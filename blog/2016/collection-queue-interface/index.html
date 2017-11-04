@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/collection-queue-interface/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Collections 9 – The Queue Interface - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Collections 9 – The Queue Interface | İlkay Günel - Blog</title>
 <meta property="og:title" content="Collections 9 – The Queue Interface" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Collections 9 – The Queue Interface" />
 <meta property="og:description" content="Collections 9 – The Queue Interface" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/collection-queue-interface/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-09-14T19:38:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Collections 9 – The Queue Interface",
-    "datePublished": "2016-09-14T19:38:20+03:00",
-    "description": "Collections 9 – The Queue Interface",
-    "url": "http://ilkaygunel.com/blog/2016/collection-queue-interface/"
-  }
-</script>
+{"name":null,"description":"Collections 9 – The Queue Interface","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/collection-queue-interface/","publisher":null,"image":null,"headline":"Collections 9 – The Queue Interface","dateModified":"2016-09-14T19:38:20+03:00","datePublished":"2016-09-14T19:38:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/collection-queue-interface/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -132,37 +127,40 @@ Temelde tüm Collection üyelerinde olduğu gibi Collection Interface’i kalıt
 Queue arabirimi bir süpermarket kuyruğu gibi ilk giren ilk çıkar (FIFO) algoritmasını uygular. Queue arabirimi Collection Interface’den aldıklarının yanında kendisi de
 ilave metotlar sunar. Bunlar şöyledir:</p>
 
-<p><code class="highlighter-rouge">java
-public interface Queue&lt;E&gt; extends Collection&lt;E&gt; {
-    E element();
-    boolean offer(E e);
-    E peek();
-    E poll();
-    E remove();
-}
-</code></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Queue</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="n">E</span> <span class="nf">element</span><span class="o">();</span>
+    <span class="kt">boolean</span> <span class="nf">offer</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">);</span>
+    <span class="n">E</span> <span class="nf">peek</span><span class="o">();</span>
+    <span class="n">E</span> <span class="nf">poll</span><span class="o">();</span>
+    <span class="n">E</span> <span class="nf">remove</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
 
 <p>Burada Collection Interface içindeki bazı metotlarla temelde aynı işi yapan ama iş yapış şekli değişik olan metotlar yer alıyor. Metotlar’ın bir kısmı işlemi gerçekleştirirken bir hata meydana gelmesi durumunda <strong><em>exception</em></strong> fırlatırken bir kısmı exception fırlatmıyor. Bunun yerine <strong><em>null</em></strong> ya da
 <strong><em>false</em></strong> gibi değerler dönüyorlar.
-Konuyu biraz açalım.
-* Yukarıda gördüğümüz metotlar içinden <strong><em>offer</em></strong> metodu Queue’ya veri eklemekte kullanılır. Collection içinden gelen <strong><em>add</em></strong> metodu da aynı işi yapar. Ancak eğer bu Queue’nun 
-kapasitesi sınırlandırılmış ise add metodu <strong><em>IllegalStateException</em></strong> hatası fırlatır, offer metodu ise <strong><em>false</em></strong> değer döndürür, bir hata fırlatmaz.
-* peek() metodu kuyruğun  başındaki elemanı silmeden elde etmemize yarar. Her çalıştırılışda aynı sonucu döndürür, kuyruğa etki etmez. Eğer kuruk boş ise peek metodu null değer döner.
-* element() metodu peek metodu ile aynı işi yapar fakat eğer liste boş ise NoSuchElement hatası fırlatır. 
-* poll metodu listenin en başındaki elemanı kuyruktan silerek elde etmeye yarar. Her çalıştırılmasında bir sonraki elemanı silerek elde eder. Eğer kuyruk boşsa null değer döner.
-* remove metodu poll ile aynı işi yapar fakat eğer liste boşsa NoSuchElementException fırlatır.</p>
+Konuyu biraz açalım.</p>
+<ul>
+  <li>Yukarıda gördüğümüz metotlar içinden <strong><em>offer</em></strong> metodu Queue’ya veri eklemekte kullanılır. Collection içinden gelen <strong><em>add</em></strong> metodu da aynı işi yapar. Ancak eğer bu Queue’nun 
+kapasitesi sınırlandırılmış ise add metodu <strong><em>IllegalStateException</em></strong> hatası fırlatır, offer metodu ise <strong><em>false</em></strong> değer döndürür, bir hata fırlatmaz.</li>
+  <li>peek() metodu kuyruğun  başındaki elemanı silmeden elde etmemize yarar. Her çalıştırılışda aynı sonucu döndürür, kuyruğa etki etmez. Eğer kuruk boş ise peek metodu null değer döner.</li>
+  <li>element() metodu peek metodu ile aynı işi yapar fakat eğer liste boş ise NoSuchElement hatası fırlatır.</li>
+  <li>poll metodu listenin en başındaki elemanı kuyruktan silerek elde etmeye yarar. Her çalıştırılmasında bir sonraki elemanı silerek elde eder. Eğer kuyruk boşsa null değer döner.</li>
+  <li>remove metodu poll ile aynı işi yapar fakat eğer liste boşsa NoSuchElementException fırlatır.</li>
+</ul>
 
 <h3 id="queue-implementations">Queue Implementations</h3>
 
 <p>Oracle Doc’a göre Queue arbiriminin implementasyonları iki grupta toplanmış.
 General-Purpose Queue Implementations denilen yani genel amaçlı kullanım olarak çevirebileceğimiz türde LinkedList ve PriorityQueue Queue’nun implementasyonlarıdır.
-Concurrent Queue Implementations denilen yani multithread uygulamalar için yazılmış olan türde ise nesneler aynı anda birden fazla Thread’in müdahelesine karşı korunmuş olur. Bu kısımdaki implementasyonlar şöyledir:
-- LinkedBlockingQueue — Zorunlu olmamakla beraber FIFO ile yapılmış arkada bağlı düğümler yapısını kullanılan veri türüdür.
-- ArrayBlockingQueue — FIFO kullanılan ve geri planda dizi ile işini gören veri yapısıdır.
-- PriorityBlockingQueue — Geri planda işini heap ile gören ve herhangi bir algoritma ile sınırlandırılmamış yapıdır. 
-- DelayQueue — Geri planda heap ile işini gören süre tabanlı zamanlama kuyruğudur.
-- SynchronousQueue — SynchronousQueue için ingilizce kaynaklar randevulaşma veri yapısı diye adlandırma yapıyor. Bunun sebebi bir Thrad kuyruktan eleman almak ister de kuruk boş ise orayyı başka bir Thread veri koyana kadar kilitler. Ya da bir Thread veri koymuşsa 
-o veri başka bir Thread tarafından alınana kadar orayı bloklar. Bu şekilde sanki bir randevulaşma gibi bir mekanizma uygulanır.</p>
+Concurrent Queue Implementations denilen yani multithread uygulamalar için yazılmış olan türde ise nesneler aynı anda birden fazla Thread’in müdahelesine karşı korunmuş olur. Bu kısımdaki implementasyonlar şöyledir:</p>
+<ul>
+  <li>LinkedBlockingQueue — Zorunlu olmamakla beraber FIFO ile yapılmış arkada bağlı düğümler yapısını kullanılan veri türüdür.</li>
+  <li>ArrayBlockingQueue — FIFO kullanılan ve geri planda dizi ile işini gören veri yapısıdır.</li>
+  <li>PriorityBlockingQueue — Geri planda işini heap ile gören ve herhangi bir algoritma ile sınırlandırılmamış yapıdır.</li>
+  <li>DelayQueue — Geri planda heap ile işini gören süre tabanlı zamanlama kuyruğudur.</li>
+  <li>SynchronousQueue — SynchronousQueue için ingilizce kaynaklar randevulaşma veri yapısı diye adlandırma yapıyor. Bunun sebebi bir Thrad kuyruktan eleman almak ister de kuruk boş ise orayyı başka bir Thread veri koyana kadar kilitler. Ya da bir Thread veri koymuşsa 
+o veri başka bir Thread tarafından alınana kadar orayı bloklar. Bu şekilde sanki bir randevulaşma gibi bir mekanizma uygulanır.</li>
+</ul>
 
 <p>Bu yazıda temel olarak Queue arabirimine göz attık. Gelecek yazıda bu arabirimin imolementasyonlarından olan PriorityQueue sınıfına değineceğiz.
 Görüşene kadar sağlıcakla kalın.</p>

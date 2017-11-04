@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsf-primefaces-autochanging/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>JSF ve PrimeFaces İle Seçime Bağlı Otomatik Değişim - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>JSF ve PrimeFaces İle Seçime Bağlı Otomatik Değişim | İlkay Günel - Blog</title>
 <meta property="og:title" content="JSF ve PrimeFaces İle Seçime Bağlı Otomatik Değişim" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="JSF ve PrimeFaces İle Seçime Bağlı Otomatik Değişim" />
 <meta property="og:description" content="JSF ve PrimeFaces İle Seçime Bağlı Otomatik Değişim" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsf-primefaces-autochanging/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-10-03T20:38:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "JSF ve PrimeFaces İle Seçime Bağlı Otomatik Değişim",
-    "datePublished": "2016-10-03T20:38:20+03:00",
-    "description": "JSF ve PrimeFaces İle Seçime Bağlı Otomatik Değişim",
-    "url": "http://ilkaygunel.com/blog/2016/jsf-primefaces-autochanging/"
-  }
-</script>
+{"name":null,"description":"JSF ve PrimeFaces İle Seçime Bağlı Otomatik Değişim","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/jsf-primefaces-autochanging/","publisher":null,"image":null,"headline":"JSF ve PrimeFaces İle Seçime Bağlı Otomatik Değişim","dateModified":"2016-10-03T20:38:20+03:00","datePublished":"2016-10-03T20:38:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/jsf-primefaces-autochanging/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -139,7 +134,7 @@
 
 <p><strong>BeanClass.java</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">primefacesautofilling</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">primefacesautofilling</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
@@ -161,7 +156,7 @@
     <span class="kd">private</span> <span class="n">String</span> <span class="n">selectedBorough</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
 
     <span class="nd">@PostConstruct</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">init</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">cities</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
         <span class="n">boroughs</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
         <span class="n">istanbulBorough</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
@@ -185,15 +180,15 @@
         <span class="n">samsunBorough</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"vezirköprü"</span><span class="o">);</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">getCities</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">getCities</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">cities</span><span class="o">;</span>
     <span class="o">}</span>
     
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">fillBoroughList</span><span class="o">(){</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fillBoroughList</span><span class="o">(){</span>
         <span class="k">if</span><span class="o">(</span><span class="n">selectedCity</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"istanbul"</span><span class="o">)){</span>
             <span class="n">boroughs</span> <span class="o">=</span> <span class="n">istanbulBorough</span><span class="o">;</span>
         <span class="o">}</span>
-        <span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">selectedCity</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"ankara"</span><span class="o">)){</span>
+        <span class="k">else</span> <span class="nf">if</span><span class="o">(</span><span class="n">selectedCity</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"ankara"</span><span class="o">)){</span>
             <span class="n">boroughs</span> <span class="o">=</span> <span class="n">ankaraBorough</span><span class="o">;</span>
         <span class="o">}</span>
         <span class="k">else</span><span class="o">{</span>
@@ -201,32 +196,31 @@
         <span class="o">}</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">getSelectedCity</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getSelectedCity</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">selectedCity</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setSelectedCity</span><span class="o">(</span><span class="n">String</span> <span class="n">selectedCity</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSelectedCity</span><span class="o">(</span><span class="n">String</span> <span class="n">selectedCity</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">selectedCity</span> <span class="o">=</span> <span class="n">selectedCity</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">getBoroughs</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">getBoroughs</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">boroughs</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setBoroughs</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">boroughs</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setBoroughs</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">boroughs</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">boroughs</span> <span class="o">=</span> <span class="n">boroughs</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">getSelectedBorough</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getSelectedBorough</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">selectedBorough</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setSelectedBorough</span><span class="o">(</span><span class="n">String</span> <span class="n">selectedBorough</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSelectedBorough</span><span class="o">(</span><span class="n">String</span> <span class="n">selectedBorough</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">selectedBorough</span> <span class="o">=</span> <span class="n">selectedBorough</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>BeanClass sınıfımız içinde 7 adet nesne tanımlı. Bu nesnelerden cities listesi xhtml içinde iller selectOneMenu’sünü dolduracak. boroughs listesi iller selectOneMenu’sünden seçilen ile göre dolacak bir liste. İstanbul seçilirse İstanbul’un listeleri görünecek örneğin. istanbulBorough, ankaraBorough ve samsunBorough listeleri de seçilen ile göre doldurulması yapılacak listeye atanacak değerleri tutan listeler. Yani Ankara seçilirse Ankara’ya ait ilçeler gösterilmesi için hazırda tutuluyor ve seçim yapıldığında direk atanıyor. selectedCity nesnesi seçilen ili tutacak ve ikinci selectOneMenu’ü bu nesneye göre dolacak. selectedBorough ise seçilen ilçeyi tutacak.</p>
 
@@ -240,7 +234,7 @@
 
 <p><strong>index.xhtml</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
 <span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
       <span class="na">xmlns:h=</span><span class="s">"http://xmlns.jcp.org/jsf/html"</span>
@@ -267,8 +261,7 @@
         <span class="nt">&lt;/h:form&gt;</span>
     <span class="nt">&lt;/h:body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Xhtml sayfamız gördüğünüz gibi çok sade. Burada Birinci selectOneMenu’nün value özelliğine <strong><em>beanClass.selectedCity</em></strong> atanması sureti ile seçilen ilin selectedCity nesnesine yazılmasını söylüyoruz. p:selectOneMenu bileşeninin içerisinde üç adet bileşen var.</p>
 

@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-1/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>MongoDB Ve Java Temel İşlemler 1 - Kayıt Eklemek - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>MongoDB Ve Java Temel İşlemler 1 - Kayıt Eklemek | İlkay Günel - Blog</title>
 <meta property="og:title" content="MongoDB Ve Java Temel İşlemler 1 - Kayıt Eklemek" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="MongoDB Ve Java Temel İşlemler 1 - Kayıt Eklemek" />
 <meta property="og:description" content="MongoDB Ve Java Temel İşlemler 1 - Kayıt Eklemek" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-1/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-09-04T19:38:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "MongoDB Ve Java Temel İşlemler 1 - Kayıt Eklemek",
-    "datePublished": "2016-09-04T19:38:20+03:00",
-    "description": "MongoDB Ve Java Temel İşlemler 1 - Kayıt Eklemek",
-    "url": "http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-1/"
-  }
-</script>
+{"name":null,"description":"MongoDB Ve Java Temel İşlemler 1 - Kayıt Eklemek","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-1/","publisher":null,"image":null,"headline":"MongoDB Ve Java Temel İşlemler 1 - Kayıt Eklemek","dateModified":"2016-09-04T19:38:20+03:00","datePublished":"2016-09-04T19:38:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-1/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -144,100 +139,94 @@ MongoDB ve Java ile ilgili diğer yazılarımdan haberdar olmak için beni <a hr
 
 <p>Öncelikle Windows için <a href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/">buradan</a>, OS X için de <a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/">buradan</a>işletim sisteminize uygun kurulum tamitlarını uygulayıp MongoDB’yi kurun arkadaşlar. Benim elimdeki OS X için</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>brew update
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew update
 brew install mongodb
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>komutları MongoDB’yi kurmak için yetti. Windows altında kurulum da kolay. İndireceğiniz bir MSI dosyası ile kurulumu hemen yapabilirsiniz. Linux için de kurulum talimatlarını okumanızı tavsiye ederim. Kurulumu yaptıktan sonra terminalinizden cd komutu ile kök dizininize gelin ve</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>sudo mkdir -p /data/db (OS X İçin)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo mkdir -p /data/db (OS X İçin)
 mkdir \data\db (Windows İçin)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>komutlarından uygun olanı verin.  Son olarak Windows’da Program Files\MongoDb\Server\SürümNo\bin altındaki mongod‘yi çalıştırın. OS X’de terminalden direk mongod komutunu verebilirsiniz. MongoDB’yi çalıştırdıktan sonra sıra Java bağlantısı yapmaya geliyor.</p>
 
 <p>Geliştirme ortamınızda bir Java projesi ya da bir Maven oluşturun. İsterseniz&nbsp;<a href="https://oss.sonatype.org/content/repositories/releases/org/mongodb/mongo-java-driver/2.13.2/">https://oss.sonatype.org/content/repositories/releases/org/mongodb/mongo-java-driver/2.13.2/</a>&nbsp;adresinden&nbsp;<span class="s1">mongo-java-driver-2.13.2.jar’ı indirin ve proje kütüphanenize ekleyin, isterseniz de aşağıdaki bağımlılığı pom.xml dosyasına ekleyerek projenize kütüphaneyi tanıtın.</span></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver --&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver --&gt;
 &lt;dependency&gt;
     &lt;groupId&gt;org.mongodb&lt;/groupId&gt;
     &lt;artifactId&gt;mongo-java-driver&lt;/artifactId&gt;
     &lt;version&gt;3.3.0&lt;/version&gt;
 &lt;/dependency&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Şimdi projemiz MongoDB’yi tanıdığı için kod yazabiliriz. Aşağıdaki MongoTest sınıfı basit bir MongoDB kullanımı içeriyor. Kodun satır satır açıklaması kodun altındadır.</p>
 
 <p><strong>MongoRecordInserting.java Kodu</strong></p>
 
-<p>```java
-    package io.github.ilkgunel.mongodb;</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kn">package</span> <span class="n">io</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">ilkgunel</span><span class="o">.</span><span class="na">mongodb</span><span class="o">;</span>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>/**
- *
- * @author ilkaygunel
- */
-import org.bson.Document;
+    <span class="cm">/**
+     *
+     * @author ilkaygunel
+     */</span>
+    <span class="kn">import</span> <span class="nn">org.bson.Document</span><span class="o">;</span>
 
-import com.mongodb.Block;
-import com.mongodb.MongoClient;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoDatabase;
+    <span class="kn">import</span> <span class="nn">com.mongodb.Block</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">com.mongodb.MongoClient</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">com.mongodb.client.FindIterable</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">com.mongodb.client.MongoDatabase</span><span class="o">;</span>
 
-import static java.util.Arrays.asList;
+    <span class="kn">import</span> <span class="nn">static</span> <span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">;</span>
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+    <span class="kn">import</span> <span class="nn">java.text.DateFormat</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">java.text.SimpleDateFormat</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">java.util.Date</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">java.util.Locale</span><span class="o">;</span>
 
-/**
- *
- * @author ilkaygunel
- */
-public class MongoRecordInserting {
+    <span class="cm">/**
+     *
+     * @author ilkaygunel
+     */</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MongoRecordInserting</span> <span class="o">{</span>
 
-    public static void main(String[] args) {
-        MongoClient mongoClient;
-        DateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-        try {
-            mongoClient = new MongoClient("localhost", 27017);
-            MongoDatabase database = mongoClient.getDatabase("MongoDB");
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">MongoClient</span> <span class="n">mongoClient</span><span class="o">;</span>
+            <span class="n">DateFormat</span> <span class="n">format</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SimpleDateFormat</span><span class="o">(</span><span class="s">"dd-MM-yyyy"</span><span class="o">,</span> <span class="n">Locale</span><span class="o">.</span><span class="na">ENGLISH</span><span class="o">);</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">mongoClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MongoClient</span><span class="o">(</span><span class="s">"localhost"</span><span class="o">,</span> <span class="mi">27017</span><span class="o">);</span>
+                <span class="n">MongoDatabase</span> <span class="n">database</span> <span class="o">=</span> <span class="n">mongoClient</span><span class="o">.</span><span class="na">getDatabase</span><span class="o">(</span><span class="s">"MongoDB"</span><span class="o">);</span>
 
-            database.getCollection("Records").insertOne(
-                    new Document("address",
-                            new Document()
-                            .append("street", "2 Avenue")
-                            .append("zipcode", "10075")
-                            .append("building", "1480")
-                            .append("coord", asList(-73.9557413, 40.7720266)))
-                    .append("borough", "Manhattan")
-                    .append("cuisine", "Italian")
-                    .append("grades", asList(
-                            new Document()
-                            .append("date", format.format(new Date()))
-                            .append("grade", "A")
-                            .append("score", 11),
-                            new Document()
-                            .append("date", format.format(new Date()))
-                            .append("grade", "B")
-                            .append("score", 17)))
-                    .append("name", "Vella")
-                    .append("restaurant_id", "41704620"));
-        } catch (Exception e) {
-            System.err.println("Bir Hata Meydana Geldi!");
-            System.out.println("Hata" + e);
-        }
-    }
-}
-</code></pre>
-</div>
+                <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"Records"</span><span class="o">).</span><span class="na">insertOne</span><span class="o">(</span>
+                        <span class="k">new</span> <span class="nf">Document</span><span class="o">(</span><span class="s">"address"</span><span class="o">,</span>
+                                <span class="k">new</span> <span class="nf">Document</span><span class="o">()</span>
+                                <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"street"</span><span class="o">,</span> <span class="s">"2 Avenue"</span><span class="o">)</span>
+                                <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"zipcode"</span><span class="o">,</span> <span class="s">"10075"</span><span class="o">)</span>
+                                <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"building"</span><span class="o">,</span> <span class="s">"1480"</span><span class="o">)</span>
+                                <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"coord"</span><span class="o">,</span> <span class="n">asList</span><span class="o">(-</span><span class="mf">73.9557413</span><span class="o">,</span> <span class="mf">40.7720266</span><span class="o">)))</span>
+                        <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"borough"</span><span class="o">,</span> <span class="s">"Manhattan"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"cuisine"</span><span class="o">,</span> <span class="s">"Italian"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"grades"</span><span class="o">,</span> <span class="n">asList</span><span class="o">(</span>
+                                <span class="k">new</span> <span class="nf">Document</span><span class="o">()</span>
+                                <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"date"</span><span class="o">,</span> <span class="n">format</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="k">new</span> <span class="n">Date</span><span class="o">()))</span>
+                                <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"grade"</span><span class="o">,</span> <span class="s">"A"</span><span class="o">)</span>
+                                <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"score"</span><span class="o">,</span> <span class="mi">11</span><span class="o">),</span>
+                                <span class="k">new</span> <span class="nf">Document</span><span class="o">()</span>
+                                <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"date"</span><span class="o">,</span> <span class="n">format</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="k">new</span> <span class="n">Date</span><span class="o">()))</span>
+                                <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"grade"</span><span class="o">,</span> <span class="s">"B"</span><span class="o">)</span>
+                                <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"score"</span><span class="o">,</span> <span class="mi">17</span><span class="o">)))</span>
+                        <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="s">"Vella"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"restaurant_id"</span><span class="o">,</span> <span class="s">"41704620"</span><span class="o">));</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Bir Hata Meydana Geldi!"</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hata"</span> <span class="o">+</span> <span class="n">e</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 
-<p>```
-Kodumuzu adım adım inceleyerek devam edelim arkadaşlar.</p>
+</code></pre></div></div>
+<p>Kodumuzu adım adım inceleyerek devam edelim arkadaşlar.</p>
 <ol>
 <li>MongoDB veritabımıza MongoClient sınıfından bir nesne ile bağlantı kuruyoruz. MongoClient kullanmak istediğimizde Checked Exception işin içine girdiğinden kodlarımızı try-catch bloğu içinde yazıyoruz.</li>
 <li>Local makinede çalıştığımız için hostumuz localhost oluyor. MongoDB de kurulum ayarları itibari ile 27017 portu üzerinden hizmet veriyor ve biz de bu portu parametre olarak veriyoruz.</li>
@@ -259,74 +248,73 @@ iki döküman yani iki farklı değer eklenecek. Bu bu dökümanların asList me
 <p>Yukarıdaki kodumuz tek bir kayıt eklemek için kullanılabilecek bir durumdur. Peki birden çok kaydı bir seferde eklemek istersek ne yapmalıyız?
 Bu durumda da <strong><em>insertMany</em></strong> metodunu kullanmamız gerekir.</p>
 
-<p>```java
-package io.github.ilkgunel.mongodb;</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">io</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">ilkgunel</span><span class="o">.</span><span class="na">mongodb</span><span class="o">;</span>
 
-<p>/**
+<span class="cm">/**
  *
  * @author ilkaygunel
- */
-import org.bson.Document;</p>
+ */</span>
+<span class="kn">import</span> <span class="nn">org.bson.Document</span><span class="o">;</span>
 
-<p>import com.mongodb.Block;
-import com.mongodb.MongoClient;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoDatabase;</p>
+<span class="kn">import</span> <span class="nn">com.mongodb.Block</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.mongodb.MongoClient</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.mongodb.client.FindIterable</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.mongodb.client.MongoDatabase</span><span class="o">;</span>
 
-<p>import static java.util.Arrays.asList;</p>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">;</span>
 
-<p>import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;</p>
+<span class="kn">import</span> <span class="nn">java.text.DateFormat</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.text.SimpleDateFormat</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Date</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Locale</span><span class="o">;</span>
 
-<p>/**
+<span class="cm">/**
  *
  * @author ilkaygunel
- */
-public class MongoDBBasicUsage {</p>
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MongoDBBasicUsage</span> <span class="o">{</span>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>public static void main(String[] args) {
-    MongoClient mongoClient;
-    DateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-    try {
-        mongoClient = new MongoClient("localhost", 27017);
-        MongoDatabase database = mongoClient.getDatabase("MongoDB");
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">MongoClient</span> <span class="n">mongoClient</span><span class="o">;</span>
+        <span class="n">DateFormat</span> <span class="n">format</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SimpleDateFormat</span><span class="o">(</span><span class="s">"dd-MM-yyyy"</span><span class="o">,</span> <span class="n">Locale</span><span class="o">.</span><span class="na">ENGLISH</span><span class="o">);</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">mongoClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MongoClient</span><span class="o">(</span><span class="s">"localhost"</span><span class="o">,</span> <span class="mi">27017</span><span class="o">);</span>
+            <span class="n">MongoDatabase</span> <span class="n">database</span> <span class="o">=</span> <span class="n">mongoClient</span><span class="o">.</span><span class="na">getDatabase</span><span class="o">(</span><span class="s">"MongoDB"</span><span class="o">);</span>
 
-        List&lt;Document&gt; documents = new ArrayList&lt;&gt;();
+            <span class="n">List</span><span class="o">&lt;</span><span class="n">Document</span><span class="o">&gt;</span> <span class="n">documents</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
 
-        for(int i=0;i&lt;=4;i++){
-            documents.add(new Document("address",
-                        new Document()
-                        .append("street", "2 Avenue")
-                        .append("zipcode", "10075")
-                        .append("building", "1480")
-                        .append("coord", asList(-73.9557413, 40.7720266)))
-                .append("borough", "Manhattan")
-                .append("cuisine", "Italian")
-                .append("grades", asList(
-                        new Document()
-                        .append("date", format.format(new Date()))
-                        .append("grade", "A")
-                        .append("score", 11),
-                        new Document()
-                        .append("date", format.format(new Date()))
-                        .append("grade", "B")
-                        .append("score", 17)))
-                .append("name", "Vella")
-                .append("restaurant_id", "41704620"));
-        }
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">4</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+                <span class="n">documents</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Document</span><span class="o">(</span><span class="s">"address"</span><span class="o">,</span>
+                            <span class="k">new</span> <span class="nf">Document</span><span class="o">()</span>
+                            <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"street"</span><span class="o">,</span> <span class="s">"2 Avenue"</span><span class="o">)</span>
+                            <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"zipcode"</span><span class="o">,</span> <span class="s">"10075"</span><span class="o">)</span>
+                            <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"building"</span><span class="o">,</span> <span class="s">"1480"</span><span class="o">)</span>
+                            <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"coord"</span><span class="o">,</span> <span class="n">asList</span><span class="o">(-</span><span class="mf">73.9557413</span><span class="o">,</span> <span class="mf">40.7720266</span><span class="o">)))</span>
+                    <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"borough"</span><span class="o">,</span> <span class="s">"Manhattan"</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"cuisine"</span><span class="o">,</span> <span class="s">"Italian"</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"grades"</span><span class="o">,</span> <span class="n">asList</span><span class="o">(</span>
+                            <span class="k">new</span> <span class="nf">Document</span><span class="o">()</span>
+                            <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"date"</span><span class="o">,</span> <span class="n">format</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="k">new</span> <span class="n">Date</span><span class="o">()))</span>
+                            <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"grade"</span><span class="o">,</span> <span class="s">"A"</span><span class="o">)</span>
+                            <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"score"</span><span class="o">,</span> <span class="mi">11</span><span class="o">),</span>
+                            <span class="k">new</span> <span class="nf">Document</span><span class="o">()</span>
+                            <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"date"</span><span class="o">,</span> <span class="n">format</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="k">new</span> <span class="n">Date</span><span class="o">()))</span>
+                            <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"grade"</span><span class="o">,</span> <span class="s">"B"</span><span class="o">)</span>
+                            <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"score"</span><span class="o">,</span> <span class="mi">17</span><span class="o">)))</span>
+                    <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="s">"Vella"</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"restaurant_id"</span><span class="o">,</span> <span class="s">"41704620"</span><span class="o">));</span>
+            <span class="o">}</span>
 
-        database.getCollection("Records").insertMany(documents);
-    } catch (Exception e) {
-        System.err.println("Bir Hata Meydana Geldi!");
-        System.out.println("Hata" + e);
-    }
-} } ```
-</code></pre>
-</div>
+            <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"Records"</span><span class="o">).</span><span class="na">insertMany</span><span class="o">(</span><span class="n">documents</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Bir Hata Meydana Geldi!"</span><span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hata"</span> <span class="o">+</span> <span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
 
 <p>Kodumuz içerisinde öncelikle <strong><em>Documents</em></strong> tipinde bir liste oluşuturuyoruz. Akabinde for döngüsü ile döküman oluşuturup dökümanı listeye ekliyoruz. Son aşamada ise oluşutup doldurduğumuz
 bu listeyi insertMany metoduna parametre olarak veriyoruz.</p>

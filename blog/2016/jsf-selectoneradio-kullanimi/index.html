@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsf-selectoneradio-kullanimi/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>SelectOneRadio Kullanımı - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>SelectOneRadio Kullanımı | İlkay Günel - Blog</title>
 <meta property="og:title" content="SelectOneRadio Kullanımı" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="SelectOneRadio Kullanımı" />
 <meta property="og:description" content="SelectOneRadio Kullanımı" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsf-selectoneradio-kullanimi/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-10-18T20:40:21+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "SelectOneRadio Kullanımı",
-    "datePublished": "2016-10-18T20:40:21+03:00",
-    "description": "SelectOneRadio Kullanımı",
-    "url": "http://ilkaygunel.com/blog/2016/jsf-selectoneradio-kullanimi/"
-  }
-</script>
+{"name":null,"description":"SelectOneRadio Kullanımı","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/jsf-selectoneradio-kullanimi/","publisher":null,"image":null,"headline":"SelectOneRadio Kullanımı","dateModified":"2016-10-18T20:40:21+03:00","datePublished":"2016-10-18T20:40:21+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/jsf-selectoneradio-kullanimi/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -143,7 +138,7 @@
 
 <p><strong>Index.xhtml Kodu:</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
@@ -179,12 +174,11 @@
 	
 	<span class="nt">&lt;/h:body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>SosyalHesaplar.java Kodu:</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">javax.faces.bean.ManagedBean</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">javax.faces.bean.ManagedBean</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">javax.faces.bean.RequestScoped</span><span class="o">;</span>
 <span class="nd">@ManagedBean</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="s">"sh"</span><span class="o">)</span>
 <span class="nd">@RequestScoped</span>
@@ -193,36 +187,35 @@
 <span class="kd">private</span> <span class="n">String</span> <span class="n">encokkullanilan</span><span class="o">;</span>
 <span class="kd">private</span> <span class="n">String</span> <span class="n">enazkullanilan</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">getEncokkullanilan</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getEncokkullanilan</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">encokkullanilan</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">getEnazkullanilan</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getEnazkullanilan</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">enazkullanilan</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">getHesapsayisi</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getHesapsayisi</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">hesapsayisi</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setEnazkullanilan</span><span class="o">(</span><span class="n">String</span> <span class="n">enazkullanilan</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEnazkullanilan</span><span class="o">(</span><span class="n">String</span> <span class="n">enazkullanilan</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">enazkullanilan</span> <span class="o">=</span> <span class="n">enazkullanilan</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setHesapsayisi</span><span class="o">(</span><span class="n">String</span> <span class="n">hesapsayisi</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setHesapsayisi</span><span class="o">(</span><span class="n">String</span> <span class="n">hesapsayisi</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">hesapsayisi</span> <span class="o">=</span> <span class="n">hesapsayisi</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setEncokkullanilan</span><span class="o">(</span><span class="n">String</span> <span class="n">encokkullanilan</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEncokkullanilan</span><span class="o">(</span><span class="n">String</span> <span class="n">encokkullanilan</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">encokkullanilan</span> <span class="o">=</span> <span class="n">encokkullanilan</span><span class="o">;</span>
     <span class="o">}</span>  
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>Secilenler.xhtml kodu:</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
 <span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
@@ -245,8 +238,7 @@
 		<span class="nt">&lt;/ol&gt;</span>
 	<span class="nt">&lt;/h:body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>Index.xhtml Kodunun Açıklaması:</strong></p>
 
@@ -264,7 +256,7 @@
 
 <p><strong>Index.xhtml Kodu:</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
 <span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
@@ -293,12 +285,11 @@
 		<span class="nt">&lt;/h:form&gt;</span>
 	<span class="nt">&lt;/h:body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>Secilenler.xhtml kodu:</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
 <span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
@@ -321,12 +312,11 @@
 		<span class="nt">&lt;/ol&gt;</span>
 	<span class="nt">&lt;/h:body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>Sosyalhesaplar.java Kodu:</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.LinkedHashMap</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.LinkedHashMap</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">javax.faces.bean.ManagedBean</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">javax.faces.bean.RequestScoped</span><span class="o">;</span>
@@ -337,27 +327,27 @@
 <span class="kd">private</span> <span class="n">String</span> <span class="n">encokkullanilan</span><span class="o">;</span>
 <span class="kd">private</span> <span class="n">String</span> <span class="n">enazkullanilan</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">getEncokkullanilan</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getEncokkullanilan</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">encokkullanilan</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">getEnazkullanilan</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getEnazkullanilan</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">enazkullanilan</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">getHesapsayisi</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getHesapsayisi</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">hesapsayisi</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setEnazkullanilan</span><span class="o">(</span><span class="n">String</span> <span class="n">enazkullanilan</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEnazkullanilan</span><span class="o">(</span><span class="n">String</span> <span class="n">enazkullanilan</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">enazkullanilan</span> <span class="o">=</span> <span class="n">enazkullanilan</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setHesapsayisi</span><span class="o">(</span><span class="n">String</span> <span class="n">hesapsayisi</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setHesapsayisi</span><span class="o">(</span><span class="n">String</span> <span class="n">hesapsayisi</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">hesapsayisi</span> <span class="o">=</span> <span class="n">hesapsayisi</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setEncokkullanilan</span><span class="o">(</span><span class="n">String</span> <span class="n">encokkullanilan</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEncokkullanilan</span><span class="o">(</span><span class="n">String</span> <span class="n">encokkullanilan</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">encokkullanilan</span> <span class="o">=</span> <span class="n">encokkullanilan</span><span class="o">;</span>
     <span class="o">}</span>
     <span class="kd">private</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">sosyalhesaplar</span><span class="o">;</span>
@@ -375,17 +365,16 @@
         <span class="n">sayilar</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"2"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">);</span>
         <span class="n">sayilar</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"3"</span><span class="o">,</span> <span class="s">"3"</span><span class="o">);</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">sosyalhesaplaridondur</span><span class="o">()</span>
+    <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="nf">sosyalhesaplaridondur</span><span class="o">()</span>
     <span class="o">{</span>
         <span class="k">return</span> <span class="n">sosyalhesaplar</span><span class="o">;</span>
     <span class="o">}</span>
-     <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">sayilaridondur</span><span class="o">()</span>
+     <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="nf">sayilaridondur</span><span class="o">()</span>
      <span class="o">{</span>
          <span class="k">return</span> <span class="n">sayilar</span><span class="o">;</span>
      <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>Kodların Açıklaması:</strong></p>
 

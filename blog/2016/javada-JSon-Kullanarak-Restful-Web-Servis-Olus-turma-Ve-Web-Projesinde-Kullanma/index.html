@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/javada-JSon-Kullanarak-Restful-Web-Servis-Olus-turma-Ve-Web-Projesinde-Kullanma/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Java’da JSon Kullanarak Restful Web Servis Oluşturma Ve Web Projesinde Kullanma - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Java’da JSon Kullanarak Restful Web Servis Oluşturma Ve Web Projesinde Kullanma | İlkay Günel - Blog</title>
 <meta property="og:title" content="Java’da JSon Kullanarak Restful Web Servis Oluşturma Ve Web Projesinde Kullanma" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Java’da JSon Kullanarak Restful Web Servis Oluşturma Ve Web Projesinde Kullanma" />
 <meta property="og:description" content="Java’da JSon Kullanarak Restful Web Servis Oluşturma Ve Web Projesinde Kullanma" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/javada-JSon-Kullanarak-Restful-Web-Servis-Olus-turma-Ve-Web-Projesinde-Kullanma/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-09-04T19:38:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Java’da JSon Kullanarak Restful Web Servis Oluşturma Ve Web Projesinde Kullanma",
-    "datePublished": "2016-09-04T19:38:20+03:00",
-    "description": "Java’da JSon Kullanarak Restful Web Servis Oluşturma Ve Web Projesinde Kullanma",
-    "url": "http://ilkaygunel.com/blog/2016/javada-JSon-Kullanarak-Restful-Web-Servis-Olus-turma-Ve-Web-Projesinde-Kullanma/"
-  }
-</script>
+{"name":null,"description":"Java’da JSon Kullanarak Restful Web Servis Oluşturma Ve Web Projesinde Kullanma","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/javada-JSon-Kullanarak-Restful-Web-Servis-Olus-turma-Ve-Web-Projesinde-Kullanma/","publisher":null,"image":null,"headline":"Java’da JSon Kullanarak Restful Web Servis Oluşturma Ve Web Projesinde Kullanma","dateModified":"2016-09-04T19:38:20+03:00","datePublished":"2016-09-04T19:38:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/javada-JSon-Kullanarak-Restful-Web-Servis-Olus-turma-Ve-Web-Projesinde-Kullanma/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -142,7 +137,7 @@ ga('send', 'pageview');
 
 <p>Yazımıza ilk olarak proje için gerekli bağımlılıklarla başlayalım. Projede JAX RS kullanılacağı için bununla ilgili kütüphaneyi eklememiz lazım. Ekleyeceğimiz kütüphane JAX RS’nin referans implementasyonlarından biri olan Jersey kütüphanesidir. Eklediğimiz iki Jersey kütüphanesinden jersey-bundle web.xml’de url mapping tanımlaması yapmak için, jersey-json ise veri değişim formatı olarak JSon kullanacağımız için eklenmiştir.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>        &lt;dependency&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        &lt;dependency&gt;
             &lt;groupId&gt;com.sun.jersey&lt;/groupId&gt;
             &lt;artifactId&gt;jersey-bundle&lt;/artifactId&gt;
             &lt;version&gt;1.19&lt;/version&gt;
@@ -153,8 +148,7 @@ ga('send', 'pageview');
             &lt;artifactId&gt;jersey-json&lt;/artifactId&gt;
             &lt;version&gt;1.19&lt;/version&gt;
         &lt;/dependency&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Web servisin tarayıcıdaki adresi için url mapping işlemini web.xml dosyamız içinde yapıyoruz. Bu işlem için önce servlet etiketlerimiz arasında ServletContainer sınıfını tanıtıyoruz ve yine servlet etiketinin içinde init-param etiketi ile web servisin yazılı olduğu sınıfın barındığı paketi <strong><em>com.sun.jersey.config.property.packages</em></strong> param-name’in hemen akabinde param-value olarak veriyoruz. Örneğin benim web servis sınıfım com.ilkgunel.jaxrstutorial pektinin altında yer alıyor.</p>
 
@@ -162,7 +156,7 @@ ga('send', 'pageview');
 
 <p>Servlet mapping kısmında da web servisimizin <strong><em>/webservis/</em></strong> dizininin altında çalışmasını söylemiş oluyoruz. Yani /webservis dizinin altına gelecek olan tüm istekler aslında bu servlet-mapping ile web servisimize iletilecek.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> &lt;servlet&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;servlet&gt;
  &lt;servlet-name&gt;Jersey Web Application&lt;/servlet-name&gt;
  &lt;servlet-class&gt;com.sun.jersey.spi.container.servlet.ServletContainer&lt;/servlet-class&gt;
 
@@ -183,75 +177,73 @@ ga('send', 'pageview');
  &lt;servlet-name&gt;Jersey Web Application&lt;/servlet-name&gt;
  &lt;url-pattern&gt;/webservis/*&lt;/url-pattern&gt;
  &lt;/servlet-mapping&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Şimdi web servisi yazdığımız java sınıfını inceleyelim.</p>
 
 <h3 id="verilerijsonadonusturmejava">VerileriJsonaDonusturme.java</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>package com.ilkgunel.jaxrstutorial;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">com</span><span class="p">.</span><span class="n">ilkgunel</span><span class="p">.</span><span class="n">jaxrstutorial</span><span class="p">;</span>
 
-import com.ilkgunel.pojo.Kisiler;
+<span class="n">import</span> <span class="n">com</span><span class="p">.</span><span class="n">ilkgunel</span><span class="p">.</span><span class="n">pojo</span><span class="p">.</span><span class="n">Kisiler</span><span class="p">;</span>
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">sql</span><span class="p">.</span><span class="n">Connection</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">sql</span><span class="p">.</span><span class="n">DriverManager</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">sql</span><span class="p">.</span><span class="n">PreparedStatement</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">sql</span><span class="p">.</span><span class="n">ResultSet</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">ArrayList</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="k">List</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">javax</span><span class="p">.</span><span class="n">ws</span><span class="p">.</span><span class="n">rs</span><span class="p">.</span><span class="n">GET</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">javax</span><span class="p">.</span><span class="n">ws</span><span class="p">.</span><span class="n">rs</span><span class="p">.</span><span class="n">Path</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">javax</span><span class="p">.</span><span class="n">ws</span><span class="p">.</span><span class="n">rs</span><span class="p">.</span><span class="n">Produces</span><span class="p">;</span>
 
-@Path("/kisibilgileri")
-public class VerileriJsonaDonusturme{
-    @GET
-    @Produces("application/json; charset=UTF-8")
-    public List&lt;Kisiler&gt; verileriGetir()
-    {
-        List&lt;Kisiler&gt; kisiListesi=new ArrayList&lt;&gt;();
+<span class="p">@</span><span class="n">Path</span><span class="p">(</span><span class="s2">"/kisibilgileri"</span><span class="p">)</span>
+<span class="k">public</span> <span class="n">class</span> <span class="n">VerileriJsonaDonusturme</span><span class="p">{</span>
+    <span class="p">@</span><span class="n">GET</span>
+    <span class="p">@</span><span class="n">Produces</span><span class="p">(</span><span class="s2">"application/json; charset=UTF-8"</span><span class="p">)</span>
+    <span class="k">public</span> <span class="k">List</span><span class="p">&lt;</span><span class="n">Kisiler</span><span class="p">&gt;</span> <span class="n">verileriGetir</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">List</span><span class="p">&lt;</span><span class="n">Kisiler</span><span class="p">&gt;</span> <span class="n">kisiListesi</span><span class="p">=</span><span class="n">new</span> <span class="n">ArrayList</span><span class="p">&lt;&gt;();</span>
 
-        Connection connnection=null;
-        PreparedStatement preparedStatement=null;
-        ResultSet resultSet=null;
-        try
-        {
-            Class.forName("com.mysql.jdbc.Driver");
-            connnection=DriverManager.getConnection("jdbc:mysql://localhost:3306/jsfdersleri?useUnicode=true&amp;amp;characterEncoding=UTF-8","root","");
-            preparedStatement=connnection.prepareStatement("select * from kisiler");
-            resultSet=preparedStatement.executeQuery();
-            while (resultSet.next())
-            {
-                Kisiler k=new Kisiler();
-                k.setId(resultSet.getInt("id"));
-                k.setIsim(resultSet.getString("isim"));
-                k.setSoyisim(resultSet.getString("soyisim"));
-                k.setUniversite(resultSet.getString("universite"));
-                kisiListesi.add(k);
-            }
-        }
-        catch(Exception e)
-        {
-            System.err.println(e);
-        }
-        finally
-        {
-            try
-            {
-                connnection.close();
-                preparedStatement.close();
-            }
-            catch (Exception e)
-            {
-                System.err.println(e);
-            }
-        }
-        return kisiListesi;
-    }
-}
-</code></pre>
-</div>
+        <span class="n">Connection</span> <span class="n">connnection</span><span class="p">=</span><span class="n">null</span><span class="p">;</span>
+        <span class="n">PreparedStatement</span> <span class="n">preparedStatement</span><span class="p">=</span><span class="n">null</span><span class="p">;</span>
+        <span class="n">ResultSet</span> <span class="n">resultSet</span><span class="p">=</span><span class="n">null</span><span class="p">;</span>
+        <span class="n">try</span>
+        <span class="p">{</span>
+            <span class="n">Class</span><span class="p">.</span><span class="n">forName</span><span class="p">(</span><span class="s2">"com.mysql.jdbc.Driver"</span><span class="p">);</span>
+            <span class="n">connnection</span><span class="p">=</span><span class="n">DriverManager</span><span class="p">.</span><span class="n">getConnection</span><span class="p">(</span><span class="s2">"jdbc:mysql://localhost:3306/jsfdersleri?useUnicode=true&amp;amp;characterEncoding=UTF-8"</span><span class="p">,</span><span class="s2">"root"</span><span class="p">,</span><span class="s2">""</span><span class="p">);</span>
+            <span class="n">preparedStatement</span><span class="p">=</span><span class="n">connnection</span><span class="p">.</span><span class="n">prepareStatement</span><span class="p">(</span><span class="s2">"select * from kisiler"</span><span class="p">);</span>
+            <span class="n">resultSet</span><span class="p">=</span><span class="n">preparedStatement</span><span class="p">.</span><span class="n">executeQuery</span><span class="p">();</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">resultSet</span><span class="p">.</span><span class="k">next</span><span class="p">())</span>
+            <span class="p">{</span>
+                <span class="n">Kisiler</span> <span class="n">k</span><span class="p">=</span><span class="n">new</span> <span class="n">Kisiler</span><span class="p">();</span>
+                <span class="n">k</span><span class="p">.</span><span class="n">setId</span><span class="p">(</span><span class="n">resultSet</span><span class="p">.</span><span class="n">getInt</span><span class="p">(</span><span class="s2">"id"</span><span class="p">));</span>
+                <span class="n">k</span><span class="p">.</span><span class="n">setIsim</span><span class="p">(</span><span class="n">resultSet</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="s2">"isim"</span><span class="p">));</span>
+                <span class="n">k</span><span class="p">.</span><span class="n">setSoyisim</span><span class="p">(</span><span class="n">resultSet</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="s2">"soyisim"</span><span class="p">));</span>
+                <span class="n">k</span><span class="p">.</span><span class="n">setUniversite</span><span class="p">(</span><span class="n">resultSet</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="s2">"universite"</span><span class="p">));</span>
+                <span class="n">kisiListesi</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">catch</span><span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="nf">System</span><span class="p">.</span><span class="n">err</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">finally</span>
+        <span class="p">{</span>
+            <span class="n">try</span>
+            <span class="p">{</span>
+                <span class="n">connnection</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+                <span class="n">preparedStatement</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+            <span class="p">}</span>
+            <span class="n">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="nf">System</span><span class="p">.</span><span class="n">err</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">return</span> <span class="n">kisiListesi</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <ul>
   <li>İlk olarak @Path notasyonu ile bir yol tanımlaması yapıyoruz ve bu web servisin hangi yol üzerinde çalışacağını söylüyoruz.</li>
@@ -278,7 +270,7 @@ public class VerileriJsonaDonusturme{
 
 <h3 id="indexxhtml">index.xhtml</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
 <span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
       <span class="na">xmlns:h=</span><span class="s">"http://xmlns.jcp.org/jsf/html"</span>
@@ -321,8 +313,7 @@ public class VerileriJsonaDonusturme{
         <span class="nt">&lt;/h:form&gt;</span>
     <span class="nt">&lt;/h:body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Index sayfamız içinde bir dataTable’ımız var ve bu dataTable JSonParse managed bean’inin içindeki <strong><em>sonuc</em></strong> listesini kullanıyor. Ekrana yazdırma işlemini de <strong><em>var</em></strong> kullanarak yapıyor.</p>
 
@@ -330,7 +321,7 @@ public class VerileriJsonaDonusturme{
 
 <h3 id="jsonparsejava">JSonParse.java</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>import java.net.URL;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -378,8 +369,7 @@ public class JSonParse {
         return sonuc;
     }
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Az önce elde ettiğimiz web servisi kullanarak JSonParse sınıfı içinde verileri elde ediyoruz. Adım adım gidelim şimdi.</p>
 
@@ -395,9 +385,9 @@ public class JSonParse {
   <li>Son olarak metodumuz get metodu olduğu için return sonuc; diyerek metotdan çıkıyoruz.</li>
 </ul>
 
-<h3 id="kiilerjava">Kişiler.java</h3>
+<h3 id="kişilerjava">Kişiler.java</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>public class Kisiler {
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Kisiler {
     int id;
     String isim;
     String soyisim;
@@ -437,10 +427,9 @@ public class JSonParse {
     }
 
 } POJO sınfımız kendine ait özellikler ile get ve set metotlarını tutuyor.
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<h3 id="ekran-kts">Ekran Çıktısı</h3>
+<h3 id="ekran-çıktısı">Ekran Çıktısı</h3>
 
 <p>[<img src="/images/restresim3.png" style="width: 1024px;height= 392px;" />]</p>
 

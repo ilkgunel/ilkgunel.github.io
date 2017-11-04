@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/scala-unified-types/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Scala 2 - Unified Types - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Scala 2 - Unified Types | İlkay Günel - Blog</title>
 <meta property="og:title" content="Scala 2 - Unified Types" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Scala 2 - Unified Types" />
 <meta property="og:description" content="Scala 2 - Unified Types" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/scala-unified-types/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-12-10T20:40:21+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Scala 2 - Unified Types",
-    "datePublished": "2016-12-10T20:40:21+03:00",
-    "description": "Scala 2 - Unified Types",
-    "url": "http://ilkaygunel.com/blog/2016/scala-unified-types/"
-  }
-</script>
+{"name":null,"description":"Scala 2 - Unified Types","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/scala-unified-types/","publisher":null,"image":null,"headline":"Scala 2 - Unified Types","dateModified":"2016-12-10T20:40:21+03:00","datePublished":"2016-12-10T20:40:21+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/scala-unified-types/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -156,7 +151,7 @@ toplayan bir sınıftır. Scala ile kod yazarken bizim tanımlayacağımız sın
 
 <p>package com.ilkaygunel.scalatutorials</p>
 
-<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">class</span> <span class="nc">App</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span></span><span class="k">class</span> <span class="nc">App</span> <span class="o">{</span>
 <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
     
   <span class="o">}</span>
@@ -166,13 +161,13 @@ toplayan bir sınıftır. Scala ile kod yazarken bizim tanımlayacağımız sın
 
 <p><strong>UnifiedTypes.scala</strong></p>
 
-<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">package</span> <span class="nn">com.ilkaygunel.scalatutorials</span>
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span></span><span class="k">package</span> <span class="nn">com.ilkaygunel.scalatutorials</span>
 
 <span class="k">object</span> <span class="nc">UnifiedTypes</span> <span class="k">extends</span> <span class="nc">App</span><span class="o">{</span>
 <span class="k">val</span> <span class="n">set</span> <span class="k">=</span> <span class="k">new</span> <span class="n">scala</span><span class="o">.</span><span class="n">collection</span><span class="o">.</span><span class="n">mutable</span><span class="o">.</span><span class="nc">LinkedHashSet</span><span class="o">[</span><span class="kt">Any</span><span class="o">]</span>
   <span class="n">set</span> <span class="o">+=</span> <span class="s">&quot;This is a string&quot;</span>  <span class="c1">// add a string</span>
   <span class="n">set</span> <span class="o">+=</span> <span class="mi">732</span>                 <span class="c1">// add a number</span>
-  <span class="n">set</span> <span class="o">+=</span> <span class="-Symbol">&#39;c</span><span class="err">&#39;</span>                 <span class="c1">// add a character</span>
+  <span class="n">set</span> <span class="o">+=</span> <span class="sc">&#39;c&#39;</span>                 <span class="c1">// add a character</span>
   <span class="n">set</span> <span class="o">+=</span> <span class="kc">true</span>                <span class="c1">// add a boolean value</span>
   <span class="n">set</span> <span class="o">+=</span> <span class="n">main</span> <span class="k">_</span>              <span class="c1">// add the main function</span>
   <span class="k">val</span> <span class="n">iter</span><span class="k">:</span> <span class="kt">Iterator</span><span class="o">[</span><span class="kt">Any</span><span class="o">]</span> <span class="k">=</span> <span class="n">set</span><span class="o">.</span><span class="n">iterator</span>

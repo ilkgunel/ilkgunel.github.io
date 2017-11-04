@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/content-negotiation/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>RestEasy İle Restful Web Servis Dersleri 17 - JAX-RS Content Negotiation - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>RestEasy İle Restful Web Servis Dersleri 17 - JAX-RS Content Negotiation | İlkay Günel - Blog</title>
 <meta property="og:title" content="RestEasy İle Restful Web Servis Dersleri 17 - JAX-RS Content Negotiation" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Managed Beans" />
 <meta property="og:description" content="Managed Beans" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/content-negotiation/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-10-15T20:39:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "RestEasy İle Restful Web Servis Dersleri 17 - JAX-RS Content Negotiation",
-    "datePublished": "2016-10-15T20:39:20+03:00",
-    "description": "Managed Beans",
-    "url": "http://ilkaygunel.com/blog/2016/content-negotiation/"
-  }
-</script>
+{"name":null,"description":"Managed Beans","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/content-negotiation/","publisher":null,"image":null,"headline":"RestEasy İle Restful Web Servis Dersleri 17 - JAX-RS Content Negotiation","dateModified":"2016-10-15T20:39:20+03:00","datePublished":"2016-10-15T20:39:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/content-negotiation/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -140,35 +135,33 @@ text/xml tipinde bir veri gönderse sistem bunu reddetmeyecek ve ikinci sıradak
 kurala (text/*) uyduğu için birinci POST metoduna girecektir. Ama text/xml tipinde veri gönderirse bu özel olarak ikinci POST metoduna uyduğu için işlem orada yapılacaktır. Content Negotiation
 konusunun asıl amacı da budur zaten. Aynı URL üzerinden farklı veri tiplerinde hizmet verebilmektir.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@Consumes</span><span class="o">(</span><span class="s">"text/*"</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Consumes</span><span class="o">(</span><span class="s">"text/*"</span><span class="o">)</span>
 <span class="nd">@Path</span><span class="o">(</span><span class="s">"/library"</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Library</span> <span class="o">{</span>
     <span class="nd">@POST</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">stringBook</span><span class="o">(</span><span class="n">String</span> <span class="n">book</span><span class="o">)</span> <span class="o">{...}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">stringBook</span><span class="o">(</span><span class="n">String</span> <span class="n">book</span><span class="o">)</span> <span class="o">{...}</span>
     
     <span class="nd">@Consumes</span><span class="o">(</span><span class="s">"text/xml"</span><span class="o">)</span>
     <span class="nd">@POST</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">jaxbBook</span><span class="o">(</span><span class="n">Book</span> <span class="n">book</span><span class="o">)</span> <span class="o">{...}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">jaxbBook</span><span class="o">(</span><span class="n">Book</span> <span class="n">book</span><span class="o">)</span> <span class="o">{...}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Olaya bir de @Produces notasyonu açısından bakalım. Örneğin bir GET metodu vasıtası ile bir çağırım yapacağız ve bir türe göre veri elde edeceğiz. Şu kod parçasına göre eğer o GET isteğini şu
 çağırımla yaparsak JSON tipinde veri elde etmiş oluruz:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nd">@Produces</span><span class="o">(</span><span class="s">"text/*"</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Produces</span><span class="o">(</span><span class="s">"text/*"</span><span class="o">)</span>
 <span class="nd">@Path</span><span class="o">(</span><span class="s">"/library"</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Library</span> <span class="o">{</span>
 
 <span class="nd">@GET</span>
 <span class="nd">@Produces</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">getJSON</span><span class="p">(</span><span class="o">)</span> <span class="o">{...}</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">getJSON</span><span class="o">()</span> <span class="o">{...}</span>
 
 <span class="nd">@GET</span>
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">get</span><span class="p">(</span><span class="o">)</span> <span class="o">{...}</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">get</span><span class="o">()</span> <span class="o">{...}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>GET /library
 Accept: application/json</p>
@@ -192,7 +185,7 @@ oluruz. Buradaki URL based olayı ise şurdan gelmekteki adres üzerinden farkl�
 
 <p>Projemizin web.xml dosyasına iki adet context-param eklenecek. O eklenen context-param’lar şu şekildedir:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="nt">&lt;web-app</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
 	<span class="na">xmlns=</span><span class="s">"http://java.sun.com/xml/ns/javaee"</span>
 	<span class="na">xsi:schemaLocation=</span><span class="s">"http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"</span>
@@ -203,14 +196,13 @@ oluruz. Buradaki URL based olayı ise şurdan gelmekteki adres üzerinden farkl�
 		<span class="nt">&lt;param-value&gt;</span>html : text/html, json : application/json, xml : application/xml<span class="nt">&lt;/param-value&gt;</span>
 	<span class="nt">&lt;/context-param&gt;</span>
 <span class="nt">&lt;/web-app&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>web.xml dosyamıza işlediğimiz hali ile 3 adet tipte veri alabiliriz. html, json ve xml. Üstelik bu 3 tipteki veriyi @Produces notasyonunu kullanmadan, direk URL üzerinden elde edebiliceğiz.</p>
 
 <p>Web service üretecek Java sınıfımız da şu şekilde, hiçbir @Produces notasyonu yok ve üretilecek veri tipi tanımlamadık:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">restPackage</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">restPackage</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">javax.ws.rs.GET</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">javax.ws.rs.Path</span><span class="o">;</span>
@@ -219,12 +211,11 @@ oluruz. Buradaki URL based olayı ise şurdan gelmekteki adres üzerinden farkl�
 <span class="nd">@Path</span><span class="o">(</span><span class="s">"/library"</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ContentNegotiation</span> <span class="o">{</span>
 	<span class="nd">@GET</span>
-	<span class="kd">public</span> <span class="n">String</span> <span class="n">get</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">get</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="s">"Message Returned!"</span><span class="o">;</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Şimdi ben http://localhost:8080/RestEasyTutorials/restService/library.xml adresine istekte bulunuyorum ve şununla karşılaşıyorum:</p>
 
@@ -245,7 +236,7 @@ oluruz. Buradaki URL based olayı ise şurdan gelmekteki adres üzerinden farkl�
 <p>RestEasy bizim verimizi istediğimiz tipte elde etmemizi URL tabanlı yapmasının yanında URL parametresi ile de yapabilir. Daha önce query string parametrelerini görmüştük. Şimdi aynı durumu
 negotiation meselesi için de kullanabiliriz. Bunun için web.xml dosyamızı güncellememiz lazım. Şöyle güncelleyelim:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="nt">&lt;web-app</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
 	<span class="na">xmlns=</span><span class="s">"http://java.sun.com/xml/ns/javaee"</span>
 	<span class="na">xsi:schemaLocation=</span><span class="s">"http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"</span>
@@ -256,8 +247,7 @@ negotiation meselesi için de kullanabiliriz. Bunun için web.xml dosyamızı g�
 		<span class="nt">&lt;param-value&gt;</span>valueFormat<span class="nt">&lt;/param-value&gt;</span>
 	<span class="nt">&lt;/context-param&gt;</span>
 <span class="nt">&lt;/web-app&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>web.xml’e tanımladığımız <strong><em>valueFormat</em></strong> param-value değerini URL’den bir parametre olarak göndereceğiz ve bu parametrenin değeri de veriyi ne tipte almak istediğimiz olacak. Java kodu üzerinde 
 bir oynama yapmıyoruz. Şimdi http://localhost:8080/RestEasyTutorials/restService/library?valueFormat=application/json adresine istekte bulunduğumda header’lar şöyle dönüyor:</p>

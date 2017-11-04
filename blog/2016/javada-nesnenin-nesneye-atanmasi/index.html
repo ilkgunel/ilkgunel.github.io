@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/javada-nesnenin-nesneye-atanmasi/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Java’da Nesnenin Nesneye Atanması - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Java’da Nesnenin Nesneye Atanması | İlkay Günel - Blog</title>
 <meta property="og:title" content="Java’da Nesnenin Nesneye Atanması" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Java’da Nesnenin Nesneye Atanması" />
 <meta property="og:description" content="Java’da Nesnenin Nesneye Atanması" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/javada-nesnenin-nesneye-atanmasi/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-09-04T19:38:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Java’da Nesnenin Nesneye Atanması",
-    "datePublished": "2016-09-04T19:38:20+03:00",
-    "description": "Java’da Nesnenin Nesneye Atanması",
-    "url": "http://ilkaygunel.com/blog/2016/javada-nesnenin-nesneye-atanmasi/"
-  }
-</script>
+{"name":null,"description":"Java’da Nesnenin Nesneye Atanması","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/javada-nesnenin-nesneye-atanmasi/","publisher":null,"image":null,"headline":"Java’da Nesnenin Nesneye Atanması","dateModified":"2016-09-04T19:38:20+03:00","datePublished":"2016-09-04T19:38:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/javada-nesnenin-nesneye-atanmasi/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -149,68 +144,66 @@ Ne demek istediğimiz örnekle açıklıyayım:</p>
 
 <h3 id="personclassjava">PersonClass.java`</h3>
 
-<p><code class="highlighter-rouge">java
-/*
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
-package collections;
-/**
+ */</span>
+<span class="kn">package</span> <span class="n">collections</span><span class="o">;</span>
+<span class="cm">/**
  *
  * @author ilkaygunel
- */
-public class PersonClass {
-    String name;
-    String surname;
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getSurname() {
-        return surname;
-    }
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-}
-</code></p>
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PersonClass</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">surname</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getSurname</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">surname</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSurname</span><span class="o">(</span><span class="n">String</span> <span class="n">surname</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">surname</span> <span class="o">=</span> <span class="n">surname</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
 
 <p>PersonClass sınıfımız son derece basit. Sadece isim ve soyisim özellikleri ile get-set metotlarına sahip.</p>
 
 <h3 id="assignmetoperationjava">AssignmetOperation.java</h3>
 
-<p><code class="highlighter-rouge">java
-/*
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
-package collections;
-/**
+ */</span>
+<span class="kn">package</span> <span class="n">collections</span><span class="o">;</span>
+<span class="cm">/**
  *
  * @author ilkaygunel
- */
-public class AssignmentOperation {
-    public static void main(String[] args) {
-        int a=5;
-        int b=a;
-        b=10;
-        System.out.println("A'nın Değeri:"+a+",B'nin değeri:"+b);
-        PersonClass personClassObject1 = new PersonClass();
-        personClassObject1.setName("ilkay");
-        personClassObject1.setSurname("günel");
-        PersonClass personClassObject2 = new PersonClass();
-        personClassObject2=personClassObject1;
-        personClassObject2.setName("onur");
-        personClassObject2.setSurname("özcan");
-        System.out.println("personClassObject1:"+personClassObject1.getName()+" "+personClassObject1.getSurname());
-        System.out.println("personClassObject2:"+personClassObject2.getName()+" "+personClassObject2.getSurname());
-    }
-}
-</code></p>
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AssignmentOperation</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="mi">5</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">b</span><span class="o">=</span><span class="n">a</span><span class="o">;</span>
+        <span class="n">b</span><span class="o">=</span><span class="mi">10</span><span class="o">;</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"A'nın Değeri:"</span><span class="o">+</span><span class="n">a</span><span class="o">+</span><span class="s">",B'nin değeri:"</span><span class="o">+</span><span class="n">b</span><span class="o">);</span>
+        <span class="n">PersonClass</span> <span class="n">personClassObject1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PersonClass</span><span class="o">();</span>
+        <span class="n">personClassObject1</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"ilkay"</span><span class="o">);</span>
+        <span class="n">personClassObject1</span><span class="o">.</span><span class="na">setSurname</span><span class="o">(</span><span class="s">"günel"</span><span class="o">);</span>
+        <span class="n">PersonClass</span> <span class="n">personClassObject2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PersonClass</span><span class="o">();</span>
+        <span class="n">personClassObject2</span><span class="o">=</span><span class="n">personClassObject1</span><span class="o">;</span>
+        <span class="n">personClassObject2</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"onur"</span><span class="o">);</span>
+        <span class="n">personClassObject2</span><span class="o">.</span><span class="na">setSurname</span><span class="o">(</span><span class="s">"özcan"</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"personClassObject1:"</span><span class="o">+</span><span class="n">personClassObject1</span><span class="o">.</span><span class="na">getName</span><span class="o">()+</span><span class="s">" "</span><span class="o">+</span><span class="n">personClassObject1</span><span class="o">.</span><span class="na">getSurname</span><span class="o">());</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"personClassObject2:"</span><span class="o">+</span><span class="n">personClassObject2</span><span class="o">.</span><span class="na">getName</span><span class="o">()+</span><span class="s">" "</span><span class="o">+</span><span class="n">personClassObject2</span><span class="o">.</span><span class="na">getSurname</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
 
 <p>AssignmetOperation sınıfını incelediğimizde iki primitive nesne var. a ve b. Önce a’ya 5 değeri atanıyor. Sonra a b’ye atanıyor. Akabinde b’ye 10 atanıyor ve konsola değerler yazdırılıyor.
 Burada hiçbir sıkıntı yok. a nesnesi değerini koruyacak, b en son atanan 10 değerine sahip olacak.
@@ -228,72 +221,70 @@ Java dilinde eğer referans tipli değişkenler arası atama yapılırsa bu tip 
 <p>Çözüm aslında basit. Burada Java’nın en temel taşlarından biri olan Constructors (Yapılandırıcılar) devreye giriyor. Eğer oluşturulacak nesneye sadece değerlerin geçirilmesini sağlayan bir constructor daha yazılırsa sorun çözülecek.
 PersonClass sınıfımız için yapılandırıcıları şöyle güncelleyelim:</p>
 
-<p><code class="highlighter-rouge">java
-/*
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
-package collections;
-/**
+ */</span>
+<span class="kn">package</span> <span class="n">collections</span><span class="o">;</span>
+<span class="cm">/**
  *
  * @author ilkaygunel
- */
-public class PersonClass {
-    String name;
-    String surname;
-    public PersonClass(){
-    }
-    public PersonClass(PersonClass personClass)
-    {
-        this.setName(personClass.getName());
-        this.setSurname(personClass.getSurname());
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getSurname() {
-        return surname;
-    }
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-}
-</code></p>
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PersonClass</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">surname</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">PersonClass</span><span class="o">(){</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="nf">PersonClass</span><span class="o">(</span><span class="n">PersonClass</span> <span class="n">personClass</span><span class="o">)</span>
+    <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="n">personClass</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">setSurname</span><span class="o">(</span><span class="n">personClass</span><span class="o">.</span><span class="na">getSurname</span><span class="o">());</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getSurname</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">surname</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSurname</span><span class="o">(</span><span class="n">String</span> <span class="n">surname</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">surname</span> <span class="o">=</span> <span class="n">surname</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
 
 <p>AssignmetOperations sınıfımızdaki personClassObject2 nesnesinin oluşturulması`ı değiştirilim ve personClassObject1 nesnesinin personClassObject2 nesnesine atandığı satırı silelim.</p>
 
-<p><code class="highlighter-rouge">java
-/*
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
-package collections;
-/**
+ */</span>
+<span class="kn">package</span> <span class="n">collections</span><span class="o">;</span>
+<span class="cm">/**
  *
  * @author ilkaygunel
- */
-public class AssignmentOperation {
-    public static void main(String[] args) {
-        int a=5;
-        int b=a;
-        b=10;
-        System.out.println("A'nın Değeri:"+a+",B'nin değeri:"+b);
-        PersonClass personClassObject1 = new PersonClass();
-        personClassObject1.setName("ilkay");
-        personClassObject1.setSurname("günel");
-        PersonClass personClassObject2 = new PersonClass(personClassObject1);
-        personClassObject2.setName("onur");
-        personClassObject2.setSurname("özcan");
-        System.out.println("personClassObject1:"+personClassObject1.getName()+" "+personClassObject1.getSurname());
-        System.out.println("personClassObject2:"+personClassObject2.getName()+" "+personClassObject2.getSurname());
-    }
-}
-</code></p>
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AssignmentOperation</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="mi">5</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">b</span><span class="o">=</span><span class="n">a</span><span class="o">;</span>
+        <span class="n">b</span><span class="o">=</span><span class="mi">10</span><span class="o">;</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"A'nın Değeri:"</span><span class="o">+</span><span class="n">a</span><span class="o">+</span><span class="s">",B'nin değeri:"</span><span class="o">+</span><span class="n">b</span><span class="o">);</span>
+        <span class="n">PersonClass</span> <span class="n">personClassObject1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PersonClass</span><span class="o">();</span>
+        <span class="n">personClassObject1</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"ilkay"</span><span class="o">);</span>
+        <span class="n">personClassObject1</span><span class="o">.</span><span class="na">setSurname</span><span class="o">(</span><span class="s">"günel"</span><span class="o">);</span>
+        <span class="n">PersonClass</span> <span class="n">personClassObject2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PersonClass</span><span class="o">(</span><span class="n">personClassObject1</span><span class="o">);</span>
+        <span class="n">personClassObject2</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"onur"</span><span class="o">);</span>
+        <span class="n">personClassObject2</span><span class="o">.</span><span class="na">setSurname</span><span class="o">(</span><span class="s">"özcan"</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"personClassObject1:"</span><span class="o">+</span><span class="n">personClassObject1</span><span class="o">.</span><span class="na">getName</span><span class="o">()+</span><span class="s">" "</span><span class="o">+</span><span class="n">personClassObject1</span><span class="o">.</span><span class="na">getSurname</span><span class="o">());</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"personClassObject2:"</span><span class="o">+</span><span class="n">personClassObject2</span><span class="o">.</span><span class="na">getName</span><span class="o">()+</span><span class="s">" "</span><span class="o">+</span><span class="n">personClassObject2</span><span class="o">.</span><span class="na">getSurname</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
 
 <p>Konsol çıktısına bir de şimdi bakalım:
 [<img src="/images/assignmetOperationImage2.png" style="width: 958px; height= 400px;" />]</p>

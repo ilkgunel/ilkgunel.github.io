@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/resteasy-on-eclipse-ide/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Eclipse IDE Üzerinde RestEasy İçin Hazırlık - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Eclipse IDE Üzerinde RestEasy İçin Hazırlık | İlkay Günel - Blog</title>
 <meta property="og:title" content="Eclipse IDE Üzerinde RestEasy İçin Hazırlık" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Eclipse IDE Üzerinde RestEasy İçin Hazırlık" />
 <meta property="og:description" content="Eclipse IDE Üzerinde RestEasy İçin Hazırlık" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/resteasy-on-eclipse-ide/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-10-05T19:38:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Eclipse IDE Üzerinde RestEasy İçin Hazırlık",
-    "datePublished": "2016-10-05T19:38:20+03:00",
-    "description": "Eclipse IDE Üzerinde RestEasy İçin Hazırlık",
-    "url": "http://ilkaygunel.com/blog/2016/resteasy-on-eclipse-ide/"
-  }
-</script>
+{"name":null,"description":"Eclipse IDE Üzerinde RestEasy İçin Hazırlık","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/resteasy-on-eclipse-ide/","publisher":null,"image":null,"headline":"Eclipse IDE Üzerinde RestEasy İçin Hazırlık","dateModified":"2016-10-05T19:38:20+03:00","datePublished":"2016-10-05T19:38:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/resteasy-on-eclipse-ide/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -156,28 +151,28 @@
   <li>Bu işlemin akabinde pom.xml dosyasını açın ve şu bağımlılık kodlarını ekleyin:</li>
 </ol>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemalocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelversion>4.0.0</modelversion>
-  <groupid>io.github.ilkgunel</groupid>
-  <artifactid>RestEasyOnEclipse</artifactid>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.github.ilkgunel</groupId>
+  <artifactId>RestEasyOnEclipse</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   <name>RestEasyOnEclipse</name>
   
   <dependencies>
     <dependency>
-        <groupid>org.jboss.resteasy</groupid>
-        <artifactid>resteasy-jaxrs</artifactid>
+        <groupId>org.jboss.resteasy</groupId>
+        <artifactId>resteasy-jaxrs</artifactId>
         <version>3.0.16.Final</version>
     </dependency>
     <dependency>
-        <groupid>org.jboss.resteasy</groupid>
-        <artifactid>resteasy-servlet-initializer</artifactid>
+        <groupId>org.jboss.resteasy</groupId>
+        <artifactId>resteasy-servlet-initializer</artifactId>
         <version>3.0.16.Final</version>
     </dependency>
     <dependency>
-        <groupid>org.jboss.resteasy</groupid>
-        <artifactid>resteasy-jackson-provider</artifactid>
+        <groupId>org.jboss.resteasy</groupId>
+        <artifactId>resteasy-jackson-provider</artifactId>
         <version>3.0.16.Final</version>
     </dependency>
 </dependencies>

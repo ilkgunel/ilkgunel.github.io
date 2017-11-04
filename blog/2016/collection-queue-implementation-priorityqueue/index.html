@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/collection-queue-implementation-priorityqueue/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Queue Implementation PriorityQueue - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Queue Implementation PriorityQueue | İlkay Günel - Blog</title>
 <meta property="og:title" content="Queue Implementation PriorityQueue" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Queue Implementation PriorityQueue" />
 <meta property="og:description" content="Queue Implementation PriorityQueue" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/collection-queue-implementation-priorityqueue/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-09-04T19:38:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Queue Implementation PriorityQueue",
-    "datePublished": "2016-09-04T19:38:20+03:00",
-    "description": "Queue Implementation PriorityQueue",
-    "url": "http://ilkaygunel.com/blog/2016/collection-queue-implementation-priorityqueue/"
-  }
-</script>
+{"name":null,"description":"Queue Implementation PriorityQueue","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/collection-queue-implementation-priorityqueue/","publisher":null,"image":null,"headline":"Queue Implementation PriorityQueue","dateModified":"2016-09-04T19:38:20+03:00","datePublished":"2016-09-04T19:38:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/collection-queue-implementation-priorityqueue/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -139,54 +134,55 @@
 <p>PriorityQueue’nun ismi içinde tuttuğu elemanları öncelikli olarak tutmasından gelir. Öncelikten kastımız da PriorityQueue’nun elemanları doğal sırada yada Comparator kullanarak
 bir sıralamada tutmasından ibarettir.
 PrioritQueue null eleman olmasına izin vermez.
-PriorityQueue sınıfının 6 adet yapılandırıcısı bulunmaktadır. Yapılandırıcılar şöyle:
-* PriorityQueue() : Başlangıç kapasitesi 11 olacak şekilde elemanları doğal sırada tutacak bir PriorityQueue nesnesi üretir.
-* PriorityQueue(Collection&lt;? extends E&gt; c) : c collection nesnesinin elemanlarını barındırarak PriorityQueue nesnesi üretir.
-* PriorityQueue(int initialCapacity) : Elemanları doğal sırada tutacak başlangıç kapasitesini bizim belirlediğimiz bir PriorityQueue nesnesi üretir.
-* PriorityQueue(int initialCapacity, Comparator&lt;? super E&gt; comparator) : Elemanların sıralanmasını parametre olarak verilmiş olan comparator nesnesine göre yapacak,başlangıç kapasitesini bizim belirlediğimiz bir PriorityQueue nesnesi üretir.
-* PriorityQueue(PriorityQueue&lt;? extends E&gt; c): Var olan bir PriorityQueue nesnesinin elemanları ile yeni bir PriorityQueue nesnesi üretir.
-* PriorityQueue(SortedSet&lt;? extends E&gt; c): c SortedSet parametresininin elemanları ile yeni bir PriorityQueue nesnesi üretir.</p>
+PriorityQueue sınıfının 6 adet yapılandırıcısı bulunmaktadır. Yapılandırıcılar şöyle:</p>
+<ul>
+  <li>PriorityQueue() : Başlangıç kapasitesi 11 olacak şekilde elemanları doğal sırada tutacak bir PriorityQueue nesnesi üretir.</li>
+  <li>PriorityQueue(Collection&lt;? extends E&gt; c) : c collection nesnesinin elemanlarını barındırarak PriorityQueue nesnesi üretir.</li>
+  <li>PriorityQueue(int initialCapacity) : Elemanları doğal sırada tutacak başlangıç kapasitesini bizim belirlediğimiz bir PriorityQueue nesnesi üretir.</li>
+  <li>PriorityQueue(int initialCapacity, Comparator&lt;? super E&gt; comparator) : Elemanların sıralanmasını parametre olarak verilmiş olan comparator nesnesine göre yapacak,başlangıç kapasitesini bizim belirlediğimiz bir PriorityQueue nesnesi üretir.</li>
+  <li>PriorityQueue(PriorityQueue&lt;? extends E&gt; c): Var olan bir PriorityQueue nesnesinin elemanları ile yeni bir PriorityQueue nesnesi üretir.</li>
+  <li>PriorityQueue(SortedSet&lt;? extends E&gt; c): c SortedSet parametresininin elemanları ile yeni bir PriorityQueue nesnesi üretir.</li>
+</ul>
 
 <p>Şimdi bir örnek yapalım.</p>
 
-<p>```java
-import java.util.LinkedList;
-import java.util.PriorityQueue;</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.LinkedList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.PriorityQueue</span><span class="o">;</span>
 
-<p>public class PriorityQueueExample {</p>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PriorityQueueExample</span> <span class="o">{</span>
+	
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span> <span class="o">(</span><span class="n">String</span> <span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+        <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">priorityQueue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PriorityQueue</span><span class="o">&lt;&gt;();</span>
+        <span class="n">priorityQueue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"ilkay"</span><span class="o">);</span>
+        <span class="n">priorityQueue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"adem"</span><span class="o">);</span>
+        <span class="n">priorityQueue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"zahit"</span><span class="o">);</span>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>public static void main (String [] args){
-    PriorityQueue&lt;String&gt; priorityQueue = new PriorityQueue&lt;&gt;();
-    priorityQueue.add("ilkay");
-    priorityQueue.add("adem");
-    priorityQueue.add("zahit");
-
-    LinkedList&lt;String&gt; linkedList = new LinkedList&lt;&gt;();
-    linkedList.add("ilkay");
-    linkedList.add("adem");
-    linkedList.add("zahit");
-    
-    System.err.println(priorityQueue);
-    System.err.println("--------");
-    System.err.println(linkedList);
-    
-    System.err.println("--------");
-    
-    String firstElementWithPeek = priorityQueue.peek();
-    System.err.println(firstElementWithPeek);
-    
-    System.err.println("--------");
-    for (int i = 0; i &lt; 5; i++) {
-        String object = priorityQueue.poll();
-        System.out.println(object);
-    }
-    /*for (int i = 0; i &lt; 5; i++) {
-        String object = priorityQueue.remove();
-        System.out.println(object);
-    }*/
-} } ```
-</code></pre>
-</div>
+        <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">linkedList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;&gt;();</span>
+        <span class="n">linkedList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"ilkay"</span><span class="o">);</span>
+        <span class="n">linkedList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"adem"</span><span class="o">);</span>
+        <span class="n">linkedList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"zahit"</span><span class="o">);</span>
+        
+        <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">priorityQueue</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--------"</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">linkedList</span><span class="o">);</span>
+        
+        <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--------"</span><span class="o">);</span>
+        
+        <span class="n">String</span> <span class="n">firstElementWithPeek</span> <span class="o">=</span> <span class="n">priorityQueue</span><span class="o">.</span><span class="na">peek</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">firstElementWithPeek</span><span class="o">);</span>
+        
+        <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--------"</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">String</span> <span class="n">object</span> <span class="o">=</span> <span class="n">priorityQueue</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">object</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="cm">/*for (int i = 0; i &lt; 5; i++) {
+            String object = priorityQueue.remove();
+            System.out.println(object);
+        }*/</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
 
 <p>Örneğimizde Queue arabirimini uygulayan LinkedList ve PriorityQueue sınıflarının birer örneğini oluşturduk ve eklemeler yaptık. Akabinde konsola bu iki veri yapısındaki değerleri bastık.
 Peek metoduna örnek olması açısından firstElementWithPeek nesnesi oluşturduk ve peek metodu ile veri çekip koyduk.

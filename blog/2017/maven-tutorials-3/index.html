@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2017/maven-tutorials-3/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Maven Yazıları 3 - Maven Tabanlı Java Web Projesi Oluşturalım Ve Çalıştıralım - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Maven Yazıları 3 - Maven Tabanlı Java Web Projesi Oluşturalım Ve Çalıştıralım | İlkay Günel - Blog</title>
 <meta property="og:title" content="Maven Yazıları 3 - Maven Tabanlı Java Web Projesi Oluşturalım Ve Çalıştıralım" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Maven Yazıları 3 - Maven Tabanlı Java Web Projesi Oluşturalım Ve Çalıştıralım" />
 <meta property="og:description" content="Maven Yazıları 3 - Maven Tabanlı Java Web Projesi Oluşturalım Ve Çalıştıralım" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2017/maven-tutorials-3/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2017-06-09T20:41:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Maven Yazıları 3 - Maven Tabanlı Java Web Projesi Oluşturalım Ve Çalıştıralım",
-    "datePublished": "2017-06-09T20:41:20+03:00",
-    "description": "Maven Yazıları 3 - Maven Tabanlı Java Web Projesi Oluşturalım Ve Çalıştıralım",
-    "url": "http://ilkaygunel.com/blog/2017/maven-tutorials-3/"
-  }
-</script>
+{"name":null,"description":"Maven Yazıları 3 - Maven Tabanlı Java Web Projesi Oluşturalım Ve Çalıştıralım","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2017/maven-tutorials-3/","publisher":null,"image":null,"headline":"Maven Yazıları 3 - Maven Tabanlı Java Web Projesi Oluşturalım Ve Çalıştıralım","dateModified":"2017-06-09T20:41:20+03:00","datePublished":"2017-06-09T20:41:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/maven-tutorials-3/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -140,7 +135,7 @@
 
 <p>Maven giriş yazısında sizlere ArtifactId, GroupId gibi konulardan bahsetmiştim. Şimdi onları da kullanarak şu komut vasıtası ile bir adet Plain Old Web Application (POWA) oluşturalım:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">mvn</span> <span class="nl">archetype:</span><span class="n">generate</span> <span class="o">-</span><span class="n">DarchetypeArtifactId</span><span class="o">=</span><span class="n">maven</span><span class="o">-</span><span class="n">archetype</span><span class="o">-</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="n">mvn</span> <span class="n">archetype</span><span class="o">:</span><span class="n">generate</span> <span class="o">-</span><span class="n">DarchetypeArtifactId</span><span class="o">=</span><span class="n">maven</span><span class="o">-</span><span class="n">archetype</span><span class="o">-</span>
 <span class="n">webapp</span> <span class="o">-</span><span class="n">DartifactId</span><span class="o">=</span><span class="n">WebAppProject</span> <span class="o">-</span><span class="n">DgroupId</span><span class="o">=</span><span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span>
 <span class="o">-</span><span class="n">Dversion</span><span class="o">=</span><span class="mf">1.0</span><span class="o">-</span><span class="n">SNAPSHOT</span> <span class="o">-</span><span class="n">Dpackage</span><span class="o">=</span><span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span></code></pre></figure>
 
@@ -173,7 +168,7 @@ sayfaları yer alır. JSP sayfaları, XHTML sayfaları gibi.</p>
 
 <p>Projenin klasör yapısı içindeki pom.xml dosyasını herhangi bir text editör’de açarsanız şu şekilde bir görünüm ile karşılacaksınız:</p>
 
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
   <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
   <span class="nt">&lt;groupId&gt;</span>com.ilkaygunel<span class="nt">&lt;/groupId&gt;</span>
@@ -200,7 +195,7 @@ sayfaları yer alır. JSP sayfaları, XHTML sayfaları gibi.</p>
 <p>Projeyi çalıştırmadan önce yapmamız gereken bir diğer konu ise bir compiler plugin’i eklemek olacaktır. Elimizdeki JSP dosyalarının derlenebilmesi için bu tarz bir plugin’e ihtiyacımız
 olacak. Bu plug’ini edinmek için de yapmamız gereken şey çok basit. pom.xml dosyasındaki buid tag’lerinin arasına <strong><em>maven-compiler-plugin</em></strong>‘i eklemek. Onu da şu şekilde yapıyoruz:</p>
 
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;build&gt;</span>
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="nt">&lt;build&gt;</span>
     <span class="nt">&lt;finalName&gt;</span>WebAppProject<span class="nt">&lt;/finalName&gt;</span>
     <span class="nt">&lt;plugins&gt;</span>
         <span class="nt">&lt;plugin&gt;</span>
@@ -242,7 +237,7 @@ dosyası target klasörünün altında yer alır.</p>
 <p>Şimdi artık projenin çalıştırlması aşamasına geldik. Projeyi çalıştırmak için yapmamız gereken şey az önceki maven-compiler-plugin eklemesi gibi maven-jetty-plugin’i eklemek olacaktır.
 pom.xml’deki build tag’inin yeni hali şöyle olacak:</p>
 
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml">...
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span>...
 <span class="nt">&lt;build&gt;</span>
     <span class="nt">&lt;finalName&gt;</span>WebAppProject<span class="nt">&lt;/finalName&gt;</span>
     <span class="nt">&lt;plugins&gt;</span>
@@ -267,7 +262,7 @@ pom.xml’deki build tag’inin yeni hali şöyle olacak:</p>
 
 <p>Proje klasöründeki index.jsp dosyasını herhangi bir text editör ile açıp baktığımızda çok basit bir Hello World kodu ile karşılacağız, projeyi çalıştırınca ekranda Hello World görmeyi bekliyoruz:</p>
 
-<figure class="highlight"><pre><code class="language-jsp" data-lang="jsp"><span class="nt">&lt;html&gt;</span>
+<figure class="highlight"><pre><code class="language-jsp" data-lang="jsp"><span></span><span class="nt">&lt;html&gt;</span>
     <span class="nt">&lt;body&gt;</span>
         <span class="nt">&lt;h2&gt;</span>Hello World!<span class="nt">&lt;/h2&gt;</span>
     <span class="nt">&lt;/body&gt;</span>
@@ -277,11 +272,11 @@ pom.xml’deki build tag’inin yeni hali şöyle olacak:</p>
 <strong><em>No plugin found for prefix ‘jetty’ in the current project and in the plugin groups</em></strong> şeklinde bir hata alırsanız <strong><em>${user.home}/.m2/settings.xml</em></strong> dosyanızı açın
 içerisine</p>
 
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;pluginGroup&gt;</span>org.mortbay.jetty<span class="nt">&lt;/pluginGroup&gt;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="nt">&lt;pluginGroup&gt;</span>org.mortbay.jetty<span class="nt">&lt;/pluginGroup&gt;</span></code></pre></figure>
 
 <p>satırını ekleyin. Dosya eğer yoks ise içeriği şu şekilde olacak şekilde oluşturabilirsiniz:</p>
 
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;settings</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/SETTINGS/1.0.0&quot;</span>
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="nt">&lt;settings</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/SETTINGS/1.0.0&quot;</span>
   <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
   <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/SETTINGS/1.0.0</span>
 <span class="s">                      http://maven.apache.org/xsd/settings-1.0.0.xsd&quot;</span><span class="nt">&gt;</span>
@@ -309,7 +304,7 @@ başlatacak.</p>
 
 <p>Burada projenin direk localhost:8080 üzerinden değil de localhost:8080/WebAppProject üzerinde çalışmasını istersek de plugin’i şu şekilde konfigüre edebiliriz:</p>
 
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;plugin&gt;</span>
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="nt">&lt;plugin&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>org.eclipse.jetty<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>jetty-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>9.4.6.v20170531<span class="nt">&lt;/version&gt;</span>
@@ -324,7 +319,7 @@ başlatacak.</p>
 <p>webApp tag’lerinin contextPath tag’leri ile projenin Jetty üzerinde hangi path’de çalışacağını söylemiş oluyoruz. İstediğimiz path’i buraya verebiliriz. Örneğin projenin <strong><em>Test</em></strong> path’i 
 üzerinde çalışmasını istersek</p>
 
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;contextPath&gt;</span>/Test<span class="nt">&lt;/contextPath&gt;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="nt">&lt;contextPath&gt;</span>/Test<span class="nt">&lt;/contextPath&gt;</span></code></pre></figure>
 
 <p>şeklinde bir değişiklik yeterli olur. Terminal üzerinden kontrol+z ile stop işlemi yapıp tekrar mvn jetty:run dediğimde proje WebAppProject path’i üzerinde çalışıyor durumda.</p>
 

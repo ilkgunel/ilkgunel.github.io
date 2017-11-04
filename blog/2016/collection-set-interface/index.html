@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/collection-set-interface/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Collections 5 – Set Interface - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Collections 5 – Set Interface | İlkay Günel - Blog</title>
 <meta property="og:title" content="Collections 5 – Set Interface" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Collections 5 – Set Interface" />
 <meta property="og:description" content="Collections 5 – Set Interface" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/collection-set-interface/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-09-04T19:38:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Collections 5 – Set Interface",
-    "datePublished": "2016-09-04T19:38:20+03:00",
-    "description": "Collections 5 – Set Interface",
-    "url": "http://ilkaygunel.com/blog/2016/collection-set-interface/"
-  }
-</script>
+{"name":null,"description":"Collections 5 – Set Interface","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/collection-set-interface/","publisher":null,"image":null,"headline":"Collections 5 – Set Interface","dateModified":"2016-09-04T19:38:20+03:00","datePublished":"2016-09-04T19:38:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/collection-set-interface/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -138,39 +133,36 @@
     <p>HashSet elemanlarını bir Hash tablosu içerisinde tutar. En performanslı Set implementasyonu olmasına karşın iterasyon yaptığımızda iterasyon sırası konusunda garanti vermemektedir.
 Tekrarlı veri tutmayan bir Set bir implementasyonu olarak HashSet için örnek kod:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  Set&lt;Type&gt; noDups = new HashSet&lt;Type&gt;(c);
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Set&lt;Type&gt; noDups = new HashSet&lt;Type&gt;(c);
   //Collection Framework'ün en temel interface'i Collection olduğu için Set yerine Collection da kullanılabilir.
   //Buradaki fark Set'in tanımından gelen tekrarlı veri tutmayışıdır.
   //Collection&lt;Type&gt; noDups = new HashSet&lt;Type&gt;(c);
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
 </ul>
 
 <p>Burada eğer elinizde bir Collection ya da ondan türetilmiş bir koleksiyon varsa ve siz tekrarsız veri içeren bir yapı istiyorsanız Java 8 ile gelen şu özelliği kullanabilirsiniz:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Collection&lt;String&gt; myCollection = new ArrayList&lt;String&gt;();
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Collection&lt;String&gt; myCollection = new ArrayList&lt;String&gt;();
 myCollection.stream().collect(Collectors.toSet());//Bunu yeni oluşturduğumuz koleksiyona atayabiliriz.
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>
     <p>TreeSet elemanlarını bir <a href="http://bilgisayarkavramlari.sadievrenseker.com/2009/12/27/kirmizi-siyah-agaclari-red-black-trees/">red-black tree</a> üzerinde tutar.  Elemanlar değerleri temel alınarak oluşturulan bir sıra içinde tutulur. Örneğin String bir TreeSet’de elemanlar alfabetik sıraya göre sıralanır. HashSet ile kıyaslandığında oldukça yavaştır.
 new HashSet yerine new TreeSet dersek yeni bir TreeSet oluşturmuş oluruz. Eğer elinizde bir Collection ya da ondan türetilmiş bir koleksiyon varsa yeni bir TreeSet’i şöyle de oluşturabiliriz:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  Set&lt;String&gt; set = myCollection.stream()
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Set&lt;String&gt; set = myCollection.stream()
   .map(Person::getName)
   .collect(Collectors.toCollection(TreeSet::new));
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>LinkedHashSet Linked List kullanılarak ve Hash Table olarak yapılmış  bir  implementasyondur. Elemanların sırası eklenme sırası olarak tutulur. Ayrıca LinkedHashSet istemcilerini HashSet tarafından verilen ve maliyeti belli belirsiz daha yüksek olan belirlenmemiş  ve genellikle kaotik olan sıralamadan korumaya çalışır.</p>
   </li>
 </ul>
 
-<h3 id="set-interface-temel-lemler">Set Interface Temel İşlemler</h3>
+<h3 id="set-interface-temel-i̇şlemler">Set Interface Temel İşlemler</h3>
 
 <ul>
   <li>size() metodu Set içindeki elemanların sayısını döndürür.</li>
@@ -181,11 +173,13 @@ new HashSet yerine new TreeSet dersek yeni bir TreeSet oluşturmuş oluruz. Eğe
 </ul>
 
 <h3 id="set-interface-bulk-operations">Set Interface Bulk Operations</h3>
-<p>Bulk Operation denince anlatılmak istenen birden çok veri ile bir kerede işlem yapılmasıdır. Bulk operations  Set Interface için bilhassa iyi tasarlanmış operasyonlardır. Bu metotlar yazıldığında standart cebirsel işlemler yapar. Şimdi s1 ve s2’nin birer Set olduğunu düşünelim.
-* s1.containsAll(s2) — Eğer s2 s1’in alt kümesi ise bu metot true değer döner. Alt küme olmasından kasıt s1’in s2’nin tüm elemanlarını barındırmasıdır.
-* s1.addAll(s2) — s2’deki tüm elemanları s1’e aktarmak sureti ile s1 ve s2’nin birleşimini sağlayarak yeni s1 elde edilmesini sağlar.
-* s1.retainAll(s2) — s1 Set’ini s1 ve s2 Set’lerinin kesişimine dönüştürür. s1 ve s2’deki ortak tüm elemanlar s1’e alınır ve s1 deki diğer elemanlar devre dışı bırakılır.
-* s1.removeAll(s2) — hem s1 hem s2 Set’inde yer alan tüm elemanlar s1 Set’inden çıkarılır. Böylece s1’de olup s2’de olmayanların barındığı Set elde edilmiş olur.</p>
+<p>Bulk Operation denince anlatılmak istenen birden çok veri ile bir kerede işlem yapılmasıdır. Bulk operations  Set Interface için bilhassa iyi tasarlanmış operasyonlardır. Bu metotlar yazıldığında standart cebirsel işlemler yapar. Şimdi s1 ve s2’nin birer Set olduğunu düşünelim.</p>
+<ul>
+  <li>s1.containsAll(s2) — Eğer s2 s1’in alt kümesi ise bu metot true değer döner. Alt küme olmasından kasıt s1’in s2’nin tüm elemanlarını barındırmasıdır.</li>
+  <li>s1.addAll(s2) — s2’deki tüm elemanları s1’e aktarmak sureti ile s1 ve s2’nin birleşimini sağlayarak yeni s1 elde edilmesini sağlar.</li>
+  <li>s1.retainAll(s2) — s1 Set’ini s1 ve s2 Set’lerinin kesişimine dönüştürür. s1 ve s2’deki ortak tüm elemanlar s1’e alınır ve s1 deki diğer elemanlar devre dışı bırakılır.</li>
+  <li>s1.removeAll(s2) — hem s1 hem s2 Set’inde yer alan tüm elemanlar s1 Set’inden çıkarılır. Böylece s1’de olup s2’de olmayanların barındığı Set elde edilmiş olur.</li>
+</ul>
 
 <p>Set interface temel olarak bu şekilde arkadaşlar. Gelecek yazıda Set Interface implementasyonu olan HashSet konusuna değineceğiz. Görüşene kadar sağlıcakla kalın.</p>
 

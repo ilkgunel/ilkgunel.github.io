@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/testng-nedir-ornek-uygulama/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>TestNG Nedir? TestNG İle Örnek Uygulama - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>TestNG Nedir? TestNG İle Örnek Uygulama | İlkay Günel - Blog</title>
 <meta property="og:title" content="TestNG Nedir? TestNG İle Örnek Uygulama" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="TestNG Nedir? TestNG İle Örnek Uygulama" />
 <meta property="og:description" content="TestNG Nedir? TestNG İle Örnek Uygulama" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/testng-nedir-ornek-uygulama/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-11-25T20:40:21+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "TestNG Nedir? TestNG İle Örnek Uygulama",
-    "datePublished": "2016-11-25T20:40:21+03:00",
-    "description": "TestNG Nedir? TestNG İle Örnek Uygulama",
-    "url": "http://ilkaygunel.com/blog/2016/testng-nedir-ornek-uygulama/"
-  }
-</script>
+{"name":null,"description":"TestNG Nedir? TestNG İle Örnek Uygulama","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/testng-nedir-ornek-uygulama/","publisher":null,"image":null,"headline":"TestNG Nedir? TestNG İle Örnek Uygulama","dateModified":"2016-11-25T20:40:21+03:00","datePublished":"2016-11-25T20:40:21+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/testng-nedir-ornek-uygulama/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -151,7 +146,7 @@ dünyası içerisinde en bilindik test koşturma aracı olarak JUnit’i düşü
 
 <p>Şimdi IDE’nizde bir Maven projesi açın ve pom.xml dosyanıza şu bağımlılık kodunu ekleyin:</p>
 
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;dependency&gt;</span>
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="nt">&lt;dependency&gt;</span>
 	<span class="nt">&lt;groupId&gt;</span>org.testng<span class="nt">&lt;/groupId&gt;</span>
 	<span class="nt">&lt;artifactId&gt;</span>testng<span class="nt">&lt;/artifactId&gt;</span>
 	<span class="nt">&lt;version&gt;</span>6.8<span class="nt">&lt;/version&gt;</span>
@@ -169,14 +164,14 @@ bir herhangi bir isim verdiğiniz Test sınıfı oluşturalım.</p>
 
 <p>NetBeans bizim için şöyle bir kod üretmiş olacak:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="cm">/*</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="cm">/*</span>
 <span class="cm"> * To change this license header, choose License Headers in Project Properties.</span>
 <span class="cm"> * To change this template file, choose Tools | Templates</span>
 <span class="cm"> * and open the template in the editor.</span>
 <span class="cm"> */</span>
-<span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">test</span><span class="o">;</span>
+<span class="kn">package</span> <span class="nn">com.ilkaygunel.test</span><span class="o">;</span>
 
-<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">testng</span><span class="o">.</span><span class="na">Assert</span><span class="o">.*;</span>
+<span class="kn">import static</span> <span class="nn">org.testng.Assert.*</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.testng.annotations.AfterClass</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.testng.annotations.AfterMethod</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.testng.annotations.BeforeClass</span><span class="o">;</span>
@@ -216,9 +211,9 @@ bir herhangi bir isim verdiğiniz Test sınıfı oluşturalım.</p>
 
 <p>Şimdi yukarıdaki bu kodu şu şekilde düzenleyelim ve inceleyelim:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">test</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.test</span><span class="o">;</span>
 
-<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">testng</span><span class="o">.</span><span class="na">Assert</span><span class="o">.*;</span>
+<span class="kn">import static</span> <span class="nn">org.testng.Assert.*</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.testng.annotations.AfterClass</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.testng.annotations.AfterMethod</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.testng.annotations.BeforeClass</span><span class="o">;</span>

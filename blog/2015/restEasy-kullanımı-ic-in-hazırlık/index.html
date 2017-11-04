@@ -27,27 +27,22 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2015/restEasy-kullan%C4%B1m%C4%B1-ic-in-haz%C4%B1rl%C4%B1k/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>RestEasy İle Restful Web Servis Dersleri 2-RestEasy Kullanımı İçin Hazırlık - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>RestEasy İle Restful Web Servis Dersleri 2-RestEasy Kullanımı İçin Hazırlık | İlkay Günel - Blog</title>
 <meta property="og:title" content="RestEasy İle Restful Web Servis Dersleri 2-RestEasy Kullanımı İçin Hazırlık" />
-<meta name="description" content="Merhabalar arkadaşlar.Bu yazıda RestEasy kullanmak için neler yapmamız gerektiğinden hızlıca bahsedeceğim." />
-<meta property="og:description" content="Merhabalar arkadaşlar.Bu yazıda RestEasy kullanmak için neler yapmamız gerektiğinden hızlıca bahsedeceğim." />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Merhabalar arkadaşlar. Bu yazıda RestEasy kullanmak için neler yapmamız gerektiğinden hızlıca bahsedeceğim." />
+<meta property="og:description" content="Merhabalar arkadaşlar. Bu yazıda RestEasy kullanmak için neler yapmamız gerektiğinden hızlıca bahsedeceğim." />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2015/restEasy-kullan%C4%B1m%C4%B1-ic-in-haz%C4%B1rl%C4%B1k/" />
 <meta property="og:url" content="http://ilkaygunel.com/blog/2015/restEasy-kullan%C4%B1m%C4%B1-ic-in-haz%C4%B1rl%C4%B1k/" />
 <meta property="og:site_name" content="İlkay Günel - Blog" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2015-11-26T15:46:52+02:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "RestEasy İle Restful Web Servis Dersleri 2-RestEasy Kullanımı İçin Hazırlık",
-    "datePublished": "2015-11-26T15:46:52+02:00",
-    "description": "Merhabalar arkadaşlar.Bu yazıda RestEasy kullanmak için neler yapmamız gerektiğinden hızlıca bahsedeceğim.",
-    "url": "http://ilkaygunel.com/blog/2015/restEasy-kullan%C4%B1m%C4%B1-ic-in-haz%C4%B1rl%C4%B1k/"
-  }
-</script>
+{"name":null,"description":"Merhabalar arkadaşlar. Bu yazıda RestEasy kullanmak için neler yapmamız gerektiğinden hızlıca bahsedeceğim.","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2015/restEasy-kullan%C4%B1m%C4%B1-ic-in-haz%C4%B1rl%C4%B1k/","publisher":null,"image":null,"headline":"RestEasy İle Restful Web Servis Dersleri 2-RestEasy Kullanımı İçin Hazırlık","dateModified":"2015-11-26T15:46:52+02:00","datePublished":"2015-11-26T15:46:52+02:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2015/restEasy-kullan%C4%B1m%C4%B1-ic-in-haz%C4%B1rl%C4%B1k/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -146,7 +141,7 @@ Bu yazıda RestEasy kullanmak için neler yapmamız gerektiğinden hızlıca bah
 
 <p>Şimdi ikinci yolu nasıl uygulayabileceğinizden bahsedelim. NetBeans IDE’mizde yeni bir maven projesi açalım. NetBeans IDE’mizde nasıl maven projesi açıldığına bakmak için <a href="http://kod5.org/jsf-maven-ve-apache-shiro-kullanarak-sayfalara-erisim-yetkisi-tanimlama/">şuradaki</a> yazıya göz atabilirsiniz. Maven projesi açmanızın akabinde pom.xml dosyanızı açın ve bağımlılıklarınızı şu şekilde düzenleyin:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;dependencies&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;dependencies&gt;
     &lt;dependency&gt;
         &lt;groupId&gt;org.jboss.resteasy&lt;/groupId&gt;
         &lt;artifactId&gt;resteasy-jaxrs&lt;/artifactId&gt;
@@ -163,8 +158,7 @@ Bu yazıda RestEasy kullanmak için neler yapmamız gerektiğinden hızlıca bah
         &lt;version&gt;3.0.16.Final&lt;/version&gt;
     &lt;/dependency&gt;
 &lt;/dependencies&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Birinci bağımlılık RestEasy implementasyonunu temsil ediyor. Spesifikasyon olan Rest API de içerisinde mevcut. İkinci bağımlılık Servlet Initializer ile alakalı, buna gelecek yazıda değineceğim. Üçüncü bağımlılık da JSON tipinde çıktı üretmek için gerekli olan bağımlılık. Yazılarımız boyunca çoğunlukla (belki de hepsinde) JSON ile çalışacağız.</p>
 

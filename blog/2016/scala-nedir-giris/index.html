@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/scala-nedir-giris/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Scala Giriş - Scala Nedir? Scala İle Hello World - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Scala Giriş - Scala Nedir? Scala İle Hello World | İlkay Günel - Blog</title>
 <meta property="og:title" content="Scala Giriş - Scala Nedir? Scala İle Hello World" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Scala Giriş - Scala Nedir? Scala İle Hello World" />
 <meta property="og:description" content="Scala Giriş - Scala Nedir? Scala İle Hello World" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/scala-nedir-giris/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-12-04T20:40:21+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Scala Giriş - Scala Nedir? Scala İle Hello World",
-    "datePublished": "2016-12-04T20:40:21+03:00",
-    "description": "Scala Giriş - Scala Nedir? Scala İle Hello World",
-    "url": "http://ilkaygunel.com/blog/2016/scala-nedir-giris/"
-  }
-</script>
+{"name":null,"description":"Scala Giriş - Scala Nedir? Scala İle Hello World","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/scala-nedir-giris/","publisher":null,"image":null,"headline":"Scala Giriş - Scala Nedir? Scala İle Hello World","dateModified":"2016-12-04T20:40:21+03:00","datePublished":"2016-12-04T20:40:21+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/scala-nedir-giris/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -158,7 +153,7 @@ binary dosyalarını indirip PATH’e atıp derleme yolu ile Hello World olacak.
 <p>İndirmiş olduğunuz sıkıştırılmış dosyayı herhangi bir yere açın. Şimdi bilgisayarımızın PATH’ine Scala’yı eklememiz gerekiyor. MacOS çalıştıran bilgisayarlar için $HOME dizini 
 altındaki <strong><em>.bash_profile</em></strong> dosyasını güncellemeniz gerekiyor. Şu iki satırı .bash_profile dosyanıza eklemeniz yeterli:</p>
 
-<figure class="highlight"><pre><code class="language-text" data-lang="text">export SCALA_HOME=/Users/ilkaygunel/Downloads/scala-2.12.1
+<figure class="highlight"><pre><code class="language-text" data-lang="text"><span></span>export SCALA_HOME=/Users/ilkaygunel/Downloads/scala-2.12.1
 export PATH=$SCALA_HOME/bin:$PATH</code></pre></figure>
 
 <p>PATH ayarının düzgün yapılıp yapılmadığını anlamak için komut satırına gelip <strong><em>scalac -version</em></strong> komutunu çalıştırın. Şöyle bir çıktı almanız gerekiyor:</p>
@@ -177,7 +172,7 @@ export PATH=$SCALA_HOME/bin:$PATH</code></pre></figure>
 
 <p>Akabinde şu satırları komut satırında yazmak sureti ile ilk örnek uygulamamızı yapmış olalım:</p>
 
-<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">object</span> <span class="nc">HelloWorld</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span></span><span class="k">object</span> <span class="nc">HelloWorld</span> <span class="o">{</span>
   <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
     <span class="n">println</span><span class="o">(</span><span class="s">&quot;Hello, world!&quot;</span><span class="o">)</span>
   <span class="o">}</span>
@@ -204,13 +199,13 @@ kullanılıyor. C dilinde <strong><em>printf</em></strong>, C++’da <strong><em
 
 <p>Akabinde komut satırından bu dosyanın olduğu yere gelin ve</p>
 
-<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="n">scalac</span> <span class="nc">HelloWorld</span><span class="o">.</span><span class="n">scala</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span></span><span class="n">scalac</span> <span class="nc">HelloWorld</span><span class="o">.</span><span class="n">scala</span></code></pre></figure>
 
 <p>komutunu çalıştırın. scalac komutu bizim elimizdeki Scala dosyamızı derleyecek ve <strong><em>.class</em></strong> uzantılı bir dosya oluşturacak.</p>
 
 <p>Şimdi de</p>
 
-<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="n">scala</span> <span class="nc">HelloWorld</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span></span><span class="n">scala</span> <span class="nc">HelloWorld</span></code></pre></figure>
 
 <p>şeklinde bir komut çalıştıralım. Az önce biz HelloWorld$.class isminde bir dosya edindik. Buraki HelloWorld’ü scala komutuna vererek HelloWorld.scala içindeki main metodunu çalıştırmış
 olacağız.</p>
@@ -256,7 +251,7 @@ seçin ve Next deyin.</p>
 
 <p>Proje açıldıktan sonra hemen Project Files altındaki pom.xml dosyasına gidiyoruz ve</p>
 
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;dependency&gt;</span>
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="nt">&lt;dependency&gt;</span>
   <span class="nt">&lt;groupId&gt;</span>org.scala-lang<span class="nt">&lt;/groupId&gt;</span>
   <span class="nt">&lt;artifactId&gt;</span>scala-library<span class="nt">&lt;/artifactId&gt;</span>
   <span class="nt">&lt;version&gt;</span>2.9.1<span class="nt">&lt;/version&gt;</span>

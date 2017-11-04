@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/collection-set-implementation-treeset/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Collections 7 – Set Implementation TreeSet - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Collections 7 – Set Implementation TreeSet | İlkay Günel - Blog</title>
 <meta property="og:title" content="Collections 7 – Set Implementation TreeSet" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Collections 7 – Set Implementation TreeSet" />
 <meta property="og:description" content="Collections 7 – Set Implementation TreeSet" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/collection-set-implementation-treeset/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-09-04T19:38:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Collections 7 – Set Implementation TreeSet",
-    "datePublished": "2016-09-04T19:38:20+03:00",
-    "description": "Collections 7 – Set Implementation TreeSet",
-    "url": "http://ilkaygunel.com/blog/2016/collection-set-implementation-treeset/"
-  }
-</script>
+{"name":null,"description":"Collections 7 – Set Implementation TreeSet","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/collection-set-implementation-treeset/","publisher":null,"image":null,"headline":"Collections 7 – Set Implementation TreeSet","dateModified":"2016-09-04T19:38:20+03:00","datePublished":"2016-09-04T19:38:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/collection-set-implementation-treeset/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -135,82 +130,80 @@ Comparator arabirimi sizin Set’in içinde verileri nasıl saklayacağınızı 
 <p>TreeSet arabirimi temel işlemler için (add,remove,contains) log(n) zamanda bu işi yapmayı garanti eder.
 TreeSet’in de Senkronize bir implementasyon olmadığını unutmayalım ve onu senkronize etmek istersek şu kodu kullanabiliriz:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>   SortedSet s = Collections.synchronizedSortedSet(new TreeSet(...)); TreeSet sınıfının 4 adet yapılandırıcı vardır. Bunlar şu şekildedir: 1. TreeSet() : Yeni bir TreeSet nesnesi oluşturur. Elemanların sırası doğal sıradadır yani örneğin String tipinde veri saklanacaksa ASCII kodları devreye girer. 2. TreeSet(Collection&lt;? extends E&gt; c) : Yapılandırıcıya verilmiş olan Collection'ın elemanlarını barındırarak ile yeni bir TreeSet oluşturulur. Elemanların sırası doğal sıradadır. 3. TreeSet(Comparator&lt;? super E&gt; comparator) : Yeni, boş bir TreeSet oluşturur fakat elamanların sıralaması bu kez yapılandırıcıya parametre olarak verilmiş olan Comparator'a göre yapılır. 4. TreeSet(SortedSet&lt;E&gt; s) : Yapılandırıcıya parametre olarak verilmiş SortedSet'deki elemanları barındırarak ve aynı sırayı uygulayarak yeni bir TreeSet oluşturur.
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   SortedSet s = Collections.synchronizedSortedSet(new TreeSet(...)); TreeSet sınıfının 4 adet yapılandırıcı vardır. Bunlar şu şekildedir: 1. TreeSet() : Yeni bir TreeSet nesnesi oluşturur. Elemanların sırası doğal sıradadır yani örneğin String tipinde veri saklanacaksa ASCII kodları devreye girer. 2. TreeSet(Collection&lt;? extends E&gt; c) : Yapılandırıcıya verilmiş olan Collection'ın elemanlarını barındırarak ile yeni bir TreeSet oluşturulur. Elemanların sırası doğal sıradadır. 3. TreeSet(Comparator&lt;? super E&gt; comparator) : Yeni, boş bir TreeSet oluşturur fakat elamanların sıralaması bu kez yapılandırıcıya parametre olarak verilmiş olan Comparator'a göre yapılır. 4. TreeSet(SortedSet&lt;E&gt; s) : Yapılandırıcıya parametre olarak verilmiş SortedSet'deki elemanları barındırarak ve aynı sırayı uygulayarak yeni bir TreeSet oluşturur.
+</code></pre></div></div>
 
 <p>Şimdi bir örnek yapalım TreeSet kullanarak:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package collections;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">/*</span>
+ <span class="p">*</span> <span class="k">To</span> <span class="n">change</span> <span class="n">this</span> <span class="n">license</span> <span class="n">header</span><span class="p">,</span> <span class="n">choose</span> <span class="n">License</span> <span class="n">Headers</span> <span class="k">in</span> <span class="n">Project</span> <span class="n">Properties</span><span class="p">.</span>
+ <span class="p">*</span> <span class="k">To</span> <span class="n">change</span> <span class="n">this</span> <span class="n">template</span> <span class="n">file</span><span class="p">,</span> <span class="n">choose</span> <span class="n">Tools</span> <span class="p">|</span> <span class="n">Templates</span>
+ <span class="p">*</span> <span class="k">and</span> <span class="n">open</span> <span class="n">the</span> <span class="n">template</span> <span class="k">in</span> <span class="n">the</span> <span class="n">editor</span><span class="p">.</span>
+ <span class="p">*/</span>
+<span class="k">package</span> <span class="n">collections</span><span class="p">;</span>
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">ArrayList</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">Iterator</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="k">List</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">SortedSet</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">TreeSet</span><span class="p">;</span>
 
-/**
- *
- * @author ilkaygunel
- */
-public class TreeSetExample {
-    public static void main(String[] args) {
-        List&lt;String&gt; surnameList = new ArrayList&lt;&gt;();
-        surnameList.add("demir");
-        surnameList.add("akkuş");
-        surnameList.add("aytimur");
+<span class="p">/**</span>
+ <span class="p">*</span>
+ <span class="p">*</span> <span class="p">@</span><span class="n">author</span> <span class="n">ilkaygunel</span>
+ <span class="p">*/</span>
+<span class="k">public</span> <span class="n">class</span> <span class="n">TreeSetExample</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="k">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">List</span><span class="p">&lt;</span><span class="k">String</span><span class="p">&gt;</span> <span class="n">surnameList</span> <span class="p">=</span> <span class="n">new</span> <span class="n">ArrayList</span><span class="p">&lt;&gt;();</span>
+        <span class="n">surnameList</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"demir"</span><span class="p">);</span>
+        <span class="n">surnameList</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"akkuş"</span><span class="p">);</span>
+        <span class="n">surnameList</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"aytimur"</span><span class="p">);</span>
 
-        TreeSet&lt;String&gt; names = new TreeSet&lt;&gt;();
-        names.add("mustafa");
-        names.add("alican");
-        names.add("isa");
-        names.add("mustafa1");
+        <span class="n">TreeSet</span><span class="p">&lt;</span><span class="k">String</span><span class="p">&gt;</span> <span class="n">names</span> <span class="p">=</span> <span class="n">new</span> <span class="n">TreeSet</span><span class="p">&lt;&gt;();</span>
+        <span class="n">names</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"mustafa"</span><span class="p">);</span>
+        <span class="n">names</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"alican"</span><span class="p">);</span>
+        <span class="n">names</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"isa"</span><span class="p">);</span>
+        <span class="n">names</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"mustafa1"</span><span class="p">);</span>
 
-        names.addAll(surnameList);
+        <span class="n">names</span><span class="p">.</span><span class="n">addAll</span><span class="p">(</span><span class="n">surnameList</span><span class="p">);</span>
 
-        System.out.println("--- Names Seti ---");
-        for (String name : names) {
-            System.out.println(name);
-        }
+        <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"--- Names Seti ---"</span><span class="p">);</span>
+        <span class="n">for</span> <span class="p">(</span><span class="k">String</span> <span class="n">name</span> <span class="p">:</span> <span class="n">names</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+        <span class="p">}</span>
 
-        Iterator&lt;String&gt; descendingIterator = names.descendingIterator();
-        Iterator&lt;String&gt; iterator = names.iterator();
+        <span class="n">Iterator</span><span class="p">&lt;</span><span class="k">String</span><span class="p">&gt;</span> <span class="n">descendingIterator</span> <span class="p">=</span> <span class="n">names</span><span class="p">.</span><span class="n">descendingIterator</span><span class="p">();</span>
+        <span class="n">Iterator</span><span class="p">&lt;</span><span class="k">String</span><span class="p">&gt;</span> <span class="n">iterator</span> <span class="p">=</span> <span class="n">names</span><span class="p">.</span><span class="n">iterator</span><span class="p">();</span>
 
-        System.out.println("--- descendingIterator Kullanımı ---");
-        while (descendingIterator.hasNext()) {
-            String nextElement = descendingIterator.next();
-            System.out.println(nextElement);
-        }
+        <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"--- descendingIterator Kullanımı ---"</span><span class="p">);</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">descendingIterator</span><span class="p">.</span><span class="n">hasNext</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">String</span> <span class="n">nextElement</span> <span class="p">=</span> <span class="n">descendingIterator</span><span class="p">.</span><span class="k">next</span><span class="p">();</span>
+            <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">nextElement</span><span class="p">);</span>
+        <span class="p">}</span>
 
-        System.out.println("--- Iterator Kullanımı ---");
-        while(iterator.hasNext()){
-            String nextElement = iterator.next();
-            System.out.println(nextElement);
-        }
+        <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"--- Iterator Kullanımı ---"</span><span class="p">);</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">iterator</span><span class="p">.</span><span class="n">hasNext</span><span class="p">()){</span>
+            <span class="k">String</span> <span class="n">nextElement</span> <span class="p">=</span> <span class="n">iterator</span><span class="p">.</span><span class="k">next</span><span class="p">();</span>
+            <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">nextElement</span><span class="p">);</span>
+        <span class="p">}</span>
 
-        System.out.println("TreeSet'deki İlk Eleman:"+names.first());
-        System.out.println("TreeSet'deki Son Eleman:"+names.last());
-        System.out.println("Ceiling Verilen Parameteye En Yakın Değeri Döndürür:"+names.ceiling("mustaf"));
-        System.out.println("Floor Verilen Parametreden Küçük Ya Da Parametreye Eşit En Büyük Değeri Döndürür:"+names.floor("mustaf"));
-        System.out.println("Heigher Verilen Parameteden Küçük En Büyük Değeri Döndürür:"+names.higher("mustaf"));
-        System.out.println("Lower Verilen Parameteden Küçük En Büyük Değeri Döndürür:"+names.lower("mustafa1"));
+        <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"TreeSet'deki İlk Eleman:"</span><span class="p">+</span><span class="n">names</span><span class="p">.</span><span class="n">first</span><span class="p">());</span>
+        <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"TreeSet'deki Son Eleman:"</span><span class="p">+</span><span class="n">names</span><span class="p">.</span><span class="n">last</span><span class="p">());</span>
+        <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"Ceiling Verilen Parameteye En Yakın Değeri Döndürür:"</span><span class="p">+</span><span class="n">names</span><span class="p">.</span><span class="n">ceiling</span><span class="p">(</span><span class="s2">"mustaf"</span><span class="p">));</span>
+        <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"Floor Verilen Parametreden Küçük Ya Da Parametreye Eşit En Büyük Değeri Döndürür:"</span><span class="p">+</span><span class="n">names</span><span class="p">.</span><span class="nb">floor</span><span class="p">(</span><span class="s2">"mustaf"</span><span class="p">));</span>
+        <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"Heigher Verilen Parameteden Küçük En Büyük Değeri Döndürür:"</span><span class="p">+</span><span class="n">names</span><span class="p">.</span><span class="n">higher</span><span class="p">(</span><span class="s2">"mustaf"</span><span class="p">));</span>
+        <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"Lower Verilen Parameteden Küçük En Büyük Değeri Döndürür:"</span><span class="p">+</span><span class="n">names</span><span class="p">.</span><span class="n">lower</span><span class="p">(</span><span class="s2">"mustafa1"</span><span class="p">));</span>
 
-        System.out.println("headSet metodu verilen parametreye kadar olan değerlerden bir SortedSet döndürür.");
-        SortedSet&lt;String&gt; sortedSet = names.headSet("demir");
-        for (String string : sortedSet) {
-            System.out.println(string);
-        }
+        <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"headSet metodu verilen parametreye kadar olan değerlerden bir SortedSet döndürür."</span><span class="p">);</span>
+        <span class="n">SortedSet</span><span class="p">&lt;</span><span class="k">String</span><span class="p">&gt;</span> <span class="n">sortedSet</span> <span class="p">=</span> <span class="n">names</span><span class="p">.</span><span class="n">headSet</span><span class="p">(</span><span class="s2">"demir"</span><span class="p">);</span>
+        <span class="n">for</span> <span class="p">(</span><span class="k">String</span> <span class="k">string</span> <span class="p">:</span> <span class="n">sortedSet</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="k">string</span><span class="p">);</span>
+        <span class="p">}</span>
 
 
-    }
-}
-</code></pre>
-</div>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <ul>
   <li>Örneğimizde bir TreeSet nesnesi elde ediyoruz ve ona <strong><em>add()</em></strong> metodu ile değerler ekliyoruz.
@@ -224,7 +217,7 @@ public class TreeSetExample {
   <li>headSet metodu bizim verdiğimiz parametreye kadar olan kısmı alır, parametrede durur ve o kısımdan bir SortedSet türetir.</li>
 </ul>
 
-<h3 id="konsol-kts">Konsol Çıktısı</h3>
+<h3 id="konsol-çıktısı">Konsol Çıktısı</h3>
 <p>[<img src="/images/treeSetImage.png" alt="Constructocat by https://github.com/jasoncostello" style="width: 1474px; height:1208px;" />]</p>
 
 <p>Bu yazıda da bu kadar arkadaşlar. Gelecek yazıda görüşene kadar sağlıcakla kalın.</p>

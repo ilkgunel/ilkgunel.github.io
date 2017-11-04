@@ -27,27 +27,22 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2015/advanced-pathparam-and-pathsegment/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>RestEasy İle Restful Web Servis Dersleri 6 - Advanced PathParam And PathSegment - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>RestEasy İle Restful Web Servis Dersleri 6 - Advanced PathParam And PathSegment | İlkay Günel - Blog</title>
 <meta property="og:title" content="RestEasy İle Restful Web Servis Dersleri 6 - Advanced PathParam And PathSegment" />
-<meta name="description" content="" />
-<meta property="og:description" content="" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="İlkay Günel Blog" />
+<meta property="og:description" content="İlkay Günel Blog" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2015/advanced-pathparam-and-pathsegment/" />
 <meta property="og:url" content="http://ilkaygunel.com/blog/2015/advanced-pathparam-and-pathsegment/" />
 <meta property="og:site_name" content="İlkay Günel - Blog" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2015-11-26T15:46:52+02:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "RestEasy İle Restful Web Servis Dersleri 6 - Advanced PathParam And PathSegment",
-    "datePublished": "2015-11-26T15:46:52+02:00",
-    "description": "",
-    "url": "http://ilkaygunel.com/blog/2015/advanced-pathparam-and-pathsegment/"
-  }
-</script>
+{"name":null,"description":"İlkay Günel Blog","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2015/advanced-pathparam-and-pathsegment/","publisher":null,"image":null,"headline":"RestEasy İle Restful Web Servis Dersleri 6 - Advanced PathParam And PathSegment","dateModified":"2015-11-26T15:46:52+02:00","datePublished":"2015-11-26T15:46:52+02:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2015/advanced-pathparam-and-pathsegment/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -144,30 +139,30 @@ ga('send', 'pageview');
 <p>Önceki yazılarda @PathParam notasyonu ile gelen bir parametreyi almayı öğrenmiştik. RestEasy içerisinde ilgili pathi birden fazla parametre alacak şekilde düzenlememize imkan sağlayan yapı mevcuttur.
 Birkaç örnek kullanıma bakalım:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>1. @Path("/kalıp1{parametre}kalıp2")
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. @Path("/kalıp1{parametre}kalıp2")
 2. @Path("/{parametre1}-{parametre2}")
 3. @Path("/kalıp1{parametre1}-{parametre2}kalıp2")
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<p>Yukarıdaki örnekleri incelediğimizde şu sonuca varıyor olacağız:
-1. Birinci örnekte kullanıcıdan değişmeyen bazı ifadelerin arasında parametre göndermesi bekleniyor. Örneğin kalıp1 ve kalıp2 id olsun biz parametrezi bu kalıplar arasında vereceğiz. Şöyle ki:
-<strong><em>id15id</em></strong> , <strong><em>id21id</em></strong> , <strong><em>id3id</em></strong>. Burada biz bir şablon belirlemiş oluyoruz ve şablon id kelimlerinin arasında bir parametre bekliyor.
-2. İkinci örnekte yukarıdan faklı olarak iki parametre alıyoruz ancak bu parametreler aralarında <strong><em>-</em></strong> ile gelmek zorundalar. Şöyle ki:
-<strong><em>ilkay-gunel</em></strong> , <strong><em>husnu-tapan</em></strong> , <strong><em>isa-aytimur</em></strong>
-3. Üçüncü örnekte ise bize ilk iki örnekten faklı olarak iki kalıp ve iki parametre amayı gösteriyor ve <strong><em>-</em></strong> işaretini zorunlu koşuyor yine. kalıp1 id olsun, kalıp2 isim olsun.
-<strong><em>id23-Mustafaisim</em></strong> , <strong><em>id15-Tanerisim</em></strong></p>
+<p>Yukarıdaki örnekleri incelediğimizde şu sonuca varıyor olacağız:</p>
+<ol>
+  <li>Birinci örnekte kullanıcıdan değişmeyen bazı ifadelerin arasında parametre göndermesi bekleniyor. Örneğin kalıp1 ve kalıp2 id olsun biz parametrezi bu kalıplar arasında vereceğiz. Şöyle ki:
+<strong><em>id15id</em></strong> , <strong><em>id21id</em></strong> , <strong><em>id3id</em></strong>. Burada biz bir şablon belirlemiş oluyoruz ve şablon id kelimlerinin arasında bir parametre bekliyor.</li>
+  <li>İkinci örnekte yukarıdan faklı olarak iki parametre alıyoruz ancak bu parametreler aralarında <strong><em>-</em></strong> ile gelmek zorundalar. Şöyle ki:
+<strong><em>ilkay-gunel</em></strong> , <strong><em>husnu-tapan</em></strong> , <strong><em>isa-aytimur</em></strong></li>
+  <li>Üçüncü örnekte ise bize ilk iki örnekten faklı olarak iki kalıp ve iki parametre amayı gösteriyor ve <strong><em>-</em></strong> işaretini zorunlu koşuyor yine. kalıp1 id olsun, kalıp2 isim olsun.
+<strong><em>id23-Mustafaisim</em></strong> , <strong><em>id15-Tanerisim</em></strong></li>
+</ol>
 
 <p>Burada başka bir durum da şu olabilir ki bu parametreler bazı özel ifadeler ile kalıplandırılabilinir:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>@GET
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@GET
     @Path("/aaa{param:b.*}/{many:.*}/stuff")
     @Produces("application/json")
     public String getRecord(@PathParam("param") String bs, @PathParam("many") String many)
     {
     }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Örneğimizde @Path’e dikkat ettiğimizde beklediği parametrenin <strong><em>aaa</em></strong> kalıbı ile başlamasını,baş harfi b olan bir parametrenin takip etmesini
 <strong><em>/</em></strong> ifadesi ile alt dizine inip {many:.<em>} ifadesi ile her türlü gelebilecek parametreyi kabul eden ama gelmesini şart koşan ve
@@ -177,7 +172,7 @@ Birkaç örnek kullanıma bakalım:</p>
 <p>Biz normalde birden fazla parametreyi metoda geçirmek istesek bu durumda birden @PathParam kullanmamız gerekecekti ve belki bu da kod kalabalığına sebep olacaktı.
 Ancak RestEasy içinde bulunan <strong><em>@PathSegment</em></strong> notasyonu ile gelen tek parametre ile birden çok değer elde edebiliriz. Hemen örneğimize bakalım:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>@GET
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@GET
     @Path("/bookInfo/{bookInfo}")
     @Produces("application/json")
     public String getRecord(@PathParam("bookInfo") PathSegment bookInfo)
@@ -209,15 +204,14 @@ Ancak RestEasy içinde bulunan <strong><em>@PathSegment</em></strong> notasyonu 
         }
         return returnedBookName + ":"+returnedAuthorName;
     }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Örneğimizi incelediğimizde metodumuzun path’inin bookInfo olduğunu görüyoruz ve bu path altında bir de <strong><em>bookInfo</em></strong> parametresi bekleniyor. Metodun parametre alan kısmında dikkat ettiğimizde <strong><em>@PathSegment</em></strong> tipinde bir bookInfo
 parametresi görüyoruz. Bu parametreden biz kod içinde getMatrixParameters() metodu ile bir MultivaluedMap nesnesi elde ediyoruz. Bu nesne tek nesne içinde gönderilen parametreleri Map’e koyan bir nesne fakat bildiğimiz Map’ten farklı.
 Bu veri tipi ile ilgili bir yazı yazıcam inşaAllah.
 For döngüleri içinde gerFirst metodunun kullanılmasının sebebi bir key’in bir defa gönderildğinin varsayılmasıdır.</p>
 
-<h3 id="ekran-kts">Ekran Çıktısı</h3>
+<h3 id="ekran-çıktısı">Ekran Çıktısı</h3>
 <p>Tarayıcıda http://localhost:8084/RestEasyTutorials/restService/service/bookInfo/bookInfo;authorName=George Orwell;bookName=1984 adresine gidiyorum. URL’de şu noktaya dikkat etmeliyiz, ben authorName ve bookName parametreleri göndericem ama bundan önce herhangi bir stringle bunu söylemem lazım.
 Yani burada /bookInfo/bookInfo; ifadesindeki ikinci bookInfo; benim parametre göndereceğimi söylüyor. Noktalı virgülden sonra gönderdiğim parametrelerde sistem tarafından algılanıyor ve kullanılıyor.</p>
 

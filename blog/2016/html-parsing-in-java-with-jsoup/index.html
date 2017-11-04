@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/html-parsing-in-java-with-jsoup/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Java Ve Jsoup Kütüphanesi İle HTML Parse Etme - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Java Ve Jsoup Kütüphanesi İle HTML Parse Etme | İlkay Günel - Blog</title>
 <meta property="og:title" content="Java Ve Jsoup Kütüphanesi İle HTML Parse Etme" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Java Ve Jsoup Kütüphanesi İle HTML Parse Etme" />
 <meta property="og:description" content="Java Ve Jsoup Kütüphanesi İle HTML Parse Etme" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/html-parsing-in-java-with-jsoup/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-12-04T20:40:21+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Java Ve Jsoup Kütüphanesi İle HTML Parse Etme",
-    "datePublished": "2016-12-04T20:40:21+03:00",
-    "description": "Java Ve Jsoup Kütüphanesi İle HTML Parse Etme",
-    "url": "http://ilkaygunel.com/blog/2016/html-parsing-in-java-with-jsoup/"
-  }
-</script>
+{"name":null,"description":"Java Ve Jsoup Kütüphanesi İle HTML Parse Etme","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/html-parsing-in-java-with-jsoup/","publisher":null,"image":null,"headline":"Java Ve Jsoup Kütüphanesi İle HTML Parse Etme","dateModified":"2016-12-04T20:40:21+03:00","datePublished":"2016-12-04T20:40:21+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/html-parsing-in-java-with-jsoup/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -142,7 +137,7 @@ sunmanızı sağlar.</p>
 
 <p>Öncelikle IDE’nizde bir Maven projesi açın ve JSoup kütüphanesini projenizin classpathine ekleyecek olan şu bağımlılık kodunu pom.xml dosyanıza ekleyin:</p>
 
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;dependency&gt;</span>
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="nt">&lt;dependency&gt;</span>
 	<span class="nt">&lt;groupId&gt;</span>org.jsoup<span class="nt">&lt;/groupId&gt;</span>
 	<span class="nt">&lt;artifactId&gt;</span>jsoup<span class="nt">&lt;/artifactId&gt;</span>
 	<span class="nt">&lt;version&gt;</span>1.10.1<span class="nt">&lt;/version&gt;</span>
@@ -166,7 +161,7 @@ barındığı elementleri alarak bilgileri konsola basalım.</p>
 
 <p><strong>Broadcast.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">samplejsoupproject</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.samplejsoupproject</span><span class="o">;</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Broadcast</span> <span class="o">{</span>
 
     <span class="kd">private</span> <span class="n">String</span> <span class="n">time</span><span class="o">;</span>
@@ -211,7 +206,7 @@ barındığı elementleri alarak bilgileri konsola basalım.</p>
 
 <p><strong>JsoupUsage.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">samplejsoupproject</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.samplejsoupproject</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
@@ -228,7 +223,7 @@ barındığı elementleri alarak bilgileri konsola basalım.</p>
             <span class="n">Document</span> <span class="n">document</span> <span class="o">=</span> <span class="n">Jsoup</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="s">&quot;https://www.kanald.com.tr/yayin-akisi&quot;</span><span class="o">).</span><span class="na">get</span><span class="o">();</span>
             <span class="n">Elements</span> <span class="n">broadcasts</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="s">&quot;#day-061216 tr&quot;</span><span class="o">);</span>
             <span class="k">for</span> <span class="o">(</span><span class="n">Element</span> <span class="n">element</span> <span class="o">:</span> <span class="n">broadcasts</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">Broadcast</span> <span class="n">broadcast</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Broadcast</span><span class="o">();</span>
+                <span class="n">Broadcast</span> <span class="n">broadcast</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Broadcast</span><span class="o">();</span>
                 <span class="n">broadcast</span><span class="o">.</span><span class="na">setTime</span><span class="o">(</span><span class="n">element</span><span class="o">.</span><span class="na">getElementsByClass</span><span class="o">(</span><span class="s">&quot;time&quot;</span><span class="o">).</span><span class="na">text</span><span class="o">());</span>
                 <span class="n">broadcast</span><span class="o">.</span><span class="na">setTitle</span><span class="o">(</span><span class="n">element</span><span class="o">.</span><span class="na">getElementsByClass</span><span class="o">(</span><span class="s">&quot;title&quot;</span><span class="o">).</span><span class="na">text</span><span class="o">());</span>
                 <span class="n">broadcast</span><span class="o">.</span><span class="na">setImageUrl</span><span class="o">(</span><span class="n">element</span><span class="o">.</span><span class="na">getElementsByTag</span><span class="o">(</span><span class="s">&quot;img&quot;</span><span class="o">).</span><span class="na">attr</span><span class="o">(</span><span class="s">&quot;data-src&quot;</span><span class="o">));</span>
@@ -251,7 +246,7 @@ barındığı elementleri alarak bilgileri konsola basalım.</p>
 <span class="o">}</span></code></pre></figure>
 
 <ul>
-  <li>List<broadcast> broadcastList = new ArrayList&lt;&gt;(); satırı ile yayın akışındaki her bir satır yayını tutacak nesneleri barındıracak listeyi tanımlıyoruz.</broadcast></li>
+  <li>List<Broadcast> broadcastList = new ArrayList&lt;&gt;(); satırı ile yayın akışındaki her bir satır yayını tutacak nesneleri barındıracak listeyi tanımlıyoruz.</Broadcast></li>
   <li>try-catch bloğunun içinde Document document = Jsoup.connect(“https://www.kanald.com.tr/yayin-akisi”).get(); satırı ile Kanal D’nin yayın akışı sayfasının tarayıcıda görünen o HTML
 kodlarını Document objesi tipinde alıyoruz.</li>
   <li>Elements broadcasts = document.select(“#day-061216 tr”); satırı ile select metoduna verilen <strong><em>CSS Selector</em></strong> şartını sağlayan elementleri barındıracak Elements tipinde bir nesne
@@ -265,10 +260,12 @@ metodunu kullanıyoruz.</li>
 o elementin <strong><em>data-src</em></strong> özelliğini alıyoruz. Örneğin</li>
 </ul>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;...&quot;</span> <span class="nt">&gt;&lt;/img&gt;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span></span><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;...&quot;</span> <span class="p">&gt;&lt;/</span><span class="nt">img</span><span class="p">&gt;</span></code></pre></figure>
 
-<p>şeklindeki HTML etiketinde src bir özelliktir. Biz de attr() metodu ile bunun gibi özellikleri çekebiliriz.
-* İkinci for döngüsü içerisinde de doldurduğumuz broadcastList listesi içinde dolanıp değerleri konsola yazdırıyoruz.</p>
+<p>şeklindeki HTML etiketinde src bir özelliktir. Biz de attr() metodu ile bunun gibi özellikleri çekebiliriz.</p>
+<ul>
+  <li>İkinci for döngüsü içerisinde de doldurduğumuz broadcastList listesi içinde dolanıp değerleri konsola yazdırıyoruz.</li>
+</ul>
 
 <p>Uygulamayı çalıştırdığımızda konsol çıktımız şu şekilde olur:</p>
 

@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2017/marshalling-with-xstream/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>XSTream İle Java’dan XML’e Veri Dönüşümü - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>XSTream İle Java’dan XML’e Veri Dönüşümü | İlkay Günel - Blog</title>
 <meta property="og:title" content="XSTream İle Java’dan XML’e Veri Dönüşümü" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="XSTream İle Java’dan XML’e Veri Dönüşümü" />
 <meta property="og:description" content="XSTream İle Java’dan XML’e Veri Dönüşümü" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2017/marshalling-with-xstream/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2017-08-17T21:23:21+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "XSTream İle Java’dan XML’e Veri Dönüşümü",
-    "datePublished": "2017-08-17T21:23:21+03:00",
-    "description": "XSTream İle Java’dan XML’e Veri Dönüşümü",
-    "url": "http://ilkaygunel.com/blog/2017/marshalling-with-xstream/"
-  }
-</script>
+{"name":null,"description":"XSTream İle Java’dan XML’e Veri Dönüşümü","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2017/marshalling-with-xstream/","publisher":null,"image":null,"headline":"XSTream İle Java’dan XML’e Veri Dönüşümü","dateModified":"2017-08-17T21:23:21+03:00","datePublished":"2017-08-17T21:23:21+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/marshalling-with-xstream/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -138,7 +133,7 @@
 <p>İlk olarak <a href="https://mvnrepository.com/artifact/xstream/xstream/">https://mvnrepository.com/artifact/xstream/xstream/</a> adresi üzerinden XStream için 
 Maven bağımlılık kodumuzu edinelim. Bu yazı yazılırken ki en güncel sürüm 1.2.2 sürümüdür. Dolayısı ile bağımlılık kodu da şu şekilde:</p>
 
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;dependency&gt;</span>
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>xstream<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>xstream<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>1.2.2<span class="nt">&lt;/version&gt;</span>
@@ -153,7 +148,7 @@ oluşturuyorum.</p>
 
 <p><strong>Address.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">pojo</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.pojo</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Address</span> <span class="o">{</span>
 	<span class="kd">private</span> <span class="n">String</span> <span class="n">district</span><span class="o">;</span>
@@ -190,7 +185,7 @@ oluşturuyorum.</p>
 
 <p><strong>Person.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">pojo</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.pojo</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
 	<span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
@@ -240,7 +235,7 @@ Person sınıfı içerisinde Address sınıfından bir nesne kullandık.</p>
 
 <p><strong>SinglePersonToXML.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">mainclasses</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.mainclasses</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.ilkaygunel.pojo.Address</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.ilkaygunel.pojo.Person</span><span class="o">;</span>
@@ -248,16 +243,16 @@ Person sınıfı içerisinde Address sınıfından bir nesne kullandık.</p>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SinglePersonToXML</span> <span class="o">{</span>
 	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-		<span class="n">Address</span> <span class="n">address</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Address</span><span class="o">();</span>
+		<span class="n">Address</span> <span class="n">address</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Address</span><span class="o">();</span>
 		<span class="n">address</span><span class="o">.</span><span class="na">setDistrict</span><span class="o">(</span><span class="s">&quot;Şişli&quot;</span><span class="o">);</span>
 		<span class="n">address</span><span class="o">.</span><span class="na">setCity</span><span class="o">(</span><span class="s">&quot;İstanbul&quot;</span><span class="o">);</span>
 		
-		<span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Person</span><span class="o">();</span>
+		<span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
 		<span class="n">person</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">&quot;İlkay&quot;</span><span class="o">);</span>
 		<span class="n">person</span><span class="o">.</span><span class="na">setSurname</span><span class="o">(</span><span class="s">&quot;Günel&quot;</span><span class="o">);</span>
 		<span class="n">person</span><span class="o">.</span><span class="na">setAddress</span><span class="o">(</span><span class="n">address</span><span class="o">);</span>
 		
-		<span class="n">XStream</span> <span class="n">xStream</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">XStream</span><span class="o">();</span>
+		<span class="n">XStream</span> <span class="n">xStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">XStream</span><span class="o">();</span>
 		<span class="n">xStream</span><span class="o">.</span><span class="na">alias</span><span class="o">(</span><span class="s">&quot;person&quot;</span><span class="o">,</span> <span class="n">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 		<span class="n">xStream</span><span class="o">.</span><span class="na">alias</span><span class="o">(</span><span class="s">&quot;address&quot;</span><span class="o">,</span> <span class="n">Address</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 		<span class="n">String</span> <span class="n">XMLResult</span> <span class="o">=</span> <span class="n">xStream</span><span class="o">.</span><span class="na">toXML</span><span class="o">(</span><span class="n">person</span><span class="o">);</span>
@@ -285,7 +280,7 @@ Person sınıfı içerisinde Address sınıfından bir nesne kullandık.</p>
 
 <p><strong>PersonList.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">pojo</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.pojo</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
@@ -308,7 +303,7 @@ Person sınıfı içerisinde Address sınıfından bir nesne kullandık.</p>
 
 <p>Eldeki bir listeyi XML’e çevirecek MultiplePersonToXML sınıfımızın içeriği şu şekilde:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">mainclasses</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.mainclasses</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.ilkaygunel.pojo.Address</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.ilkaygunel.pojo.Person</span><span class="o">;</span>
@@ -318,16 +313,16 @@ Person sınıfı içerisinde Address sınıfından bir nesne kullandık.</p>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MultiplePersonToXML</span> <span class="o">{</span>
 	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
 		
-		<span class="n">XStream</span> <span class="n">xStream</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">XStream</span><span class="o">();</span>
+		<span class="n">XStream</span> <span class="n">xStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">XStream</span><span class="o">();</span>
 		<span class="n">xStream</span><span class="o">.</span><span class="na">alias</span><span class="o">(</span><span class="s">&quot;person&quot;</span><span class="o">,</span> <span class="n">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 		<span class="n">xStream</span><span class="o">.</span><span class="na">alias</span><span class="o">(</span><span class="s">&quot;address&quot;</span><span class="o">,</span> <span class="n">Address</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 		<span class="n">xStream</span><span class="o">.</span><span class="na">alias</span><span class="o">(</span><span class="s">&quot;personList&quot;</span><span class="o">,</span> <span class="n">PersonList</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 		<span class="n">xStream</span><span class="o">.</span><span class="na">addImplicitCollection</span><span class="o">(</span><span class="n">PersonList</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="s">&quot;list&quot;</span><span class="o">);</span>
 		
-		<span class="n">PersonList</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">PersonList</span><span class="o">();</span>
-		<span class="n">list</span><span class="o">.</span><span class="na">addPerson</span><span class="o">(</span><span class="k">new</span> <span class="nf">Person</span><span class="o">(</span><span class="s">&quot;Michael&quot;</span> <span class="o">,</span> <span class="s">&quot;Schumacher&quot;</span><span class="o">,</span> <span class="k">new</span> <span class="nf">Address</span><span class="o">(</span><span class="s">&quot;Hürth-Hermülheim&quot;</span><span class="o">,</span> <span class="s">&quot;Germany&quot;</span><span class="o">)));</span>
-		<span class="n">list</span><span class="o">.</span><span class="na">addPerson</span><span class="o">(</span><span class="k">new</span> <span class="nf">Person</span><span class="o">(</span><span class="s">&quot;Mika&quot;</span> <span class="o">,</span> <span class="s">&quot;Hakkinen&quot;</span><span class="o">,</span> <span class="k">new</span> <span class="nf">Address</span><span class="o">(</span><span class="s">&quot;Helsinki&quot;</span><span class="o">,</span> <span class="s">&quot;Finland&quot;</span><span class="o">)));</span>
-		<span class="n">list</span><span class="o">.</span><span class="na">addPerson</span><span class="o">(</span><span class="k">new</span> <span class="nf">Person</span><span class="o">(</span><span class="s">&quot;Fernando&quot;</span> <span class="o">,</span> <span class="s">&quot;Alonso&quot;</span><span class="o">,</span> <span class="k">new</span> <span class="nf">Address</span><span class="o">(</span><span class="s">&quot;Oviedo&quot;</span><span class="o">,</span> <span class="s">&quot;Spain&quot;</span><span class="o">)));</span>
+		<span class="n">PersonList</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PersonList</span><span class="o">();</span>
+		<span class="n">list</span><span class="o">.</span><span class="na">addPerson</span><span class="o">(</span><span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="s">&quot;Michael&quot;</span> <span class="o">,</span> <span class="s">&quot;Schumacher&quot;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Address</span><span class="o">(</span><span class="s">&quot;Hürth-Hermülheim&quot;</span><span class="o">,</span> <span class="s">&quot;Germany&quot;</span><span class="o">)));</span>
+		<span class="n">list</span><span class="o">.</span><span class="na">addPerson</span><span class="o">(</span><span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="s">&quot;Mika&quot;</span> <span class="o">,</span> <span class="s">&quot;Hakkinen&quot;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Address</span><span class="o">(</span><span class="s">&quot;Helsinki&quot;</span><span class="o">,</span> <span class="s">&quot;Finland&quot;</span><span class="o">)));</span>
+		<span class="n">list</span><span class="o">.</span><span class="na">addPerson</span><span class="o">(</span><span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="s">&quot;Fernando&quot;</span> <span class="o">,</span> <span class="s">&quot;Alonso&quot;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Address</span><span class="o">(</span><span class="s">&quot;Oviedo&quot;</span><span class="o">,</span> <span class="s">&quot;Spain&quot;</span><span class="o">)));</span>
 		
 		<span class="n">String</span> <span class="n">XMLResult</span> <span class="o">=</span> <span class="n">xStream</span><span class="o">.</span><span class="na">toXML</span><span class="o">(</span><span class="n">list</span><span class="o">);</span>
 		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">XMLResult</span><span class="o">);</span>

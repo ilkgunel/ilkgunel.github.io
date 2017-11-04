@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/rest-default-value/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>RestEasy İle Restful Web Servis Dersleri 13 – Default Value - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>RestEasy İle Restful Web Servis Dersleri 13 – Default Value | İlkay Günel - Blog</title>
 <meta property="og:title" content="RestEasy İle Restful Web Servis Dersleri 13 – Default Value" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="RestEasy İle Restful Web Servis Dersleri 13 – Default Value" />
 <meta property="og:description" content="RestEasy İle Restful Web Servis Dersleri 13 – Default Value" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/rest-default-value/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-10-05T19:38:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "RestEasy İle Restful Web Servis Dersleri 13 – Default Value",
-    "datePublished": "2016-10-05T19:38:20+03:00",
-    "description": "RestEasy İle Restful Web Servis Dersleri 13 – Default Value",
-    "url": "http://ilkaygunel.com/blog/2016/rest-default-value/"
-  }
-</script>
+{"name":null,"description":"RestEasy İle Restful Web Servis Dersleri 13 – Default Value","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/rest-default-value/","publisher":null,"image":null,"headline":"RestEasy İle Restful Web Servis Dersleri 13 – Default Value","dateModified":"2016-10-05T19:38:20+03:00","datePublished":"2016-10-05T19:38:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/rest-default-value/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -135,7 +130,7 @@
 
 <p><strong>DefaultValueExample.java</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">mycompany</span><span class="o">.</span><span class="na">resteasytutorials</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">mycompany</span><span class="o">.</span><span class="na">resteasytutorials</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">javax.ws.rs.DefaultValue</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">javax.ws.rs.GET</span><span class="o">;</span>
@@ -148,12 +143,11 @@
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">DefaultValueExample</span> <span class="o">{</span>
     <span class="nd">@Produces</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">TEXT_HTML</span><span class="o">)</span>
     <span class="nd">@GET</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">returnParameter</span><span class="o">(</span><span class="nd">@QueryParam</span><span class="o">(</span><span class="s">"parameter"</span><span class="o">)</span> <span class="nd">@DefaultValue</span><span class="o">(</span><span class="s">"kod5.org"</span><span class="o">)</span> <span class="n">String</span> <span class="n">parameter</span><span class="o">){</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">returnParameter</span><span class="o">(</span><span class="nd">@QueryParam</span><span class="o">(</span><span class="s">"parameter"</span><span class="o">)</span> <span class="nd">@DefaultValue</span><span class="o">(</span><span class="s">"kod5.org"</span><span class="o">)</span> <span class="n">String</span> <span class="n">parameter</span><span class="o">){</span>
         <span class="k">return</span> <span class="n">parameter</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>GET notasyonu ile işaretlediğimiz ve bu sayfaya istekte bulunulduğunda çalışacak olan <strong><em>returnParameter</em></strong> metodumuz adres çubuğundan <strong><em>parameter</em></strong> ismi ile gönderilecek bir String parameter parametresi bekliyor. Eğer adres çubuğuna herhangi bir QueryParam girilmeden GET isteğinde bulunursa da devreye hemen varsayılan değer olan kod5.org girecek ve web servisin sağlıksız çalışmasının önüne geçecek.</p>
 

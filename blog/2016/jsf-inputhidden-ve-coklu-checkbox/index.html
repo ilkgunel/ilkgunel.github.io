@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsf-inputhidden-ve-coklu-checkbox/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>InputHidden ve Çoklu CheckBox - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>InputHidden ve Çoklu CheckBox | İlkay Günel - Blog</title>
 <meta property="og:title" content="InputHidden ve Çoklu CheckBox" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="InputHidden ve Çoklu CheckBox" />
 <meta property="og:description" content="InputHidden ve Çoklu CheckBox" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsf-inputhidden-ve-coklu-checkbox/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-10-17T20:40:21+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "InputHidden ve Çoklu CheckBox",
-    "datePublished": "2016-10-17T20:40:21+03:00",
-    "description": "InputHidden ve Çoklu CheckBox",
-    "url": "http://ilkaygunel.com/blog/2016/jsf-inputhidden-ve-coklu-checkbox/"
-  }
-</script>
+{"name":null,"description":"InputHidden ve Çoklu CheckBox","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/jsf-inputhidden-ve-coklu-checkbox/","publisher":null,"image":null,"headline":"InputHidden ve Çoklu CheckBox","dateModified":"2016-10-17T20:40:21+03:00","datePublished":"2016-10-17T20:40:21+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/jsf-inputhidden-ve-coklu-checkbox/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -138,7 +133,7 @@ burada değinmeyeceğiz. Makaleyi okumak isteyenler <a href="http://ilkaygunel.c
 
 <p>Örnek bir <strong><em>inputHidden</em></strong> yapısı için <strong><em>index.xhtml</em></strong> kodu şu şekilde olabilir:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
@@ -159,8 +154,7 @@ burada değinmeyeceğiz. Makaleyi okumak isteyenler <a href="http://ilkaygunel.c
 		<span class="nt">&lt;/h:form&gt;</span>
 	<span class="nt">&lt;/h:body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Bu kodda sadece <strong><em>xhtml</em></strong> sayfası kullanılarak bir <strong><em>pop-up</em></strong> yapısı çıkarılmıştır. Siz <strong><em>managed bean’lerdeki</em></strong> bilgiyi çekerek ya da işlemin sonucuna göre bir değer atıyarak <strong><em>pop-up</em></strong> içeriğine istediğiniz şekli verebilirsiniz.</p>
 
@@ -182,7 +176,7 @@ burada değinmeyeceğiz. Makaleyi okumak isteyenler <a href="http://ilkaygunel.c
 
 <p><strong>index.xhtml Kodu:</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
@@ -209,12 +203,11 @@ burada değinmeyeceğiz. Makaleyi okumak isteyenler <a href="http://ilkaygunel.c
 		<span class="nt">&lt;/h:form&gt;</span>
 	<span class="nt">&lt;/h:body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>Ilceler.java Kodu:</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">javax.faces.bean.ManagedBean</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">javax.faces.bean.RequestScoped</span><span class="o">;</span>
@@ -225,11 +218,11 @@ burada değinmeyeceğiz. Makaleyi okumak isteyenler <a href="http://ilkaygunel.c
     <span class="n">String</span><span class="o">[]</span> <span class="n">ilceler</span><span class="o">;</span>
     <span class="n">String</span><span class="o">[]</span> <span class="n">ilceler1</span><span class="o">;</span>
     
-    <span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="n">getIlceler</span><span class="o">()</span> <span class="o">{</span>   
+    <span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getIlceler</span><span class="o">()</span> <span class="o">{</span>   
         <span class="k">return</span> <span class="n">ilceler</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="n">getListeyiDoldur</span><span class="o">()</span>
+    <span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getListeyiDoldur</span><span class="o">()</span>
     <span class="o">{</span>
         <span class="n">ilceler</span><span class="o">=</span><span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="mi">3</span><span class="o">];</span>
         <span class="n">ilceler</span><span class="o">[</span><span class="mi">0</span><span class="o">]=</span><span class="s">"SULTANBEYLİ"</span><span class="o">;</span>
@@ -238,16 +231,16 @@ burada değinmeyeceğiz. Makaleyi okumak isteyenler <a href="http://ilkaygunel.c
         <span class="k">return</span> <span class="n">ilceler</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">getilcelerstring</span><span class="o">()</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getilcelerstring</span><span class="o">()</span>
     <span class="o">{</span>
         <span class="k">return</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">ilceler</span><span class="o">);</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="n">getIlceler1</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getIlceler1</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">ilceler1</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">setIlceler1</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">ilceler1</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setIlceler1</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">ilceler1</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">ilceler1</span> <span class="o">=</span> <span class="n">ilceler1</span><span class="o">;</span>
     <span class="o">}</span>
 
@@ -258,17 +251,16 @@ burada değinmeyeceğiz. Makaleyi okumak isteyenler <a href="http://ilkaygunel.c
         <span class="n">listeyidoldur1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"KARTAL"</span><span class="o">);</span>
         <span class="n">listeyidoldur1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"SAMANDIRA"</span><span class="o">);</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">getListeyidoldur1</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">getListeyidoldur1</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">listeyidoldur1</span><span class="o">;</span>
     <span class="o">}</span>
     
-    <span class="kd">public</span> <span class="n">String</span> <span class="n">getListeyiStringeDonustur</span><span class="o">()</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getListeyiStringeDonustur</span><span class="o">()</span>
     <span class="o">{</span>
         <span class="k">return</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">ilceler1</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>Kodların Açıklaması:</strong></p>
 

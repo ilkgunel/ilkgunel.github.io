@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/collection-set-implementation-hashset/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Collections 6 – Set Implementation HashSet - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Collections 6 – Set Implementation HashSet | İlkay Günel - Blog</title>
 <meta property="og:title" content="Collections 6 – Set Implementation HashSet" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Collections 6 – Set Implementation HashSet" />
 <meta property="og:description" content="Collections 6 – Set Implementation HashSet" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/collection-set-implementation-hashset/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-09-04T19:38:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Collections 6 – Set Implementation HashSet",
-    "datePublished": "2016-09-04T19:38:20+03:00",
-    "description": "Collections 6 – Set Implementation HashSet",
-    "url": "http://ilkaygunel.com/blog/2016/collection-set-implementation-hashset/"
-  }
-</script>
+{"name":null,"description":"Collections 6 – Set Implementation HashSet","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/collection-set-implementation-hashset/","publisher":null,"image":null,"headline":"Collections 6 – Set Implementation HashSet","dateModified":"2016-09-04T19:38:20+03:00","datePublished":"2016-09-04T19:38:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/collection-set-implementation-hashset/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -135,9 +130,8 @@
 
 <p>HashSet sınıfı doğrudan senkronize olma özelliğine sahip değildir. Eğer senkronize olmasını istersek şöyle bir kod kullanmalıyız:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Set s = Collections.synchronizedSet(new HashSet());
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Set s = Collections.synchronizedSet(new HashSet());
+</code></pre></div></div>
 
 <p>HashSet sınıfından türetilip kullanılacak <strong><em>iterator</em></strong> nesnesi <strong><em>fail-fast</em></strong> özelliğe sahiptir. Bu şu anlama gelir ki iterator çalışırken bir müdahele gelirse işini bırakıp  ConcurrentModificationException fırlatır. Yalnız Oracle’ın dökümanına göre bu işin bir garantisi yok. Bu yüzden Oracle bu hatanın kesinlikle fırlatılacağına bağlı kalarak bir iş yapılmasını tavsiye etmiyor.
 ###HashSet’in Yapılandırıcıları</p>
@@ -155,93 +149,92 @@
 
 <h3 id="hashsetexamplejava">HashSetExample.java</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>package collections;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">collections</span><span class="p">;</span>
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">HashSet</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">Iterator</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="k">Set</span><span class="p">;</span>
 
-public class HashSetExample {
-    public static void main(String[] args) {
-        // 1-HashSet'i oluşturma
+<span class="k">public</span> <span class="n">class</span> <span class="n">HashSetExample</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="k">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">//</span> <span class="m">1</span><span class="p">-</span><span class="n">HashSet</span><span class="s1">'i oluşturma
         Set&lt;String&gt; names = new HashSet&lt;&gt;();
         Set&lt;String&gt; otherSet = new HashSet&lt;&gt;();
         Set&lt;String&gt; otherSet2 = new HashSet&lt;&gt;();
 
-        // 2-HashSet'e veri ekleme
-        names.add("Alper Akalın");
-        names.add("Enes Gönez");
-        names.add("Nihat Gülşen");
+        // 2-HashSet'</span><span class="n">e</span> <span class="n">veri</span> <span class="n">ekleme</span>
+        <span class="n">names</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"Alper Akalın"</span><span class="p">);</span>
+        <span class="n">names</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"Enes Gönez"</span><span class="p">);</span>
+        <span class="n">names</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"Nihat Gülşen"</span><span class="p">);</span>
 
-        otherSet.add("Osman Doğan");
-        otherSet.add("Hüsnü Tapan");
-        otherSet.add("Ramazan Haber");
+        <span class="n">otherSet</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"Osman Doğan"</span><span class="p">);</span>
+        <span class="n">otherSet</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"Hüsnü Tapan"</span><span class="p">);</span>
+        <span class="n">otherSet</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"Ramazan Haber"</span><span class="p">);</span>
 
-        otherSet2.add("Hüsnü Tapan");
-        otherSet2.add("Ramazan Haber");
-        otherSet2.add("Osman Doğan");
+        <span class="n">otherSet2</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"Hüsnü Tapan"</span><span class="p">);</span>
+        <span class="n">otherSet2</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"Ramazan Haber"</span><span class="p">);</span>
+        <span class="n">otherSet2</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"Osman Doğan"</span><span class="p">);</span>
 
-        // 3-size kullanımı
-        System.out.println("Set'in Boyutu:"+names.size());
+        <span class="p">//</span> <span class="m">3</span><span class="p">-</span><span class="n">size</span> <span class="n">kullan</span><span class="err">ı</span><span class="n">m</span><span class="err">ı</span>
+        <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"Set'in Boyutu:"</span><span class="p">+</span><span class="n">names</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
 
-        //Iterator Kullanımı
-        System.out.println("---Listedeki Elemenlar---");
-        Iterator&lt;String&gt; iterator = names.iterator();
-        while (iterator.hasNext()) {
-            String currentName = iterator.next();
-            System.out.println(currentName);
+        <span class="p">//</span><span class="n">Iterator</span> <span class="n">Kullan</span><span class="err">ı</span><span class="n">m</span><span class="err">ı</span>
+        <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"---Listedeki Elemenlar---"</span><span class="p">);</span>
+        <span class="n">Iterator</span><span class="p">&lt;</span><span class="k">String</span><span class="p">&gt;</span> <span class="n">iterator</span> <span class="p">=</span> <span class="n">names</span><span class="p">.</span><span class="n">iterator</span><span class="p">();</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">iterator</span><span class="p">.</span><span class="n">hasNext</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">String</span> <span class="n">currentName</span> <span class="p">=</span> <span class="n">iterator</span><span class="p">.</span><span class="k">next</span><span class="p">();</span>
+            <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">currentName</span><span class="p">);</span>
 
-        }
+        <span class="p">}</span>
 
-        // 4-Contains Kullanımı
-        if(names.contains("Alper Akalın"))
-            System.out.println("---Alper Akalın listede mevcut!---");
+        <span class="p">//</span> <span class="m">4</span><span class="p">-</span><span class="n">Contains</span> <span class="n">Kullan</span><span class="err">ı</span><span class="n">m</span><span class="err">ı</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">names</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">"Alper Akalın"</span><span class="p">))</span>
+            <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"---Alper Akalın listede mevcut!---"</span><span class="p">);</span>
 
-        // 5-isEmpty Kullanımı
-        if(!names.isEmpty())
-            System.out.println("---Liste Boş Değil!---");
+        <span class="p">//</span> <span class="m">5</span><span class="p">-</span><span class="n">isEmpty</span> <span class="n">Kullan</span><span class="err">ı</span><span class="n">m</span><span class="err">ı</span>
+        <span class="k">if</span><span class="p">(</span><span class="c1">!names.isEmpty())
+</span>            <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"---Liste Boş Değil!---"</span><span class="p">);</span>
 
-        // 6-addAll Kullanımı
-        names.addAll(otherSet);
-        System.out.println("---AddAll Metodu Çalıştıktan Sonra---");
-        names.forEach(e -&gt; System.out.println(e));
+        <span class="p">//</span> <span class="m">6</span><span class="p">-</span><span class="n">addAll</span> <span class="n">Kullan</span><span class="err">ı</span><span class="n">m</span><span class="err">ı</span>
+        <span class="n">names</span><span class="p">.</span><span class="n">addAll</span><span class="p">(</span><span class="n">otherSet</span><span class="p">);</span>
+        <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"---AddAll Metodu Çalıştıktan Sonra---"</span><span class="p">);</span>
+        <span class="n">names</span><span class="p">.</span><span class="n">forEach</span><span class="p">(</span><span class="n">e</span> <span class="p">-&gt;</span> <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">e</span><span class="p">));</span>
 
-        // 7-removeAll kullanımı
-        names.removeAll(otherSet);
-        System.out.println("---RemoveAll Metodu Çalıştıktan Sonra---");
-        names.forEach(e -&gt; System.out.println(e));
+        <span class="p">//</span> <span class="m">7</span><span class="p">-</span><span class="n">removeAll</span> <span class="n">kullan</span><span class="err">ı</span><span class="n">m</span><span class="err">ı</span>
+        <span class="n">names</span><span class="p">.</span><span class="n">removeAll</span><span class="p">(</span><span class="n">otherSet</span><span class="p">);</span>
+        <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"---RemoveAll Metodu Çalıştıktan Sonra---"</span><span class="p">);</span>
+        <span class="n">names</span><span class="p">.</span><span class="n">forEach</span><span class="p">(</span><span class="n">e</span> <span class="p">-&gt;</span> <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">e</span><span class="p">));</span>
 
-        // 8-equals Kullanımı
-        System.out.println("---equals Kullanımı---");
-        System.out.print("names Set'i otherSet'e eşit mi?");
-        if(names.equals(otherSet))
-        {
-            System.out.println("Evet");
-        }
-        else
-        {
-            System.out.println("Hayır");
-        }
+        <span class="p">//</span> <span class="m">8</span><span class="p">-</span><span class="n">equals</span> <span class="n">Kullan</span><span class="err">ı</span><span class="n">m</span><span class="err">ı</span>
+        <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"---equals Kullanımı---"</span><span class="p">);</span>
+        <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s2">"names Set'i otherSet'e eşit mi?"</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">names</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="n">otherSet</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"Evet"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"Hayır"</span><span class="p">);</span>
+        <span class="p">}</span>
 
-        System.out.print("otherSet Set'i otherSet2'ye eşit mi?");
-        if(otherSet.equals(otherSet2))
-        {
-            System.out.println("Evet");
-        }
-        else
-        {
-            System.out.println("Hayır");
-        }
+        <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s2">"otherSet Set'i otherSet2'ye eşit mi?"</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">otherSet</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="n">otherSet2</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"Evet"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"Hayır"</span><span class="p">);</span>
+        <span class="p">}</span>
 
-        // 9-Clear Kullanımı
-        names.clear();
-        System.out.println("---Clear Metodu Çalıştıktan Sonra---");
-        names.forEach(e -&gt; System.out.println(e));
+        <span class="p">//</span> <span class="m">9</span><span class="p">-</span><span class="n">Clear</span> <span class="n">Kullan</span><span class="err">ı</span><span class="n">m</span><span class="err">ı</span>
+        <span class="n">names</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"---Clear Metodu Çalıştıktan Sonra---"</span><span class="p">);</span>
+        <span class="n">names</span><span class="p">.</span><span class="n">forEach</span><span class="p">(</span><span class="n">e</span> <span class="p">-&gt;</span> <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">e</span><span class="p">));</span>
 
-    }
-}
-</code></pre>
-</div>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>Java kodumuz içinde birinci aşamada HashSet örneğinin elde edilişini görüyoruz.</p>
 
@@ -275,7 +268,7 @@ public class HashSetExample {
   </li>
 </ol>
 
-<h3 id="ekran-kts">Ekran Çıktısı</h3>
+<h3 id="ekran-çıktısı">Ekran Çıktısı</h3>
 
 <p>[<img src="/images/setImpHash1.png" style="width: 1000px; height= 400px;" />]</p>
 

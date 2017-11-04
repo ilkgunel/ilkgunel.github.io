@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsfde-kaynak-demetleriresources-bundle-in-jsf/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>JSF Derslerim- Resources Bundle in JSF - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>JSF Derslerim- Resources Bundle in JSF | İlkay Günel - Blog</title>
 <meta property="og:title" content="JSF Derslerim- Resources Bundle in JSF" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="JSF Derslerim- Resources Bundle in JSF" />
 <meta property="og:description" content="JSF Derslerim- Resources Bundle in JSF" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsfde-kaynak-demetleriresources-bundle-in-jsf/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-10-17T20:40:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "JSF Derslerim- Resources Bundle in JSF",
-    "datePublished": "2016-10-17T20:40:20+03:00",
-    "description": "JSF Derslerim- Resources Bundle in JSF",
-    "url": "http://ilkaygunel.com/blog/2016/jsfde-kaynak-demetleriresources-bundle-in-jsf/"
-  }
-</script>
+{"name":null,"description":"JSF Derslerim- Resources Bundle in JSF","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/jsfde-kaynak-demetleriresources-bundle-in-jsf/","publisher":null,"image":null,"headline":"JSF Derslerim- Resources Bundle in JSF","dateModified":"2016-10-17T20:40:20+03:00","datePublished":"2016-10-17T20:40:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/jsfde-kaynak-demetleriresources-bundle-in-jsf/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -147,18 +142,17 @@ Sağ kısımdan “Properties Files” öğesini seçelim. “Next” diyelim.</
 <p>Bir sonraki ekranda bizden isim girilmesini istiyor. Biz de dosyamızın ismini <strong><em>messages</em></strong> koyuyoruz ve <strong><em>Finish</em></strong> diyoruz. <strong><em>Properties</em></strong> dosyamızı ekledikten sonra bunu projemize tanıtmamız 
 gerekiyor. Bunun için bir <strong><em>faces-config.xml</em></strong> dosyasını projemize ekliyoruz ve içine şu kodu yazıyoruz:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;application&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;application&gt;
       &lt;resource-bundle&gt;
             &lt;base-name&gt;messages&lt;/base-name&gt;
             &lt;var&gt;msg&lt;/var&gt;
        &lt;/resource-bundle&gt;
 &lt;/application&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Properties dosyamızı tanıtmak için <i><b>&lt;application&gt;…&lt;/application&gt;</b></i> etiketleri arasına yazacağız. <span style="color: #000000"><span style="font-size: medium"><i><b>&lt;resource-bundle&gt;…&lt;/resource-bundle&gt;</b></i> ise bir kaynak demeti tanıtmamızı sağlayan etikettir.</span></span> <span style="color: #000000"><span style="font-size: medium">Bo kodda <i><b>&lt;base-name&gt;…&lt;/base-name&gt; </b></i>etiketlerinin arasına yazılan yazı <b><i>properties</i></b> dosyamıza verdiğimiz isimdir.</span></span> <span style="color: #000000"><span style="font-family: 'Liberation Serif', serif"><span style="font-size: medium"><i><b>&lt;var&gt;…&lt;/var&gt;</b></i> etiketlerinin arasına yazdığımız yazı ise properties dosyamızı çağırırken kullanacağımız addır. Bunu bir nevi kod adı olarak düşünebiliriz.</span></span></span> Şimdi messages.properties dosyamıza sağ tıklayalım ve düzenle diyelim. Dosyamız açıldıktan sonra içine şu kodları yazalım.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>messages = "messages.properties dosyasının içindeki mesaj"
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>messages = "messages.properties dosyasının içindeki mesaj"
 
 messages.programmingLanguage = "Java"
 messages.author1 = "Akın Kaldıroğlu"
@@ -166,8 +160,7 @@ messages.author2 = "&lt;h2&gt;Rahman Usta&lt;/h2&gt;"
 
 messages.authorParam = "Yazar İsmi:" {0}
 messages.TwoAuthorParam = "Yazar İsimleri:" {0},{1}
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>Bu Kodların Açıklaması:</strong></p>
 
@@ -175,7 +168,7 @@ messages.TwoAuthorParam = "Yazar İsimleri:" {0},{1}
 
 <p><strong>index.xhtml Kodu</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8' ?&gt;</span>
 <span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
 	  <span class="na">xmlns:h=</span><span class="s">"http://xmlns.jcp.org/jsf/html"</span>
@@ -202,8 +195,7 @@ messages.TwoAuthorParam = "Yazar İsimleri:" {0},{1}
 		<span class="nt">&lt;/h:form&gt;</span>
 	<span class="nt">&lt;/h:body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>index.xhtml Kodunun Açıklaması:</strong></p>
 

@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/maven-jetty-plugin/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Jetty Maven Plugin İle Serverınızı Projenizde Taşıyın - İlkay Günel - Blog</title>
+      <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Jetty Maven Plugin İle Serverınızı Projenizde Taşıyın | İlkay Günel - Blog</title>
 <meta property="og:title" content="Jetty Maven Plugin İle Serverınızı Projenizde Taşıyın" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Jetty Maven Plugin İle Serverınızı Projenizde Taşıyın" />
 <meta property="og:description" content="Jetty Maven Plugin İle Serverınızı Projenizde Taşıyın" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2016/maven-jetty-plugin/" />
@@ -38,16 +40,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-09-13T19:38:20+03:00" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Jetty Maven Plugin İle Serverınızı Projenizde Taşıyın",
-    "datePublished": "2016-09-13T19:38:20+03:00",
-    "description": "Jetty Maven Plugin İle Serverınızı Projenizde Taşıyın",
-    "url": "http://ilkaygunel.com/blog/2016/maven-jetty-plugin/"
-  }
-</script>
+{"name":null,"description":"Jetty Maven Plugin İle Serverınızı Projenizde Taşıyın","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/maven-jetty-plugin/","publisher":null,"image":null,"headline":"Jetty Maven Plugin İle Serverınızı Projenizde Taşıyın","dateModified":"2016-09-13T19:38:20+03:00","datePublished":"2016-09-13T19:38:20+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/maven-jetty-plugin/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
   </head>
 
   <body>
@@ -133,7 +128,7 @@
 
 <p>Ben bu yazı için daha önce de hakkında bir yazı yazdığım <a href="http://kod5.org/spring-mvc-ile-basit-bir-blog-projesi/">SpringMVCBlogProject</a> projesini kullanacağım. pom.xml dosyamıza şöyle bir kod ekleyip kaydediyoruz. Bu kod benim projeme özgü olarak sadece proje context pathîni içeriyor. Onun dışında tüm projeler için kullanılabilir durumda.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;build&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;build&gt;
 	&lt;plugins&gt;
 		&lt;plugin&gt;
 			&lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;
@@ -148,14 +143,12 @@
 		&lt;/plugin&gt;
 	&lt;/plugins&gt;
 &lt;/build&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Akabinde eğer çalıştırmanız gereken database vs. varsa çalıştırıp sisteminizde Maven kurulu ise cmd/terminalden, kurulu değilse Eclipse IDE’den şu komutu vermemiz gerekiyor:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>mvn jetty:run
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn jetty:run
+</code></pre></div></div>
 
 <p>Bu kodu Eclipse’de projeye sağ tıklayıp Run As -&gt; Maven build seçerek de girebilirsiniz (2 adet Maven Build göreceksiniz. Birincisi daha önceden çalıştırdığınız Maven Build komutlarını listeleyip seçim yapmanızı sağlar. İkincisi ise yeni bir komut girmenizi sağlar. Aşağıdaki ekran için ikincisini seçiyoruz):</p>
 
