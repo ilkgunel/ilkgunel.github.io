@@ -5,9 +5,237 @@
     <description>İlkay Günel Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 31 Dec 2017 14:52:32 +0300</pubDate>
-    <lastBuildDate>Sun, 31 Dec 2017 14:52:32 +0300</lastBuildDate>
+    <pubDate>Sun, 07 Jan 2018 11:20:35 +0300</pubDate>
+    <lastBuildDate>Sun, 07 Jan 2018 11:20:35 +0300</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>Spring Boot ve Spring Security İle Rest Servisi Koruma 2 - Database'de Tanımlı Kullanıcılar</title>
+        <description>&lt;p&gt;Merhabalar arkadaşlar.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://ilkaygunel.com/blog/2017/securing-rest-service-spring-security-spring-boot-inmemory/&quot;&gt;Önceki&lt;/a&gt; yazımızda Spring Boot ve Spring Security ile
+Restful web servisi inmemory user ile koruma altına almayı görmüştük. Bu yazıda ise databese’de tanımlı kullanıcılar yetkilendirme işlemini 
+örnekleyeceğiz.&lt;/p&gt;
+
+&lt;p&gt;Öncelikle veritabanına bakalım. Kullanıcılarımızı tutmak için bir Member tablomuz var. Bu tablo üzerinde Spring Security kullanacağımız alanlar password,
+memberUserName ve enabled alanlarıdır. memberUserName alanı tekrar etmeyen alan olarak düşüneceğiz bu yazı boyunca. password alanı ise BCrypt ile 
+hashlenip saklanan bir alan. enable alanı ise user’ın aktif mi pasif mi durumda olduğunu bildiren alandır.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/springBootSecurityRest/4.png&quot;&gt;
+&lt;img src=&quot;/images/springBootSecurityRest/4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Kullanıcıların rol bazı yönetimini yapmak içinde userroles tablosunda ilgili kullanıcının rolünü tutuyoruz. Member tablosunda tekrar etmeyen alanımız
+olan memberUserName burada da belirleyici alan. Role kolonunda ilgili user’ın rolünü tutuyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/springBootSecurityRest/5.png&quot;&gt;
+&lt;img src=&quot;/images/springBootSecurityRest/5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi Java sınıflarımıza bakalım.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;AppConfig.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.ilkaygunel.security&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.context.annotation.Bean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.context.annotation.Configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.jdbc.datasource.DriverManagerDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Configuration&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AppConfig&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;dataSource&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DriverManagerDataSource&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;dataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;DriverManagerDataSource&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;driverManagerDataSource&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DriverManagerDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;driverManagerDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setDriverClassName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;com.mysql.jdbc.Driver&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;driverManagerDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setUrl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;jdbc:mysql://localhost:3306/SpringSecurityWithSpringBoot&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;driverManagerDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setUsername&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;root&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;driverManagerDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setPassword&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;driverManagerDataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;	
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;AppConfig sınıfımız içerisinde @Bean notasyonu ile &lt;strong&gt;&lt;em&gt;dataSource&lt;/em&gt;&lt;/strong&gt; isminde bir bean tanımı yapıyoruz. dataSource() metodu ile de bize veritabanı
+bağlantısı sunacak bir driverManagerDataSource nesnesi elde ediyoruz. Veritabanına bağlantı için yapılması gereken tanımlar driverManagerDataSource
+nesnesi üzerinde yapılabiliyor. Örneğin &lt;strong&gt;&lt;em&gt;setDriverClassName()&lt;/em&gt;&lt;/strong&gt; metodu ile kullanacağımız veritabanının driver’ını bildiriyoruz ve biz MySQL 
+kullanacağız.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;application.properties&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-properties&quot; data-lang=&quot;properties&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;server.contextPath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/SpringSecurityWithSpringBoot&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;server.port&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;8080&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;usersByUsernameQuery&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;select memberUserName,password,enabled from Member where memberUserName=?&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;authoritiesByUsernameQuery&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;select memberUserName,role from userroles where memberUserName=?&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;application.properties dosyamız içerisine gelen kullanıcı adı bilgisine göre veritabanından user çekecek &lt;strong&gt;&lt;em&gt;usersByUsernameQuery&lt;/em&gt;&lt;/strong&gt; ve eğer user var ise
+onun yetkilendirmesine bakmak için sorgu atacak &lt;strong&gt;&lt;em&gt;authoritiesByUsernameQuery&lt;/em&gt;&lt;/strong&gt; property’lerini ekledik.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;WebSecurityConfig.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.ilkaygunel.security&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.sql.DataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.beans.factory.annotation.Autowired&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.context.annotation.Bean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.context.annotation.Configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.core.env.Environment&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.config.annotation.web.builders.HttpSecurity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.config.annotation.web.builders.WebSecurity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.config.annotation.web.configuration.EnableWebSecurity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.web.authentication.rememberme.PersistentTokenRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.web.cors.CorsConfiguration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.web.cors.CorsConfigurationSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.web.cors.UrlBasedCorsConfigurationSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Configuration&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@PropertySource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;classpath:application.properties&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@EnableWebSecurity&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WebSecurityConfig&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WebSecurityConfigurerAdapter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	
+	&lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DataSource&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	
+	&lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Environment&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configure&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HttpSecurity&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;cors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;configurationSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CorsConfiguration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;applyPermitDefaultValues&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;and&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;csrf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+				&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;disable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;authorizeRequests&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;antMatchers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;/memberList&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;access&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;hasRole(&amp;#39;ROLE_ADMIN&amp;#39;)&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+				&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;and&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;httpBasic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;CorsConfigurationSource&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;corsConfigurationSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;CorsConfiguration&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CorsConfiguration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setAllowedOrigins&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;asList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setAllowedMethods&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;asList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;GET&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;POST&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;UrlBasedCorsConfigurationSource&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UrlBasedCorsConfigurationSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;registerCorsConfiguration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;/**&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configure&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AuthenticationManagerBuilder&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;jdbcAuthentication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;usersByUsernameQuery&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getProperty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;usersByUsernameQuery&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;authoritiesByUsernameQuery&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getProperty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;authoritiesByUsernameQuery&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;passwordEncoder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BCryptPasswordEncoder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configure&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WebSecurity&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;web&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;web&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//	@Override&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//	public void configure(AuthenticationManagerBuilder auth) throws Exception {&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//		auth.inMemoryAuthentication().withUser(&amp;quot;adminUser&amp;quot;).password(&amp;quot;adminUserPassword&amp;quot;).roles(&amp;quot;ADMIN&amp;quot;);&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//		auth.inMemoryAuthentication().withUser(&amp;quot;standartUser&amp;quot;).password(&amp;quot;standartUserPassword&amp;quot;).roles(&amp;quot;USER&amp;quot;);&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//	}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Önceki yazımızda inMemoryUser ile doğrulama ve yetkilendirme yaptığımız WebSecurityConfig sınıfımızı şimdi database’de tanımlı user ile yapacak şekilde
+değiştiriyoruz.&lt;/p&gt;
+
+&lt;p&gt;Sınıfımızın başında @Autowired notasyonu ile az önce AppConfig sınıfı içerisinde oluşturduğumuz dataSource bean’ini sınıfımıza inject ediyoruz.&lt;/p&gt;
+
+&lt;p&gt;Yine @Autowired notasyonu bir Environment nesnesini inject ediyoruz. Environment nesnesi ile application.properties dosyası içerisindeki property’lerimizi
+kolaylıkle çekebiliyoruz. Bunu yapabilmek için bir de sınıfın &lt;strong&gt;&lt;em&gt;@PropertySource&lt;/em&gt;&lt;/strong&gt; notasyonu ile işaretli olması yeterli.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;configure(AuthenticationManagerBuilder auth)&lt;/em&gt;&lt;/strong&gt; metodu içinde&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;auth.jdbcAuthentication() ile dorulama&amp;amp;yetkilendirmenin veritabanı aracılığı ile yapılacağını söylüyoruz.&lt;/li&gt;
+  &lt;li&gt;.dataSource(dataSource) ile az önce AppConfig içerisinde oluşturup sınıfımıza inject ettiğimiz dataSource nesnesini metoda vererek veritabanı bağlantı
+  bilgilerini veriyoruz.&lt;/li&gt;
+  &lt;li&gt;.usersByUsernameQuery() metodu ile giriş yapan kullanıcının veritabanı üzerinde tanımlı olup olmadığı kontrolünü yapıyoruz. .usersByUsernameQuery()
+  metoduna verilen SQL sorgusu gelen username bilgisi ile memberUserName alanını kullanarak  member tablosu üzerinde sorgu atıyor.&lt;/li&gt;
+  &lt;li&gt;.authoritiesByUsernameQuery() metodu ise eğer kullanıcı mevcut ise ve parolayı doğru girmiş ise yetkisinin doğru olup olmadığına bakıyor.&lt;/li&gt;
+  &lt;li&gt;.passwordEncoder() metodu da veritabanında hash’li olarak tutulan kullanıcı parolasının neye göre karşılaştıracağını bildirir. Yani biz veritabanında
+BCrypt ile hash’lenmiş bir passowrd tutuyoruz ve Spring Security’e de gelen parola bilgisini &lt;strong&gt;&lt;em&gt;BCryptPasswordEncoder&lt;/em&gt;&lt;/strong&gt; sınıfı aracılığı ile encode et
+ve öyle karşılaştır demiş oluyoruz.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://ilkaygunel.com/blog/2017/securing-rest-service-spring-security-spring-boot-inmemory/&quot;&gt;Önceki&lt;/a&gt; yazımızdan farklı olarak bu yazıda bir de
+corsConfigurationSource() metodu ve configure(HttpSecurity http) metodu içinde cors için tanımlar yer alıyor. Açılımı &lt;strong&gt;&lt;em&gt;Cross-Origin Resource Sharing&lt;/em&gt;&lt;/strong&gt;
+CORS kaynaklarımıza erişim için domain bazlı tanımlar yapmayı sağlayan bir mekanizmadır. CORS mekanizmasını sunucularda ön tanımlı olarak kapalı gelir,
+bunun sebebi de kötüye kullanımları önlemektir.&lt;/p&gt;
+
+&lt;p&gt;Şimdi &lt;a href=&quot;http://ilkaygunel.com/blog/2017/securing-rest-service-spring-security-spring-boot-inmemory/&quot;&gt;önceki&lt;/a&gt; yazıda olduğu gibi Application sınıfına
+sağ tıklayıp Run As -&amp;gt; Java Application diyerek Spring Boot projesini ayağa kaldıralım ve Postman üzerinden aynı requestleri atalım.&lt;/p&gt;
+
+&lt;p&gt;İlk olarak yetkisi olmayan kullanıcının erişememesi testini yapalım.&lt;/p&gt;
+
+&lt;p&gt;ilkay.gunel username’ini ve TEST1234 parolasını headerda Basic Authentication kullanarak web servise isteğimizi atıyoruz. ilkay.gunel kullanıcısı ROLE_USER
+rolüne sahip bir kullanıcı. Web servis de bize kod içerisinde
+sadece ROLE_ADMIN rolüne sahip kullanıcıların buraya erişebileceği tanımlandığı için &lt;strong&gt;&lt;em&gt;403-Access Denied&lt;/em&gt;&lt;/strong&gt; hatası ile dönüyor.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/springBootSecurityRest/6.png&quot;&gt;
+&lt;img src=&quot;/images/springBootSecurityRest/6.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi ROLE_ADMIN rolüne sahip ertan.sahin kullanıcısı ve TEST1234 parolası ile istek gönderelim (username&amp;amp;password değiştirdikten sonra sağ taraftaki
+Update Request butonuna tıklamayı unutmayalım). İsteğe cevap olarak web servisten datalar dönüyor.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/springBootSecurityRest/7.png&quot;&gt;
+&lt;img src=&quot;/images/springBootSecurityRest/7.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bir de son olarak hiç tanımlı olmayan user bilgisi ile test edelim. Eğer hiç tanımlı olmayan bir kullanıcı ile de gidersek &lt;strong&gt;&lt;em&gt;401 - Bad credentials&lt;/em&gt;&lt;/strong&gt;
+mesajı ile geri çevriliyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/springBootSecurityRest/8.png&quot;&gt;
+&lt;img src=&quot;/images/springBootSecurityRest/8.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda anlatacaklarım bu kadar arkadaşlar. İki yazı ile Spring Boot projesi içerisinde Spring Security kullanımını incelemiş olduk.&lt;/p&gt;
+
+&lt;p&gt;Başka yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Sat, 06 Jan 2018 20:40:21 +0300</pubDate>
+        <link>http://localhost:4000/blog/2018/securing-rest-webservice-spring-security-spring-boot-database/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2018/securing-rest-webservice-spring-security-spring-boot-database/</guid>
+        
+        <category>spring rest</category>
+        
+        <category>spring rest örneği</category>
+        
+        <category>spring rest example</category>
+        
+        <category>spring rest get example</category>
+        
+        <category>spring restful example</category>
+        
+        <category>spring restful get exaple</category>
+        
+        <category>spring restful örneği</category>
+        
+        <category>spring restful get örneği</category>
+        
+        <category>spring rest koruma</category>
+        
+        <category>spring security spring rest</category>
+        
+        <category>securing restful web service with spring security</category>
+        
+        <category>spring boot spring security spring rest</category>
+        
+        <category>database authentication with spring security</category>
+        
+        <category>database authentication with spring security spring boot</category>
+        
+        
+      </item>
     
       <item>
         <title>Angular İle Yetkilendirilmiş Web Service'e Erişim</title>
@@ -1892,106 +2120,6 @@ Başka bir yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
         <category>exception handling in java</category>
         
         <category>how to handle exception in java</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Singleton Design Pattern</title>
-        <description>&lt;p&gt;Merhabalar arkadaşlar. Bu yazıda &lt;strong&gt;&lt;em&gt;Singleton Design Pattern&lt;/em&gt;&lt;/strong&gt; hakkında size bilgi vermeye çalışacağım.&lt;/p&gt;
-
-&lt;p&gt;Projelerimiz çoğunlukla gelen parametrelere göre farklı şekilde çıktılar üretecek şekilde yazılsalar bile projenin bazı kısımlarında ne olursa olsun
-standart çıktıyı vermesi gerekir. Örneğin diyelim ki bir üyelik sistemi projeniz var ve bu üyelik sistemi içerisinde kullanıcı bir hareket gerçekleştirdi. Bu
-gerçekleşen hareketin tarihini, saatini vs. kaydetmeniz gerekiyor. İşte bu durumda sistem kullanıcıya özel bir veri değil standart bir veri üretmesi
-gerekir. Bu durumda da Singleton Design Pattern uygulanarak bu ihtiyaç karşılanabilir.&lt;/p&gt;
-
-&lt;p&gt;Şimdi Java dili ile basit bir şekilde Singleton Design Pattern kullanımını örnekleyelim.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.ilkaygunel.singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.time.ZoneOffset&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.time.ZonedDateTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SingletonDesignPattern&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SingletonDesignPattern&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;SingletonDesignPattern&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
-        
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;synchronized&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SingletonDesignPattern&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;instance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;instance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SingletonDesignPattern&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ZonedDateTime&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getUTCDateTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;ZonedDateTime&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;now&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ZonedDateTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ZoneOffset&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;UTC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;SingletonDesignPattern sınıfımızı inceleyelim:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Az önce de bahsettiğim gibi Singleton Design Pattern uygulanacağı zaman kullanıcıya ya da parametreye bağlı olarak çıktı üretilmeyeceği yani 
-herkes için standart bir akış uygulanacak demektir. Bu durumda bu pattern’in uygulandığı sınıf nesnesinin static olması bizim için iyidir. Biz de
-bunun için &lt;strong&gt;instance&lt;/strong&gt;* nesnemizi static olarak tanımladık.&lt;/li&gt;
-  &lt;li&gt;Sınıfımızın constructor’ını Thread Safe bir mekanizma oluşturmak için private olacak şekilde tanımladık.&lt;/li&gt;
-  &lt;li&gt;getInstance() metodumuz bize bu sınıftan bir nesne üretip verecek bir metotdur. Yine Thread Safe bir mekanizma için metodumuz synchronized olarak 
-tanımlı. Metodun tek görevi bize sınıftan nesne sunmak olduğu için static olarak olarak tanımlanmasında sakınca yoktur. Metot içerisinde az önce 
-tanımladığımız instance nesnemiz null ise yenisini oluşturup, değilse var olanı bize verecek şekilde kodumuzu yazıyoruz.&lt;/li&gt;
-  &lt;li&gt;getUTCDateTime() metodu da şu anki zamanı UTC diliminde bize verecek metotdur. Türkiye UTC+3’de yer aldığı için şu anki zamandan 3 saat öncesini
-bize verecektir metot.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;MainClass.java&lt;/strong&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.ilkaygunel.singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MainClass&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;SingletonDesignPattern&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SingletonDesignPattern&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;instance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getUTCDateTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;MainClass içerinse SingletonDesignPattern sınıfı içindeki static getInstance metoud üzerinden nesnemizi elde ediyoruz ve konsola UTC zamanı
-yazdırıyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Ekran Çıktısı&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;MainClass’ı çalıştırdığımda konsol çıktım şu şekilde olmakta:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/designPattern/singletonDesignPattern1.png&quot;&gt;
-    &lt;img src=&quot;/images/designPattern/singletonDesignPattern1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Gördüğümüz gibi saat 20:21 olmasına karşın UTC date time istediğimiz için saat 17:21 olarak geliyor.&lt;/p&gt;
-
-&lt;p&gt;Bu yazıda anlatacağım bu kadar arkadaşlar. Singleton Design Pattern kullanımını örneklemiş olduk.&lt;/p&gt;
-
-&lt;p&gt;Başka bir yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
-
-&lt;p&gt;Görüşmek üzere.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-</description>
-        <pubDate>Mon, 17 Jul 2017 20:40:22 +0300</pubDate>
-        <link>http://localhost:4000/blog/2017/singleton-design-pattern/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2017/singleton-design-pattern/</guid>
-        
-        <category>Singleton pattern</category>
-        
-        <category>Singleton pattern in java</category>
-        
-        <category>utc date in java</category>
-        
-        <category>utc date time in java</category>
-        
-        <category>utc date time in java 8</category>
         
         
       </item>
