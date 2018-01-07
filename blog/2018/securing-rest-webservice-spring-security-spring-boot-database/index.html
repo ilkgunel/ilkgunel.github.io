@@ -129,6 +129,9 @@
 Restful web servisi inmemory user ile koruma altına almayı görmüştük. Bu yazıda ise databese’de tanımlı kullanıcılar yetkilendirme işlemini 
 örnekleyeceğiz.</p>
 
+<p>Bu yazıdaki uygulamanın kodlarına <a href="https://github.com/ilkgunel/SpringSecurityWithSpringBoot">https://github.com/ilkgunel/SpringSecurityWithSpringBoot</a>
+adresinden erişebilirsiniz. Ayrıca kullandığımız veritabanı için de bir SQL dosyası ekledim, direk onu import edebilsiniz.</p>
+
 <p>Öncelikle veritabanına bakalım. Kullanıcılarımızı tutmak için bir Member tablomuz var. Bu tablo üzerinde Spring Security kullanacağımız alanlar password,
 memberUserName ve enabled alanlarıdır. memberUserName alanı tekrar etmeyen alan olarak düşüneceğiz bu yazı boyunca. password alanı ise BCrypt ile 
 hashlenip saklanan bir alan. enable alanı ise user’ın aktif mi pasif mi durumda olduğunu bildiren alandır.</p>

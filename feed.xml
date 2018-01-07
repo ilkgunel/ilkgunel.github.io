@@ -5,8 +5,8 @@
     <description>İlkay Günel Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 07 Jan 2018 11:20:35 +0300</pubDate>
-    <lastBuildDate>Sun, 07 Jan 2018 11:20:35 +0300</lastBuildDate>
+    <pubDate>Sun, 07 Jan 2018 11:46:06 +0300</pubDate>
+    <lastBuildDate>Sun, 07 Jan 2018 11:46:06 +0300</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
     
       <item>
@@ -16,6 +16,9 @@
 &lt;p&gt;&lt;a href=&quot;http://ilkaygunel.com/blog/2017/securing-rest-service-spring-security-spring-boot-inmemory/&quot;&gt;Önceki&lt;/a&gt; yazımızda Spring Boot ve Spring Security ile
 Restful web servisi inmemory user ile koruma altına almayı görmüştük. Bu yazıda ise databese’de tanımlı kullanıcılar yetkilendirme işlemini 
 örnekleyeceğiz.&lt;/p&gt;
+
+&lt;p&gt;Bu yazıdaki uygulamanın kodlarına &lt;a href=&quot;https://github.com/ilkgunel/SpringSecurityWithSpringBoot&quot;&gt;https://github.com/ilkgunel/SpringSecurityWithSpringBoot&lt;/a&gt;
+adresinden erişebilirsiniz. Ayrıca kullandığımız veritabanı için de bir SQL dosyası ekledim, direk onu import edebilsiniz.&lt;/p&gt;
 
 &lt;p&gt;Öncelikle veritabanına bakalım. Kullanıcılarımızı tutmak için bir Member tablomuz var. Bu tablo üzerinde Spring Security kullanacağımız alanlar password,
 memberUserName ve enabled alanlarıdır. memberUserName alanı tekrar etmeyen alan olarak düşüneceğiz bu yazı boyunca. password alanı ise BCrypt ile 
