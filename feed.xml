@@ -5,9 +5,211 @@
     <description>İlkay Günel Blog</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 21 Jan 2018 16:29:58 +0300</pubDate>
-    <lastBuildDate>Sun, 21 Jan 2018 16:29:58 +0300</lastBuildDate>
+    <pubDate>Sun, 21 Jan 2018 16:38:31 +0300</pubDate>
+    <lastBuildDate>Sun, 21 Jan 2018 16:38:31 +0300</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>Angular 2 Tutorials 10 - Inputs and Outputs</title>
+        <description>&lt;p&gt;Merhabalar arkadaşlar.&lt;/p&gt;
+
+&lt;p&gt;Bu yazı içerisinde Angular 2’de Componentler arası veri geçirme konusu olan olan &lt;strong&gt;&lt;em&gt;Inputs and Outputs&lt;/em&gt;&lt;/strong&gt; konusunu öğreneceğiz.&lt;/p&gt;
+
+&lt;p&gt;Componentler arası veri geçirme olayı üst ve alt component ilişkisi olan componentler arasında yapılıyor arkadaşlar. Biz de yazımıda üst component olan
+AppComponent ile alt component olan Angular2Tutorials component’i arasında veri taşıma olayına bakacağız.&lt;/p&gt;
+
+&lt;p&gt;İlk olarak alt component’den üst component’e veri taşıma olayını örnekleyelim.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;tutorials.component.ts&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;@Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2-tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&amp;lt;h2&amp;gt;Child Tutorials Component&amp;lt;/h2&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sb&quot;&gt;				&amp;lt;label&amp;gt;Enter Child Tutorials Component&amp;lt;/label&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sb&quot;&gt;				&amp;lt;input type=&amp;quot;text&amp;quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sb&quot;&gt;				&amp;lt;p&amp;gt;Value from Parent AppComponent is&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sb&quot;&gt;				`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;inputs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`parentData`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+
+&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;parentData&lt;/span&gt;: &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Angular2Tutorials component’imiz az önce de söylediğim gibi bizim altcomponent’imizdir. Angular2Tutorials sınıfının içerisinde template kısmında kullanıcının
+bir değer gireceği bir input alanı mevcut. Bu input alanını Angular2Tutorials’den AppComponent’e veri taşırken kullanacağız. Yine template kısmında 
+interpolation kullanarak parentData nesnesi template’imize eklenmiş. Burada selector ve template gibi kullanılan yeni bir özellik görüyoruz, o da &lt;strong&gt;&lt;em&gt;inputs&lt;/em&gt;&lt;/strong&gt;
+özelliği. inputs özelliği içerisinde adı verilmiş olan nesnenin tanımlanma işlemi sınıfın içerisinde yapılmış bulunmakta. Angular2Tutorials sınıfı içerisinde
+string tipinde &lt;strong&gt;&lt;em&gt;parentData&lt;/em&gt;&lt;/strong&gt; nesnesinin tanımlandığını görüyoruz ve bu parentData nesnesi inputs özelliğine verilmiş. Bu şu anlama gelir ki, başka bir component
+içerisinden parentData ismi ile Angular2Tutorials sınıfına veri gönderilebilir ve bu değer sınıf içerisindeki parentData nesnesine işlenir.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;app.component.ts&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;./tutorials.component&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;@Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;my-app&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&amp;lt;h2&amp;gt;Parent App Component&amp;lt;/h2&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sb&quot;&gt;				&amp;lt;label&amp;gt;Enter Parent App Component Value&amp;lt;/label&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sb&quot;&gt;				&amp;lt;input type=&amp;quot;text&amp;quot; #ptext (keyup)=&amp;quot;0&amp;quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sb&quot;&gt;				&amp;lt;p&amp;gt;Value from Child TutorialsComponent is&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sb&quot;&gt;				&amp;lt;angular2-tutorials [parentData]=&amp;quot;ptext.value&amp;quot;&amp;gt;&amp;lt;/angular2-tutorials&amp;gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;directives&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AppComponent&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;AppComponent sınıfımız içerisinde template özelliği içerisinde  Angular2Tutorials’da olduğu gibi bir input alanı var. Bu input alanı için #ptext ifadesi ile
+bir referans tanımlaması yapıldı ve (keyup)=”0” ifadesi her tuşa basılıp bırakıldığında değerinin güncellenmesi sağlandı.Template içerisinde 
+&lt;strong&gt;&lt;em&gt;angular2-tutorials&lt;/em&gt;&lt;/strong&gt; selector’unu kullanarak Angular2Tutorials component’ini dahil etmiş olduk. angular2-tutorials tag’inin kullanımı sırasında
+göreceğimiz gibi bir data binding durumu mevcut arkadaşlar. Angular2Tutorials sınıfının parentData nesnesine ptext referanslı input’un değerini göndermiş
+oluyoruz angular2-tutorials tag’inin kullanımı ile. Bu değer gönderimi ile Angular2Tutorials sınıfının template özelliği içerisindeki inputs alanı değeri
+karşılayacak ve parentData nesnesine yazacak.&lt;/p&gt;
+
+&lt;p&gt;Browser’a gidip baktığımızda ve Parent App Component alanındaki kutucuğa değer girdiğimizde Child Tutorials Component alanında değerin yazdırıldığını 
+görüyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson10/1.png&quot;&gt;
+&lt;img src=&quot;/images/angularTutorials/lesson10/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi de üst component’den yani AppComponent’den alt component’e yani Angular2Tutorials component’ine nasıl veri geçirilir ona bakalım.&lt;/p&gt;
+
+&lt;p&gt;Componentler arasında bir alt-üst ilişkisi olması birbirleri arasında veri transferinin aynı şekilde olmasını engelliyor arkadaşlar. Bu nedenle alt componentden
+üst component’e veri gönderdiğimiz gibi üst component’den alt component’e veri gönderemiyoruz. Bu iş için inputs özelliği gibi bir de &lt;strong&gt;&lt;em&gt;outputs&lt;/em&gt;&lt;/strong&gt; özelliğimiz
+var. Şimdi nasıl kullanıldığına bakalım:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;tutorials.component.ts&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;EventEmitter&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;@Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2-tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&amp;lt;h2&amp;gt;Child Tutorials Component&amp;lt;/h2&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sb&quot;&gt;				&amp;lt;label&amp;gt;Enter Child Tutorials Component&amp;lt;/label&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sb&quot;&gt;				&amp;lt;input type=&amp;quot;text&amp;quot; #childText (keyup)=&amp;quot;onChange(childText.value)&amp;quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sb&quot;&gt;				&amp;lt;p&amp;gt;Value from Parent AppComponent is&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sb&quot;&gt;				`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;inputs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`parentData`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;outputs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`childEvent`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+
+&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;parentData&lt;/span&gt;: &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;nx&quot;&gt;childEvent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;EventEmitter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; 
+	&lt;span class=&quot;nx&quot;&gt;onChange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;:&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;childEvent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;emit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Angular2Tutorials sınıfı içerisinde outputs özelliğini ona childEvent nesnesini vererek kullandık. Bu childEvent nesnesi EventEmitter tipinde olan bir nesnedir
+ve EventEmitter’ı biz değer yayması, göndermesi için kullanacağız.&lt;/p&gt;
+
+&lt;p&gt;Template özelliği içerisindeki input’a #childText ifadesi ile bir referans ataması yaptık
+ve (keyup)=”onChange(childText.value)” ifadesi ile bu input içerisinde iken her tuşa basılıp kaldırıldığında onChange metodunun çağırılmasını sağladık. onChange
+metodunun çağırımı sırasında da ona parametre olan childText referanslı nesnenin değerini gönderdik.&lt;/p&gt;
+
+&lt;p&gt;onChange metodunun da yaptığı iş kendisine gelen değeri &lt;strong&gt;&lt;em&gt;emit()&lt;/em&gt;&lt;/strong&gt; metodu vasıtası ile yaymaktır arkadaşlar. childEvent nesnesi outputs kısmında kullanıldığı
+için bu emit metodunun çağırımı ile childEvent’in çağırıldığı yere emit metoduna gelen değer yayılır. Burada biz AppComponent içerisinden childEvent’i 
+tetikleyeceğimiz için çağırıldığı yer AppComponent olacak ve her tuşa basılıp kaldırıldığında değer AppComponent’e döndürülecek.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;app.component.ts&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;./tutorials.component&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;@Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;my-app&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&amp;lt;h2&amp;gt;Parent App Component&amp;lt;/h2&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sb&quot;&gt;				&amp;lt;label&amp;gt;Enter Parent App Component Value&amp;lt;/label&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sb&quot;&gt;				&amp;lt;input type=&amp;quot;text&amp;quot; #ptext (keyup)=&amp;quot;0&amp;quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sb&quot;&gt;				&amp;lt;p&amp;gt;Value from Child TutorialsComponent is&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sb&quot;&gt;				&lt;/span&gt;
+&lt;span class=&quot;sb&quot;&gt;				&amp;lt;angular2-tutorials (childEvent)=&amp;quot;childData=$event&amp;quot; [parentData]=&amp;quot;ptext.value&amp;quot;&amp;gt;&amp;lt;/angular2-tutorials&amp;gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;directives&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AppComponent&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;childData&lt;/span&gt; : &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;AppComponent içerisinde de sınıfın tanım kısmında alt sınıftan gelecek değeri tutacak, string tipinde bir childData nesnesi tanımlıyoruz. Template özelliği
+içerisinde, angular2-tutorials tag’i içerisinde bir event binding işlemi uyguluyoruz arkadaşlar. Burada childEvent nesnesi EventEmitter tipinde olduğu için
+onMousOver gibi, keyup gibi childEvent da bizim için bir event’tır ve bu event’a atanan iş childData nesnesine &lt;strong&gt;&lt;em&gt;$event&lt;/em&gt;&lt;/strong&gt; gelen değeri basmaktır. $event
+ile değerin gelmesi childEvent’ın gerçekleştirdiği event’ın döndürdüğü değerdir. Yani childEvent Angular2Tutorials içerisinde emit() event’ını 
+gerçekleştiriyordu ve buradan da gelen değeri yayıyordu. Bu nedenle $event bize emit() fonksiyonunun yaydığı değeri verecektir.&lt;/p&gt;
+
+&lt;p&gt;Tekrar browser’a gidip baktığımızda ve Child Tutorials Component alanındaki kutucuğa değer girdiğimizde Parent App Component alanında ilgili değerin yazdığını
+görüyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson10/2.png&quot;&gt;
+&lt;img src=&quot;/images/angularTutorials/lesson10/2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda anlatacağım bu kadar arkadaşlar.&lt;/p&gt;
+
+&lt;p&gt;Bir sonraki Angular 2 yazısında görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Sat, 20 Jan 2018 20:40:21 +0300</pubDate>
+        <link>http://localhost:4000/blog/2018/angular-2-inputs-and-outputs/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2018/angular-2-inputs-and-outputs/</guid>
+        
+        <category>angular 2 web service</category>
+        
+        <category>angular 2 rest get</category>
+        
+        <category>angular 2 rest post</category>
+        
+        <category>angular 2 rest</category>
+        
+        <category>angular 2 calling web service</category>
+        
+        <category>angular 2 giriş</category>
+        
+        <category>angular 2 tutorials</category>
+        
+        <category>angular 2 hello world</category>
+        
+        <category>angular 2 dersleri</category>
+        
+        <category>angular 2 kaynak</category>
+        
+        <category>angular 2 türkçe kaynak</category>
+        
+        <category>angular 2 türkçe dersleri</category>
+        
+        <category>angular 2 ngIf</category>
+        
+        <category>angular 2 ngSwitch</category>
+        
+        <category>angular 2 ngSwitchWhen</category>
+        
+        <category>angular 2 ngSwitchDefault</category>
+        
+        <category>angular 2 ngFor</category>
+        
+        <category>angular 2 Structural Directives</category>
+        
+        <category>angular 2 Attribute Directives</category>
+        
+        <category>angular 2 ngClass</category>
+        
+        <category>angular 2 ngStyle</category>
+        
+        <category>angular ngClass ngStyle</category>
+        
+        <category>angular 2 inputs and outputs</category>
+        
+        <category>angular 2 passing data between components</category>
+        
+        <category>angular 2 passing data from one component to other component</category>
+        
+        
+      </item>
     
       <item>
         <title>Person of Interest Dizisi Üzerine</title>
@@ -1287,208 +1489,6 @@ kalın.&lt;/p&gt;
         <category>spring mvc apache tiles</category>
         
         <category>how to use apache tiles with spring mvc</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Angular 2 Tutorials 10 - Inputs and Outputs</title>
-        <description>&lt;p&gt;Merhabalar arkadaşlar.&lt;/p&gt;
-
-&lt;p&gt;Bu yazı içerisinde Angular 2’de Componentler arası veri geçirme konusu olan olan &lt;strong&gt;&lt;em&gt;Inputs and Outputs&lt;/em&gt;&lt;/strong&gt; konusunu öğreneceğiz.&lt;/p&gt;
-
-&lt;p&gt;Componentler arası veri geçirme olayı üst ve alt component ilişkisi olan componentler arasında yapılıyor arkadaşlar. Biz de yazımıda üst component olan
-AppComponent ile alt component olan Angular2Tutorials component’i arasında veri taşıma olayına bakacağız.&lt;/p&gt;
-
-&lt;p&gt;İlk olarak alt component’den üst component’e veri taşıma olayını örnekleyelim.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;tutorials.component.ts&lt;/strong&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;@Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-	&lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2-tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-	&lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&amp;lt;h2&amp;gt;Child Tutorials Component&amp;lt;/h2&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;label&amp;gt;Enter Child Tutorials Component&amp;lt;/label&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;input type=&amp;quot;text&amp;quot;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;p&amp;gt;Value from Parent AppComponent is&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-	&lt;span class=&quot;nx&quot;&gt;inputs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`parentData`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;parentData&lt;/span&gt;: &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Angular2Tutorials component’imiz az önce de söylediğim gibi bizim altcomponent’imizdir. Angular2Tutorials sınıfının içerisinde template kısmında kullanıcının
-bir değer gireceği bir input alanı mevcut. Bu input alanını Angular2Tutorials’den AppComponent’e veri taşırken kullanacağız. Yine template kısmında 
-interpolation kullanarak parentData nesnesi template’imize eklenmiş. Burada selector ve template gibi kullanılan yeni bir özellik görüyoruz, o da &lt;strong&gt;&lt;em&gt;inputs&lt;/em&gt;&lt;/strong&gt;
-özelliği. inputs özelliği içerisinde adı verilmiş olan nesnenin tanımlanma işlemi sınıfın içerisinde yapılmış bulunmakta. Angular2Tutorials sınıfı içerisinde
-string tipinde &lt;strong&gt;&lt;em&gt;parentData&lt;/em&gt;&lt;/strong&gt; nesnesinin tanımlandığını görüyoruz ve bu parentData nesnesi inputs özelliğine verilmiş. Bu şu anlama gelir ki, başka bir component
-içerisinden parentData ismi ile Angular2Tutorials sınıfına veri gönderilebilir ve bu değer sınıf içerisindeki parentData nesnesine işlenir.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;app.component.ts&lt;/strong&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;./tutorials.component&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;@Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;my-app&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&amp;lt;h2&amp;gt;Parent App Component&amp;lt;/h2&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;label&amp;gt;Enter Parent App Component Value&amp;lt;/label&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;input type=&amp;quot;text&amp;quot; #ptext (keyup)=&amp;quot;0&amp;quot;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;p&amp;gt;Value from Child TutorialsComponent is&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;angular2-tutorials [parentData]=&amp;quot;ptext.value&amp;quot;&amp;gt;&amp;lt;/angular2-tutorials&amp;gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;directives&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AppComponent&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;AppComponent sınıfımız içerisinde template özelliği içerisinde  Angular2Tutorials’da olduğu gibi bir input alanı var. Bu input alanı için #ptext ifadesi ile
-bir referans tanımlaması yapıldı ve (keyup)=”0” ifadesi her tuşa basılıp bırakıldığında değerinin güncellenmesi sağlandı.Template içerisinde 
-&lt;strong&gt;&lt;em&gt;angular2-tutorials&lt;/em&gt;&lt;/strong&gt; selector’unu kullanarak Angular2Tutorials component’ini dahil etmiş olduk. angular2-tutorials tag’inin kullanımı sırasında
-göreceğimiz gibi bir data binding durumu mevcut arkadaşlar. Angular2Tutorials sınıfının parentData nesnesine ptext referanslı input’un değerini göndermiş
-oluyoruz angular2-tutorials tag’inin kullanımı ile. Bu değer gönderimi ile Angular2Tutorials sınıfının template özelliği içerisindeki inputs alanı değeri
-karşılayacak ve parentData nesnesine yazacak.&lt;/p&gt;
-
-&lt;p&gt;Browser’a gidip baktığımızda ve Parent App Component alanındaki kutucuğa değer girdiğimizde Child Tutorials Component alanında değerin yazdırıldığını 
-görüyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson10/1.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson10/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Şimdi de üst component’den yani AppComponent’den alt component’e yani Angular2Tutorials component’ine nasıl veri geçirilir ona bakalım.&lt;/p&gt;
-
-&lt;p&gt;Componentler arasında bir alt-üst ilişkisi olması birbirleri arasında veri transferinin aynı şekilde olmasını engelliyor arkadaşlar. Bu nedenle alt componentden
-üst component’e veri gönderdiğimiz gibi üst component’den alt component’e veri gönderemiyoruz. Bu iş için inputs özelliği gibi bir de &lt;strong&gt;&lt;em&gt;outputs&lt;/em&gt;&lt;/strong&gt; özelliğimiz
-var. Şimdi nasıl kullanıldığına bakalım:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;tutorials.component.ts&lt;/strong&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;EventEmitter&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;@Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-	&lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2-tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-	&lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&amp;lt;h2&amp;gt;Child Tutorials Component&amp;lt;/h2&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;label&amp;gt;Enter Child Tutorials Component&amp;lt;/label&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;input type=&amp;quot;text&amp;quot; #childText (keyup)=&amp;quot;onChange(childText.value)&amp;quot;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;p&amp;gt;Value from Parent AppComponent is&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-	&lt;span class=&quot;nx&quot;&gt;inputs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`parentData`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-	&lt;span class=&quot;nx&quot;&gt;outputs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`childEvent`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;parentData&lt;/span&gt;: &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;nx&quot;&gt;childEvent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;EventEmitter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; 
-	&lt;span class=&quot;nx&quot;&gt;onChange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;:&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;childEvent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;emit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Angular2Tutorials sınıfı içerisinde outputs özelliğini ona childEvent nesnesini vererek kullandık. Bu childEvent nesnesi EventEmitter tipinde olan bir nesnedir
-ve EventEmitter’ı biz değer yayması, göndermesi için kullanacağız.&lt;/p&gt;
-
-&lt;p&gt;Template özelliği içerisindeki input’a #childText ifadesi ile bir referans ataması yaptık
-ve (keyup)=”onChange(childText.value)” ifadesi ile bu input içerisinde iken her tuşa basılıp kaldırıldığında onChange metodunun çağırılmasını sağladık. onChange
-metodunun çağırımı sırasında da ona parametre olan childText referanslı nesnenin değerini gönderdik.&lt;/p&gt;
-
-&lt;p&gt;onChange metodunun da yaptığı iş kendisine gelen değeri &lt;strong&gt;&lt;em&gt;emit()&lt;/em&gt;&lt;/strong&gt; metodu vasıtası ile yaymaktır arkadaşlar. childEvent nesnesi outputs kısmında kullanıldığı
-için bu emit metodunun çağırımı ile childEvent’in çağırıldığı yere emit metoduna gelen değer yayılır. Burada biz AppComponent içerisinden childEvent’i 
-tetikleyeceğimiz için çağırıldığı yer AppComponent olacak ve her tuşa basılıp kaldırıldığında değer AppComponent’e döndürülecek.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;app.component.ts&lt;/strong&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;./tutorials.component&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;@Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;my-app&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&amp;lt;h2&amp;gt;Parent App Component&amp;lt;/h2&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;label&amp;gt;Enter Parent App Component Value&amp;lt;/label&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;input type=&amp;quot;text&amp;quot; #ptext (keyup)=&amp;quot;0&amp;quot;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;p&amp;gt;Value from Child TutorialsComponent is&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;angular2-tutorials (childEvent)=&amp;quot;childData=$event&amp;quot; [parentData]=&amp;quot;ptext.value&amp;quot;&amp;gt;&amp;lt;/angular2-tutorials&amp;gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;directives&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AppComponent&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;childData&lt;/span&gt; : &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;AppComponent içerisinde de sınıfın tanım kısmında alt sınıftan gelecek değeri tutacak, string tipinde bir childData nesnesi tanımlıyoruz. Template özelliği
-içerisinde, angular2-tutorials tag’i içerisinde bir event binding işlemi uyguluyoruz arkadaşlar. Burada childEvent nesnesi EventEmitter tipinde olduğu için
-onMousOver gibi, keyup gibi childEvent da bizim için bir event’tır ve bu event’a atanan iş childData nesnesine &lt;strong&gt;&lt;em&gt;$event&lt;/em&gt;&lt;/strong&gt; gelen değeri basmaktır. $event
-ile değerin gelmesi childEvent’ın gerçekleştirdiği event’ın döndürdüğü değerdir. Yani childEvent Angular2Tutorials içerisinde emit() event’ını 
-gerçekleştiriyordu ve buradan da gelen değeri yayıyordu. Bu nedenle $event bize emit() fonksiyonunun yaydığı değeri verecektir.&lt;/p&gt;
-
-&lt;p&gt;Tekrar browser’a gidip baktığımızda ve Child Tutorials Component alanındaki kutucuğa değer girdiğimizde Parent App Component alanında ilgili değerin yazdığını
-görüyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson10/2.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson10/2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Bu yazıda anlatacağım bu kadar arkadaşlar.&lt;/p&gt;
-
-&lt;p&gt;Bir sonraki Angular 2 yazısında görüşene kadar sağlıcakla kalın.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-</description>
-        <pubDate>Sat, 09 Sep 2017 20:40:21 +0300</pubDate>
-        <link>http://localhost:4000/blog/2017/angular-2-inputs-and-outputs/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2017/angular-2-inputs-and-outputs/</guid>
-        
-        <category>angular 2 web service</category>
-        
-        <category>angular 2 rest get</category>
-        
-        <category>angular 2 rest post</category>
-        
-        <category>angular 2 rest</category>
-        
-        <category>angular 2 calling web service</category>
-        
-        <category>angular 2 giriş</category>
-        
-        <category>angular 2 tutorials</category>
-        
-        <category>angular 2 hello world</category>
-        
-        <category>angular 2 dersleri</category>
-        
-        <category>angular 2 kaynak</category>
-        
-        <category>angular 2 türkçe kaynak</category>
-        
-        <category>angular 2 türkçe dersleri</category>
-        
-        <category>angular 2 ngIf</category>
-        
-        <category>angular 2 ngSwitch</category>
-        
-        <category>angular 2 ngSwitchWhen</category>
-        
-        <category>angular 2 ngSwitchDefault</category>
-        
-        <category>angular 2 ngFor</category>
-        
-        <category>angular 2 Structural Directives</category>
-        
-        <category>angular 2 Attribute Directives</category>
-        
-        <category>angular 2 ngClass</category>
-        
-        <category>angular 2 ngStyle</category>
-        
-        <category>angular ngClass ngStyle</category>
-        
-        <category>angular 2 inputs and outputs</category>
-        
-        <category>angular 2 passing data between components</category>
-        
-        <category>angular 2 passing data from one component to other component</category>
         
         
       </item>
