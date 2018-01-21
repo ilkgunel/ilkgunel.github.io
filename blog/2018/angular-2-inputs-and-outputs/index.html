@@ -142,6 +142,8 @@ AppComponent ile alt component olan Angular2Tutorials component’i arasında ve
 <span class="sb">				&lt;label&gt;Enter Child Tutorials Component&lt;/label&gt;</span>
 <span class="sb">				&lt;input type=&quot;text&quot;&gt;</span>
 <span class="sb">				&lt;p&gt;Value from Parent AppComponent is&lt;/p&gt;</span>
+<span class="sb">				</span>
+<span class="sb">				{{parentData}}</span>
 <span class="sb">				`</span><span class="p">,</span>
 	<span class="nx">inputs</span><span class="o">:</span> <span class="p">[</span><span class="sb">`parentData`</span><span class="p">]</span>
 <span class="p">})</span>
@@ -204,6 +206,8 @@ var. Şimdi nasıl kullanıldığına bakalım:</p>
 <span class="sb">				&lt;label&gt;Enter Child Tutorials Component&lt;/label&gt;</span>
 <span class="sb">				&lt;input type=&quot;text&quot; #childText (keyup)=&quot;onChange(childText.value)&quot;&gt;</span>
 <span class="sb">				&lt;p&gt;Value from Parent AppComponent is&lt;/p&gt;</span>
+<span class="sb">				</span>
+<span class="sb">				{{parentData}}</span>
 <span class="sb">				`</span><span class="p">,</span>
 	<span class="nx">inputs</span><span class="o">:</span> <span class="p">[</span><span class="sb">`parentData`</span><span class="p">],</span>
 	<span class="nx">outputs</span><span class="o">:</span> <span class="p">[</span><span class="sb">`childEvent`</span><span class="p">]</span>
@@ -239,6 +243,8 @@ tetikleyeceğimiz için çağırıldığı yer AppComponent olacak ve her tuşa 
 <span class="sb">				&lt;label&gt;Enter Parent App Component Value&lt;/label&gt;</span>
 <span class="sb">				&lt;input type=&quot;text&quot; #ptext (keyup)=&quot;0&quot;&gt;</span>
 <span class="sb">				&lt;p&gt;Value from Child TutorialsComponent is&lt;/p&gt;</span>
+<span class="sb">				</span>
+<span class="sb">				{{ childData }}</span>
 <span class="sb">				</span>
 <span class="sb">				&lt;angular2-tutorials (childEvent)=&quot;childData=$event&quot; [parentData]=&quot;ptext.value&quot;&gt;&lt;/angular2-tutorials&gt;`</span><span class="p">,</span>
   <span class="nx">directives</span><span class="o">:</span><span class="p">[</span><span class="nx">Angular2Tutorials</span><span class="p">]</span>
