@@ -5,9 +5,83 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 01 Mar 2018 22:43:23 +0300</pubDate>
-    <lastBuildDate>Thu, 01 Mar 2018 22:43:23 +0300</lastBuildDate>
-    <generator>Jekyll v3.6.2</generator>
+    <pubDate>Sat, 17 Mar 2018 21:51:47 +0300</pubDate>
+    <lastBuildDate>Sat, 17 Mar 2018 21:51:47 +0300</lastBuildDate>
+    <generator>Jekyll v3.7.3</generator>
+    
+      <item>
+        <title>Eclipse - Dosya Kaydedildiğinde Otomatik Formatlama</title>
+        <description>&lt;p&gt;Merhabalar arkadaşlar.&lt;/p&gt;
+
+&lt;p&gt;Bu kısa yazıda size Eclipse IDE’de Java sınıflarını kaydettiğinizde otomatik formatlama özelliğinin nasıl açıldığını göstereceğim.&lt;/p&gt;
+
+&lt;p&gt;Window -&amp;gt; Preferences yolu ile Eclipse’in ayarlar menüsü açalım.&lt;/p&gt;
+
+&lt;p&gt;Akabinde Java -&amp;gt; Editor -&amp;gt; Save Actions ekranını açalım. Açılan ekrandaki &lt;strong&gt;&lt;em&gt;Perform the selected actions on save&lt;/em&gt;&lt;/strong&gt; seçeneğine tik koyalım. Onun altındaki &lt;strong&gt;&lt;em&gt;Format source code&lt;/em&gt;&lt;/strong&gt; seçeneğine de tik koyalım. Tik koyduğumuzda &lt;strong&gt;&lt;em&gt;Format all lines&lt;/em&gt;&lt;/strong&gt; seçili gelecek. Bu şekilde bırakabiliriz.&lt;strong&gt;&lt;em&gt;Apply and Close&lt;/em&gt;&lt;/strong&gt; butonuna tıkladığımızda kayıt sırasında kodumuzu formatlamak için IDE’miz hazır olacak.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/eclipse/autoFormat1.png&quot;&gt;
+&lt;img src=&quot;/images/eclipse/autoFormat1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Sat, 17 Mar 2018 20:40:21 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2018/eclipse-save-auto-format/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2018/eclipse-save-auto-format/</guid>
+        
+        <category>angular 2 web service</category>
+        
+        <category>angular 2 rest get</category>
+        
+        <category>angular 2 rest post</category>
+        
+        <category>angular 2 rest</category>
+        
+        <category>angular 2 calling web service</category>
+        
+        <category>angular 2 giriş</category>
+        
+        <category>angular 2 tutorials</category>
+        
+        <category>angular 2 hello world</category>
+        
+        <category>angular 2 dersleri</category>
+        
+        <category>angular 2 kaynak</category>
+        
+        <category>angular 2 türkçe kaynak</category>
+        
+        <category>angular 2 türkçe dersleri</category>
+        
+        <category>angular 2 ngIf</category>
+        
+        <category>angular 2 ngSwitch</category>
+        
+        <category>angular 2 ngSwitchWhen</category>
+        
+        <category>angular 2 ngSwitchDefault</category>
+        
+        <category>angular 2 ngFor</category>
+        
+        <category>angular 2 Structural Directives</category>
+        
+        <category>angular 2 Attribute Directives</category>
+        
+        <category>angular 2 ngClass</category>
+        
+        <category>angular 2 ngStyle</category>
+        
+        <category>angular ngClass ngStyle</category>
+        
+        <category>eclipse</category>
+        
+        <category>eclipse auto format on save</category>
+        
+        <category>eclipse format on save</category>
+        
+        
+      </item>
     
       <item>
         <title>Java FX İle Basit Hash Uygulaması Yazalaım</title>
@@ -1963,189 +2037,6 @@ kalın.&lt;/p&gt;
         <category>spring mvc apache tiles</category>
         
         <category>how to use apache tiles with spring mvc</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Angular 2 Tutorials 9 - Attribute Directives</title>
-        <description>&lt;p&gt;Merhabalar arkadaşlar. Angular 2 yazılarına Attribute Directives konusu ile devam ediyoruz.&lt;/p&gt;
-
-&lt;p&gt;Bir önceki yazıda öğrendiğimiz Structural Directives konusu DOM Manipülasyonu üzerine odaklanan bir directive iken Attribute Directive ise DOM Elementinin davranışını 
-değiştirmeye odaklanmıştır. Biz de bu yazıda Attribute Directives konusuna ait olan &lt;strong&gt;&lt;em&gt;ngClass&lt;/em&gt;&lt;/strong&gt; ve &lt;strong&gt;&lt;em&gt;ngStyle&lt;/em&gt;&lt;/strong&gt; özelliklerini öğreneceğiz.&lt;/p&gt;
-
-&lt;p&gt;angular2tutorials.component.ts dosyamızın içeriğini şu şekilde güncelleyelim:&lt;/p&gt;
-
-&lt;p&gt;import {Component} from ‘@angular/core’;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;@Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2Tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&amp;lt;h2&amp;gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;                &amp;lt;p [ngClass]=&amp;quot;{classOne:cone,classTwo:ctwo}&amp;quot;&amp;gt;ngClass Paragraph&amp;lt;/p&amp;gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;styles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`.classOne{color:white}&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;             .classTwo{background-color:black}`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Angular 2 Tutorials&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cone&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ctwo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;angular2tutorials.component.ts dosyamızda template kısmı içerisinde bir tag’i tanımladık ve bu paragraph içerisinde &lt;strong&gt;ngClass Paragraph&lt;/strong&gt; yazsın dedik. p tag’inde özellik 
-olarak &lt;strong&gt;&lt;em&gt;ngClass&lt;/em&gt;&lt;/strong&gt; kullandık ve ngClass aslında bizim HTML’den bildiğimiz class attribute’nu yönetmek için geliştirilmiş bir özellik ve class attribute’u da bildiğimiz 
-CSS özelliğinden geiyor. Burada da ngClass atama yapabilmek için öncelikle selector gibi, template gibi &lt;strong&gt;&lt;em&gt;styles&lt;/em&gt;&lt;/strong&gt; özelliğinin tanımınınn yapılması gerekiyor.&lt;/p&gt;
-
-&lt;p&gt;styles özelliği içerisinde iki adet class tanımı yaptık. CSS dosyalarında ifadenin “.” ile başlaması bildiğiniz class tanımı yapıldığına işaret eder ve “.” ile başlayan 
-classOne ve classTwo’yu yazmamız ile birlikte iki adet class özelliğini kayda geçirmiş olduk. classOne atandığını elementin rengini beyaz yaparken, classTwo arka plan rengini
-siyah yapmaktadır.&lt;/p&gt;
-
-&lt;p&gt;ngClass özelliğine geri dönersek ngClass’a atanan değer içerisinde classOne:cone ifadesi ile classOne’ın aktif olup olmamasına cone değişkeninin değeri karar verecek diyoruz.
-Aynı durum classTwo için de geçerli.&lt;/p&gt;
-
-&lt;p&gt;Angular2Tutorials class’ı içerisinde cone ve ctwo’ya true değerleri atalı. Bu iki CSS class’ının da aktif olacağı anlamına geliyor.&lt;/p&gt;
-
-&lt;p&gt;Şimdi anasayfamızı kontrol edelim:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson9/1.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson9/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Gördüğünüz gibi elementin style’ı çalışır vaziyette.&lt;/p&gt;
-
-&lt;p&gt;Şimdi bir butonumuz olsun ve bu buton tıklandığında yukarıdaki p tag’inin içindeki elementin style’ını değiştirsin. angular2tutorials.component.ts dosyamızı şu şekilde 
-güncelleyelim:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;@Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2Tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&amp;lt;h2&amp;gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;                &amp;lt;p [ngClass]=&amp;quot;{classOne:cone,classTwo:ctwo}&amp;quot;&amp;gt;ngClass Paragraph&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;                &amp;lt;button (click)=toggle()&amp;gt;Toggle&amp;lt;/button&amp;gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;styles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`.classOne{color:white}&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;             .classTwo{background-color:black}`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Angular 2 Tutorials&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cone&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ctwo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;toggle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cone&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ctwo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ctwo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Template özelliğimizin içerisinde bir button tanımladık ve click özelliğine &lt;strong&gt;&lt;em&gt;toggle()&lt;/em&gt;&lt;/strong&gt; isminde bir metot atandık yani butona tıklandığından toggle metodu çağırılacak.
-Class içerisinde de toggle metodumuzu tanımladık ve bu metodun işlevi cone ve ctwo değişkenlerinin değerini tersine çevirmektir.&lt;/p&gt;
-
-&lt;p&gt;Şimdi sayfamızı kontrol edelim:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson9/2.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson9/2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Toggle butonumuz sayfamızda yerini aldı, şimdi butona tıklıyorum:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson9/3.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson9/3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Gördüğünüz gibi p tag’inin style özellikleri devre dışı kaldı.&lt;/p&gt;
-
-&lt;p&gt;Web sayfamızdaki elementlerimize istersek class özelliği ile istersek style özelliği ile şekil verebiliyoruz. Angular içerisinde de ngClass attribute’nun yanında ngStyle
-attribute’unu da kullanabiliriz. Şimdi ngClass nasıl kullanılır ona bakalım, kodumuzu şu şekilde güncelleyelim:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;@Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2Tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&amp;lt;h2&amp;gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;                &amp;lt;p [ngClass]=&amp;quot;{classOne:cone,classTwo:ctwo}&amp;quot;&amp;gt;ngClass Paragraph&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;                &amp;lt;button (click)=toggle()&amp;gt;Toggle&amp;lt;/button&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;                &amp;lt;p [ngStyle]=&amp;quot;{&amp;#39;font-style&amp;#39;:style,&amp;#39;font-size&amp;#39;:size}&amp;quot;&amp;gt;ngStyle Paragraph&amp;lt;/p&amp;gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;styles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`.classOne{color:white}&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;             .classTwo{background-color:black}`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Angular 2 Tutorials&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cone&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ctwo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;italic&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;30px&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;toggle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cone&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ctwo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ctwo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Kodumuz içerisinde template özelliği içerisinde yeni bir p tag’i tanımladık ve bu tag içerisinde HTML’den tanıdığımız style özelliğini yönetmek için geliştirilmiş &lt;strong&gt;&lt;em&gt;ngStyle&lt;/em&gt;&lt;/strong&gt;
-özelliğini kullandık. Angular2Tutorials sınıfı içerisinde değeri &lt;strong&gt;&lt;em&gt;italic&lt;/em&gt;&lt;/strong&gt; olan style değişkeni ve değeri &lt;strong&gt;&lt;em&gt;30px&lt;/em&gt;&lt;/strong&gt; olan size değişkeni tanımladık.ngStyle özelliğimize 
-atanan değer içerisinde de HTML’den tanıdığımız &lt;strong&gt;&lt;em&gt;font-style&lt;/em&gt;&lt;/strong&gt; ve &lt;strong&gt;&lt;em&gt;font-size&lt;/em&gt;&lt;/strong&gt; özelliklerini kullandık. font-style özellliğine Angular2Tutorials sınıfı içerisinde tanımlı
-style değişkenini atadık ve font-size özelliğine de size değişkenini atadık.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson9/4.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson9/4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Sayfamıza gittiğimiz zaman yeni p tag’imizi görüyoruz ve öğeyi incelediğimizde style özelliğine bizim değerlerimizin atanmış olduğunu görüyoruz.&lt;/p&gt;
-
-&lt;p&gt;Bu yazıda anlatacaklarım da bu kadar arkadaşlar. Attribute Directives konusunu da böylece öğrenmiş olduk. Gelecek yazıda görüşmek üzere.&lt;/p&gt;
-
-&lt;p&gt;Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-
-</description>
-        <pubDate>Sat, 09 Sep 2017 20:40:21 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2017/angular-2-attribute-directive/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/angular-2-attribute-directive/</guid>
-        
-        <category>angular 2 web service</category>
-        
-        <category>angular 2 rest get</category>
-        
-        <category>angular 2 rest post</category>
-        
-        <category>angular 2 rest</category>
-        
-        <category>angular 2 calling web service</category>
-        
-        <category>angular 2 giriş</category>
-        
-        <category>angular 2 tutorials</category>
-        
-        <category>angular 2 hello world</category>
-        
-        <category>angular 2 dersleri</category>
-        
-        <category>angular 2 kaynak</category>
-        
-        <category>angular 2 türkçe kaynak</category>
-        
-        <category>angular 2 türkçe dersleri</category>
-        
-        <category>angular 2 ngIf</category>
-        
-        <category>angular 2 ngSwitch</category>
-        
-        <category>angular 2 ngSwitchWhen</category>
-        
-        <category>angular 2 ngSwitchDefault</category>
-        
-        <category>angular 2 ngFor</category>
-        
-        <category>angular 2 Structural Directives</category>
-        
-        <category>angular 2 Attribute Directives</category>
-        
-        <category>angular 2 ngClass</category>
-        
-        <category>angular 2 ngStyle</category>
-        
-        <category>angular ngClass ngStyle</category>
         
         
       </item>
