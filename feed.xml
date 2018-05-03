@@ -5,9 +5,239 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 01 Apr 2018 17:39:19 +0300</pubDate>
-    <lastBuildDate>Sun, 01 Apr 2018 17:39:19 +0300</lastBuildDate>
+    <pubDate>Thu, 03 May 2018 16:51:42 +0300</pubDate>
+    <lastBuildDate>Thu, 03 May 2018 16:51:42 +0300</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
+    
+      <item>
+        <title>Spring Framework İçerisinde Yerelleştirme (Internalization) Örneği</title>
+        <description>&lt;p&gt;Merhabalar arkadaşlar.&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda sizlere Spring Framework içerisinde yerelleştirme (Internalization) konusunu örnekleyeceğim.&lt;/p&gt;
+
+&lt;p&gt;Bu yazıdaki kodlar aklıma geldikçe üzerine eklemeler yaparak halen geliştirmekte olduğum MemberRestAPI projesinde yer almaktadır. Kodlara şuaradan ulaşabilirsiniz:
+&lt;a href=&quot;https://github.com/ilkgunel/MemberRestAPIProject&quot;&gt;https://github.com/ilkgunel/MemberRestAPIProject&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Yerelleştirme konusu basit hali ile kullanıcılara bir takım mesajların kullanıcıların dillerinde gösterilmesi mevzusudur. Biz de yazımız içerisinde Rest API üzerinde gelen dil parametresine göre mesaj dönümünü göreceğiz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;ApplicationCofig.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.ilkaygunel.application&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.Locale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.context.support.ResourceBundleMessageSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.stereotype.Component&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Component&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ApplicationConfig&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ResourceBundleMessageSource&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;messageSourceInstance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getValueOfProperty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;propertyName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;localeValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+		&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;messageSourceInstance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;messageSourceInstance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ResourceBundleMessageSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;messageSourceInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setBasenames&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;messageTexts&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;messageSourceInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setDefaultEncoding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;UTF-8&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;messageSourceInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;propertyName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Locale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;localeValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;ApplicationConfig sınıfımız gelen dil parametresine ilgili mesajı dönecek olan metodu barındıran sınıftır.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Sınıfımız diğer sınıflaramız içerisinde çağırılıp kullanbilmek için ilk olarak &lt;strong&gt;&lt;em&gt;@Componenet&lt;/em&gt;&lt;/strong&gt; notasyonu ile işaretlendi.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Sınıfımız içerisinde her mesaj getiriminde yeniden oluşturulmasın, bir tane oluşturulup bellekte kalsın diyerek static bir &lt;strong&gt;&lt;em&gt;ResourceBundleMessageSource&lt;/em&gt;&lt;/strong&gt; nesnesi tanımlı.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script async=&quot;&quot; src=&quot;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;ins class=&quot;adsbygoogle&quot; style=&quot;display:block&quot; data-ad-format=&quot;fluid&quot; data-ad-layout-key=&quot;-fb+5w+4e-db+86&quot; data-ad-client=&quot;ca-pub-0980023289791742&quot; data-ad-slot=&quot;8632723594&quot;&gt;&lt;/ins&gt;
+&lt;script&gt;
+     (adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;getValueOfProperty(…) metodu kendisine verilen anahtar bilgisine ait mesajı kendisine gelen dil parametresine göre dönecek metottur. İçerisinde eğer messageSourceInstance o an için oluşturulmamış durumda ise  ResourceBundleMessageSource sınıfından bir nesne oluşturuyor. Bu nesneye &lt;strong&gt;&lt;em&gt;setBasenames()&lt;/em&gt;&lt;/strong&gt; metodu ile sonu en ya da tr olarak biten dosyalardaki prefix kelimeyi atıyoruz. Bizim örneğimizde Türkçe ve İngilizce mesajları tutan dosyalarımızın isimleri messageTexts_tr.properties ve messageTexts_en.properties şeklinde olduğu için setBaseNames metoduna messageTexts değerini veriyoruz. Encoding değerini de atadıktan sonra nesnemiz hazır hale geliyor.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Son adımda ResourceBundleMessageSource sınıfındaki &lt;strong&gt;&lt;em&gt;getMessage(…)&lt;/em&gt;&lt;/strong&gt; metoduna ilgili anahtar kelimeyi (propertyName) ve dil parametresini geçirerek mesajı bize döndürüyor.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;MemberSaveService.java&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi MemberSaveService sınıfı içerisindeki addOneMember(…) metodu ile yerelleştirme işlemini örneklemiş olacağız. Metot şu şekilde:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MemberOperationPojo&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;addOneMember&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Member&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;role&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Logger&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LOGGER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;MemberOperationPojo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;memberOperationPojo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MemberOperationPojo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;LOGGER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Level&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;INFO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;applicationConfig&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getValueOfProperty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;role&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;_memberAddingMethod&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMemberLanguageCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setPassword&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getHashedPassword&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getPassword&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setEnabled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;addMemberRolesObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;role&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;addActivationToken&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;memberRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;mailUtil&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sendActivationMail&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getEmail&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getActivationToken&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;memberOperationPojo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;applicationConfig&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getValueOfProperty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;role&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;_memberAddingSuccessfull&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMemberLanguageCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
+
+            &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Member&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;memberList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;memberList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+            &lt;span class=&quot;n&quot;&gt;memberOperationPojo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setMemberList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;memberList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;LOGGER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Level&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;INFO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;applicationConfig&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getValueOfProperty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;role&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;_memberAddingSuccessfull&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMemberLanguageCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;LOGGER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Level&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;SEVERE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;applicationConfig&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getValueOfProperty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;role&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;_memberAddingFaled&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;member&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMemberLanguageCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;memberOperationPojo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setErrorCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ErrorCodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ERROR_10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getErrorCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;memberOperationPojo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;memberOperationPojo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;addOneMember(…) metodumuz içerisinde ilk olarak loglama işlemine dikkat edelim.INFO seviyesindeki loglama sırasında neyin loglanacağı  &lt;strong&gt;&lt;em&gt;applicationConfig.getValueOfProperty(role + “_memberAddingMethod”, member.getMemberLanguageCode())&lt;/em&gt;&lt;/strong&gt; ifadesi ile az önce ApplicationConfig sınıfı içerisinde gördüğümüz getValueOfProperty(…) metodu ile belirleniyor. Anahtar olarak &lt;strong&gt;&lt;em&gt;role + “_memberAddingMethod”&lt;/em&gt;&lt;/strong&gt; ifadesi geçiriliyor. role ifadesi burada ROLE_USER ya da ROLE_ADMIN olacaktır. member.getMemberLanguageCode() ifadesi ile de gelen dil parametresini geçiriyoruz.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;memberOperationPojo.setResult(…) ifadesi ile de dönülecek API response’unda yer alacak mesaj bilgisi gelen dile göre çekilip koyulacak.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;messageTexts_en.properties&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;İngilizce karşılıkları tutan dosyada bu yazı için kullanacağımız metin şu şekilde:&lt;/p&gt;
+
+&lt;p&gt;ROLE_USER_memberAddingMethod=One user member adding method is running!&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;messageTexts_tr.properties&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Türkçe karşılıkları tutan dosyada da anahtara karşılık gelen değer şöyle:&lt;/p&gt;
+
+&lt;p&gt;ROLE_USER_memberAddingMethod=Tekil kullanıcı üye ekleme metodu çalışıyor!&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Ekran Görüntüleri&lt;/strong&gt;
+memberLanguageCode parametresini içeren JSON datasını ilgili adres’e POST ediyorum.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/springLocalization/springLocalization1.png&quot;&gt;
+&lt;img src=&quot;/images/springLocalization/springLocalization1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Ben memberLanguageCode olarak tr gönderdiğim için dönen JSON datasının result alanında yukarıda gördüğümüz Türkçe mesaj metni dönüyor.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/springLocalization/springLocalization2.png&quot;&gt;
+&lt;img src=&quot;/images/springLocalization/springLocalization2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi memberLanguageCode olarak en değerini gönderiyorum:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/springLocalization/springLocalization3.png&quot;&gt;
+&lt;img src=&quot;/images/springLocalization/springLocalization3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Dönen JSON datasının result alanında İngilizce metin dönüyor:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/springLocalization/springLocalization4.png&quot;&gt;
+&lt;img src=&quot;/images/springLocalization/springLocalization4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi bir de log dosyalarımıza bakalım.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/springLocalization/springLocalization5.png&quot;&gt;
+&lt;img src=&quot;/images/springLocalization/springLocalization5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Log dosyamızda 3:39:54’de atılan log Türkçe metin içerirken 3:44:57’de atılan log İngilizce metin içermektedir.&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda anlatacaklarım bu kadar arkadaşlar. Başka bir yazıda görüşmek üzere.&lt;/p&gt;
+
+&lt;p&gt;Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
+</description>
+        <pubDate>Sat, 31 Mar 2018 17:54:00 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2018/localization-in-spring-framework/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2018/localization-in-spring-framework/</guid>
+        
+        <category>angular 2 web service</category>
+        
+        <category>angular 2 rest get</category>
+        
+        <category>angular 2 rest post</category>
+        
+        <category>angular 2 rest</category>
+        
+        <category>angular 2 calling web service</category>
+        
+        <category>angular 2 giriş</category>
+        
+        <category>angular 2 tutorials</category>
+        
+        <category>angular 2 hello world</category>
+        
+        <category>angular 2 dersleri</category>
+        
+        <category>angular 2 kaynak</category>
+        
+        <category>angular 2 türkçe kaynak</category>
+        
+        <category>angular 2 türkçe dersleri</category>
+        
+        <category>angular 2 ngIf</category>
+        
+        <category>angular 2 ngSwitch</category>
+        
+        <category>angular 2 ngSwitchWhen</category>
+        
+        <category>angular 2 ngSwitchDefault</category>
+        
+        <category>angular 2 ngFor</category>
+        
+        <category>angular 2 Structural Directives</category>
+        
+        <category>angular 2 Attribute Directives</category>
+        
+        <category>angular 2 ngClass</category>
+        
+        <category>angular 2 ngStyle</category>
+        
+        <category>angular ngClass ngStyle</category>
+        
+        <category>eclipse</category>
+        
+        <category>eclipse auto format on save</category>
+        
+        <category>eclipse format on save</category>
+        
+        <category>kotlin introduction</category>
+        
+        <category>kotlin</category>
+        
+        <category>kotlin hello world</category>
+        
+        <category>kotlin tutorials</category>
+        
+        <category>kotlin tutorial</category>
+        
+        <category>kotlin intellij idea</category>
+        
+        <category>kotlin intellij idea jetbrains</category>
+        
+        <category>kotlin jetbrains</category>
+        
+        <category>spring localization</category>
+        
+        <category>spring yerelleştirme</category>
+        
+        <category>spring language based messagegin</category>
+        
+        <category>spring messages according to language</category>
+        
+        
+      </item>
     
       <item>
         <title>Kotlin Yazıları 01- Giriş ve Hello World</title>
@@ -1691,172 +1921,6 @@ de user’ın rolünü tanımlıyoruz. Biz biri ADMIN biri de USER olacak şekil
         <category>spring restful örneği</category>
         
         <category>spring restful get örneği</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Spring AOP 1 - AOP Nedir? Basitçe Spring İle AOP Nasıl Uygulanır? </title>
-        <description>&lt;p&gt;Merhabalar. Bu ve gelecek bir kaç yazıda Spring Framework’ün AOP uygulama mantığını öğreniyor olacağız.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;AOP Nedir?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Geliştirdiğimiz uygulamalarımız içerisinde bir çok layer olabilir ve bu layer’lar da kendi içlerinde modüllere sahip olabilir. Projemiz içerisinde hedeflediğimiz belli bir 
-işlevi yerine getiren fonksiyonalitelere de &lt;strong&gt;&lt;em&gt;concern&lt;/em&gt;&lt;/strong&gt; adını veriyoruz. Proje içerisinde bu concern’lerden birisine farklı farklı layer’larda ihtiyaç duyuluyor olabilir.
-Örneğin yetkilendirme mekanizması proje içerisinde bir çok farklı nokta için başvurulan bir mekanizma olabilir. Keza yine loglama mekanizması da hemen hemen bütün concern’lerin
-kullanma ihtiyacı duyduğu bir mekanizma (concern). İşte bu şekilde bir çok farklı noktada kullanımına ihtiyaç duyulan concern’lere &lt;strong&gt;&lt;em&gt;Cross-Cutting Concern&lt;/em&gt;&lt;/strong&gt; adı verilir.&lt;/p&gt;
-
-&lt;p&gt;AOP yani &lt;strong&gt;&lt;em&gt;Aspect-Oriented Programming&lt;/em&gt;&lt;/strong&gt; terimi ise işte bu Cross-Cutting Concern’lerin implementasyonunu en iyi seviyede yapmayı amaçlayan bir programlama yaklaşımıdır.
-Bir projede Cross-Cutting Concern’ler duplicate kodun çokça yer almasına sebep olabilecek yapılardır. AOP ile bu kod tekrarının minimum seviyeye çekilmesi hedeflenir.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;AOP Concepts&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;AOP yaklaşımının kendine ait bir takım kavramları (Concepts) vardır. AOP’u iyi anlayabilmek için bu kavramların da anlaşılması gerekir.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Joinpoints: Joinpoint aslında programın çalışması sırasında meydana gelen tüm olayları niteler. Örneğin method çağırılması, hata fırlatılması Joinpoint’e birer örnektir.&lt;/li&gt;
-  &lt;li&gt;Advice: Belirli bir Joinpoint’de alınması gereken aksiyonu tanımlayan kelime bizim için Advice’dır. Birkaç çeşit Advice yapısı bulunur, örneğin &lt;strong&gt;&lt;em&gt;before&lt;/em&gt;&lt;/strong&gt; advice’ı 
-ilgili Joinpoint çalıştırılmadan önce devreye girer, &lt;strong&gt;&lt;em&gt;after&lt;/em&gt;&lt;/strong&gt; advice’ı ise çalıştırıldıktan sonra devreye girer.&lt;/li&gt;
-  &lt;li&gt;Pointcuts: Az önce bahsettiğimiz Joinpoint’lerin bir kümesidir. Kullanım amacı ise bir Advice’ın hangi Joinpoint için çalıştırılacağının belirlenmesidir. Yani bir bakıma
-advice ne zaman çalışsın sorusuna cevap verme görevi vardır.&lt;/li&gt;
-  &lt;li&gt;Aspects: Aspect dediğimiz kavram advice ve Pointcuts’ı içerisinde barındıran bir sınıftır.&lt;/li&gt;
-  &lt;li&gt;Weaving: En uygun noktada aspect’lerin uygulama koduna eklenmesi işlemine Weaving denir.&lt;/li&gt;
-  &lt;li&gt;Target: Bir AOP işlemi ile modifiye edilen ve çalışma akışı bilgisine sahip olan nesnelere Target ismi verilir.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;AOP İle Hello World&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Şimdi AOP kullanarak bir Hello World uygulaması yapacağız.&lt;/p&gt;
-
-&lt;p&gt;Elimizde içerisinde konsola World yazdıran writeMessage metodunu barındıran MessageWriter sınıfımız olsun ve bizim Case’miz de runtime sırasında World olan bu mesajı 
-Hello World’a çevirmek olsun.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.ilkaygunel.aopexamples&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MessageWriter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;writeMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;World&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;writeMessage metodu konsola &lt;strong&gt;&lt;em&gt;World&lt;/em&gt;&lt;/strong&gt; yazdıracak olsa da biz AOP ile konsola yazdırılan metnin Hello World olmasını sağlayacağız.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.ilkaygunel.aopexamples&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.aopalliance.intercept.MethodInterceptor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.aopalliance.intercept.MethodInvocation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MessageDecorator&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MethodInterceptor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;invoke&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MethodInvocation&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;invocation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Throwable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Hello &amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;retVal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;invocation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;proceed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;!&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;retVal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;MethodInterceptor interface’ı Spring AOP içerisinde advice implementasyonu için kullanılan standarttır arkadaşlar. İçerisinde implement edilmek üzere bir invoke metodu yer 
-alır ve Joinpoint’de buradaki invoke çağırılır. MessageDecorator sınıfı bizim için bu noktada advice olacaktır çünkü bizim için belirli noktada alınması gereken aksiyon bu 
-sınıfta yer almaktadır.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.ilkaygunel.aopexamples&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.aop.framework.ProxyFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloWorldAOPExample&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;MessageWriter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;target&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MessageWriter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		
-		&lt;span class=&quot;n&quot;&gt;ProxyFactory&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ProxyFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;pf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addAdvice&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MessageDecorator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;pf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setTarget&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		
-		&lt;span class=&quot;n&quot;&gt;MessageWriter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;proxy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MessageWriter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getProxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;writeMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		
-		&lt;span class=&quot;n&quot;&gt;proxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;writeMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;HelloWorldAOPExample sınıfımız içerisinde maim metodumuz yer alıyor. Main metodu içerisindeki target nesnesi klasik nesne edinme yöntemi ile elde ediliyor. Kodun devam kısmında
-ProxyFactory sınıfından bir nesne elde ediyoruz ve &lt;strong&gt;&lt;em&gt;addAdvice()&lt;/em&gt;&lt;/strong&gt; metodu ile az önce advice’mız olacağından bahsettiğimiz sınıf advice olarak ekliyoruz. 
-addAdvice metoduna parametre olarak MessageDecorator sınıfından bir nesneyi geçirerek advice ekleme işlemimizi tamamlıyoruz. Akabinde pf nesnesi üzerinden setTarget metodunu 
-çağırarak az önce klasik şekilde ürettiğimiz MessageWriter tipinde nesne olan target nesnesini setTarget metoduna parametre olarak veriyoruz. ProxyFactory sınıfından üretilen
-bir nesne için target zorunlu bir nesnedir arkadaşlar. Eğer setTarget metodunu kullanmadan uygulamayı çalıştırırsak zorunlu alan doldurulmadığı gerekçesi ile Exception 
-alırız.&lt;/p&gt;
-
-&lt;p&gt;pf nesnesi üzerinden getProxy metodunu çağırarak ve casting işlemine tabi tutarak MessageWriter nesnesi elde ediyoruz.&lt;/p&gt;
-
-&lt;p&gt;Önce target nesnesi üzerinden writeMessage metodunu çağırıyoruz ardından pf.getProxy() üzerinden elde ettiğimiz MessageWriter tipindeki proxy nesnesi üzerinden writeMessage()
-metodunu çağırıyoruz.&lt;/p&gt;
-
-&lt;p&gt;Konsol çıktısı şu şekilde olmakta:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/springAop/1.png&quot;&gt;
-&lt;img src=&quot;/images/springAop/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Şimdi burada bir nokta dikkatimizi vermemiz gerekiyor. Advice’ın tanımını yaptığımız nokta örnek olarak before, after gibi örnekler vermiştirk. Fakat burada kullandığımız advice
-için before, after gibi bir şeyi ne tanımladık ne de ona değindik.&lt;/p&gt;
-
-&lt;p&gt;Eğer biz MethodInterceptor’ı implement edip advise olarak o sınıfı geçirirsek bu durumda default olarak bizim iş yapan metodumuz çağırılmadan önce 
-(bizim örneğimizde writeMessage metodu) advise olarak verilen sınıf nesnesi içindeki invoke çağırılır ve işlem yapılır. Bizim örneğimizde de invoke metodu önce çağırılıp
-konsola Hello yazdırılıyor, invocation.proceed() ile writeMessage metodu çağırılıp World yazdırılıyor ve son olarak konsola ! yazdırılıp işlem tamamlanyor.&lt;/p&gt;
-
-&lt;p&gt;Bu yazıda anlatacağım bu kadar arkadaşlar. AOP’a bir giriş yapıp Spring ile basitçe bir örnek yaptık ve bizim iş metodumuz koşulmadan önce başka bir metodun devreye girmesi
-durumunu görmüş olduk. Gelecek yazıda Spring’teki Advice Tipleri konusuna değineceğiz.&lt;/p&gt;
-
-&lt;p&gt;Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-</description>
-        <pubDate>Fri, 29 Sep 2017 20:30:21 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2017/spring-aop-introduction/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2017/spring-aop-introduction/</guid>
-        
-        <category>spring framework</category>
-        
-        <category>spring framework dersleri</category>
-        
-        <category>spring framework giriş</category>
-        
-        <category>spring framework tutorial</category>
-        
-        <category>spring framework türkçe kaynak</category>
-        
-        <category>spring framework hello world örneği</category>
-        
-        <category>spring framework hello world example</category>
-        
-        <category>spring framework hello world tutorial</category>
-        
-        <category>spring framework öğren</category>
-        
-        <category>spring framework türkçe</category>
-        
-        <category>spring framework nedir</category>
-        
-        <category>spring framework nasıl kullanılır</category>
-        
-        <category>spring inversion of control nedir?</category>
-        
-        <category>spring dependency injection nedir?</category>
-        
-        <category>spring ioc</category>
-        
-        <category>spring di</category>
-        
-        <category>spring setter injection</category>
-        
-        <category>spring constructor injection</category>
-        
-        <category>spring aop</category>
-        
-        <category>spring aop hello world</category>
-        
-        <category>aop nedir?</category>
         
         
       </item>
