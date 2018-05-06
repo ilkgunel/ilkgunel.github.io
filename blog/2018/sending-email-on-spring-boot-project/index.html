@@ -22,7 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Spring Boot Tabanlı Projede Mail Gönderimi</title>
-    <meta name="description" content="UPCOMING ARTICLE">
+    <meta name="description" content="Merhabalar arkadaşlar.">
 
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2018/sending-email-on-spring-boot-project/">
@@ -125,7 +125,42 @@
     </header>
 
     <div class="post-content">
-      <p><strong>UPCOMING ARTICLE</strong></p>
+      <p>Merhabalar arkadaşlar.</p>
+
+<p>Bu yazıda Spring Boot tabanlı bir projede mail gönderimi işleminin nasıl yapılacağını anlatacağım. Bu yazı için kullandığımız kaynak kodlara <a href="https://github.com/ilkgunel/MemberRestAPIProject">https://github.com/ilkgunel/MemberRestAPIProject</a> adresindeki projeden ulaşabilirsiniz.</p>
+
+<p>İlk olarak pom.xml dosyamıza Spring Boot’un mail gönderme ile ilgili olan kütüphanesini ekleyelim.</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="nt">&lt;dependency&gt;</span>
+	<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+	<span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-mail<span class="nt">&lt;/artifactId&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span></code></pre></figure>
+
+<p>Akabinde application.properties dosyamızda mail gönderimi sırasında kullanılacak sunucu bilgileri tanımlarını yapalım.</p>
+
+<p><strong>application.properties</strong></p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text"><span></span>#Mail Sending Properties
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=ilkgunel93@gmail.com
+spring.mail.password=password of e-mail account
+spring.mail.protocol=smtp
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+spring.mail.debug=true </code></pre></figure>
+
+<p>application.properties dosyası içerisinde</p>
+
+<ul>
+  <li>spring.mail.host özelliği ile mail gönderimi için kullanılacak host tanımı yapılıyor. Biz Gmail kullanacağımız için mail host’u olarak smtp.gmail.com’u kullanacağız.</li>
+  <li>spring.mail.port özelliği ile mail gönderimi için port tanımı yapıyoruz. Gmail için bu değer 587’dir.</li>
+  <li>spring.mail.username özelliği ile mail gönderimi için kullanacağımız e-posta adresini tanımlıyoruz. Bu örnekte mail ilkgunel93@gmail.com adresinden gelecek.</li>
+  <li>spring.mail.password özelliği ile e-posta adresinin şifresini tanımlıyoruz. Burada Gmail hesabınızın şifresini de girebilirsiniz ya da bir uyglama şifresi oluşturup onu kullanabilirsiniz.</li>
+  <li>spring.mail.protocol özelliği ile mail gönderim protokolünü tanımlıyoruz. Bizim için bu değer SMTP’dir.</li>
+  <li>spring.mail.properties.mail.smtp.auth özelliğini true değeri ile kullanarak yetkilendirme akışına gireceğini söylüyoruz.</li>
+  <li>spring.mail.properties.mail.smtp.starttls.enable özelliğine true değer atayarak TLS protokolünün de kullanılacağını söylüyoruz.</li>
+</ul>
 
 <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
@@ -133,6 +168,102 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script></p>
+
+<p><a href="/images/springLocalization/springLocalization5.png">
+<img src="/images/springLocalization/springLocalization5.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p><strong>MailUtil.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.util</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.core.io.FileSystemResource</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.mail.SimpleMailMessage</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.mail.javamail.JavaMailSender</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.mail.javamail.MimeMessageHelper</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Component</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.mail.MessagingException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.mail.internet.MimeMessage</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.logging.Level</span><span class="o">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MailUtil</span> <span class="o">{</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="n">JavaMailSender</span> <span class="n">mailSender</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="n">LoggingUtil</span> <span class="n">loggingUtil</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="n">SimpleMailMessage</span> <span class="nf">templateForSimpleMessage</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="n">SimpleMailMessage</span> <span class="n">simpleMailMessage</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SimpleMailMessage</span><span class="o">();</span>
+        <span class="n">simpleMailMessage</span><span class="o">.</span><span class="na">setSubject</span><span class="o">(</span><span class="s">&quot;Hesabınızı Aktifleştirin&quot;</span><span class="o">);</span>
+        <span class="n">simpleMailMessage</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">&quot;Hesabınızın aktifleştirilmesi için bu linke tıklayınız: \nhttp://localhost:8080/MemberRestAPIProject/activateMemberWebServiceEndpoint/activateMember?activationToken=%s/&quot;</span><span class="o">);</span>
+
+        <span class="k">return</span> <span class="n">simpleMailMessage</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sendActivationMail</span><span class="o">(</span><span class="n">String</span> <span class="n">emailAddress</span><span class="o">,</span> <span class="n">String</span> <span class="n">activationToken</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">SimpleMailMessage</span> <span class="n">simpleMailMessage</span> <span class="o">=</span> <span class="n">templateForSimpleMessage</span><span class="o">();</span>
+        <span class="n">MimeMessage</span> <span class="n">mimeMessage</span> <span class="o">=</span> <span class="n">mailSender</span><span class="o">.</span><span class="na">createMimeMessage</span><span class="o">();</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">MimeMessageHelper</span> <span class="n">mimeMessageHelper</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MimeMessageHelper</span><span class="o">(</span><span class="n">mimeMessage</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+            <span class="n">mimeMessageHelper</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">simpleMailMessage</span><span class="o">.</span><span class="na">getText</span><span class="o">(),</span> <span class="n">activationToken</span><span class="o">),</span> <span class="kc">true</span><span class="o">);</span>
+            <span class="n">mimeMessageHelper</span><span class="o">.</span><span class="na">setTo</span><span class="o">(</span><span class="n">emailAddress</span><span class="o">);</span>
+            <span class="n">mimeMessage</span><span class="o">.</span><span class="na">setSubject</span><span class="o">(</span><span class="n">simpleMailMessage</span><span class="o">.</span><span class="na">getSubject</span><span class="o">());</span>
+
+            <span class="n">FileSystemResource</span> <span class="n">file</span>
+                    <span class="o">=</span> <span class="k">new</span> <span class="n">FileSystemResource</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;/home/ilkaygunel/Desktop/notlar.txt&quot;</span><span class="o">));</span>
+            <span class="n">mimeMessageHelper</span><span class="o">.</span><span class="na">addAttachment</span><span class="o">(</span><span class="s">&quot;Notes&quot;</span><span class="o">,</span> <span class="n">file</span><span class="o">);</span>
+
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">MessagingException</span> <span class="n">messagingException</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">loggingUtil</span><span class="o">.</span><span class="na">getLoggerForEmailSending</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">getClass</span><span class="o">()).</span><span class="na">log</span><span class="o">(</span><span class="n">Level</span><span class="o">.</span><span class="na">SEVERE</span><span class="o">,</span> <span class="n">messagingException</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+
+        <span class="o">}</span>
+        <span class="n">mailSender</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">mimeMessage</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span></code></pre></figure>
+
+<p>MailUtil sınıfımız içerisinde @Autowired notasyonu Spring tarafından referans atanacak olan bir JavaMailSender nesnesi tanımlıyoruz. Ayrıca mail gönderimi sırasında oluşabilecek hataların loglanması için bir de LoggingUtil nesnesini AutoWired ile doldurduk.</p>
+
+<p>templateForSimpleMessage() metodu ile bir template hazırlıyoruz ve SimpleMailMessage nesnesi oluşturup bu nesnenin setSubject metodu mail konusunu, setText metodu ile de mail’in gövdesini hazırlıyoruz. Mail’in text kısmında kullanıcıya hesabını aktifleştirmesi için bir activation link gönderiliyor. Activation link’in son kısmında bir activation token yer alıyor. Bu activation token template içerisinde parametrik olarak %s ile tanımlı ve değerin linke geçirilmesi sendActivationMail içerisinde yapılıyor.</p>
+
+<p>sendActivationMail() metodu içerisinde templateForSimpleMessage() metodunu çağırarak template’i SimpleMailMessage nesnesine atıyoruz. Bizim örneğimizde bir de attachemtn olacağı için burada MimeMessage üzerinden gideceğiz. try bloğu içerisinde az önce oluşturduğumuz MimeMessage nesnesini MimeMessageHelper sınıfının yapılandırıcısına parametre olarak geçirip bir MimeMessageHelper nesnesi elde ediyoruz. MimeMessageHelper nesnesinin setText metoduna template’den alınan text,  activationToken alanı değeri ile değiştirilerek gönderiliyor. setTo metodu ile mail’in kime gideceği, setSubject metodu ile de mail başlığı kaydediliyor.</p>
+
+<p>Son aşamada ise mail’e eklemek istediğimiz dosyayının path bilgisini File sınıfı yapılandırıcısına vererek bir File nesnesi elde ediyoruz ve File nesnesini de FileSystemResource sınıfı yapılandırıcısına vererek bir FileSystemResource nesnesi elde ediyoruz. Elde ettiğimiz bu FileSystemResource nesnesini de mimeMessageHelper nesnesinin addAttachment metoduna parametre geçirerek kaydetmiş oluyoruz.</p>
+
+<p>catch bloğu içerisinde MessagingException tipindeki hatalar loglanacak.</p>
+
+<p>sendActivationMail metodunun son adımında da mailSender üzerinden send metoduna mimeMessage nesnesini parametre olarak geçirip mail’imizi gönderiyoruz.</p>
+
+<p>Mail gönderilmesini istediğimiz herhangi bir yerde de sınıf içerisinde AutoWired ile doldurduğumuz MailUtil nesnesi üzerinden sendActivationMail(…) metoduna email adresini ve activationToken’ı parametre olarak geçirip çağırabiliriz.</p>
+
+<p><strong>Ekran Görüntüleri</strong></p>
+
+<p>Şimdi email bilgisi ilkay.gunel@kod5.org olacak şekilde bir bir üye kaydı isteği gönderiyorum.</p>
+
+<p><a href="/images/mailSendingWithSpringBoot/mailSendingWithSpringBoot1.png">
+<img src="/images/mailSendingWithSpringBoot/mailSendingWithSpringBoot1.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Bana üye kaydının başarı ile yapıldığına dair API response’u dönüyor. Mail hesabımı kontrol edeceğim şimdi:</p>
+
+<p><a href="/images/mailSendingWithSpringBoot/mailSendingWithSpringBoot2.png">
+<img src="/images/mailSendingWithSpringBoot/mailSendingWithSpringBoot2.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Az önce üye kaydı isteğinde e-posta adresi olarak girdiğim ilkay.gunel@kod5.org adresine activation mail’inin geldiğini görüyorum. Ayrıca ek kısmında notlar.txt dosyasının yer aldığını da görüyorum.</p>
+
+<p><a href="/images/mailSendingWithSpringBoot/mailSendingWithSpringBoot3.png">
+<img src="/images/mailSendingWithSpringBoot/mailSendingWithSpringBoot3.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Bu yazıda anlatacaklarım bu kadar arkadaşlar. Spring Boot alt yapısındaki bir projede nasıl mail gönderilir onu anlamış oldum. Başka bir yazıda görüşmek üzere.</p>
+
+<p>Görüşene kadar sağlıcakla kalın.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
 
     </div>
 
