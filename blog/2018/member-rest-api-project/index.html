@@ -153,9 +153,7 @@
 
 <p>Şimdi projedeki CRUD işlemlerini gerçekleştirelim. Ben bu yazı için PostMan uygulaması ile Post işlemlerini gerçekleştireceğim.</p>
 
-<ol>
-  <li>Tekil Ve Çoğul User Ve Admin Üye Kayıt İşlemi</li>
-</ol>
+<p><strong>1.Tekil Ve Çoğul User Ve Admin Üye Kayıt İşlemi</strong></p>
 
 <p>İlk olarak tekil USER rolünde bir üyenin kaydı için PostMan’in arayüzünden POST işlemi yapılacağını söyleyip adres olarak <a href="http://localhost:8080/MemberRestAPIProject/memberPostWebServiceEndPoint/saveUserMember">http://localhost:8080/MemberRestAPIProject/memberPostWebServiceEndPoint/saveUserMember</a> linkini veriyorum. Akabinde Authorization kısmından Basic Auth’u seçiyoruz ve UserName&amp;Password alanına ilkgunel93@gmail.com ve TEST 1234 bilgilerini giriyoruz.</p>
 
@@ -250,9 +248,7 @@
 <img src="/images/memberrestapiproject/8.png" style="width: 958px; height= 400px;" />
 </a></p>
 
-<ol>
-  <li>Tekil ve Çoğul Üye Güncelleme İşlemi</li>
-</ol>
+<p><strong>2.Tekil ve Çoğul Üye Güncelleme İşlemi</strong></p>
 
 <p>Üye güncelleme işlemi için <a href="http://localhost:8080/MemberRestAPIProject/memberUpdateWebServiceEndpoint/updateUserMember">http://localhost:8080/MemberRestAPIProject/memberUpdateWebServiceEndpoint/updateUserMember</a>
 <a href="http://localhost:8080/MemberRestAPIProject/memberUpdateWebServiceEndpoint/updateAdminMember">http://localhost:8080/MemberRestAPIProject/memberUpdateWebServiceEndpoint/updateAdminMember</a>
@@ -276,9 +272,7 @@ Mika Hakkinen’i updateUserMember path’ine istek gönderip Rubens Barichello 
 
 <p>Birden fazla üye güncellenmek istendiğinde de JSON’da gönderilen üye bilgileri arttıralarak işlem yapılabilir.</p>
 
-<ol>
-  <li>Member Listeleme İşlemi</li>
-</ol>
+<p><strong>3.Member Listeleme İşlemi</strong></p>
 
 <p>Browser üzerinden <a href="http://localhost:8080/MemberRestAPIProject/memberGetWebServiceEndPoint/getAllMembers">http://localhost:8080/MemberRestAPIProject/memberGetWebServiceEndPoint/getAllMembers</a> adresine gitmeye çalıştığımda bu bir GET isteği olacaktır ve bana o an kayıtlı tüm üyelerin listesini sunacaktır.</p>
 
@@ -300,11 +294,32 @@ Mika Hakkinen’i updateUserMember path’ine istek gönderip Rubens Barichello 
 <img src="/images/memberrestapiproject/12.png" style="width: 958px; height= 400px;" />
 </a></p>
 
-<ol>
-  <li>Üye Silme İşlemi</li>
-</ol>
+<p><strong>4.Üye Silme İşlemi</strong></p>
 
-<p>Üye silme işlemi</p>
+<p>Üye silme işlemi için ise <a href="http://localhost:8080/MemberRestAPIProject/memberDeleteWebServiceEndPoint/deleteUserMember">http://localhost:8080/MemberRestAPIProject/memberDeleteWebServiceEndPoint/deleteUserMember</a>
+<a href="http://localhost:8080/MemberRestAPIProject/memberDeleteWebServiceEndPoint/deleteAdminMember">http://localhost:8080/MemberRestAPIProject/memberDeleteWebServiceEndPoint/deleteAdminMember</a> adreslerini kullanıyoruz. Üye silme işleminde kayıt ve güncelleme işlemlerinden farklı olarak memberList kullanmıyoruz ve HTTP metodunu DELETE olarak gönderiyoruz fakat yine JSON array gönderiyoruz. Web service tarafı bu işlem için de liste karşılaması yapıyor. Üye silme işleminde sadece id bilgisinin gönderilmesi yeterli. Örneğin 2 id bilgisindeki USER rolündeki kullanıcıyı silmek için oldukça basit olan JSON datamız şöyle olur:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span></span><span class="p">[{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}]</span></code></pre></figure>
+
+<p>Bu isteği attığım zaman bana şu şekilde işlemin başarılı olduğuna dair bir mesaj dönüyor.</p>
+
+<p><a href="/images/memberrestapiproject/13.png">
+<img src="/images/memberrestapiproject/13.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Birden fazla üyeyi aynı anda silmek istersem de JSON datası şu şekilde olmalı:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span></span><span class="p">[</span>
+	<span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+	<span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span>
+	<span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+<span class="p">]</span></code></pre></figure>
+
+<p>Bu yazıda anlatacağım bu kadar arkadaşlar. Projenin nasıl ayağa kaldırılıp neler yapılabileceğin bahsettim. Projeye çalıştırma aşamasında sorun yaşarsanız ya da kod içerisinde anlamadığınız yerler olursa yorum kısmına yazarak bana sorabilirsiniz aradaşlar.</p>
+
+<p>Görüşene kadar sağlıcakla kalın.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
 
 
     </div>
