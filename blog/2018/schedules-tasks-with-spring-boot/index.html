@@ -22,7 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Spring Boot İle Planlanmış Görevlerin (Scheduled Tasks) Çalıştırılması</title>
-    <meta name="description" content="Merhabalar arkadaşlar. Bu yazıda size Spring Boot tabanlı bir projede planlanmış görevlerin nasıl çalıştırılacağını anlatacağım.">
+    <meta name="description" content="Merhabalar arkadaşlar. Bu yazıda size Spring Boot tabanlı bir projede planlanmış görevlerin nasıl çalıştırılacağını anlatacağım. Bu yazıda konuyu anlatmak iç...">
 
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2018/schedules-tasks-with-spring-boot/">
@@ -125,7 +125,7 @@
     </header>
 
     <div class="post-content">
-      <p>Merhabalar arkadaşlar. Bu yazıda size Spring Boot tabanlı bir projede planlanmış görevlerin nasıl çalıştırılacağını anlatacağım.</p>
+      <p>Merhabalar arkadaşlar. Bu yazıda size Spring Boot tabanlı bir projede planlanmış görevlerin nasıl çalıştırılacağını anlatacağım. Bu yazıda konuyu anlatmak için kullandığım kaynak kodlara <a href="https://github.com/ilkgunel/SchedulingTaksWithSpring">https://github.com/ilkgunel/SchedulingTaksWithSpring</a> adresinden erişebilirsiniz.</p>
 
 <p><strong>Scheduling Mekanizmasının Aktif Hale Getirilmesi</strong></p>
 
@@ -255,8 +255,49 @@
 
 <p>fixedRateDelayAndInitialDelay metodunu yine @Schedule notasyonu ile işaretliyoruz fakat bu kez 2 parametre veriyoruz. fixedRate yukarıda öğrendiğimiz şekilde 2 task arasında sabit zaman koyuyor. initialDelay parametresi uygulama başlatıldıktan kaç saniye sonra bu task’ın ilk defa çalıştırılacağını belirtiyor. Uygulama başladıktan 5 saniye sonra task ilk kez çalışacak.</p>
 
+<p>Konsol çıktımızı inceleyelim:</p>
+
 <p><a href="/images/springSchedule/springSchedule3.png">
 <img src="/images/springSchedule/springSchedule3.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Konsol çıktısından görebileceğimiz gibi uygulama ayağa kalkarken task tetiklenmedi, fakat uygulama ayağa kalktıktan 5 saniye sonra ilk task tetiklendi ve akabinde her 2 saniyede bir task tetiklenir oldu.</p>
+
+<p><strong>Using Cron Expression Scheduling</strong></p>
+
+<p>Eğer task’larımızı Cron Expression’lar ile planlamak istersek o zaman da @Scheduled notasyonuna <strong><em>cron</em></strong> parametresini geçirmemiz yeterli olacaktır. İlgili task’ın her dakika başı çalışmasını sağlayacak olan şu kod örneğine bakalım:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.tasks</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.text.SimpleDateFormat</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Date</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.scheduling.annotation.Scheduled</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Component</span><span class="o">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ScheduledTaskUsingCronExpression</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">SimpleDateFormat</span> <span class="n">dateFormat</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SimpleDateFormat</span><span class="o">(</span><span class="s">&quot;HH:mm:ss&quot;</span><span class="o">);</span>
+
+	<span class="nd">@Scheduled</span><span class="o">(</span><span class="n">cron</span> <span class="o">=</span> <span class="s">&quot;0 * * * * ?&quot;</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">scheduledTaskUsingCronExpression</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Scheduled Task Using Cron Expression Task Worked! &quot;</span> <span class="o">+</span> <span class="n">dateFormat</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="k">new</span> <span class="n">Date</span><span class="o">()));</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>scheduledTaskUsingCronExpression metodumuzu yine @Scheduled notasyonu ile işaretledik ve içerisine bu kez Cron Expression kullanacağımız için <strong><em>cron</em></strong> parametresini verdik. 0 * * * * ? şablonundaki değer ilgili task’ın her dakika başı çalışmasını sağlayan bir değerdir. Örneğin her 5 saniyede bir task’ın çalışmasını istese idik de */5 * * * * * şeklinde bir şablonu kullanabilirdik. Ya da her gün öğleden sonra 15:30’da (3:30 PM) task’ın tetiklenmesini istese idik 0 30 15 * * * şeklinde bir Cron Expression kullanabilirdik. Aşağıdaki konsol çıktılarından ilki her dakika başı çalışan Cron Expression için bir örnek iken, ikincisi her 5 saniyede bir çalışan için bir örnektir.</p>
+
+<p><a href="/images/springSchedule/springSchedule4.png">
+<img src="/images/springSchedule/springSchedule4.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p><a href="/images/springSchedule/springSchedule5.png">
+<img src="/images/springSchedule/springSchedule5.png" style="width: 958px; height= 400px;" /></a></p>
+
+<p>Bu yazıda anlatacaklarım bu kadar arkadaşlar. Spring’in Scheduling mekanizmasının 4 farklı kullanım yöntemini öğremiş olduk. Başka bir yazıda görüşmek üzere.</p>
+
+<p>Görüşene kadar sağlıcakla kalın.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
 
     </div>
 

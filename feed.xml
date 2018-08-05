@@ -5,13 +5,13 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 05 Aug 2018 14:06:25 +0300</pubDate>
-    <lastBuildDate>Sun, 05 Aug 2018 14:06:25 +0300</lastBuildDate>
+    <pubDate>Sun, 05 Aug 2018 15:27:46 +0300</pubDate>
+    <lastBuildDate>Sun, 05 Aug 2018 15:27:46 +0300</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
     
       <item>
         <title>Spring Boot İle Planlanmış Görevlerin (Scheduled Tasks) Çalıştırılması</title>
-        <description>&lt;p&gt;Merhabalar arkadaşlar. Bu yazıda size Spring Boot tabanlı bir projede planlanmış görevlerin nasıl çalıştırılacağını anlatacağım.&lt;/p&gt;
+        <description>&lt;p&gt;Merhabalar arkadaşlar. Bu yazıda size Spring Boot tabanlı bir projede planlanmış görevlerin nasıl çalıştırılacağını anlatacağım. Bu yazıda konuyu anlatmak için kullandığım kaynak kodlara &lt;a href=&quot;https://github.com/ilkgunel/SchedulingTaksWithSpring&quot;&gt;https://github.com/ilkgunel/SchedulingTaksWithSpring&lt;/a&gt; adresinden erişebilirsiniz.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Scheduling Mekanizmasının Aktif Hale Getirilmesi&lt;/strong&gt;&lt;/p&gt;
 
@@ -141,8 +141,49 @@
 
 &lt;p&gt;fixedRateDelayAndInitialDelay metodunu yine @Schedule notasyonu ile işaretliyoruz fakat bu kez 2 parametre veriyoruz. fixedRate yukarıda öğrendiğimiz şekilde 2 task arasında sabit zaman koyuyor. initialDelay parametresi uygulama başlatıldıktan kaç saniye sonra bu task’ın ilk defa çalıştırılacağını belirtiyor. Uygulama başladıktan 5 saniye sonra task ilk kez çalışacak.&lt;/p&gt;
 
+&lt;p&gt;Konsol çıktımızı inceleyelim:&lt;/p&gt;
+
 &lt;p&gt;&lt;a href=&quot;/images/springSchedule/springSchedule3.png&quot;&gt;
 &lt;img src=&quot;/images/springSchedule/springSchedule3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Konsol çıktısından görebileceğimiz gibi uygulama ayağa kalkarken task tetiklenmedi, fakat uygulama ayağa kalktıktan 5 saniye sonra ilk task tetiklendi ve akabinde her 2 saniyede bir task tetiklenir oldu.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Using Cron Expression Scheduling&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Eğer task’larımızı Cron Expression’lar ile planlamak istersek o zaman da @Scheduled notasyonuna &lt;strong&gt;&lt;em&gt;cron&lt;/em&gt;&lt;/strong&gt; parametresini geçirmemiz yeterli olacaktır. İlgili task’ın her dakika başı çalışmasını sağlayacak olan şu kod örneğine bakalım:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.ilkaygunel.tasks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.text.SimpleDateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.scheduling.annotation.Scheduled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.stereotype.Component&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Component&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ScheduledTaskUsingCronExpression&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SimpleDateFormat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dateFormat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SimpleDateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;HH:mm:ss&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+	&lt;span class=&quot;nd&quot;&gt;@Scheduled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cron&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;0 * * * * ?&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;scheduledTaskUsingCronExpression&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Scheduled Task Using Cron Expression Task Worked! &amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;scheduledTaskUsingCronExpression metodumuzu yine @Scheduled notasyonu ile işaretledik ve içerisine bu kez Cron Expression kullanacağımız için &lt;strong&gt;&lt;em&gt;cron&lt;/em&gt;&lt;/strong&gt; parametresini verdik. 0 * * * * ? şablonundaki değer ilgili task’ın her dakika başı çalışmasını sağlayan bir değerdir. Örneğin her 5 saniyede bir task’ın çalışmasını istese idik de */5 * * * * * şeklinde bir şablonu kullanabilirdik. Ya da her gün öğleden sonra 15:30’da (3:30 PM) task’ın tetiklenmesini istese idik 0 30 15 * * * şeklinde bir Cron Expression kullanabilirdik. Aşağıdaki konsol çıktılarından ilki her dakika başı çalışan Cron Expression için bir örnek iken, ikincisi her 5 saniyede bir çalışan için bir örnektir.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/springSchedule/springSchedule4.png&quot;&gt;
+&lt;img src=&quot;/images/springSchedule/springSchedule4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/springSchedule/springSchedule5.png&quot;&gt;
+&lt;img src=&quot;/images/springSchedule/springSchedule5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda anlatacaklarım bu kadar arkadaşlar. Spring’in Scheduling mekanizmasının 4 farklı kullanım yöntemini öğremiş olduk. Başka bir yazıda görüşmek üzere.&lt;/p&gt;
+
+&lt;p&gt;Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
 </description>
         <pubDate>Sat, 04 Aug 2018 17:54:00 +0300</pubDate>
         <link>http://ilkaygunel.com/blog/2018/schedules-tasks-with-spring-boot/</link>
@@ -229,6 +270,16 @@
         <category>spring boot mail</category>
         
         <category>spring boot mail sender</category>
+        
+        <category>spring scheduling</category>
+        
+        <category>spring schediling fixed delay</category>
+        
+        <category>spring scheduling fixed rate</category>
+        
+        <category>spring scheduling initial delay</category>
+        
+        <category>spring scheduling cron expression</category>
         
         
       </item>
@@ -1160,7 +1211,7 @@ spring.mail.debug=true &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;&lt;a href=&quot;/images/mailSendingWithSpringBoot/mailSendingWithSpringBoot3.png&quot;&gt;
 &lt;img src=&quot;/images/mailSendingWithSpringBoot/mailSendingWithSpringBoot3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Bu yazıda anlatacaklarım bu kadar arkadaşlar. Spring Boot alt yapısındaki bir projede nasıl mail gönderilir onu anlamış oldum. Başka bir yazıda görüşmek üzere.&lt;/p&gt;
+&lt;p&gt;Bu yazıda anlatacaklarım bu kadar arkadaşlar. Spring Boot alt yapısındaki bir projede nasıl mail gönderilir onu anlatmış oldum. Başka bir yazıda görüşmek üzere.&lt;/p&gt;
 
 &lt;p&gt;Görüşene kadar sağlıcakla kalın.&lt;/p&gt;
 
