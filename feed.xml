@@ -5,9 +5,233 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 14 Jul 2018 09:59:06 +0300</pubDate>
-    <lastBuildDate>Sat, 14 Jul 2018 09:59:06 +0300</lastBuildDate>
+    <pubDate>Sun, 05 Aug 2018 14:06:25 +0300</pubDate>
+    <lastBuildDate>Sun, 05 Aug 2018 14:06:25 +0300</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
+    
+      <item>
+        <title>Spring Boot İle Planlanmış Görevlerin (Scheduled Tasks) Çalıştırılması</title>
+        <description>&lt;p&gt;Merhabalar arkadaşlar. Bu yazıda size Spring Boot tabanlı bir projede planlanmış görevlerin nasıl çalıştırılacağını anlatacağım.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Scheduling Mekanizmasının Aktif Hale Getirilmesi&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Spring Boot tabanlı projelerimizi bildiğiniz üzere &lt;strong&gt;&lt;em&gt;main(…)&lt;/em&gt;&lt;/strong&gt; metoda sahip bir class üzerinden başlatabiliyoruz. @SpringBootApplication anotasyonu ile işaretlenmiş sınıfımızı bir de &lt;strong&gt;&lt;em&gt;@EnableScheduling&lt;/em&gt;&lt;/strong&gt; notasyonu ile işaretlersek projemizde Scheduling mekanizması aktif hale gelmiş olur.&lt;/p&gt;
+
+&lt;p&gt;Örnek kodumuz şöyle olacaktır:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.ilkaygunel.application&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.boot.SpringApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.boot.autoconfigure.SpringBootApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.context.annotation.ComponentScan&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.scheduling.annotation.EnableScheduling&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@SpringBootApplication&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@ComponentScan&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;basePackages&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;com.ilkaygunel.*&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@EnableScheduling&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Application&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;SpringApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Application&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;script async=&quot;&quot; src=&quot;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;ins class=&quot;adsbygoogle&quot; style=&quot;display:block&quot; data-ad-format=&quot;fluid&quot; data-ad-layout-key=&quot;-fb+5w+4e-db+86&quot; data-ad-client=&quot;ca-pub-0980023289791742&quot; data-ad-slot=&quot;8632723594&quot;&gt;&lt;/ins&gt;
+&lt;script&gt;
+     (adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;Spring Framework bize 4 adet Scheduling tipi sunuyor. Şimdi ayrı örneklerle bu 4 çeşit Scheduling mekanizmasını öğrenelim.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Fixed Rate Scheduling&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Fixed Rate Scheduling ile sabit bir aralıkta çalışmasını istediğimiz görevleri çalıştırabiliiz. Örneğin Fixed Rate Scheduling ile ayarladığımız bir task her 5 saniyede bir tekrar tekrar çalışacaktır. Örnek kodumuz şöyle:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.ilkaygunel.tasks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.text.SimpleDateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.scheduling.annotation.Scheduled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.stereotype.Component&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Component&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FixedRateScheduledTask&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SimpleDateFormat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dateFormat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SimpleDateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;HH:mm:ss&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+	&lt;span class=&quot;nd&quot;&gt;@Scheduled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fixedRate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;fixedRateScheduledTaskMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Fixed Rate Scheduled Task Worked! &amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;@Scheduled&lt;/em&gt;&lt;/strong&gt; anotasyonu ile bu metodun planlanmış bir zaman diliminde kendi kendine sürekli çalışacak bir metot olduğunu bildiriyoruz. İçerisine verdiğimiz &lt;strong&gt;&lt;em&gt;fixedRate&lt;/em&gt;&lt;/strong&gt; parametresi bu metodun sabit bir aralıkta sürekli çalışacağı anlamına geliyor. fixedRate parametresine verdiğimiz 5000 değeri de milisaniye cinsinden bir değerdir ve &lt;strong&gt;&lt;em&gt;fixedRateScheduledTaskMethod()&lt;/em&gt;&lt;/strong&gt; metodu her 5 saniyede bir çalışacaktır.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/springSchedule/springSchedule1.png&quot;&gt;
+&lt;img src=&quot;/images/springSchedule/springSchedule1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Uygulamayı çalıştırıp konsolu kontrol ettiğimiz zaman Tomcat’in başlamasından 5 saniye sonra metot ilk defa çalışıyor ve akabinde her 5 saniyede bir tetikleniyor.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Fixed Delay Scheduling&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Eğer planlı çalışmasını istediğiniz bir task’ın çalışması için bir önceki tetiklenmesinin bitmesini istiyorsak eğer Fixed Delay Scheduling kullanabiliriz. Bu tip kullanımda planladığımız task’ın yeniden çalışabilmesi için önceki task’ın bitmiş olması gerekir ve verdiğimiz süre task’ın bitiş zamanından itibaren sayılmaya başlanır.&lt;/p&gt;
+
+&lt;p&gt;Şu örnek koda bakalım:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.ilkaygunel.tasks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.text.SimpleDateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.concurrent.TimeUnit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.scheduling.annotation.Scheduled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.stereotype.Component&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Component&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FixedDelayScheduledTask&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SimpleDateFormat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dateFormat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SimpleDateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;HH:mm:ss&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+	&lt;span class=&quot;nd&quot;&gt;@Scheduled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fixedDelay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;fixedDelayScheduledTaskMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;fixedDelayScheduledTaskMethod Task Worked! &amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;TimeUnit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;SECONDS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Ran into an error {}&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IllegalStateException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;fixedDelayScheduledTaskMethod metodunu yine @Schedule notasyonu ile işaretliyoruz fakat bu kez içerisine &lt;strong&gt;&lt;em&gt;fixedDelay&lt;/em&gt;&lt;/strong&gt; parametresini veriyoruz ve değer olarak 2 saniyeyi geçiriyoruz. Böylece bu task bittikten 2 saniye sonra task yeniden tetiklenmiş olacak. Metot içerisinde ise 5 saniyelik bir bekletme işlemi uyguluyoruz. Böylece fixedDelay ile tanımlanmış metodun gerçekten bir sonraki task tetiklemesi için bekleyip beklemeyeceğini test etmiş olacağız.&lt;/p&gt;
+
+&lt;p&gt;Şimdi şu konsol çıktısına bakalım:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/springSchedule/springSchedule2.png&quot;&gt;
+&lt;img src=&quot;/images/springSchedule/springSchedule2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Konsol çıktımızda gördüğümüz gibi Tomcat ayağa kalkarken &lt;strong&gt;Started Application&lt;/strong&gt; yazısından önce fixedDelayScheduledTaskMethod task’ı bir kez çalışıyor. Metot çalışınca 5 saniye uyuyor ve bitince 2 saniye de diğer task’ın çalışması için bekliyor. Toplamda 7 saniye sonra Started Application yazısının altında task’ın ikinci defa çalıştığını görüyoruz. Bu noktadan sonra task her iki task arasındaki 2 saniye ve 5 saniyelik uyuma zamanı ile toplamda 7 saniye aralıkla sürekli çalışıyor. Tabii ki burada 5 saniyelik sabit uyuma süresi var, başka bir projemizde database’de okuma yazma yavaşlığı olabilir, bağlandığımız bir servis geç cevap verebilir, bu süre hep değişkenlik gösterebilir.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Fixed Rate Or Delay And Initial Delay Scheduling&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Eğer bir task’ın uygulama ayağa kalkarken çalışmasını istemiyor, uygulama tam olarak ayağa kalktıktan bir süre sonra çalışmasını sitiyorsak o zaman az önce gördüğümüz 2 kullanım tipi ile birlikte &lt;strong&gt;&lt;em&gt;initialDelay&lt;/em&gt;&lt;/strong&gt; parametresini de kullanabiliriz.&lt;/p&gt;
+
+&lt;p&gt;Şu örnek koda bakalım:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.ilkaygunel.tasks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.text.SimpleDateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.scheduling.annotation.Scheduled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.stereotype.Component&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Component&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FixedRateDelayAndInitialDelay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SimpleDateFormat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dateFormat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SimpleDateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;HH:mm:ss&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+	&lt;span class=&quot;nd&quot;&gt;@Scheduled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fixedRate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;initialDelay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;fixedRateDelayAndInitialDelay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Fixed Rate Delay And Initial Delay Task Worked! &amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;fixedRateDelayAndInitialDelay metodunu yine @Schedule notasyonu ile işaretliyoruz fakat bu kez 2 parametre veriyoruz. fixedRate yukarıda öğrendiğimiz şekilde 2 task arasında sabit zaman koyuyor. initialDelay parametresi uygulama başlatıldıktan kaç saniye sonra bu task’ın ilk defa çalıştırılacağını belirtiyor. Uygulama başladıktan 5 saniye sonra task ilk kez çalışacak.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/springSchedule/springSchedule3.png&quot;&gt;
+&lt;img src=&quot;/images/springSchedule/springSchedule3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 04 Aug 2018 17:54:00 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2018/schedules-tasks-with-spring-boot/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2018/schedules-tasks-with-spring-boot/</guid>
+        
+        <category>angular 2 web service</category>
+        
+        <category>angular 2 rest get</category>
+        
+        <category>angular 2 rest post</category>
+        
+        <category>angular 2 rest</category>
+        
+        <category>angular 2 calling web service</category>
+        
+        <category>angular 2 giriş</category>
+        
+        <category>angular 2 tutorials</category>
+        
+        <category>angular 2 hello world</category>
+        
+        <category>angular 2 dersleri</category>
+        
+        <category>angular 2 kaynak</category>
+        
+        <category>angular 2 türkçe kaynak</category>
+        
+        <category>angular 2 türkçe dersleri</category>
+        
+        <category>angular 2 ngIf</category>
+        
+        <category>angular 2 ngSwitch</category>
+        
+        <category>angular 2 ngSwitchWhen</category>
+        
+        <category>angular 2 ngSwitchDefault</category>
+        
+        <category>angular 2 ngFor</category>
+        
+        <category>angular 2 Structural Directives</category>
+        
+        <category>angular 2 Attribute Directives</category>
+        
+        <category>angular 2 ngClass</category>
+        
+        <category>angular 2 ngStyle</category>
+        
+        <category>angular ngClass ngStyle</category>
+        
+        <category>eclipse</category>
+        
+        <category>eclipse auto format on save</category>
+        
+        <category>eclipse format on save</category>
+        
+        <category>kotlin introduction</category>
+        
+        <category>kotlin</category>
+        
+        <category>kotlin hello world</category>
+        
+        <category>kotlin tutorials</category>
+        
+        <category>kotlin tutorial</category>
+        
+        <category>kotlin intellij idea</category>
+        
+        <category>kotlin intellij idea jetbrains</category>
+        
+        <category>kotlin jetbrains</category>
+        
+        <category>spring localization</category>
+        
+        <category>spring yerelleştirme</category>
+        
+        <category>spring language based messagegin</category>
+        
+        <category>spring messages according to language</category>
+        
+        <category>spring mail sending</category>
+        
+        <category>spring mail</category>
+        
+        <category>spring boot mail</category>
+        
+        <category>spring boot mail sender</category>
+        
+        
+      </item>
     
       <item>
         <title>S.O.L.I.D. Prensipleri Nelerdir?</title>
@@ -1945,214 +2169,6 @@ bulundurarak GET isteği gönderiyorum. Web servis bana ilgili verileri dönüyo
         <category>spring security jwt usage</category>
         
         <category>spring security json web token</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Angular 2 Tutorials 10 - Inputs and Outputs</title>
-        <description>&lt;p&gt;Merhabalar arkadaşlar.&lt;/p&gt;
-
-&lt;p&gt;Bu yazı içerisinde Angular 2’de Componentler arası veri geçirme konusu olan olan &lt;strong&gt;&lt;em&gt;Inputs and Outputs&lt;/em&gt;&lt;/strong&gt; konusunu öğreneceğiz.&lt;/p&gt;
-
-&lt;p&gt;Componentler arası veri geçirme olayı üst ve alt component ilişkisi olan componentler arasında yapılıyor arkadaşlar. Biz de yazımıda üst component olan
-AppComponent ile alt component olan Angular2Tutorials component’i arasında veri taşıma olayına bakacağız.&lt;/p&gt;
-
-&lt;p&gt;İlk olarak alt component’den üst component’e veri taşıma olayını örnekleyelim.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;tutorials.component.ts&lt;/strong&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;@Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-	&lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2-tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-	&lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&amp;lt;h2&amp;gt;Child Tutorials Component&amp;lt;/h2&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;label&amp;gt;Enter Child Tutorials Component&amp;lt;/label&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;input type=&amp;quot;text&amp;quot;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;p&amp;gt;Value from Parent AppComponent is&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				{{parentData}}&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-	&lt;span class=&quot;nx&quot;&gt;inputs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`parentData`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;parentData&lt;/span&gt;: &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Angular2Tutorials component’imiz az önce de söylediğim gibi bizim altcomponent’imizdir. Angular2Tutorials sınıfının içerisinde template kısmında kullanıcının
-bir değer gireceği bir input alanı mevcut. Bu input alanını Angular2Tutorials’den AppComponent’e veri taşırken kullanacağız. Yine template kısmında 
-interpolation kullanarak parentData nesnesi template’imize eklenmiş. Burada selector ve template gibi kullanılan yeni bir özellik görüyoruz, o da &lt;strong&gt;&lt;em&gt;inputs&lt;/em&gt;&lt;/strong&gt;
-özelliği. inputs özelliği içerisinde adı verilmiş olan nesnenin tanımlanma işlemi sınıfın içerisinde yapılmış bulunmakta. Angular2Tutorials sınıfı içerisinde
-string tipinde &lt;strong&gt;&lt;em&gt;parentData&lt;/em&gt;&lt;/strong&gt; nesnesinin tanımlandığını görüyoruz ve bu parentData nesnesi inputs özelliğine verilmiş. Bu şu anlama gelir ki, başka bir component
-içerisinden parentData ismi ile Angular2Tutorials sınıfına veri gönderilebilir ve bu değer sınıf içerisindeki parentData nesnesine işlenir.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;app.component.ts&lt;/strong&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;./tutorials.component&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;@Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;my-app&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&amp;lt;h2&amp;gt;Parent App Component&amp;lt;/h2&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;label&amp;gt;Enter Parent App Component Value&amp;lt;/label&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;input type=&amp;quot;text&amp;quot; #ptext (keyup)=&amp;quot;0&amp;quot;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;p&amp;gt;Value from Child TutorialsComponent is&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;angular2-tutorials [parentData]=&amp;quot;ptext.value&amp;quot;&amp;gt;&amp;lt;/angular2-tutorials&amp;gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;directives&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AppComponent&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;AppComponent sınıfımız içerisinde template özelliği içerisinde  Angular2Tutorials’da olduğu gibi bir input alanı var. Bu input alanı için #ptext ifadesi ile
-bir referans tanımlaması yapıldı ve (keyup)=”0” ifadesi her tuşa basılıp bırakıldığında değerinin güncellenmesi sağlandı.Template içerisinde 
-&lt;strong&gt;&lt;em&gt;angular2-tutorials&lt;/em&gt;&lt;/strong&gt; selector’unu kullanarak Angular2Tutorials component’ini dahil etmiş olduk. angular2-tutorials tag’inin kullanımı sırasında
-göreceğimiz gibi bir data binding durumu mevcut arkadaşlar. Angular2Tutorials sınıfının parentData nesnesine ptext referanslı input’un değerini göndermiş
-oluyoruz angular2-tutorials tag’inin kullanımı ile. Bu değer gönderimi ile Angular2Tutorials sınıfının template özelliği içerisindeki inputs alanı değeri
-karşılayacak ve parentData nesnesine yazacak.&lt;/p&gt;
-
-&lt;p&gt;Browser’a gidip baktığımızda ve Parent App Component alanındaki kutucuğa değer girdiğimizde Child Tutorials Component alanında değerin yazdırıldığını 
-görüyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson10/1.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson10/1.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Şimdi de üst component’den yani AppComponent’den alt component’e yani Angular2Tutorials component’ine nasıl veri geçirilir ona bakalım.&lt;/p&gt;
-
-&lt;p&gt;Componentler arasında bir alt-üst ilişkisi olması birbirleri arasında veri transferinin aynı şekilde olmasını engelliyor arkadaşlar. Bu nedenle alt componentden
-üst component’e veri gönderdiğimiz gibi üst component’den alt component’e veri gönderemiyoruz. Bu iş için inputs özelliği gibi bir de &lt;strong&gt;&lt;em&gt;outputs&lt;/em&gt;&lt;/strong&gt; özelliğimiz
-var. Şimdi nasıl kullanıldığına bakalım:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;tutorials.component.ts&lt;/strong&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;EventEmitter&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;@Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-	&lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;angular2-tutorials&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-	&lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&amp;lt;h2&amp;gt;Child Tutorials Component&amp;lt;/h2&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;label&amp;gt;Enter Child Tutorials Component&amp;lt;/label&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;input type=&amp;quot;text&amp;quot; #childText (keyup)=&amp;quot;onChange(childText.value)&amp;quot;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;p&amp;gt;Value from Parent AppComponent is&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				{{parentData}}&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-	&lt;span class=&quot;nx&quot;&gt;inputs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`parentData`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-	&lt;span class=&quot;nx&quot;&gt;outputs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`childEvent`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;parentData&lt;/span&gt;: &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;nx&quot;&gt;childEvent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;EventEmitter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; 
-	&lt;span class=&quot;nx&quot;&gt;onChange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;:&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;childEvent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;emit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Angular2Tutorials sınıfı içerisinde outputs özelliğini ona childEvent nesnesini vererek kullandık. Bu childEvent nesnesi EventEmitter tipinde olan bir nesnedir
-ve EventEmitter’ı biz değer yayması, göndermesi için kullanacağız.&lt;/p&gt;
-
-&lt;p&gt;Template özelliği içerisindeki input’a #childText ifadesi ile bir referans ataması yaptık
-ve (keyup)=”onChange(childText.value)” ifadesi ile bu input içerisinde iken her tuşa basılıp kaldırıldığında onChange metodunun çağırılmasını sağladık. onChange
-metodunun çağırımı sırasında da ona parametre olan childText referanslı nesnenin değerini gönderdik.&lt;/p&gt;
-
-&lt;p&gt;onChange metodunun da yaptığı iş kendisine gelen değeri &lt;strong&gt;&lt;em&gt;emit()&lt;/em&gt;&lt;/strong&gt; metodu vasıtası ile yaymaktır arkadaşlar. childEvent nesnesi outputs kısmında kullanıldığı
-için bu emit metodunun çağırımı ile childEvent’in çağırıldığı yere emit metoduna gelen değer yayılır. Burada biz AppComponent içerisinden childEvent’i 
-tetikleyeceğimiz için çağırıldığı yer AppComponent olacak ve her tuşa basılıp kaldırıldığında değer AppComponent’e döndürülecek.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;app.component.ts&lt;/strong&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Component&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@angular/core&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;./tutorials.component&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;@Component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;my-app&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&amp;lt;h2&amp;gt;Parent App Component&amp;lt;/h2&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;label&amp;gt;Enter Parent App Component Value&amp;lt;/label&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;input type=&amp;quot;text&amp;quot; #ptext (keyup)=&amp;quot;0&amp;quot;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;p&amp;gt;Value from Child TutorialsComponent is&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				{{ childData }}&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&lt;/span&gt;
-&lt;span class=&quot;sb&quot;&gt;				&amp;lt;angular2-tutorials (childEvent)=&amp;quot;childData=$event&amp;quot; [parentData]=&amp;quot;ptext.value&amp;quot;&amp;gt;&amp;lt;/angular2-tutorials&amp;gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;directives&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Angular2Tutorials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;kr&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AppComponent&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;childData&lt;/span&gt; : &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;AppComponent içerisinde de sınıfın tanım kısmında alt sınıftan gelecek değeri tutacak, string tipinde bir childData nesnesi tanımlıyoruz. Template özelliği
-içerisinde, angular2-tutorials tag’i içerisinde bir event binding işlemi uyguluyoruz arkadaşlar. Burada childEvent nesnesi EventEmitter tipinde olduğu için
-onMousOver gibi, keyup gibi childEvent da bizim için bir event’tır ve bu event’a atanan iş childData nesnesine &lt;strong&gt;&lt;em&gt;$event&lt;/em&gt;&lt;/strong&gt; gelen değeri basmaktır. $event
-ile değerin gelmesi childEvent’ın gerçekleştirdiği event’ın döndürdüğü değerdir. Yani childEvent Angular2Tutorials içerisinde emit() event’ını 
-gerçekleştiriyordu ve buradan da gelen değeri yayıyordu. Bu nedenle $event bize emit() fonksiyonunun yaydığı değeri verecektir.&lt;/p&gt;
-
-&lt;p&gt;Tekrar browser’a gidip baktığımızda ve Child Tutorials Component alanındaki kutucuğa değer girdiğimizde Parent App Component alanında ilgili değerin yazdığını
-görüyoruz.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/angularTutorials/lesson10/2.png&quot;&gt;
-&lt;img src=&quot;/images/angularTutorials/lesson10/2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Bu yazıda anlatacağım bu kadar arkadaşlar.&lt;/p&gt;
-
-&lt;p&gt;Bir sonraki Angular 2 yazısında görüşene kadar sağlıcakla kalın.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center&quot;&gt;Selam ve Sevgilerimle&lt;/p&gt;
-</description>
-        <pubDate>Sat, 20 Jan 2018 20:40:21 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2018/angular-2-inputs-and-outputs/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2018/angular-2-inputs-and-outputs/</guid>
-        
-        <category>angular 2 web service</category>
-        
-        <category>angular 2 rest get</category>
-        
-        <category>angular 2 rest post</category>
-        
-        <category>angular 2 rest</category>
-        
-        <category>angular 2 calling web service</category>
-        
-        <category>angular 2 giriş</category>
-        
-        <category>angular 2 tutorials</category>
-        
-        <category>angular 2 hello world</category>
-        
-        <category>angular 2 dersleri</category>
-        
-        <category>angular 2 kaynak</category>
-        
-        <category>angular 2 türkçe kaynak</category>
-        
-        <category>angular 2 türkçe dersleri</category>
-        
-        <category>angular 2 ngIf</category>
-        
-        <category>angular 2 ngSwitch</category>
-        
-        <category>angular 2 ngSwitchWhen</category>
-        
-        <category>angular 2 ngSwitchDefault</category>
-        
-        <category>angular 2 ngFor</category>
-        
-        <category>angular 2 Structural Directives</category>
-        
-        <category>angular 2 Attribute Directives</category>
-        
-        <category>angular 2 ngClass</category>
-        
-        <category>angular 2 ngStyle</category>
-        
-        <category>angular ngClass ngStyle</category>
-        
-        <category>angular 2 inputs and outputs</category>
-        
-        <category>angular 2 passing data between components</category>
-        
-        <category>angular 2 passing data from one component to other component</category>
         
         
       </item>
