@@ -377,12 +377,23 @@ ise veritabanında tanımlı user ile bu işlemi örnekleyeceğiz.</p>
 				<span class="o">.</span><span class="na">and</span><span class="o">().</span><span class="na">httpBasic</span><span class="o">();</span>
 	<span class="o">}</span>
 
+<!--
 	<span class="nd">@Override</span>
 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="n">AuthenticationManagerBuilder</span> <span class="n">auth</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
 		<span class="n">auth</span><span class="o">.</span><span class="na">inMemoryAuthentication</span><span class="o">().</span><span class="na">withUser</span><span class="o">(</span><span class="s">&quot;adminUser&quot;</span><span class="o">).</span><span class="na">password</span><span class="o">(</span><span class="s">&quot;adminUserPassword&quot;</span><span class="o">).</span><span class="na">roles</span><span class="o">(</span><span class="s">&quot;ADMIN&quot;</span><span class="o">)</span>
 		     <span class="o">.</span><span class="na">and</span><span class="o">().</span><span class="na">withUser</span><span class="o">(</span><span class="s">&quot;standartUser&quot;</span><span class="o">).</span><span class="na">password</span><span class="o">(</span><span class="s">&quot;standartUserPassword&quot;</span><span class="o">).</span><span class="na">roles</span><span class="o">(</span><span class="s">&quot;USER&quot;</span><span class="o">);</span>
 	<span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
+-->
+
+<pre><code class="language-java">    <span class="hljs-annotation">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">configure</span><span class="hljs-params">(AuthenticationManagerBuilder auth)</span> <span class="hljs-keyword">throws</span> Exception </span>{
+        InMemoryUserDetailsManager manager = <span class="hljs-keyword">new</span> InMemoryUserDetailsManager();
+        manager.createUser(User.withUsername(<span class="hljs-string">"user"</span>).password(<span class="hljs-string">"{noop}password"</span>).roles(<span class="hljs-string">"ADMIN"</span>).build());
+        manager.createUser(User.withUsername(<span class="hljs-string">"admin"</span>).password(<span class="hljs-string">"{noop}admin"</span>).roles(<span class="hljs-string">"USER"</span>).build());
+        auth.userDetailsService(manager);
+    }
+</code></pre>
 
 <p>Yazımızın ana noktasını oluşturan olayı konuştuğumuz WebSecurityConfig sınıfına geldi sıra. WebSecurityConfig sınıfını  @Configuration ve @EnableWebSecurity notasyonları ile işaretliyoruz. @Configuration notasyonu XML ile de yapılabilen konfigürasyon ayarlarının Java kodunda yapılabilmesini sağlayan notasyondur.
 @EnableWebSecurity notasyonu da web projemiz üzerinde güvenlik katmanını aktif hale getiren notasyondur.</p>
