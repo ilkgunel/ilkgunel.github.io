@@ -392,8 +392,8 @@ ise veritabanında tanımlı user ile bu işlemi örnekleyeceğiz.</p>
         <span class="n">manager</span><span class="o">.</span><span class="na">createUser</span><span class="o">(</span><span class="n">User</span><span class="o">.</span><span class="na">withUsername</span><span class="o">(</span><span class="s">"user"</span><span class="o">).</span><span class="na">password</span><span class="o">(</span><span class="s">"{noop}password"</span><span class="o">).</span><span class="na">roles</span><span class="o">(</span><span class="s">"ADMIN"</span><span class="o">).</span><span class="na">build</span><span class="o">());</span>
         <span class="n">manager</span><span class="o">.</span><span class="na">createUser</span><span class="o">(</span><span class="n">User</span><span class="o">.</span><span class="na">withUsername</span><span class="o">(</span><span class="s">"admin"</span><span class="o">).</span><span class="na">password</span><span class="o">(</span><span class="s">"{noop}admin"</span><span class="o">).</span><span class="na">roles</span><span class="o">(</span><span class="s">"USER"</span><span class="o">).</span><span class="na">build</span><span class="o">());</span>
         <span class="n">auth</span><span class="o">.</span><span class="na">userDetailsService</span><span class="o">(</span><span class="n">manager</span><span class="o">);</span>
-    <span class="o">}</span></code></pre></figure>
-
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
 <p>Yazımızın ana noktasını oluşturan olayı konuştuğumuz WebSecurityConfig sınıfına geldi sıra. WebSecurityConfig sınıfını  @Configuration ve @EnableWebSecurity notasyonları ile işaretliyoruz. @Configuration notasyonu XML ile de yapılabilen konfigürasyon ayarlarının Java kodunda yapılabilmesini sağlayan notasyondur.
 @EnableWebSecurity notasyonu da web projemiz üzerinde güvenlik katmanını aktif hale getiren notasyondur.</p>
 
