@@ -356,6 +356,10 @@ ise veritabanında tanımlı user ile bu işlemi örnekleyeceğiz.</p>
 
 <p>Daha önce <a href="http://ilkaygunel.com/blog/2016/spring-rest-get-example/">Spring Rest GET Örneği</a> yazımda Spring ile GET hizmeti sunan bir Testful web servis yazmayı anlatmıştım. İlgilenen arkadaşlar oraya da göz atabilirler.</p>
 
+<p style="color: red"><strong>15.11.2018 Güncelleme</strong></p>
+<p>Linkedin'den yaşadığı sorun ile ilgili mesaj atan bir hanım arkadaş vesilesi ile öğrendiğim kadarı ile Spring Boot 2.0 ile beraber InMemoryUser tanımı ve kullanımında değişikliğe gidilmiş. InMemoryUser'ların tanımı ve kullanımı için bir InMemoryUserDetailsManager instance'ı oluşturmalı ve ilgili user'larımızı aşağıdaki gibi
+kayda geçirmeliyiz. Spring Boot 2.0 öncesi için ***auth.inMemoryAuthentication().withUser("adminUser").password("adminUserPassword").roles("ADMIN");*** şeklinde kullanmaya devam edebiliriz.</p>
+
 <p><strong>WebSecurityConfig.java</strong></p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.security</span><span class="o">;</span>
@@ -376,15 +380,6 @@ ise veritabanında tanımlı user ile bu işlemi örnekleyeceğiz.</p>
 				<span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">&quot;/memberList&quot;</span><span class="o">).</span><span class="na">hasAnyRole</span><span class="o">(</span><span class="s">&quot;ADMIN&quot;</span><span class="o">).</span><span class="na">anyRequest</span><span class="o">().</span><span class="na">authenticated</span><span class="o">()</span>
 				<span class="o">.</span><span class="na">and</span><span class="o">().</span><span class="na">httpBasic</span><span class="o">();</span>
 	<span class="o">}</span>
-
-<!--
-	<span class="nd">@Override</span>
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="n">AuthenticationManagerBuilder</span> <span class="n">auth</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-		<span class="n">auth</span><span class="o">.</span><span class="na">inMemoryAuthentication</span><span class="o">().</span><span class="na">withUser</span><span class="o">(</span><span class="s">&quot;adminUser&quot;</span><span class="o">).</span><span class="na">password</span><span class="o">(</span><span class="s">&quot;adminUserPassword&quot;</span><span class="o">).</span><span class="na">roles</span><span class="o">(</span><span class="s">&quot;ADMIN&quot;</span><span class="o">)</span>
-		     <span class="o">.</span><span class="na">and</span><span class="o">().</span><span class="na">withUser</span><span class="o">(</span><span class="s">&quot;standartUser&quot;</span><span class="o">).</span><span class="na">password</span><span class="o">(</span><span class="s">&quot;standartUserPassword&quot;</span><span class="o">).</span><span class="na">roles</span><span class="o">(</span><span class="s">&quot;USER&quot;</span><span class="o">);</span>
-	<span class="o">}</span>
-<span class="o">}</span></code></pre></figure>
--->
 
 	<span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="n">AuthenticationManagerBuilder</span> <span class="n">auth</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
