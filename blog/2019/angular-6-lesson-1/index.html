@@ -21,27 +21,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Angular 6 Ders 1 - Giriş ve Hello World</title>
+    <title>Angular 6 Ders 1 - Giriş Ve Kurulum</title>
     <meta name="description" content="Merhabalar arkadaşlar.">
 
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2019/angular-6-lesson-1/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
       <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Angular 6 Ders 1 - Giriş ve Hello World | İlkay Günel - Blog</title>
+<title>Angular 6 Ders 1 - Giriş Ve Kurulum | İlkay Günel - Blog</title>
 <meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="Angular 6 Ders 1 - Giriş ve Hello World" />
+<meta property="og:title" content="Angular 6 Ders 1 - Giriş Ve Kurulum" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Angular 2 Ders 1 - Giriş" />
-<meta property="og:description" content="Angular 2 Ders 1 - Giriş" />
+<meta name="description" content="Angular 6 Ders 1 - Giriş Ve Kurulum" />
+<meta property="og:description" content="Angular 6 Ders 1 - Giriş Ve Kurulum" />
 <link rel="canonical" href="http://ilkaygunel.com/blog/2019/angular-6-lesson-1/" />
 <meta property="og:url" content="http://ilkaygunel.com/blog/2019/angular-6-lesson-1/" />
 <meta property="og:site_name" content="İlkay Günel - Blog" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-01-02T20:40:21+03:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2019/angular-6-lesson-1/"},"url":"http://ilkaygunel.com/blog/2019/angular-6-lesson-1/","headline":"Angular 6 Ders 1 - Giriş ve Hello World","dateModified":"2019-01-02T20:40:21+03:00","datePublished":"2019-01-02T20:40:21+03:00","description":"Angular 2 Ders 1 - Giriş","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2019/angular-6-lesson-1/"},"url":"http://ilkaygunel.com/blog/2019/angular-6-lesson-1/","headline":"Angular 6 Ders 1 - Giriş Ve Kurulum","dateModified":"2019-01-02T20:40:21+03:00","datePublished":"2019-01-02T20:40:21+03:00","description":"Angular 6 Ders 1 - Giriş Ve Kurulum","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -118,7 +118,7 @@
 
   <div class="card">
     <header class="post-header">
-      <h1 class="post-title">Angular 6 Ders 1 - Giriş ve Hello World</h1>
+      <h1 class="post-title">Angular 6 Ders 1 - Giriş Ve Kurulum</h1>
       <p class="post-meta">Jan 2, 2019</p>
     </header>
 
@@ -127,6 +127,10 @@
 
 <p>Günümüz yazılım dünyasında bana göre önemi ve popülerliği giderek artan bir JS framework’ü olan Angular’ın 6. versiyonunu kendimi geliştirmek ve ilerisi için yatırım yapmak adına öğrenmeye
 başladım. Bu yazı ile beraber de öğrendiklerimi sizlerle paylaşacağım.</p>
+
+<p><strong>Angular 6 Nedir?</strong></p>
+
+<p>Angular 6, Angular 2 ile birlikte gelen TypeScript yapısının devam ettirildiği bir Client Side MVC yazılımıdır.</p>
 
 <p><strong>Başlamak İçin Gereksinimler</strong></p>
 
@@ -144,7 +148,7 @@ başladım. Bu yazı ile beraber de öğrendiklerimi sizlerle paylaşacağım.</
 <img src="/images/angular6/lesson1/1.png" style="width: 958px; height= 400px;" />
 </a></p>
 
-<p>Node.js kurulumunun ardından Angular 6 tabanlı bir proje oluşturabilmek için bilgisayarımıza Angular CLI’ın 6.x.x versiyon numaralı
+<p>Node.js kurulumunun ardından Angular 6 tabanlı bir projeler oluşturabilmek için bilgisayarımıza Angular CLI’ın 6.x.x versiyon numaralı
 sürümünü kurmamız gerekecek. Bu yazıyı yazdığım gün itibari ile Angular 7’nin karalı sürümleri yayınlanmaya başlamıştı ve Angular
 6’nın da son sürümü 6.2.8’di. Angular CLI’ın kurulumu için de terminalde/komut satırında <strong><em>npm install -g @angular/cli@6.2.8</em></strong>
 yazıp çalıştırmamız gereklidir arkadaşlar.</p>
@@ -161,7 +165,76 @@ satırında <strong><em>ng -v</em></strong> komutunu çalıştırarak kontrol ed
 <img src="/images/angular6/lesson1/3.png" style="width: 958px; height= 400px;" />
 </a></p>
 
-<p>Görüşene kadar sağlıcakla kalın.</p>
+<p>Angular CLI kurulumunun ardından şimdi yeni bir Angular 6 projesi oluşturma adımına geçebiliriz.</p>
+
+<ul>
+  <li><strong><em>ng new projectName -d</em></strong> komutu ile oluşturulacak projede hangi dosyaların yer alacağını listeleyebiliriz. Bu komut projeyi oluşturmayacak, sadece
+listeleme yapacaktır. Aşağıdaki ekran görüntüsünde bu komutun çıktısını göreceğiz.</li>
+  <li><strong><em>ng new projectName –skip-tests</em></strong> komutu ile yukarıda oluşturulacak dosyaları listelettiğimizde görünen <strong><em>spec</em></strong> yani test için kullanılacak
+dosyaların oluşumunu şimdilik atlayabiliriz. Bu komut projeyi fiziksel dizinimizde oluşturacaktır.</li>
+</ul>
+
+<p>ng new projectName -d komutunun çıktısı içerisinde görebileceğiniz gibi spec isimli dosyalar da mevcut ve onlar test için varlar:</p>
+
+<p><a href="/images/angular6/lesson1/4.png">
+<img src="/images/angular6/lesson1/4.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>ng new projectName –skip-tests komutunun çıktısı:</p>
+
+<p><a href="/images/angular6/lesson1/5.png">
+<img src="/images/angular6/lesson1/5.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Projemiz başarı ile oluşturulduktan sonra cd komutu ile projemizin içine girelim ve projemizi çalıştırmak için <strong><em>ng serve –open</em></strong> ya da bu komuta
+karşılık gelen <strong><em>ng s -o</em></strong> komutunu terminalimizde çalıştıralım. Bu komuttaki ng Angular CLI kurulumundan komut, s komutu serve yani sunucu üstünde
+bu projeyi çalıştır, –open (o) komutu da projeyi tarayıcı üzerinde aç demektir.</p>
+
+<p>ng s -o komutunun çıktısı:</p>
+
+<p><a href="/images/angular6/lesson1/6.png">
+<img src="/images/angular6/lesson1/6.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Komut başarı ile çalıştığında localhost:4200 adresi üzerinde projemiz açılıyor.</p>
+
+<p><a href="/images/angular6/lesson1/7.png">
+<img src="/images/angular6/lesson1/7.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Ben bu yazılar sırasında Angular kodlarını yazmak ve düzenlemek için Visual Studio Code kullanacağım. Siz de Visual Studio Code uygulamasında Open 
+Folder diyerek az önce oluşturduğumuz Angular6Project klasörünü açabilirsiniz.</p>
+
+<p>Projeyi Visual Studio Code üzerinde açtıktan sonra src klasörünün altında bir app klasörü göreceksiniz ve onun içinde de <strong><em>app.component.html</em></strong>
+adında bir dosya göreceksiniz. Bu dosya az önce localhost:4200 üzerinde projeyi çalıştırdığımızda gördüğümüz sayfadır arkadaşlar. Dosyayı açtığınızda 
+hemen yukarıda şu kod parçacığını göreceksiniz:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">  <span class="nt">&lt;h1&gt;</span>
+    Welcome to !
+  <span class="nt">&lt;/h1&gt;</span></code></pre></figure>
+
+<p>Tarayıcımızda gördüğümüz <strong><em>Welcome to Angular6Project!</em></strong> satırı buradan gelmektedir. İki süslü parantezler arasındaki title ise Angular’ın ts dosylarından
+gelmektedir ve buna <strong><em>interpolation</em></strong> denmektedir. Şimdi buradaki Welcome to ifadesini <strong><em>Welcome my friend to</em></strong> olarak değiştirelim ve title olduğu
+gibi kalsın. Değişimden sonra sadece dosyayı kaydedelim ve tarayıcıyı kontrol edelim.</p>
+
+<p><a href="/images/angular6/lesson1/8.png">
+<img src="/images/angular6/lesson1/8.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Gördüğümüz gibi sayfa kendiliğinden değişip yeniden yüklendi. Biz projeyi çalıştırdıktan sonra proje watch modda çalışıyor ve herhangi bir değişim olduğu
+anda yeniden derlenip yükleniyor, bizim dosyadaki değişiklikleri kaydetmekten başka yapmamız gereken bir şey yok.</p>
+
+<p>Az önce bahsettiğim gibi title ifadesi ts dosyasından geliyor bu dosya da yine src/app altındaki app.component.ts dosyasıdır. Dosyayı açtığınızda 
+<strong><em>export class AppComponent</em></strong> satırının hemen altında title parametresine <strong><em>Angular6Project</em></strong> değerinin atandığını göreceksiniz. Biz şimdi
+Angular6Project değerini <strong><em>Angular6Project Tutorial</em></strong> değeri ile değiştirip dosyayı kaydedelim.</p>
+
+<p><a href="/images/angular6/lesson1/9.png">
+<img src="/images/angular6/lesson1/9.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Tarayıcıyı kontrol ettiğimizde yine yaptığımız değişikliğin direk yüklendiğini görmekteyiz.</p>
+
+<p>Bu yazıda anlatacaklarım bu kadar arkadaşlar. Angular 6’ya giriş yapmış olduk. Bir sonraki yazıda görüşene kadar sağlıcakla kalın.</p>
 
 <p style="text-align: center">Selam ve Sevgilerimle</p>
 
