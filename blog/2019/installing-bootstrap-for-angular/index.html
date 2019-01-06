@@ -21,27 +21,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Bir Karşı Ütopya - 1984</title>
-    <meta name="description" content="">
+    <title>Angular 6 Ders 2 - Angular İçin BootStrap Kurulumu</title>
+    <meta name="description" content="Merhabalar arkadaşlar. Bu yazıda Angular için Bootstrap kurulumunu ele alacağız.">
 
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="http://ilkaygunel.com/blog/2016/1984/">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2019/installing-bootstrap-for-angular/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
       <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Bir Karşı Ütopya - 1984 | İlkay Günel - Blog</title>
+<title>Angular 6 Ders 2 - Angular İçin BootStrap Kurulumu | İlkay Günel - Blog</title>
 <meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="Bir Karşı Ütopya - 1984" />
+<meta property="og:title" content="Angular 6 Ders 2 - Angular İçin BootStrap Kurulumu" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Bir Karşı Ütopya - 1984" />
-<meta property="og:description" content="Bir Karşı Ütopya - 1984" />
-<link rel="canonical" href="http://ilkaygunel.com/blog/2016/1984/" />
-<meta property="og:url" content="http://ilkaygunel.com/blog/2016/1984/" />
+<meta name="description" content="Angular 6 Ders 2 - Angular İçin BootStrap Kurulumu" />
+<meta property="og:description" content="Angular 6 Ders 2 - Angular İçin BootStrap Kurulumu" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2019/installing-bootstrap-for-angular/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2019/installing-bootstrap-for-angular/" />
 <meta property="og:site_name" content="İlkay Günel - Blog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2016-09-04T19:38:20+03:00" />
+<meta property="article:published_time" content="2019-01-05T20:40:21+03:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/1984/"},"url":"http://ilkaygunel.com/blog/2016/1984/","headline":"Bir Karşı Ütopya - 1984","dateModified":"2016-09-04T19:38:20+03:00","datePublished":"2016-09-04T19:38:20+03:00","description":"Bir Karşı Ütopya - 1984","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2019/installing-bootstrap-for-angular/"},"url":"http://ilkaygunel.com/blog/2019/installing-bootstrap-for-angular/","headline":"Angular 6 Ders 2 - Angular İçin BootStrap Kurulumu","dateModified":"2019-01-05T20:40:21+03:00","datePublished":"2019-01-05T20:40:21+03:00","description":"Angular 6 Ders 2 - Angular İçin BootStrap Kurulumu","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -118,85 +118,73 @@
 
   <div class="card">
     <header class="post-header">
-      <h1 class="post-title">Bir Karşı Ütopya - 1984</h1>
-      <p class="post-meta">Sep 4, 2016</p>
+      <h1 class="post-title">Angular 6 Ders 2 - Angular İçin BootStrap Kurulumu</h1>
+      <p class="post-meta">Jan 5, 2019</p>
     </header>
 
     <div class="post-content">
-      <head>
+      <p>Merhabalar arkadaşlar. Bu yazıda Angular için Bootstrap kurulumunu ele alacağız.</p>
+
+<p><strong>Bootstrap Nedir?</strong></p>
+
+<p>Bootstrap yazılım geliştiricilerine responsive yani tüm cihazlarla uyumlu şekilde tasarım yapılmasını sağlayan açık kaynak kodlu bir CSS 
+framework’üdür. Barındırdığı bileşenler sayesinde hem görünüm hem uyumluluk konusunda avantajlar sağlar.</p>
+
+<p><strong>Angular İçin Bootstrap Nasıl Kurulur?</strong></p>
+
+<p>Angular için Bootstrap kurulumunda da yine npm’den yardım alacağız. Öncelikle cd komutu ile ilk yazıda oluşturduğumuz Angular6Project içine geçelim
+ve <strong><em>npm install bootstrap@4.2.1 jquery –save</em></strong> komutu ile Bootstrap’ın bu yazı yazılırkenki en güncel sürümü olan 4.2.1 sürümünün kurulumu
+gerçekleştirelim.</p>
+
+<p><a href="/images/angular6/lesson2/1.png">
+<img src="/images/angular6/lesson2/1.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<p><ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-0980023289791742" data-ad-slot="8632723594"></ins>
 <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-76541903-2', 'auto');
-ga('send', 'pageview');
-</script>
-<style>
-.rotate90 {
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    transform: rotate(90deg);
-}
-</style>
-</head>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
 
-<p><br />
-<br />
-<img src="/images/1984.jpg" alt="Constructocat by https://github.com/jasoncostello" style="width: 550px; height:400px;" class="rotate90" /></p>
+<p>Akabinde Angular6Project dizinimizde yer alan package.json açalım ve <strong><em>dependencies</em></strong> alanında yer alan <strong><em>bootstrap</em></strong> ve <strong><em>jquery</em></strong> 
+kütüphanelerinin düzgün versiyon ile kurulup kurulmadığını kontrol edelim. Aşağıdaki ekran görüntüsünde görebileceğimiz gibi Bootstrap bende 4.2.1
+versiyonu ile ve jquery de 3.3.1 versiyonu ile kurulmuş durumda.</p>
 
-<p><br />
-<br />
-<br />
-Final sınavları idi, işe git gel idi, özel bazı sorunlardı derken büyük bir heves ile aldığım ve okuduğum bir kitabı nihayet bitirdim. Birçok yerde övgü
-ile bahsedilen ve okunması kesinlikle tavsiye edilen bu kitabı kesinlikle ben de size okumanız için tavsiye ediyorum.
-Kitap tamamı ile bir kaşı ütopya (distopya) üzerine kurulu. Kitabımızın baş karakteri olan Winston Smith’in bu ortam içinde başına gelenler ve ortamın ayrıntıları anlatılmakta.
-Kitap’ta Okyanusya adı verilen bir ülke içindeki tüm vatandaşların her hareketinden hatta ve hatta düşüncelerinden haberdar olan bir devlet, bu devletin iktidarı olan bir parti ve onun toplumu kendi dünya
-görüşü çerçevesinde şekillendirmek istemesi,tüm insani duyguları yok etme çabası ve makineleştirilmiş bir toplum isteği George Orwell tarafından ustaca anlatılıyor.
-Kitaptaki Parti’nin ana düşüncesi şu 4 cümle ile temele oturtuluyor, kitabı okuyunca cümlelerin anlamlarını anlayacaksınız:</p>
+<p><a href="/images/angular6/lesson2/2.png">
+<img src="/images/angular6/lesson2/2.png" style="width: 958px; height= 400px;" />
+</a></p>
 
-<p><strong><em>Büyük Birader’in Gözü Üstünde</em></strong></p>
+<p><strong>Bootstrap’ın Angular CLI Konfigürasyonu</strong></p>
 
-<p><strong><em>Savaş Barıştır</em></strong></p>
+<p>Bootstrap kurulumunun ardından projemizde kullanabilmek üzere konfigüre etmemiz gerekmetedir. Bunun için de proje dizinimizde yer alan package.json
+dosyası üzerinde değişiklik yapmamız gerekmektedir. package.json dosyasını açtığımızda içerisinde <strong><em>styles</em></strong> ve <strong><em>scripts</em></strong> alanları mevcuttur.
+Biz ilgili alanları aşağıdaki gibi değiştirelim:</p>
 
-<p><strong><em>Özgürlük Köleliktir</em></strong></p>
+<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="s1">"styles"</span><span class="o">:</span> <span class="o">[</span>
+              <span class="s1">"src/styles.css"</span><span class="o">,</span>
+              <span class="s1">"node_modules/bootstrap/dist/css/bootstrap.min.css"</span>
+            <span class="o">],</span>
+<span class="s1">"scripts"</span><span class="o">:</span> <span class="o">[</span>
+              <span class="s1">"node_modules/jquery/dist/jquery.min.js"</span><span class="o">,</span>
+              <span class="s1">"node_modules/bootstrap/dist/js/bootstrap.min.js"</span>
+            <span class="o">]</span></code></pre></figure>
 
-<p><strong><em>Cahillik Güçtür</em></strong></p>
+<p>Bootstrap’a ait CSS ve JS dosyalarının konfigürasyona eklenmesinin ardından app.component.html dosyasını açalım ve aşağıdaki gibi 
+yeni bir li elementi ekleyim:</p>
 
-<p>Kitabın anlattıkları hakkında fazla bilgi verip sizi okuma heycanından mahrum bırakmak istemiyorum :)
-Ancak şu kesin bir tavsiyemdir ki kitabı bir çırpıda okumayın, sakin,yavaş ve sindire sindire okuyun.</p>
+<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span>
+	<span class="o">&lt;</span><span class="nt">button</span> <span class="nt">class</span><span class="o">=</span><span class="s1">"btn btn-primary"</span><span class="o">&gt;</span> <span class="nt">Bootstrap</span> <span class="nt">Styled</span> <span class="nt">Button</span><span class="o">&lt;/</span><span class="nt">button</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span></code></pre></figure>
 
-<p>Kitabı okuyunca aklınıza şu soru gelebilir : “<strong><em>1984 gerçekten bir distopya mı yoksa içinde yaşadığımız dünya adım adım buraya mı gidiyor?</em></strong>”</p>
+<p>Yukarıdaki kodda basitçe bir button elemanı ekliyoruz ve butonun CSS class özelliğine Bootstrap’dan gelen btn ve btn-primary değerlerini atıyoruz. Şimdi
+ng s -o komutu ile uygulamamızı çalıştıralım. Aşağıdaki ekran görüntüsünden görebileceğimiz gibi eklenen buton Bootstrap’ın CSS özelliklerini kullanmış.</p>
 
-<div id="disqus_thread"></div>
-<script>
-/**
-* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
+<p><a href="/images/angular6/lesson2/3.png">
+<img src="/images/angular6/lesson2/3.png" style="width: 958px; height= 400px;" />
+</a></p>
 
-s.src = '//ilkgunelgithubio.disqus.com/embed.js';
-
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-
-<script id="dsq-count-scr" src="//ilkgunelgithubio.disqus.com/count.js" async=""></script>
-
-<!-- <a href="http://example.com/bar.html#disqus_thread">Link</a> -->
+<p>Bu yazıda anlatacaklarım bu kadar arkadaşlar. Bir sonraki yazıda görüşene kadar sağlıcakla kalın.</p>
 
     </div>
 
