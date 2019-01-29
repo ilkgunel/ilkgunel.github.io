@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2017/angular-2-lesson-2-create-component/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.4.0 -->
+      <!-- Begin Jekyll SEO tag v2.5.0 -->
 <title>Angular 2 Ders 2 - Component Oluşturalım | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.7.3" />
+<meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="Angular 2 Ders 2 - Component Oluşturalım" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2017-05-05T20:40:21+03:00" />
 <script type="application/ld+json">
-{"description":"Angular 2 Ders 2 - Component Oluşturalım","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2017/angular-2-lesson-2-create-component/","headline":"Angular 2 Ders 2 - Component Oluşturalım","dateModified":"2017-05-05T20:40:21+03:00","datePublished":"2017-05-05T20:40:21+03:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/angular-2-lesson-2-create-component/"},"@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/angular-2-lesson-2-create-component/"},"url":"http://ilkaygunel.com/blog/2017/angular-2-lesson-2-create-component/","headline":"Angular 2 Ders 2 - Component Oluşturalım","dateModified":"2017-05-05T20:40:21+03:00","datePublished":"2017-05-05T20:40:21+03:00","description":"Angular 2 Ders 2 - Component Oluşturalım","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -101,8 +101,6 @@
         
           <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
         
-          <li><a href="/blog/2017/filmler/" title="Filmler">Filmler</a></li>
-        
           <li><a href="/blog" title="Blog">Blog</a></li>
         
         <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
@@ -132,14 +130,14 @@ Hello World uygulaması yapmıştık. Bu yazıda da kendi component’imizi yap�
 
 <p><strong>angular2tutorials.component.ts</strong></p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span></span><span class="kr">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
 
-<span class="kd">@Component</span><span class="p">({</span>
-    <span class="nx">selector</span> <span class="o">:</span> <span class="s1">&#39;angular2Tutorials&#39;</span><span class="p">,</span>
-    <span class="nx">template</span> <span class="o">:</span> <span class="s1">&#39;&lt;h2&gt;Angular 2 Tutorials&lt;/h2&gt;&#39;</span>
+<span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
+    <span class="na">selector</span> <span class="p">:</span> <span class="s1">'angular2Tutorials'</span><span class="p">,</span>
+    <span class="na">template</span> <span class="p">:</span> <span class="s1">'&lt;h2&gt;Angular 2 Tutorials&lt;/h2&gt;'</span>
 <span class="p">})</span>
 
-<span class="kr">export</span> <span class="kr">class</span> <span class="nx">Angular2Tutorials</span><span class="p">{}</span></code></pre></figure>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">Angular2Tutorials</span><span class="p">{}</span></code></pre></figure>
 
 <p>Yeni bir component oluşturacağımız zaman ilk olarak dosya ismini düzgün hazırlamamız gerekiyor. Angular 2 anladığım kadarı dosya isimlendirmelerinde bir zorunluluk getirmemiş ancak hangi dosyanın ne işe yaradığının 
 net anlaşılabilmesi adına dosya adının peşine türünü de yazmak oldukça faydalı olacaktır. Temiz kod yaklaşımında kodun, dosyanın vs. ne iş yaptığının isminden anlaşılabilmesi iyi bir pratiktir. 
@@ -158,16 +156,16 @@ service işleri yapan kısımları barındıracak dosyalarımız olacak. O zaman
 
 <p><strong>app.component.ts</strong></p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
-<span class="kr">import</span> <span class="p">{</span><span class="nx">Angular2Tutorials</span><span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./angular2tutorials.component&#39;</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">Angular2Tutorials</span><span class="p">}</span> <span class="k">from</span> <span class="s1">'./angular2tutorials.component'</span><span class="p">;</span>
 
-<span class="kd">@Component</span><span class="p">({</span>
-  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;my-app&#39;</span><span class="p">,</span>
-  <span class="nx">template</span><span class="o">:</span> <span class="sb">`&lt;h1&gt;Hello World&lt;/h1&gt;</span>
-<span class="sb">              &lt;angular2Tutorials&gt;&lt;/angular2Tutorials&gt;`</span><span class="p">,</span>
-  <span class="nx">directives</span><span class="o">:</span><span class="p">[</span><span class="nx">Angular2Tutorials</span><span class="p">]</span>
+<span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
+  <span class="na">selector</span><span class="p">:</span> <span class="s1">'my-app'</span><span class="p">,</span>
+  <span class="na">template</span><span class="p">:</span> <span class="s2">`&lt;h1&gt;Hello World&lt;/h1&gt;
+              &lt;angular2Tutorials&gt;&lt;/angular2Tutorials&gt;`</span><span class="p">,</span>
+  <span class="na">directives</span><span class="p">:[</span><span class="nx">Angular2Tutorials</span><span class="p">]</span>
 <span class="p">})</span>
-<span class="kr">export</span> <span class="kr">class</span> <span class="nx">AppComponent</span> <span class="p">{</span> <span class="p">}</span></code></pre></figure>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">AppComponent</span> <span class="p">{</span> <span class="p">}</span></code></pre></figure>
 
 <p>Önceki yazıdan da hatırlayacağınız üzere uygulama başlatılırken (bootstrap) AppComponent ile başlatılıyordu. Biz de yeni component’lerimizi AppComponent içinden çağırmak sureti ile kullanabiliriz.</p>
 
@@ -243,7 +241,7 @@ var disqus_config = function () {
   
 </ul>
     <p class="txt-medium-gray">
-      <small>&copy;2018 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
     </p>
   </div>
 </footer>

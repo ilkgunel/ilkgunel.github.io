@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2017/exception-handling-practices-in-java/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.4.0 -->
+      <!-- Begin Jekyll SEO tag v2.5.0 -->
 <title>Java Exception Handling Best Practices | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.7.3" />
+<meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="Java Exception Handling Best Practices" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2017-08-04T21:23:21+03:00" />
 <script type="application/ld+json">
-{"description":"Java Exception Handling Best Practices","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2017/exception-handling-practices-in-java/","headline":"Java Exception Handling Best Practices","dateModified":"2017-08-04T21:23:21+03:00","datePublished":"2017-08-04T21:23:21+03:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/exception-handling-practices-in-java/"},"@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/exception-handling-practices-in-java/"},"url":"http://ilkaygunel.com/blog/2017/exception-handling-practices-in-java/","headline":"Java Exception Handling Best Practices","dateModified":"2017-08-04T21:23:21+03:00","datePublished":"2017-08-04T21:23:21+03:00","description":"Java Exception Handling Best Practices","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -100,8 +100,6 @@
           <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
         
           <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
-        
-          <li><a href="/blog/2017/filmler/" title="Filmler">Filmler</a></li>
         
           <li><a href="/blog" title="Blog">Blog</a></li>
         
@@ -171,7 +169,7 @@ Error’lar programın bütününü ya da bir kısmını çalışamayacak hale g
 
 <p><strong><em>Exception’ı catch bloğu içerisinde yutmayın.</em></strong>: Şu şekilde bir kodunuz olduğunu düşünün:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchMethodException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchMethodException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
    <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
 <span class="o">}</span></code></pre></figure>
 
@@ -180,24 +178,24 @@ yanlış bir yaklaşımdır. Sebebi bilinmeyen bir hatayı çözmek de mümkün 
 
 <p><strong><em>Geniş yerine dar kapsamlı Exception tanımlaması yapın</em></strong>: Şu şekilde bir kodumuz olsun:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">doAnything</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span> <span class="c1">//Doğru yaklaşım değil!</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">doAnything</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span> <span class="c1">//Doğru yaklaşım değil!</span>
 <span class="o">}</span>  </code></pre></figure>
 
 <p>Yukarıdaki kod bir hata olduğunda en tepedeki Exception sınıfı türünden bir hata fılatacaktır. Kodun yazılması sırasında doğru olan yaklaşım Exception’ların en 
 spesifik olacak şekilde tanımlanması ve hata mesajlarının buna uygun veirlmesidir. Yukarıdaki yaklaşım genellikle bir metot yazımında Java’nın zorladığı Checked Exception
 sayısı bir kaç tane olduğunda toptan hepsinden kurtulmak için başvurulan bir yoldur ama yanlıştır. Yukarıdaki kodun doğru hali şöyle olmalıdır:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">doAnything</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">SpecificException1</span><span class="o">,</span> <span class="n">SpecificException2</span> <span class="o">{</span> <span class="c1">//Doğru Yaklaşım</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">doAnything</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">SpecificException1</span><span class="o">,</span> <span class="n">SpecificException2</span> <span class="o">{</span> <span class="c1">//Doğru Yaklaşım</span>
 <span class="o">}</span></code></pre></figure>
 
 <p><strong><em>Catch içerisinde genel kapsamlı yakalama yapmayın</em></strong>: İkinci maddedekine benzer sebeplerle try-catch bloğunun catch kısmı içerisinde genel kapsamlı bir Excetion
 tanımlaması yapılması yanlış bir yaklaşımdır. Şu koddaki catch kısmında <strong><em>Exception e</em></strong> yerine IOExcetion, FileNotFoundException vs. gibi daha spesifik olacak 
 Exception sınıflarını kullanmak daha doğru bir yaklaşımdır.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="k">try</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">try</span> <span class="o">{</span>
    <span class="n">someMethod</span><span class="o">();</span>
 <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-   <span class="n">LOGGER</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">&quot;method has failed&quot;</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+   <span class="n">LOGGER</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"method has failed"</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
 <span class="o">}</span></code></pre></figure>
 
 <p><strong><em>Throwable Sınıfı Catch İçerisine Almayın</em></strong>: Yukarıdaki görüntüde fark ettiğimiz gibi Throwable hata mekanizmasının en üstünde yer alan sınıftır. JVM 
@@ -207,12 +205,12 @@ implementasyonlarındaki farklılıklar ve Throwable’ın en üst seviye hata s
 <p><strong><em>Hata Nesnesinin Kendisini Kullanın</em></strong>: Meydana gelen bir hatayı Catch içerisinde yakaladığınız zaman hatanın mesajını e.getMessage() şeklinde alabiliyoruz fakat bu yaklaşım hatanın Stack Trace’ini yok ediyor.
 Bu durumda hata üzerinde etki alanımızı daraltıyor. Bunun için hata fırlatılırken hata nesnesinin kendisinin kullanılması doğru bir yaklaşım olacaktır.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchMethodException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-   <span class="k">throw</span> <span class="k">new</span> <span class="n">MyServiceException</span><span class="o">(</span><span class="s">&quot;Some information: &quot;</span> <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>  <span class="c1">//Yanlış Yaklaşım!</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchMethodException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+   <span class="k">throw</span> <span class="k">new</span> <span class="nf">MyServiceException</span><span class="o">(</span><span class="s">"Some information: "</span> <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>  <span class="c1">//Yanlış Yaklaşım!</span>
 <span class="o">}</span></code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchMethodException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-   <span class="k">throw</span> <span class="k">new</span> <span class="n">MyServiceException</span><span class="o">(</span><span class="s">&quot;Some information: &quot;</span> <span class="o">,</span> <span class="n">e</span><span class="o">);</span>  <span class="c1">//Doğru Yaklaşım </span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchMethodException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+   <span class="k">throw</span> <span class="k">new</span> <span class="nf">MyServiceException</span><span class="o">(</span><span class="s">"Some information: "</span> <span class="o">,</span> <span class="n">e</span><span class="o">);</span>  <span class="c1">//Doğru Yaklaşım </span>
 <span class="o">}</span></code></pre></figure>
 
 <p><strong><em>Hatalarınızı Loglayın</em></strong>: Catch içerisinde hatalarınızı yakaladığınız zaman hatayı anlamak ve çözümünü kolaylaştırmak için hatalarınızı loglayın. Burada aklınıza
@@ -230,7 +228,7 @@ olmaz.</p>
 <p><strong><em>Hata Yakalamayacaksanız Catch Kullanmayın</em></strong>: Try bloğunun genellikle catch bloğu ile birlikte kullanıldığını görürüz fakat bu bir zorunluluk değildir. Eğer try içerisinde yapılacak işlem neticesinde bir hata 
 olsa da yakalamak, üstesinden gelmek istemiyorsanız, catch kullanmayıp finnaly bloğu ile kaynaklarınızı kapatabilirsiniz.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="k">try</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">try</span> <span class="o">{</span>
   <span class="n">someMethod</span><span class="o">();</span>  
 <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
   <span class="n">cleanUp</span><span class="o">();</span>
@@ -255,7 +253,7 @@ olacaktır.</p>
 
 <p>Şu şekilde bir DBUtil sınıfı içerisinde closeConnection metodu yazılabilir.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">class</span> <span class="nc">DBUtil</span><span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">DBUtil</span><span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">closeConnection</span><span class="o">(</span><span class="n">Connection</span> <span class="n">conn</span><span class="o">){</span>
         <span class="k">try</span><span class="o">{</span>
             <span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
@@ -267,7 +265,7 @@ olacaktır.</p>
 
 <p>Aşağıdaki kodda da finally içerisinden DBUtil’deki closeConnection metodu çağıralarak kod tekrarının önüne geçilmiş oluyor.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">dataAccessCode</span><span class="o">()</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">dataAccessCode</span><span class="o">()</span> <span class="o">{</span>
     <span class="n">Connection</span> <span class="n">conn</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
     <span class="k">try</span><span class="o">{</span>
         <span class="n">conn</span> <span class="o">=</span> <span class="n">getConnection</span><span class="o">();</span>
@@ -282,16 +280,16 @@ Bu hatanın alınması bize o an yapılan işin durdurulması gerektiğine bir i
 
 <p>Şu kodda InterruptedException oluştuğunda Thread üzerinde hiçbir şey yapılmıyor. Bu yanlış yaklaşım olur.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
   <span class="k">try</span> <span class="o">{</span>
     <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">100000</span><span class="o">);</span>
-  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{}</span> <span class="c1">//Don&#39;t do this</span>
+  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{}</span> <span class="c1">//Don't do this</span>
   <span class="n">doSomething</span><span class="o">();</span>
 <span class="o">}</span></code></pre></figure>
 
 <p>Doğru olan yaklaşım şu şekilde o an yaptığı işi ve Thread’i sonlandırması olacaktır:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
   <span class="k">try</span> <span class="o">{</span>
     <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">100000</span><span class="o">);</span>
   <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
@@ -354,7 +352,7 @@ var disqus_config = function () {
   
 </ul>
     <p class="txt-medium-gray">
-      <small>&copy;2018 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
     </p>
   </div>
 </footer>

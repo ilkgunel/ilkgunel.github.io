@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2017/spring-rest-post-example/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.4.0 -->
+      <!-- Begin Jekyll SEO tag v2.5.0 -->
 <title>Spring Rest - POST Örneği | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.7.3" />
+<meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="Spring Rest - POST Örneği" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2017-01-21T20:40:21+03:00" />
 <script type="application/ld+json">
-{"description":"Spring Rest - POST Örneği","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2017/spring-rest-post-example/","headline":"Spring Rest - POST Örneği","dateModified":"2017-01-21T20:40:21+03:00","datePublished":"2017-01-21T20:40:21+03:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/spring-rest-post-example/"},"@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/spring-rest-post-example/"},"url":"http://ilkaygunel.com/blog/2017/spring-rest-post-example/","headline":"Spring Rest - POST Örneği","dateModified":"2017-01-21T20:40:21+03:00","datePublished":"2017-01-21T20:40:21+03:00","description":"Spring Rest - POST Örneği","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -101,8 +101,6 @@
         
           <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
         
-          <li><a href="/blog/2017/filmler/" title="Filmler">Filmler</a></li>
-        
           <li><a href="/blog" title="Blog">Blog</a></li>
         
         <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
@@ -145,7 +143,7 @@ alan(lar)ımızı kullanmak olacaktır.</p>
 
 <p><strong>PersonRegisterPojo.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">pojo</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">pojo</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">PersonRegisterPojo</span> <span class="o">{</span>
 	<span class="n">String</span> <span class="n">registeringResult</span><span class="o">;</span>
@@ -173,7 +171,7 @@ alan(lar)ımızı kullanmak olacaktır.</p>
 
 <p><strong>PostExampleController.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">postExample</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">postExample</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.sql.Connection</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.sql.DriverManager</span><span class="o">;</span>
@@ -192,7 +190,7 @@ alan(lar)ımızı kullanmak olacaktır.</p>
 
 <span class="nd">@RestController</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">PostExampleController</span> <span class="o">{</span>
-	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/postPerson&quot;</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">)</span>
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/postPerson"</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">)</span>
 	<span class="kd">public</span> <span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">PersonRegisterPojo</span><span class="o">&gt;</span> <span class="nf">postPerson</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="n">Person</span> <span class="n">person</span><span class="o">)</span> <span class="o">{</span>
 
 		<span class="n">PersonRegisterPojo</span> <span class="n">registerPojo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PersonRegisterPojo</span><span class="o">();</span>
@@ -201,10 +199,10 @@ alan(lar)ımızı kullanmak olacaktır.</p>
 		<span class="n">PreparedStatement</span> <span class="n">ps</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 		<span class="n">Connection</span> <span class="n">con</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 		<span class="k">try</span> <span class="o">{</span>
-			<span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">&quot;com.mysql.jdbc.Driver&quot;</span><span class="o">);</span>
+			<span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"com.mysql.jdbc.Driver"</span><span class="o">);</span>
 			<span class="n">con</span> <span class="o">=</span> <span class="n">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span>
-					<span class="s">&quot;jdbc:mysql://localhost:3306/SpringRestPost?useUnicode=true&amp;characterEncoding=UTF-8&quot;</span><span class="o">,</span> <span class="s">&quot;root&quot;</span><span class="o">,</span> <span class="s">&quot;&quot;</span><span class="o">);</span>
-			<span class="n">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">&quot;INSERT INTO person(id,name,surname,	neighborhood,borough, city,	country) VALUES(?,?,?,?,?,?,?)&quot;</span><span class="o">;</span>
+					<span class="s">"jdbc:mysql://localhost:3306/SpringRestPost?useUnicode=true&amp;characterEncoding=UTF-8"</span><span class="o">,</span> <span class="s">"root"</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+			<span class="n">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">"INSERT INTO person(id,name,surname,	neighborhood,borough, city,	country) VALUES(?,?,?,?,?,?,?)"</span><span class="o">;</span>
 			<span class="n">ps</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span>
 			<span class="n">ps</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">person</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
 			<span class="n">ps</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">person</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
@@ -214,10 +212,10 @@ alan(lar)ımızı kullanmak olacaktır.</p>
 			<span class="n">ps</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">6</span><span class="o">,</span> <span class="n">person</span><span class="o">.</span><span class="na">getAddress</span><span class="o">().</span><span class="na">getCity</span><span class="o">());</span>
 			<span class="n">ps</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">7</span><span class="o">,</span> <span class="n">person</span><span class="o">.</span><span class="na">getAddress</span><span class="o">().</span><span class="na">getCountry</span><span class="o">());</span>
 			<span class="n">ps</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">();</span>
-			<span class="n">registerPojo</span><span class="o">.</span><span class="na">setRegisteringResult</span><span class="o">(</span><span class="s">&quot;Kyıt Başarı İle Eklendi&quot;</span><span class="o">);</span>
+			<span class="n">registerPojo</span><span class="o">.</span><span class="na">setRegisteringResult</span><span class="o">(</span><span class="s">"Kyıt Başarı İle Eklendi"</span><span class="o">);</span>
 
 		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ClassNotFoundException</span> <span class="o">|</span> <span class="n">SQLException</span> <span class="n">exception</span><span class="o">)</span> <span class="o">{</span>
-			<span class="n">registerPojo</span><span class="o">.</span><span class="na">setRegisteringResult</span><span class="o">(</span><span class="s">&quot;Kayıt Sırasında Bir Hata Meydana Geldi! &quot;</span> <span class="o">+</span> <span class="n">exception</span><span class="o">);</span>
+			<span class="n">registerPojo</span><span class="o">.</span><span class="na">setRegisteringResult</span><span class="o">(</span><span class="s">"Kayıt Sırasında Bir Hata Meydana Geldi! "</span> <span class="o">+</span> <span class="n">exception</span><span class="o">);</span>
 			<span class="n">exception</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 		<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
 			<span class="k">try</span> <span class="o">{</span>
@@ -265,17 +263,17 @@ veriyoruz. Akabinde Body tabına tıklıyoruz ve raw seçeneğini seçiyoruz. ra
 web servisin beklediği şekilde bir JSON yazıyoruz. Beklediği şekildeden kasıt ise önceki yazıdaki Person sınıfı alanlarını taşıyan bir JSON olmasıdır. Burada adress alanının iç içe olduğuna dikkat
 etmek gerekir. Biz şöyle bir JSON gönderiyoruz:</p>
 
-<figure class="highlight"><pre><code class="language-json" data-lang="json"><span></span><span class="p">{</span>  
-   <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
-   <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Onur&quot;</span><span class="p">,</span>
-   <span class="nt">&quot;surname&quot;</span><span class="p">:</span><span class="s2">&quot;Özcan&quot;</span><span class="p">,</span>
-   <span class="nt">&quot;address&quot;</span><span class="p">:{</span>  
-      <span class="nt">&quot;neighborhood&quot;</span><span class="p">:</span><span class="s2">&quot;Cennet Mah.&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;borough&quot;</span><span class="p">:</span><span class="s2">&quot;K.Çekmece&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;İstanbul&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;TÜRKİYE&quot;</span>
-   <span class="p">}</span>
-<span class="p">}</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">  
+   </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Onur"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"surname"</span><span class="p">:</span><span class="s2">"Özcan"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"address"</span><span class="p">:{</span><span class="w">  
+      </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="s2">"Cennet Mah."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"borough"</span><span class="p">:</span><span class="s2">"K.Çekmece"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"city"</span><span class="p">:</span><span class="s2">"İstanbul"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"country"</span><span class="p">:</span><span class="s2">"TÜRKİYE"</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
 
 <p><a href="/images/springRest/post3.png">
 <img src="/images/springRest/post3.png" style="width: 958px; height= 400px;" />
@@ -296,17 +294,17 @@ kaydın başarı ile ekleniğine dair Response döndü.</p>
 
 <p>Şimdi az önce gönderdiğimiz JSON’ın id alanı aynı kalsın ve içeriğini biraz değiştirelim. Sonra Postman’e bu JSON’ı verip POST edelim.</p>
 
-<figure class="highlight"><pre><code class="language-json" data-lang="json"><span></span><span class="p">{</span>  
-   <span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
-   <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Alican&quot;</span><span class="p">,</span>
-   <span class="nt">&quot;surname&quot;</span><span class="p">:</span><span class="s2">&quot;Akkuş&quot;</span><span class="p">,</span>
-   <span class="nt">&quot;address&quot;</span><span class="p">:{</span>  
-      <span class="nt">&quot;neighborhood&quot;</span><span class="p">:</span><span class="s2">&quot;Cennet Mah.&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;borough&quot;</span><span class="p">:</span><span class="s2">&quot;K.Çekmece&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;İstanbul&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;TÜRKİYE&quot;</span>
-   <span class="p">}</span>
-<span class="p">}</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">  
+   </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Alican"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"surname"</span><span class="p">:</span><span class="s2">"Akkuş"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"address"</span><span class="p">:{</span><span class="w">  
+      </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="s2">"Cennet Mah."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"borough"</span><span class="p">:</span><span class="s2">"K.Çekmece"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"city"</span><span class="p">:</span><span class="s2">"İstanbul"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"country"</span><span class="p">:</span><span class="s2">"TÜRKİYE"</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
 
 <p>Aşağıdaki resimde göreceğiniz gibi bir duplicate hatası alacağız çünkü id alanı bir PrimaryKey alan ve tekrarlı veriye izin vermez. Bu nedenle de JDBC hata veriyor. Biz de hatayı dönen JSON içinde
 görüyoruz.</p>
@@ -368,7 +366,7 @@ var disqus_config = function () {
   
 </ul>
     <p class="txt-medium-gray">
-      <small>&copy;2018 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
     </p>
   </div>
 </footer>

@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/rest-assured-ile-web-servis-testi-2-json-schema-validation-ve-expected-values/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.4.0 -->
+      <!-- Begin Jekyll SEO tag v2.5.0 -->
 <title>Rest Assured İle Web Servis Testi 2 - JSON Schema Validation Ve Expected Values | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.7.3" />
+<meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="Rest Assured İle Web Servis Testi 2 - JSON Schema Validation Ve Expected Values" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-11-25T20:40:21+03:00" />
 <script type="application/ld+json">
-{"description":"Rest Assured İle Web Servis Testi","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/rest-assured-ile-web-servis-testi-2-json-schema-validation-ve-expected-values/","headline":"Rest Assured İle Web Servis Testi 2 - JSON Schema Validation Ve Expected Values","dateModified":"2016-11-25T20:40:21+03:00","datePublished":"2016-11-25T20:40:21+03:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/rest-assured-ile-web-servis-testi-2-json-schema-validation-ve-expected-values/"},"@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/rest-assured-ile-web-servis-testi-2-json-schema-validation-ve-expected-values/"},"url":"http://ilkaygunel.com/blog/2016/rest-assured-ile-web-servis-testi-2-json-schema-validation-ve-expected-values/","headline":"Rest Assured İle Web Servis Testi 2 - JSON Schema Validation Ve Expected Values","dateModified":"2016-11-25T20:40:21+03:00","datePublished":"2016-11-25T20:40:21+03:00","description":"Rest Assured İle Web Servis Testi","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -101,8 +101,6 @@
         
           <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
         
-          <li><a href="/blog/2017/filmler/" title="Filmler">Filmler</a></li>
-        
           <li><a href="/blog" title="Blog">Blog</a></li>
         
         <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
@@ -129,37 +127,37 @@
 
 <p>Önceki yazıda bize bir döküman verildiği ve dökümanda şunlar şunlar yazıyor varsayımı üzerinden gitmiştik. Şimdi varsayalım ki aynı döküman bize işlem başarılı olursa şöyle bir JSON’ın döndüğü bilgisini veriyor, alanların karşısındaki değerlerin ne olduğunun önemi yok, döküman bunu kalıp olarak veriyor:</p>
 
-<figure class="highlight"><pre><code class="language-json" data-lang="json"><span></span><span class="p">{</span>
-    <span class="nt">&quot;operationResult&quot;</span><span class="p">:</span> <span class="s2">&quot;Kayıt Başarı İle Tamamlandı! Kaydolan Kişiye Ait Bilgiler&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;member&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;emailAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;icmen@mustafa.com&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;İÜ Avcılar Kampüs&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;enabled&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Mustafa&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;827ccb0eea8a706c4c34a16891f84e7b&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;ROLE_USER&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;surname&quot;</span><span class="p">:</span> <span class="s2">&quot;İçmen&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;telephoneNumber&quot;</span><span class="p">:</span> <span class="s2">&quot;0-212-473-70-70&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;birthDate&quot;</span><span class="p">:</span> <span class="mi">315532800000</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"operationResult"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kayıt Başarı İle Tamamlandı! Kaydolan Kişiye Ait Bilgiler"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"emailAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"icmen@mustafa.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"İÜ Avcılar Kampüs"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mustafa"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"827ccb0eea8a706c4c34a16891f84e7b"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ROLE_USER"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"surname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"İçmen"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"telephoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0-212-473-70-70"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"birthDate"</span><span class="p">:</span><span class="w"> </span><span class="mi">315532800000</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
 
 <p>İşlemin başarısız olması durumunda ise şöyle bir JSON bize döndürülüyor:</p>
 
-<figure class="highlight"><pre><code class="language-json" data-lang="json"><span></span><span class="p">{</span>
-    <span class="nt">&quot;operationResult&quot;</span><span class="p">:</span> <span class="s2">&quot;Aynı E-posta Adresi İkinci Kez Kayıt Olamaz!&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;member&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;emailAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;icmen@mustafa.com&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;İÜ Avcılar Kampüs&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;enabled&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Mustafa&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;827ccb0eea8a706c4c34a16891f84e7b&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;ROLE_USER&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;surname&quot;</span><span class="p">:</span> <span class="s2">&quot;İçmen&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;telephoneNumber&quot;</span><span class="p">:</span> <span class="s2">&quot;0-212-473-70-70&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;birthDate&quot;</span><span class="p">:</span> <span class="mi">315532800000</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"operationResult"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Aynı E-posta Adresi İkinci Kez Kayıt Olamaz!"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"emailAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"icmen@mustafa.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"İÜ Avcılar Kampüs"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mustafa"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"827ccb0eea8a706c4c34a16891f84e7b"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ROLE_USER"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"surname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"İçmen"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"telephoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0-212-473-70-70"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"birthDate"</span><span class="p">:</span><span class="w"> </span><span class="mi">315532800000</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
 
 <p>Burada döküman bizden kayıt ister başarılı ister başarısız olsun bu alanların kesinlikle dönen cevap içinde olmasını istiyor. Ve ayrıca bizden operationResult alanının geçerli bilgiler ile post işlemi yapıldığında  “Kayıt Başarı İle Tamamlandı! Kaydolan Kişiye Ait Bilgiler” şeklinde gelmesinin testinin de yapılmasını istiyor.</p>
 
@@ -176,30 +174,30 @@ ve herhangi biri bulunumazsa test fail oluyor. Şimdi bu şemanın nasıl kullan
 
 <p>Önceki yazıda response elde ettiğimiz kod parçası şu şekilde idi:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">given</span><span class="o">()</span>
-		<span class="o">.</span><span class="na">auth</span><span class="o">().</span><span class="na">form</span><span class="o">(</span><span class="s">&quot;ilkay.gunel@kod5.org&quot;</span><span class="o">,</span> <span class="s">&quot;12345&quot;</span><span class="o">,</span><span class="k">new</span> <span class="n">FormAuthConfig</span><span class="o">(</span><span class="s">&quot;/BlogProjectWithSpringMVC/j_spring_security_check&quot;</span><span class="o">,</span> <span class="s">&quot;j_username&quot;</span><span class="o">,</span> <span class="s">&quot;j_password&quot;</span><span class="o">))</span>
-        <span class="o">.</span><span class="na">contentType</span><span class="o">(</span><span class="s">&quot;application/json&quot;</span><span class="o">)</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">given</span><span class="o">()</span>
+		<span class="o">.</span><span class="na">auth</span><span class="o">().</span><span class="na">form</span><span class="o">(</span><span class="s">"ilkay.gunel@kod5.org"</span><span class="o">,</span> <span class="s">"12345"</span><span class="o">,</span><span class="k">new</span> <span class="n">FormAuthConfig</span><span class="o">(</span><span class="s">"/BlogProjectWithSpringMVC/j_spring_security_check"</span><span class="o">,</span> <span class="s">"j_username"</span><span class="o">,</span> <span class="s">"j_password"</span><span class="o">))</span>
+        <span class="o">.</span><span class="na">contentType</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">)</span>
         <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="n">json</span><span class="o">)</span>
         <span class="o">.</span><span class="na">when</span><span class="o">()</span>
-        <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">&quot;/webservice/memberRegister&quot;</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">"/webservice/memberRegister"</span><span class="o">)</span>
         <span class="o">.</span><span class="na">then</span><span class="o">()</span>
         <span class="o">.</span><span class="na">statusCode</span><span class="o">(</span><span class="mi">200</span><span class="o">)</span>
         <span class="o">.</span><span class="na">extract</span><span class="o">().</span><span class="na">response</span><span class="o">();</span></code></pre></figure>
 
 <p>Şimdi biz bu kod bloğunun .statusCode(200)’den sonrasına 1 satır ekleme yapacağız. Şu şekilde :</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">import static</span> <span class="nn">com.jayway.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">static</span> <span class="n">com</span><span class="o">.</span><span class="na">jayway</span><span class="o">.</span><span class="na">restassured</span><span class="o">.</span><span class="na">module</span><span class="o">.</span><span class="na">jsv</span><span class="o">.</span><span class="na">JsonSchemaValidator</span><span class="o">.</span><span class="na">matchesJsonSchema</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
 
 <span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">given</span><span class="o">()</span>
-		<span class="o">.</span><span class="na">auth</span><span class="o">().</span><span class="na">form</span><span class="o">(</span><span class="s">&quot;ilkay.gunel@kod5.org&quot;</span><span class="o">,</span> <span class="s">&quot;12345&quot;</span><span class="o">,</span><span class="k">new</span> <span class="n">FormAuthConfig</span><span class="o">(</span><span class="s">&quot;/BlogProjectWithSpringMVC/j_spring_security_check&quot;</span><span class="o">,</span> <span class="s">&quot;j_username&quot;</span><span class="o">,</span> <span class="s">&quot;j_password&quot;</span><span class="o">))</span>
-        <span class="o">.</span><span class="na">contentType</span><span class="o">(</span><span class="s">&quot;application/json&quot;</span><span class="o">)</span>
+		<span class="o">.</span><span class="na">auth</span><span class="o">().</span><span class="na">form</span><span class="o">(</span><span class="s">"ilkay.gunel@kod5.org"</span><span class="o">,</span> <span class="s">"12345"</span><span class="o">,</span><span class="k">new</span> <span class="n">FormAuthConfig</span><span class="o">(</span><span class="s">"/BlogProjectWithSpringMVC/j_spring_security_check"</span><span class="o">,</span> <span class="s">"j_username"</span><span class="o">,</span> <span class="s">"j_password"</span><span class="o">))</span>
+        <span class="o">.</span><span class="na">contentType</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">)</span>
         <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="n">json</span><span class="o">)</span>
         <span class="o">.</span><span class="na">when</span><span class="o">()</span>
-        <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">&quot;/webservice/memberRegister&quot;</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">"/webservice/memberRegister"</span><span class="o">)</span>
         <span class="o">.</span><span class="na">then</span><span class="o">()</span>
         <span class="o">.</span><span class="na">statusCode</span><span class="o">(</span><span class="mi">200</span><span class="o">)</span>
-        <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="n">matchesJsonSchema</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;src/test/resources/schemas/generated.json&quot;</span><span class="o">)))</span>
+        <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="n">matchesJsonSchema</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"src/test/resources/schemas/generated.json"</span><span class="o">)))</span>
         <span class="o">.</span><span class="na">extract</span><span class="o">().</span><span class="na">response</span><span class="o">();</span></code></pre></figure>
 
 <p>matchesJsonSchema() metodu içerisine parametre olarak File nesnesinde belirtilen doyayı dönen response ile karşılaştırır ve required altındaki alanların response içinde olup olmadığına bakar. Eğer herhangi biri yoksa testi fail eder.</p>
@@ -222,18 +220,18 @@ ve herhangi biri bulunumazsa test fail oluyor. Şimdi bu şemanın nasıl kullan
 
 <p>Rest Assured içinde when()’den sonra birden fazla kez body() metodu kullanılabilir. Biz de şimdi .body(matchesJsonSchema(new File(“src/test/resources/schemas/generated.json”))) satırının altına bir satır daha kod ekleyeceğiz. Şöyle:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">import static</span> <span class="nn">org.hamcrest.core.IsEqual.equalTo</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">hamcrest</span><span class="o">.</span><span class="na">core</span><span class="o">.</span><span class="na">IsEqual</span><span class="o">.</span><span class="na">equalTo</span><span class="o">;</span>
 
 <span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">given</span><span class="o">()</span>
-		<span class="o">.</span><span class="na">auth</span><span class="o">().</span><span class="na">form</span><span class="o">(</span><span class="s">&quot;ilkay.gunel@kod5.org&quot;</span><span class="o">,</span> <span class="s">&quot;12345&quot;</span><span class="o">,</span><span class="k">new</span> <span class="n">FormAuthConfig</span><span class="o">(</span><span class="s">&quot;/BlogProjectWithSpringMVC/j_spring_security_check&quot;</span><span class="o">,</span> <span class="s">&quot;j_username&quot;</span><span class="o">,</span> <span class="s">&quot;j_password&quot;</span><span class="o">))</span>
-        <span class="o">.</span><span class="na">contentType</span><span class="o">(</span><span class="s">&quot;application/json&quot;</span><span class="o">)</span>
+		<span class="o">.</span><span class="na">auth</span><span class="o">().</span><span class="na">form</span><span class="o">(</span><span class="s">"ilkay.gunel@kod5.org"</span><span class="o">,</span> <span class="s">"12345"</span><span class="o">,</span><span class="k">new</span> <span class="n">FormAuthConfig</span><span class="o">(</span><span class="s">"/BlogProjectWithSpringMVC/j_spring_security_check"</span><span class="o">,</span> <span class="s">"j_username"</span><span class="o">,</span> <span class="s">"j_password"</span><span class="o">))</span>
+        <span class="o">.</span><span class="na">contentType</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">)</span>
         <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="n">json</span><span class="o">)</span>
         <span class="o">.</span><span class="na">when</span><span class="o">()</span>
-        <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">&quot;/webservice/memberRegister&quot;</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">"/webservice/memberRegister"</span><span class="o">)</span>
         <span class="o">.</span><span class="na">then</span><span class="o">()</span>
         <span class="o">.</span><span class="na">statusCode</span><span class="o">(</span><span class="mi">200</span><span class="o">)</span>
-        <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="n">matchesJsonSchema</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;src/test/resources/schemas/generated.json&quot;</span><span class="o">)))</span>
-        <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="s">&quot;operationResult&quot;</span><span class="o">,</span> <span class="n">equalTo</span><span class="o">(</span><span class="s">&quot;Kayıt Başarı İle Tamamlandı! Kaydolan Kişiye Ait Bilgiler&quot;</span><span class="o">))</span>
+        <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="n">matchesJsonSchema</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"src/test/resources/schemas/generated.json"</span><span class="o">)))</span>
+        <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="s">"operationResult"</span><span class="o">,</span> <span class="n">equalTo</span><span class="o">(</span><span class="s">"Kayıt Başarı İle Tamamlandı! Kaydolan Kişiye Ait Bilgiler"</span><span class="o">))</span>
         <span class="o">.</span><span class="na">extract</span><span class="o">().</span><span class="na">response</span><span class="o">();</span></code></pre></figure>
 
 <p>Dönen response içindeki operationResult alanının değerinin <strong><em>Kayıt Başarı İle Tamamlandı! Kaydolan Kişiye Ait Bilgiler</em></strong> şeklide olup olmadığını test ediyoruz. body() metoduna iki 
@@ -309,7 +307,7 @@ var disqus_config = function () {
   
 </ul>
     <p class="txt-medium-gray">
-      <small>&copy;2018 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
     </p>
   </div>
 </footer>

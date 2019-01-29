@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2017/demo-maven-project/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.4.0 -->
+      <!-- Begin Jekyll SEO tag v2.5.0 -->
 <title>Maven Yazıları 6 - Demo Maven Projesi Yapalım | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.7.3" />
+<meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="Maven Yazıları 6 - Demo Maven Projesi Yapalım" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2017-07-05T20:41:20+03:00" />
 <script type="application/ld+json">
-{"description":"Maven Yazıları 6 - Demo Maven Projesi Yapalım","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2017/demo-maven-project/","headline":"Maven Yazıları 6 - Demo Maven Projesi Yapalım","dateModified":"2017-07-05T20:41:20+03:00","datePublished":"2017-07-05T20:41:20+03:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/demo-maven-project/"},"@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/demo-maven-project/"},"url":"http://ilkaygunel.com/blog/2017/demo-maven-project/","headline":"Maven Yazıları 6 - Demo Maven Projesi Yapalım","dateModified":"2017-07-05T20:41:20+03:00","datePublished":"2017-07-05T20:41:20+03:00","description":"Maven Yazıları 6 - Demo Maven Projesi Yapalım","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -101,8 +101,6 @@
         
           <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
         
-          <li><a href="/blog/2017/filmler/" title="Filmler">Filmler</a></li>
-        
           <li><a href="/blog" title="Blog">Blog</a></li>
         
         <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
@@ -142,8 +140,8 @@ NetBeans için <a href="http://ilkaygunel.com/blog/2017/maven-tutorials-4/">bura
 
 <p><strong>pom.xml</strong></p>
 
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
-	<span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="nt">&gt;</span>
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/POM/4.0.0"</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+	<span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span><span class="nt">&gt;</span>
 	<span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
 	<span class="nt">&lt;groupId&gt;</span>com.ilkaygunel<span class="nt">&lt;/groupId&gt;</span>
 	<span class="nt">&lt;artifactId&gt;</span>DemoMavenProject<span class="nt">&lt;/artifactId&gt;</span>
@@ -213,7 +211,7 @@ Ben genellikle hızlı ve eski sürümler de kolaylıkla bulunabildiği için mv
 
 <p><strong>Driver.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.pojo</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">pojo</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Driver</span> <span class="o">{</span>
 	<span class="kd">private</span> <span class="kt">int</span> <span class="n">driverId</span><span class="o">;</span>
@@ -259,7 +257,7 @@ metotlarını barındıran sınıflar POJO (Plain Old Java Object) olarak adland
 
 <p><strong>DriverService.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.service</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">service</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.sql.Connection</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.sql.DriverManager</span><span class="o">;</span>
@@ -282,25 +280,25 @@ metotlarını barındıran sınıflar POJO (Plain Old Java Object) olarak adland
 	    
 	    
 	    <span class="k">try</span> <span class="o">{</span>
-            <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">&quot;com.mysql.jdbc.Driver&quot;</span><span class="o">);</span>
-            <span class="n">con</span><span class="o">=</span><span class="n">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="s">&quot;jdbc:mysql://localhost:3306/Formula1&quot;</span><span class="o">,</span><span class="s">&quot;root&quot;</span><span class="o">,</span><span class="s">&quot;&quot;</span><span class="o">);</span>
-            <span class="n">ps</span><span class="o">=</span><span class="n">con</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="s">&quot;SELECT * FROM drivers&quot;</span><span class="o">);</span>
+            <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"com.mysql.jdbc.Driver"</span><span class="o">);</span>
+            <span class="n">con</span><span class="o">=</span><span class="n">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="s">"jdbc:mysql://localhost:3306/Formula1"</span><span class="o">,</span><span class="s">"root"</span><span class="o">,</span><span class="s">""</span><span class="o">);</span>
+            <span class="n">ps</span><span class="o">=</span><span class="n">con</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="s">"SELECT * FROM drivers"</span><span class="o">);</span>
             <span class="n">ResultSet</span> <span class="n">rs</span><span class="o">=</span><span class="n">ps</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">();</span>
             
             <span class="k">while</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">next</span><span class="o">())</span>
             <span class="o">{</span>
             	<span class="n">Driver</span> <span class="n">driver</span><span class="o">=</span><span class="k">new</span> <span class="n">Driver</span><span class="o">();</span>
-                <span class="n">driver</span><span class="o">.</span><span class="na">setDriverId</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="s">&quot;driverId&quot;</span><span class="o">));</span>
-                <span class="n">driver</span><span class="o">.</span><span class="na">setDriverName</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;driverName&quot;</span><span class="o">));</span>
-                <span class="n">driver</span><span class="o">.</span><span class="na">setDriverSurname</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;driverSurname&quot;</span><span class="o">));</span>
-                <span class="n">driver</span><span class="o">.</span><span class="na">setDriverCountry</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;driverCountry&quot;</span><span class="o">));</span>
-                <span class="n">driver</span><span class="o">.</span><span class="na">setDriverTeam</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;driverTeam&quot;</span><span class="o">));</span>
+                <span class="n">driver</span><span class="o">.</span><span class="na">setDriverId</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="s">"driverId"</span><span class="o">));</span>
+                <span class="n">driver</span><span class="o">.</span><span class="na">setDriverName</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"driverName"</span><span class="o">));</span>
+                <span class="n">driver</span><span class="o">.</span><span class="na">setDriverSurname</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"driverSurname"</span><span class="o">));</span>
+                <span class="n">driver</span><span class="o">.</span><span class="na">setDriverCountry</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"driverCountry"</span><span class="o">));</span>
+                <span class="n">driver</span><span class="o">.</span><span class="na">setDriverTeam</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"driverTeam"</span><span class="o">));</span>
                 <span class="n">driverList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">driver</span><span class="o">);</span>
             <span class="o">}</span>
             <span class="k">return</span> <span class="n">driverList</span><span class="o">;</span>
         <span class="o">}</span> 
         <span class="k">catch</span> <span class="o">(</span><span class="n">ClassNotFoundException</span> <span class="o">|</span> <span class="n">SQLException</span> <span class="n">exception</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Bir hata meydana geldi:&quot;</span><span class="o">+</span><span class="n">exception</span><span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Bir hata meydana geldi:"</span><span class="o">+</span><span class="n">exception</span><span class="o">);</span>
             <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
         <span class="o">}</span>
         <span class="k">finally</span><span class="o">{</span> 
@@ -312,7 +310,7 @@ metotlarını barındıran sınıflar POJO (Plain Old Java Object) olarak adland
                     <span class="n">ps</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
                 <span class="o">}</span>
             <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">SQLException</span> <span class="n">sqlException</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Bir hata meydana geldi:&quot;</span><span class="o">+</span><span class="n">sqlException</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Bir hata meydana geldi:"</span><span class="o">+</span><span class="n">sqlException</span><span class="o">);</span>
             <span class="o">}</span>
         <span class="o">}</span>
 	<span class="o">}</span>
@@ -324,7 +322,7 @@ biraz daha detaylı olarak anlatmıştım. Yazıyı uzatmamak adına tekrar bura
 
 <p><strong>GetDriversServlet.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.servlet</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">servlet</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
 
@@ -337,7 +335,7 @@ biraz daha detaylı olarak anlatmıştım. Yazıyı uzatmamak adına tekrar bura
 
 <span class="kn">import</span> <span class="nn">com.ilkaygunel.service.DriversService</span><span class="o">;</span>
 
-<span class="nd">@WebServlet</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;getDrivers&quot;</span><span class="o">,</span> <span class="n">urlPatterns</span> <span class="o">=</span> <span class="o">{</span><span class="s">&quot;/getDrivers&quot;</span><span class="o">})</span>
+<span class="nd">@WebServlet</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"getDrivers"</span><span class="o">,</span> <span class="n">urlPatterns</span> <span class="o">=</span> <span class="o">{</span><span class="s">"/getDrivers"</span><span class="o">})</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">GetDriversServlet</span> <span class="kd">extends</span> <span class="n">HttpServlet</span><span class="o">{</span>
 	
 	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
@@ -345,8 +343,8 @@ biraz daha detaylı olarak anlatmıştım. Yazıyı uzatmamak adına tekrar bura
 	<span class="nd">@Override</span>
 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">doGet</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="o">{</span>
 		<span class="n">DriversService</span> <span class="n">driversService</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DriversService</span><span class="o">();</span>
-		<span class="n">request</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">&quot;driverList&quot;</span><span class="o">,</span> <span class="n">driversService</span><span class="o">.</span><span class="na">getDriverList</span><span class="o">());</span>
-		<span class="n">RequestDispatcher</span> <span class="n">view</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getRequestDispatcher</span><span class="o">(</span><span class="s">&quot;/index.jsp&quot;</span><span class="o">);</span>
+		<span class="n">request</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"driverList"</span><span class="o">,</span> <span class="n">driversService</span><span class="o">.</span><span class="na">getDriverList</span><span class="o">());</span>
+		<span class="n">RequestDispatcher</span> <span class="n">view</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getRequestDispatcher</span><span class="o">(</span><span class="s">"/index.jsp"</span><span class="o">);</span>
         <span class="k">try</span> <span class="o">{</span>
 			<span class="n">view</span><span class="o">.</span><span class="na">forward</span><span class="o">(</span><span class="n">request</span><span class="o">,</span> <span class="n">response</span><span class="o">);</span>
 		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ServletException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
@@ -365,18 +363,18 @@ bu Servlet’e istek gelirse son aşamada index.jsp’ye yönlendirme yap dedik.
 
 <p><strong>index.jsp</strong></p>
 
-<figure class="highlight"><pre><code class="language-jsp" data-lang="jsp"><span></span><span class="k">&lt;%@</span> <span class="n">page</span> <span class="n">language</span><span class="o">=</span><span class="s">&quot;java&quot;</span> <span class="n">contentType</span><span class="o">=</span><span class="s">&quot;text/html; charset=UTF-8&quot;</span>
-    <span class="n">pageEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="k">%&gt;</span>
-<span class="k">&lt;%@</span><span class="n">taglib</span> <span class="n">prefix</span><span class="o">=</span><span class="s">&quot;c&quot;</span> <span class="n">uri</span><span class="o">=</span><span class="s">&quot;http://java.sun.com/jsp/jstl/core&quot;</span><span class="k">%&gt;</span>
-<span class="cp">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;</span>
+<figure class="highlight"><pre><code class="language-jsp" data-lang="jsp"><span class="nt">&lt;%@ page </span><span class="na">language=</span><span class="s">"java"</span><span class="na"> contentType=</span><span class="s">"text/html; charset=UTF-8"</span><span class="na">
+    pageEncoding=</span><span class="s">"UTF-8"</span><span class="nt">%&gt;</span>
+<span class="nt">&lt;%@taglib </span><span class="na">prefix=</span><span class="s">"c"</span><span class="na"> uri=</span><span class="s">"http://java.sun.com/jsp/jstl/core"</span><span class="nt">%&gt;</span>
+<span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</span>
 <span class="nt">&lt;html&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-<span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;Content-Type&quot;</span> <span class="na">content=</span><span class="s">&quot;text/html; charset=UTF-8&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"Content-Type"</span> <span class="na">content=</span><span class="s">"text/html; charset=UTF-8"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;title&gt;</span>Insert title here<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-	<span class="nt">&lt;c:forEach</span> <span class="na">var =</span> <span class="s">&quot;driver&quot;</span> <span class="na">items=</span><span class="s">&quot;${driverList}&quot;</span><span class="nt">&gt;</span>
-          <span class="nt">&lt;c:out</span> <span class="na">value =</span> <span class="s">&quot;${driver.driverId} ${driver.driverName} ${driver.driverSurname} ${driver.driverCountry} ${driver.driverTeam}&quot;</span><span class="nt">/&gt;&lt;p&gt;</span>
+	<span class="nt">&lt;c:forEach </span><span class="na">var = </span><span class="s">"driver"</span><span class="na"> items=</span><span class="s">"</span><span class="si">${</span><span class="n">driverList</span><span class="si">}</span><span class="s">"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;c:out </span><span class="na">value = </span><span class="s">"</span><span class="si">${</span><span class="n">driver</span><span class="o">.</span><span class="na">driverId</span><span class="si">}</span><span class="s"> ${driver.driverName} ${driver.driverSurname} ${driver.driverCountry} ${driver.driverTeam}"</span><span class="nt">/&gt;&lt;p&gt;</span>
       <span class="nt">&lt;/c:forEach&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span></code></pre></figure>
@@ -389,8 +387,8 @@ driver var’ındaki alanlarımızı ekrana yazdırıyoruz.</p>
 
 <p>Son olarak bir de web.xml dosyasına göz atalım:</p>
 
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-<span class="nt">&lt;web-app</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;http://java.sun.com/xml/ns/javaee&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd&quot;</span> <span class="na">version=</span><span class="s">&quot;2.5&quot;</span><span class="nt">&gt;</span>
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;web-app</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="na">xmlns=</span><span class="s">"http://java.sun.com/xml/ns/javaee"</span> <span class="na">xsi:schemaLocation=</span><span class="s">"http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"</span> <span class="na">version=</span><span class="s">"2.5"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;display-name&gt;</span>DemoMavenProject<span class="nt">&lt;/display-name&gt;</span>
   <span class="nt">&lt;welcome-file-list&gt;</span>
     <span class="nt">&lt;welcome-file&gt;</span>getDrivers<span class="nt">&lt;/welcome-file&gt;</span>
@@ -464,7 +462,7 @@ var disqus_config = function () {
   
 </ul>
     <p class="txt-medium-gray">
-      <small>&copy;2018 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
     </p>
   </div>
 </footer>

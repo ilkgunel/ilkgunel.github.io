@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsf-veritabanina-giris/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.4.0 -->
+      <!-- Begin Jekyll SEO tag v2.5.0 -->
 <title>Veritabanına Giriş | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.7.3" />
+<meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="Veritabanına Giriş" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-11-12T20:40:21+03:00" />
 <script type="application/ld+json">
-{"description":"Veritabanına Giriş","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/jsf-veritabanina-giris/","headline":"Veritabanına Giriş","dateModified":"2016-11-12T20:40:21+03:00","datePublished":"2016-11-12T20:40:21+03:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/jsf-veritabanina-giris/"},"@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/jsf-veritabanina-giris/"},"url":"http://ilkaygunel.com/blog/2016/jsf-veritabanina-giris/","headline":"Veritabanına Giriş","dateModified":"2016-11-12T20:40:21+03:00","datePublished":"2016-11-12T20:40:21+03:00","description":"Veritabanına Giriş","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -101,8 +101,6 @@
         
           <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
         
-          <li><a href="/blog/2017/filmler/" title="Filmler">Filmler</a></li>
-        
           <li><a href="/blog" title="Blog">Blog</a></li>
         
         <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
@@ -141,16 +139,16 @@ sayfası için de <a href="http://tr.wikipedia.org/wiki/MySQL">buraya</a> tıkla
 <p>Burada bir noktaya değinelim. Xampp Server’ın Windows ve MAC OS X altında kurulum ve kullanımı çok basittir ancak Linux ortamında biraz zorlayabilir. 
 Linux ortamında Xampp Server’ı kurmak için, indirme işleminde sonra cd ile Xampp Server’ı indirdiğiniz yere gelin ve şu komutları girin.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="n">sudo</span> <span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="n">xampp</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">x64</span><span class="o">-</span><span class="mf">1.8.3</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">installer</span><span class="o">.</span><span class="na">run</span>
-<span class="n">sudo</span> <span class="o">./</span><span class="n">xampp</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">x64</span><span class="o">-</span><span class="mf">1.8.3</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">installer</span><span class="o">.</span><span class="na">run</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">sudo</span> <span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="n">xampp</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">x64</span><span class="o">-</span><span class="mf">1.8</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">installer</span><span class="o">.</span><span class="na">run</span>
+<span class="n">sudo</span> <span class="o">./</span><span class="n">xampp</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">x64</span><span class="o">-</span><span class="mf">1.8</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">installer</span><span class="o">.</span><span class="na">run</span></code></pre></figure>
 
 <p>Bu komutların ardından karşınıza kurulum ekranı gelecek. Next butonlarına tıklayarak kurulumu bitiriyoruz. İlk kurulum sonunda Finish butonuna basmadan önce Launch XAMPP seçeneği işaretli ise Xampp Server kendisi açılır ama diğer zamanlarda Xampp Server’ı başlatmak için terminalden şu komutu vermeniz gerekir.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="n">sudo</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">lampp</span><span class="o">/</span><span class="n">lampp</span> <span class="n">start</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">sudo</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">lampp</span><span class="o">/</span><span class="n">lampp</span> <span class="n">start</span></code></pre></figure>
 
 <p>Xampp Server’ı kapatmak için de şu komutu girmelisiniz.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="n">sudo</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">lampp</span><span class="o">/</span><span class="n">lampp</span> <span class="n">stop</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">sudo</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">lampp</span><span class="o">/</span><span class="n">lampp</span> <span class="n">stop</span></code></pre></figure>
 
 <p>Xampp Server’ı kurduktan sonra şimdi olayın NetBeans tarafına geçelim. Geliştirme ortamımızda “Veritabanına Giriş”  adında bir proje oluşturalım. MySQL veritabanını kullanabilmek için projemize MySQL’i tanıyacak bir sürücü eklememiz gerekiyor. Şimdi o sürücüyü ekleyelim.</p>
 
@@ -227,7 +225,7 @@ var disqus_config = function () {
   
 </ul>
     <p class="txt-medium-gray">
-      <small>&copy;2018 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
     </p>
   </div>
 </footer>

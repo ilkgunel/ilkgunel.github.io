@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2017/java-generic-class/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.4.0 -->
+      <!-- Begin Jekyll SEO tag v2.5.0 -->
 <title>Java’da Generic Class Kullanımı | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.7.3" />
+<meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="Java’da Generic Class Kullanımı" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2017-01-29T20:40:21+03:00" />
 <script type="application/ld+json">
-{"description":"Java’da Generic Class Kullanımı","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2017/java-generic-class/","headline":"Java’da Generic Class Kullanımı","dateModified":"2017-01-29T20:40:21+03:00","datePublished":"2017-01-29T20:40:21+03:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/java-generic-class/"},"@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/java-generic-class/"},"url":"http://ilkaygunel.com/blog/2017/java-generic-class/","headline":"Java’da Generic Class Kullanımı","dateModified":"2017-01-29T20:40:21+03:00","datePublished":"2017-01-29T20:40:21+03:00","description":"Java’da Generic Class Kullanımı","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -101,8 +101,6 @@
         
           <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
         
-          <li><a href="/blog/2017/filmler/" title="Filmler">Filmler</a></li>
-        
           <li><a href="/blog" title="Blog">Blog</a></li>
         
         <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
@@ -134,7 +132,7 @@ iştir. Java dilinde de farklı veri tipleri için aynı işi yapabilmek amacı 
 
 <p><strong>Student.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.pojo</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">pojo</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Student</span> <span class="o">{</span>
 
@@ -177,12 +175,12 @@ iştir. Java dilinde de farklı veri tipleri için aynı işi yapabilmek amacı 
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">surname</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">city</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">studentId</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">name</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">surname</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">city</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">studentId</span><span class="o">;</span>
     <span class="o">}</span>
 
 <span class="o">}</span></code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.pojo</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">pojo</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Teacher</span> <span class="o">{</span>
 
@@ -225,7 +223,7 @@ iştir. Java dilinde de farklı veri tipleri için aynı işi yapabilmek amacı 
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">surname</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">city</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">teacherId</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">name</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">surname</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">city</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">teacherId</span><span class="o">;</span>
     <span class="o">}</span>
 
 <span class="o">}</span></code></pre></figure>
@@ -237,7 +235,7 @@ kullanılabilir. Bizim örneğimizdeki ServiceClass bize gönderilen POJO’nun 
 
 <p><strong>ServiceClass.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.service</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">service</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">ServiceClass</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
 
@@ -255,7 +253,7 @@ kullanılabilir. Bizim örneğimizdeki ServiceClass bize gönderilen POJO’nun 
 
 <p>ServiceClass sınıfımız bir abstract sınıf. Az sonra göreceğimiz Operation sınıfları bu sınıfı kaltıcağından ötürü bu sınıfın içinde gövdesi tanımlanmamış metotlar da yer alabilir ve abstract olması bana göre 
 kullanıma daha uygun. Sınıf tanımlanması sırasında bu sınıfın bir parametre alacağını söylüyoruz ve</p>
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span></code></pre></figure>
 <p>ifadesi bu sınıfa Generic olma özelliği kazandırıyor. Artık bu sınıftan kalıtım yaparken istenen
 tüm sınıflar parametre olarak kullanılabilir. Sınıf içerisinde <strong><em>entityClass</em></strong> adında bir nesnemiz mevcut. Bu sınıfı kalıtmış bir sınftan nesne oluşturulurken oluşturalacak bu nesne ile hangi sınıfın geldiğini
 konsola yazdıracağız. <strong><em>getStringFromEntity()</em></strong> metodu T tpinde bir parametre bekliyor. Yani bu metot birden farklı tipte parametreyi karşılayabilecek vaziyette. Metot içerisinde ise önce  entityClass nesnesinden
@@ -266,7 +264,7 @@ hangi sınıf tipinde parametre geldiğini yazdırıyoruz sonra da gelen entity�
 <p>StudenOperationClass ve TeacherOperationClass sınıfları arasında hiçbir fark yok. ServiceClass sınıfından extend edilmeleri sırasında hangi POJO sınıfları kullanılarak işlem gerçekleştirilecekse onlar parametre 
 olarak geçiriliyor. OperationClass’lar içinde extend edilen ServiceClass’dan yapılandırıcılar zorunlu olarak yazılıyor ve super ile ServiceClass’ın yapılandırıcısının çağırılmasında POJO sınıfları gönderiliyor.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.operations</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">operations</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.ilkaygunel.pojo.Student</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.ilkaygunel.service.ServiceClass</span><span class="o">;</span>
@@ -279,7 +277,7 @@ olarak geçiriliyor. OperationClass’lar içinde extend edilen ServiceClass’d
 
 <span class="o">}</span></code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.operations</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">operations</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.ilkaygunel.pojo.Teacher</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.ilkaygunel.service.ServiceClass</span><span class="o">;</span>
@@ -294,7 +292,7 @@ olarak geçiriliyor. OperationClass’lar içinde extend edilen ServiceClass’d
 
 <p><strong>MainClass.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">genericclassexample</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">genericclassexample</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.ilkaygunel.operations.StudentOperationClass</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.ilkaygunel.operations.TeacherOperationClass</span><span class="o">;</span>
@@ -308,18 +306,18 @@ olarak geçiriliyor. OperationClass’lar içinde extend edilen ServiceClass’d
         <span class="n">StudentOperationClass</span> <span class="n">studentOperationClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StudentOperationClass</span><span class="o">();</span>
 
         <span class="n">Teacher</span> <span class="n">teacher</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Teacher</span><span class="o">();</span>
-        <span class="n">teacher</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">&quot;Alican&quot;</span><span class="o">);</span>
-        <span class="n">teacher</span><span class="o">.</span><span class="na">setSurname</span><span class="o">(</span><span class="s">&quot;Akkuş&quot;</span><span class="o">);</span>
-        <span class="n">teacher</span><span class="o">.</span><span class="na">setCity</span><span class="o">(</span><span class="s">&quot;İstanbul&quot;</span><span class="o">);</span>
+        <span class="n">teacher</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Alican"</span><span class="o">);</span>
+        <span class="n">teacher</span><span class="o">.</span><span class="na">setSurname</span><span class="o">(</span><span class="s">"Akkuş"</span><span class="o">);</span>
+        <span class="n">teacher</span><span class="o">.</span><span class="na">setCity</span><span class="o">(</span><span class="s">"İstanbul"</span><span class="o">);</span>
         <span class="n">teacher</span><span class="o">.</span><span class="na">setTeacherId</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
 
         <span class="n">String</span> <span class="n">teacherResult</span> <span class="o">=</span> <span class="n">teacherOperationClass</span><span class="o">.</span><span class="na">getStringFromEntity</span><span class="o">(</span><span class="n">teacher</span><span class="o">);</span>
         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">teacherResult</span><span class="o">);</span>
 
         <span class="n">Student</span> <span class="n">student</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Student</span><span class="o">();</span>
-        <span class="n">student</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">&quot;Mustafa&quot;</span><span class="o">);</span>
-        <span class="n">student</span><span class="o">.</span><span class="na">setSurname</span><span class="o">(</span><span class="s">&quot;Demir&quot;</span><span class="o">);</span>
-        <span class="n">student</span><span class="o">.</span><span class="na">setCity</span><span class="o">(</span><span class="s">&quot;Isparta&quot;</span><span class="o">);</span>
+        <span class="n">student</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Mustafa"</span><span class="o">);</span>
+        <span class="n">student</span><span class="o">.</span><span class="na">setSurname</span><span class="o">(</span><span class="s">"Demir"</span><span class="o">);</span>
+        <span class="n">student</span><span class="o">.</span><span class="na">setCity</span><span class="o">(</span><span class="s">"Isparta"</span><span class="o">);</span>
         <span class="n">student</span><span class="o">.</span><span class="na">setStudentId</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
 
         <span class="n">String</span> <span class="n">studentResult</span> <span class="o">=</span> <span class="n">studentOperationClass</span><span class="o">.</span><span class="na">getStringFromEntity</span><span class="o">(</span><span class="n">student</span><span class="o">);</span>
@@ -396,7 +394,7 @@ var disqus_config = function () {
   
 </ul>
     <p class="txt-medium-gray">
-      <small>&copy;2018 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
     </p>
   </div>
 </footer>

@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/rest-assured-ile-web-servis-testi/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.4.0 -->
+      <!-- Begin Jekyll SEO tag v2.5.0 -->
 <title>Rest Assured İle Web Servis Testi - 1 | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.7.3" />
+<meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="Rest Assured İle Web Servis Testi - 1" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-11-25T20:40:21+03:00" />
 <script type="application/ld+json">
-{"description":"Rest Assured İle Web Servis Testi","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/rest-assured-ile-web-servis-testi/","headline":"Rest Assured İle Web Servis Testi - 1","dateModified":"2016-11-25T20:40:21+03:00","datePublished":"2016-11-25T20:40:21+03:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/rest-assured-ile-web-servis-testi/"},"@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/rest-assured-ile-web-servis-testi/"},"url":"http://ilkaygunel.com/blog/2016/rest-assured-ile-web-servis-testi/","headline":"Rest Assured İle Web Servis Testi - 1","dateModified":"2016-11-25T20:40:21+03:00","datePublished":"2016-11-25T20:40:21+03:00","description":"Rest Assured İle Web Servis Testi","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -101,8 +101,6 @@
         
           <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
         
-          <li><a href="/blog/2017/filmler/" title="Filmler">Filmler</a></li>
-        
           <li><a href="/blog" title="Blog">Blog</a></li>
         
         <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
@@ -133,21 +131,21 @@
 
 <p>Bize verilen dökümanda web servis üzerinden bir üye kaydı yapılması için yetkilendirilmiş bir istekte bulunulması, bilgilerin JSON formatında gönderilmesi isteniyor ve gönderilebilecek bir örnek şöyle gösteriliyor:</p>
 
-<figure class="highlight"><pre><code class="language-json" data-lang="json"><span></span><span class="p">{</span>
-<span class="nt">&quot;name&quot;</span> <span class="p">:</span> <span class="s2">&quot;ilkay&quot;</span><span class="p">,</span>
-<span class="nt">&quot;surname&quot;</span> <span class="p">:</span> <span class="s2">&quot;günel&quot;</span><span class="p">,</span>
-<span class="nt">&quot;emailAddress&quot;</span> <span class="p">:</span> <span class="s2">&quot;ilkay.gunel@kod5.org&quot;</span><span class="p">,</span>
-<span class="nt">&quot;birthDate&quot;</span> <span class="p">:</span> <span class="s2">&quot;1980-01-01&quot;</span><span class="p">,</span>
-<span class="nt">&quot;address&quot;</span> <span class="p">:</span> <span class="s2">&quot;İstanbul&quot;</span><span class="p">,</span>
-<span class="nt">&quot;password&quot;</span> <span class="p">:</span> <span class="s2">&quot;12345&quot;</span><span class="p">,</span>
-<span class="nt">&quot;telephoneNumber&quot;</span> <span class="p">:</span> <span class="s2">&quot;0212-212-33-44&quot;</span>
-<span class="p">}</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+</span><span class="s2">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ilkay"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"surname"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"günel"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"emailAddress"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ilkay.gunel@kod5.org"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"birthDate"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1980-01-01"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"address"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"İstanbul"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"password"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"telephoneNumber"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0212-212-33-44"</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
 
 <p>Ben bu JSON’ı src/test/resources altında requests adındaki bir klasör içindeki memberRegisterRequest.json adındaki dosyaya koydum. Test kodu içinde bu dosyayı kullanacağız.  Java kodu içinde yapacağımız testte kullanmak üzere bu JSON’ı baz alarak JSON’daki alanları içinde barındıran bir Class oluşturmamız gerekiyor. O sınıfımızın ismi MemberRegisterRequest sınıfıdır ve sınıf şöyledir:</p>
 
 <p><strong>MemberRegisterRequest.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">sampleTest</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">sampleTest</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberRegisterRequest</span> <span class="o">{</span>
 	<span class="n">String</span> <span class="n">name</span><span class="o">;</span>
@@ -213,11 +211,11 @@
 
 <p><strong>WebServisTest.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">sampleTest</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">sampleTest</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
 
-<span class="kn">import static</span> <span class="nn">com.jayway.restassured.RestAssured.given</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">com</span><span class="o">.</span><span class="na">jayway</span><span class="o">.</span><span class="na">restassured</span><span class="o">.</span><span class="na">RestAssured</span><span class="o">.</span><span class="na">given</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.io.FileNotFoundException</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.io.FileReader</span><span class="o">;</span>
@@ -235,19 +233,19 @@
 	
 	<span class="nd">@Test</span>
 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">memberRegisterTest</span><span class="o">(){</span>
-		<span class="n">RestAssured</span><span class="o">.</span><span class="na">baseURI</span><span class="o">=</span><span class="s">&quot;http://localhost:8080/BlogProjectWithSpringMVC&quot;</span><span class="o">;</span>
+		<span class="n">RestAssured</span><span class="o">.</span><span class="na">baseURI</span><span class="o">=</span><span class="s">"http://localhost:8080/BlogProjectWithSpringMVC"</span><span class="o">;</span>
 		
 		<span class="n">MemberRegisterRequest</span> <span class="n">memberRegisterRequest</span> <span class="o">=</span> <span class="n">memberRegisterRequestFromJson</span><span class="o">();</span>
 		<span class="n">String</span> <span class="n">json</span> <span class="o">=</span> <span class="n">memberRegisterRequestToJson</span><span class="o">(</span><span class="n">memberRegisterRequest</span><span class="o">);</span>
 		
-		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Body:&quot;</span><span class="o">+</span><span class="n">json</span><span class="o">);</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Body:"</span><span class="o">+</span><span class="n">json</span><span class="o">);</span>
 		
 		<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">given</span><span class="o">()</span>
-		<span class="c1">//.auth().form(&quot;ilkay.gunel@kod5.org&quot;, &quot;12345&quot;,new FormAuthConfig(&quot;/BlogProjectWithSpringMVC/j_spring_security_check&quot;, &quot;j_username&quot;, &quot;j_password&quot;))</span>
-        <span class="o">.</span><span class="na">contentType</span><span class="o">(</span><span class="s">&quot;application/json&quot;</span><span class="o">)</span>
+		<span class="c1">//.auth().form("ilkay.gunel@kod5.org", "12345",new FormAuthConfig("/BlogProjectWithSpringMVC/j_spring_security_check", "j_username", "j_password"))</span>
+        <span class="o">.</span><span class="na">contentType</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">)</span>
         <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="n">json</span><span class="o">)</span>
         <span class="o">.</span><span class="na">when</span><span class="o">()</span>
-        <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">&quot;/webservice/memberRegister&quot;</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">"/webservice/memberRegister"</span><span class="o">)</span>
         <span class="o">.</span><span class="na">then</span><span class="o">()</span>
         <span class="o">.</span><span class="na">statusCode</span><span class="o">(</span><span class="mi">200</span><span class="o">)</span>
         <span class="o">.</span><span class="na">extract</span><span class="o">().</span><span class="na">response</span><span class="o">();</span>
@@ -259,7 +257,7 @@
 		<span class="k">try</span> <span class="o">{</span>
 			<span class="n">Gson</span> <span class="n">gson</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Gson</span><span class="o">();</span>
 			<span class="n">FileReader</span> <span class="n">reader</span><span class="o">;</span>
-			<span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">&quot;src/test/resources/requests/memberRegisterRequest.json&quot;</span><span class="o">);</span>
+			<span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">"src/test/resources/requests/memberRegisterRequest.json"</span><span class="o">);</span>
 			<span class="k">return</span> <span class="n">gson</span><span class="o">.</span><span class="na">fromJson</span><span class="o">(</span><span class="n">reader</span><span class="o">,</span> <span class="n">MemberRegisterRequest</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">FileNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
@@ -270,13 +268,13 @@
 	<span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">memberRegisterRequestToJson</span><span class="o">(</span><span class="n">MemberRegisterRequest</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
 		<span class="n">Gson</span> <span class="n">gson</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Gson</span><span class="o">();</span>
 		
-		<span class="n">request</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">&quot;Mustafa&quot;</span><span class="o">);</span>
-		<span class="n">request</span><span class="o">.</span><span class="na">setSurname</span><span class="o">(</span><span class="s">&quot;İçmen&quot;</span><span class="o">);</span>
-		<span class="n">request</span><span class="o">.</span><span class="na">setEmailAddress</span><span class="o">(</span><span class="s">&quot;mustafa@icmen.com&quot;</span><span class="o">);</span>
-		<span class="n">request</span><span class="o">.</span><span class="na">setBirthDate</span><span class="o">(</span><span class="s">&quot;1980-01-01&quot;</span><span class="o">);</span>
-		<span class="n">request</span><span class="o">.</span><span class="na">setAddress</span><span class="o">(</span><span class="s">&quot;İÜ Avcılar Kampüs&quot;</span><span class="o">);</span>
-		<span class="n">request</span><span class="o">.</span><span class="na">setPassword</span><span class="o">(</span><span class="s">&quot;12345&quot;</span><span class="o">);</span>
-		<span class="n">request</span><span class="o">.</span><span class="na">setTelephoneNumber</span><span class="o">(</span><span class="s">&quot;0-212-473-70-70&quot;</span><span class="o">);</span>
+		<span class="n">request</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Mustafa"</span><span class="o">);</span>
+		<span class="n">request</span><span class="o">.</span><span class="na">setSurname</span><span class="o">(</span><span class="s">"İçmen"</span><span class="o">);</span>
+		<span class="n">request</span><span class="o">.</span><span class="na">setEmailAddress</span><span class="o">(</span><span class="s">"mustafa@icmen.com"</span><span class="o">);</span>
+		<span class="n">request</span><span class="o">.</span><span class="na">setBirthDate</span><span class="o">(</span><span class="s">"1980-01-01"</span><span class="o">);</span>
+		<span class="n">request</span><span class="o">.</span><span class="na">setAddress</span><span class="o">(</span><span class="s">"İÜ Avcılar Kampüs"</span><span class="o">);</span>
+		<span class="n">request</span><span class="o">.</span><span class="na">setPassword</span><span class="o">(</span><span class="s">"12345"</span><span class="o">);</span>
+		<span class="n">request</span><span class="o">.</span><span class="na">setTelephoneNumber</span><span class="o">(</span><span class="s">"0-212-473-70-70"</span><span class="o">);</span>
 		
 		<span class="k">return</span> <span class="n">gson</span><span class="o">.</span><span class="na">toJson</span><span class="o">(</span><span class="n">request</span><span class="o">);</span>
 	<span class="o">}</span>
@@ -290,12 +288,12 @@
   <li>String json = memberRegisterRequestToJson(memberRegisterRequest); satırı ile JSON formatında bir String elde ediyoruz.</li>
   <li></li>
 </ul>
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span>	<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">given</span><span class="o">()</span>
-	<span class="c1">//.auth().form(&quot;ilkay.gunel@kod5.org&quot;, &quot;12345&quot;,new FormAuthConfig(&quot;/BlogProjectWithSpringMVC/j_spring_security_check&quot;, &quot;j_username&quot;, &quot;j_password&quot;))</span>
-	<span class="o">.</span><span class="na">contentType</span><span class="o">(</span><span class="s">&quot;application/json&quot;</span><span class="o">)</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java">	<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">given</span><span class="o">()</span>
+	<span class="c1">//.auth().form("ilkay.gunel@kod5.org", "12345",new FormAuthConfig("/BlogProjectWithSpringMVC/j_spring_security_check", "j_username", "j_password"))</span>
+	<span class="o">.</span><span class="na">contentType</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">)</span>
 	<span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="n">json</span><span class="o">)</span>
 	<span class="o">.</span><span class="na">when</span><span class="o">()</span>
-	<span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">&quot;/webservice/memberRegister&quot;</span><span class="o">)</span>
+	<span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">"/webservice/memberRegister"</span><span class="o">)</span>
 	<span class="o">.</span><span class="na">then</span><span class="o">()</span>
 	<span class="o">.</span><span class="na">statusCode</span><span class="o">(</span><span class="mi">200</span><span class="o">)</span>
 	<span class="o">.</span><span class="na">extract</span><span class="o">().</span><span class="na">response</span><span class="o">();</span>
@@ -394,7 +392,7 @@ var disqus_config = function () {
   
 </ul>
     <p class="txt-medium-gray">
-      <small>&copy;2018 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
     </p>
   </div>
 </footer>

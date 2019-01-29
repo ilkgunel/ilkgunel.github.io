@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2017/android-retrofit-tutorial/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.4.0 -->
+      <!-- Begin Jekyll SEO tag v2.5.0 -->
 <title>Android Retrofit Kütüphanesi İle Web Service GET ve POST Örneği | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.7.3" />
+<meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="Android Retrofit Kütüphanesi İle Web Service GET ve POST Örneği" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2017-01-29T20:40:21+03:00" />
 <script type="application/ld+json">
-{"description":"Android Retrofit Kütüphanesi İle Web Service GET ve POST Örneği","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2017/android-retrofit-tutorial/","headline":"Android Retrofit Kütüphanesi İle Web Service GET ve POST Örneği","dateModified":"2017-01-29T20:40:21+03:00","datePublished":"2017-01-29T20:40:21+03:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/android-retrofit-tutorial/"},"@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/android-retrofit-tutorial/"},"url":"http://ilkaygunel.com/blog/2017/android-retrofit-tutorial/","headline":"Android Retrofit Kütüphanesi İle Web Service GET ve POST Örneği","dateModified":"2017-01-29T20:40:21+03:00","datePublished":"2017-01-29T20:40:21+03:00","description":"Android Retrofit Kütüphanesi İle Web Service GET ve POST Örneği","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -101,8 +101,6 @@
         
           <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
         
-          <li><a href="/blog/2017/filmler/" title="Filmler">Filmler</a></li>
-        
           <li><a href="/blog" title="Blog">Blog</a></li>
         
         <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
@@ -136,7 +134,7 @@ adresinden erişebilirsiniz arkadaşlar.</p>
 
 <p><strong>PersonAPI.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">webserviceusage.operations</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">webserviceusage</span><span class="o">.</span><span class="na">operations</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">retrofit2.Call</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">retrofit2.http.Body</span><span class="o">;</span>
@@ -145,10 +143,10 @@ adresinden erişebilirsiniz arkadaşlar.</p>
 <span class="kn">import</span> <span class="nn">webserviceusage.pojo.Person</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">PersonAPI</span> <span class="o">{</span>
-    <span class="nd">@GET</span><span class="o">(</span><span class="s">&quot;/SpringRestTutorial/getExample&quot;</span><span class="o">)</span>
+    <span class="nd">@GET</span><span class="o">(</span><span class="s">"/SpringRestTutorial/getExample"</span><span class="o">)</span>
     <span class="n">Call</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">[]&gt;</span> <span class="nf">getSonValues</span><span class="o">();</span>
 
-    <span class="nd">@POST</span><span class="o">(</span><span class="s">&quot;/SpringRestTutorial/postPerson&quot;</span><span class="o">)</span>
+    <span class="nd">@POST</span><span class="o">(</span><span class="s">"/SpringRestTutorial/postPerson"</span><span class="o">)</span>
     <span class="n">Call</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="nf">postPerson</span><span class="o">(</span><span class="nd">@Body</span> <span class="n">Person</span> <span class="n">person</span><span class="o">);</span>
 <span class="o">}</span></code></pre></figure>
 
@@ -161,14 +159,14 @@ söylüyoruz. postPerson() metodunu da Retrofit yardımı ile implemente edeceğ
 <p>Retrofit kütüphanesini kullanacağımız zaman <strong><em>Retrofit</em></strong> sınıfından bir nesneye ihtiyacımız olacak. Bunun RetroClient adında bir sınıfımız var ve bu sınıfımız içinde bize
 Retrofit nesnesi sunan bir bir getClient metodumuz var:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">ilkaygunel.com.webserviceusagetutorial</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">ilkaygunel</span><span class="o">.</span><span class="na">com</span><span class="o">.</span><span class="na">webserviceusagetutorial</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">okhttp3.OkHttpClient</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">retrofit2.Retrofit</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">retrofit2.converter.gson.GsonConverterFactory</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">RetroClient</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">BASE_URL</span> <span class="o">=</span> <span class="s">&quot;http://10.0.2.2:8080/&quot;</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">BASE_URL</span> <span class="o">=</span> <span class="s">"http://10.0.2.2:8080/"</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kd">static</span> <span class="n">Retrofit</span> <span class="n">retrofit</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
 
@@ -191,7 +189,7 @@ ifadesi ile HTTP client’ı ataması yapıyor, build() ifadesi ile de retrofit 
 
 <p><strong><em>ListActivity.java</em></strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">ilkaygunel.com.webserviceusagetutorial</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">ilkaygunel</span><span class="o">.</span><span class="na">com</span><span class="o">.</span><span class="na">webserviceusagetutorial</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">android.app.ListActivity</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">android.os.Bundle</span><span class="o">;</span>
@@ -229,7 +227,7 @@ ifadesi ile HTTP client’ı ataması yapıyor, build() ifadesi ile de retrofit 
 
             <span class="nd">@Override</span>
             <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onFailure</span><span class="o">(</span><span class="n">Call</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">[]&gt;</span> <span class="n">call</span><span class="o">,</span> <span class="n">Throwable</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="s">&quot;MainActivit Class:&quot;</span><span class="o">,</span> <span class="s">&quot;HATA: &quot;</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+                <span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="s">"MainActivit Class:"</span><span class="o">,</span> <span class="s">"HATA: "</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
             <span class="o">}</span>
         <span class="o">});</span>
 
@@ -252,7 +250,7 @@ nesnelerini personList listesine ekliyoruz.</p>
 
 <p><strong>CustomAdapter.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">ilkaygunel.com.webserviceusagetutorial</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">ilkaygunel</span><span class="o">.</span><span class="na">com</span><span class="o">.</span><span class="na">webserviceusagetutorial</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">android.app.Activity</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">android.content.Context</span><span class="o">;</span>
@@ -325,32 +323,32 @@ list_layout yerleşim düzenindeki nesneler bulunuyor ve değerler o elementlere
 
 <p>list_layout.xml dosyamız da şu şekilde:</p>
 
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
-<span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
-    <span class="na">xmlns:tools=</span><span class="s">&quot;http://schemas.android.com/tools&quot;</span>
-    <span class="na">android:layout_width=</span><span class="s">&quot;match_parent&quot;</span>
-    <span class="na">android:layout_height=</span><span class="s">&quot;match_parent&quot;</span>
-    <span class="na">android:orientation=</span><span class="s">&quot;horizontal&quot;</span> <span class="nt">&gt;</span>
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+    <span class="na">xmlns:tools=</span><span class="s">"http://schemas.android.com/tools"</span>
+    <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+    <span class="na">android:layout_height=</span><span class="s">"match_parent"</span>
+    <span class="na">android:orientation=</span><span class="s">"horizontal"</span> <span class="nt">&gt;</span>
 
     <span class="nt">&lt;TextView</span>
-        <span class="na">android:id=</span><span class="s">&quot;@+id/idNumber&quot;</span>
-        <span class="na">android:layout_width=</span><span class="s">&quot;48dp&quot;</span>
-        <span class="na">android:layout_height=</span><span class="s">&quot;48dp&quot;</span> <span class="nt">/&gt;</span>
+        <span class="na">android:id=</span><span class="s">"@+id/idNumber"</span>
+        <span class="na">android:layout_width=</span><span class="s">"48dp"</span>
+        <span class="na">android:layout_height=</span><span class="s">"48dp"</span> <span class="nt">/&gt;</span>
 
     <span class="nt">&lt;TextView</span>
-        <span class="na">android:id=</span><span class="s">&quot;@+id/name&quot;</span>
-        <span class="na">android:layout_width=</span><span class="s">&quot;48dp&quot;</span>
-        <span class="na">android:layout_height=</span><span class="s">&quot;48dp&quot;</span> <span class="nt">/&gt;</span>
+        <span class="na">android:id=</span><span class="s">"@+id/name"</span>
+        <span class="na">android:layout_width=</span><span class="s">"48dp"</span>
+        <span class="na">android:layout_height=</span><span class="s">"48dp"</span> <span class="nt">/&gt;</span>
 
     <span class="nt">&lt;TextView</span>
-        <span class="na">android:id=</span><span class="s">&quot;@+id/surname&quot;</span>
-        <span class="na">android:layout_width=</span><span class="s">&quot;48dp&quot;</span>
-        <span class="na">android:layout_height=</span><span class="s">&quot;48dp&quot;</span> <span class="nt">/&gt;</span>
+        <span class="na">android:id=</span><span class="s">"@+id/surname"</span>
+        <span class="na">android:layout_width=</span><span class="s">"48dp"</span>
+        <span class="na">android:layout_height=</span><span class="s">"48dp"</span> <span class="nt">/&gt;</span>
 
     <span class="nt">&lt;TextView</span>
-        <span class="na">android:id=</span><span class="s">&quot;@+id/address&quot;</span>
-        <span class="na">android:layout_width=</span><span class="s">&quot;48dp&quot;</span>
-        <span class="na">android:layout_height=</span><span class="s">&quot;48dp&quot;</span> <span class="nt">/&gt;</span>
+        <span class="na">android:id=</span><span class="s">"@+id/address"</span>
+        <span class="na">android:layout_width=</span><span class="s">"48dp"</span>
+        <span class="na">android:layout_height=</span><span class="s">"48dp"</span> <span class="nt">/&gt;</span>
 
 <span class="nt">&lt;/LinearLayout&gt;</span></code></pre></figure>
 
@@ -370,7 +368,7 @@ list_layout yerleşim düzenindeki nesneler bulunuyor ve değerler o elementlere
 
 <p><strong>PostUserActivity.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">ilkaygunel.com.webserviceusagetutorial</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">ilkaygunel</span><span class="o">.</span><span class="na">com</span><span class="o">.</span><span class="na">webserviceusagetutorial</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">android.app.Activity</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">android.os.Bundle</span><span class="o">;</span>
@@ -405,10 +403,10 @@ list_layout yerleşim düzenindeki nesneler bulunuyor ve değerler o elementlere
         <span class="n">person</span><span class="o">.</span><span class="na">setSurname</span><span class="o">(</span><span class="n">surnameEditText</span><span class="o">.</span><span class="na">getText</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
 
         <span class="n">Address</span> <span class="n">address</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Address</span><span class="o">();</span>
-        <span class="n">address</span><span class="o">.</span><span class="na">setNeighborhood</span><span class="o">(</span><span class="s">&quot;Cennet Mahallesi&quot;</span><span class="o">);</span>
-        <span class="n">address</span><span class="o">.</span><span class="na">setBorough</span><span class="o">(</span><span class="s">&quot;Küçükçekmece&quot;</span><span class="o">);</span>
-        <span class="n">address</span><span class="o">.</span><span class="na">setCity</span><span class="o">(</span><span class="s">&quot;İstanbul&quot;</span><span class="o">);</span>
-        <span class="n">address</span><span class="o">.</span><span class="na">setCountry</span><span class="o">(</span><span class="s">&quot;Türkiye&quot;</span><span class="o">);</span>
+        <span class="n">address</span><span class="o">.</span><span class="na">setNeighborhood</span><span class="o">(</span><span class="s">"Cennet Mahallesi"</span><span class="o">);</span>
+        <span class="n">address</span><span class="o">.</span><span class="na">setBorough</span><span class="o">(</span><span class="s">"Küçükçekmece"</span><span class="o">);</span>
+        <span class="n">address</span><span class="o">.</span><span class="na">setCity</span><span class="o">(</span><span class="s">"İstanbul"</span><span class="o">);</span>
+        <span class="n">address</span><span class="o">.</span><span class="na">setCountry</span><span class="o">(</span><span class="s">"Türkiye"</span><span class="o">);</span>
 
         <span class="n">person</span><span class="o">.</span><span class="na">setAddress</span><span class="o">(</span><span class="n">address</span><span class="o">);</span>
 
@@ -417,12 +415,12 @@ list_layout yerleşim düzenindeki nesneler bulunuyor ve değerler o elementlere
         <span class="n">call</span><span class="o">.</span><span class="na">enqueue</span><span class="o">(</span><span class="k">new</span> <span class="n">Callback</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;()</span> <span class="o">{</span>
             <span class="nd">@Override</span>
             <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onResponse</span><span class="o">(</span><span class="n">Call</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">call</span><span class="o">,</span> <span class="n">Response</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">response</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;POST işlemi başarılı&quot;</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"POST işlemi başarılı"</span><span class="o">);</span>
             <span class="o">}</span>
 
             <span class="nd">@Override</span>
             <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onFailure</span><span class="o">(</span><span class="n">Call</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">call</span><span class="o">,</span> <span class="n">Throwable</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Bir Hata Meydana Geldi! &quot;</span><span class="o">+</span><span class="n">t</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Bir Hata Meydana Geldi! "</span><span class="o">+</span><span class="n">t</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
             <span class="o">}</span>
         <span class="o">});</span>
     <span class="o">}</span>
@@ -434,59 +432,59 @@ tetikliyoruz. enqueue metodu içerisinde onResponse’da konsola dönen response
 
 <p>post_user_activity layout’umuz da şu şekilde:</p>
 
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
-<span class="nt">&lt;GridLayout</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
-    <span class="na">xmlns:tools=</span><span class="s">&quot;http://schemas.android.com/tools&quot;</span>
-    <span class="na">android:layout_width=</span><span class="s">&quot;match_parent&quot;</span>
-    <span class="na">android:layout_height=</span><span class="s">&quot;match_parent&quot;</span>
-    <span class="na">android:paddingBottom=</span><span class="s">&quot;@dimen/activity_vertical_margin&quot;</span>
-    <span class="na">android:paddingLeft=</span><span class="s">&quot;@dimen/activity_horizontal_margin&quot;</span>
-    <span class="na">android:paddingRight=</span><span class="s">&quot;@dimen/activity_horizontal_margin&quot;</span>
-    <span class="na">android:paddingTop=</span><span class="s">&quot;@dimen/activity_vertical_margin&quot;</span>
-    <span class="na">tools:context=</span><span class="s">&quot;ilkaygunel.com.webserviceusagetutorial.PostUserActivity&quot;</span>
-    <span class="na">android:weightSum=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;GridLayout</span> <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+    <span class="na">xmlns:tools=</span><span class="s">"http://schemas.android.com/tools"</span>
+    <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+    <span class="na">android:layout_height=</span><span class="s">"match_parent"</span>
+    <span class="na">android:paddingBottom=</span><span class="s">"@dimen/activity_vertical_margin"</span>
+    <span class="na">android:paddingLeft=</span><span class="s">"@dimen/activity_horizontal_margin"</span>
+    <span class="na">android:paddingRight=</span><span class="s">"@dimen/activity_horizontal_margin"</span>
+    <span class="na">android:paddingTop=</span><span class="s">"@dimen/activity_vertical_margin"</span>
+    <span class="na">tools:context=</span><span class="s">"ilkaygunel.com.webserviceusagetutorial.PostUserActivity"</span>
+    <span class="na">android:weightSum=</span><span class="s">"1"</span><span class="nt">&gt;</span>
 
     <span class="nt">&lt;TextView</span>
-        <span class="na">android:text=</span><span class="s">&quot;Id Giriniz:&quot;</span>
-        <span class="na">android:layout_row=</span><span class="s">&quot;0&quot;</span>
-        <span class="na">android:layout_column=</span><span class="s">&quot;0&quot;</span>
-        <span class="na">android:width=</span><span class="s">&quot;120dp&quot;</span><span class="nt">/&gt;</span>
+        <span class="na">android:text=</span><span class="s">"Id Giriniz:"</span>
+        <span class="na">android:layout_row=</span><span class="s">"0"</span>
+        <span class="na">android:layout_column=</span><span class="s">"0"</span>
+        <span class="na">android:width=</span><span class="s">"120dp"</span><span class="nt">/&gt;</span>
 
     <span class="nt">&lt;EditText</span>
-        <span class="na">android:id=</span><span class="s">&quot;@+id/idField&quot;</span>
-        <span class="na">android:layout_row=</span><span class="s">&quot;0&quot;</span>
-        <span class="na">android:layout_column=</span><span class="s">&quot;1&quot;</span>
-        <span class="na">android:width=</span><span class="s">&quot;120dp&quot;</span><span class="nt">/&gt;</span>
+        <span class="na">android:id=</span><span class="s">"@+id/idField"</span>
+        <span class="na">android:layout_row=</span><span class="s">"0"</span>
+        <span class="na">android:layout_column=</span><span class="s">"1"</span>
+        <span class="na">android:width=</span><span class="s">"120dp"</span><span class="nt">/&gt;</span>
 
     <span class="nt">&lt;TextView</span>
-        <span class="na">android:text=</span><span class="s">&quot;İsim Giriniz:&quot;</span>
-        <span class="na">android:layout_row=</span><span class="s">&quot;1&quot;</span>
-        <span class="na">android:layout_column=</span><span class="s">&quot;0&quot;</span>
-        <span class="na">android:width=</span><span class="s">&quot;120dp&quot;</span><span class="nt">/&gt;</span>
+        <span class="na">android:text=</span><span class="s">"İsim Giriniz:"</span>
+        <span class="na">android:layout_row=</span><span class="s">"1"</span>
+        <span class="na">android:layout_column=</span><span class="s">"0"</span>
+        <span class="na">android:width=</span><span class="s">"120dp"</span><span class="nt">/&gt;</span>
 
     <span class="nt">&lt;EditText</span>
-        <span class="na">android:id=</span><span class="s">&quot;@+id/nameField&quot;</span>
-        <span class="na">android:layout_row=</span><span class="s">&quot;1&quot;</span>
-        <span class="na">android:layout_column=</span><span class="s">&quot;1&quot;</span>
-        <span class="na">android:width=</span><span class="s">&quot;120dp&quot;</span><span class="nt">/&gt;</span>
+        <span class="na">android:id=</span><span class="s">"@+id/nameField"</span>
+        <span class="na">android:layout_row=</span><span class="s">"1"</span>
+        <span class="na">android:layout_column=</span><span class="s">"1"</span>
+        <span class="na">android:width=</span><span class="s">"120dp"</span><span class="nt">/&gt;</span>
 
     <span class="nt">&lt;TextView</span>
-        <span class="na">android:text=</span><span class="s">&quot;Soyisim Giriniz:&quot;</span>
-        <span class="na">android:layout_row=</span><span class="s">&quot;2&quot;</span>
-        <span class="na">android:layout_column=</span><span class="s">&quot;0&quot;</span>
-        <span class="na">android:width=</span><span class="s">&quot;120dp&quot;</span><span class="nt">/&gt;</span>
+        <span class="na">android:text=</span><span class="s">"Soyisim Giriniz:"</span>
+        <span class="na">android:layout_row=</span><span class="s">"2"</span>
+        <span class="na">android:layout_column=</span><span class="s">"0"</span>
+        <span class="na">android:width=</span><span class="s">"120dp"</span><span class="nt">/&gt;</span>
 
     <span class="nt">&lt;EditText</span>
-        <span class="na">android:id=</span><span class="s">&quot;@+id/surnameField&quot;</span>
-        <span class="na">android:layout_row=</span><span class="s">&quot;2&quot;</span>
-        <span class="na">android:layout_column=</span><span class="s">&quot;1&quot;</span>
-        <span class="na">android:width=</span><span class="s">&quot;120dp&quot;</span><span class="nt">/&gt;</span>
+        <span class="na">android:id=</span><span class="s">"@+id/surnameField"</span>
+        <span class="na">android:layout_row=</span><span class="s">"2"</span>
+        <span class="na">android:layout_column=</span><span class="s">"1"</span>
+        <span class="na">android:width=</span><span class="s">"120dp"</span><span class="nt">/&gt;</span>
 
     <span class="nt">&lt;Button</span>
-        <span class="na">android:layout_row=</span><span class="s">&quot;3&quot;</span>
-        <span class="na">android:layout_column=</span><span class="s">&quot;1&quot;</span>
-        <span class="na">android:text=</span><span class="s">&quot;GÖNDER&quot;</span>
-        <span class="na">android:onClick=</span><span class="s">&quot;postPersonToWebService&quot;</span><span class="nt">/&gt;</span>
+        <span class="na">android:layout_row=</span><span class="s">"3"</span>
+        <span class="na">android:layout_column=</span><span class="s">"1"</span>
+        <span class="na">android:text=</span><span class="s">"GÖNDER"</span>
+        <span class="na">android:onClick=</span><span class="s">"postPersonToWebService"</span><span class="nt">/&gt;</span>
 
 <span class="nt">&lt;/GridLayout&gt;</span></code></pre></figure>
 
@@ -561,7 +559,7 @@ var disqus_config = function () {
   
 </ul>
     <p class="txt-medium-gray">
-      <small>&copy;2018 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
     </p>
   </div>
 </footer>
