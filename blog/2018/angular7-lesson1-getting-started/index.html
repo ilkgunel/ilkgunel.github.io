@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <script type="text/javascript">
+        function setVoice() {
+            var vid = document.getElementById("voice");
+            if(vid!=null){
+            	vid.volume = 0.2;
+            }
+        }
+        window.onload = setVoice;
+        </script>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+	  (adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-0980023289791742",
+		enable_page_level_ads: true
+	  });
+	</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Angular 7 Yazıları 1 - Kurulum Ve İlk Uyglama</title>
+    <meta name="description" content="Merhabalar arkadaşlar. Bu yazıla ile birlikte Angular 7 öğrenmeye başlıyoruz.">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2018/angular7-lesson1-getting-started/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Angular 7 Yazıları 1 - Kurulum Ve İlk Uyglama | İlkay Günel - Blog</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Angular 7 Yazıları 1 - Kurulum Ve İlk Uyglama" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Angular 7 Yazıları 1 - Kurulum Ve İlk Uyglama" />
+<meta property="og:description" content="Angular 7 Yazıları 1 - Kurulum Ve İlk Uyglama" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2018/angular7-lesson1-getting-started/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2018/angular7-lesson1-getting-started/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-03-16T20:40:21+03:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2018/angular7-lesson1-getting-started/","headline":"Angular 7 Yazıları 1 - Kurulum Ve İlk Uyglama","dateModified":"2018-03-16T20:40:21+03:00","datePublished":"2018-03-16T20:40:21+03:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2018/angular7-lesson1-getting-started/"},"author":{"@type":"Person","name":"İlkay Günel"},"description":"Angular 7 Yazıları 1 - Kurulum Ve İlk Uyglama","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/ilkay-gunel-cv.pdf" title="Bana Ait CV">Bana Ait CV</a></li>
+        
+          <li><a href="/blog/2016/git-nedir" title="Git Nedir? Nasıl Kullanılır?">Git Nedir? Nasıl Kullanılır?</a></li>
+        
+          <li><a href="/blog/2017/angular-2-tutorials" title="Angular 2">Angular 2</a></li>
+        
+          <li><a href="/blog/2016/maven-tutorials" title="Maven">Maven</a></li>
+        
+          <li><a href="/blog/2016/jsf-tutorials-list" title="JSF">JSF</a></li>
+        
+          <li><a href="/blog/2016/spring-tutorials" title="Spring 4">Spring 4</a></li>
+        
+          <li><a href="/blog/2016/eclipselink" title="Eclipselink">Eclipselink</a></li>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/blog/2016/test" title="Test">Test</a></li>
+        
+          <li><a href="/blog/2016/useful-libraries-for-java" title="Java İçin Faydalı Kütüphaneler">Java İçin Faydalı Kütüphaneler</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog/2016/eclipse-notes" title="Eclipse">Eclipse</a></li>
+        
+          <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
+        
+          <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+        <li><a href="https://1000kitap.com/ilkaygunel">1000Kitap</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Angular 7 Yazıları 1 - Kurulum Ve İlk Uyglama</h1>
+      <p class="post-meta">Mar 16, 2018</p>
+    </header>
+
+    <div class="post-content">
+      <p>Merhabalar arkadaşlar. Bu yazıla ile birlikte Angular 7 öğrenmeye başlıyoruz.</p>
+
+<p>Angular’ın ne olduğu ile ilgili daha önce http://ilkaygunel.com/blog/2017/angular-2-lesson-1/ adresindeki yazımda bahsetmiştim, burada tekrar yazmıyacağım, ilgilenen arkadaşların orayı okumalarını tavsiye ederim.</p>
+
+<p>Angular 7 geliştirebilmek için bilgisayarımızda node.js kurulu olmalıdır arkadaşlar. Windows işletim sisteminde kurulum dosyasını indirip kurarak, Mac OS ve Linux tabanlı işletim sistemlerinde ise paket yöneticiniz aracılığı ile kurumulumu gerçekleştirmelisiniz. Kurulumdan emin olmak için npm -v ve 
+node -v komutlarını çalıştırabilirsiniz. Benim bilgisayarımda npm için 6.4.1, node için 10.15.1 versiyonları kurulu.</p>
+
+<p><a href="/images/angular7/lesson1/checkNodeAndNpmVersion.png">
+<img src="/images/angular7/lesson1/checkNodeAndNpmVersion.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>node.js kurulumunun ardından bilgisayarımıza <strong><em>Angular CLI</em></strong> kurmamız gerekecek arkadaşlar. Komut satırı/terminal üzerinde iken <strong><em>npm install -g @angular/cli</em></strong> komutunu çalıştırdığımızda npm’den bizim için en güncel olan Angular CLI sürümü çekilip kurulacak. Bu yazıyı yazdığım gün itibari ile 7.3.6 sürümü
+en güncel sürüm. Eğer bilgisayarınızda 7.3.6 altında bir Angular CLI kurulu ise şu komutlar ile Angular CLI’ın güncel sürümüne geçebilirsiniz:</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">npm uninstall -g angular-cli
+npm cache verify 
+npm install -g @angular/cli@latest</code></pre></figure>
+
+<p>Angular CLI kurulumunu ya da güncellemesini yaptıktan sonra şimdi ilk projemizi oluşturabiliriz.</p>
+
+<p>Komut satırımızı/terminalimizi açalım ve ilk projemizi oluşturmak için şu komutu çalıştıralım, ben C diskinin altında AngularTutorials adında bir klasör oluşturdum, yazılardaki kodlar için orayı kullanacağım:</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">ng new hello-world</code></pre></figure>
+
+<p>Komut satırında size Routing ve CSS ile ilgili 2 soru sorulacak, y/N sorusuna y deyip, ikinci seçenekte de Enter’a basıp geçebilirsiniz arkadaşlar. Benim komut satırı çıktım şöyle:</p>
+
+<p><a href="/images/angular7/lesson1/createNewAngularProject.PNG">
+<img src="/images/angular7/lesson1/createNewAngularProject.PNG" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Şimdi komut satırı üzerinden oluşturmuş olduğumuz hello-world klasörüne cd komutu ile geçelim ve şu komutu çalıştıralım:</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">ng s -o </code></pre></figure>
+
+<p>Bu komut bizim için oluşturduğumuz hello-world projesini derleyecek ve http://localhost:4200/ adresi üzerinde çalıştıracak.</p>
+
+<p><a href="/images/angular7/lesson1/firstLook.png">
+<img src="/images/angular7/lesson1/firstLook.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Şimdi bir değişiklik yapalım bu proje üzerinde. Oluşturduğumuz hello-world projesini herhangi bir IDE ya da Code Editor üzerinde açalım. Ben Visual Studio Code kullanıyorum bu iş için. Projeyi açtıktan sonra app klasörü altında app.component.html  dosyasını göreceksiniz. Bu dosyayı açalım ve 
+<strong><em>Welcome to {{title}}!</em></strong> yazısını <strong><em>{{title}} Projesine Hoşgeldiniz!</em></strong> ile değiştirelim. Değişikliği yapıp dosyayı kaydettiğimizde değişiklik anında uygulanacaktır. Tarayıcıya döndüğümüzde uygulandığını göreceğiz:</p>
+
+<p><a href="/images/angular7/lesson1/changedLook.png">
+<img src="/images/angular7/lesson1/changedLook.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Bu yazıda anlatacaklarım bu kadar arkadaşlar. Bu yazıda</p>
+
+<ul>
+  <li>Angular CLI 7 kurulumunu yaptık,</li>
+  <li>İlk projemizi oluşturup çalıştırdık,</li>
+  <li>Bir değişiklik yapıp değişikliğin hemen uygulandığını gördük.</li>
+</ul>
+
+<p>Gelecek yazıda Componenets konusunu öğreneceğiz. Görüşene kadar sağlıcakla kalın.</p>
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
+  
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgunel/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>
