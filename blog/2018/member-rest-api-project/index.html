@@ -143,7 +143,7 @@
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script></p>
 
-<p>Proje temel olarak bir CRUD projesi arkadaşlar. Restful web servis endpoint’lerine kayıt, getirme, güncelleme ve silme işlemleri için JSON formatında request’ler gönderiliyor ve geri cevap olarak da JSON formatında cevaplar alınıyor. Getirme servisi dışındaki tüm servisler Spring Security tarafından korunmuş web servislerdir. Sisteme kayıtlı olmayan, kayıtlı olsa bile erişim hakkı olmayan, erişim hakkı olacak şekilde kaydolmuş olsa bile hesabı aktifleştirilmemiş kullanıcılar kaydetme, güncelleme ve silme servislerine erişemezler. Testler için proje ayağa kalkarken ADMIN rolündeki bir kullanıcıyı veritabanına kaydediyor. Resources klasörünün altında yer alana import.sql dosyası ile projenin ayağa kalkması sırasında veritabanına atılacak kayıtları tanımlayabiliyoruz.</p>
+<p>Proje temel olarak bir CRUD projesi arkadaşlar. Restful web servis endpoint’lerine kayıt, getirme, güncelleme ve silme işlemleri için JSON formatında request’ler gönderiliyor ve geri cevap olarak da JSON formatında cevaplar alınıyor. Proje içerisinde tüm servisler Spring Security tarafından korunmuş web servislerdir. Sisteme kayıtlı olmayan, kayıtlı olsa bile erişim hakkı olmayan, erişim hakkı olacak şekilde kaydolmuş olsa bile hesabı aktifleştirilmemiş kullanıcılar kaydetme, güncelleme ve silme servislerine erişemezler. Testler için proje ayağa kalkarken ADMIN rolündeki bir kullanıcıyı veritabanına kaydediyor. Resources klasörünün altında yer alana import.sql dosyası ile projenin ayağa kalkması sırasında veritabanına atılacak kayıtları tanımlayabiliyoruz.</p>
 
 <p>Projede 2 adet rol var. Birisi USER ve birisi de ADMIN rolü. ADMIN rolü USER’a ait path’lere erişim sağlayabiliyorken USER rolü ADMIN’e ait path’lere erişim sağlayamıyor.</p>
 
@@ -151,12 +151,20 @@
 
 <p>Şimdi projedeki CRUD işlemlerini gerçekleştirelim. Ben bu yazı için PostMan uygulaması ile Post işlemlerini gerçekleştireceğim.</p>
 
-<p><strong>1.Tekil Ve Çoğul User Ve Admin Üye Kayıt İşlemi</strong></p>
+<p><strong>1.Authorization Token'ın Alınması</strong></p>
 
-<p>İlk olarak tekil USER rolünde bir üyenin kaydı için PostMan’in arayüzünden POST işlemi yapılacağını söyleyip adres olarak <a href="http://localhost:8080/MemberRestAPIProject/memberPostWebServiceEndPoint/saveUserMember">http://localhost:8080/MemberRestAPIProject/memberPostWebServiceEndPoint/saveUserMember</a> linkini veriyorum. Akabinde Authorization kısmından Basic Auth’u seçiyoruz ve UserName&amp;Password alanına ilkgunel93@gmail.com ve TEST 1234 bilgilerini giriyoruz.</p>
+<p>Proje içerisindeki servislere erişim JWT Token ile yapılmaktadır. Bu nedenle ilk önce JWTLoginFilter üzerinden kullanıcı adı-şifre ikilisi ile bir Authorization token alınması gerekmektedir. Bunun için http://localhost:8080/MemberRestAPIProject/login adresine body kısmı JSON formatında olacak şekilde **username** ve **password** ikilisini içeren bir GET isteği gönderiyoruz. Bu GET isteğininden bize dönen response'un headerları arasında **Authorization** header'ı  bulunuyor ve biz Authorization header'ı içindeki Token ile servis isteklerimizi yapacağız. Aşağıdaki ekran görüntüsünde GET isteğinin body kısmını ve dönen cevabın header'ları arasında Authorization header'ını görebiliyoruz. Ben buradaki Authorization header bilgisini kopyalıyorum şimdi, az sonra kullanacağım.</p>
 
-<p><a href="/images/memberrestapiproject/1.png">
-<img src="/images/memberrestapiproject/1.png" style="width: 958px; height= 400px;" />
+<p><a href="/images/memberrestapiproject/14.png">
+<img src="/images/memberrestapiproject/14.png" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p><strong>2.Tekil Ve Çoğul User Ve Admin Üye Kayıt İşlemi</strong></p>
+
+<p>Şimdi tekil USER rolünde bir üyenin kaydı için PostMan’in arayüzünden POST işlemi yapılacağını söyleyip adres olarak <a href="http://localhost:8080/MemberRestAPIProject/memberPostWebServiceEndPoint/saveUserMember">http://localhost:8080/MemberRestAPIProject/memberPostWebServiceEndPoint/saveUserMember</a> linkini veriyorum. Akabinde Authorization kısmından ise Bearer Token'ı seçiyoruz ve az önce kopyaladığımız Authorization header bilgisini buraya giriyoruz.</p>
+
+<p><a href="/images/memberrestapiproject/15.png">
+<img src="/images/memberrestapiproject/15.png" style="width: 958px; height= 400px;" />
 </a></p>
 
 <p>Body kısmına da raw ve JSON seçip aşağıdaki JSON datasını yapıştırıyoruz ve Send butonuna tıklıyoruz.</p>
@@ -168,6 +176,10 @@
 	<span class="p">]</span>
 
 <span class="p">}</span></code></pre></figure>
+
+<p><a href="/images/memberrestapiproject/1.png">
+<img src="/images/memberrestapiproject/1.png" style="width: 958px; height= 400px;" />
+</a></p>
 
 <p>JSON datası içerisinde memberList key’inde veri gönderiyorum. JSR-303 sebebi ile @Valid notasyonu List nesnesi üzerinde validasyon yapamıyor, tekil bean’ler üzerinde validasyon yapabiliyor. Ben de web servis endpoint’inde List<Member> tipinde veri almak yerine bir MemberWrapper yazdım ve validasyonun ardından memberList'i kullandım.</Member></p>
 
@@ -246,7 +258,7 @@
 <img src="/images/memberrestapiproject/8.png" style="width: 958px; height= 400px;" />
 </a></p>
 
-<p><strong>2.Tekil ve Çoğul Üye Güncelleme İşlemi</strong></p>
+<p><strong>3.Tekil ve Çoğul Üye Güncelleme İşlemi</strong></p>
 
 <p>Üye güncelleme işlemi için <a href="http://localhost:8080/MemberRestAPIProject/memberUpdateWebServiceEndpoint/updateUserMember">http://localhost:8080/MemberRestAPIProject/memberUpdateWebServiceEndpoint/updateUserMember</a>
 <a href="http://localhost:8080/MemberRestAPIProject/memberUpdateWebServiceEndpoint/updateAdminMember">http://localhost:8080/MemberRestAPIProject/memberUpdateWebServiceEndpoint/updateAdminMember</a>
@@ -270,7 +282,7 @@ Mika Hakkinen’i updateUserMember path’ine istek gönderip Rubens Barichello 
 
 <p>Birden fazla üye güncellenmek istendiğinde de JSON’da gönderilen üye bilgileri arttıralarak işlem yapılabilir.</p>
 
-<p><strong>3.Member Listeleme İşlemi</strong></p>
+<p><strong>4.Member Listeleme İşlemi</strong></p>
 
 <p>Browser üzerinden <a href="http://localhost:8080/MemberRestAPIProject/memberGetWebServiceEndPoint/getAllMembers">http://localhost:8080/MemberRestAPIProject/memberGetWebServiceEndPoint/getAllMembers</a> adresine gitmeye çalıştığımda bu bir GET isteği olacaktır ve bana o an kayıtlı tüm üyelerin listesini sunacaktır.</p>
 
@@ -292,7 +304,7 @@ Mika Hakkinen’i updateUserMember path’ine istek gönderip Rubens Barichello 
 <img src="/images/memberrestapiproject/12.png" style="width: 958px; height= 400px;" />
 </a></p>
 
-<p><strong>4.Üye Silme İşlemi</strong></p>
+<p><strong>5.Üye Silme İşlemi</strong></p>
 
 <p>Üye silme işlemi için ise <a href="http://localhost:8080/MemberRestAPIProject/memberDeleteWebServiceEndPoint/deleteUserMember">http://localhost:8080/MemberRestAPIProject/memberDeleteWebServiceEndPoint/deleteUserMember</a>
 <a href="http://localhost:8080/MemberRestAPIProject/memberDeleteWebServiceEndPoint/deleteAdminMember">http://localhost:8080/MemberRestAPIProject/memberDeleteWebServiceEndPoint/deleteAdminMember</a> adreslerini kullanıyoruz. Üye silme işleminde kayıt ve güncelleme işlemlerinden farklı olarak memberList kullanmıyoruz ve HTTP metodunu DELETE olarak gönderiyoruz fakat yine JSON array gönderiyoruz. Web service tarafı bu işlem için de liste karşılaması yapıyor. Üye silme işleminde sadece id bilgisinin gönderilmesi yeterli. Örneğin 2 id bilgisindeki USER rolündeki kullanıcıyı silmek için oldukça basit olan JSON datamız şöyle olur:</p>
