@@ -177,10 +177,6 @@
 
 <span class="p">}</span></code></pre></figure>
 
-<p><a href="/images/memberrestapiproject/1.png">
-<img src="/images/memberrestapiproject/1.png" style="width: 958px; height= 400px;" />
-</a></p>
-
 <p>JSON datası içerisinde memberList key’inde veri gönderiyorum. JSR-303 sebebi ile @Valid notasyonu List nesnesi üzerinde validasyon yapamıyor, tekil bean’ler üzerinde validasyon yapabiliyor. Ben de web servis endpoint’inde List<Member> tipinde veri almak yerine bir MemberWrapper yazdım ve validasyonun ardından memberList'i kullandım.</Member></p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">com.ilkaygunel.wrapper</span><span class="o">;</span>
@@ -212,7 +208,7 @@
 <img src="/images/memberrestapiproject/2.png" style="width: 958px; height= 400px;" />
 </a></p>
 
-<p>Şimdi hiçbir şey yapmadan PostMan üzerindeki Authorization kısmında geri dönüyorum ve username alanını az önce kaydettiğim üyenin e-posta adresi olan <strong><em>ilkay.gunel@kod5.org</em></strong> ile değiştiriyorum ve Preview Request butonuna tıklıyorum. Akabinde tekrar Send butonuna tıklıyorum.</p>
+<p>Şimdi hiçbir şey yapmadan PostMan üzerinde Authorization header bilgisini aldığım ve /login path'ine istek attığım ekrana geri dönüyorum ve username alanını az önce kaydettiğim üyenin e-posta adresi olan <strong><em>ilkay.gunel@kod5.org</em></strong> ile değiştiriyorum. Akabinde tekrar Send butonuna tıklıyorum.</p>
 
 <p><a href="/images/memberrestapiproject/3.png">
 <img src="/images/memberrestapiproject/3.png" style="width: 958px; height= 400px;" />
@@ -230,17 +226,19 @@
 <img src="/images/memberrestapiproject/5.png" style="width: 958px; height= 400px;" />
 </a></p>
 
-<p>Şimdi Body alanındaki JSON’daki e-mail alanını herhangi bir e-mail adresi ile değiştiriyorum. Ben burada ilkay_gunel34@hotmail.com’u kullanacağım. Akabinde de Send butonuna tıklıyorum. Az önce kullanıcı aktif olmadığı için engellene istek şimdi başarı ile tamamlanıyor.</p>
+<p>Şimdi /login path'ine istek attığım ekrana geri dönüp tekrar istek gönderdiğimde başarılı bir şekilde token bilgisini alabildiğimi görüyorum.</p>
 
 <p><a href="/images/memberrestapiproject/6.png">
 <img src="/images/memberrestapiproject/6.png" style="width: 958px; height= 400px;" />
 </a></p>
 
-<p>Şimdi son olarak da POST isteğinin yapıldığı Path’in sonunu saveAdminMember olarak değiştirp aynı request’i tekrar gönderiyorum. Şimdi de erişim hakkım olmayan bir yere erişim denediğim için 403 yetki hatası döndü ve hata mesajında <strong><em>Access is denied</em></strong> metni geldi.</p>
+<p>Şimdi son olarak da POST isteğinin yapıldığı Path’in sonunu saveUserMember yerine saveAdminMember olarak değiştirip Bearer token bilgisini de az önce ürettiğim token ile değiştirip Preview Request butonuna tıkladıktan sonra aynı request’i tekrar gönderiyorum. Şimdi de erişim hakkım olmayan bir yere erişim denediğim için 403 yetki hatası döndü ve hata mesajında <strong><em>Access is denied</em></strong> metni geldi.</p>
 
 <p><a href="/images/memberrestapiproject/7.png">
 <img src="/images/memberrestapiproject/7.png" style="width: 958px; height= 400px;" />
 </a></p>
+
+<p style="text-align: center;color:red;">NOT:Sonraki adımların tamamında request'ler Authorization kısmında Bearer Token içerecek şekilde gönderilmiştir.</p>
 
 <p>Toplu halde üye kaydetmek istediğimde de saveUserMember adresine göndereceğim JSON datası şu şekilde olacaktır:</p>
 
