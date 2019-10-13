@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <script type="text/javascript">
+        function setVoice() {
+            var vid = document.getElementById("voice");
+            if(vid!=null){
+            	vid.volume = 0.2;
+            }
+        }
+        window.onload = setVoice;
+        </script>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+	  (adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-0980023289791742",
+		enable_page_level_ads: true
+	  });
+	</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>CRON EXPRESSIONS</title>
+    <meta name="description" content="Merhabalar. Bu yazıda size bazı işlerin planlanmış zamanlarda düzenli olarak çalışmasını sağlayan CRON Expressions hakkında bilgi vereceğim.">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2019/qron-expression-tutorial/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>CRON EXPRESSIONS | İlkay Günel - Blog</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="CRON EXPRESSIONS" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="CRON EXPRESSIONS" />
+<meta property="og:description" content="CRON EXPRESSIONS" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2019/qron-expression-tutorial/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2019/qron-expression-tutorial/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-10-01T20:30:21+03:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2019/qron-expression-tutorial/","headline":"CRON EXPRESSIONS","dateModified":"2019-10-01T20:30:21+03:00","datePublished":"2019-10-01T20:30:21+03:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2019/qron-expression-tutorial/"},"author":{"@type":"Person","name":"İlkay Günel"},"description":"CRON EXPRESSIONS","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/ilkay-gunel-cv.pdf" title="Bana Ait CV">Bana Ait CV</a></li>
+        
+          <li><a href="/blog/2016/git-nedir" title="Git Nedir? Nasıl Kullanılır?">Git Nedir? Nasıl Kullanılır?</a></li>
+        
+          <li><a href="/blog/2017/angular-2-tutorials" title="Angular 2">Angular 2</a></li>
+        
+          <li><a href="/blog/2016/maven-tutorials" title="Maven">Maven</a></li>
+        
+          <li><a href="/blog/2016/jsf-tutorials-list" title="JSF">JSF</a></li>
+        
+          <li><a href="/blog/2016/spring-tutorials" title="Spring 4">Spring 4</a></li>
+        
+          <li><a href="/blog/2016/eclipselink" title="Eclipselink">Eclipselink</a></li>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/blog/2016/test" title="Test">Test</a></li>
+        
+          <li><a href="/blog/2016/useful-libraries-for-java" title="Java İçin Faydalı Kütüphaneler">Java İçin Faydalı Kütüphaneler</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog/2016/eclipse-notes" title="Eclipse">Eclipse</a></li>
+        
+          <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
+        
+          <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+        <li><a href="https://1000kitap.com/ilkaygunel">1000Kitap</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">CRON EXPRESSIONS</h1>
+      <p class="post-meta">Oct 1, 2019</p>
+    </header>
+
+    <div class="post-content">
+      <p>Merhabalar. Bu yazıda size bazı işlerin planlanmış zamanlarda düzenli olarak çalışmasını sağlayan <strong><em>CRON Expressions</em></strong> hakkında bilgi vereceğim.</p>
+
+<p>CRON Expression’lar en fazla 7 parametre olacak şekilde yazılabilirler ve en temel gösterimleri * * * * * * * şeklindedir. Burada bulunan * ifadesi uygun tüm değerlerin kabulü anlamına gelmektedir. Şimdi bu 7 parametrenin
+sıra ile hangi değerlere karşılık geldiğine bakalım.</p>
+
+<ol>
+  <li>
+    <p>Saniye : En solda yer alan bu parametre planlamış görevimizin hangi saniye ya da saniyelerde çalışmasını bildirmek içindir.</p>
+  </li>
+  <li>
+    <p>Dakika : En solun bir sağında yer alan bu parametre planlamış görevimizin hangi dakika ya da dakikalarda çalışmasını bildirmek içindir.</p>
+  </li>
+  <li>
+    <p>Saat   : En solun 2 sağında yer alan bu parametre planlamış görevimizin hangi saat ya da saatlerde çalışmasını bildirmek içindir.</p>
+  </li>
+  <li>
+    <p>Ayın Günü (Day Of Month) :En solun 3 sağında yer alan bu parametre planlamış görevimizin ayın hangi gün ya da günlerinde çalışmasını bildirmek içindir.</p>
+  </li>
+  <li>
+    <p>Ay (Month) : En sağın 2 solunda yer alan bu parametre planlamış görevimizin hangi ay ya da aylarda çalışmasını bildirmek içindir.</p>
+  </li>
+  <li>
+    <p>Haftanın Günü (Day of Week) : En sağın 1 solunda yer alan bu parametre planlamış görevimizin haftanın hangi gününde çalışmasını bildirmek içindir.</p>
+  </li>
+  <li>
+    <p>Yıl (Year) : En sağda yer alan bu parametre planlamış görevimizin hangi yıl ya da yıllarda çalışmasını bildirmek içindir. Bu parametre optional yani isteğe bağlı bir parametredir. İsterseniz koyalabilir isterseniz de koymayabilirsiniz.</p>
+  </li>
+</ol>
+
+<p><strong>CRON Expression’da Kullanılabilecek Özel Karakterler</strong></p>
+
+<ol>
+  <li>
+    <ul>
+      <li>: Uygun olan tüm değerleri kabul et manasına gelmektedir. Örneğin dakika alanına * koyduğunuzda diğer alanlara bağlı olmakla birlikte uygun olan tüm dakikalarda ilgili görevin çalışacağı anlamına gelir.</li>
+    </ul>
+  </li>
+  <li>
+    <p>? : Eğer bir alan için bir değer belirtmek istemiyorsanız, boş bırakmak istiyorsanız ? karakterini kullanabilirsiniz ancak bu karakter sadece 2 alan için izinlidir. Onlar da <strong><em>Haftanın Günü (Day of Week)</em></strong> ve <strong><em>Ayın Günü (Day
+of Month)</em></strong> alanlarıdır.</p>
+  </li>
+  <li>
+    <ul>
+      <li>: Aralık belirtmek için kullanılan bir karakterdir. Örneğin saat alanında 3-5 ifadesi kullanılırsa saat 3’de başlayıp 5’de bitmesi manasına gelir.</li>
+    </ul>
+  </li>
+  <li>
+    <p>, : Birden fazla parametre geçmek için kullanılan karakterdir. Örneğin Haftanın günü alanında MON, WED, FRI şeklinde kullanılırsa ilgili görevin Pazartesi, Çarşamba ve Cuma günlerinde çalışacağı anlamına gelir.</p>
+  </li>
+  <li>
+    <p>/ : Arttırım için kullanılan karakterdir. Örneğin biz saniye alanında 0/15 şeklinde bir kullanım yapsak bu ifade 0. saniyede başla ve 15 saniye arttırarak çalış anlamına gelir. Bu durumda 0. ,15. ,30. ve 45. saniyelerde bu görev 
+çalışacaktır.</p>
+  </li>
+  <li>
+    <p>L : Son (Last) anlamına gelen karakterdir. Örneğin siz bu karakteri ayın günü alanında kullanırsanız ayın son günü çalışacak bir görev yazmış olursunuz. Ayın son günü alanında <strong>L-2</strong> şeklinde bir ifade kullanırsanız ayın son gününden
+2 gün önce çalışcak bir görev yazmış olursunuz. Burada hangi ay olduğu da önem teşkil ediyor. Örneğin Ocak ayı için 31 gün, Şubat ayı için 28 gün olarak hesap yapar. Bu durumda L-2 ifadesi Ocak ayı içinde 29. günde çalışacakken
+şubat ayı içerisinde 26. günde çalışacaktır.</p>
+  </li>
+  <li>W : Bu parametre ilgili görevin hafta içi bir günde çalışması için kullanılmaktadır. Örneğin siz ayın günü alanına <strong>15W</strong> ifadesini yazarsanız planlanmış görevimiz ayın 15. gününe en yakın haftaiçi gününde çalışcaktır. Eğer ayın</li>
+  <li>günü Cumartesiye denk geliyor ise görev bir önceki gün Cuma çalışacaktır. Eğer ayın 15. günü Pazar’a denk gelirse bu defa bir sonraki gün Pazartesi çalışacaktır. Eğer 15. gün Salı günü ise hafta içine denk geldiğinde görev 
+o Salı günü çalıştırılacaktır.</li>
+</ol>
+
+<p><strong>Cron Expression İçin Örnekler</strong></p>
+
+<p>Her gün saat 14:00 ile 14:55 arasında ve 18:00 ile 18:55 arasında 5 dakikada bir çalışacak Cron Expression yazalım.</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">    0 0/5 14,18 * * * *</code></pre></figure>
+
+<p>Pazartesi, Salı, Çarşamba, Perşembe ve Cuma günleri saat 10:15’de çalışacak Cron Expression yazalım:</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">	0 15 10 * * MON-FRI *</code></pre></figure>
+
+<p>Her ayın 15. günü saat 10:15’de çalışacak Cron Expression yazalım:</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">	0 15 10 15 * ? * </code></pre></figure>
+
+<p>Yılın son günü Cuma günü ise yılın bitiminden 1 dakika önce çalışacak Cron Expression yazalım.</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">    0 59 23 31 12 5 *</code></pre></figure>
+
+<p>Ocak, Mart, Mayıs, Temmuz, Eylül ve Kasım ayında her dakika çalışacak Cron Expression yazalım.</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">	* * * * 1,3,5,7,9,11 * * </code></pre></figure>
+
+<p>Bu yazıda anlatacaklarım da bu kadar arkadaşlar. Cron Expression sentaksındaki dizilimi görmüş olduk ve temel olarak nasıl Cron Expression yazabileceğimizi öğrenmiş olduk. Gelecek yazıda görüşmek üzere.</p>
+
+<p>Görüşene kadar sağlıcakla kalın.</p>
+
+<p style="text-align: center">Selam ve Sevgilerimle</p>
+
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
+  
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgunel/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>
