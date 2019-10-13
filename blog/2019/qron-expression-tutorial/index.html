@@ -127,60 +127,36 @@
 
 <p>CRON Expression’lar en fazla 7 parametre olacak şekilde yazılabilirler ve en temel gösterimleri * * * * * * * şeklindedir. Burada bulunan * ifadesi uygun tüm değerlerin kabulü anlamına gelmektedir. Şimdi bu 7 parametrenin
 sıra ile hangi değerlere karşılık geldiğine bakalım.</p>
-
 <ol>
-  <li>
-    <p>Saniye : En solda yer alan bu parametre planlamış görevimizin hangi saniye ya da saniyelerde çalışmasını bildirmek içindir.</p>
-  </li>
-  <li>
-    <p>Dakika : En solun bir sağında yer alan bu parametre planlamış görevimizin hangi dakika ya da dakikalarda çalışmasını bildirmek içindir.</p>
-  </li>
-  <li>
-    <p>Saat   : En solun 2 sağında yer alan bu parametre planlamış görevimizin hangi saat ya da saatlerde çalışmasını bildirmek içindir.</p>
-  </li>
-  <li>
-    <p>Ayın Günü (Day Of Month) :En solun 3 sağında yer alan bu parametre planlamış görevimizin ayın hangi gün ya da günlerinde çalışmasını bildirmek içindir.</p>
-  </li>
-  <li>
-    <p>Ay (Month) : En sağın 2 solunda yer alan bu parametre planlamış görevimizin hangi ay ya da aylarda çalışmasını bildirmek içindir.</p>
-  </li>
-  <li>
-    <p>Haftanın Günü (Day of Week) : En sağın 1 solunda yer alan bu parametre planlamış görevimizin haftanın hangi gününde çalışmasını bildirmek içindir.</p>
-  </li>
-  <li>
-    <p>Yıl (Year) : En sağda yer alan bu parametre planlamış görevimizin hangi yıl ya da yıllarda çalışmasını bildirmek içindir. Bu parametre optional yani isteğe bağlı bir parametredir. İsterseniz koyalabilir isterseniz de koymayabilirsiniz.</p>
-  </li>
+  <li>Saniye : En solda yer alan bu parametre planlamış görevimizin hangi saniye ya da saniyelerde çalışmasını bildirmek içindir.</li>
+  <li>Dakika : En solun bir sağında yer alan bu parametre planlamış görevimizin hangi dakika ya da dakikalarda çalışmasını bildirmek içindir.</li>
+  <li>Saat   : En solun 2 sağında yer alan bu parametre planlamış görevimizin hangi saat ya da saatlerde çalışmasını bildirmek içindir.</li>
+  <li>Ayın Günü (Day Of Month) :En solun 3 sağında yer alan bu parametre planlamış görevimizin ayın hangi gün ya da günlerinde çalışmasını bildirmek içindir.</li>
+  <li>Ay (Month) : En sağın 2 solunda yer alan bu parametre planlamış görevimizin hangi ay ya da aylarda çalışmasını bildirmek içindir.</li>
+  <li>Haftanın Günü (Day of Week) : En sağın 1 solunda yer alan bu parametre planlamış görevimizin haftanın hangi gününde çalışmasını bildirmek içindir.</li>
+  <li>Yıl (Year) : En sağda yer alan bu parametre planlamış görevimizin hangi yıl ya da yıllarda çalışmasını bildirmek içindir. Bu parametre optional yani isteğe bağlı bir parametredir. İsterseniz koyalabilir isterseniz de koymayabilirsiniz.</li>
 </ol>
 
 <p><strong>CRON Expression’da Kullanılabilecek Özel Karakterler</strong></p>
-
 <ol>
   <li>
     <ul>
       <li>: Uygun olan tüm değerleri kabul et manasına gelmektedir. Örneğin dakika alanına * koyduğunuzda diğer alanlara bağlı olmakla birlikte uygun olan tüm dakikalarda ilgili görevin çalışacağı anlamına gelir.</li>
     </ul>
   </li>
-  <li>
-    <p>? : Eğer bir alan için bir değer belirtmek istemiyorsanız, boş bırakmak istiyorsanız ? karakterini kullanabilirsiniz ancak bu karakter sadece 2 alan için izinlidir. Onlar da <strong><em>Haftanın Günü (Day of Week)</em></strong> ve <strong><em>Ayın Günü (Day
-of Month)</em></strong> alanlarıdır.</p>
-  </li>
+  <li>? : Eğer bir alan için bir değer belirtmek istemiyorsanız, boş bırakmak istiyorsanız ? karakterini kullanabilirsiniz ancak bu karakter sadece 2 alan için izinlidir. Onlar da <strong><em>Haftanın Günü (Day of Week)</em></strong> ve <strong><em>Ayın Günü (Day
+of Month)</em></strong> alanlarıdır.</li>
   <li>
     <ul>
       <li>: Aralık belirtmek için kullanılan bir karakterdir. Örneğin saat alanında 3-5 ifadesi kullanılırsa saat 3’de başlayıp 5’de bitmesi manasına gelir.</li>
     </ul>
   </li>
-  <li>
-    <p>, : Birden fazla parametre geçmek için kullanılan karakterdir. Örneğin Haftanın günü alanında MON, WED, FRI şeklinde kullanılırsa ilgili görevin Pazartesi, Çarşamba ve Cuma günlerinde çalışacağı anlamına gelir.</p>
-  </li>
-  <li>
-    <p>/ : Arttırım için kullanılan karakterdir. Örneğin biz saniye alanında 0/15 şeklinde bir kullanım yapsak bu ifade 0. saniyede başla ve 15 saniye arttırarak çalış anlamına gelir. Bu durumda 0. ,15. ,30. ve 45. saniyelerde bu görev 
-çalışacaktır.</p>
-  </li>
-  <li>
-    <p>L : Son (Last) anlamına gelen karakterdir. Örneğin siz bu karakteri ayın günü alanında kullanırsanız ayın son günü çalışacak bir görev yazmış olursunuz. Ayın son günü alanında <strong>L-2</strong> şeklinde bir ifade kullanırsanız ayın son gününden
+  <li>, : Birden fazla parametre geçmek için kullanılan karakterdir. Örneğin Haftanın günü alanında MON, WED, FRI şeklinde kullanılırsa ilgili görevin Pazartesi, Çarşamba ve Cuma günlerinde çalışacağı anlamına gelir.</li>
+  <li>/ : Arttırım için kullanılan karakterdir. Örneğin biz saniye alanında 0/15 şeklinde bir kullanım yapsak bu ifade 0. saniyede başla ve 15 saniye arttırarak çalış anlamına gelir. Bu durumda 0. ,15. ,30. ve 45. saniyelerde bu görev 
+çalışacaktır.</li>
+  <li>L : Son (Last) anlamına gelen karakterdir. Örneğin siz bu karakteri ayın günü alanında kullanırsanız ayın son günü çalışacak bir görev yazmış olursunuz. Ayın son günü alanında <strong>L-2</strong> şeklinde bir ifade kullanırsanız ayın son gününden
 2 gün önce çalışcak bir görev yazmış olursunuz. Burada hangi ay olduğu da önem teşkil ediyor. Örneğin Ocak ayı için 31 gün, Şubat ayı için 28 gün olarak hesap yapar. Bu durumda L-2 ifadesi Ocak ayı içinde 29. günde çalışacakken
-şubat ayı içerisinde 26. günde çalışacaktır.</p>
-  </li>
+şubat ayı içerisinde 26. günde çalışacaktır.</li>
   <li>W : Bu parametre ilgili görevin hafta içi bir günde çalışması için kullanılmaktadır. Örneğin siz ayın günü alanına <strong>15W</strong> ifadesini yazarsanız planlanmış görevimiz ayın 15. gününe en yakın haftaiçi gününde çalışcaktır. Eğer ayın</li>
   <li>günü Cumartesiye denk geliyor ise görev bir önceki gün Cuma çalışacaktır. Eğer ayın 15. günü Pazar’a denk gelirse bu defa bir sonraki gün Pazartesi çalışacaktır. Eğer 15. gün Salı günü ise hafta içine denk geldiğinde görev 
 o Salı günü çalıştırılacaktır.</li>
