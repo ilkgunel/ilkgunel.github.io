@@ -156,7 +156,7 @@ d) num1 == num2
 
 <p><strong>Cevap</strong></p>
 
-<p>Bu sorunun doğru cevabı d şıkkı olacaktır arkadaşlar. Çünkü metot içerisinde primitive int yerine class olan Integer kullanılmış. Bu durumda == operatörü değer kontrolünden ziyade referans kontrolüne odaklanacaktır. num3 != num4 ifadesinin ekrana basılacak olması bu nedenden kaynaklanmaktadır. Peki o zaman bu kural baz alındığında num1==num2 nasıl ekran basılacaktır? Bu Java’nın integer üzerinde üzerinde uyguladığı caching yapısından kaynaklanmaktadır. Java integer üzerinde -127 ile 127 arasındaki değerler için caching uygular ve num1 ile num2 hem aynı değere sahip oldukları hem de bu aralığa girdikleri için Java aynı referans noktasını ikisine de atayacaktır.</p>
+<p>Bu sorunun doğru cevabı d şıkkı olacaktır arkadaşlar. Çünkü metot içerisinde primitive int yerine class olan Integer kullanılmış. Bu durumda == operatörü değer kontrolünden ziyade referans kontrolüne odaklanacaktır. num3 != num4 ifadesinin ekrana basılacak olması bu nedenden kaynaklanmaktadır. Peki o zaman bu kural baz alındığında num1==num2 nasıl ekran basılacaktır? Bu Java’nın integer üzerinde üzerinde uyguladığı caching yapısından kaynaklanmaktadır. Java integer üzerinde -128 ile 127 arasındaki değerler için caching uygular ve num1 ile num2 hem aynı değere sahip oldukları hem de bu aralığa girdikleri için Java aynı referans noktasını ikisine de atayacaktır.</p>
 
 <p>Bu nedenle sorumuzun doğru cevabı num1 == num2 ve num3 != num4 çıktıları olacaktır.</p>
 
