@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-3/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.5.0 -->
+      <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Mongo DB Ve Java Temel İşlemler 3 - Kayıt Çekme - İkinci Bölüm | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.8.6" />
 <meta property="og:title" content="Mongo DB Ve Java Temel İşlemler 3 - Kayıt Çekme - İkinci Bölüm" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-09-04T19:38:20+03:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-3/"},"url":"http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-3/","headline":"Mongo DB Ve Java Temel İşlemler 3 - Kayıt Çekme - İkinci Bölüm","dateModified":"2016-09-04T19:38:20+03:00","datePublished":"2016-09-04T19:38:20+03:00","description":"Mongo DB Ve Java Temel İşlemler 3 - Kayıt Çekme - İkinci Bölüm","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-3/"},"author":{"@type":"Person","name":"İlkay Günel"},"url":"http://ilkaygunel.com/blog/2016/mongo-db-ve-java-temel-islemler-3/","headline":"Mongo DB Ve Java Temel İşlemler 3 - Kayıt Çekme - İkinci Bölüm","dateModified":"2016-09-04T19:38:20+03:00","datePublished":"2016-09-04T19:38:20+03:00","description":"Mongo DB Ve Java Temel İşlemler 3 - Kayıt Çekme - İkinci Bölüm","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -107,6 +107,17 @@
         <li><a href="https://1000kitap.com/ilkaygunel">1000Kitap</a></li>
       </ul>
     </nav>
+	<div class="container">
+		<ul class="social">
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
+  
+</ul>
+	</div>
   </div>
 </header>
 
@@ -129,32 +140,32 @@ bir kısmını görmüştük. Bu yazı ile de kayıt çekme işlemlerini tamamla
 <p>Java kodumuza geçmeden önce yine MongoDB’deki kayıtlardan herhangi birisine göz atalım:</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57c19b523e9b4210f7353280"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 Avenue"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10078"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"building"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1480"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"coord"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="nl">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57c19b523e9b4210f7353280"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 Avenue"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10078"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"building"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1480"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"coord"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="mf">-73.9557413</span><span class="p">,</span><span class="w">
         </span><span class="mf">40.7720266</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"borough"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Manhattan"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuisine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Russian"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"grades"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="nl">"borough"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Manhattan"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cuisine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Russian"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"grades"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27-08-2016"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"grade"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="w">
+        </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27-08-2016"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"grade"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27-08-2016"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"grade"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="w">
+        </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27-08-2016"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"grade"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vella"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"restaurant_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"41704620"</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vella"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"restaurant_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"41704620"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -182,19 +193,19 @@ büyük score alanına sahip tüm kayıtlar getiriliyor. grades altındakilern s
 
 <p>Yukarıdaki kod şu şekilde de kullanılabilirdi:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FindIterable</span><span class="o">&lt;</span><span class="n">Document</span><span class="o">&gt;</span> <span class="n">iterable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"Records"</span><span class="o">).</span><span class="na">find</span><span class="o">(</span><span class="k">new</span> <span class="n">Document</span><span class="o">(</span><span class="s">"grades.score"</span><span class="o">,</span> <span class="k">new</span> <span class="n">Document</span><span class="o">(</span><span class="s">"$gt"</span><span class="o">,</span> <span class="mi">13</span><span class="o">)));</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FindIterable</span><span class="o">&lt;</span><span class="nc">Document</span><span class="o">&gt;</span> <span class="n">iterable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"Records"</span><span class="o">).</span><span class="na">find</span><span class="o">(</span><span class="k">new</span> <span class="nc">Document</span><span class="o">(</span><span class="s">"grades.score"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Document</span><span class="o">(</span><span class="s">"$gt"</span><span class="o">,</span> <span class="mi">13</span><span class="o">)));</span>
 </code></pre></div></div>
 
 <p>Eğer belirli bir değerden küçük değerleri getir demek istiyorsak da <strong><em>lt</em></strong>‘yi kullanabiliriz. Şu kod parçası da iki score alanından birisi 15’den küçük değer içeren tüm
 kayıtları getirecektir.</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span class="n">com</span><span class="o">.</span><span class="na">mongodb</span><span class="o">.</span><span class="na">client</span><span class="o">.</span><span class="na">model</span><span class="o">.</span><span class="na">Filters</span><span class="o">.</span><span class="na">lt</span><span class="o">;</span>
-<span class="n">FindIterable</span><span class="o">&lt;</span><span class="n">Document</span><span class="o">&gt;</span> <span class="n">iterable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"Records"</span><span class="o">).</span><span class="na">find</span><span class="o">(</span><span class="n">lt</span><span class="o">(</span><span class="s">"grades.score"</span><span class="o">,</span> <span class="mi">15</span><span class="o">));</span>
+<span class="nc">FindIterable</span><span class="o">&lt;</span><span class="nc">Document</span><span class="o">&gt;</span> <span class="n">iterable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"Records"</span><span class="o">).</span><span class="na">find</span><span class="o">(</span><span class="n">lt</span><span class="o">(</span><span class="s">"grades.score"</span><span class="o">,</span> <span class="mi">15</span><span class="o">));</span>
 </code></pre></div></div>
 
 <p>Yine aynı şekilde bu kod da yukarıdaki gibi new Document parametre verilerek kullanılabilir:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FindIterable</span><span class="o">&lt;</span><span class="n">Document</span><span class="o">&gt;</span> <span class="n">iterable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"Records"</span><span class="o">).</span><span class="na">find</span><span class="o">(</span><span class="k">new</span> <span class="n">Document</span><span class="o">(</span><span class="s">"grades.score"</span><span class="o">,</span> <span class="k">new</span> <span class="n">Document</span><span class="o">(</span><span class="s">"$lt"</span><span class="o">,</span> <span class="mi">15</span><span class="o">)));</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FindIterable</span><span class="o">&lt;</span><span class="nc">Document</span><span class="o">&gt;</span> <span class="n">iterable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"Records"</span><span class="o">).</span><span class="na">find</span><span class="o">(</span><span class="k">new</span> <span class="nc">Document</span><span class="o">(</span><span class="s">"grades.score"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Document</span><span class="o">(</span><span class="s">"$lt"</span><span class="o">,</span> <span class="mi">15</span><span class="o">)));</span>
 </code></pre></div></div>
 
 <p>Ekran çıktımız da şöyle olur, 15’den küçük score alanı olan tüm kayıtlar getirilir:</p>
@@ -205,7 +216,7 @@ kayıtları getirecektir.</p>
 <p>SQL ile klasik veri tabanı işlemeri yaparken kullanılan AND,OR işlemleri MongoDB’nin Java kütüphanesinde de mevcut. Şimdi örneğin cuisine alanı Turkish olan ve score alanı 11 olan kayıtları
 getir diyelim. Kodumuz şu şekilde olur:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FindIterable</span><span class="o">&lt;</span><span class="n">Document</span><span class="o">&gt;</span> <span class="n">iterable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"Records"</span><span class="o">).</span><span class="na">find</span><span class="o">(</span><span class="n">and</span><span class="o">(</span><span class="n">eq</span><span class="o">(</span><span class="s">"grades.score"</span><span class="o">,</span> <span class="mi">11</span><span class="o">),</span><span class="n">eq</span><span class="o">(</span><span class="s">"cuisine"</span><span class="o">,</span> <span class="s">"Turkish"</span><span class="o">)));</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FindIterable</span><span class="o">&lt;</span><span class="nc">Document</span><span class="o">&gt;</span> <span class="n">iterable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"Records"</span><span class="o">).</span><span class="na">find</span><span class="o">(</span><span class="n">and</span><span class="o">(</span><span class="n">eq</span><span class="o">(</span><span class="s">"grades.score"</span><span class="o">,</span> <span class="mi">11</span><span class="o">),</span><span class="n">eq</span><span class="o">(</span><span class="s">"cuisine"</span><span class="o">,</span> <span class="s">"Turkish"</span><span class="o">)));</span>
 </code></pre></div></div>
 
 <p>Resimde de gördüğümüz gibi cuisine alanı Turkish olan ve 11 score’una sahip kaydı bize getirdi.</p>
@@ -216,13 +227,13 @@ getir diyelim. Kodumuz şu şekilde olur:</p>
 <p>Aynı kod şu şekilde de yazılabilirdi, bu durumda önceki örneklere benzer şekilde döküman parametresi yolluyoruz fakat AND işleminin gerçekleşmesi için
 şartlarımızı <strong><em>append</em></strong>‘liyoruz:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FindIterable</span><span class="o">&lt;</span><span class="n">Document</span><span class="o">&gt;</span> <span class="n">iterable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"Records"</span><span class="o">).</span><span class="na">find</span><span class="o">(</span><span class="n">and</span><span class="o">(</span><span class="k">new</span> <span class="n">Document</span><span class="o">(</span><span class="s">"cuisine"</span><span class="o">,</span> <span class="s">"Turkish"</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="s">"grades.score"</span><span class="o">,</span> <span class="mi">11</span><span class="o">));</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FindIterable</span><span class="o">&lt;</span><span class="nc">Document</span><span class="o">&gt;</span> <span class="n">iterable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"Records"</span><span class="o">).</span><span class="na">find</span><span class="o">(</span><span class="n">and</span><span class="o">(</span><span class="k">new</span> <span class="nc">Document</span><span class="o">(</span><span class="s">"cuisine"</span><span class="o">,</span> <span class="s">"Turkish"</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="s">"grades.score"</span><span class="o">,</span> <span class="mi">11</span><span class="o">));</span>
 </code></pre></div></div>
 
 <p>OR operatörünü kullanmak istediğimizde ise döküman parametresi yollayacaksan durum yukarıdakinden farklı oluyor. OR işleminin yapılacağını bildirmek için parametre olarak verilen
 dökümanda <strong><em>$or</em></strong> olması gerekiyor. Örnek kodumuz şöyle olur:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FindIterable</span><span class="o">&lt;</span><span class="n">Document</span><span class="o">&gt;</span> <span class="n">iterable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"Records"</span><span class="o">).</span><span class="na">find</span><span class="o">(</span><span class="k">new</span> <span class="n">Document</span><span class="o">(</span><span class="s">"$or"</span><span class="o">,</span> <span class="n">asList</span><span class="o">(</span><span class="k">new</span> <span class="n">Document</span><span class="o">(</span><span class="s">"cuisine"</span><span class="o">,</span> <span class="s">"Turkish"</span><span class="o">),</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FindIterable</span><span class="o">&lt;</span><span class="nc">Document</span><span class="o">&gt;</span> <span class="n">iterable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"Records"</span><span class="o">).</span><span class="na">find</span><span class="o">(</span><span class="k">new</span> <span class="nc">Document</span><span class="o">(</span><span class="s">"$or"</span><span class="o">,</span> <span class="n">asList</span><span class="o">(</span><span class="k">new</span> <span class="nc">Document</span><span class="o">(</span><span class="s">"cuisine"</span><span class="o">,</span> <span class="s">"Turkish"</span><span class="o">),</span>
                                                                                          <span class="k">new</span> <span class="nf">Document</span><span class="o">(</span><span class="s">"grades.score"</span><span class="o">,</span> <span class="mi">14</span><span class="o">))));</span>
 </code></pre></div></div>
 
@@ -235,14 +246,14 @@ hangi şartlarda veri beklediğimizi bildiriyor. Biz cuisine key’ine karşıl�
 <p>Yukarıdaki kod şu şekilde de kullanılabilirdi:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span class="n">com</span><span class="o">.</span><span class="na">mongodb</span><span class="o">.</span><span class="na">client</span><span class="o">.</span><span class="na">model</span><span class="o">.</span><span class="na">Filters</span><span class="o">.</span><span class="na">or</span><span class="o">;</span>
-<span class="n">FindIterable</span><span class="o">&lt;</span><span class="n">Document</span><span class="o">&gt;</span> <span class="n">iterable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"Records"</span><span class="o">).</span><span class="na">find</span><span class="o">(</span><span class="n">or</span><span class="o">(</span><span class="n">eq</span><span class="o">(</span><span class="s">"cuisine"</span><span class="o">,</span> <span class="s">"Turkish"</span><span class="o">),</span> <span class="n">eq</span><span class="o">(</span><span class="s">"grades.score"</span><span class="o">,</span> <span class="mi">14</span><span class="o">)));</span>
+<span class="nc">FindIterable</span><span class="o">&lt;</span><span class="nc">Document</span><span class="o">&gt;</span> <span class="n">iterable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"Records"</span><span class="o">).</span><span class="na">find</span><span class="o">(</span><span class="n">or</span><span class="o">(</span><span class="n">eq</span><span class="o">(</span><span class="s">"cuisine"</span><span class="o">,</span> <span class="s">"Turkish"</span><span class="o">),</span> <span class="n">eq</span><span class="o">(</span><span class="s">"grades.score"</span><span class="o">,</span> <span class="mi">14</span><span class="o">)));</span>
 </code></pre></div></div>
 
 <p>Bazı durumlarda veritabanından aldığımız kayıtlarımızı artan ya da azalan sırada elde etmek isteriz. Bunun için de MongoDB Java kütüphanesinin içinde <strong><em>sort()</em></strong> metodu
 yer alıyor. sort metoduna az önceki gibi bir döküman parametre geçireceğiz ve dökümanın key alanı hangi alana göre sıralama yapmak istediğimiz, value alanı ise
 artan mı yoksa azalan sırada mı listelemek istediğimizi belirtecek. Örnek kodumuz şöyle :</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FindIterable</span><span class="o">&lt;</span><span class="n">Document</span><span class="o">&gt;</span> <span class="n">iterable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"Records"</span><span class="o">).</span><span class="na">find</span><span class="o">().</span><span class="na">sort</span><span class="o">(</span><span class="k">new</span> <span class="n">Document</span><span class="o">(</span><span class="s">"address.zipcode"</span><span class="o">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">));</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FindIterable</span><span class="o">&lt;</span><span class="nc">Document</span><span class="o">&gt;</span> <span class="n">iterable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"Records"</span><span class="o">).</span><span class="na">find</span><span class="o">().</span><span class="na">sort</span><span class="o">(</span><span class="k">new</span> <span class="nc">Document</span><span class="o">(</span><span class="s">"address.zipcode"</span><span class="o">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">));</span>
 </code></pre></div></div>
 
 <p>Kodumuz içinde sort metoduna verdiğimiz döküman parametresinin key alanı hangi alana göre sıralama yapılıp kayıtlar getirilsin demek içindir. Value alanı ise
@@ -256,14 +267,14 @@ Kodu çalıştırınca zipcode alanına göre şöyle bir azalan sırada çıkt�
 descending metodunu kullanıyoruz:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span class="n">com</span><span class="o">.</span><span class="na">mongodb</span><span class="o">.</span><span class="na">client</span><span class="o">.</span><span class="na">model</span><span class="o">.</span><span class="na">Sorts</span><span class="o">.</span><span class="na">descending</span><span class="o">;</span>
-<span class="n">FindIterable</span><span class="o">&lt;</span><span class="n">Document</span><span class="o">&gt;</span> <span class="n">iterable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"Records"</span><span class="o">).</span><span class="na">find</span><span class="o">().</span><span class="na">sort</span><span class="o">(</span><span class="n">descending</span><span class="o">(</span><span class="s">"address.zipcode"</span><span class="o">));</span>
+<span class="nc">FindIterable</span><span class="o">&lt;</span><span class="nc">Document</span><span class="o">&gt;</span> <span class="n">iterable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"Records"</span><span class="o">).</span><span class="na">find</span><span class="o">().</span><span class="na">sort</span><span class="o">(</span><span class="n">descending</span><span class="o">(</span><span class="s">"address.zipcode"</span><span class="o">));</span>
 </code></pre></div></div>
 
 <p>Biz yukarıdaki örneklerde tek bir key’e göre sıralama yapılmasını istedik. Eğer birden fazla key işin içine girecekse kodumuz şöyle olmalıdır:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FindIterable</span><span class="o">&lt;</span><span class="n">Document</span><span class="o">&gt;</span> <span class="n">iterable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"collectionName"</span><span class="o">).</span><span class="na">find</span><span class="o">().</span><span class="na">sort</span><span class="o">(</span><span class="k">new</span> <span class="n">Document</span><span class="o">(</span><span class="s">"selectKey1"</span><span class="o">,</span> <span class="mi">1</span> <span class="n">or</span> <span class="o">-</span><span class="mi">1</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="s">"selectKey2"</span><span class="o">,</span> <span class="mi">1</span> <span class="n">or</span> <span class="o">-</span><span class="mi">1</span><span class="o">));</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FindIterable</span><span class="o">&lt;</span><span class="nc">Document</span><span class="o">&gt;</span> <span class="n">iterable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"collectionName"</span><span class="o">).</span><span class="na">find</span><span class="o">().</span><span class="na">sort</span><span class="o">(</span><span class="k">new</span> <span class="nc">Document</span><span class="o">(</span><span class="s">"selectKey1"</span><span class="o">,</span> <span class="mi">1</span> <span class="n">or</span> <span class="o">-</span><span class="mi">1</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="s">"selectKey2"</span><span class="o">,</span> <span class="mi">1</span> <span class="n">or</span> <span class="o">-</span><span class="mi">1</span><span class="o">));</span>
 <span class="c1">//Ya da şu şekilde de olabilir</span>
-<span class="n">FindIterable</span><span class="o">&lt;</span><span class="n">Document</span><span class="o">&gt;</span> <span class="n">iterable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"collectionName"</span><span class="o">).</span><span class="na">find</span><span class="o">().</span><span class="na">sort</span><span class="o">(</span><span class="n">ascending</span> <span class="n">or</span> <span class="nf">descending</span><span class="o">(</span><span class="s">"selectKey1"</span><span class="o">,</span> <span class="s">"selectKeyTwo"</span><span class="o">));</span>
+<span class="nc">FindIterable</span><span class="o">&lt;</span><span class="nc">Document</span><span class="o">&gt;</span> <span class="n">iterable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">"collectionName"</span><span class="o">).</span><span class="na">find</span><span class="o">().</span><span class="na">sort</span><span class="o">(</span><span class="n">ascending</span> <span class="n">or</span> <span class="nf">descending</span><span class="o">(</span><span class="s">"selectKey1"</span><span class="o">,</span> <span class="s">"selectKeyTwo"</span><span class="o">));</span>
 </code></pre></div></div>
 
 <p>Bu yazıda da bu kadar arkadaşlar. MongoDB’den kayıt çekme işlemlerini tamamladık. Gelecek yazıda kayıt güncelleme işlemlerine değineceğiz.
