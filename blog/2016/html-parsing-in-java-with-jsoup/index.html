@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/html-parsing-in-java-with-jsoup/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.5.0 -->
+      <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Java Ve Jsoup Kütüphanesi İle HTML Parse Etme | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.8.6" />
 <meta property="og:title" content="Java Ve Jsoup Kütüphanesi İle HTML Parse Etme" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-12-04T20:40:21+03:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/html-parsing-in-java-with-jsoup/","headline":"Java Ve Jsoup Kütüphanesi İle HTML Parse Etme","dateModified":"2016-12-04T20:40:21+03:00","datePublished":"2016-12-04T20:40:21+03:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/html-parsing-in-java-with-jsoup/"},"author":{"@type":"Person","name":"İlkay Günel"},"description":"Java Ve Jsoup Kütüphanesi İle HTML Parse Etme","@context":"http://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/html-parsing-in-java-with-jsoup/"},"author":{"@type":"Person","name":"İlkay Günel"},"url":"http://ilkaygunel.com/blog/2016/html-parsing-in-java-with-jsoup/","headline":"Java Ve Jsoup Kütüphanesi İle HTML Parse Etme","dateModified":"2016-12-04T20:40:21+03:00","datePublished":"2016-12-04T20:40:21+03:00","description":"Java Ve Jsoup Kütüphanesi İle HTML Parse Etme","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -176,40 +176,40 @@ barındığı elementleri alarak bilgileri konsola basalım.</p>
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">samplejsoupproject</span><span class="o">;</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Broadcast</span> <span class="o">{</span>
 
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">time</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">imageUrl</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">title</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">tag</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">time</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">imageUrl</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">title</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">tag</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getTime</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getTime</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">time</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setTime</span><span class="o">(</span><span class="n">String</span> <span class="n">time</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setTime</span><span class="o">(</span><span class="nc">String</span> <span class="n">time</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">time</span> <span class="o">=</span> <span class="n">time</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getImageUrl</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getImageUrl</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">imageUrl</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setImageUrl</span><span class="o">(</span><span class="n">String</span> <span class="n">imageUrl</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setImageUrl</span><span class="o">(</span><span class="nc">String</span> <span class="n">imageUrl</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">imageUrl</span> <span class="o">=</span> <span class="n">imageUrl</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getTitle</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getTitle</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">title</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setTitle</span><span class="o">(</span><span class="n">String</span> <span class="n">title</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setTitle</span><span class="o">(</span><span class="nc">String</span> <span class="n">title</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">title</span> <span class="o">=</span> <span class="n">title</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getTag</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getTag</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">tag</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setTag</span><span class="o">(</span><span class="n">String</span> <span class="n">tag</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setTag</span><span class="o">(</span><span class="nc">String</span> <span class="n">tag</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">tag</span> <span class="o">=</span> <span class="n">tag</span><span class="o">;</span>
     <span class="o">}</span>   
 <span class="o">}</span></code></pre></figure>
@@ -229,13 +229,13 @@ barındığı elementleri alarak bilgileri konsola basalım.</p>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">JsoupUsage</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">List</span><span class="o">&lt;</span><span class="n">Broadcast</span><span class="o">&gt;</span> <span class="n">broadcastList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Broadcast</span><span class="o">&gt;</span> <span class="n">broadcastList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
         <span class="k">try</span> <span class="o">{</span>
-            <span class="n">Document</span> <span class="n">document</span> <span class="o">=</span> <span class="n">Jsoup</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="s">"https://www.kanald.com.tr/yayin-akisi"</span><span class="o">).</span><span class="na">get</span><span class="o">();</span>
-            <span class="n">Elements</span> <span class="n">broadcasts</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="s">"#day-061216 tr"</span><span class="o">);</span>
-            <span class="k">for</span> <span class="o">(</span><span class="n">Element</span> <span class="n">element</span> <span class="o">:</span> <span class="n">broadcasts</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">Broadcast</span> <span class="n">broadcast</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Broadcast</span><span class="o">();</span>
+            <span class="nc">Document</span> <span class="n">document</span> <span class="o">=</span> <span class="nc">Jsoup</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="s">"https://www.kanald.com.tr/yayin-akisi"</span><span class="o">).</span><span class="na">get</span><span class="o">();</span>
+            <span class="nc">Elements</span> <span class="n">broadcasts</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="s">"#day-061216 tr"</span><span class="o">);</span>
+            <span class="k">for</span> <span class="o">(</span><span class="nc">Element</span> <span class="n">element</span> <span class="o">:</span> <span class="n">broadcasts</span><span class="o">)</span> <span class="o">{</span>
+                <span class="nc">Broadcast</span> <span class="n">broadcast</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Broadcast</span><span class="o">();</span>
                 <span class="n">broadcast</span><span class="o">.</span><span class="na">setTime</span><span class="o">(</span><span class="n">element</span><span class="o">.</span><span class="na">getElementsByClass</span><span class="o">(</span><span class="s">"time"</span><span class="o">).</span><span class="na">text</span><span class="o">());</span>
                 <span class="n">broadcast</span><span class="o">.</span><span class="na">setTitle</span><span class="o">(</span><span class="n">element</span><span class="o">.</span><span class="na">getElementsByClass</span><span class="o">(</span><span class="s">"title"</span><span class="o">).</span><span class="na">text</span><span class="o">());</span>
                 <span class="n">broadcast</span><span class="o">.</span><span class="na">setImageUrl</span><span class="o">(</span><span class="n">element</span><span class="o">.</span><span class="na">getElementsByTag</span><span class="o">(</span><span class="s">"img"</span><span class="o">).</span><span class="na">attr</span><span class="o">(</span><span class="s">"data-src"</span><span class="o">));</span>
@@ -244,13 +244,13 @@ barındığı elementleri alarak bilgileri konsola basalım.</p>
                 <span class="n">broadcastList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">broadcast</span><span class="o">);</span>
             <span class="o">}</span>
             
-            <span class="k">for</span> <span class="o">(</span><span class="n">Broadcast</span> <span class="n">broadcast</span> <span class="o">:</span> <span class="n">broadcastList</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">broadcast</span><span class="o">.</span><span class="na">getTime</span><span class="o">());</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">broadcast</span><span class="o">.</span><span class="na">getTitle</span><span class="o">());</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">broadcast</span><span class="o">.</span><span class="na">getImageUrl</span><span class="o">());</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">broadcast</span><span class="o">.</span><span class="na">getTag</span><span class="o">());</span>
+            <span class="k">for</span> <span class="o">(</span><span class="nc">Broadcast</span> <span class="n">broadcast</span> <span class="o">:</span> <span class="n">broadcastList</span><span class="o">)</span> <span class="o">{</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">broadcast</span><span class="o">.</span><span class="na">getTime</span><span class="o">());</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">broadcast</span><span class="o">.</span><span class="na">getTitle</span><span class="o">());</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">broadcast</span><span class="o">.</span><span class="na">getImageUrl</span><span class="o">());</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">broadcast</span><span class="o">.</span><span class="na">getTag</span><span class="o">());</span>
             <span class="o">}</span>
-        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
             <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
         <span class="o">}</span>
 

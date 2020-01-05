@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/form-param/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.5.0 -->
+      <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>RestEasy İle Restful Web Servis Dersleri 11 – Form Param | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.8.6" />
 <meta property="og:title" content="RestEasy İle Restful Web Servis Dersleri 11 – Form Param" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-10-03T19:38:20+03:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/form-param/","headline":"RestEasy İle Restful Web Servis Dersleri 11 – Form Param","dateModified":"2016-10-03T19:38:20+03:00","datePublished":"2016-10-03T19:38:20+03:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/form-param/"},"author":{"@type":"Person","name":"İlkay Günel"},"description":"RestEasy İle Restful Web Servis Dersleri 11 – Form Param","@context":"http://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/form-param/"},"author":{"@type":"Person","name":"İlkay Günel"},"url":"http://ilkaygunel.com/blog/2016/form-param/","headline":"RestEasy İle Restful Web Servis Dersleri 11 – Form Param","dateModified":"2016-10-03T19:38:20+03:00","datePublished":"2016-10-03T19:38:20+03:00","description":"RestEasy İle Restful Web Servis Dersleri 11 – Form Param","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -187,10 +187,10 @@
 <span class="nd">@Path</span><span class="o">(</span><span class="s">"/formParamExample"</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">FormParamExample</span> <span class="o">{</span>
     <span class="nd">@Path</span><span class="o">(</span><span class="s">"/postFormParams"</span><span class="o">)</span>
-    <span class="nd">@Produces</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">TEXT_HTML</span><span class="o">+</span><span class="s">";charset=UTF-8"</span><span class="o">)</span>
+    <span class="nd">@Produces</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_HTML</span><span class="o">+</span><span class="s">";charset=UTF-8"</span><span class="o">)</span>
     <span class="nd">@POST</span>
-    <span class="kd">public</span> <span class="n">Response</span> <span class="nf">formParamMethod</span><span class="o">(</span><span class="nd">@FormParam</span><span class="o">(</span><span class="s">"firstname"</span><span class="o">)</span> <span class="n">String</span> <span class="n">firstName</span><span class="o">,</span><span class="nd">@FormParam</span><span class="o">(</span><span class="s">"lastname"</span><span class="o">)</span> <span class="n">String</span> <span class="n">lastname</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">Response</span><span class="o">.</span><span class="na">status</span><span class="o">(</span><span class="mi">200</span><span class="o">).</span><span class="na">entity</span><span class="o">(</span><span class="s">"---Gelen İsim   :"</span><span class="o">+</span><span class="n">firstName</span><span class="o">+</span><span class="s">"---"</span><span class="o">+</span><span class="s">"---Gelen Soyisim:"</span><span class="o">+</span><span class="n">lastname</span> <span class="o">+</span><span class="s">"---"</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>        
+    <span class="kd">public</span> <span class="nc">Response</span> <span class="nf">formParamMethod</span><span class="o">(</span><span class="nd">@FormParam</span><span class="o">(</span><span class="s">"firstname"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">firstName</span><span class="o">,</span><span class="nd">@FormParam</span><span class="o">(</span><span class="s">"lastname"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">lastname</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">Response</span><span class="o">.</span><span class="na">status</span><span class="o">(</span><span class="mi">200</span><span class="o">).</span><span class="na">entity</span><span class="o">(</span><span class="s">"---Gelen İsim   :"</span><span class="o">+</span><span class="n">firstName</span><span class="o">+</span><span class="s">"---"</span><span class="o">+</span><span class="s">"---Gelen Soyisim:"</span><span class="o">+</span><span class="n">lastname</span> <span class="o">+</span><span class="s">"---"</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>        
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>

@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/gson-tutorial/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.5.0 -->
+      <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Gson Kütüphanesi İle Java’dan Json’a ve Json’dan Java’ya Dönüşüm Yapma | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.8.6" />
 <meta property="og:title" content="Gson Kütüphanesi İle Java’dan Json’a ve Json’dan Java’ya Dönüşüm Yapma" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-12-14T20:40:21+03:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2016/gson-tutorial/","headline":"Gson Kütüphanesi İle Java’dan Json’a ve Json’dan Java’ya Dönüşüm Yapma","dateModified":"2016-12-14T20:40:21+03:00","datePublished":"2016-12-14T20:40:21+03:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/gson-tutorial/"},"author":{"@type":"Person","name":"İlkay Günel"},"description":"Gson Kütüphanesi İle Java’dan Json’a ve Json’dan Java’ya Dönüşüm Yapma","@context":"http://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/gson-tutorial/"},"author":{"@type":"Person","name":"İlkay Günel"},"url":"http://ilkaygunel.com/blog/2016/gson-tutorial/","headline":"Gson Kütüphanesi İle Java’dan Json’a ve Json’dan Java’ya Dönüşüm Yapma","dateModified":"2016-12-14T20:40:21+03:00","datePublished":"2016-12-14T20:40:21+03:00","description":"Gson Kütüphanesi İle Java’dan Json’a ve Json’dan Java’ya Dönüşüm Yapma","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -160,31 +160,31 @@ dosyanıza şu bağımlılık kodu ekleyin:</p>
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">gson</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
-	<span class="kd">private</span> <span class="n">String</span> <span class="n">id</span><span class="o">;</span>
-	<span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
-	<span class="kd">private</span> <span class="n">String</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">id</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">surname</span><span class="o">;</span>
 
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">id</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="n">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="nc">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">name</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getSurname</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getSurname</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">surname</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSurname</span><span class="o">(</span><span class="n">String</span> <span class="n">surname</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSurname</span><span class="o">(</span><span class="nc">String</span> <span class="n">surname</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">surname</span> <span class="o">=</span> <span class="n">surname</span><span class="o">;</span>
 	<span class="o">}</span>
 
@@ -200,20 +200,20 @@ dosyanıza şu bağımlılık kodu ekleyin:</p>
 <span class="kn">import</span> <span class="nn">com.google.gson.GsonBuilder</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">FromJavaToJson</span> <span class="o">{</span>
-	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-		<span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">();</span>
 		<span class="n">person</span><span class="o">.</span><span class="na">setId</span><span class="o">(</span><span class="s">"1"</span><span class="o">);</span>
 		<span class="n">person</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Eyüp"</span><span class="o">);</span>
 		<span class="n">person</span><span class="o">.</span><span class="na">setSurname</span><span class="o">(</span><span class="s">"Bağdaş"</span><span class="o">);</span>
 
-		<span class="n">Gson</span> <span class="n">gsonBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GsonBuilder</span><span class="o">().</span><span class="na">create</span><span class="o">();</span>
-		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">gsonBuilder</span><span class="o">.</span><span class="na">toJson</span><span class="o">(</span><span class="n">person</span><span class="o">));</span>
+		<span class="nc">Gson</span> <span class="n">gsonBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GsonBuilder</span><span class="o">().</span><span class="na">create</span><span class="o">();</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">gsonBuilder</span><span class="o">.</span><span class="na">toJson</span><span class="o">(</span><span class="n">person</span><span class="o">));</span>
 	<span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 
 <p>FromJavaToJson sınıfındaki main metodu içerisinde öncelikle Person sınıfından bir obje oluşturup set metotları ile alanlarına değer tanımları yapıyoruz. Akabinde</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Gson</span> <span class="n">gsonBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GsonBuilder</span><span class="o">().</span><span class="na">create</span><span class="o">();</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">Gson</span> <span class="n">gsonBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GsonBuilder</span><span class="o">().</span><span class="na">create</span><span class="o">();</span></code></pre></figure>
 
 <p>satırı ile JSon’dan Java’ya ve Java’dan Json’a dönüşüm yapma yeteneği olan <strong><em>gsonBuilder</em></strong> objemizi oluşturuyoruz.</p>
 
@@ -237,20 +237,20 @@ dosyanıza şu bağımlılık kodu ekleyin:</p>
 <span class="kn">import</span> <span class="nn">com.google.gson.Gson</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">FromJavaToJson</span> <span class="o">{</span>
-	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-		<span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">personList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;();</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">List</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">&gt;</span> <span class="n">personList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">&gt;();</span>
 
-		<span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+		<span class="nc">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">();</span>
 		<span class="n">person</span><span class="o">.</span><span class="na">setId</span><span class="o">(</span><span class="s">"1"</span><span class="o">);</span>
 		<span class="n">person</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Eyüp"</span><span class="o">);</span>
 		<span class="n">person</span><span class="o">.</span><span class="na">setSurname</span><span class="o">(</span><span class="s">"Bağdaş"</span><span class="o">);</span>
 
-		<span class="n">Person</span> <span class="n">person2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+		<span class="nc">Person</span> <span class="n">person2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">();</span>
 		<span class="n">person2</span><span class="o">.</span><span class="na">setId</span><span class="o">(</span><span class="s">"2"</span><span class="o">);</span>
 		<span class="n">person2</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Perihan"</span><span class="o">);</span>
 		<span class="n">person2</span><span class="o">.</span><span class="na">setSurname</span><span class="o">(</span><span class="s">"İmamoğlu"</span><span class="o">);</span>
 
-		<span class="n">Person</span> <span class="n">person3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+		<span class="nc">Person</span> <span class="n">person3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">();</span>
 		<span class="n">person3</span><span class="o">.</span><span class="na">setId</span><span class="o">(</span><span class="s">"3"</span><span class="o">);</span>
 		<span class="n">person3</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Toker"</span><span class="o">);</span>
 		<span class="n">person3</span><span class="o">.</span><span class="na">setSurname</span><span class="o">(</span><span class="s">"Turgut"</span><span class="o">);</span>
@@ -259,9 +259,9 @@ dosyanıza şu bağımlılık kodu ekleyin:</p>
 		<span class="n">personList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">person2</span><span class="o">);</span>
 		<span class="n">personList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">person3</span><span class="o">);</span>
 
-		<span class="n">Gson</span> <span class="n">gson</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Gson</span><span class="o">();</span>
-		<span class="n">String</span> <span class="n">json</span> <span class="o">=</span> <span class="n">gson</span><span class="o">.</span><span class="na">toJson</span><span class="o">(</span><span class="n">personList</span><span class="o">);</span>
-		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">json</span><span class="o">);</span>
+		<span class="nc">Gson</span> <span class="n">gson</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Gson</span><span class="o">();</span>
+		<span class="nc">String</span> <span class="n">json</span> <span class="o">=</span> <span class="n">gson</span><span class="o">.</span><span class="na">toJson</span><span class="o">(</span><span class="n">personList</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">json</span><span class="o">);</span>
 	<span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 
@@ -281,19 +281,19 @@ formatladığımız Json’ı içine kopyalayalım. Benim dosyam şu şekilde:</
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">[</span><span class="w">  
    </span><span class="p">{</span><span class="w">  
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Perihan"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"surname"</span><span class="p">:</span><span class="s2">"İmamoğlu"</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"Perihan"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"surname"</span><span class="p">:</span><span class="s2">"İmamoğlu"</span><span class="w">
    </span><span class="p">},</span><span class="w">
    </span><span class="p">{</span><span class="w">  
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"2"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Sümeyye"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"surname"</span><span class="p">:</span><span class="s2">"Demirel"</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"Sümeyye"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"surname"</span><span class="p">:</span><span class="s2">"Demirel"</span><span class="w">
    </span><span class="p">},</span><span class="w">
    </span><span class="p">{</span><span class="w">  
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"3"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Toker"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"surname"</span><span class="p">:</span><span class="s2">"Turgut"</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"Toker"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"surname"</span><span class="p">:</span><span class="s2">"Turgut"</span><span class="w">
    </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span></code></pre></figure>
 
@@ -311,23 +311,23 @@ formatladığımız Json’ı içine kopyalayalım. Benim dosyam şu şekilde:</
 <span class="kn">import</span> <span class="nn">com.google.gson.JsonParser</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">FromJsonToJava</span> <span class="o">{</span>
-	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-		<span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">personList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;();</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">List</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">&gt;</span> <span class="n">personList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">&gt;();</span>
 		<span class="k">try</span> <span class="o">{</span>
-			<span class="n">FileReader</span> <span class="n">fileReader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">"src/main/resources/jsonFile.json"</span><span class="o">);</span>
-			<span class="n">Gson</span> <span class="n">gson</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Gson</span><span class="o">();</span>
-			<span class="n">JsonParser</span> <span class="n">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JsonParser</span><span class="o">();</span>
-			<span class="n">JsonArray</span> <span class="n">jsonArray</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">fileReader</span><span class="o">).</span><span class="na">getAsJsonArray</span><span class="o">();</span>
+			<span class="nc">FileReader</span> <span class="n">fileReader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="s">"src/main/resources/jsonFile.json"</span><span class="o">);</span>
+			<span class="nc">Gson</span> <span class="n">gson</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Gson</span><span class="o">();</span>
+			<span class="nc">JsonParser</span> <span class="n">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JsonParser</span><span class="o">();</span>
+			<span class="nc">JsonArray</span> <span class="n">jsonArray</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">fileReader</span><span class="o">).</span><span class="na">getAsJsonArray</span><span class="o">();</span>
 			<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">jsonArray</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-				<span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="n">gson</span><span class="o">.</span><span class="na">fromJson</span><span class="o">(</span><span class="n">jsonArray</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="n">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+				<span class="nc">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="n">gson</span><span class="o">.</span><span class="na">fromJson</span><span class="o">(</span><span class="n">jsonArray</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 				<span class="n">personList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">person</span><span class="o">);</span>
 			<span class="o">}</span>
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">FileNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Bir Hata Meydana Geldi! Hata:"</span><span class="o">+</span><span class="n">e</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">FileNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Bir Hata Meydana Geldi! Hata:"</span><span class="o">+</span><span class="n">e</span><span class="o">);</span>
 		<span class="o">}</span>
 		
-		<span class="k">for</span> <span class="o">(</span><span class="n">Person</span> <span class="nl">p:</span><span class="n">personList</span><span class="o">)</span> <span class="o">{</span>
-			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">getId</span><span class="o">()+</span><span class="s">" "</span><span class="o">+</span><span class="n">p</span><span class="o">.</span><span class="na">getName</span><span class="o">()+</span><span class="s">" "</span><span class="o">+</span><span class="n">p</span><span class="o">.</span><span class="na">getSurname</span><span class="o">());</span>
+		<span class="k">for</span> <span class="o">(</span><span class="nc">Person</span> <span class="nl">p:</span><span class="n">personList</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">getId</span><span class="o">()+</span><span class="s">" "</span><span class="o">+</span><span class="n">p</span><span class="o">.</span><span class="na">getName</span><span class="o">()+</span><span class="s">" "</span><span class="o">+</span><span class="n">p</span><span class="o">.</span><span class="na">getSurname</span><span class="o">());</span>
 		<span class="o">}</span>
 	<span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
@@ -356,18 +356,18 @@ JsonArray’in ilgili gözündeki parametre olarak veriyoruz zira JsonArray’in
 <p>Eğer Json dosyamız şu şekilde tek bir person objesine denk gelen bir veri tutuyorsa kodu şu şekilde güncelleyebiliriz:</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">  
-	</span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Emre"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"surname"</span><span class="p">:</span><span class="s2">"Uysal"</span><span class="w">
+	</span><span class="nl">"id"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"Emre"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"surname"</span><span class="p">:</span><span class="s2">"Uysal"</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">try</span> <span class="o">{</span>
-		<span class="n">FileReader</span> <span class="n">fileReader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">"src/main/resources/jsonFile2.json"</span><span class="o">);</span>
-		<span class="n">Gson</span> <span class="n">gson</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Gson</span><span class="o">();</span>
-		<span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="n">gson</span><span class="o">.</span><span class="na">fromJson</span><span class="o">(</span><span class="n">fileReader</span><span class="o">,</span> <span class="n">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">person</span><span class="o">.</span><span class="na">getId</span><span class="o">()</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">person</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">person</span><span class="o">.</span><span class="na">getSurname</span><span class="o">());</span>
-	<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">FileNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Bir Hata Meydana Geldi! Hata:"</span> <span class="o">+</span> <span class="n">e</span><span class="o">);</span>
+		<span class="nc">FileReader</span> <span class="n">fileReader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="s">"src/main/resources/jsonFile2.json"</span><span class="o">);</span>
+		<span class="nc">Gson</span> <span class="n">gson</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Gson</span><span class="o">();</span>
+		<span class="nc">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="n">gson</span><span class="o">.</span><span class="na">fromJson</span><span class="o">(</span><span class="n">fileReader</span><span class="o">,</span> <span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">person</span><span class="o">.</span><span class="na">getId</span><span class="o">()</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">person</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">person</span><span class="o">.</span><span class="na">getSurname</span><span class="o">());</span>
+	<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">FileNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Bir Hata Meydana Geldi! Hata:"</span> <span class="o">+</span> <span class="n">e</span><span class="o">);</span>
 	<span class="o">}</span></code></pre></figure>
 
 <p><a href="/images/gson/gson4.png">
@@ -392,24 +392,24 @@ nasıl kullanıldığına bakalım.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">[</span><span class="w">  
    </span><span class="p">{</span><span class="w">  
-      </span><span class="s2">"Id"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Name"</span><span class="p">:</span><span class="s2">"Perihan"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Surname"</span><span class="p">:</span><span class="s2">"İmamoğlu"</span><span class="w">
+      </span><span class="nl">"Id"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Name"</span><span class="p">:</span><span class="s2">"Perihan"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Surname"</span><span class="p">:</span><span class="s2">"İmamoğlu"</span><span class="w">
    </span><span class="p">},</span><span class="w">
    </span><span class="p">{</span><span class="w">  
-      </span><span class="s2">"Id"</span><span class="p">:</span><span class="s2">"2"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Name"</span><span class="p">:</span><span class="s2">"Sümeyye"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Surname"</span><span class="p">:</span><span class="s2">"Demirel"</span><span class="w">
+      </span><span class="nl">"Id"</span><span class="p">:</span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Name"</span><span class="p">:</span><span class="s2">"Sümeyye"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Surname"</span><span class="p">:</span><span class="s2">"Demirel"</span><span class="w">
    </span><span class="p">},</span><span class="w">
    </span><span class="p">{</span><span class="w">  
-      </span><span class="s2">"Id"</span><span class="p">:</span><span class="s2">"3"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Name"</span><span class="p">:</span><span class="s2">"Toker"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Surname"</span><span class="p">:</span><span class="s2">"Turgut"</span><span class="w">
+      </span><span class="nl">"Id"</span><span class="p">:</span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Name"</span><span class="p">:</span><span class="s2">"Toker"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Surname"</span><span class="p">:</span><span class="s2">"Turgut"</span><span class="w">
    </span><span class="p">},</span><span class="w">
    </span><span class="p">{</span><span class="w">  
-      </span><span class="s2">"Id"</span><span class="p">:</span><span class="s2">"4"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Name"</span><span class="p">:</span><span class="s2">"Enes"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Surname"</span><span class="p">:</span><span class="s2">"Özmen"</span><span class="w">
+      </span><span class="nl">"Id"</span><span class="p">:</span><span class="s2">"4"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Name"</span><span class="p">:</span><span class="s2">"Enes"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Surname"</span><span class="p">:</span><span class="s2">"Özmen"</span><span class="w">
    </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span></code></pre></figure>
 
@@ -421,35 +421,35 @@ nasıl kullanıldığına bakalım.</p>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SerializedPerson</span> <span class="o">{</span>
 	<span class="nd">@SerializedName</span><span class="o">(</span><span class="s">"Id"</span><span class="o">)</span>
-	<span class="kd">private</span> <span class="n">String</span> <span class="n">id</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">id</span><span class="o">;</span>
 
 	<span class="nd">@SerializedName</span><span class="o">(</span><span class="s">"Name"</span><span class="o">)</span>
-	<span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
 
 	<span class="nd">@SerializedName</span><span class="o">(</span><span class="s">"Surname"</span><span class="o">)</span>
-	<span class="kd">private</span> <span class="n">String</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">surname</span><span class="o">;</span>
 
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">id</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="n">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="nc">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">name</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getSurname</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getSurname</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">surname</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSurname</span><span class="o">(</span><span class="n">String</span> <span class="n">surname</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSurname</span><span class="o">(</span><span class="nc">String</span> <span class="n">surname</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">surname</span> <span class="o">=</span> <span class="n">surname</span><span class="o">;</span>
 	<span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
@@ -458,7 +458,7 @@ nasıl kullanıldığına bakalım.</p>
 arasındaki eşleştirmeleri en doğru şekilde yapmaya mukabil oluyor. Örneğin</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nd">@SerializedName</span><span class="o">(</span><span class="s">"Name"</span><span class="o">)</span>
-<span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span></code></pre></figure>
+<span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span></code></pre></figure>
 
 <p>kodu ile GSON kütüphanesi dönüşüm ve nesne oluşturma işlemi sırasında JSON içerisinde <strong><em>Name</em></strong> ismindeki alanı Java sınıfı içindeki <strong><em>String name</em></strong> alanına dolduracaktır.</p>
 
@@ -476,23 +476,23 @@ arasındaki eşleştirmeleri en doğru şekilde yapmaya mukabil oluyor. Örneği
 <span class="kn">import</span> <span class="nn">com.google.gson.JsonParser</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">FromJsonToJava</span> <span class="o">{</span>
-	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-		<span class="n">List</span><span class="o">&lt;</span><span class="n">SerializedPerson</span><span class="o">&gt;</span> <span class="n">serializedPersons</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">SerializedPerson</span><span class="o">&gt;();</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">List</span><span class="o">&lt;</span><span class="nc">SerializedPerson</span><span class="o">&gt;</span> <span class="n">serializedPersons</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">SerializedPerson</span><span class="o">&gt;();</span>
 		<span class="k">try</span> <span class="o">{</span>
-			<span class="n">FileReader</span> <span class="n">fileReader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">"src/main/resources/jsonForSerialized.json"</span><span class="o">);</span>
-			<span class="n">Gson</span> <span class="n">gson</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Gson</span><span class="o">();</span>
-			<span class="n">JsonParser</span> <span class="n">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JsonParser</span><span class="o">();</span>
-			<span class="n">JsonArray</span> <span class="n">jsonArray</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">fileReader</span><span class="o">).</span><span class="na">getAsJsonArray</span><span class="o">();</span>
+			<span class="nc">FileReader</span> <span class="n">fileReader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="s">"src/main/resources/jsonForSerialized.json"</span><span class="o">);</span>
+			<span class="nc">Gson</span> <span class="n">gson</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Gson</span><span class="o">();</span>
+			<span class="nc">JsonParser</span> <span class="n">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JsonParser</span><span class="o">();</span>
+			<span class="nc">JsonArray</span> <span class="n">jsonArray</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">fileReader</span><span class="o">).</span><span class="na">getAsJsonArray</span><span class="o">();</span>
 			<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">jsonArray</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-				<span class="n">SerializedPerson</span> <span class="n">serializedPerson</span> <span class="o">=</span> <span class="n">gson</span><span class="o">.</span><span class="na">fromJson</span><span class="o">(</span><span class="n">jsonArray</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="n">SerializedPerson</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+				<span class="nc">SerializedPerson</span> <span class="n">serializedPerson</span> <span class="o">=</span> <span class="n">gson</span><span class="o">.</span><span class="na">fromJson</span><span class="o">(</span><span class="n">jsonArray</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="nc">SerializedPerson</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 				<span class="n">serializedPersons</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">serializedPerson</span><span class="o">);</span>
 			<span class="o">}</span>
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">FileNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Bir Hata Meydana Geldi! Hata:"</span> <span class="o">+</span> <span class="n">e</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">FileNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Bir Hata Meydana Geldi! Hata:"</span> <span class="o">+</span> <span class="n">e</span><span class="o">);</span>
 		<span class="o">}</span>
 
-		<span class="k">for</span> <span class="o">(</span><span class="n">SerializedPerson</span> <span class="n">p</span> <span class="o">:</span> <span class="n">serializedPersons</span><span class="o">)</span> <span class="o">{</span>
-			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">getId</span><span class="o">()</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="na">getSurname</span><span class="o">());</span>
+		<span class="k">for</span> <span class="o">(</span><span class="nc">SerializedPerson</span> <span class="n">p</span> <span class="o">:</span> <span class="n">serializedPersons</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">getId</span><span class="o">()</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="na">getSurname</span><span class="o">());</span>
 		<span class="o">}</span>
 	<span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
