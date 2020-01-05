@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2017/structural-directives/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.5.0 -->
+      <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Angular 2 Tutorials 8 - Structural Directives | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.8.6" />
 <meta property="og:title" content="Angular 2 Tutorials 8 - Structural Directives" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2017-05-29T20:40:21+03:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2017/structural-directives/","headline":"Angular 2 Tutorials 8 - Structural Directives","dateModified":"2017-05-29T20:40:21+03:00","datePublished":"2017-05-29T20:40:21+03:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/structural-directives/"},"author":{"@type":"Person","name":"İlkay Günel"},"description":"Angular 2 Tutorials 8 - Structural Directives","@context":"http://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/structural-directives/"},"author":{"@type":"Person","name":"İlkay Günel"},"url":"http://ilkaygunel.com/blog/2017/structural-directives/","headline":"Angular 2 Tutorials 8 - Structural Directives","dateModified":"2017-05-29T20:40:21+03:00","datePublished":"2017-05-29T20:40:21+03:00","description":"Angular 2 Tutorials 8 - Structural Directives","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -107,15 +107,14 @@
         <li><a href="https://1000kitap.com/ilkaygunel">1000Kitap</a></li>
       </ul>
     </nav>
-	<div class="container">
+	<div class="container" style="text-align: center">
 		<ul class="social">
-  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
-  
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
 </ul>
 	</div>
   </div>
@@ -150,16 +149,16 @@
 
 <p>Şimdi <strong><em>ngIf</em></strong> konusuna değinelim. ngIf directive’i isminden de anlaşılabileceği gibi sayfamızda belirli şartlara göre bir akış sağlamamıza yarayan bir directive’dir. Basit bir örnekle pratiğe dökelim:</p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
-    <span class="na">selector</span> <span class="p">:</span> <span class="s1">'angular2Tutorials'</span><span class="p">,</span>
+    <span class="na">selector</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">angular2Tutorials</span><span class="dl">'</span><span class="p">,</span>
     <span class="na">template</span> <span class="p">:</span> <span class="s2">`&lt;h2&gt;{{title}}&lt;/h2&gt;
                 &lt;p *ngIf="showElement"&gt;Show Element&lt;/p&gt;`</span><span class="p">,</span>
 <span class="p">})</span>
 
 <span class="k">export</span> <span class="kd">class</span> <span class="nx">Angular2Tutorials</span><span class="p">{</span>
-    <span class="kr">public</span> <span class="nx">title</span> <span class="o">=</span> <span class="s2">"Angular 2 Tutorials"</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">title</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Angular 2 Tutorials</span><span class="dl">"</span><span class="p">;</span>
     <span class="kr">public</span> <span class="nx">showElement</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
@@ -181,10 +180,10 @@
 
 <p>Şimdi <strong><em>ngSwitch</em></strong> konusunu işleyelim. ngSwitch konusu klasik programlama dillerinde yer alan switch-case mantığında bir yapı. Bu olursa şu olsun, şu olursa bu olsun şekilde çalışacak bir yapı ngSwitch. Yukarıdaki örneğimize eklemeler yaparak ngSwitch’i örnekleyelim.</p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
-    <span class="na">selector</span> <span class="p">:</span> <span class="s1">'angular2Tutorials'</span><span class="p">,</span>
+    <span class="na">selector</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">angular2Tutorials</span><span class="dl">'</span><span class="p">,</span>
     <span class="na">template</span> <span class="p">:</span> <span class="s2">`&lt;h2&gt;{{title}}&lt;/h2&gt;
                 &lt;p *ngIf="showElement"&gt;Show Element&lt;/p&gt;
                 &lt;div [ngSwitch]="color"&gt;
@@ -195,9 +194,9 @@
 <span class="p">})</span>
 
 <span class="k">export</span> <span class="kd">class</span> <span class="nx">Angular2Tutorials</span><span class="p">{</span>
-    <span class="kr">public</span> <span class="nx">title</span> <span class="o">=</span> <span class="s2">"Angular 2 Tutorials"</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">title</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Angular 2 Tutorials</span><span class="dl">"</span><span class="p">;</span>
     <span class="kr">public</span> <span class="nx">showElement</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-    <span class="kr">public</span> <span class="nx">color</span> <span class="o">=</span> <span class="s2">"red"</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">color</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">red</span><span class="dl">"</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
 <p>Template’mize bir div tag’i ekledik ve bu tag içerisinde köşeli parantezler arasında <strong><em>ngSwitch</em></strong> özelliğimizi kullandık. ngSwitch özelliğimize class içerisinde tanımlı color nesnesini atadık. Div tag’inin içerisinde 3 adet p tag’i kullandık ve bu p tag’lerinde ngSwitchWhen ile ngSwitchDefault kullandık. ngSwitch özelliği kendisine atanan color değerinin kontrolünü gerçekleştiriyor ve akabinde içerideki ngSwitchWhen’lere göre işlemin gerçekleştirilmesini yapıyor. Eğer gelen color’ın değeri red ise birinci p tag’i yazdırılıyor. Eğer blue ise ikinci p tag’i yazdırılıyor. Eğer red ya da blue dışında bir renk gelirse ngSwitchDefault’a yönlendiriyor ve son sıradaki p tag’i yazdırılıyor. Color nesnesini değeri red olacak şekilde gönderelim ve ekran çıktısına bakalım:</p>
@@ -226,10 +225,10 @@
 
 <p>Şimdi bu yazımıdaki son directive’miz olan <strong><em>ngFor</em></strong> directive’ini öğrenelim. ngFor directive’de bize bir döngü döndürme imkanı sunuyor. ngFor’u örnekleyelim:</p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
-    <span class="na">selector</span> <span class="p">:</span> <span class="s1">'angular2Tutorials'</span><span class="p">,</span>
+    <span class="na">selector</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">angular2Tutorials</span><span class="dl">'</span><span class="p">,</span>
     <span class="na">template</span> <span class="p">:</span> <span class="s2">`&lt;h2&gt;{{title}}&lt;/h2&gt;
                 &lt;p *ngIf="showElement"&gt;Show Element&lt;/p&gt;
                 &lt;div [ngSwitch]="color"&gt;
@@ -243,10 +242,10 @@
 <span class="p">})</span>
 
 <span class="k">export</span> <span class="kd">class</span> <span class="nx">Angular2Tutorials</span><span class="p">{</span>
-    <span class="kr">public</span> <span class="nx">title</span> <span class="o">=</span> <span class="s2">"Angular 2 Tutorials"</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">title</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Angular 2 Tutorials</span><span class="dl">"</span><span class="p">;</span>
     <span class="kr">public</span> <span class="nx">showElement</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-    <span class="kr">public</span> <span class="nx">color</span> <span class="o">=</span> <span class="s2">"green"</span><span class="p">;</span>
-    <span class="kr">public</span> <span class="nx">drivers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Michael Schumacher"</span><span class="p">,</span><span class="s2">"Mika Hakkinen"</span><span class="p">,</span><span class="s2">"Rubens Barichello"</span><span class="p">,</span><span class="s2">"David Coulthard"</span><span class="p">];</span>
+    <span class="kr">public</span> <span class="nx">color</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">green</span><span class="dl">"</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">drivers</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Michael Schumacher</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">Mika Hakkinen</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">Rubens Barichello</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">David Coulthard</span><span class="dl">"</span><span class="p">];</span>
 <span class="p">}</span></code></pre></figure>
 
 <p>Class içerisinde bir drivers array’i tanımladık ve içerisine değerler koyduk. Template içerisinde de ul tag’i içerisinde li tag’i ile array içindeki değerleri ekrana yazdıracağız. Normalde array içinde 4 değer olduğu için ul içerisinde 4 li kullanarak yazıdrabilirdik ama ngFor sayesinde tek satırda, tek li tag’i ile işi halledeceğiz. Kod içerisinde <em>ngFor ifadesi ile bir döngü, repeat işlemi yapılacağını söylüyoruz. ngFor’a atanan <strong>*let driver of drivers</strong></em> ifadesi ile klasik programlama dillerindeki forEach döngüsüne benzer şekilde drivers içinde dönerken her birini driver olarak kabul edip işlem yapacak. Ekrana yazdırma kısmında ise daha önce öğrendiğimiz interpolation devreye giriyor ve driver’ı yazdırıyoruz.</p>
@@ -305,16 +304,15 @@ var disqus_config = function () {
       <footer class="site-footer">
   <div class="container">
     <ul class="social">
-  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
-  
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
 </ul>
     <p class="txt-medium-gray">
-      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+      <small>&copy;2020 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
     </p>
   </div>
 </footer>

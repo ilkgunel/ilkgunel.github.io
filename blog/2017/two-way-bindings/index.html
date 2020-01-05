@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2017/two-way-bindings/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.5.0 -->
+      <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Angular 2 Tutorials 7 - Two Way Bindings | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.8.6" />
 <meta property="og:title" content="Angular 2 Tutorials 7 - Two Way Bindings" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2017-05-20T20:40:21+03:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2017/two-way-bindings/","headline":"Angular 2 Tutorials 7 - Two Way Bindings","dateModified":"2017-05-20T20:40:21+03:00","datePublished":"2017-05-20T20:40:21+03:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/two-way-bindings/"},"author":{"@type":"Person","name":"İlkay Günel"},"description":"Angular 2 Tutorials 7 - Two Way Bindings","@context":"http://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/two-way-bindings/"},"author":{"@type":"Person","name":"İlkay Günel"},"url":"http://ilkaygunel.com/blog/2017/two-way-bindings/","headline":"Angular 2 Tutorials 7 - Two Way Bindings","dateModified":"2017-05-20T20:40:21+03:00","datePublished":"2017-05-20T20:40:21+03:00","description":"Angular 2 Tutorials 7 - Two Way Bindings","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -107,15 +107,14 @@
         <li><a href="https://1000kitap.com/ilkaygunel">1000Kitap</a></li>
       </ul>
     </nav>
-	<div class="container">
+	<div class="container" style="text-align: center">
 		<ul class="social">
-  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
-  
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
 </ul>
 	</div>
   </div>
@@ -140,15 +139,15 @@
 
 <p>Şu şekilde elimizde oldukça sade bir Angular2Tutorials component’imiz olsun:</p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
-    <span class="na">selector</span> <span class="p">:</span> <span class="s1">'angular2Tutorials'</span><span class="p">,</span>
+    <span class="na">selector</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">angular2Tutorials</span><span class="dl">'</span><span class="p">,</span>
     <span class="na">template</span> <span class="p">:</span> <span class="s2">`&lt;h2&gt;&lt;/h2&gt;`</span><span class="p">,</span>
 <span class="p">})</span>
 
 <span class="k">export</span> <span class="kd">class</span> <span class="nx">Angular2Tutorials</span><span class="p">{</span>
-    <span class="kr">public</span> <span class="nx">title</span> <span class="o">=</span> <span class="s2">"Angular 2 Tutorials"</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">title</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Angular 2 Tutorials</span><span class="dl">"</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
 <p>Burada bizim Two Way Binding olarak bahsettiğimiz olay da şudur ki aynı anda hem data binding hem de event binding yapabilmektir. Örneğin elimizde iki adet input olsun, bu inputlara girilen veri hemen
@@ -156,10 +155,10 @@ arkadaki değişkenlere atansın ve ardından du değişkenlerden alınıp ekran
 
 <p>Şimdi bunu örnekleyecek şekilde component’imizi değiştirelim.</p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
-    <span class="na">selector</span> <span class="p">:</span> <span class="s1">'angular2Tutorials'</span><span class="p">,</span>
+    <span class="na">selector</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">angular2Tutorials</span><span class="dl">'</span><span class="p">,</span>
     <span class="na">template</span> <span class="p">:</span> <span class="s2">`&lt;h2&gt;{{title}}&lt;/h2&gt;
                 &lt;input type="text" [(ngModel)]=fName&gt;
                 &lt;input type="text" [(ngModel)]=lName&gt;
@@ -167,7 +166,7 @@ arkadaki değişkenlere atansın ve ardından du değişkenlerden alınıp ekran
 <span class="p">})</span>
 
 <span class="k">export</span> <span class="kd">class</span> <span class="nx">Angular2Tutorials</span><span class="p">{</span>
-    <span class="kr">public</span> <span class="nx">title</span> <span class="o">=</span> <span class="s2">"Angular 2 Tutorials"</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">title</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Angular 2 Tutorials</span><span class="dl">"</span><span class="p">;</span>
     <span class="kr">public</span> <span class="nx">fName</span><span class="p">;</span>
     <span class="kr">public</span> <span class="nx">lName</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
@@ -245,16 +244,15 @@ var disqus_config = function () {
       <footer class="site-footer">
   <div class="container">
     <ul class="social">
-  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
-  
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
 </ul>
     <p class="txt-medium-gray">
-      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+      <small>&copy;2020 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
     </p>
   </div>
 </footer>

@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2017/angular-2-webservice-get-post/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.5.0 -->
+      <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Angular 2 İle Web Service GET &amp; POST | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.8.6" />
 <meta property="og:title" content="Angular 2 İle Web Service GET &amp; POST" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2017-04-25T20:40:21+03:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/angular-2-webservice-get-post/"},"url":"http://ilkaygunel.com/blog/2017/angular-2-webservice-get-post/","headline":"Angular 2 İle Web Service GET &amp; POST","dateModified":"2017-04-25T20:40:21+03:00","datePublished":"2017-04-25T20:40:21+03:00","description":"Angular 2 İle Web Service GET &amp; POST","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/angular-2-webservice-get-post/"},"author":{"@type":"Person","name":"İlkay Günel"},"url":"http://ilkaygunel.com/blog/2017/angular-2-webservice-get-post/","headline":"Angular 2 İle Web Service GET &amp; POST","dateModified":"2017-04-25T20:40:21+03:00","datePublished":"2017-04-25T20:40:21+03:00","description":"Angular 2 İle Web Service GET &amp; POST","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -107,6 +107,16 @@
         <li><a href="https://1000kitap.com/ilkaygunel">1000Kitap</a></li>
       </ul>
     </nav>
+	<div class="container" style="text-align: center">
+		<ul class="social">
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
+</ul>
+	</div>
   </div>
 </header>
 
@@ -173,7 +183,7 @@ gelen id bilgisine göre bir driver gösterecek. Şu şekilde:</p>
 
     <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"systemjs.config.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
     <span class="nt">&lt;script&gt;</span>
-      <span class="nx">System</span><span class="p">.</span><span class="k">import</span><span class="p">(</span><span class="s1">'app'</span><span class="p">).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span> <span class="p">});</span>
+      <span class="nx">System</span><span class="p">.</span><span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">app</span><span class="dl">'</span><span class="p">).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span> <span class="p">});</span>
     <span class="nt">&lt;/script&gt;</span>
   <span class="nt">&lt;/head&gt;</span>
 
@@ -189,12 +199,12 @@ kullanabildik.</p>
 
 <p><strong>app.component.ts</strong></p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">DriverService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./driver.service'</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">DriverService</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./driver.service</span><span class="dl">'</span><span class="p">;</span>
 
 
 <span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
-  <span class="na">selector</span><span class="p">:</span> <span class="s1">'my-app'</span><span class="p">,</span>
+  <span class="na">selector</span><span class="p">:</span> <span class="dl">'</span><span class="s1">my-app</span><span class="dl">'</span><span class="p">,</span>
   <span class="na">template</span><span class="p">:</span> <span class="s2">`
   &lt;h1&gt;  &lt;/h1&gt;
   &lt;router-outlet&gt;
@@ -202,7 +212,7 @@ kullanabildik.</p>
   <span class="na">providers</span><span class="p">:</span> <span class="p">[</span><span class="nx">DriverService</span><span class="p">]</span>
 <span class="p">})</span>
 <span class="k">export</span> <span class="kd">class</span> <span class="nx">AppComponent</span> <span class="p">{</span>
-  <span class="nl">title</span><span class="p">:</span><span class="nx">string</span> <span class="o">=</span> <span class="s1">'Formula 1 Drivers'</span><span class="p">;</span>
+  <span class="nl">title</span><span class="p">:</span><span class="nx">string</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Formula 1 Drivers</span><span class="dl">'</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
 <p>*.component.ts şeklindeki isim kalıbına sahip dosyalar içinde bileşen tanımlarımız gerçekleştiriliyor. Bu bileşen tanımlarını html sayfamız içinde çağırıp kullanabiliyoruz. 
@@ -217,24 +227,24 @@ tanımları inceleyince burası daha iyi oturacak.</li>
 
 <p><strong>app.routes.ts</strong></p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span> <span class="nx">Routes</span><span class="p">,</span> <span class="nx">RouterModule</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/router'</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span> <span class="nx">Routes</span><span class="p">,</span> <span class="nx">RouterModule</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/router</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="k">import</span> <span class="p">{</span> <span class="nx">DriverListComponent</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./driver-list.component'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">DriverDetailsComponent</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./driver-details.component'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">DriverListComponent</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./driver-list.component</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">DriverDetailsComponent</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./driver-details.component</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">routes</span><span class="p">:</span> <span class="nx">Routes</span> <span class="o">=</span> <span class="p">[</span>
   <span class="p">{</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'drivers'</span><span class="p">,</span>
+    <span class="na">path</span><span class="p">:</span> <span class="dl">'</span><span class="s1">drivers</span><span class="dl">'</span><span class="p">,</span>
     <span class="na">component</span><span class="p">:</span> <span class="nx">DriverListComponent</span><span class="p">,</span>
   <span class="p">},</span>
   <span class="p">{</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'drivers/:driverId'</span><span class="p">,</span>
+    <span class="na">path</span><span class="p">:</span> <span class="dl">'</span><span class="s1">drivers/:driverId</span><span class="dl">'</span><span class="p">,</span>
     <span class="na">component</span><span class="p">:</span> <span class="nx">DriverDetailsComponent</span>
   <span class="p">},</span>
   <span class="p">{</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">''</span><span class="p">,</span>
-    <span class="na">redirectTo</span><span class="p">:</span> <span class="s1">'/drivers'</span><span class="p">,</span>
-    <span class="na">pathMatch</span><span class="p">:</span> <span class="s1">'full'</span>
+    <span class="na">path</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+    <span class="na">redirectTo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/drivers</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">pathMatch</span><span class="p">:</span> <span class="dl">'</span><span class="s1">full</span><span class="dl">'</span>
   <span class="p">},</span>
 <span class="p">];</span>
 
@@ -258,16 +268,16 @@ tanımları inceleyince burası daha iyi oturacak.</li>
 
 <p><strong>app.module.ts</strong></p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span>      <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserModule</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/platform-browser'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">FormsModule</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/forms'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">HttpModule</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/http'</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span>      <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserModule</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/platform-browser</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">FormsModule</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/forms</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">HttpModule</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/http</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="k">import</span> <span class="p">{</span> <span class="nx">routing</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./app.routes'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">routing</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./app.routes</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="k">import</span> <span class="p">{</span> <span class="nx">AppComponent</span> <span class="p">}</span>  <span class="k">from</span> <span class="s1">'./app.component'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">DriverListComponent</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./driver-list.component'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">DriverDetailsComponent</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./driver-details.component'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">AppComponent</span> <span class="p">}</span>  <span class="k">from</span> <span class="dl">'</span><span class="s1">./app.component</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">DriverListComponent</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./driver-list.component</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">DriverDetailsComponent</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./driver-details.component</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="p">@</span><span class="nd">NgModule</span><span class="p">({</span>
   <span class="na">imports</span><span class="p">:</span> <span class="p">[</span> <span class="nx">BrowserModule</span><span class="p">,</span> <span class="nx">routing</span><span class="p">,</span> <span class="nx">FormsModule</span><span class="p">,</span> <span class="nx">HttpModule</span><span class="p">],</span>
@@ -282,9 +292,9 @@ export ediyoruz ve diğer bileşenler içinde import etmek üzere hazır hale ge
 
 <p><strong>main.ts</strong></p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span> <span class="nx">platformBrowserDynamic</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/platform-browser-dynamic'</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span> <span class="nx">platformBrowserDynamic</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/platform-browser-dynamic</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="k">import</span> <span class="p">{</span> <span class="nx">AppModule</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./app.module'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">AppModule</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./app.module</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="nx">platformBrowserDynamic</span><span class="p">().</span><span class="nx">bootstrapModule</span><span class="p">(</span><span class="nx">AppModule</span><span class="p">);</span> </code></pre></figure>
 
@@ -312,15 +322,15 @@ export ediyoruz ve diğer bileşenler içinde import etmek üzere hazır hale ge
 
 <p>Şimdi bu blog yazısını yazmamızın asıl sebep noktasıne geldik. Web servise get ve post isteğinde bulunacak service sınıfımızı yazacağız.</p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Http</span><span class="p">,</span> <span class="nx">Response</span><span class="p">,</span> <span class="nx">Headers</span><span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/http'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'rxjs/Rx'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Driver</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./driver'</span><span class="p">;</span>
-<span class="k">import</span> <span class="s1">'rxjs/add/operator/map'</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Http</span><span class="p">,</span> <span class="nx">Response</span><span class="p">,</span> <span class="nx">Headers</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/http</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">rxjs/Rx</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Driver</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./driver</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="dl">'</span><span class="s1">rxjs/add/operator/map</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="p">@</span><span class="nd">Injectable</span><span class="p">()</span>
 <span class="k">export</span> <span class="kd">class</span> <span class="nx">DriverService</span><span class="p">{</span>
-  <span class="kr">private</span> <span class="nx">baseUrl</span><span class="p">:</span> <span class="nx">string</span> <span class="o">=</span> <span class="s1">'http://localhost:8080/RestfulWebServiceTutorials/webservice/formula1'</span><span class="p">;</span>
+  <span class="kr">private</span> <span class="nx">baseUrl</span><span class="p">:</span> <span class="nx">string</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">http://localhost:8080/RestfulWebServiceTutorials/webservice/formula1</span><span class="dl">'</span><span class="p">;</span>
 
   <span class="kd">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">http</span> <span class="p">:</span> <span class="nx">Http</span><span class="p">){</span>
   <span class="p">}</span>
@@ -344,8 +354,8 @@ export ediyoruz ve diğer bileşenler içinde import etmek üzere hazır hale ge
 
   <span class="kr">private</span> <span class="nx">getHeaders</span><span class="p">(){</span>
     <span class="kd">let</span> <span class="nx">headers</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
-    <span class="nx">headers</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'Accept'</span><span class="p">,</span> <span class="s1">'application/json'</span><span class="p">);</span>
-    <span class="nx">headers</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'Content-Type'</span><span class="p">,</span> <span class="s1">'application/json'</span><span class="p">);</span>
+    <span class="nx">headers</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">'</span><span class="s1">Accept</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">headers</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">);</span>
     <span class="k">return</span> <span class="nx">headers</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span>
@@ -358,7 +368,7 @@ export ediyoruz ve diğer bileşenler içinde import etmek üzere hazır hale ge
     <span class="na">driverCountry</span><span class="p">:</span> <span class="nx">r</span><span class="p">.</span><span class="nx">driverCountry</span><span class="p">,</span>
     <span class="na">driverTeam</span><span class="p">:</span> <span class="nx">r</span><span class="p">.</span><span class="nx">driverTeam</span>
   <span class="p">});</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Parsed driver:'</span><span class="p">,</span> <span class="nx">driver</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Parsed driver:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">driver</span><span class="p">);</span>
   <span class="k">return</span> <span class="nx">driver</span><span class="p">;</span>
 <span class="p">}</span>
 
@@ -394,12 +404,12 @@ veri gönderdiğimizi söylüyoruz.</li>
 
 <p><strong>driver-list.component.ts</strong></p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Driver</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./driver'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">DriverService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./driver.service'</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Driver</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./driver</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">DriverService</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./driver.service</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
-  <span class="na">selector</span><span class="p">:</span> <span class="s1">'driver-list'</span><span class="p">,</span>
+  <span class="na">selector</span><span class="p">:</span> <span class="dl">'</span><span class="s1">driver-list</span><span class="dl">'</span><span class="p">,</span>
   <span class="na">template</span><span class="p">:</span> <span class="s2">`
   &lt;section&gt;
     &lt;section *ngIf="isLoading &amp;&amp; !errorMessage"&gt;
@@ -421,8 +431,8 @@ veri gönderdiğimizi söylüyoruz.</li>
 <span class="p">})</span>
 <span class="k">export</span> <span class="kd">class</span> <span class="nx">DriverListComponent</span> <span class="kr">implements</span> <span class="nx">OnInit</span><span class="p">{</span>
   <span class="nl">drivers</span><span class="p">:</span> <span class="nx">Driver</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
-  <span class="nl">errorMessage</span><span class="p">:</span> <span class="nx">string</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-  <span class="nl">isLoading</span><span class="p">:</span> <span class="kr">boolean</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="nl">errorMessage</span><span class="p">:</span> <span class="nx">string</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
+  <span class="nl">isLoading</span><span class="p">:</span> <span class="nx">boolean</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
 
   <span class="kd">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">driverService</span> <span class="p">:</span> <span class="nx">DriverService</span><span class="p">){</span> <span class="p">}</span>
 
@@ -447,21 +457,21 @@ ekliyoruz.</li>
 
 <p><strong>driver-details.component.ts</strong></p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">OnDestroy</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">ActivatedRoute</span><span class="p">,</span> <span class="nx">Router</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/router'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Response</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/http'</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">OnDestroy</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">ActivatedRoute</span><span class="p">,</span> <span class="nx">Router</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/router</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Response</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/http</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Driver</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./driver'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">DriverService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./driver.service'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Driver</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./driver</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">DriverService</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./driver.service</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
-  <span class="na">selector</span><span class="p">:</span> <span class="s1">'driver-details'</span><span class="p">,</span>
-  <span class="na">templateUrl</span><span class="p">:</span> <span class="s1">'app/driver-details.component.html'</span>
+  <span class="na">selector</span><span class="p">:</span> <span class="dl">'</span><span class="s1">driver-details</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">templateUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">app/driver-details.component.html</span><span class="dl">'</span>
 <span class="p">})</span>
 <span class="k">export</span> <span class="kd">class</span> <span class="nx">DriverDetailsComponent</span> <span class="kr">implements</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">OnDestroy</span> <span class="p">{</span>
     <span class="nl">driver</span><span class="p">:</span> <span class="nx">Driver</span><span class="p">;</span>
     <span class="nl">sub</span><span class="p">:</span> <span class="nx">any</span><span class="p">;</span>
-    <span class="nl">teams</span><span class="p">:</span> <span class="nx">string</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Scuderia Ferrari'</span><span class="p">,</span> <span class="s1">'McLaren'</span><span class="p">,</span> <span class="s1">'Mercedes AMG Petronas'</span><span class="p">,</span><span class="s1">'Toyota'</span><span class="p">];</span>
+    <span class="nl">teams</span><span class="p">:</span> <span class="nx">string</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Scuderia Ferrari</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">McLaren</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Mercedes AMG Petronas</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">Toyota</span><span class="dl">'</span><span class="p">];</span>
 
     <span class="kd">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">driverService</span><span class="p">:</span> <span class="nx">DriverService</span><span class="p">,</span>
                 <span class="kr">private</span> <span class="nx">route</span><span class="p">:</span> <span class="nx">ActivatedRoute</span><span class="p">,</span>
@@ -470,8 +480,8 @@ ekliyoruz.</li>
 
     <span class="nx">ngOnInit</span><span class="p">(){</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">sub</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">params</span> <span class="o">=&gt;</span> <span class="p">{</span>
-          <span class="kd">let</span> <span class="nx">driverId</span> <span class="o">=</span> <span class="nb">Number</span><span class="p">.</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">params</span><span class="p">[</span><span class="s1">'driverId'</span><span class="p">]);</span>
-          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'getting person with id: '</span><span class="p">,</span> <span class="nx">driverId</span><span class="p">);</span>
+          <span class="kd">let</span> <span class="nx">driverId</span> <span class="o">=</span> <span class="nb">Number</span><span class="p">.</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">params</span><span class="p">[</span><span class="dl">'</span><span class="s1">driverId</span><span class="dl">'</span><span class="p">]);</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">getting person with id: </span><span class="dl">'</span><span class="p">,</span> <span class="nx">driverId</span><span class="p">);</span>
           <span class="k">this</span><span class="p">.</span><span class="nx">driverService</span>
             <span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">driverId</span><span class="p">)</span>
             <span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">p</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">driver</span> <span class="o">=</span> <span class="nx">p</span><span class="p">);</span>
@@ -483,12 +493,12 @@ ekliyoruz.</li>
     <span class="p">}</span>
 
     <span class="nx">gotoDriversList</span><span class="p">(){</span>
-        <span class="kd">let</span> <span class="nx">link</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'/drivers'</span><span class="p">];</span>
+        <span class="kd">let</span> <span class="nx">link</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">/drivers</span><span class="dl">'</span><span class="p">];</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">navigate</span><span class="p">(</span><span class="nx">link</span><span class="p">);</span>
     <span class="p">}</span>
 
     <span class="nx">saveDriverDetails</span><span class="p">(){</span>
-      <span class="kd">let</span> <span class="nx">link</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'/drivers'</span><span class="p">];</span>
+      <span class="kd">let</span> <span class="nx">link</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">/drivers</span><span class="dl">'</span><span class="p">];</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">driverService</span>
           <span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">driver</span><span class="p">)</span>
           <span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span>
@@ -513,7 +523,7 @@ this.router.navigate(link); ifadesi ile gotoDriversList() metodu çağırıldı�
 <p><strong>driver-details.component.html</strong></p>
 
 <figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="c">&lt;!--</span> <span class="k">new</span> <span class="nx">syntax</span> <span class="k">for</span> <span class="nx">ng</span><span class="o">-</span><span class="k">if</span> <span class="o">--&gt;</span>
-<span class="o">&lt;</span><span class="nx">section</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">"driver"</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">section</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="dl">"</span><span class="s2">driver</span><span class="dl">"</span><span class="o">&gt;</span>
   <span class="o">&lt;</span><span class="nx">section</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="nx">You</span> <span class="nx">selected</span><span class="p">:</span>  <span class="o">&lt;</span><span class="sr">/h2</span><span class="err">&gt;
 </span>    <span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span><span class="nx">Description</span><span class="o">&lt;</span><span class="sr">/h3</span><span class="err">&gt;
@@ -522,33 +532,33 @@ this.router.navigate(link); ifadesi ile gotoDriversList() metodu çağırıldı�
     <span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
 </span>  <span class="o">&lt;</span><span class="sr">/section</span><span class="err">&gt;
 </span>  <span class="o">&lt;</span><span class="nx">section</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="nx">form</span> <span class="p">(</span><span class="nx">ngSubmit</span><span class="p">)</span><span class="o">=</span><span class="s2">"saveDriverDetails()"</span> <span class="err">#</span><span class="nx">driverForm</span><span class="o">=</span><span class="s2">"ngForm"</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">form</span> <span class="p">(</span><span class="nx">ngSubmit</span><span class="p">)</span><span class="o">=</span><span class="dl">"</span><span class="s2">saveDriverDetails()</span><span class="dl">"</span> <span class="err">#</span><span class="nx">driverForm</span><span class="o">=</span><span class="dl">"</span><span class="s2">ngForm</span><span class="dl">"</span><span class="o">&gt;</span>
         <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
-            <span class="o">&lt;</span><span class="nx">label</span> <span class="k">for</span><span class="o">=</span><span class="s2">"driverName"</span><span class="o">&gt;</span><span class="nx">Name</span><span class="p">:</span> <span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
-</span>            <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"text"</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"driverName"</span> <span class="nx">required</span> <span class="p">[(</span><span class="nx">ngModel</span><span class="p">)]</span><span class="o">=</span><span class="s2">"driver.driverName"</span> <span class="err">#</span><span class="nx">name</span><span class="o">=</span><span class="s2">"ngModel"</span><span class="o">&gt;</span>
-            <span class="o">&lt;</span><span class="nx">div</span> <span class="p">[</span><span class="nx">hidden</span><span class="p">]</span><span class="o">=</span><span class="s2">"name.valid || name.pristine"</span> <span class="kd">class</span><span class="o">=</span><span class="s2">"error"</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">label</span> <span class="k">for</span><span class="o">=</span><span class="dl">"</span><span class="s2">driverName</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">Name</span><span class="p">:</span> <span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">text</span><span class="dl">"</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">driverName</span><span class="dl">"</span> <span class="nx">required</span> <span class="p">[(</span><span class="nx">ngModel</span><span class="p">)]</span><span class="o">=</span><span class="dl">"</span><span class="s2">driver.driverName</span><span class="dl">"</span> <span class="err">#</span><span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">ngModel</span><span class="dl">"</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">div</span> <span class="p">[</span><span class="nx">hidden</span><span class="p">]</span><span class="o">=</span><span class="dl">"</span><span class="s2">name.valid || name.pristine</span><span class="dl">"</span> <span class="kd">class</span><span class="o">=</span><span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="o">&gt;</span>
                 <span class="nx">Name</span> <span class="nx">is</span> <span class="nx">required</span> <span class="nx">my</span> <span class="nx">good</span> <span class="nx">sir</span><span class="o">/</span><span class="nx">lady</span><span class="o">!</span>
             <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
 </span>      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
 </span>      <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
-        <span class="o">&lt;</span><span class="nx">label</span> <span class="k">for</span><span class="o">=</span><span class="s2">"driverSurname"</span><span class="o">&gt;</span><span class="nx">Surname</span><span class="p">:</span> <span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
-</span>        <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"text"</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"driverSurname"</span> <span class="p">[(</span><span class="nx">ngModel</span><span class="p">)]</span><span class="o">=</span><span class="s2">"driver.driverSurname"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">label</span> <span class="k">for</span><span class="o">=</span><span class="dl">"</span><span class="s2">driverSurname</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">Surname</span><span class="p">:</span> <span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">text</span><span class="dl">"</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">driverSurname</span><span class="dl">"</span> <span class="p">[(</span><span class="nx">ngModel</span><span class="p">)]</span><span class="o">=</span><span class="dl">"</span><span class="s2">driver.driverSurname</span><span class="dl">"</span><span class="o">&gt;</span>
       <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
 </span>      <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
-        <span class="o">&lt;</span><span class="nx">label</span> <span class="k">for</span><span class="o">=</span><span class="s2">"driverCountry"</span><span class="o">&gt;</span><span class="nx">Country</span><span class="p">:</span> <span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
-</span>        <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"text"</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"driverCountry"</span> <span class="p">[(</span><span class="nx">ngModel</span><span class="p">)]</span><span class="o">=</span><span class="s2">"driver.driverCountry"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">label</span> <span class="k">for</span><span class="o">=</span><span class="dl">"</span><span class="s2">driverCountry</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">Country</span><span class="p">:</span> <span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">text</span><span class="dl">"</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">driverCountry</span><span class="dl">"</span> <span class="p">[(</span><span class="nx">ngModel</span><span class="p">)]</span><span class="o">=</span><span class="dl">"</span><span class="s2">driver.driverCountry</span><span class="dl">"</span><span class="o">&gt;</span>
       <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
 </span>      <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
-        <span class="o">&lt;</span><span class="nx">label</span> <span class="k">for</span><span class="o">=</span><span class="s2">"driverTeam"</span><span class="o">&gt;</span><span class="nx">Team</span><span class="p">:</span><span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
-</span>        <span class="o">&lt;</span><span class="nx">select</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"driverTeam"</span> <span class="p">[(</span><span class="nx">ngModel</span><span class="p">)]</span><span class="o">=</span><span class="s2">"driver.driverTeam"</span><span class="o">&gt;</span>
-          <span class="o">&lt;</span><span class="nx">option</span> <span class="o">*</span><span class="nx">ngFor</span><span class="o">=</span><span class="s2">"let team of teams"</span> <span class="p">[</span><span class="nx">value</span><span class="p">]</span><span class="o">=</span><span class="s2">"team"</span><span class="o">&gt;&lt;</span><span class="sr">/option</span><span class="err">&gt;
+        <span class="o">&lt;</span><span class="nx">label</span> <span class="k">for</span><span class="o">=</span><span class="dl">"</span><span class="s2">driverTeam</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">Team</span><span class="p">:</span><span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">select</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">driverTeam</span><span class="dl">"</span> <span class="p">[(</span><span class="nx">ngModel</span><span class="p">)]</span><span class="o">=</span><span class="dl">"</span><span class="s2">driver.driverTeam</span><span class="dl">"</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">option</span> <span class="o">*</span><span class="nx">ngFor</span><span class="o">=</span><span class="dl">"</span><span class="s2">let team of teams</span><span class="dl">"</span> <span class="p">[</span><span class="nx">value</span><span class="p">]</span><span class="o">=</span><span class="dl">"</span><span class="s2">team</span><span class="dl">"</span><span class="o">&gt;&lt;</span><span class="sr">/option</span><span class="err">&gt;
 </span>        <span class="o">&lt;</span><span class="sr">/select</span><span class="err">&gt;
 </span>      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
-</span>      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"submit"</span> <span class="p">[</span><span class="nx">disabled</span><span class="p">]</span><span class="o">=</span><span class="s2">"!driverForm.form.valid"</span><span class="o">&gt;</span><span class="nx">Save</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">submit</span><span class="dl">"</span> <span class="p">[</span><span class="nx">disabled</span><span class="p">]</span><span class="o">=</span><span class="dl">"</span><span class="s2">!driverForm.form.valid</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">Save</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
 </span>    <span class="o">&lt;</span><span class="sr">/form</span><span class="err">&gt;
 </span>  <span class="o">&lt;</span><span class="sr">/section</span><span class="err">&gt;
 </span>
-  <span class="o">&lt;</span><span class="nx">button</span> <span class="p">(</span><span class="nx">click</span><span class="p">)</span><span class="o">=</span><span class="s2">"gotoDriversList()"</span><span class="o">&gt;</span><span class="nx">Back</span> <span class="nx">to</span> <span class="nx">drivers</span> <span class="nx">list</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+  <span class="o">&lt;</span><span class="nx">button</span> <span class="p">(</span><span class="nx">click</span><span class="p">)</span><span class="o">=</span><span class="dl">"</span><span class="s2">gotoDriversList()</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">Back</span> <span class="nx">to</span> <span class="nx">drivers</span> <span class="nx">list</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
 </span><span class="o">&lt;</span><span class="nx">section</span><span class="o">&gt;</span></code></pre></figure>
 
 <p>driver-details.component.html dosyamız bizim DriverDetailsComponent bileşenimiz için templateUrl kısmında tanımladığımız şablon dosyamızdı. Bu şablon dosya içerisinde DriverDetailsComponent’den
@@ -636,16 +646,15 @@ var disqus_config = function () {
       <footer class="site-footer">
   <div class="container">
     <ul class="social">
-  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
-  
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
 </ul>
     <p class="txt-medium-gray">
-      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+      <small>&copy;2020 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
     </p>
   </div>
 </footer>

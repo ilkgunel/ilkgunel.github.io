@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2017/android-retrofit-tutorial/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.5.0 -->
+      <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Android Retrofit Kütüphanesi İle Web Service GET ve POST Örneği | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.8.6" />
 <meta property="og:title" content="Android Retrofit Kütüphanesi İle Web Service GET ve POST Örneği" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2017-01-29T20:40:21+03:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/android-retrofit-tutorial/"},"url":"http://ilkaygunel.com/blog/2017/android-retrofit-tutorial/","headline":"Android Retrofit Kütüphanesi İle Web Service GET ve POST Örneği","dateModified":"2017-01-29T20:40:21+03:00","datePublished":"2017-01-29T20:40:21+03:00","description":"Android Retrofit Kütüphanesi İle Web Service GET ve POST Örneği","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/android-retrofit-tutorial/"},"author":{"@type":"Person","name":"İlkay Günel"},"url":"http://ilkaygunel.com/blog/2017/android-retrofit-tutorial/","headline":"Android Retrofit Kütüphanesi İle Web Service GET ve POST Örneği","dateModified":"2017-01-29T20:40:21+03:00","datePublished":"2017-01-29T20:40:21+03:00","description":"Android Retrofit Kütüphanesi İle Web Service GET ve POST Örneği","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -107,6 +107,16 @@
         <li><a href="https://1000kitap.com/ilkaygunel">1000Kitap</a></li>
       </ul>
     </nav>
+	<div class="container" style="text-align: center">
+		<ul class="social">
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
+</ul>
+	</div>
   </div>
 </header>
 
@@ -144,10 +154,10 @@ adresinden erişebilirsiniz arkadaşlar.</p>
 
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">PersonAPI</span> <span class="o">{</span>
     <span class="nd">@GET</span><span class="o">(</span><span class="s">"/SpringRestTutorial/getExample"</span><span class="o">)</span>
-    <span class="n">Call</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">[]&gt;</span> <span class="nf">getSonValues</span><span class="o">();</span>
+    <span class="nc">Call</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">[]&gt;</span> <span class="nf">getSonValues</span><span class="o">();</span>
 
     <span class="nd">@POST</span><span class="o">(</span><span class="s">"/SpringRestTutorial/postPerson"</span><span class="o">)</span>
-    <span class="n">Call</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="nf">postPerson</span><span class="o">(</span><span class="nd">@Body</span> <span class="n">Person</span> <span class="n">person</span><span class="o">);</span>
+    <span class="nc">Call</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">&gt;</span> <span class="nf">postPerson</span><span class="o">(</span><span class="nd">@Body</span> <span class="nc">Person</span> <span class="n">person</span><span class="o">);</span>
 <span class="o">}</span></code></pre></figure>
 
 <p>PersonAPI interface’i içerisinde getSonValues() metodunu <strong><em>@GET(“/SpringRestTutorial/getExample”)</em></strong> ifadesi ile işaretleyerek /SpringRestTutorial/getExample adresine bir GET isteği 
@@ -166,15 +176,15 @@ Retrofit nesnesi sunan bir bir getClient metodumuz var:</p>
 <span class="kn">import</span> <span class="nn">retrofit2.converter.gson.GsonConverterFactory</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">RetroClient</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">BASE_URL</span> <span class="o">=</span> <span class="s">"http://10.0.2.2:8080/"</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Retrofit</span> <span class="n">retrofit</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">BASE_URL</span> <span class="o">=</span> <span class="s">"http://10.0.2.2:8080/"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="nc">Retrofit</span> <span class="n">retrofit</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Retrofit</span> <span class="nf">getClient</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">Retrofit</span> <span class="nf">getClient</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">retrofit</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">retrofit</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Retrofit</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-                    <span class="o">.</span><span class="na">baseUrl</span><span class="o">(</span><span class="n">BASE_URL</span><span class="o">)</span>
-                    <span class="o">.</span><span class="na">addConverterFactory</span><span class="o">(</span><span class="n">GsonConverterFactory</span><span class="o">.</span><span class="na">create</span><span class="o">()).</span><span class="na">client</span><span class="o">(</span><span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">())</span>
+            <span class="n">retrofit</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Retrofit</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">baseUrl</span><span class="o">(</span><span class="no">BASE_URL</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">addConverterFactory</span><span class="o">(</span><span class="nc">GsonConverterFactory</span><span class="o">.</span><span class="na">create</span><span class="o">()).</span><span class="na">client</span><span class="o">(</span><span class="k">new</span> <span class="nc">OkHttpClient</span><span class="o">())</span>
                     <span class="o">.</span><span class="na">build</span><span class="o">();</span>
         <span class="o">}</span>
         <span class="k">return</span> <span class="n">retrofit</span><span class="o">;</span>
@@ -205,34 +215,34 @@ ifadesi ile HTTP client’ı ataması yapıyor, build() ifadesi ile de retrofit 
 <span class="kn">import</span> <span class="nn">webserviceusage.operations.PersonAPI</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">webserviceusage.pojo.Person</span><span class="o">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ListUsersActivity</span> <span class="kd">extends</span> <span class="n">ListActivity</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">personList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-    <span class="n">CustomAdapter</span> <span class="n">customAdapter</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ListUsersActivity</span> <span class="kd">extends</span> <span class="nc">ListActivity</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">&gt;</span> <span class="n">personList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="nc">CustomAdapter</span> <span class="n">customAdapter</span><span class="o">;</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="nc">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
         <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
-        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">activity_list_people</span><span class="o">);</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">activity_list_people</span><span class="o">);</span>
 
 
-        <span class="kd">final</span> <span class="n">PersonAPI</span> <span class="n">personAPI</span> <span class="o">=</span> <span class="n">RetroClient</span><span class="o">.</span><span class="na">getClient</span><span class="o">().</span><span class="na">create</span><span class="o">(</span><span class="n">PersonAPI</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-        <span class="kd">final</span> <span class="n">Call</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">[]&gt;</span> <span class="n">call</span> <span class="o">=</span> <span class="n">personAPI</span><span class="o">.</span><span class="na">getSonValues</span><span class="o">();</span>
-        <span class="n">call</span><span class="o">.</span><span class="na">enqueue</span><span class="o">(</span><span class="k">new</span> <span class="n">Callback</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">[]&gt;()</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="nc">PersonAPI</span> <span class="n">personAPI</span> <span class="o">=</span> <span class="nc">RetroClient</span><span class="o">.</span><span class="na">getClient</span><span class="o">().</span><span class="na">create</span><span class="o">(</span><span class="nc">PersonAPI</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="kd">final</span> <span class="nc">Call</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">[]&gt;</span> <span class="n">call</span> <span class="o">=</span> <span class="n">personAPI</span><span class="o">.</span><span class="na">getSonValues</span><span class="o">();</span>
+        <span class="n">call</span><span class="o">.</span><span class="na">enqueue</span><span class="o">(</span><span class="k">new</span> <span class="nc">Callback</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">[]&gt;()</span> <span class="o">{</span>
             <span class="nd">@Override</span>
-            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onResponse</span><span class="o">(</span><span class="n">Call</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">[]&gt;</span> <span class="n">call</span><span class="o">,</span> <span class="n">Response</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">[]&gt;</span> <span class="n">response</span><span class="o">)</span> <span class="o">{</span>
-                <span class="k">for</span> <span class="o">(</span><span class="n">Person</span> <span class="n">p</span> <span class="o">:</span> <span class="n">response</span><span class="o">.</span><span class="na">body</span><span class="o">()){</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onResponse</span><span class="o">(</span><span class="nc">Call</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">[]&gt;</span> <span class="n">call</span><span class="o">,</span> <span class="nc">Response</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">[]&gt;</span> <span class="n">response</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">for</span> <span class="o">(</span><span class="nc">Person</span> <span class="n">p</span> <span class="o">:</span> <span class="n">response</span><span class="o">.</span><span class="na">body</span><span class="o">()){</span>
                     <span class="n">personList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
                 <span class="o">}</span>
             <span class="o">}</span>
 
             <span class="nd">@Override</span>
-            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onFailure</span><span class="o">(</span><span class="n">Call</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">[]&gt;</span> <span class="n">call</span><span class="o">,</span> <span class="n">Throwable</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="s">"MainActivit Class:"</span><span class="o">,</span> <span class="s">"HATA: "</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onFailure</span><span class="o">(</span><span class="nc">Call</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">[]&gt;</span> <span class="n">call</span><span class="o">,</span> <span class="nc">Throwable</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
+                <span class="nc">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="s">"MainActivit Class:"</span><span class="o">,</span> <span class="s">"HATA: "</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
             <span class="o">}</span>
         <span class="o">});</span>
 
-        <span class="n">ListView</span> <span class="n">listView</span> <span class="o">=</span> <span class="o">(</span><span class="n">ListView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">android</span><span class="o">.</span><span class="na">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">list</span><span class="o">);</span>
-        <span class="n">customAdapter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CustomAdapter</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">personList</span><span class="o">);</span>
+        <span class="nc">ListView</span> <span class="n">listView</span> <span class="o">=</span> <span class="o">(</span><span class="nc">ListView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">android</span><span class="o">.</span><span class="na">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">list</span><span class="o">);</span>
+        <span class="n">customAdapter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CustomAdapter</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">personList</span><span class="o">);</span>
         <span class="n">listView</span><span class="o">.</span><span class="na">setAdapter</span><span class="o">(</span><span class="n">customAdapter</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
@@ -263,13 +273,13 @@ nesnelerini personList listesine ekliyoruz.</p>
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">webserviceusage.pojo.Person</span><span class="o">;</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomAdapter</span> <span class="kd">extends</span> <span class="n">BaseAdapter</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomAdapter</span> <span class="kd">extends</span> <span class="nc">BaseAdapter</span> <span class="o">{</span>
 
-    <span class="kd">private</span> <span class="n">LayoutInflater</span> <span class="n">layoutInflater</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">personList</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">LayoutInflater</span> <span class="n">layoutInflater</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">&gt;</span> <span class="n">personList</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="nf">CustomAdapter</span><span class="o">(</span><span class="n">Activity</span> <span class="n">activity</span><span class="o">,</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">personList</span><span class="o">){</span>
-        <span class="n">layoutInflater</span> <span class="o">=</span> <span class="o">(</span><span class="n">LayoutInflater</span><span class="o">)</span> <span class="n">activity</span><span class="o">.</span><span class="na">getSystemService</span><span class="o">(</span><span class="n">Context</span><span class="o">.</span><span class="na">LAYOUT_INFLATER_SERVICE</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="nf">CustomAdapter</span><span class="o">(</span><span class="nc">Activity</span> <span class="n">activity</span><span class="o">,</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">&gt;</span> <span class="n">personList</span><span class="o">){</span>
+        <span class="n">layoutInflater</span> <span class="o">=</span> <span class="o">(</span><span class="nc">LayoutInflater</span><span class="o">)</span> <span class="n">activity</span><span class="o">.</span><span class="na">getSystemService</span><span class="o">(</span><span class="nc">Context</span><span class="o">.</span><span class="na">LAYOUT_INFLATER_SERVICE</span><span class="o">);</span>
         <span class="k">this</span><span class="o">.</span><span class="na">personList</span> <span class="o">=</span> <span class="n">personList</span><span class="o">;</span>
     <span class="o">}</span>
 
@@ -279,7 +289,7 @@ nesnelerini personList listesine ekliyoruz.</p>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">getItem</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Object</span> <span class="nf">getItem</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">personList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
     <span class="o">}</span>
 
@@ -289,24 +299,24 @@ nesnelerini personList listesine ekliyoruz.</p>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">View</span> <span class="nf">getView</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="n">View</span> <span class="n">view</span><span class="o">,</span> <span class="n">ViewGroup</span> <span class="n">viewGroup</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">View</span> <span class="n">satirView</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nc">View</span> <span class="nf">getView</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="nc">View</span> <span class="n">view</span><span class="o">,</span> <span class="nc">ViewGroup</span> <span class="n">viewGroup</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">View</span> <span class="n">satirView</span><span class="o">;</span>
 
-        <span class="n">satirView</span> <span class="o">=</span> <span class="n">layoutInflater</span><span class="o">.</span><span class="na">inflate</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">list_layout</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
-        <span class="n">TextView</span> <span class="n">idNumber</span> <span class="o">=</span>
-                <span class="o">(</span><span class="n">TextView</span><span class="o">)</span> <span class="n">satirView</span><span class="o">.</span><span class="na">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">idNumber</span><span class="o">);</span>
+        <span class="n">satirView</span> <span class="o">=</span> <span class="n">layoutInflater</span><span class="o">.</span><span class="na">inflate</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">list_layout</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+        <span class="nc">TextView</span> <span class="n">idNumber</span> <span class="o">=</span>
+                <span class="o">(</span><span class="nc">TextView</span><span class="o">)</span> <span class="n">satirView</span><span class="o">.</span><span class="na">findViewById</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">idNumber</span><span class="o">);</span>
 
-        <span class="n">TextView</span> <span class="n">name</span> <span class="o">=</span>
-                <span class="o">(</span><span class="n">TextView</span><span class="o">)</span> <span class="n">satirView</span><span class="o">.</span><span class="na">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">name</span><span class="o">);</span>
+        <span class="nc">TextView</span> <span class="n">name</span> <span class="o">=</span>
+                <span class="o">(</span><span class="nc">TextView</span><span class="o">)</span> <span class="n">satirView</span><span class="o">.</span><span class="na">findViewById</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">name</span><span class="o">);</span>
 
-        <span class="n">TextView</span> <span class="n">surname</span> <span class="o">=</span>
-                <span class="o">(</span><span class="n">TextView</span><span class="o">)</span> <span class="n">satirView</span><span class="o">.</span><span class="na">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">surname</span><span class="o">);</span>
+        <span class="nc">TextView</span> <span class="n">surname</span> <span class="o">=</span>
+                <span class="o">(</span><span class="nc">TextView</span><span class="o">)</span> <span class="n">satirView</span><span class="o">.</span><span class="na">findViewById</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">surname</span><span class="o">);</span>
 
-        <span class="n">TextView</span> <span class="n">address</span> <span class="o">=</span>
-                <span class="o">(</span><span class="n">TextView</span><span class="o">)</span> <span class="n">satirView</span><span class="o">.</span><span class="na">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">address</span><span class="o">);</span>
+        <span class="nc">TextView</span> <span class="n">address</span> <span class="o">=</span>
+                <span class="o">(</span><span class="nc">TextView</span><span class="o">)</span> <span class="n">satirView</span><span class="o">.</span><span class="na">findViewById</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">address</span><span class="o">);</span>
 
 
-        <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="n">personList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+        <span class="nc">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="n">personList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
 
         <span class="n">idNumber</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">person</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
         <span class="n">name</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">person</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
@@ -384,25 +394,25 @@ list_layout yerleşim düzenindeki nesneler bulunuyor ve değerler o elementlere
 <span class="kn">import</span> <span class="nn">webserviceusage.pojo.Person</span><span class="o">;</span>
 
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PostUserActivity</span> <span class="kd">extends</span> <span class="n">Activity</span><span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PostUserActivity</span> <span class="kd">extends</span> <span class="nc">Activity</span><span class="o">{</span>
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="nc">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
         <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
-        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">post_user_activity</span><span class="o">);</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">post_user_activity</span><span class="o">);</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">postPersonToWebService</span><span class="o">(</span><span class="n">View</span> <span class="n">view</span><span class="o">){</span>
-        <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">postPersonToWebService</span><span class="o">(</span><span class="nc">View</span> <span class="n">view</span><span class="o">){</span>
+        <span class="nc">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">();</span>
 
-        <span class="n">EditText</span> <span class="n">idEditText</span> <span class="o">=</span> <span class="o">(</span><span class="n">EditText</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">idField</span><span class="o">);</span>
-        <span class="n">EditText</span> <span class="n">nameEditText</span> <span class="o">=</span> <span class="o">(</span><span class="n">EditText</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">nameField</span><span class="o">);</span>
-        <span class="n">EditText</span> <span class="n">surnameEditText</span> <span class="o">=</span> <span class="o">(</span><span class="n">EditText</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">surnameField</span><span class="o">);</span>
+        <span class="nc">EditText</span> <span class="n">idEditText</span> <span class="o">=</span> <span class="o">(</span><span class="nc">EditText</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">idField</span><span class="o">);</span>
+        <span class="nc">EditText</span> <span class="n">nameEditText</span> <span class="o">=</span> <span class="o">(</span><span class="nc">EditText</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">nameField</span><span class="o">);</span>
+        <span class="nc">EditText</span> <span class="n">surnameEditText</span> <span class="o">=</span> <span class="o">(</span><span class="nc">EditText</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">surnameField</span><span class="o">);</span>
 
         <span class="n">person</span><span class="o">.</span><span class="na">setId</span><span class="o">(</span><span class="n">idEditText</span><span class="o">.</span><span class="na">getText</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
         <span class="n">person</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="n">nameEditText</span><span class="o">.</span><span class="na">getText</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
         <span class="n">person</span><span class="o">.</span><span class="na">setSurname</span><span class="o">(</span><span class="n">surnameEditText</span><span class="o">.</span><span class="na">getText</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
 
-        <span class="n">Address</span> <span class="n">address</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Address</span><span class="o">();</span>
+        <span class="nc">Address</span> <span class="n">address</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Address</span><span class="o">();</span>
         <span class="n">address</span><span class="o">.</span><span class="na">setNeighborhood</span><span class="o">(</span><span class="s">"Cennet Mahallesi"</span><span class="o">);</span>
         <span class="n">address</span><span class="o">.</span><span class="na">setBorough</span><span class="o">(</span><span class="s">"Küçükçekmece"</span><span class="o">);</span>
         <span class="n">address</span><span class="o">.</span><span class="na">setCity</span><span class="o">(</span><span class="s">"İstanbul"</span><span class="o">);</span>
@@ -410,17 +420,17 @@ list_layout yerleşim düzenindeki nesneler bulunuyor ve değerler o elementlere
 
         <span class="n">person</span><span class="o">.</span><span class="na">setAddress</span><span class="o">(</span><span class="n">address</span><span class="o">);</span>
 
-        <span class="n">PersonAPI</span> <span class="n">personAPI</span> <span class="o">=</span> <span class="n">RetroClient</span><span class="o">.</span><span class="na">getClient</span><span class="o">().</span><span class="na">create</span><span class="o">(</span><span class="n">PersonAPI</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-        <span class="n">Call</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">call</span> <span class="o">=</span> <span class="n">personAPI</span><span class="o">.</span><span class="na">postPerson</span><span class="o">(</span><span class="n">person</span><span class="o">);</span>
-        <span class="n">call</span><span class="o">.</span><span class="na">enqueue</span><span class="o">(</span><span class="k">new</span> <span class="n">Callback</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;()</span> <span class="o">{</span>
+        <span class="nc">PersonAPI</span> <span class="n">personAPI</span> <span class="o">=</span> <span class="nc">RetroClient</span><span class="o">.</span><span class="na">getClient</span><span class="o">().</span><span class="na">create</span><span class="o">(</span><span class="nc">PersonAPI</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="nc">Call</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">&gt;</span> <span class="n">call</span> <span class="o">=</span> <span class="n">personAPI</span><span class="o">.</span><span class="na">postPerson</span><span class="o">(</span><span class="n">person</span><span class="o">);</span>
+        <span class="n">call</span><span class="o">.</span><span class="na">enqueue</span><span class="o">(</span><span class="k">new</span> <span class="nc">Callback</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">&gt;()</span> <span class="o">{</span>
             <span class="nd">@Override</span>
-            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onResponse</span><span class="o">(</span><span class="n">Call</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">call</span><span class="o">,</span> <span class="n">Response</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">response</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"POST işlemi başarılı"</span><span class="o">);</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onResponse</span><span class="o">(</span><span class="nc">Call</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">&gt;</span> <span class="n">call</span><span class="o">,</span> <span class="nc">Response</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">&gt;</span> <span class="n">response</span><span class="o">)</span> <span class="o">{</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"POST işlemi başarılı"</span><span class="o">);</span>
             <span class="o">}</span>
 
             <span class="nd">@Override</span>
-            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onFailure</span><span class="o">(</span><span class="n">Call</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">call</span><span class="o">,</span> <span class="n">Throwable</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Bir Hata Meydana Geldi! "</span><span class="o">+</span><span class="n">t</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onFailure</span><span class="o">(</span><span class="nc">Call</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">&gt;</span> <span class="n">call</span><span class="o">,</span> <span class="nc">Throwable</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Bir Hata Meydana Geldi! "</span><span class="o">+</span><span class="n">t</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
             <span class="o">}</span>
         <span class="o">});</span>
     <span class="o">}</span>
@@ -550,16 +560,15 @@ var disqus_config = function () {
       <footer class="site-footer">
   <div class="container">
     <ul class="social">
-  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
-  
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
 </ul>
     <p class="txt-medium-gray">
-      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+      <small>&copy;2020 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
     </p>
   </div>
 </footer>

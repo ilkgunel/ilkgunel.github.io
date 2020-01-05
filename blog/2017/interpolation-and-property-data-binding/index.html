@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2017/interpolation-and-property-data-binding/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.5.0 -->
+      <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Angular 2 Ders 4 - Interpolation and Property Data Binding | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.8.6" />
 <meta property="og:title" content="Angular 2 Ders 4 - Interpolation and Property Data Binding" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2017-05-09T20:40:21+03:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2017/interpolation-and-property-data-binding/","headline":"Angular 2 Ders 4 - Interpolation and Property Data Binding","dateModified":"2017-05-09T20:40:21+03:00","datePublished":"2017-05-09T20:40:21+03:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/interpolation-and-property-data-binding/"},"author":{"@type":"Person","name":"İlkay Günel"},"description":"Angular 2 Ders 4- Interpolation and Property Data Binding","@context":"http://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/interpolation-and-property-data-binding/"},"author":{"@type":"Person","name":"İlkay Günel"},"url":"http://ilkaygunel.com/blog/2017/interpolation-and-property-data-binding/","headline":"Angular 2 Ders 4 - Interpolation and Property Data Binding","dateModified":"2017-05-09T20:40:21+03:00","datePublished":"2017-05-09T20:40:21+03:00","description":"Angular 2 Ders 4- Interpolation and Property Data Binding","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -107,15 +107,14 @@
         <li><a href="https://1000kitap.com/ilkaygunel">1000Kitap</a></li>
       </ul>
     </nav>
-	<div class="container">
+	<div class="container" style="text-align: center">
 		<ul class="social">
-  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
-  
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
 </ul>
 	</div>
   </div>
@@ -138,10 +137,10 @@
 
 <p>Bir önceki yazımızda Angular2Tutorials’ı şu şekilde yazmıştık:</p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
-    <span class="na">selector</span> <span class="p">:</span> <span class="s1">'angular2Tutorials'</span><span class="p">,</span>
+    <span class="na">selector</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">angular2Tutorials</span><span class="dl">'</span><span class="p">,</span>
     <span class="na">template</span> <span class="p">:</span> <span class="s2">`&lt;h2&gt;Angular 2 Tutorials&lt;/h2&gt;
                 &lt;h4&gt;Header 4 From Angular 2 Tutorials&lt;/h4&gt;`</span><span class="p">,</span>
     <span class="na">styles</span><span class="p">:</span> <span class="p">[</span><span class="s2">`h4{
@@ -153,10 +152,10 @@
 
 <p>Şimdi <strong><em>template</em></strong> özelliği içindeki <strong>Header 4 From Angular 2 Tutorials</strong> bilgisini class içerisinde bir değişken tanımlayıp ona atayarak kullanalım:</p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
-    <span class="na">selector</span> <span class="p">:</span> <span class="s1">'angular2Tutorials'</span><span class="p">,</span>
+    <span class="na">selector</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">angular2Tutorials</span><span class="dl">'</span><span class="p">,</span>
     <span class="na">template</span> <span class="p">:</span> <span class="s2">`&lt;h2&gt;Angular 2 Tutorials&lt;/h2&gt;
                 
                 &lt;h4&gt;{{title}}&lt;/h4&gt;
@@ -167,7 +166,7 @@
 <span class="p">})</span>
 
 <span class="k">export</span> <span class="kd">class</span> <span class="nx">Angular2Tutorials</span><span class="p">{</span>
-    <span class="kr">public</span> <span class="nx">title</span> <span class="o">=</span> <span class="s2">"Header 4 From Angular 2 Tutorials"</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">title</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Header 4 From Angular 2 Tutorials</span><span class="dl">"</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
 <p>Angular 2 içerisinde <strong>* {{ }} *** ifadesinin kullanımına Interpolation ismi veriliyor ve class’ın içinde tanımlanmış bir property’nin bu ifade içerisinde kullanılarak view’a bağlanmasına 
@@ -181,10 +180,10 @@
 
 <p>Şimdi <strong><em>Data Binding</em></strong> konusunun bir diğer kullanım şekline bakalım. Template içerisinde bir img tag’i kullanalım ve class içerisinde resim linki tanımlayarak data binding yapalım.</p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
-    <span class="na">selector</span> <span class="p">:</span> <span class="s1">'angular2Tutorials'</span><span class="p">,</span>
+    <span class="na">selector</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">angular2Tutorials</span><span class="dl">'</span><span class="p">,</span>
     <span class="na">template</span> <span class="p">:</span> <span class="s2">`&lt;h2&gt;Angular 2 Tutorials&lt;/h2&gt;
                 
                 &lt;h4&gt;{{title}}&lt;/h4&gt;
@@ -196,8 +195,8 @@
 <span class="p">})</span>
 
 <span class="k">export</span> <span class="kd">class</span> <span class="nx">Angular2Tutorials</span><span class="p">{</span>
-    <span class="kr">public</span> <span class="nx">title</span> <span class="o">=</span> <span class="s2">"Header 4 From Angular 2 Tutorials"</span><span class="p">;</span>
-    <span class="kr">public</span> <span class="nx">imageLink</span> <span class="o">=</span> <span class="s2">"https://pbs.twimg.com/profile_images/598551481181155329/DqwnzkIE.jpg"</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">title</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Header 4 From Angular 2 Tutorials</span><span class="dl">"</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">imageLink</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://pbs.twimg.com/profile_images/598551481181155329/DqwnzkIE.jpg</span><span class="dl">"</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
 <p>Angular2Tutorials sınıfı içerisinde bir fotoğraf linki tanımladım. Template özelliği içerisinde ise bir img etiketi tanımladık ve img etiketinin src property’sini köşeli parantezler içine alarak
@@ -217,10 +216,10 @@ işlem yapıyor.</p>
 
 <p>Şimdi Angular2Tutorials’ın template kısmına bir input ekleyelim ve class içerisinde <strong><em>courseName</em></strong> tanımlayıp input’un value’suna atayalım:</p>
 
-<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span class="k">import</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
-    <span class="na">selector</span> <span class="p">:</span> <span class="s1">'angular2Tutorials'</span><span class="p">,</span>
+    <span class="na">selector</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">angular2Tutorials</span><span class="dl">'</span><span class="p">,</span>
     <span class="na">template</span> <span class="p">:</span> <span class="s2">`&lt;h2&gt;Angular 2 Tutorials&lt;/h2&gt;
     			
                 &lt;h4&gt;{{title}}&lt;/h4&gt;
@@ -233,9 +232,9 @@ işlem yapıyor.</p>
 <span class="p">})</span>
 
 <span class="k">export</span> <span class="kd">class</span> <span class="nx">Angular2Tutorials</span><span class="p">{</span>
-    <span class="kr">public</span> <span class="nx">title</span> <span class="o">=</span> <span class="s2">"Header 4 From Angular 2 Tutorials"</span><span class="p">;</span>
-    <span class="kr">public</span> <span class="nx">imageLink</span> <span class="o">=</span> <span class="s2">"https://pbs.twimg.com/profile_images/598551481181155329/DqwnzkIE.jpg"</span><span class="p">;</span>
-    <span class="kr">public</span> <span class="nx">courseName</span> <span class="o">=</span> <span class="s2">"Angular2"</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">title</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Header 4 From Angular 2 Tutorials</span><span class="dl">"</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">imageLink</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://pbs.twimg.com/profile_images/598551481181155329/DqwnzkIE.jpg</span><span class="dl">"</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">courseName</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Angular2</span><span class="dl">"</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
 <p>Yine aynı şekilde value özelliğini köşeli parantezler arasına aldık ve değer olarak da sınıf içinde tanımlı courseName’i atadık.</p>
@@ -294,16 +293,15 @@ var disqus_config = function () {
       <footer class="site-footer">
   <div class="container">
     <ul class="social">
-  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
-  
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
 </ul>
     <p class="txt-medium-gray">
-      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+      <small>&copy;2020 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
     </p>
   </div>
 </footer>

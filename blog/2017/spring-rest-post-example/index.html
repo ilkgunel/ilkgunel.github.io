@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2017/spring-rest-post-example/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.5.0 -->
+      <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Spring Rest - POST Örneği | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.8.6" />
 <meta property="og:title" content="Spring Rest - POST Örneği" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2017-01-21T20:40:21+03:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","url":"http://ilkaygunel.com/blog/2017/spring-rest-post-example/","headline":"Spring Rest - POST Örneği","dateModified":"2017-01-21T20:40:21+03:00","datePublished":"2017-01-21T20:40:21+03:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/spring-rest-post-example/"},"author":{"@type":"Person","name":"İlkay Günel"},"description":"Spring Rest - POST Örneği","@context":"http://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2017/spring-rest-post-example/"},"author":{"@type":"Person","name":"İlkay Günel"},"url":"http://ilkaygunel.com/blog/2017/spring-rest-post-example/","headline":"Spring Rest - POST Örneği","dateModified":"2017-01-21T20:40:21+03:00","datePublished":"2017-01-21T20:40:21+03:00","description":"Spring Rest - POST Örneği","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -107,15 +107,14 @@
         <li><a href="https://1000kitap.com/ilkaygunel">1000Kitap</a></li>
       </ul>
     </nav>
-	<div class="container">
+	<div class="container" style="text-align: center">
 		<ul class="social">
-  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
-  
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
 </ul>
 	</div>
   </div>
@@ -157,22 +156,22 @@ alan(lar)ımızı kullanmak olacaktır.</p>
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">pojo</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">PersonRegisterPojo</span> <span class="o">{</span>
-	<span class="n">String</span> <span class="n">registeringResult</span><span class="o">;</span>
-	<span class="n">Person</span> <span class="n">person</span><span class="o">;</span>
+	<span class="nc">String</span> <span class="n">registeringResult</span><span class="o">;</span>
+	<span class="nc">Person</span> <span class="n">person</span><span class="o">;</span>
 
-	<span class="kd">public</span> <span class="n">Person</span> <span class="nf">getPerson</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nc">Person</span> <span class="nf">getPerson</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">person</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPerson</span><span class="o">(</span><span class="n">Person</span> <span class="n">person</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPerson</span><span class="o">(</span><span class="nc">Person</span> <span class="n">person</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">person</span> <span class="o">=</span> <span class="n">person</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getRegisteringResult</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getRegisteringResult</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">registeringResult</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setRegisteringResult</span><span class="o">(</span><span class="n">String</span> <span class="n">registeringResult</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setRegisteringResult</span><span class="o">(</span><span class="nc">String</span> <span class="n">registeringResult</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">registeringResult</span> <span class="o">=</span> <span class="n">registeringResult</span><span class="o">;</span>
 	<span class="o">}</span>
 
@@ -201,19 +200,19 @@ alan(lar)ımızı kullanmak olacaktır.</p>
 
 <span class="nd">@RestController</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">PostExampleController</span> <span class="o">{</span>
-	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/postPerson"</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">)</span>
-	<span class="kd">public</span> <span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">PersonRegisterPojo</span><span class="o">&gt;</span> <span class="nf">postPerson</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="n">Person</span> <span class="n">person</span><span class="o">)</span> <span class="o">{</span>
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/postPerson"</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">PersonRegisterPojo</span><span class="o">&gt;</span> <span class="nf">postPerson</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">Person</span> <span class="n">person</span><span class="o">)</span> <span class="o">{</span>
 
-		<span class="n">PersonRegisterPojo</span> <span class="n">registerPojo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PersonRegisterPojo</span><span class="o">();</span>
+		<span class="nc">PersonRegisterPojo</span> <span class="n">registerPojo</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PersonRegisterPojo</span><span class="o">();</span>
 		<span class="n">registerPojo</span><span class="o">.</span><span class="na">setPerson</span><span class="o">(</span><span class="n">person</span><span class="o">);</span>
 
-		<span class="n">PreparedStatement</span> <span class="n">ps</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-		<span class="n">Connection</span> <span class="n">con</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="nc">PreparedStatement</span> <span class="n">ps</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="nc">Connection</span> <span class="n">con</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 		<span class="k">try</span> <span class="o">{</span>
-			<span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"com.mysql.jdbc.Driver"</span><span class="o">);</span>
-			<span class="n">con</span> <span class="o">=</span> <span class="n">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span>
+			<span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"com.mysql.jdbc.Driver"</span><span class="o">);</span>
+			<span class="n">con</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span>
 					<span class="s">"jdbc:mysql://localhost:3306/SpringRestPost?useUnicode=true&amp;characterEncoding=UTF-8"</span><span class="o">,</span> <span class="s">"root"</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
-			<span class="n">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">"INSERT INTO person(id,name,surname,	neighborhood,borough, city,	country) VALUES(?,?,?,?,?,?,?)"</span><span class="o">;</span>
+			<span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">"INSERT INTO person(id,name,surname,	neighborhood,borough, city,	country) VALUES(?,?,?,?,?,?,?)"</span><span class="o">;</span>
 			<span class="n">ps</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span>
 			<span class="n">ps</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">person</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
 			<span class="n">ps</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">person</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
@@ -225,7 +224,7 @@ alan(lar)ımızı kullanmak olacaktır.</p>
 			<span class="n">ps</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">();</span>
 			<span class="n">registerPojo</span><span class="o">.</span><span class="na">setRegisteringResult</span><span class="o">(</span><span class="s">"Kyıt Başarı İle Eklendi"</span><span class="o">);</span>
 
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ClassNotFoundException</span> <span class="o">|</span> <span class="n">SQLException</span> <span class="n">exception</span><span class="o">)</span> <span class="o">{</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">ClassNotFoundException</span> <span class="o">|</span> <span class="nc">SQLException</span> <span class="n">exception</span><span class="o">)</span> <span class="o">{</span>
 			<span class="n">registerPojo</span><span class="o">.</span><span class="na">setRegisteringResult</span><span class="o">(</span><span class="s">"Kayıt Sırasında Bir Hata Meydana Geldi! "</span> <span class="o">+</span> <span class="n">exception</span><span class="o">);</span>
 			<span class="n">exception</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 		<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
@@ -236,12 +235,12 @@ alan(lar)ımızı kullanmak olacaktır.</p>
 				<span class="k">if</span> <span class="o">(</span><span class="n">ps</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
 					<span class="n">ps</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 				<span class="o">}</span>
-			<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">SQLException</span> <span class="n">sqlException</span><span class="o">)</span> <span class="o">{</span>
+			<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">sqlException</span><span class="o">)</span> <span class="o">{</span>
 				<span class="n">sqlException</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 			<span class="o">}</span>
 		<span class="o">}</span>
 
-		<span class="k">return</span> <span class="k">new</span> <span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">PersonRegisterPojo</span><span class="o">&gt;(</span><span class="n">registerPojo</span><span class="o">,</span> <span class="n">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">PersonRegisterPojo</span><span class="o">&gt;(</span><span class="n">registerPojo</span><span class="o">,</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
 	<span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 
@@ -275,14 +274,14 @@ web servisin beklediği şekilde bir JSON yazıyoruz. Beklediği şekildeden kas
 etmek gerekir. Biz şöyle bir JSON gönderiyoruz:</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">  
-   </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Onur"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"surname"</span><span class="p">:</span><span class="s2">"Özcan"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"address"</span><span class="p">:{</span><span class="w">  
-      </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="s2">"Cennet Mah."</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"borough"</span><span class="p">:</span><span class="s2">"K.Çekmece"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"city"</span><span class="p">:</span><span class="s2">"İstanbul"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"country"</span><span class="p">:</span><span class="s2">"TÜRKİYE"</span><span class="w">
+   </span><span class="nl">"id"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"Onur"</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"surname"</span><span class="p">:</span><span class="s2">"Özcan"</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"address"</span><span class="p">:{</span><span class="w">  
+      </span><span class="nl">"neighborhood"</span><span class="p">:</span><span class="s2">"Cennet Mah."</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"borough"</span><span class="p">:</span><span class="s2">"K.Çekmece"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"city"</span><span class="p">:</span><span class="s2">"İstanbul"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"country"</span><span class="p">:</span><span class="s2">"TÜRKİYE"</span><span class="w">
    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
@@ -306,14 +305,14 @@ kaydın başarı ile ekleniğine dair Response döndü.</p>
 <p>Şimdi az önce gönderdiğimiz JSON’ın id alanı aynı kalsın ve içeriğini biraz değiştirelim. Sonra Postman’e bu JSON’ı verip POST edelim.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">  
-   </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Alican"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"surname"</span><span class="p">:</span><span class="s2">"Akkuş"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"address"</span><span class="p">:{</span><span class="w">  
-      </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="s2">"Cennet Mah."</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"borough"</span><span class="p">:</span><span class="s2">"K.Çekmece"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"city"</span><span class="p">:</span><span class="s2">"İstanbul"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"country"</span><span class="p">:</span><span class="s2">"TÜRKİYE"</span><span class="w">
+   </span><span class="nl">"id"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"Alican"</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"surname"</span><span class="p">:</span><span class="s2">"Akkuş"</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"address"</span><span class="p">:{</span><span class="w">  
+      </span><span class="nl">"neighborhood"</span><span class="p">:</span><span class="s2">"Cennet Mah."</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"borough"</span><span class="p">:</span><span class="s2">"K.Çekmece"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"city"</span><span class="p">:</span><span class="s2">"İstanbul"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"country"</span><span class="p">:</span><span class="s2">"TÜRKİYE"</span><span class="w">
    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
@@ -368,16 +367,15 @@ var disqus_config = function () {
       <footer class="site-footer">
   <div class="container">
     <ul class="social">
-  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
-  
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
 </ul>
     <p class="txt-medium-gray">
-      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+      <small>&copy;2020 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
     </p>
   </div>
 </footer>
