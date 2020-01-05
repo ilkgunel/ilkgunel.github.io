@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsf-selectoneradio-kullanimi/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.5.0 -->
+      <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>SelectOneRadio Kullanımı | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.8.6" />
 <meta property="og:title" content="SelectOneRadio Kullanımı" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-10-18T20:40:21+03:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/jsf-selectoneradio-kullanimi/"},"url":"http://ilkaygunel.com/blog/2016/jsf-selectoneradio-kullanimi/","headline":"SelectOneRadio Kullanımı","dateModified":"2016-10-18T20:40:21+03:00","datePublished":"2016-10-18T20:40:21+03:00","description":"SelectOneRadio Kullanımı","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/jsf-selectoneradio-kullanimi/"},"author":{"@type":"Person","name":"İlkay Günel"},"url":"http://ilkaygunel.com/blog/2016/jsf-selectoneradio-kullanimi/","headline":"SelectOneRadio Kullanımı","dateModified":"2016-10-18T20:40:21+03:00","datePublished":"2016-10-18T20:40:21+03:00","description":"SelectOneRadio Kullanımı","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -107,6 +107,16 @@
         <li><a href="https://1000kitap.com/ilkaygunel">1000Kitap</a></li>
       </ul>
     </nav>
+	<div class="container" style="text-align: center">
+		<ul class="social">
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
+</ul>
+	</div>
   </div>
 </header>
 
@@ -184,31 +194,31 @@
 <span class="nd">@ManagedBean</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="s">"sh"</span><span class="o">)</span>
 <span class="nd">@RequestScoped</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SosyalHesaplar</span> <span class="o">{</span>
-<span class="kd">private</span> <span class="n">String</span> <span class="n">hesapsayisi</span><span class="o">;</span>
-<span class="kd">private</span> <span class="n">String</span> <span class="n">encokkullanilan</span><span class="o">;</span>
-<span class="kd">private</span> <span class="n">String</span> <span class="n">enazkullanilan</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">String</span> <span class="n">hesapsayisi</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">String</span> <span class="n">encokkullanilan</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">String</span> <span class="n">enazkullanilan</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getEncokkullanilan</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getEncokkullanilan</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">encokkullanilan</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getEnazkullanilan</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getEnazkullanilan</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">enazkullanilan</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getHesapsayisi</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getHesapsayisi</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">hesapsayisi</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEnazkullanilan</span><span class="o">(</span><span class="n">String</span> <span class="n">enazkullanilan</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEnazkullanilan</span><span class="o">(</span><span class="nc">String</span> <span class="n">enazkullanilan</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">enazkullanilan</span> <span class="o">=</span> <span class="n">enazkullanilan</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setHesapsayisi</span><span class="o">(</span><span class="n">String</span> <span class="n">hesapsayisi</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setHesapsayisi</span><span class="o">(</span><span class="nc">String</span> <span class="n">hesapsayisi</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">hesapsayisi</span> <span class="o">=</span> <span class="n">hesapsayisi</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEncokkullanilan</span><span class="o">(</span><span class="n">String</span> <span class="n">encokkullanilan</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEncokkullanilan</span><span class="o">(</span><span class="nc">String</span> <span class="n">encokkullanilan</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">encokkullanilan</span> <span class="o">=</span> <span class="n">encokkullanilan</span><span class="o">;</span>
     <span class="o">}</span>  
 <span class="o">}</span>
@@ -324,53 +334,53 @@
 <span class="nd">@ManagedBean</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="s">"sh"</span><span class="o">)</span>
 <span class="nd">@RequestScoped</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sosyalhesaplar</span> <span class="o">{</span>
-<span class="kd">private</span> <span class="n">String</span> <span class="n">hesapsayisi</span><span class="o">;</span>
-<span class="kd">private</span> <span class="n">String</span> <span class="n">encokkullanilan</span><span class="o">;</span>
-<span class="kd">private</span> <span class="n">String</span> <span class="n">enazkullanilan</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">String</span> <span class="n">hesapsayisi</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">String</span> <span class="n">encokkullanilan</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">String</span> <span class="n">enazkullanilan</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getEncokkullanilan</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getEncokkullanilan</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">encokkullanilan</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getEnazkullanilan</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getEnazkullanilan</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">enazkullanilan</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getHesapsayisi</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getHesapsayisi</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">hesapsayisi</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEnazkullanilan</span><span class="o">(</span><span class="n">String</span> <span class="n">enazkullanilan</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEnazkullanilan</span><span class="o">(</span><span class="nc">String</span> <span class="n">enazkullanilan</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">enazkullanilan</span> <span class="o">=</span> <span class="n">enazkullanilan</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setHesapsayisi</span><span class="o">(</span><span class="n">String</span> <span class="n">hesapsayisi</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setHesapsayisi</span><span class="o">(</span><span class="nc">String</span> <span class="n">hesapsayisi</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">hesapsayisi</span> <span class="o">=</span> <span class="n">hesapsayisi</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEncokkullanilan</span><span class="o">(</span><span class="n">String</span> <span class="n">encokkullanilan</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEncokkullanilan</span><span class="o">(</span><span class="nc">String</span> <span class="n">encokkullanilan</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">encokkullanilan</span> <span class="o">=</span> <span class="n">encokkullanilan</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">sosyalhesaplar</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">sosyalhesaplar</span><span class="o">;</span>
     <span class="kd">static</span><span class="o">{</span>
-        <span class="n">sosyalhesaplar</span><span class="o">=</span><span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;();</span>
+        <span class="n">sosyalhesaplar</span><span class="o">=</span><span class="k">new</span> <span class="nc">LinkedHashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;();</span>
         <span class="n">sosyalhesaplar</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Facebook"</span><span class="o">,</span><span class="s">"Facebook"</span><span class="o">);</span>
         <span class="n">sosyalhesaplar</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Twitter"</span><span class="o">,</span> <span class="s">"Twitter"</span><span class="o">);</span>
         <span class="n">sosyalhesaplar</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Google+"</span><span class="o">,</span> <span class="s">"Google+"</span><span class="o">);</span>
     <span class="o">}</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">sayilar</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">sayilar</span><span class="o">;</span>
     <span class="kd">static</span>
     <span class="o">{</span>
-        <span class="n">sayilar</span><span class="o">=</span><span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;();</span>
+        <span class="n">sayilar</span><span class="o">=</span><span class="k">new</span> <span class="nc">LinkedHashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;();</span>
         <span class="n">sayilar</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"1"</span><span class="o">);</span>
         <span class="n">sayilar</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"2"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">);</span>
         <span class="n">sayilar</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"3"</span><span class="o">,</span> <span class="s">"3"</span><span class="o">);</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="nf">sosyalhesaplaridondur</span><span class="o">()</span>
+    <span class="kd">public</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="nf">sosyalhesaplaridondur</span><span class="o">()</span>
     <span class="o">{</span>
         <span class="k">return</span> <span class="n">sosyalhesaplar</span><span class="o">;</span>
     <span class="o">}</span>
-     <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="nf">sayilaridondur</span><span class="o">()</span>
+     <span class="kd">public</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="nf">sayilaridondur</span><span class="o">()</span>
      <span class="o">{</span>
          <span class="k">return</span> <span class="n">sayilar</span><span class="o">;</span>
      <span class="o">}</span>
@@ -439,16 +449,15 @@ var disqus_config = function () {
       <footer class="site-footer">
   <div class="container">
     <ul class="social">
-  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
-  
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
 </ul>
     <p class="txt-medium-gray">
-      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+      <small>&copy;2020 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
     </p>
   </div>
 </footer>

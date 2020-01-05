@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/microsoft-sql-jdbc-driver-in-local-maven/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.5.0 -->
+      <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Microsoft SQL Server JDBC Driver’ının Local Maven Reposuna Eklenmesi | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.8.6" />
 <meta property="og:title" content="Microsoft SQL Server JDBC Driver’ının Local Maven Reposuna Eklenmesi" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-10-21T20:41:20+03:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/microsoft-sql-jdbc-driver-in-local-maven/"},"url":"http://ilkaygunel.com/blog/2016/microsoft-sql-jdbc-driver-in-local-maven/","headline":"Microsoft SQL Server JDBC Driver’ının Local Maven Reposuna Eklenmesi","dateModified":"2016-10-21T20:41:20+03:00","datePublished":"2016-10-21T20:41:20+03:00","description":"Microsoft SQL Server JDBC Driver’ının Local Maven Reposuna Eklenmesi","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/microsoft-sql-jdbc-driver-in-local-maven/"},"author":{"@type":"Person","name":"İlkay Günel"},"url":"http://ilkaygunel.com/blog/2016/microsoft-sql-jdbc-driver-in-local-maven/","headline":"Microsoft SQL Server JDBC Driver’ının Local Maven Reposuna Eklenmesi","dateModified":"2016-10-21T20:41:20+03:00","datePublished":"2016-10-21T20:41:20+03:00","description":"Microsoft SQL Server JDBC Driver’ının Local Maven Reposuna Eklenmesi","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -107,6 +107,16 @@
         <li><a href="https://1000kitap.com/ilkaygunel">1000Kitap</a></li>
       </ul>
     </nav>
+	<div class="container" style="text-align: center">
+		<ul class="social">
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
+</ul>
+	</div>
   </div>
 </header>
 
@@ -179,8 +189,8 @@ sürümünü indirin. Ben aşağıdaki resimdeki işaretli sürümü indiriyorum
 <p>Şimdi terminali açalım, az önce indridğimiz tar.gz uzantılı dosyayı açtığımız yere gidelim. Bu klasörün içinde <strong><em>enu</em></strong> isminde bir klasör var. cd komutu ile içine girelim 
 ve şu komutu işletelim:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mvn</span> <span class="nl">install:</span><span class="n">install</span><span class="o">-</span><span class="n">file</span> <span class="o">-</span><span class="n">Dfile</span><span class="o">=</span><span class="n">sqljdbc42</span><span class="o">.</span><span class="na">jar</span> <span class="o">-</span><span class="n">DgroupId</span><span class="o">=</span><span class="n">com</span><span class="o">.</span><span class="na">microsoft</span><span class="o">.</span><span class="na">sqlserver</span>
-<span class="o">-</span><span class="n">DartifactId</span><span class="o">=</span><span class="n">sqljdbc4</span> <span class="o">-</span><span class="n">Dversion</span><span class="o">=</span><span class="mf">4.0</span> <span class="o">-</span><span class="n">Dpackaging</span><span class="o">=</span><span class="n">jar</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mvn</span> <span class="nl">install:</span><span class="n">install</span><span class="o">-</span><span class="n">file</span> <span class="o">-</span><span class="nc">Dfile</span><span class="o">=</span><span class="n">sqljdbc42</span><span class="o">.</span><span class="na">jar</span> <span class="o">-</span><span class="nc">DgroupId</span><span class="o">=</span><span class="n">com</span><span class="o">.</span><span class="na">microsoft</span><span class="o">.</span><span class="na">sqlserver</span>
+<span class="o">-</span><span class="nc">DartifactId</span><span class="o">=</span><span class="n">sqljdbc4</span> <span class="o">-</span><span class="nc">Dversion</span><span class="o">=</span><span class="mf">4.0</span> <span class="o">-</span><span class="nc">Dpackaging</span><span class="o">=</span><span class="n">jar</span>
 </code></pre></div></div>
 
 <p>enu ismindeki klasör içinde 4 adet jar var. Biz bunlardan <strong><em>sqljdbc42.jar</em></strong> ismindeki jar’ı kullanıyoruz.</p>
@@ -258,16 +268,15 @@ var disqus_config = function () {
       <footer class="site-footer">
   <div class="container">
     <ul class="social">
-  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
-  
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
 </ul>
     <p class="txt-medium-gray">
-      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+      <small>&copy;2020 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
     </p>
   </div>
 </footer>

@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/lokbok-nedir-ornek-kod/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.5.0 -->
+      <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Lombok Nedir? Nasıl Kullanılır? | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.8.6" />
 <meta property="og:title" content="Lombok Nedir? Nasıl Kullanılır?" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-11-25T20:40:21+03:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/lokbok-nedir-ornek-kod/"},"url":"http://ilkaygunel.com/blog/2016/lokbok-nedir-ornek-kod/","headline":"Lombok Nedir? Nasıl Kullanılır?","dateModified":"2016-11-25T20:40:21+03:00","datePublished":"2016-11-25T20:40:21+03:00","description":"Lombok Nedir? Nasıl Kullanılır?","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/lokbok-nedir-ornek-kod/"},"author":{"@type":"Person","name":"İlkay Günel"},"url":"http://ilkaygunel.com/blog/2016/lokbok-nedir-ornek-kod/","headline":"Lombok Nedir? Nasıl Kullanılır?","dateModified":"2016-11-25T20:40:21+03:00","datePublished":"2016-11-25T20:40:21+03:00","description":"Lombok Nedir? Nasıl Kullanılır?","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -107,6 +107,16 @@
         <li><a href="https://1000kitap.com/ilkaygunel">1000Kitap</a></li>
       </ul>
     </nav>
+	<div class="container" style="text-align: center">
+		<ul class="social">
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
+</ul>
+	</div>
   </div>
 </header>
 
@@ -179,47 +189,47 @@ en basit hali ile alanlar ve o alanların get-set metotlarının barınmasını 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">pojo</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
-	<span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
-	<span class="kd">private</span> <span class="n">String</span> <span class="n">surname</span><span class="o">;</span>
-	<span class="kd">private</span> <span class="n">String</span> <span class="n">city</span><span class="o">;</span>
-	<span class="kd">private</span> <span class="n">String</span> <span class="n">telephoneNumber</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">city</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">telephoneNumber</span><span class="o">;</span>
 
-	<span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="n">String</span> <span class="n">surname</span><span class="o">,</span> <span class="n">String</span> <span class="n">city</span><span class="o">,</span> <span class="n">String</span> <span class="n">telephoneNumber</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">surname</span><span class="o">,</span> <span class="nc">String</span> <span class="n">city</span><span class="o">,</span> <span class="nc">String</span> <span class="n">telephoneNumber</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">surname</span> <span class="o">=</span> <span class="n">surname</span><span class="o">;</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">city</span> <span class="o">=</span> <span class="n">city</span><span class="o">;</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">telephoneNumber</span> <span class="o">=</span> <span class="n">telephoneNumber</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">name</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getSurname</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getSurname</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">surname</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSurname</span><span class="o">(</span><span class="n">String</span> <span class="n">surname</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSurname</span><span class="o">(</span><span class="nc">String</span> <span class="n">surname</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">surname</span> <span class="o">=</span> <span class="n">surname</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getCity</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getCity</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">city</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCity</span><span class="o">(</span><span class="n">String</span> <span class="n">city</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCity</span><span class="o">(</span><span class="nc">String</span> <span class="n">city</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">city</span> <span class="o">=</span> <span class="n">city</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getTelephoneNumber</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getTelephoneNumber</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">telephoneNumber</span><span class="o">;</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setTelephoneNumber</span><span class="o">(</span><span class="n">String</span> <span class="n">telephoneNumber</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setTelephoneNumber</span><span class="o">(</span><span class="nc">String</span> <span class="n">telephoneNumber</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">telephoneNumber</span> <span class="o">=</span> <span class="n">telephoneNumber</span><span class="o">;</span>
 	<span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
@@ -232,9 +242,9 @@ en basit hali ile alanlar ve o alanların get-set metotlarının barınmasını 
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainClass</span> <span class="o">{</span>
 
-	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-		<span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="s">"Ali Emrah"</span><span class="o">,</span> <span class="s">"Pekesen"</span><span class="o">,</span> <span class="s">"Los Angelas"</span><span class="o">,</span> <span class="s">"(202)358-0000"</span><span class="o">);</span>
-		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">person</span><span class="o">.</span><span class="na">getName</span><span class="o">()+</span><span class="s">" "</span><span class="o">+</span><span class="n">person</span><span class="o">.</span><span class="na">getSurname</span><span class="o">()+</span><span class="s">" "</span><span class="o">+</span><span class="n">person</span><span class="o">.</span><span class="na">getCity</span><span class="o">()+</span><span class="s">" "</span><span class="o">+</span><span class="n">person</span><span class="o">.</span><span class="na">getTelephoneNumber</span><span class="o">());</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Ali Emrah"</span><span class="o">,</span> <span class="s">"Pekesen"</span><span class="o">,</span> <span class="s">"Los Angelas"</span><span class="o">,</span> <span class="s">"(202)358-0000"</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">person</span><span class="o">.</span><span class="na">getName</span><span class="o">()+</span><span class="s">" "</span><span class="o">+</span><span class="n">person</span><span class="o">.</span><span class="na">getSurname</span><span class="o">()+</span><span class="s">" "</span><span class="o">+</span><span class="n">person</span><span class="o">.</span><span class="na">getCity</span><span class="o">()+</span><span class="s">" "</span><span class="o">+</span><span class="n">person</span><span class="o">.</span><span class="na">getTelephoneNumber</span><span class="o">());</span>
 	<span class="o">}</span>
 
 <span class="o">}</span></code></pre></figure>
@@ -250,12 +260,12 @@ silelim ve sınıf içindeki alanlarımızı @Getter ve @Setter notasyonları il
 <span class="kn">import</span> <span class="nn">lombok.Setter</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
-	<span class="nd">@Getter</span> <span class="nd">@Setter</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
-	<span class="nd">@Getter</span> <span class="nd">@Setter</span> <span class="n">String</span> <span class="n">surname</span><span class="o">;</span>
-	<span class="nd">@Getter</span> <span class="nd">@Setter</span> <span class="n">String</span> <span class="n">city</span><span class="o">;</span>
-	<span class="nd">@Getter</span> <span class="nd">@Setter</span> <span class="n">String</span> <span class="n">telephoneNumber</span><span class="o">;</span>
+	<span class="nd">@Getter</span> <span class="nd">@Setter</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="nd">@Getter</span> <span class="nd">@Setter</span> <span class="nc">String</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="nd">@Getter</span> <span class="nd">@Setter</span> <span class="nc">String</span> <span class="n">city</span><span class="o">;</span>
+	<span class="nd">@Getter</span> <span class="nd">@Setter</span> <span class="nc">String</span> <span class="n">telephoneNumber</span><span class="o">;</span>
 
-	<span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="n">String</span> <span class="n">surname</span><span class="o">,</span> <span class="n">String</span> <span class="n">city</span><span class="o">,</span> <span class="n">String</span> <span class="n">telephoneNumber</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">surname</span><span class="o">,</span> <span class="nc">String</span> <span class="n">city</span><span class="o">,</span> <span class="nc">String</span> <span class="n">telephoneNumber</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">surname</span> <span class="o">=</span> <span class="n">surname</span><span class="o">;</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">city</span> <span class="o">=</span> <span class="n">city</span><span class="o">;</span>
@@ -282,10 +292,10 @@ işaretleyelim. Akabinde main metodunu yeniden çalıştıralım. Person sınıf
 
 <span class="nd">@AllArgsConstructor</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
-	<span class="nd">@Getter</span> <span class="nd">@Setter</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
-	<span class="nd">@Getter</span> <span class="nd">@Setter</span> <span class="n">String</span> <span class="n">surname</span><span class="o">;</span>
-	<span class="nd">@Getter</span> <span class="nd">@Setter</span> <span class="n">String</span> <span class="n">city</span><span class="o">;</span>
-	<span class="nd">@Getter</span> <span class="nd">@Setter</span> <span class="n">String</span> <span class="n">telephoneNumber</span><span class="o">;</span>
+	<span class="nd">@Getter</span> <span class="nd">@Setter</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="nd">@Getter</span> <span class="nd">@Setter</span> <span class="nc">String</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="nd">@Getter</span> <span class="nd">@Setter</span> <span class="nc">String</span> <span class="n">city</span><span class="o">;</span>
+	<span class="nd">@Getter</span> <span class="nd">@Setter</span> <span class="nc">String</span> <span class="n">telephoneNumber</span><span class="o">;</span>
 <span class="o">}</span></code></pre></figure>
 
 <p>Main metodunu çalıştırdığımızda yine aynı çıktıyı alacağız.</p>
@@ -307,15 +317,15 @@ sınıfı @Data notasyonu ile işaretlersek tüm alanlar için Gettter/Setter ta
 <span class="nd">@AllArgsConstructor</span>
 <span class="nd">@Data</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
-	<span class="n">String</span> <span class="n">name</span><span class="o">;</span>
-	<span class="n">String</span> <span class="n">surname</span><span class="o">;</span>
-	<span class="n">String</span> <span class="n">city</span><span class="o">;</span>
-	<span class="nd">@NonNull</span> <span class="n">String</span> <span class="n">telephoneNumber</span><span class="o">;</span>
+	<span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="nc">String</span> <span class="n">surname</span><span class="o">;</span>
+	<span class="nc">String</span> <span class="n">city</span><span class="o">;</span>
+	<span class="nd">@NonNull</span> <span class="nc">String</span> <span class="n">telephoneNumber</span><span class="o">;</span>
 <span class="o">}</span></code></pre></figure>
 
 <p>Main sınıfındaki Person objesini şu şekilde oluşturup çalıştırırsak hata alırız:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="s">"Ali Emrah"</span><span class="o">,</span> <span class="s">"Pekesen"</span><span class="o">,</span> <span class="s">"Los Angelas"</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Ali Emrah"</span><span class="o">,</span> <span class="s">"Pekesen"</span><span class="o">,</span> <span class="s">"Los Angelas"</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span></code></pre></figure>
 
 <p><a href="/images/lombok/lombok6.png">
 <img src="/images/lombok/lombok6.png" style="width: 958px; height= 400px;" />
@@ -366,16 +376,15 @@ var disqus_config = function () {
       <footer class="site-footer">
   <div class="container">
     <ul class="social">
-  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
-  
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
 </ul>
     <p class="txt-medium-gray">
-      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+      <small>&copy;2020 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
     </p>
   </div>
 </footer>

@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsf-gecerlilik-denetleyicisi-ile-form-ornegi/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.5.0 -->
+      <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Geçerlilik Denetleyicisi ile Form Örneği | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.8.6" />
 <meta property="og:title" content="Geçerlilik Denetleyicisi ile Form Örneği" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-11-05T20:40:21+03:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/jsf-gecerlilik-denetleyicisi-ile-form-ornegi/"},"url":"http://ilkaygunel.com/blog/2016/jsf-gecerlilik-denetleyicisi-ile-form-ornegi/","headline":"Geçerlilik Denetleyicisi ile Form Örneği","dateModified":"2016-11-05T20:40:21+03:00","datePublished":"2016-11-05T20:40:21+03:00","description":"Geçerlilik Denetleyicisi ile Form Örneği","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/jsf-gecerlilik-denetleyicisi-ile-form-ornegi/"},"author":{"@type":"Person","name":"İlkay Günel"},"url":"http://ilkaygunel.com/blog/2016/jsf-gecerlilik-denetleyicisi-ile-form-ornegi/","headline":"Geçerlilik Denetleyicisi ile Form Örneği","dateModified":"2016-11-05T20:40:21+03:00","datePublished":"2016-11-05T20:40:21+03:00","description":"Geçerlilik Denetleyicisi ile Form Örneği","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -107,6 +107,16 @@
         <li><a href="https://1000kitap.com/ilkaygunel">1000Kitap</a></li>
       </ul>
     </nav>
+	<div class="container" style="text-align: center">
+		<ul class="social">
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
+</ul>
+	</div>
   </div>
 </header>
 
@@ -242,27 +252,27 @@ dışında daha önce bahsetmediğimiz bir nokta yoktur.</p>
 <span class="nd">@ManagedBean</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="s">"d"</span><span class="o">)</span>
 <span class="nd">@RequestScoped</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Degiskenler</span> <span class="o">{</span>
-<span class="kd">private</span> <span class="n">String</span> <span class="n">isim</span><span class="o">;</span>
-<span class="kd">private</span> <span class="n">String</span> <span class="n">soyisim</span><span class="o">;</span>
-<span class="kd">private</span> <span class="n">String</span> <span class="n">il</span><span class="o">;</span>
-<span class="kd">private</span> <span class="n">String</span> <span class="n">esposta</span><span class="o">;</span>
-<span class="kd">private</span> <span class="n">String</span> <span class="n">linkedinkullaniyormusunuz</span><span class="o">;</span>
-<span class="kd">private</span> <span class="n">String</span> <span class="n">cinsiyet</span><span class="o">;</span>
-<span class="kd">private</span> <span class="n">String</span> <span class="n">adres</span><span class="o">;</span>
-<span class="kd">private</span> <span class="n">String</span> <span class="n">parola</span><span class="o">;</span>
-<span class="kd">private</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">cinsiyetler</span><span class="o">=</span><span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;();</span>
-<span class="kd">private</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">iller</span><span class="o">=</span><span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;();</span>
-<span class="kd">private</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">hesapvarmi</span><span class="o">=</span><span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;();</span>
-<span class="kd">private</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">hobilistesi</span><span class="o">=</span><span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;();</span>
-<span class="kd">private</span> <span class="n">String</span><span class="o">[]</span> <span class="n">hobiler</span><span class="o">=</span><span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="mi">7</span><span class="o">];</span>
-<span class="kd">private</span> <span class="n">String</span> <span class="n">yabanci_dil_seviyesi</span><span class="o">;</span>
-<span class="kd">private</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">ydseviyeler</span><span class="o">=</span><span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;();</span>
+<span class="kd">private</span> <span class="nc">String</span> <span class="n">isim</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">String</span> <span class="n">soyisim</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">String</span> <span class="n">il</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">String</span> <span class="n">esposta</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">String</span> <span class="n">linkedinkullaniyormusunuz</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">String</span> <span class="n">cinsiyet</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">String</span> <span class="n">adres</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">String</span> <span class="n">parola</span><span class="o">;</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">cinsiyetler</span><span class="o">=</span><span class="k">new</span> <span class="nc">LinkedHashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;();</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">iller</span><span class="o">=</span><span class="k">new</span> <span class="nc">LinkedHashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;();</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">hesapvarmi</span><span class="o">=</span><span class="k">new</span> <span class="nc">LinkedHashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;();</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">hobilistesi</span><span class="o">=</span><span class="k">new</span> <span class="nc">LinkedHashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;();</span>
+<span class="kd">private</span> <span class="nc">String</span><span class="o">[]</span> <span class="n">hobiler</span><span class="o">=</span><span class="k">new</span> <span class="nc">String</span><span class="o">[</span><span class="mi">7</span><span class="o">];</span>
+<span class="kd">private</span> <span class="nc">String</span> <span class="n">yabanci_dil_seviyesi</span><span class="o">;</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">ydseviyeler</span><span class="o">=</span><span class="k">new</span> <span class="nc">LinkedHashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;();</span>
 <span class="kd">static</span><span class="o">{</span>
     <span class="n">ydseviyeler</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"İyi"</span><span class="o">,</span> <span class="s">"İyi"</span><span class="o">);</span>
     <span class="n">ydseviyeler</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Orta"</span><span class="o">,</span> <span class="s">"Orta"</span><span class="o">);</span>
     <span class="n">ydseviyeler</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Yok"</span><span class="o">,</span> <span class="s">"Yok"</span><span class="o">);</span>
 <span class="o">}</span>
-<span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="nf">ydseviyeleridondur</span><span class="o">()</span>
+<span class="kd">public</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="nf">ydseviyeleridondur</span><span class="o">()</span>
 <span class="o">{</span>
     <span class="k">return</span> <span class="n">ydseviyeler</span><span class="o">;</span>
 <span class="o">}</span>
@@ -275,13 +285,13 @@ dışında daha önce bahsetmediğimiz bir nokta yoktur.</p>
     <span class="n">hobilistesi</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Gastronomi"</span><span class="o">,</span> <span class="s">"Gastronomi"</span><span class="o">);</span>
     <span class="n">hobilistesi</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Avcılık"</span><span class="o">,</span> <span class="s">"Avcılık"</span><span class="o">);</span>
 <span class="o">}</span>
-<span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="nf">hobilistesinidondur</span><span class="o">()</span>
+<span class="kd">public</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="nf">hobilistesinidondur</span><span class="o">()</span>
 <span class="o">{</span>
     <span class="k">return</span> <span class="n">hobilistesi</span><span class="o">;</span>
 <span class="o">}</span>
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">hobileriStringecevir</span><span class="o">()</span>
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">hobileriStringecevir</span><span class="o">()</span>
 <span class="o">{</span>
-    <span class="k">return</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">hobiler</span><span class="o">);</span>
+    <span class="k">return</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">hobiler</span><span class="o">);</span>
 <span class="o">}</span>
 
 <span class="kd">static</span><span class="o">{</span>
@@ -291,7 +301,7 @@ dışında daha önce bahsetmediğimiz bir nokta yoktur.</p>
     <span class="n">iller</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"ADANA"</span><span class="o">,</span> <span class="s">"ADANA"</span><span class="o">);</span>
     <span class="n">iller</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"ESKİŞEHŞİR"</span><span class="o">,</span> <span class="s">"ESKİŞEHİR"</span><span class="o">);</span>
 <span class="o">}</span>
-<span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="nf">illeridondur</span><span class="o">()</span>
+<span class="kd">public</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="nf">illeridondur</span><span class="o">()</span>
 <span class="o">{</span>
     <span class="k">return</span> <span class="n">iller</span><span class="o">;</span>
 <span class="o">}</span>
@@ -299,7 +309,7 @@ dışında daha önce bahsetmediğimiz bir nokta yoktur.</p>
     <span class="n">cinsiyetler</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Erkek"</span><span class="o">,</span> <span class="s">"Erkek"</span><span class="o">);</span>
     <span class="n">cinsiyetler</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Bayan"</span><span class="o">,</span> <span class="s">"Bayan"</span><span class="o">);</span>
 <span class="o">}</span>
-<span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="nf">cinsiyetleridondur</span><span class="o">()</span>
+<span class="kd">public</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="nf">cinsiyetleridondur</span><span class="o">()</span>
 <span class="o">{</span>
     <span class="k">return</span> <span class="n">cinsiyetler</span><span class="o">;</span>
 <span class="o">}</span>
@@ -307,128 +317,128 @@ dışında daha önce bahsetmediğimiz bir nokta yoktur.</p>
     <span class="n">hesapvarmi</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Evet"</span><span class="o">,</span> <span class="s">"Evet"</span><span class="o">);</span>
     <span class="n">hesapvarmi</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Hayır"</span><span class="o">,</span> <span class="s">"Hayır"</span><span class="o">);</span>
 <span class="o">}</span>
-<span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="nf">hesapvarmidondur</span><span class="o">()</span>
+<span class="kd">public</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="nf">hesapvarmidondur</span><span class="o">()</span>
 <span class="o">{</span>
     <span class="k">return</span> <span class="n">hesapvarmi</span><span class="o">;</span>
 <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getParola</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getParola</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">parola</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setParola</span><span class="o">(</span><span class="n">String</span> <span class="n">parola</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setParola</span><span class="o">(</span><span class="nc">String</span> <span class="n">parola</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">parola</span> <span class="o">=</span> <span class="n">parola</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="nf">getCinsiyetler</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="nf">getCinsiyetler</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">cinsiyetler</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">setCinsiyetler</span><span class="o">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">cinsiyetler</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">Degiskenler</span><span class="o">.</span><span class="na">cinsiyetler</span> <span class="o">=</span> <span class="n">cinsiyetler</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">setCinsiyetler</span><span class="o">(</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">cinsiyetler</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Degiskenler</span><span class="o">.</span><span class="na">cinsiyetler</span> <span class="o">=</span> <span class="n">cinsiyetler</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="nf">getHesapvarmi</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="nf">getHesapvarmi</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">hesapvarmi</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">setHesapvarmi</span><span class="o">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">hesapvarmi</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">Degiskenler</span><span class="o">.</span><span class="na">hesapvarmi</span> <span class="o">=</span> <span class="n">hesapvarmi</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">setHesapvarmi</span><span class="o">(</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">hesapvarmi</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Degiskenler</span><span class="o">.</span><span class="na">hesapvarmi</span> <span class="o">=</span> <span class="n">hesapvarmi</span><span class="o">;</span>
     <span class="o">}</span>
 
     
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getAdres</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getAdres</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">adres</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAdres</span><span class="o">(</span><span class="n">String</span> <span class="n">adres</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAdres</span><span class="o">(</span><span class="nc">String</span> <span class="n">adres</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">adres</span> <span class="o">=</span> <span class="n">adres</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getCinsiyet</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getCinsiyet</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">cinsiyet</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCinsiyet</span><span class="o">(</span><span class="n">String</span> <span class="n">cinsiyet</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCinsiyet</span><span class="o">(</span><span class="nc">String</span> <span class="n">cinsiyet</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">cinsiyet</span> <span class="o">=</span> <span class="n">cinsiyet</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="nf">getIller</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="nf">getIller</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">iller</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setIller</span><span class="o">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">iller</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setIller</span><span class="o">(</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">iller</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">iller</span> <span class="o">=</span> <span class="n">iller</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getIsim</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getIsim</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">isim</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setIsim</span><span class="o">(</span><span class="n">String</span> <span class="n">isim</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setIsim</span><span class="o">(</span><span class="nc">String</span> <span class="n">isim</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">isim</span> <span class="o">=</span> <span class="n">isim</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getSoyisim</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getSoyisim</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">soyisim</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSoyisim</span><span class="o">(</span><span class="n">String</span> <span class="n">soyisim</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSoyisim</span><span class="o">(</span><span class="nc">String</span> <span class="n">soyisim</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">soyisim</span> <span class="o">=</span> <span class="n">soyisim</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getIl</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getIl</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">il</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setIl</span><span class="o">(</span><span class="n">String</span> <span class="n">il</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setIl</span><span class="o">(</span><span class="nc">String</span> <span class="n">il</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">il</span> <span class="o">=</span> <span class="n">il</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getEsposta</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getEsposta</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">esposta</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEsposta</span><span class="o">(</span><span class="n">String</span> <span class="n">esposta</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEsposta</span><span class="o">(</span><span class="nc">String</span> <span class="n">esposta</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">esposta</span> <span class="o">=</span> <span class="n">esposta</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getLinkedinkullaniyormusunuz</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getLinkedinkullaniyormusunuz</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">linkedinkullaniyormusunuz</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setLinkedinkullaniyormusunuz</span><span class="o">(</span><span class="n">String</span> <span class="n">linkedinkullaniyormusunuz</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setLinkedinkullaniyormusunuz</span><span class="o">(</span><span class="nc">String</span> <span class="n">linkedinkullaniyormusunuz</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">linkedinkullaniyormusunuz</span> <span class="o">=</span> <span class="n">linkedinkullaniyormusunuz</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getHobiler</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span><span class="o">[]</span> <span class="nf">getHobiler</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">hobiler</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setHobiler</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">hobiler</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setHobiler</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">hobiler</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">hobiler</span> <span class="o">=</span> <span class="n">hobiler</span><span class="o">;</span>
     <span class="o">}</span>
     
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="nf">getHobilistesi</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="nf">getHobilistesi</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">hobilistesi</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">setHobilistesi</span><span class="o">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">hobilistesi</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">Degiskenler</span><span class="o">.</span><span class="na">hobilistesi</span> <span class="o">=</span> <span class="n">hobilistesi</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">setHobilistesi</span><span class="o">(</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">hobilistesi</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Degiskenler</span><span class="o">.</span><span class="na">hobilistesi</span> <span class="o">=</span> <span class="n">hobilistesi</span><span class="o">;</span>
     <span class="o">}</span>
     
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getYabanci_dil_seviyesi</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getYabanci_dil_seviyesi</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">yabanci_dil_seviyesi</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setYabanci_dil_seviyesi</span><span class="o">(</span><span class="n">String</span> <span class="n">yabanci_dil_seviyesi</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setYabanci_dil_seviyesi</span><span class="o">(</span><span class="nc">String</span> <span class="n">yabanci_dil_seviyesi</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">yabanci_dil_seviyesi</span> <span class="o">=</span> <span class="n">yabanci_dil_seviyesi</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="nf">getYdseviyeler</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="nf">getYdseviyeler</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">ydseviyeler</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">setYdseviyeler</span><span class="o">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">ydseviyeler</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">Degiskenler</span><span class="o">.</span><span class="na">ydseviyeler</span> <span class="o">=</span> <span class="n">ydseviyeler</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">setYdseviyeler</span><span class="o">(</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">ydseviyeler</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Degiskenler</span><span class="o">.</span><span class="na">ydseviyeler</span> <span class="o">=</span> <span class="n">ydseviyeler</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -544,16 +554,15 @@ var disqus_config = function () {
       <footer class="site-footer">
   <div class="container">
     <ul class="social">
-  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
-  
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
 </ul>
     <p class="txt-medium-gray">
-      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+      <small>&copy;2020 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
     </p>
   </div>
 </footer>

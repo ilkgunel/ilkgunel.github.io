@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsf-ve-ajaxjsf-and-ajax/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.5.0 -->
+      <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>JSF ve Ajax(JSF and Ajax) | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.8.6" />
 <meta property="og:title" content="JSF ve Ajax(JSF and Ajax)" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-11-08T20:40:21+03:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/jsf-ve-ajaxjsf-and-ajax/"},"url":"http://ilkaygunel.com/blog/2016/jsf-ve-ajaxjsf-and-ajax/","headline":"JSF ve Ajax(JSF and Ajax)","dateModified":"2016-11-08T20:40:21+03:00","datePublished":"2016-11-08T20:40:21+03:00","description":"JSF ve Ajax(JSF and Ajax)","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/jsf-ve-ajaxjsf-and-ajax/"},"author":{"@type":"Person","name":"İlkay Günel"},"url":"http://ilkaygunel.com/blog/2016/jsf-ve-ajaxjsf-and-ajax/","headline":"JSF ve Ajax(JSF and Ajax)","dateModified":"2016-11-08T20:40:21+03:00","datePublished":"2016-11-08T20:40:21+03:00","description":"JSF ve Ajax(JSF and Ajax)","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -107,6 +107,16 @@
         <li><a href="https://1000kitap.com/ilkaygunel">1000Kitap</a></li>
       </ul>
     </nav>
+	<div class="container" style="text-align: center">
+		<ul class="social">
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
+</ul>
+	</div>
   </div>
 </header>
 
@@ -166,17 +176,17 @@ açıklaması kaynak kodlarımızın altındadır.</p>
 <span class="nd">@ManagedBean</span>
 <span class="nd">@RequestScoped</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AjaxManagedBean</span> <span class="o">{</span>
-<span class="n">String</span> <span class="n">isim</span><span class="o">=</span><span class="s">""</span><span class="o">;</span>
+<span class="nc">String</span> <span class="n">isim</span><span class="o">=</span><span class="s">""</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getIsim</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getIsim</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">isim</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setIsim</span><span class="o">(</span><span class="n">String</span> <span class="n">isim</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setIsim</span><span class="o">(</span><span class="nc">String</span> <span class="n">isim</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">isim</span> <span class="o">=</span> <span class="n">isim</span><span class="o">;</span>
     <span class="o">}</span>
    
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">hosgeldinizsoyle</span><span class="o">()</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">hosgeldinizsoyle</span><span class="o">()</span>
     <span class="o">{</span>
         <span class="k">if</span><span class="o">(</span><span class="n">isim</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">""</span><span class="o">)||</span><span class="n">isim</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
             <span class="k">return</span> <span class="s">""</span><span class="o">;</span>
@@ -191,10 +201,10 @@ açıklaması kaynak kodlarımızın altındadır.</p>
 <p>index.xhtml sayfası içerisinde bulunan <strong><em>inputText</em></strong> bileşenini şimdiye kadar id olmadan kullandık. Ancak Ajax kullanacaksak id 
 kullanmamız şart. Uygun bir id verip değerine de managed bean içindeki değişkene atıyoruz.</p>
 
-<p>Ajax işlemini asıl çalıştıracak yapı <strong><em>buton</em></strong> içindedir. <strong><em>CommandButton</em></strong> içerisinde yer alan ***<f :="" ajax="">*** etiketi Ajax yapısını 
-kullanmamıza imkan sağlayan etikettir. ***execute*** bölümüne Ajax ile çalıştırmak istediğimiz bileşene verdiğimiz id’yi atarız 
-çünkü execute girilen veriyi işleyecektir. ***render*** bölümüne de butona basıldıktan sonra ne olmasını istiyorsak onu tanımladığımız 
-bileşenin id’sini atıyoruz. Burada id kısmına ***cikti*** verdik. Butona basılınca cikti id’li ***outputText*** çalıştırılacak. 16. satırda bulunan outputText bildiğimiz outputText yapısıdır.</f></p>
+<p>Ajax işlemini asıl çalıştıracak yapı <strong><em>buton</em></strong> içindedir. <strong><em>CommandButton</em></strong> içerisinde yer alan <strong><em>&lt;f : ajax&gt;</em></strong> etiketi Ajax yapısını 
+kullanmamıza imkan sağlayan etikettir. <strong><em>execute</em></strong> bölümüne Ajax ile çalıştırmak istediğimiz bileşene verdiğimiz id’yi atarız 
+çünkü execute girilen veriyi işleyecektir. <strong><em>render</em></strong> bölümüne de butona basıldıktan sonra ne olmasını istiyorsak onu tanımladığımız 
+bileşenin id’sini atıyoruz. Burada id kısmına <strong><em>cikti</em></strong> verdik. Butona basılınca cikti id’li <strong><em>outputText</em></strong> çalıştırılacak. 16. satırda bulunan outputText bildiğimiz outputText yapısıdır.</p>
 
 <p>Managed Bean içinde isim değişkenini tanımlarken ona ” “ değerini atadık. Çünkü bununla <strong><em>Null Pointer Exception</em></strong> hatası almanın 
 önüne geçmek istedik. ” ” değerini atamasaydık bize <strong><em>Boş Gösterici Hatası</em></strong> şeklindeki hatayı verecekti. Değişkenimizin  get ve 
@@ -258,16 +268,15 @@ var disqus_config = function () {
       <footer class="site-footer">
   <div class="container">
     <ul class="social">
-  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
-  
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
 </ul>
     <p class="txt-medium-gray">
-      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+      <small>&copy;2020 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
     </p>
   </div>
 </footer>

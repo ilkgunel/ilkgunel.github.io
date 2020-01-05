@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://ilkaygunel.com/blog/2016/jsf-ajax-ve-jsf-ile-anket-ornegi/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.5.0 -->
+      <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Ajax ve JSF ile Anket Örneği | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.8.6" />
 <meta property="og:title" content="Ajax ve JSF ile Anket Örneği" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-11-12T20:40:21+03:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/jsf-ajax-ve-jsf-ile-anket-ornegi/"},"url":"http://ilkaygunel.com/blog/2016/jsf-ajax-ve-jsf-ile-anket-ornegi/","headline":"Ajax ve JSF ile Anket Örneği","dateModified":"2016-11-12T20:40:21+03:00","datePublished":"2016-11-12T20:40:21+03:00","description":"Ajax ve JSF ile Anket Örneği","author":{"@type":"Person","name":"İlkay Günel"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2016/jsf-ajax-ve-jsf-ile-anket-ornegi/"},"author":{"@type":"Person","name":"İlkay Günel"},"url":"http://ilkaygunel.com/blog/2016/jsf-ajax-ve-jsf-ile-anket-ornegi/","headline":"Ajax ve JSF ile Anket Örneği","dateModified":"2016-11-12T20:40:21+03:00","datePublished":"2016-11-12T20:40:21+03:00","description":"Ajax ve JSF ile Anket Örneği","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -107,6 +107,16 @@
         <li><a href="https://1000kitap.com/ilkaygunel">1000Kitap</a></li>
       </ul>
     </nav>
+	<div class="container" style="text-align: center">
+		<ul class="social">
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
+</ul>
+	</div>
   </div>
 </header>
 
@@ -171,20 +181,20 @@ Bu yazıda ben java dosyamızın içeriğinden bahsedeceğim.</p>
 <span class="nd">@ManagedBean</span>
 <span class="nd">@RequestScoped</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sonuclar</span> <span class="o">{</span>
-<span class="n">String</span> <span class="n">secilensehir</span><span class="o">;</span>
+<span class="nc">String</span> <span class="n">secilensehir</span><span class="o">;</span>
 <span class="kd">static</span> <span class="kt">int</span> <span class="n">istanbul</span><span class="o">,</span><span class="n">samsun</span><span class="o">,</span><span class="n">bursa</span><span class="o">,</span><span class="n">adana</span><span class="o">,</span><span class="n">konya</span><span class="o">;</span>
-<span class="kd">static</span> <span class="n">List</span> <span class="n">ipler</span><span class="o">=</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">();</span>
-<span class="n">HttpServletRequest</span> <span class="n">request</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpServletRequest</span><span class="o">)</span> <span class="n">FacesContext</span><span class="o">.</span><span class="na">getCurrentInstance</span><span class="o">().</span><span class="na">getExternalContext</span><span class="o">().</span><span class="na">getRequest</span><span class="o">();</span>
-<span class="n">String</span> <span class="n">ipAddress</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getRemoteAddr</span><span class="o">();</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getSecilensehir</span><span class="o">()</span> <span class="o">{</span>
+<span class="kd">static</span> <span class="nc">List</span> <span class="n">ipler</span><span class="o">=</span><span class="k">new</span> <span class="nc">ArrayList</span><span class="o">();</span>
+<span class="nc">HttpServletRequest</span> <span class="n">request</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpServletRequest</span><span class="o">)</span> <span class="nc">FacesContext</span><span class="o">.</span><span class="na">getCurrentInstance</span><span class="o">().</span><span class="na">getExternalContext</span><span class="o">().</span><span class="na">getRequest</span><span class="o">();</span>
+<span class="nc">String</span> <span class="n">ipAddress</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getRemoteAddr</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getSecilensehir</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">secilensehir</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSecilensehir</span><span class="o">(</span><span class="n">String</span> <span class="n">secilensehir</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSecilensehir</span><span class="o">(</span><span class="nc">String</span> <span class="n">secilensehir</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">secilensehir</span> <span class="o">=</span> <span class="n">secilensehir</span><span class="o">;</span>
     <span class="o">}</span>
     
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">sonuclarigoster</span><span class="o">()</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">sonuclarigoster</span><span class="o">()</span>
     <span class="o">{</span>
         <span class="k">if</span><span class="o">(</span><span class="n">ipler</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">ipAddress</span><span class="o">)==</span><span class="kc">true</span><span class="o">)</span>
         <span class="o">{</span>
@@ -232,8 +242,8 @@ Bu yazıda ben java dosyamızın içeriğinden bahsedeceğim.</p>
 
 <p>Bu örnekte bence en önemli yer kullanıcının IP adresinin tespit edildiği kısımdır. Java ile sayfayı ziyaret eden kişinin IP’sini şu kodlarla tespit edebiliriz:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">HttpServletRequest</span> <span class="n">request</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpServletRequest</span><span class="o">)</span> <span class="n">FacesContext</span><span class="o">.</span><span class="na">getCurrentInstance</span><span class="o">().</span><span class="na">getExternalContext</span><span class="o">().</span><span class="na">getRequest</span><span class="o">();</span>
-<span class="n">String</span> <span class="n">ipAddress</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getRemoteAddr</span><span class="o">();</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">HttpServletRequest</span> <span class="n">request</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpServletRequest</span><span class="o">)</span> <span class="nc">FacesContext</span><span class="o">.</span><span class="na">getCurrentInstance</span><span class="o">().</span><span class="na">getExternalContext</span><span class="o">().</span><span class="na">getRequest</span><span class="o">();</span>
+<span class="nc">String</span> <span class="n">ipAddress</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getRemoteAddr</span><span class="o">();</span></code></pre></figure>
 
 <p>sonuclarigoster metodumuz içinde tespit ettiğimiz IP’nin ipler listesi içinde olup olmadığını kontrol ediyoruz. Eğer varsa kullanıcıya daha önce oy vermiş olduğunu söyleyip sonuçları ekrana yazdırıyoruz. Yoksa oy verip vermeden butona basıldığını kontrol ediyoruz. Vermeden basmışsa boş bir string döndürüyoruz. Verilmişse oyu işletip IP’sini listeye ekliyoruz ve sonuçları kullanıcının IP adresi ile birlikte ekrana yazdırıyoruz. Tekrar GÖNDER butonuna bastığımızda oy vermiş olduğumuzu söyleyip verdiğimiz oyu saymıyor.</p>
 
@@ -303,16 +313,15 @@ var disqus_config = function () {
       <footer class="site-footer">
   <div class="container">
     <ul class="social">
-  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
-  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
-  
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
 </ul>
     <p class="txt-medium-gray">
-      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+      <small>&copy;2020 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
     </p>
   </div>
 </footer>
