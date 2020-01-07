@@ -156,7 +156,7 @@
 
 <p><strong>Obje Referansları Nasıl Call By Value Olarak Çalışır?</strong></p>
 
-<p>Primitive değişkenlerde olduğu gibi obje referansları da call by value olarak parametre geçilirler. Methodun aldığı parametre asıl objenin değerinin bir kopyası şeklinde parametre olarak geçilir. Fakat burada bir püf nokta var. Her ne kadar objenin değeri geçiriliyor olsa da çağırılan metot içerisinde parametre olarak gelen objede üzerinde yapılan değişiklikler de asıl objeye yansır. Bir örnekle duruma bakalım:</p>
+<p>Primitive değişkenlerde olduğu gibi obje referansları da call by value olarak parametre geçilirler. Methodun aldığı parametre asıl objenin değerinin bir kopyası şeklinde parametre olarak geçilir. Fakat burada bir püf nokta var. Her ne kadar objenin değeri geçiriliyor olsa da çağırılan metot içerisinde parametre olarak gelen obje üzerinde yapılan değişiklikler de asıl objeye yansır. Bir örnekle duruma bakalım:</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainClass</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
@@ -172,7 +172,7 @@
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 
-<p>Yukarıdaki kodumuz main metodu içerisindeki Person sınıfından bir obje oluşturup onun name alanına Sheldon Copper değerini koyuyor. Ardından bu person objesi parametre geçilerek modifyPerson metodu çağırılıyor ve objenin name alanı Leonard Hofstadter ile değiştiriliyor. Bu kod çalıştırıldığında ekrana Leonard Hofstadter değerini yazdıracaktır çünkü geçilen kopya person objesi de orjinal person objesi ile aynı referans adresini işaret etmektedir, bu nedenle bu kopua obje üzerinde yapılan değişiklik ana objeye de yansımaktadır.</p>
+<p>Yukarıdaki kodumuz main metodu içerisinde Person sınıfından bir obje oluşturup onun name alanına Sheldon Copper değerini koyuyor. Ardından bu person objesi parametre geçilerek modifyPerson metodu çağırılıyor ve objenin name alanı Leonard Hofstadter ile değiştiriliyor. Bu kod çalıştırıldığında ekrana Leonard Hofstadter değerini yazdıracaktır çünkü geçilen kopya person objesi de orjinal person objesi ile aynı referans adresini işaret etmektedir, bu nedenle bu kopua obje üzerinde yapılan değişiklik ana objeye de yansımaktadır.</p>
 
 <p>Bu durumda şu soruyu soruyor olabilirsiniz: <strong><em>Böyle bir durumda Java nasıl Call By Value Çalışıyor?</em></strong></p>
 
