@@ -21,27 +21,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Java Call By Value Şeklinde mi Yoksa Call By Referance Şeklinde mi Çalışır?</title>
-    <meta name="description" content="Programlama dillerinde parametre geçerken 2 ifade ile karşılaşırız: Call By Value &amp; Call By Referance. Bazı diller Call By Referece’ı desteklerken bazı d...">
+    <title>Java Call By Value Şeklinde mi Yoksa Call By Reference Şeklinde mi Çalışır?</title>
+    <meta name="description" content="Programlama dillerinde parametre geçerken 2 ifade ile karşılaşırız: Call By Value &amp; Call By Reference. Bazı diller Call By Reference’ı desteklerken bazı ...">
 
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="http://ilkaygunel.com/blog/2020/is-java-pass-by-value-or-referance/">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2020/is-java-pass-by-value-or-reference/">
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
       <!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Java Call By Value Şeklinde mi Yoksa Call By Referance Şeklinde mi Çalışır? | İlkay Günel - Blog</title>
+<title>Java Call By Value Şeklinde mi Yoksa Call By Reference Şeklinde mi Çalışır? | İlkay Günel - Blog</title>
 <meta name="generator" content="Jekyll v3.8.6" />
-<meta property="og:title" content="Java Call By Value Şeklinde mi Yoksa Call By Referance Şeklinde mi Çalışır?" />
+<meta property="og:title" content="Java Call By Value Şeklinde mi Yoksa Call By Reference Şeklinde mi Çalışır?" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Java Call By Value Şeklinde mi Yoksa Call By Referance Şeklinde mi Çalışır?" />
-<meta property="og:description" content="Java Call By Value Şeklinde mi Yoksa Call By Referance Şeklinde mi Çalışır?" />
-<link rel="canonical" href="http://ilkaygunel.com/blog/2020/is-java-pass-by-value-or-referance/" />
-<meta property="og:url" content="http://ilkaygunel.com/blog/2020/is-java-pass-by-value-or-referance/" />
+<meta name="description" content="Java Call By Value Şeklinde mi Yoksa Call By Reference Şeklinde mi Çalışır?" />
+<meta property="og:description" content="Java Call By Value Şeklinde mi Yoksa Call By Reference Şeklinde mi Çalışır?" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2020/is-java-pass-by-value-or-reference/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2020/is-java-pass-by-value-or-reference/" />
 <meta property="og:site_name" content="İlkay Günel - Blog" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-01-06T21:23:21+03:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2020/is-java-pass-by-value-or-referance/"},"author":{"@type":"Person","name":"İlkay Günel"},"url":"http://ilkaygunel.com/blog/2020/is-java-pass-by-value-or-referance/","headline":"Java Call By Value Şeklinde mi Yoksa Call By Referance Şeklinde mi Çalışır?","dateModified":"2020-01-06T21:23:21+03:00","datePublished":"2020-01-06T21:23:21+03:00","description":"Java Call By Value Şeklinde mi Yoksa Call By Referance Şeklinde mi Çalışır?","@context":"https://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2020/is-java-pass-by-value-or-reference/"},"author":{"@type":"Person","name":"İlkay Günel"},"url":"http://ilkaygunel.com/blog/2020/is-java-pass-by-value-or-reference/","headline":"Java Call By Value Şeklinde mi Yoksa Call By Reference Şeklinde mi Çalışır?","dateModified":"2020-01-06T21:23:21+03:00","datePublished":"2020-01-06T21:23:21+03:00","description":"Java Call By Value Şeklinde mi Yoksa Call By Reference Şeklinde mi Çalışır?","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -128,12 +128,12 @@
 
   <div class="card">
     <header class="post-header">
-      <h1 class="post-title">Java Call By Value Şeklinde mi Yoksa Call By Referance Şeklinde mi Çalışır?</h1>
+      <h1 class="post-title">Java Call By Value Şeklinde mi Yoksa Call By Reference Şeklinde mi Çalışır?</h1>
       <p class="post-meta">Jan 6, 2020</p>
     </header>
 
     <div class="post-content">
-      <p>Programlama dillerinde parametre geçerken 2 ifade ile karşılaşırız: <strong>Call By Value &amp; Call By Referance</strong>. Bazı diller Call By Referece’ı desteklerken bazı diller desteklemez. İşte Java programlama dili de Call By Referance’ı desteklemeyen ve daimi olarak Call By Value olarak çalışan diller arasındadır. Şimdi örneklemeler eşliğinde bu durumu ispatlayalım.</p>
+      <p>Programlama dillerinde parametre geçerken 2 ifade ile karşılaşırız: <strong>Call By Value &amp; Call By Reference</strong>. Bazı diller Call By Reference’ı desteklerken bazı diller desteklemez. İşte Java programlama dili de Call By Reference’ı desteklemeyen ve daimi olarak Call By Value olarak çalışan diller arasındadır. Şimdi örneklemeler eşliğinde bu durumu ispatlayalım.</p>
 
 <p><strong>Primitive Tiplerin Parametre Olarak Geçilmesi</strong></p>
 
@@ -194,7 +194,7 @@
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 
-<p>Yukarıdaki kod örneği bir önceki örneğimizden farklı olarak modifyPerson metodu içerisinde person objesinin name özelliğini değiştirdikten sonra person objesini yeniliyor ve onun name alanına Howard Wolowitz değerini koyuyor. Bu kod çalıştırıldığında çıktımız yine Leonard Hofstadter olacaktır çünkü person objesinin new’lenmesi ile birlikte modifyPerson içindeki person objesinin asıl person objesi ile olan ilişkisi kaybolmuş oldu. Bellekten yeni bir referans adresi edinen person objesi üzerinde yapılan değişiklikler de modifyPerson metodunun yaşamı kadar geçerli olacak ve başka bir yere yansımayacaktır. Eğer Java Call By Referance çalışan bir dil olsa idi person objesinin new’lenmesi ve akabinde name alanına Howard Wolowitz ifadesinin koyulması da asıl objeye yansırdı ve biz çıktı olarak Howard Wolowitz’i görürdük. Fakat dilin Call By Value olarak çalışmasından ötürü asıl obje ile ilişki kopmadığı sürece parametre olarak gelen obje üzerinde yapılan değişiklikler asıl objeye yansıyacaktır.</p>
+<p>Yukarıdaki kod örneği bir önceki örneğimizden farklı olarak modifyPerson metodu içerisinde person objesinin name özelliğini değiştirdikten sonra person objesini yeniliyor ve onun name alanına Howard Wolowitz değerini koyuyor. Bu kod çalıştırıldığında çıktımız yine Leonard Hofstadter olacaktır çünkü person objesinin new’lenmesi ile birlikte modifyPerson içindeki person objesinin asıl person objesi ile olan ilişkisi kaybolmuş oldu. Bellekten yeni bir referans adresi edinen person objesi üzerinde yapılan değişiklikler de modifyPerson metodunun yaşamı kadar geçerli olacak ve başka bir yere yansımayacaktır. Eğer Java Call By Reference çalışan bir dil olsa idi person objesinin new’lenmesi ve akabinde name alanına Howard Wolowitz ifadesinin koyulması da asıl objeye yansırdı ve biz çıktı olarak Howard Wolowitz’i görürdük. Fakat dilin Call By Value olarak çalışmasından ötürü asıl obje ile ilişki kopmadığı sürece parametre olarak gelen obje üzerinde yapılan değişiklikler asıl objeye yansıyacaktır.</p>
 
 <p><strong>Immutable Objelerde Durum Nasıldır?</strong></p>
 
