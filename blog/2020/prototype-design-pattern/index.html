@@ -322,9 +322,11 @@ new operatörü ile bir Circle objesi oluşturup x,y,radius ve color bilgilerini
 
 <p>Rectangle sınıfından da bir obje üretip alanlarını dolduruyoruz ve shapes listesine ekliyoruz.</p>
 
-<p>Main metodunun sonunda <strong><em>cloneAndCompare(…)</em></strong> metodunu çağırıyoruz. cloneAndCompare metodu çağırılmadan önce shapes listemizde 3 eleman var ve shapesCopy listemiz boş. cloneAndCompare metodu öncelikle shapes listesindeki elemanlar üzerinden clone metodunu çağırarak shapesCopy listesini dolduruyor. Ardından shapes listesinin son sırasındaki elemanı hem shapes listesine tekrar ekliyor hem de bu elemanı shapesCopy listesine ekliyor. 
-Devam eden kısımda ise for döngüsü içerisinde bir if-else yer alıyor. if şartı içerisinde bir != ifadesi görüyoruz. Bildiğimiz üzere Java’da != ifadesi objeler üzerinde kullanılırsa bu referans kontrolü anlamına gelir. Bu nedenle buradaki if kısmı objelerin aynı obje olup olmadığına bakar, else kısmında zaten objelerin aynı olduğuna mesaj yazdırılıyor. 
-if kısmının içerisinde ise önce objelerin farklı objeler olduğuna dair mesaj yazdırılıyor ardından objeler üzerinden equals çağırılarak objelerin aynı değerlere sahip olup olmadığına bakıyor. Burada Circle ve Rectangle’ın kendilerine ait equals metotları çalıştırılacak. Eğer değerler birbirini tutuyorsa aynı olduklarına dair mesaj yazdırılıyor, aksi takdirde aynı olmadıklarına dair mesaj yazdırılıyor.</p>
+<p>Main metodunun sonunda <strong><em>cloneAndCompare(…)</em></strong> metodunu çağırıyoruz. cloneAndCompare metodu çağırılmadan önce shapes listemizde 3 eleman var ve shapesCopy listemiz boş. cloneAndCompare metodu öncelikle shapes listesindeki elemanlar üzerinden clone metodunu çağırarak shapesCopy listesini dolduruyor. Ardından shapes listesinin son sırasındaki elemanı hem shapes listesine tekrar ekliyor hem de bu elemanı shapesCopy listesine ekliyor.</p>
+
+<p>Devam eden kısımda ise for döngüsü içerisinde bir if-else yer alıyor. if şartı içerisinde bir != ifadesi görüyoruz. Bildiğimiz üzere Java’da != ifadesi referans tipleri üzerinde kullanılırsa bu bellek adres kontrolü anlamına gelir. Bu nedenle buradaki if kısmı objelerin aynı referans gözünü işaret edip etmediğine ve dolayısı ile aynı olup olmadığına bakar, else kısmında zaten objelerin aynı olduğuna dair bir mesaj yazdırılıyor.</p>
+
+<p>if kısmının içerisinde ise önce objelerin farklı objeler olduğuna dair mesaj yazdırılıyor ve ardından objeler üzerinden equals çağırılarak objelerin aynı değerlere sahip olup olmadığına bakıyor. Burada Circle ve Rectangle’ın kendilerine ait equals metotları çalıştırılacak. Eğer değerler birbirini tutuyorsa aynı olduklarına dair mesaj yazdırılıyor, aksi takdirde aynı olmadıklarına dair mesaj yazdırılıyor.</p>
 
 <p><strong>Ekran Görüntüsü</strong></p>
 
