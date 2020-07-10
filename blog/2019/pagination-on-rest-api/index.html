@@ -29,7 +29,7 @@
     <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
       <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Rest API Üzerinde Pagination İşlemi | İlkay Günel - Blog</title>
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v3.8.7" />
 <meta property="og:title" content="Rest API Üzerinde Pagination İşlemi" />
 <meta name="author" content="İlkay Günel" />
 <meta property="og:locale" content="en_US" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-01-28T20:40:21+03:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2019/pagination-on-rest-api/"},"author":{"@type":"Person","name":"İlkay Günel"},"url":"http://ilkaygunel.com/blog/2019/pagination-on-rest-api/","headline":"Rest API Üzerinde Pagination İşlemi","dateModified":"2019-01-28T20:40:21+03:00","datePublished":"2019-01-28T20:40:21+03:00","description":"Rest API Üzerinde Pagination İşlemi","@context":"https://schema.org"}</script>
+{"dateModified":"2019-01-28T20:40:21+03:00","datePublished":"2019-01-28T20:40:21+03:00","url":"http://ilkaygunel.com/blog/2019/pagination-on-rest-api/","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2019/pagination-on-rest-api/"},"author":{"@type":"Person","name":"İlkay Günel"},"description":"Rest API Üzerinde Pagination İşlemi","@type":"BlogPosting","headline":"Rest API Üzerinde Pagination İşlemi","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -75,15 +75,9 @@
         
           <li><a href="/blog/2016/git-nedir" title="Git Nedir? Nasıl Kullanılır?">Git Nedir? Nasıl Kullanılır?</a></li>
         
-          <li><a href="/blog/2020/spring-boot-yazilari/" title="Spring Boot Yazıları">Spring Boot Yazıları</a></li>
-        
           <li><a href="/blog/2017/angular-2-tutorials" title="Angular 2">Angular 2</a></li>
         
-          <li><a href="/blog/2016/design-patterns" title="Design Patterns">Design Patterns</a></li>
-        
           <li><a href="/blog/2016/maven-tutorials" title="Maven">Maven</a></li>
-        
-          <li><a href="/blog/2016/vue-tutorials" title="Vue.js">Vue.js</a></li>
         
           <li><a href="/blog/2016/jsf-tutorials-list" title="JSF">JSF</a></li>
         
@@ -113,16 +107,6 @@
         <li><a href="https://1000kitap.com/ilkaygunel">1000Kitap</a></li>
       </ul>
     </nav>
-	<div class="container" style="text-align: center">
-		<ul class="social">
-  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
-  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
-  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
-  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
-  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
-  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
-</ul>
-	</div>
   </div>
 </header>
 
@@ -154,7 +138,7 @@ bu kayıtları kullanacağız.</p>
 
 <p><strong>Characters.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">entity</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.ilkaygunel.entity</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">javax.persistence.Column</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">javax.persistence.Entity</span><span class="o">;</span>
@@ -206,7 +190,7 @@ bu kayıtları kullanacağız.</p>
 
 <p><strong>CharacterDao.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">repository</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.ilkaygunel.repository</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Page</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.data.domain.Pageable</span><span class="o">;</span>
@@ -233,7 +217,7 @@ için Pageable tipinde parametre alan Page<Characters> tipinde veri dönen findA
 
 <p><strong>CharacterService.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">service</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.ilkaygunel.service</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.ilkaygunel.entity.Characters</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.ilkaygunel.exception.ResourceNotFoundException</span><span class="o">;</span>
@@ -268,7 +252,7 @@ sorun yok ise de resultPAge nesnesini dönüyoruz.</p>
 
 <p><strong>CharacterRestController.java</strong></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">ilkaygunel</span><span class="o">.</span><span class="na">controller</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.ilkaygunel.controller</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.ilkaygunel.entity.Characters</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.ilkaygunel.service.CharacterService</span><span class="o">;</span>
@@ -362,12 +346,13 @@ var disqus_config = function () {
       <footer class="site-footer">
   <div class="container">
     <ul class="social">
-  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 48px;height: 48px;"></img></a></li>
-  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 48px;height: 48px;"></img></a></li>
-  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 48px;height: 48px;"></img></a></li>
-  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 48px;height: 48px;"></img></a></li>
-  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 48px;height: 48px;"></img></a></li>
-  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 48px;height: 48px;"></img></a></li>
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
+  
 </ul>
     <p class="txt-medium-gray">
       <small>&copy;2020 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
