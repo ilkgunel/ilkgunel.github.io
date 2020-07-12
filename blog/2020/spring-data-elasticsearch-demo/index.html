@@ -39,9 +39,9 @@
 <meta property="og:url" content="http://ilkaygunel.com/blog/2020/spring-data-elasticsearch-demo/" />
 <meta property="og:site_name" content="İlkay Günel - Blog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-07-09T19:40:21+03:00" />
+<meta property="article:published_time" content="2020-07-09T20:40:21+03:00" />
 <script type="application/ld+json">
-{"dateModified":"2020-07-09T19:40:21+03:00","datePublished":"2020-07-09T19:40:21+03:00","url":"http://ilkaygunel.com/blog/2020/spring-data-elasticsearch-demo/","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2020/spring-data-elasticsearch-demo/"},"author":{"@type":"Person","name":"İlkay Günel"},"description":"Spring Data Elastichsearch İle Spring Boot ve Elastichsearch’ün Birlikte Kullanımı","@type":"BlogPosting","headline":"Spring Data Elastichsearch İle Spring Boot ve Elastichsearch’ün Birlikte Kullanımı","@context":"https://schema.org"}</script>
+{"dateModified":"2020-07-09T20:40:21+03:00","datePublished":"2020-07-09T20:40:21+03:00","url":"http://ilkaygunel.com/blog/2020/spring-data-elasticsearch-demo/","mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2020/spring-data-elasticsearch-demo/"},"author":{"@type":"Person","name":"İlkay Günel"},"description":"Spring Data Elastichsearch İle Spring Boot ve Elastichsearch’ün Birlikte Kullanımı","@type":"BlogPosting","headline":"Spring Data Elastichsearch İle Spring Boot ve Elastichsearch’ün Birlikte Kullanımı","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -135,9 +135,13 @@
 
 <p>Bu index kavramının altında <strong><em>type</em></strong> isminde bir kavram vardır, bu RDMS’teki tabloya karşılık geliyor diye düşünebiliriz.</p>
 
+<p style="color:red">NOT: Type özelliği 7.x.x versiyonu ile deprecated hale gelmiştir ve Elastichsearch'den kaldırılmak üzeredir. Elasticsearch bu konuda ya her doküman tipi için index kullanımını ya da kendi custom type'larınızı oluşturmanızı tavsiye etmektedir.</p>
+
 <p>type dediğimiz kavramın altında <strong><em>document</em></strong> adında bir kavram vardır. Bu kavram da RDMS’teki satırlara yani kayıtlara karşılık gelmektedir. Elasticsearch içerisindeki her bir doküman JSON formantında saklanmaktadır. Her bir document içerisinde bir ya da birden fazla document’e sahip olabilir.</p>
 
 <p>Document kavramı da içerisinde <strong><em>field</em></strong> adındaki kavrama sahiptir. Bu kavram da RDMS’teki kolonlara karşılık geliyor diye düşünebiliriz.</p>
+
+<p>Elasticsearch’de <strong><em>dynamic</em></strong> adında bir özellik de bulunmaktadır. Klasik veritabanlarında bildiğimiz gibi tablo içerisinde tanımlı olmayan bir alan için veri gelirse ya hata verilir ya da gelen bilgi yok sayılır. Elastichsearch’de ise bu durumda nasıl hareket edilmesi gerektiği kararı bize bırakılmıştır. Eğer bu dynamic özelliği <strong><em>strict</em></strong> olursa Elastichsearch önceden tanımlı olmadığı halde gelen alan bilgilerini içeren kaydı işlemez ve hata fırlatır. Eğer bu dynamic özelliği <strong><em>false</em></strong> olursa önceden tanımlı olmadığı halde gelen alan bilgilerini içeren kaydın sadece tanımlı olan kısmı işlenir, tanımlı olmayan alanlar yok sayılır. Eğer bu dynamic özelliği <strong><em>true</em></strong> olursa gelen bilgi içerisindeki tüm alanlar işlenir, önceden tanımlı olmayanlar da yeni birer alan olarak sisteme eklenir.</p>
 
 <p><strong>Demo Uygulama</strong></p>
 

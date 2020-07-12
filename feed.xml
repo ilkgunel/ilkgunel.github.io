@@ -5,8 +5,8 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 10 Jul 2020 22:14:05 +0300</pubDate>
-    <lastBuildDate>Fri, 10 Jul 2020 22:14:05 +0300</lastBuildDate>
+    <pubDate>Sun, 12 Jul 2020 09:27:14 +0300</pubDate>
+    <lastBuildDate>Sun, 12 Jul 2020 09:27:14 +0300</lastBuildDate>
     <generator>Jekyll v3.8.7</generator>
     
       <item>
@@ -23,9 +23,13 @@
 
 &lt;p&gt;Bu index kavramının altında &lt;strong&gt;&lt;em&gt;type&lt;/em&gt;&lt;/strong&gt; isminde bir kavram vardır, bu RDMS’teki tabloya karşılık geliyor diye düşünebiliriz.&lt;/p&gt;
 
+&lt;p style=&quot;color:red&quot;&gt;NOT: Type özelliği 7.x.x versiyonu ile deprecated hale gelmiştir ve Elastichsearch'den kaldırılmak üzeredir. Elasticsearch bu konuda ya her doküman tipi için index kullanımını ya da kendi custom type'larınızı oluşturmanızı tavsiye etmektedir.&lt;/p&gt;
+
 &lt;p&gt;type dediğimiz kavramın altında &lt;strong&gt;&lt;em&gt;document&lt;/em&gt;&lt;/strong&gt; adında bir kavram vardır. Bu kavram da RDMS’teki satırlara yani kayıtlara karşılık gelmektedir. Elasticsearch içerisindeki her bir doküman JSON formantında saklanmaktadır. Her bir document içerisinde bir ya da birden fazla document’e sahip olabilir.&lt;/p&gt;
 
 &lt;p&gt;Document kavramı da içerisinde &lt;strong&gt;&lt;em&gt;field&lt;/em&gt;&lt;/strong&gt; adındaki kavrama sahiptir. Bu kavram da RDMS’teki kolonlara karşılık geliyor diye düşünebiliriz.&lt;/p&gt;
+
+&lt;p&gt;Elasticsearch’de &lt;strong&gt;&lt;em&gt;dynamic&lt;/em&gt;&lt;/strong&gt; adında bir özellik de bulunmaktadır. Klasik veritabanlarında bildiğimiz gibi tablo içerisinde tanımlı olmayan bir alan için veri gelirse ya hata verilir ya da gelen bilgi yok sayılır. Elastichsearch’de ise bu durumda nasıl hareket edilmesi gerektiği kararı bize bırakılmıştır. Eğer bu dynamic özelliği &lt;strong&gt;&lt;em&gt;strict&lt;/em&gt;&lt;/strong&gt; olursa Elastichsearch önceden tanımlı olmadığı halde gelen alan bilgilerini içeren kaydı işlemez ve hata fırlatır. Eğer bu dynamic özelliği &lt;strong&gt;&lt;em&gt;false&lt;/em&gt;&lt;/strong&gt; olursa önceden tanımlı olmadığı halde gelen alan bilgilerini içeren kaydın sadece tanımlı olan kısmı işlenir, tanımlı olmayan alanlar yok sayılır. Eğer bu dynamic özelliği &lt;strong&gt;&lt;em&gt;true&lt;/em&gt;&lt;/strong&gt; olursa gelen bilgi içerisindeki tüm alanlar işlenir, önceden tanımlı olmayanlar da yeni birer alan olarak sisteme eklenir.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Demo Uygulama&lt;/strong&gt;&lt;/p&gt;
 
@@ -345,7 +349,7 @@
 
 &lt;p&gt;Bu yazıda anlatacaklarım da bu kadar arkadaşlar. Başka bir yazıda görüşmek üzere hoşçakalın.&lt;/p&gt;
 </description>
-        <pubDate>Thu, 09 Jul 2020 19:40:21 +0300</pubDate>
+        <pubDate>Thu, 09 Jul 2020 20:40:21 +0300</pubDate>
         <link>http://ilkaygunel.com/blog/2020/spring-data-elasticsearch-demo/</link>
         <guid isPermaLink="true">http://ilkaygunel.com/blog/2020/spring-data-elasticsearch-demo/</guid>
         
