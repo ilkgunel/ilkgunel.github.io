@@ -5,9 +5,150 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 12 Jul 2020 09:27:14 +0300</pubDate>
-    <lastBuildDate>Sun, 12 Jul 2020 09:27:14 +0300</lastBuildDate>
+    <pubDate>Sun, 09 Aug 2020 13:01:49 +0300</pubDate>
+    <lastBuildDate>Sun, 09 Aug 2020 13:01:49 +0300</lastBuildDate>
     <generator>Jekyll v3.8.7</generator>
+    
+      <item>
+        <title>Docker Compose İle Spring Boot ve Elasticseaarch'ün Dockerize Edilmesi</title>
+        <description>&lt;p&gt;Merhaba.&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda sizlere Docker Compose kullanarak Elasticsearch ve Spring Boot’un Dockerize edilip kullanılması hakkında bilgi vereceğim.&lt;/p&gt;
+
+&lt;p&gt;Öncelikle bilgisayarınızda Docker’ın kurulu olması gerekmektedir. Windows kullanan arkadaşlar https://docs.docker.com/docker-for-windows/install/ adresindeki maddeleri takip ederek Docker’ı bilgisayarlarına kurabilirler. Esasen kurulum için spesifik olarak yapılması gereken bir şey yok. Next Next deyip kurulumu tamamlayabilirsiniz.&lt;/p&gt;
+
+&lt;p&gt;Bu yazı için geçenlerde Elasticsearch’ün Spring Data ile beraber kullanımına dair kullandığım örnek uygulamayı kullacağım.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Docker Compose File Oluşturulması&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Docker Compose bizim uygulamamızın ihtiyaç duyduğu servisleri tek bir komutla ayağa kaldırmamızı sağlayan bir araçtır arkadaşlar. Ayağa kaldırma sırasında uygulanacak prosedürleri .yaml formatındaki bir dosyada saklarız.&lt;/p&gt;
+
+&lt;p&gt;Biz de şimdi projenin kök dizini içerisinde &lt;strong&gt;&lt;em&gt;docker-compose.yml&lt;/em&gt;&lt;/strong&gt; adında bir dosya oluşturuyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;docker-compose.yml Dosyasının İçeriği&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;docker-compose.yml dosyamız az önce de bahsettiğim gibi uygulamamızın ihtiyaç duyduğu servislerin, bağımlılıkların nasıl ayağa kaldırabileceğini söylediğimiz dosyadır. Konfigürasyon işlemimiz bu dosya içerisinde yer alacaktır.&lt;/p&gt;
+
+&lt;p&gt;docker-compose.yml dosyamızın içeriği de şu şekildedir:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yml&quot; data-lang=&quot;yml&quot;&gt;&lt;span class=&quot;na&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;3'&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;web&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;.&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;ports&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;8080:8080&quot;&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;networks&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;docker-files_default&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;elasticsearch&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;docker.elastic.co/elasticsearch/elasticsearch:7.8.1&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;restart&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;always&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;container_name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;elasticsearch&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;environment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;discovery.type=single-node&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;cluster.name=docker-cluster&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;bootstrap.memory_lock=true&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;node.name=nodefortutorial&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;ES_JAVA_OPTS=-Xms512m&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;-Xmx512m&quot;&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;ulimits&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;memlock&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;soft&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;-1&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;hard&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;-1&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;ports&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;9200:9200&quot;&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;9300:9300&quot;&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;networks&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;docker-files_default&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;networks&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;docker-files_default&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;external&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;esdata&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;driver&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;local&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;docker-compose.yml dosyası içeriğinde &lt;strong&gt;&lt;em&gt;services&lt;/em&gt;&lt;/strong&gt; seçeneği altında &lt;strong&gt;&lt;em&gt;web&lt;/em&gt;&lt;/strong&gt; ve &lt;strong&gt;&lt;em&gt;elasticsearch&lt;/em&gt;&lt;/strong&gt; adında 2 alt tag’imiz var.&lt;/p&gt;
+
+&lt;p&gt;web dediğimiz kısım bizim Spring Boot uygulamamızı simgeliyor. Uygulamamız 8080 portunda çalışacak ve &lt;strong&gt;&lt;em&gt;docker-files_default&lt;/em&gt;&lt;/strong&gt; adındaki bir network’e dahil olacak.&lt;/p&gt;
+
+&lt;p&gt;elasticsearch tag’i altında da &lt;strong&gt;&lt;em&gt;image&lt;/em&gt;&lt;/strong&gt; özelliği ile Docker Hub’dan çekilcek elasticsearch imajını belitriyoruz. &lt;strong&gt;&lt;em&gt;container_name&lt;/em&gt;&lt;/strong&gt; özelliği ile Docker container isimlendirmesini yapıyoruz. &lt;strong&gt;&lt;em&gt;environment&lt;/em&gt;&lt;/strong&gt; özelliği ile elasticsearch’ün çalışma şeklini konfigüre ediyoruz. &lt;strong&gt;&lt;em&gt;discovery.type=single-node&lt;/em&gt;&lt;/strong&gt; elastichsearch’ün tek node üzerinde çalışacağını söylüyoruz, &lt;strong&gt;&lt;em&gt;cluster.name&lt;/em&gt;&lt;/strong&gt; node’u kapsayan cluster’ı isimlendiriyoruz. &lt;strong&gt;&lt;em&gt;bootstrap.memory_lock&lt;/em&gt;&lt;/strong&gt; özelliğine true ataması yaparak elasticsearch ayağa kalkarken RAM’den bir alanı kendisine ayıracağını belirtiyoruz. &lt;strong&gt;&lt;em&gt;node.name=nodefortutorial&lt;/em&gt;&lt;/strong&gt; özelliği ile de ayağa kalkacak tek node’un isimlendirmesini yapıyoruz. Ayrıca network üzerinden elastichsearch’e de bu node ismi ile erişeceğiz. ports özelliği ile elasticsearch’ün çalışacağı portları ayarlıyoruz. 9200 ve 9300 portları elasticseach’e tahsis edilecek.networks kısmında da web kısmında olduğu gibi elasticsearch’ü &lt;strong&gt;&lt;em&gt;docker-files_default&lt;/em&gt;&lt;/strong&gt; adındaki network’e dahil ediyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Network’ün Oluşturulması&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;.yml uzantılı dosyamızı hazırladıktan sonra sıra geldi network’ümüzü oluşturmaya. Oldukça basit bir komutu komut satırı üzerinde işleterek network’ü oluşturacağız. Çalıştıracağımız komut şu şekildedir:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;docker network create docker-files_default&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Bu komutu çalıştırdıktan sonra komut satırı üzerinden &lt;strong&gt;&lt;em&gt;docker network ls&lt;/em&gt;&lt;/strong&gt; komutunu çalıştırarak network’ün oluşturulup oluşturulmadığını görebiliriz.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/docker/2.png&quot;&gt;
+    &lt;img src=&quot;/images/docker/2.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Uygulamanın Ayağa Kaldırılması&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Komut satırı üzerinden projenin kök dizinine gelip aşağıdaki komutu çalıştırdığımız takdirde Spring Boot uygulamamız ve elastichsearch Dockerize eidlmiş bir şekilde ayağa kaldırılacaklar.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;docker-compose up -d&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Komutun çalışması tamamlandığında yine komut satırı üzerinden &lt;strong&gt;&lt;em&gt;docker ps -a&lt;/em&gt;&lt;/strong&gt; komutunu çalıştırarak Docker’a kayıtlı imajları listeyelebiliriz.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/docker/3.png&quot;&gt;
+    &lt;img src=&quot;/images/docker/3.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/docker/4.png&quot;&gt;
+    &lt;img src=&quot;/images/docker/4.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Ekran görüntüsündne görebileceğimiz gibi Spring Boot uygulamamız ve Elastissearch Docker üzerinde koşmaya başlamışlar.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Uygulamayı Test Edelim&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi Postman üzerinden http://localhost:8080/api/drivers/ adresine aşağıdaki body’e sahip HTTP POST isteğini gönderiyorum.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-json&quot; data-lang=&quot;json&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Alex&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;surname&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Albon&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;team&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Aston Martin Red Bull Racing&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Kayıt İşlemi Başarılı&lt;/em&gt;&lt;/strong&gt; şeklindeki mesaja sahip şekilde bir response geliyor.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/docker/5.png&quot;&gt;
+    &lt;img src=&quot;/images/docker/5.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi aynı adrese HTTP GET isteği gönderiyorum.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/docker/6.png&quot;&gt;
+    &lt;img src=&quot;/images/docker/6.png&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Az önce kaydettiğim kullanıcının bana gösterildiğini görüyorum. Uygulamamız başarılı şekilde çalışıyor.&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda anlatacaklarım bu kadar arkadaşlar. Başka bir yazıda görüşene kadar hoşçakalın.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 02 Aug 2020 18:38:20 +0300</pubDate>
+        <link>http://ilkaygunel.com/blog/2020/dockerizing-spring-boot-app/</link>
+        <guid isPermaLink="true">http://ilkaygunel.com/blog/2020/dockerizing-spring-boot-app/</guid>
+        
+        <category>eclipse ide</category>
+        
+        <category>eclipse Code Assist</category>
+        
+        <category>eclipse auto Code Assist</category>
+        
+        <category>eclipse ide kod tamamlama</category>
+        
+        <category>eclipse ide otomatik kod tamamlama</category>
+        
+        <category>eclipse otomatik kod tamamlama</category>
+        
+        <category>how to remove unused import automatically in eclipse ide</category>
+        
+        
+      </item>
     
       <item>
         <title>Spring Data Elastichsearch İle Spring Boot ve Elastichsearch'ün Birlikte Kullanımı</title>
@@ -1808,107 +1949,6 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver&lt;/code&gt;&lt;/pr
         <category>spring boot external properties</category>
         
         <category>spring boot external property setting</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Spring Boot Uygulamasından WAR Elde Edilip Tomcat'e Deploy Edilmesi</title>
-        <description>&lt;p&gt;Merhabalar.&lt;/p&gt;
-
-&lt;p&gt;08.02.2020 tarihinde https://www.youtube.com/watch?v=ljC-1KmIAKY&amp;amp;t=28s adresinde bir Spring Boot uygulamasından WAR paketi elde edilip Tomcat’e deploy edilmesi konusunu anlatmıştım. Bu yazıda da videonun yazılı halini sizinle paylaşacağım.&lt;/p&gt;
-
-&lt;p&gt;Bildiğimiz gibi @SpringBootApplication notasyonu ile işaretli sınıftan Spring Boot uygulamamızı başlatabiliyoruz. Fakat uygulamadan bir WAR elde edip bir Tomcat’e deploy etme ihtiyacı duyduğumuzda sınıfımızda ayarlama yapmamız gerekecektir.&lt;/p&gt;
-
-&lt;p&gt;Şimdi benim elimde basit bir demo Spring Boot uygulaması var. Bu uygulamayı @SpringBootApplication notasyonu ile işaretli sınıftan başlattığım zaman  http://localhost:8080/api/drivers adresi üzerinden erişebildiğim ve bana aşağıdaki bir cevap dönen servisim var.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/SpringBootWARTomcat/1.PNG&quot;&gt;
-    &lt;img src=&quot;/images/SpringBootWARTomcat/1.PNG&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Ben bu Spring Boot uygulamasından bir IDE içerisinde ya da komut satırı üzerinde &lt;strong&gt;&lt;em&gt;mvn clean install&lt;/em&gt;&lt;/strong&gt; komutunu çalıştırarak bir WAR dosyası elde ediyorum ve akabinde kullanacağım Tomcat’in &lt;strong&gt;&lt;em&gt;webapps&lt;/em&gt;&lt;/strong&gt; dizini altına elde ettiğim WAR dosyasını koyuyorum.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/SpringBootWARTomcat/2.PNG&quot;&gt;
-    &lt;img src=&quot;/images/SpringBootWARTomcat/2.PNG&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Kullanacağım Tomcat’in dizininin içindeki bin dizininde bir adet &lt;strong&gt;&lt;em&gt;startup.bat&lt;/em&gt;&lt;/strong&gt; dosyası yer alıyor. Komut satırı aracılığı ile bu dosyayı çalıştırdığımda webapps altında yer alan WAR dosyaları Tomcat’e deploy ediliyor. .bat dosyasını çalıştırdıktan sonra browser’dan http://localhost:8080/DemoSpringBootProject-1.0-SNAPSHOT/api/drivers adresine gittiğimde 404 Not Found hatası alıyorum.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/SpringBootWARTomcat/3.PNG&quot;&gt;
-    &lt;img src=&quot;/images/SpringBootWARTomcat/3.PNG&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Bunun sebebi de @SpringBootApplication notasyonu ile işaretli sınıfın konfigüre edilmemiş olmasıdır. Bu konfigürasyon işlemi de oldukça basit. Sınıfımızı aşağıdaki şekilde &lt;strong&gt;&lt;em&gt;SpringBootServletInitializer&lt;/em&gt;&lt;/strong&gt; sınıfından kalıtırsak ve &lt;strong&gt;&lt;em&gt;configure&lt;/em&gt;&lt;/strong&gt; metodunu da override edersek uygulamamız WAR elde edilip Tomcat’e deploy edilecek hale gelecektir.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.ilkaygunel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.boot.SpringApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.boot.autoconfigure.SpringBootApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.boot.builder.SpringApplicationBuilder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.boot.web.servlet.support.SpringBootServletInitializer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;nd&quot;&gt;@SpringBootApplication&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Application&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SpringBootServletInitializer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SpringApplicationBuilder&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configure&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;SpringApplicationBuilder&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;builder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;builder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sources&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Application&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nc&quot;&gt;SpringApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Application&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Bu değişiklik akabinde mevcut sunucuyu durdurup webapps dizini altındaki WAR dosyası ve deploy edilmiş klasörü silip mvn clean install komutu ile uygulamadan tekrar WAR dosyası elde ediyoruz ve webapps dizini altına bu WAR dosyasını koyup Tomcat’i yeniden başlatıyorum.&lt;/p&gt;
-
-&lt;p&gt;Şimdi tekrardan http://localhost:8080/DemoSpringBootProject-1.0-SNAPSHOT/api/drivers adresine istekte bulunduğumda uygulamanın çalıştığını görüyorum.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/images/SpringBootWARTomcat/4.PNG&quot;&gt;
-    &lt;img src=&quot;/images/SpringBootWARTomcat/4.PNG&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Bu yazıda anlatacağım da bu kadar arkadaşlar. Başka yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 08 Feb 2020 20:40:21 +0300</pubDate>
-        <link>http://ilkaygunel.com/blog/2020/deploying-spring-boot-war-tomcat/</link>
-        <guid isPermaLink="true">http://ilkaygunel.com/blog/2020/deploying-spring-boot-war-tomcat/</guid>
-        
-        <category>spring rest api</category>
-        
-        <category>spring rest api get example</category>
-        
-        <category>spring rest api get örneği</category>
-        
-        <category>spring rest pagination</category>
-        
-        <category>spring rest sayfalama</category>
-        
-        <category>spring rest api pagination</category>
-        
-        <category>spring rest api sayfalama</category>
-        
-        <category>rest api pagination</category>
-        
-        <category>rest api sayfalama</category>
-        
-        <category>spring boot</category>
-        
-        <category>spring mongodb</category>
-        
-        <category>spring boot mongodb</category>
-        
-        <category>spring boot ve mongdb'nin birlikte kullanımı</category>
-        
-        <category>spring boot ve mongodb entegrasyonu</category>
-        
-        <category>spring boot war</category>
-        
-        <category>deploying war from spring boot</category>
-        
-        <category>deploying war of spring boot app to tomcat</category>
-        
-        <category>deploying spring boot war to tomcat</category>
         
         
       </item>
