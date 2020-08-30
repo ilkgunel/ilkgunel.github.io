@@ -381,8 +381,9 @@
 
 <p>Sender uygulaması ile işimiz bu kadar, şimdi Receiver uygulamasına bakalım.</p>
 
-<p><b style="text-align: center;">RECEIVER APPLICATION</b></p>
-
+<p style="text-align: center;">
+    <b>RECEIVER APPLICATION</b>
+</p>
 <p>Reveiver uygulamamızda da Product, Book, Perfume, Order ve LineItem sınıfları aynen yer alıyor. Farklı olarak Invoice sınıfımız var.</p>
 
 <p><strong>Invoice.java</strong></p>
@@ -484,6 +485,8 @@
 <span class="o">}</span></code></pre></figure>
 
 <p>ReceiverConfiguration sınıfımız que’yu nasıl dinleyeceğimiz ve mesaj geldiğinde ne yapacağımıza dair tanımlamalarımız yer alıyor.</p>
+
+<p>Receiver uygulamamız bizim Spring Integration’ın özelliklerinden yararlanacağımız bir uygulama olacak. Spring Integration içindeki channels, transformers ve serviceactivators’ı kullanarak burada işimi gerçekleştireceğiz.</p>
 
 <p>Sınıfımız içerisinde bir <strong><em>orderChannel</em></strong> ve bir de <strong><em>invoiceChannel</em></strong> tanımı yapıyoruz. Bu channel’lar bizim que’dan gelen mesajı karşılamada ve fatura hazılarmada kullanacağımız channel’lardır. 
 <strong><em>container(…)</em></strong> metodu ile tanımladığımız Bean bizim hangi que’yu dinleyeceğimizi tanımladığımız Bean’dir. <strong><em>container.setQueueNames(“orders”);</em></strong> ifadesi ile orders ismindeki que’yu dinlemeisni söylüyoruz. 

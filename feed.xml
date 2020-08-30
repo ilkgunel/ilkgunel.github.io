@@ -5,8 +5,8 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 30 Aug 2020 14:11:12 +0300</pubDate>
-    <lastBuildDate>Sun, 30 Aug 2020 14:11:12 +0300</lastBuildDate>
+    <pubDate>Sun, 30 Aug 2020 14:23:17 +0300</pubDate>
+    <lastBuildDate>Sun, 30 Aug 2020 14:23:17 +0300</lastBuildDate>
     <generator>Jekyll v3.8.7</generator>
     
       <item>
@@ -269,8 +269,9 @@
 
 &lt;p&gt;Sender uygulaması ile işimiz bu kadar, şimdi Receiver uygulamasına bakalım.&lt;/p&gt;
 
-&lt;p&gt;&lt;b style=&quot;text-align: center;&quot;&gt;RECEIVER APPLICATION&lt;/b&gt;&lt;/p&gt;
-
+&lt;p style=&quot;text-align: center;&quot;&gt;
+    &lt;b&gt;RECEIVER APPLICATION&lt;/b&gt;
+&lt;/p&gt;
 &lt;p&gt;Reveiver uygulamamızda da Product, Book, Perfume, Order ve LineItem sınıfları aynen yer alıyor. Farklı olarak Invoice sınıfımız var.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Invoice.java&lt;/strong&gt;&lt;/p&gt;
@@ -372,6 +373,8 @@
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;ReceiverConfiguration sınıfımız que’yu nasıl dinleyeceğimiz ve mesaj geldiğinde ne yapacağımıza dair tanımlamalarımız yer alıyor.&lt;/p&gt;
+
+&lt;p&gt;Receiver uygulamamız bizim Spring Integration’ın özelliklerinden yararlanacağımız bir uygulama olacak. Spring Integration içindeki channels, transformers ve serviceactivators’ı kullanarak burada işimi gerçekleştireceğiz.&lt;/p&gt;
 
 &lt;p&gt;Sınıfımız içerisinde bir &lt;strong&gt;&lt;em&gt;orderChannel&lt;/em&gt;&lt;/strong&gt; ve bir de &lt;strong&gt;&lt;em&gt;invoiceChannel&lt;/em&gt;&lt;/strong&gt; tanımı yapıyoruz. Bu channel’lar bizim que’dan gelen mesajı karşılamada ve fatura hazılarmada kullanacağımız channel’lardır. 
 &lt;strong&gt;&lt;em&gt;container(…)&lt;/em&gt;&lt;/strong&gt; metodu ile tanımladığımız Bean bizim hangi que’yu dinleyeceğimizi tanımladığımız Bean’dir. &lt;strong&gt;&lt;em&gt;container.setQueueNames(“orders”);&lt;/em&gt;&lt;/strong&gt; ifadesi ile orders ismindeki que’yu dinlemeisni söylüyoruz. 
