@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <script type="text/javascript">
+        function setVoice() {
+            var vid = document.getElementById("voice");
+            if(vid!=null){
+            	vid.volume = 0.2;
+            }
+        }
+        window.onload = setVoice;
+        </script>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+	  (adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-0980023289791742",
+		enable_page_level_ads: true
+	  });
+	</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Spring Integration İle RabbitMQ ve Spring Boot Uygulamasının Entegre Edilmesi</title>
+    <meta name="description" content="Merhabalar.">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://ilkaygunel.com/blog/2020/integration-with-rabbitmq-spring-boot/">
+    <link rel="alternate" type="application/rss+xml" title="İlkay Günel - Blog" href="http://ilkaygunel.com/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Spring Integration İle RabbitMQ ve Spring Boot Uygulamasının Entegre Edilmesi | İlkay Günel - Blog</title>
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="Spring Integration İle RabbitMQ ve Spring Boot Uygulamasının Entegre Edilmesi" />
+<meta name="author" content="İlkay Günel" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Spring Integration İle RabbitMQ ve Spring Boot Uygulamasının Entegre Edilmesi" />
+<meta property="og:description" content="Spring Integration İle RabbitMQ ve Spring Boot Uygulamasının Entegre Edilmesi" />
+<link rel="canonical" href="http://ilkaygunel.com/blog/2020/integration-with-rabbitmq-spring-boot/" />
+<meta property="og:url" content="http://ilkaygunel.com/blog/2020/integration-with-rabbitmq-spring-boot/" />
+<meta property="og:site_name" content="İlkay Günel - Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-29T18:38:20+03:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ilkaygunel.com/blog/2020/integration-with-rabbitmq-spring-boot/"},"@type":"BlogPosting","author":{"@type":"Person","name":"İlkay Günel"},"url":"http://ilkaygunel.com/blog/2020/integration-with-rabbitmq-spring-boot/","headline":"Spring Integration İle RabbitMQ ve Spring Boot Uygulamasının Entegre Edilmesi","dateModified":"2020-08-29T18:38:20+03:00","datePublished":"2020-08-29T18:38:20+03:00","description":"Spring Integration İle RabbitMQ ve Spring Boot Uygulamasının Entegre Edilmesi","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76541903-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    <main>
+      <header class="site-header">
+  <div class="container">
+    <h1><a href="/">Ana Sayfa</a></h1>
+
+    <button type="button" class="sliding-panel-button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar sliding-panel-content">
+      <ul>
+        
+          <li><a href="/ilkay-gunel-cv.pdf" title="Bana Ait CV">Bana Ait CV</a></li>
+        
+          <li><a href="/blog/2016/git-nedir" title="Git Nedir? Nasıl Kullanılır?">Git Nedir? Nasıl Kullanılır?</a></li>
+        
+          <li><a href="/blog/2017/angular-2-tutorials" title="Angular 2">Angular 2</a></li>
+        
+          <li><a href="/blog/2016/maven-tutorials" title="Maven">Maven</a></li>
+        
+          <li><a href="/blog/2016/jsf-tutorials-list" title="JSF">JSF</a></li>
+        
+          <li><a href="/blog/2016/spring-tutorials" title="Spring 4">Spring 4</a></li>
+        
+          <li><a href="/blog/2016/eclipselink" title="Eclipselink">Eclipselink</a></li>
+        
+          <li><a href="/blog/2016/resteasy/" title="Resteasy">Resteasy</a></li>
+        
+          <li><a href="/blog/2016/mongodb/" title="MongoDB&Java">MongoDB&Java</a></li>
+        
+          <li><a href="/blog/2016/test" title="Test">Test</a></li>
+        
+          <li><a href="/blog/2016/useful-libraries-for-java" title="Java İçin Faydalı Kütüphaneler">Java İçin Faydalı Kütüphaneler</a></li>
+        
+          <li><a href="/about" title="Hakkımda">Hakkımda</a></li>
+        
+          <li><a href="/blog/2016/eclipse-notes" title="Eclipse">Eclipse</a></li>
+        
+          <li><a href="/blog/2016/formula1/" title="Formula 1">Formula 1</a></li>
+        
+          <li><a href="/blog/2016/kitaplar" title="Kitaplar">Kitaplar</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-feed"></i></a></li>
+        <li><a href="https://1000kitap.com/ilkaygunel">1000Kitap</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sliding-panel-fade-screen"></div>
+
+
+      <div class="container">
+        <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Spring Integration İle RabbitMQ ve Spring Boot Uygulamasının Entegre Edilmesi</h1>
+      <p class="post-meta">Aug 29, 2020</p>
+    </header>
+
+    <div class="post-content">
+      <p>Merhabalar.</p>
+
+<p>Bu yazıda bir Spring Boot uygulamasında Spring Integration kullanarak RabbitMQ ile entegrasyonun nasıl yapılacağını öğreneceğiz.</p>
+
+<p>Bu yazıda RabbitMQ’ya bir gönderici bir de RabbitMQ’dan alıcı 2 projemiz olacak, Sender ve Receiver projelerimiz.</p>
+
+<p>Sender projemizin kodlarına şuradan erişebilirsiniz: https://github.com/ilkgunel/SpringIntegrationRabbitMQSender</p>
+
+<p>Reveiver projemizin kodlarına da şuradan erişebilirsiniz: https://github.com/ilkgunel/SpringIntegrationRabbitMQReceiver</p>
+
+<p>Şimdi öncelikle Sender uygulamamızı inceleyelim:</p>
+
+<p><strong>Product.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.ilkaygunel.domain</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.Serializable</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Product</span> <span class="kd">implements</span> <span class="nc">Serializable</span> <span class="o">{</span>
+	<span class="kt">char</span> <span class="n">type</span><span class="o">;</span>
+	<span class="kt">int</span> <span class="n">price</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="kt">char</span> <span class="nf">getType</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">type</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setType</span><span class="o">(</span><span class="kt">char</span> <span class="n">type</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">type</span> <span class="o">=</span> <span class="n">type</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getPrice</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">price</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPrice</span><span class="o">(</span><span class="kt">int</span> <span class="n">price</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">price</span> <span class="o">=</span> <span class="n">price</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Product sınıfımız bir üst sınıf görevi üstlenecek. İçerisinde ürün tipini belirten bir <strong><em>type</em></strong> alanı ve fiyatını belirten bir <strong><em>price</em></strong> alanı yer alıyor. Devam eden kısımda da bu alanlara ait get-set metotları yer alıyor.</p>
+
+<p><strong>Book.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.ilkaygunel.domain</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Book</span> <span class="kd">extends</span> <span class="nc">Product</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nf">Book</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">type</span> <span class="o">=</span> <span class="sc">'B'</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">price</span> <span class="o">=</span> <span class="mi">100</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Product sınıfımızı kalıtan Book sınıfımız tip olarak B’yi ve fiyat olarak da 100 değerini kullanacak şekilde yapılandırılıyor.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.ilkaygunel.domain</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Perfume</span> <span class="kd">extends</span> <span class="nc">Product</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nf">Perfume</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">type</span> <span class="o">=</span> <span class="sc">'P'</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">price</span> <span class="o">=</span> <span class="mi">200</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Product sınıfımızı kalıtan Perfume sınıfımız tip olarak P’yi ve fiyat olarak da 200 değerini kullanacak şekilde yapılandırılıyor.</p>
+
+<p><strong>LineItem.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.ilkaygunel.domain</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.Serializable</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">LineItem</span> <span class="kd">implements</span> <span class="nc">Serializable</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">Product</span> <span class="n">product</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">qty</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nc">Product</span> <span class="nf">getProduct</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">product</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setProduct</span><span class="o">(</span><span class="nc">Product</span> <span class="n">product</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">product</span> <span class="o">=</span> <span class="n">product</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getQty</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">qty</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setQty</span><span class="o">(</span><span class="kt">int</span> <span class="n">qty</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">qty</span> <span class="o">=</span> <span class="n">qty</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>LineItem sınıfımız ürünlerimizin siparişi sırasında kullanacağımız bir ara sınıf olacak. İçerisinde ürünü simgeleyecek bir product ve miktarını simgeleyecek qty alanları yer alıyor.</p>
+
+<p><strong>Order.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.ilkaygunel.domain</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.Serializable</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Order</span> <span class="kd">implements</span> <span class="nc">Serializable</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">id</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">LineItem</span><span class="o">&gt;</span> <span class="n">items</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="nc">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">LineItem</span><span class="o">&gt;</span> <span class="nf">getItems</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">items</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setItems</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">LineItem</span><span class="o">&gt;</span> <span class="n">items</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">items</span> <span class="o">=</span> <span class="n">items</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Verilecek siparişleri simgelemek için oluşturulmuş Order sınıfımız içerisinde <strong><em>items</em></strong> isminde LineImtem tipinde bir liste ve bir de sipariş id tutuyor.</p>
+
+<p><strong>SenderConfiguration.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.ilkaygunel.springintegration.sender</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.amqp.core.Binding</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.amqp.core.BindingBuilder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.amqp.core.Queue</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.amqp.core.TopicExchange</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.amqp.rabbit.connection.ConnectionFactory</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+
+<span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SenderConfiguration</span> <span class="o">{</span>
+
+	<span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">topicExchangeName</span> <span class="o">=</span> <span class="s">"ecommExchange"</span><span class="o">;</span>
+
+	<span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">queueName</span> <span class="o">=</span> <span class="s">"orders"</span><span class="o">;</span>
+
+	<span class="nd">@Bean</span>
+	<span class="nc">Queue</span> <span class="nf">queue</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nf">Queue</span><span class="o">(</span><span class="n">queueName</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Bean</span>
+	<span class="nc">TopicExchange</span> <span class="nf">exchange</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nf">TopicExchange</span><span class="o">(</span><span class="n">topicExchangeName</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Bean</span>
+	<span class="nc">Binding</span> <span class="nf">binding</span><span class="o">(</span><span class="nc">Queue</span> <span class="n">queue</span><span class="o">,</span> <span class="nc">TopicExchange</span> <span class="n">exchange</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="nc">BindingBuilder</span><span class="o">.</span><span class="na">bind</span><span class="o">(</span><span class="n">queue</span><span class="o">).</span><span class="na">to</span><span class="o">(</span><span class="n">exchange</span><span class="o">).</span><span class="na">with</span><span class="o">(</span><span class="s">"orders.#"</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>SenderConfiguration sınıfımız uygulamamızın RabbitMQ’ya nasıl mesaj göndereceğini bildiriyor arkadaşlar. <strong><em>topicExchangeName</em></strong> ismi ile tanımlanmış değişkenin değeri RabbitMQ içerisinde bir exchange yani dönüşüm uygulanması için kullanılacak. <strong><em>queueName</em></strong> ismi ile tanımlanmış değişken de mesajların hangi kuyruğa iletileceğini bildiriyor. Bizim uygulamamız ecommExchange adındaki bir exchange üzerinden geçip orders isimindeki bir que’ya gönderilecek. <strong><em>binding(…)</em></strong> metoduna dikkat edersek orders.# şeklinde bir ifade görüyoruz. Bu kısım aslında <strong><em>routingKey</em></strong> anlamına geliyor arkadaşlar. Exchange üzerinde bu key ile que’ya yönlendirme yapılacak. # işareti bildiğimiz gibi number ifade etmek için kullanılıyor. Bu nedenle biz de routingKey orders.1, orders.2 gibi ifadeler kullanacağız.</p>
+
+<p>RabbitMQ’da Publisher konumunda olan birisi bir mesaj gönderdiğinde RabbitMQ içerisindeki Exchange bu mesajı karşılar ve routingKey’e bakarak bunu que’ya gönderir.</p>
+
+<p><strong>Runner.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.ilkaygunel.springintegration.sender</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.TimeUnit</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.ilkaygunel.domain.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.amqp.rabbit.core.RabbitTemplate</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.CommandLineRunner</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Component</span><span class="o">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Runner</span> <span class="kd">implements</span> <span class="nc">CommandLineRunner</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">RabbitTemplate</span> <span class="n">rabbitTemplate</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nf">Runner</span><span class="o">(</span><span class="nc">RabbitTemplate</span> <span class="n">rabbitTemplate</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">rabbitTemplate</span> <span class="o">=</span> <span class="n">rabbitTemplate</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="nc">String</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+
+		<span class="nc">Product</span> <span class="n">book</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Book</span><span class="o">();</span>
+		<span class="nc">Product</span> <span class="n">perfume</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Perfume</span><span class="o">();</span>
+
+		<span class="nc">LineItem</span> <span class="n">l1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LineItem</span><span class="o">();</span>
+		<span class="n">l1</span><span class="o">.</span><span class="na">setProduct</span><span class="o">(</span><span class="n">book</span><span class="o">);</span>
+		<span class="n">l1</span><span class="o">.</span><span class="na">setQty</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Sending first order, two Books &amp; three Perfumes"</span><span class="o">);</span>
+		<span class="nc">LineItem</span> <span class="n">l2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LineItem</span><span class="o">();</span>
+		<span class="n">l2</span><span class="o">.</span><span class="na">setProduct</span><span class="o">(</span><span class="n">perfume</span><span class="o">);</span>
+		<span class="n">l2</span><span class="o">.</span><span class="na">setQty</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+
+		<span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">LineItem</span><span class="o">&gt;</span> <span class="n">lineItems1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">LineItem</span><span class="o">&gt;();</span>
+		<span class="n">lineItems1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">l1</span><span class="o">);</span>
+		<span class="n">lineItems1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">l2</span><span class="o">);</span>
+
+		<span class="nc">Order</span> <span class="n">order1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Order</span><span class="o">();</span>
+		<span class="n">order1</span><span class="o">.</span><span class="na">setId</span><span class="o">(</span><span class="s">"1001"</span><span class="o">);</span>
+		<span class="n">order1</span><span class="o">.</span><span class="na">setItems</span><span class="o">(</span><span class="n">lineItems1</span><span class="o">);</span>
+
+		<span class="n">rabbitTemplate</span><span class="o">.</span><span class="na">convertAndSend</span><span class="o">(</span><span class="nc">SenderConfiguration</span><span class="o">.</span><span class="na">topicExchangeName</span><span class="o">,</span> <span class="s">"orders.1"</span><span class="o">,</span> <span class="n">order1</span><span class="o">);</span>
+
+		<span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Sending second order, five books &amp; two Perfumes"</span><span class="o">);</span>
+		<span class="nc">LineItem</span> <span class="n">l3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LineItem</span><span class="o">();</span>
+		<span class="n">l3</span><span class="o">.</span><span class="na">setProduct</span><span class="o">(</span><span class="n">book</span><span class="o">);</span>
+		<span class="n">l3</span><span class="o">.</span><span class="na">setQty</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+
+		<span class="nc">LineItem</span> <span class="n">l4</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LineItem</span><span class="o">();</span>
+		<span class="n">l4</span><span class="o">.</span><span class="na">setProduct</span><span class="o">(</span><span class="n">perfume</span><span class="o">);</span>
+		<span class="n">l4</span><span class="o">.</span><span class="na">setQty</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+
+		<span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">LineItem</span><span class="o">&gt;</span> <span class="n">lineItems2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">LineItem</span><span class="o">&gt;();</span>
+		<span class="n">lineItems2</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">l3</span><span class="o">);</span>
+		<span class="n">lineItems2</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">l4</span><span class="o">);</span>
+
+		<span class="nc">Order</span> <span class="n">order2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Order</span><span class="o">();</span>
+		<span class="n">order2</span><span class="o">.</span><span class="na">setId</span><span class="o">(</span><span class="s">"1002"</span><span class="o">);</span>
+		<span class="n">order2</span><span class="o">.</span><span class="na">setItems</span><span class="o">(</span><span class="n">lineItems2</span><span class="o">);</span>
+
+		<span class="n">rabbitTemplate</span><span class="o">.</span><span class="na">convertAndSend</span><span class="o">(</span><span class="nc">SenderConfiguration</span><span class="o">.</span><span class="na">topicExchangeName</span><span class="o">,</span> <span class="s">"orders.2"</span><span class="o">,</span> <span class="n">order2</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Runner sınıfı aslında bu örnek için oluşturduğumuz ve que’ya otomatik veri basması için kullanacağımız bir sınıf. CommandLineRunner’ı kalıtan bu sınıf içerisindeki run metodu uygulama başlatıldığında çalışacak que’ya veri gönderecek.</p>
+
+<p>run(…) metodu içerisinde çeşitli ürünler oluşturulup bu ürünlerle LineItem nesneleri oluşturuluyor ve bu nesneler ile de siparişler oluşturuluyor. Yapılandırıcıdan gelen <strong><em>rabbitTemplate</em></strong> üzerinden <strong><em>convertAndSend(…)</em></strong> metodu çağırılarak da veriler RabbitMQ’ya gönderiliyor. convertAndSend metoduna parametre olarak exchangeName’i, routingKey’i ve sipariş nesnesini geçiyoruz. routingKey gördüğümüz gibi number’lı bir patterne sahip.</p>
+
+<p><strong>SenderApplication.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.ilkaygunel.springintegration.sender</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.boot.SpringApplication</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.autoconfigure.SpringBootApplication</span><span class="o">;</span>
+
+<span class="nd">@SpringBootApplication</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SenderApplication</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">InterruptedException</span> <span class="o">{</span>
+		<span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">SenderApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">).</span><span class="na">close</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>SenderApplication sınıfımızın da yaptığı tek iş main metodu üzerinden uygulamayı ayağa kaldırmak.</p>
+
+<p>Sender uygulaması ile işimiz bu kadar, şimdi Receiver uygulamasına bakalım.</p>
+
+<p>Reveiver uygulamamızda da Product, Book, Perfume, Order ve LineItem sınıfları aynen yer alıyor. Farklı olarak Invoice sınıfımız var.</p>
+
+<p><strong>Invoice.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.ilkaygunel.domain</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Date</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Invoice</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">order_id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Date</span> <span class="n">date</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Double</span> <span class="n">value</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Double</span> <span class="n">amount</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="nc">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getOrder_id</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">order_id</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setOrder_id</span><span class="o">(</span><span class="nc">String</span> <span class="n">order_id</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">order_id</span> <span class="o">=</span> <span class="n">order_id</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">Date</span> <span class="nf">getDate</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">date</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDate</span><span class="o">(</span><span class="nc">Date</span> <span class="n">date</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">date</span> <span class="o">=</span> <span class="n">date</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">Double</span> <span class="nf">getValue</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">value</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setValue</span><span class="o">(</span><span class="nc">Double</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">Double</span> <span class="nf">getAmount</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">amount</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAmount</span><span class="o">(</span><span class="nc">Double</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">amount</span> <span class="o">=</span> <span class="n">amount</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Invoice sınıfımız aslında gelen siparişler için faturalama işi yapacağından içerisinde buna ait alanlar tutuyor. Bu alanların nasıl kullandığına <strong><em>ReceiverApplication</em></strong> sınıfında bakacağız.</p>
+
+<p><strong>ReceiverConfiguration.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.ilkaygunel.springintegration</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.amqp.rabbit.connection.ConnectionFactory</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Qualifier</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.integration.amqp.inbound.AmqpInboundChannelAdapter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.integration.channel.DirectChannel</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.messaging.MessageChannel</span><span class="o">;</span>
+
+<span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ReceiverConfiguration</span> <span class="o">{</span>
+
+	<span class="nd">@Bean</span>
+	<span class="kd">public</span> <span class="nc">MessageChannel</span> <span class="nf">orderChannel</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nf">DirectChannel</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Bean</span>
+	<span class="kd">public</span> <span class="nc">MessageChannel</span> <span class="nf">invoiceChannel</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nf">DirectChannel</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Bean</span>
+	<span class="kd">public</span> <span class="nc">AmqpInboundChannelAdapter</span> <span class="nf">inbound</span><span class="o">(</span><span class="nc">SimpleMessageListenerContainer</span> <span class="n">listenerContainer</span><span class="o">,</span>
+			<span class="nd">@Qualifier</span><span class="o">(</span><span class="s">"orderChannel"</span><span class="o">)</span> <span class="nc">MessageChannel</span> <span class="n">channel</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">AmqpInboundChannelAdapter</span> <span class="n">adapter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AmqpInboundChannelAdapter</span><span class="o">(</span><span class="n">listenerContainer</span><span class="o">);</span>
+		<span class="n">adapter</span><span class="o">.</span><span class="na">setOutputChannel</span><span class="o">(</span><span class="n">channel</span><span class="o">);</span>
+		<span class="k">return</span> <span class="n">adapter</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Bean</span>
+	<span class="kd">public</span> <span class="nc">SimpleMessageListenerContainer</span> <span class="nf">container</span><span class="o">(</span><span class="nc">ConnectionFactory</span> <span class="n">connectionFactory</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">SimpleMessageListenerContainer</span> <span class="n">container</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SimpleMessageListenerContainer</span><span class="o">(</span><span class="n">connectionFactory</span><span class="o">);</span>
+		<span class="n">container</span><span class="o">.</span><span class="na">setQueueNames</span><span class="o">(</span><span class="s">"orders"</span><span class="o">);</span>
+		<span class="k">return</span> <span class="n">container</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>ReceiverConfiguration sınıfımız que’yu nasıl dinleyeceğimiz ve mesaj geldiğinde ne yapacağımıza dair tanımlamalarımız yer alıyor.</p>
+
+<p>Sınıfımız içerisinde bir <strong><em>orderChannel</em></strong> ve bir de <strong><em>invoiceChannel</em></strong> tanımı yapıyoruz. Bu channel’lar bizim que’dan gelen mesajı karşılamada ve fatura hazılarmada kullanacağımız channel’lardır. 
+<strong><em>container(…)</em></strong> metodu ile tanımladığımız Bean bizim hangi que’yu dinleyeceğimizi tanımladığımız Bean’dir. <strong><em>container.setQueueNames(“orders”);</em></strong> ifadesi ile orders ismindeki que’yu dinlemeisni söylüyoruz. 
+<strong><em>inbound(…)</em></strong> metodu ile de  que’dan mesaj geldiğinde nasıl davranılacağını bildiriyoruz. Metoda parametre olarak geçilen <strong><em>listenerContainer</em></strong> que’yu dinleme görevini üstlenirken <strong><em>orderChannel</em></strong>‘a işaret eden channel ise mesajın iletileceği channel olma görevini üstleniyor.</p>
+
+<p><strong>ReceiverApplication.java</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.ilkaygunel.springintegration</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.ilkaygunel.domain.Invoice</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.ilkaygunel.domain.LineItem</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.ilkaygunel.domain.Order</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.WebApplicationType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.autoconfigure.SpringBootApplication</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.builder.SpringApplicationBuilder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.integration.annotation.ServiceActivator</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.integration.annotation.Transformer</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.messaging.Message</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.messaging.MessageHandler</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.messaging.MessagingException</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Date</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="nd">@SpringBootApplication</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ReceiverApplication</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">new</span> <span class="nf">SpringApplicationBuilder</span><span class="o">(</span><span class="nc">ReceiverApplication</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">web</span><span class="o">(</span><span class="nc">WebApplicationType</span><span class="o">.</span><span class="na">NONE</span><span class="o">).</span><span class="na">run</span><span class="o">(</span><span class="n">args</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Transformer</span><span class="o">(</span><span class="n">inputChannel</span> <span class="o">=</span> <span class="s">"orderChannel"</span><span class="o">,</span> <span class="n">outputChannel</span> <span class="o">=</span> <span class="s">"invoiceChannel"</span><span class="o">)</span>
+	<span class="nc">Invoice</span> <span class="nf">convertToInvoice</span><span class="o">(</span><span class="nc">Order</span> <span class="n">order</span><span class="o">)</span> <span class="o">{</span>
+
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"*****************************"</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"..... Received an order ....."</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Order id = "</span> <span class="o">+</span> <span class="n">order</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Generating Invoice .........."</span><span class="o">);</span>
+		<span class="nc">Invoice</span> <span class="n">invoice</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Invoice</span><span class="o">();</span>
+		<span class="n">invoice</span><span class="o">.</span><span class="na">setDate</span><span class="o">(</span><span class="k">new</span> <span class="nc">Date</span><span class="o">());</span>
+		<span class="n">invoice</span><span class="o">.</span><span class="na">setOrder_id</span><span class="o">(</span><span class="n">order</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
+
+		<span class="nc">Double</span> <span class="n">value</span>    <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
+		<span class="nc">Double</span> <span class="n">amount</span>   <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
+		<span class="nc">Double</span> <span class="n">tax_rate</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
+		<span class="nc">Double</span> <span class="n">tax</span>      <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
+
+		<span class="nc">List</span><span class="o">&lt;</span><span class="nc">LineItem</span><span class="o">&gt;</span> <span class="n">lineItems</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="na">getItems</span><span class="o">();</span>
+		<span class="nc">Double</span> <span class="n">lineItemPrice</span><span class="o">;</span>
+
+		<span class="k">for</span> <span class="o">(</span><span class="nc">LineItem</span> <span class="n">lineItem</span> <span class="o">:</span> <span class="n">lineItems</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">lineItemPrice</span> <span class="o">=</span> <span class="o">(</span><span class="kt">double</span><span class="o">)</span> <span class="o">(</span><span class="n">lineItem</span><span class="o">.</span><span class="na">getProduct</span><span class="o">().</span><span class="na">getPrice</span><span class="o">()</span> <span class="o">*</span> <span class="n">lineItem</span><span class="o">.</span><span class="na">getQty</span><span class="o">());</span>
+
+			<span class="c1">// Books are taxed at 5%</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">lineItem</span><span class="o">.</span><span class="na">getProduct</span><span class="o">().</span><span class="na">getType</span><span class="o">()</span> <span class="o">==</span> <span class="sc">'B'</span><span class="o">)</span>
+				<span class="n">tax_rate</span> <span class="o">=</span> <span class="mf">0.05</span><span class="o">;</span>
+			<span class="c1">// Perfumes are taxed at 8%</span>
+			<span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">lineItem</span><span class="o">.</span><span class="na">getProduct</span><span class="o">().</span><span class="na">getType</span><span class="o">()</span> <span class="o">==</span> <span class="sc">'P'</span><span class="o">)</span>
+				<span class="n">tax_rate</span> <span class="o">=</span> <span class="mf">0.08</span><span class="o">;</span>
+
+			<span class="n">tax</span> <span class="o">=</span> <span class="n">lineItemPrice</span> <span class="o">*</span> <span class="n">tax_rate</span><span class="o">;</span>
+
+			<span class="n">value</span>  <span class="o">+=</span> <span class="n">lineItemPrice</span><span class="o">;</span>
+			<span class="n">amount</span> <span class="o">+=</span> <span class="n">lineItemPrice</span> <span class="o">+</span> <span class="n">tax</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="n">invoice</span><span class="o">.</span><span class="na">setValue</span><span class="o">(</span><span class="n">value</span><span class="o">);</span>
+		<span class="n">invoice</span><span class="o">.</span><span class="na">setAmount</span><span class="o">(</span><span class="n">amount</span><span class="o">);</span>
+
+		<span class="k">return</span> <span class="n">invoice</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Bean</span>
+	<span class="nd">@ServiceActivator</span><span class="o">(</span><span class="n">inputChannel</span> <span class="o">=</span> <span class="s">"invoiceChannel"</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">MessageHandler</span> <span class="nf">handler</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nf">MessageHandler</span><span class="o">()</span> <span class="o">{</span>
+			<span class="nd">@Override</span>
+			<span class="kd">public</span> <span class="kt">void</span> <span class="nf">handleMessage</span><span class="o">(</span><span class="nc">Message</span><span class="o">&lt;?&gt;</span> <span class="n">message</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">MessagingException</span> <span class="o">{</span>
+
+				<span class="nc">Invoice</span> <span class="n">invoice</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Invoice</span><span class="o">)</span> <span class="n">message</span><span class="o">.</span><span class="na">getPayload</span><span class="o">();</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Received Invoice ............"</span><span class="o">);</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Order Id = "</span> <span class="o">+</span> <span class="n">invoice</span><span class="o">.</span><span class="na">getOrder_id</span><span class="o">());</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Value = "</span> <span class="o">+</span> <span class="n">invoice</span><span class="o">.</span><span class="na">getValue</span><span class="o">());</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Invoice Amount = "</span> <span class="o">+</span> <span class="n">invoice</span><span class="o">.</span><span class="na">getAmount</span><span class="o">());</span>
+			<span class="o">}</span>
+		<span class="o">};</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>ReceiverApplication sınıfımız uygulamayı başlatacak main metodumuzu barındırıyor ve bunun yanında faturalandırma yapacak metodu da içinde barındırıyor.</p>
+
+<p>Invoice dönüş tipine sahip <strong><em>convertToInvoice(…)</em></strong> metodu <strong>@Transformer</strong> notasyonu ile işaretli. Bu notasyona bir inputChannel ve bir de outputChannel parametreleri verilmiş. inputChannel ile denmek istenen ilgili channel’a veri girişi olduğunda burasının tetikleneceğidir. outputChannel ile denmek istenen de bu metodun işini bitirip döndürdüğü objenin gönderileceği channel’dır. Bu örneğimizde orderChannel’a veri gönderildiğinde bu metot devreye girecek, işlemler yapıp Invoice tipinde bir obje dönecek ve bu obje de outputChannel olarak tanımlanmış invoiceChannel’a iletilecektir. convertToInvoice metodu içerisinde Sender uygulamasından gelen Order’dan alanlar alınıyor, gelen adete göre vergili ve vergisiz fiyat hesaplaması yapılıyor, akabinde de Invoice objesine koyulup göndeirliyor.</p>
+
+<p>Son olarak <strong><em>handler(…)</em></strong> metodu da bir <strong><em>@ServiceActivator</em></strong> notasyonuna sahip. Burada da yine bir inputChannel tanımı var. @Transformer ile aynı şekilde @ServiceActivator’da da bir channel’a veri geldiğinde tetiklenmesi sağlanabilir. Burada da invoiceChannel’a veri geldiğinde handler(…) metodunun tetiklenmesini sağlıyoruz.Metot içerisinde gelen Invoice objesindeki alanlar konsola yazdırılıyor.</p>
+
+<p><strong>DEMO</strong></p>
+
+<p>Şimdi ilk olarak Sender uygulamasındaki main metodun olduğu sınıf üzerinden uygulamamızı çalıştıralım.</p>
+
+<p><a href="/images/springIntegrationRabbitMQ/1.PNG">
+    <img src="/images/springIntegrationRabbitMQ/1.PNG" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Aşağıdaki gibi 2 metni konsolda görüyoruz:</p>
+
+<p>Sending first order, two Books &amp; three Perfumes
+Sending second order, five books &amp; two Perfumes</p>
+
+<p>http://localhost:15672/ adresinden orders que’sunu kontrol ettiğimde kuyrukta 2 adet verinin bekleidğini görüyorum.</p>
+
+<p><a href="/images/springIntegrationRabbitMQ/2.PNG">
+    <img src="/images/springIntegrationRabbitMQ/2.PNG" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Şimdi de Receiver uygulamasını ayağa kaldırıyorum ve konsolu kontrol ediyorum.</p>
+
+<p><a href="/images/springIntegrationRabbitMQ/3.PNG">
+    <img src="/images/springIntegrationRabbitMQ/3.PNG" style="width: 958px; height= 400px;" />
+</a></p>
+
+<p>Receiver uygulamasının konsolunda da Sender uygulamasından gönderilen ve que’da bekleyen mesajların işlendiğini görüyorum.</p>
+
+<p>Bu yazıda anlatacaklarım da bu kadar arkadaşlar. Başka bir yazıda görüşene kadar sağlıcakla kalın.</p>
+
+    </div>
+
+    
+<hr>
+
+<aside id="comments" class="disqus">
+  <div class="container">
+    <h3><i class="icon icon-comments-o"></i> Comments</h3>
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+/*
+var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = '//ilkaygunel-com.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                    
+  </div>
+</aside>
+
+  </div>
+
+</article>
+
+      </div>
+
+      <footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="https://www.instagram.com/ilkay_gunel/" target="_blank"><img src="/images/instagram.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="https://www.facebook.com/ilkay.gunel" target="_blank"><img src="/images/facebook.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="https://www.youtube.com/c/ilkaygunel" target="_blank"><img src="/images/youtube.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://twitter.com/ilkaygunel" target="_blank"><img src="/images/twitter.png" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://github.com/ilkgunel" target="_blank"><img src="/images/github.jpg" style="width: 24px;height: 24px;"></img></a></li>
+  <li><a href="http://linkedin.com/in/ilkaygunel" target="_blank"><img src="/images/linkedin.png" style="width: 24px;height: 24px;"></img></a></li>
+  
+</ul>
+    <p class="txt-medium-gray">
+      <small>&copy;2020 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+      <a href="http://github.com/ilkgunel/ilkgunel.github.io" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+      <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+          $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+          e.preventDefault();
+        });
+      });
+      </script>
+    </main>
+  </body>
+</html>
