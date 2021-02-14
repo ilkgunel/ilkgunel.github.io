@@ -5,8 +5,8 @@
     <description>İlkay Günel Blog</description>
     <link>http://ilkaygunel.com/</link>
     <atom:link href="http://ilkaygunel.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 11 Feb 2021 00:03:49 +0300</pubDate>
-    <lastBuildDate>Thu, 11 Feb 2021 00:03:49 +0300</lastBuildDate>
+    <pubDate>Sun, 14 Feb 2021 14:17:30 +0300</pubDate>
+    <lastBuildDate>Sun, 14 Feb 2021 14:17:30 +0300</lastBuildDate>
     <generator>Jekyll v3.8.7</generator>
     
       <item>
@@ -175,7 +175,148 @@ Dördüncü sezonu Florida’da başlıyor ve işlenmeyen suçtan kurtulma çaba
 
 &lt;p&gt;&lt;strong&gt;Database Normalization Nedir?&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Veri tabanlarında verilerin çoklanmasını, tekrarlanmasını minimize etmek için kullanılan tekniğe &lt;strong&gt;&lt;em&gt;Database Normalization&lt;/em&gt;&lt;/strong&gt; denmektedir.&lt;/p&gt;
+&lt;p&gt;Veri tabanlarında verilerin çoklanmasını, tekrarlanmasını minimize etmek amacıyla verilerin birden fazla tabloya dağıtılmasında
+kullanılan tekniğe &lt;strong&gt;&lt;em&gt;Database Normalization&lt;/em&gt;&lt;/strong&gt; denmektedir.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Verilen Çoklanması, Tekrarlanması İle Kastedilen Nedir?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi alttaki resimdeki bir tablonuz ve saklanan verileriniz olduğunu düşünün.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/databaseNormalization/1.PNG&quot;&gt;
+    &lt;img src=&quot;/images/databaseNormalization/1.PNG&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Burada göreceğimiz üzere karakterlerin ait oldukları dizinin adı, kanalı ve yayınlanma tarihleri her kayıt için sürekli tekrar ediyor. İşte buna 
+&lt;strong&gt;Data Redundancy&lt;/strong&gt; adı veriliyor. Kayıtlar gereksiz yere veritabanını şişirecek şekilde yazılıyorlar.&lt;/p&gt;
+
+&lt;p&gt;Bu durum şunlara da sebep olur:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Ekleme Problemleri (Insertion Anomally): Yeni bir karakter eklemek istediğiniz zaman kanal adı, dizi adı ve yayınlanma tarihlerini hep tam olarak girmek zorundasınız.
+Birini yanlış girdiğinizde örneğin görüntüleme vs. sorunları çıkabilir. Ya da sisteme bu dizin için 50 karakter eklemeniz gerekiyor diye düşünelim. O zaman 50 kere aynı datayı
+sisteme girmek gerekecek.&lt;/li&gt;
+  &lt;li&gt;Silme Problemleri (Deletion Anomally): Şimdi bu tablodaki kayıtların hepsini sildiğimiz düşünelim. Biz kayıtları sildiğimizde karakterlerin yanında diziye
+ait bilgiler de siliniyor. Son kayıt da silindiği anda artık dizinin ismi, kanal bilgisi ve yayınlanma yılları da silinmiş olacak.&lt;/li&gt;
+  &lt;li&gt;Güncelleme Problemleri (Updation Anomally): Diyelim ki kanalım adı NBC’den başka bir şeye çevrildi ve sizin de sistemde bunu değiştirmeniz gerekiyor. Burada da
+kanal ismi NBC olan bütün kayıtlar üzerinde update script’i çalıştırmanız gerekecek. Herhangi bir şekilde kayıtlardan bir ya da birkaçı için bu güncelleme
+çalıştırılamazsa o zaman da tutarsız veri problemi ortaya çıkar.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Çözüm&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Burada yapılacak işi elimizdeki tabloyu karakterler ve diziler şeklinde 2 tabloya bölmek olacaktır. Öncelikle elimizdeki diziye ait bilgiler ile
+şu şekilde tablo oluşturup kayıt girebiliriz:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/databaseNormalization/2.PNG&quot;&gt;
+    &lt;img src=&quot;/images/databaseNormalization/2.PNG&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Ardından karakterler tablosunu da şu şekilde düzenleyebiliriz:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/databaseNormalization/3.PNG&quot;&gt;
+    &lt;img src=&quot;/images/databaseNormalization/3.PNG&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Gördüğünüz gibi data tekrarını minimize ettik ve bahsi geçen 3 problem için de çözüm sağladık.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Ekleme sırasında sadece dizinin id bilgisini vermek ekleme problemini&lt;/li&gt;
+  &lt;li&gt;Tüm karakter kayıtları silinse bile dizi etkilenmeyeceği için silme problemini&lt;/li&gt;
+  &lt;li&gt;Diziye ait bir değişiklik olduğunda tek kayıt değişeceği için güncelleme problemini çözmüş olduk.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Database Normalization dediğimiz kavram birkaç farklı tipte gerçeklenebiliyor. Biz bu yazıda aşağıdaki 3 tipi ele alacağız:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;1st Normal Form&lt;/li&gt;
+  &lt;li&gt;2nd Normal Form&lt;/li&gt;
+  &lt;li&gt;3rd Normal Form&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;1st Normal Form&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Database Normalization çerçevesinde bir veritabanının en azından uygulaması gereken normalization tipi olarak geçmektedir 1st Normal Form. Bu normalization
+tipi 4 adet kural üzerine kuruludur.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Her bir kolon tek değer içermeli. Eğer bir kolon A,B şeklinde değer içeriyorsa bu kuralı bozuyor demektir. Örneğin Saul Goodman’ın oynadığı diziler
+için bir kolonda “Breaking Bad, Better Call Saul” şeklinde veri varsa bu kural ihlal edilmiş olur.&lt;/li&gt;
+  &lt;li&gt;Bir kolon her zaman aynı tipte veri tutmalıdır ve başka kolondaki veri tipi ile karıştırılmamalıdır. Örneğin 5 kayıt içeren bir tabloda bir kolon
+için 4 kayıt tarih bilgisi içerirken 1 kayıt başka tipte bir bilgi tutarsa bu kural ihlal edilmiş olur.&lt;/li&gt;
+  &lt;li&gt;Bir tablodaki her kolon eşsiz isme sahip olmalı. Yani 2 kolonda aynı isim olmamalı. Buna zaten modern DBMS yazılımları izin vermiyor :)&lt;/li&gt;
+  &lt;li&gt;Veritabanına kayıt sıraları bizim için sorun teşkil etmemeli. Örneğin ID kolonu 1,3,5,2,4 şeklinde sıralanıyorsa bu bizim için sorun olmamalı.
+Biz zaten SQL’de order by komutu ile bunları istediğimiz sırada çekebiliriz.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;2nd Normal Form&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;2nd Normal Form için 2 adet şart bulunmaktadır.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;1st Normal Form’daki tüm kurallar sağlanmış olmalı.&lt;/li&gt;
+  &lt;li&gt;Partial Dependency olmamalı.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Partial Dependency konusunu açıklamadan önce Dependency nedir ona bakmak gerekiyor. Yeniden karakterler tablosuna dönüp bir bakalım.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/databaseNormalization/3.PNG&quot;&gt;
+    &lt;img src=&quot;/images/databaseNormalization/3.PNG&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Tabloda id bilgileri eşsiz, ID kolonu bizim için Primary Key durumunda. Bir karakterin ismine erişmek istersem ya da oynadığı diziye, 
+id bilgisini verip kaydı almam lazım. İşte bu duruma dependency deniliyor, diğer kolonlardaki verileri almak için ID kolonuna bağımlı durumdayız.&lt;/p&gt;
+
+&lt;p&gt;Şimdi çalışanlar isminde bir tablomuz olduğunu düşünelim. Bu tabloda ID, Name, Department bilgileri yer alıyor olsun. Bir de Tasks adında bir
+tablomuz olduğunu düşünelim. Her bir task’ı da ayrı kişilerin atayabileceğini düşünelim. Örneğin Işık Kontrol taskını bir kişi atayabiliyor, kırtasiye
+işleri taskını başka bir kişi.&lt;/p&gt;
+
+&lt;p&gt;Şimdi bu iki tablonun Assigned Tasks ismindeki bir tabloda şöyle buluştuğunu ve aşağıdaki şekilde bir çıktısı olduğunu düşünelim.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/databaseNormalization/4.PNG&quot;&gt;
+    &lt;img src=&quot;/images/databaseNormalization/4.PNG&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Employee ve Tasks arasında görebileceğiniz gibi bir many-to-many ilişki var. Biz her ne kadar bir id kolonuna sahip olsak da employee_id + task_id
+birleşimi bize daha iyi bir primary key seçeneği olarak ortaya çıkıyor. İşte bu noktada dikkatimizi Task_Assigner kolonu çekiyor. Az önce de belirttiğim
+gibi, bir taskı bir kişinin atama yetkisi varsa Task_Assigner sadece Task_Id ilişkili. Employee_Id ile bir birlikteliği yok. İşte tam bu noktada
+biz de diyebiliriz ki bu tabloda Partial Dependency var. Employee_id + task_id ortaklığındaki bir primary key kullanımında Task_Assigner sadece
+task_id ile ilişkili olacak ve bu da parçalı bağımlılık anlamına gelecek.&lt;/p&gt;
+
+&lt;p&gt;Buna çözüm olarak ise Task Assigner bilgisinin Assigned_Tasks tablosundan kaldırılması ve Tasks tablosuna eklenmesi yolu uygulanabilir.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3rd Normal Form&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;3rd Normal Form için yine 2 adet şart bulunmaktadır.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;2nd Normal Form olmalı.&lt;/li&gt;
+  &lt;li&gt;Transitive Dependency olmamalı.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Transitive Dependency’nin ne olduğuna ve nasıl çözüleceğine bakalım şimdi.&lt;/p&gt;
+
+&lt;p&gt;Assigned_Tasks tablosunun aşağıdaki gibi olduğunu düşünelim:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/databaseNormalization/5.PNG&quot;&gt;
+    &lt;img src=&quot;/images/databaseNormalization/5.PNG&quot; style=&quot;width: 958px; height= 400px;&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi burayı incelediğimizde&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;employee_id + task_id primary key kombinasyonu üzerinden Task_Country bilgisini bilgisini bulabilirim.&lt;/li&gt;
+  &lt;li&gt;Task_Country bilgisi üzerinden hangi task olduğunu bulamam çünkü aynı ülkede farklı tasklar olabilir.&lt;/li&gt;
+  &lt;li&gt;Task_Country bilgisi üzerinden Task_Price_Currency bilgisini bulabilirim.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Bu noktada employee_id + task_id primary key kombinasyonu ile Task_Price_Currency arasında ortaya çıkan bağımlılığa Transitive Dependency
+adı veriliyor. Task_Price_Currency bilgisi Task_Country bilgisine göre değişkenlik gösteriyor. İşte bu şekilde primary key olmayan bir alan başka
+bir primary key olmayan alanının değerine karar verdiriyorsa buna Transitive Dependency adı veriliyor.&lt;/p&gt;
+
+&lt;p&gt;Bu durumu çözebilmek için de Task_Country ve Task_Price_Currency bilgilerini içeren ayrı bir tablo hazırlayıp Assigned_Tasks tablosunu da Task_Country
+üzerinden o tabloya bağlamak gerekiyor.&lt;/p&gt;
+
+&lt;p&gt;Bu yazıda anlatacaklarım bu kadar arkadaşlar. Başka bir yazıda görüşene kadar sağlıcakla kalın.&lt;/p&gt;
 </description>
         <pubDate>Sat, 09 Jan 2021 20:40:21 +0300</pubDate>
         <link>http://ilkaygunel.com/blog/2021/databse-normalization-1/</link>
